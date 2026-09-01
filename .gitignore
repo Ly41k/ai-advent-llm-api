@@ -1,0 +1,12 @@
+# Скрыть файлы с ключами
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+.DS_Store
+
+# Временные файлы
+check_models.py
