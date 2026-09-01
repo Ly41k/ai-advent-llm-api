@@ -55,7 +55,6 @@ while True:
             messages=messages,
             temperature=0.8,
             reasoning_effort="medium",
-            # max_completion_tokens=1000,
         )
 
         bot_response = response.choices[0].message.content or ""
