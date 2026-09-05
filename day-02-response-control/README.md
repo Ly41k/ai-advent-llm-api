@@ -1,82 +1,84 @@
-# День 2 — управление форматом ответа LLM
+**English** | [Русский](README.ru.md)
 
-Второе практическое задание курса AI Advent посвящено управлению структурой, длиной и завершением ответа языковой модели.
+# Day 2 — Controlling LLM Response Format
 
-## Задание
+The second AI Advent assignment explores how to control the structure, length, and completion of a language model response.
 
-Отправить один и тот же запрос два раза:
+## Assignment
 
-1. Без дополнительных ограничений.
-2. С явным описанием формата, ограничением длины и условием завершения ответа.
+Send the same request twice:
 
-Затем сравнить полученные результаты.
+1. Without additional constraints.
+2. With an explicit format, length limit, and completion condition.
 
-## Результат
+Then compare the responses.
 
-Программа отправляет один пользовательский запрос модели `openai/gpt-oss-20b` дважды и выводит ответы в отдельных блоках:
+## Result
 
-- без управления форматом;
-- с заданными правилами ответа.
+The program sends one user request to `openai/gpt-oss-20b` twice and prints two separate results:
 
-## Что реализовано
+- a response without format control;
+- a response with explicit rules.
 
-- одинаковый пользовательский запрос для двух вызовов API;
-- отдельный системный промпт с правилами для контролируемого ответа;
-- явное описание требуемого формата;
-- ограничение видимого ответа до 70 слов;
-- технический лимит `max_completion_tokens`;
-- явное условие завершения после третьего пункта;
-- наглядный вывод результатов в консоль.
+## Implemented Features
 
-## Уровни контроля ответа
+- the same user request for both API calls;
+- additional system instructions for the controlled response;
+- an explicit output structure;
+- a visible limit of 70 words;
+- a technical `max_completion_tokens` limit;
+- an instruction to stop after the third bullet point;
+- side-by-side console output.
 
-| Требование | Реализация |
+## Levels of Control
+
+| Requirement | Implementation |
 |---|---|
-| Формат | Строка `Краткий ответ:` и ровно три пункта списка |
-| Длина | Не более 70 слов и `max_completion_tokens=500` |
-| Завершение | Явная инструкция закончить после третьего пункта |
+| Format | The `Краткий ответ:` heading followed by exactly three bullet points |
+| Length | No more than 70 words and `max_completion_tokens=500` |
+| Completion | An explicit instruction to stop after the third item |
 
-### Формат
+### Format
 
-Модели передаётся точное описание ожидаемой структуры:
+The controlled request defines the exact expected structure:
 
 ```text
 1. Начни со строки «Краткий ответ:».
 2. Затем напиши ровно три пункта маркированного списка.
 ```
 
-Без этой инструкции модель самостоятельно выбирает структуру ответа.
+Without these instructions, the model chooses its own response structure.
 
-### Ограничение длины
+### Length limit
 
-В системном промпте установлено смысловое ограничение:
+The system prompt contains a semantic constraint:
 
 ```text
 Используй не более 70 слов.
 ```
 
-Дополнительно в параметры API передаётся технический лимит:
+The API request also receives a technical generation limit:
 
 ```python
 request_parameters["max_completion_tokens"] = 500
 ```
 
-`max_completion_tokens` ограничивает общее количество токенов генерации. Значение установлено с запасом, поскольку reasoning-модель расходует часть лимита на внутреннее рассуждение. Видимая длина ответа контролируется инструкцией в системном промпте.
+`max_completion_tokens` limits the full generation budget. The value includes room for internal reasoning, while the visible response length is controlled by the prompt.
 
-### Условие завершения
+### Completion condition
 
-Задание разрешает использовать `stop sequence` **или** явную инструкцию. В программе выбран второй вариант:
+The assignment allows either a stop sequence or an explicit instruction. This implementation uses an instruction:
 
 ```text
 4. Заверши ответ сразу после третьего пункта.
 5. Не добавляй заключение или дополнительный текст.
 ```
 
-Таким образом, модель должна прекратить ответ после третьего пункта без дополнительного заключения.
+The model is therefore asked to finish immediately after the third bullet point.
 
-## Контролирующая инструкция
+## Control Instructions
 
-Все правила собраны в отдельной константе:
+All rules are stored in one constant:
 
 ```python
 CONTROL_INSTRUCTIONS = (
@@ -89,23 +91,23 @@ CONTROL_INSTRUCTIONS = (
 )
 ```
 
-Она добавляется к основному системному промпту только для ответа с ограничениями:
+The rules are appended to the base system prompt only for the controlled request:
 
 ```python
 if with_limits:
     system_prompt += CONTROL_INSTRUCTIONS
 ```
 
-## Сравнение запросов
+## Comparing the Requests
 
-Оба вызова используют:
+Both calls use:
 
-- одну модель;
-- одинаковый пользовательский запрос;
-- одинаковую температуру;
-- одинаковый уровень рассуждения.
+- the same model;
+- the same user request;
+- the same temperature;
+- the same reasoning effort.
 
-Различается только наличие управляющих инструкций и технического лимита:
+Only the control instructions and technical token limit differ:
 
 ```python
 response_without_limits = get_response(
@@ -119,27 +121,27 @@ response_with_limits = get_response(
 )
 ```
 
-История диалога намеренно не сохраняется: каждый вызов получает чистый контекст, поэтому предыдущий ответ не влияет на следующий.
+Conversation history is intentionally not preserved. Each request starts with clean context, so the first response cannot influence the second.
 
-## Подготовка к запуску
+## Setup
 
-Выполните общую [настройку проекта](../README.md#подготовка-проекта) и добавьте `GROQ_API_KEY` в корневой файл `.env`.
+Complete the shared [project setup](../README.md#project-setup) and add `GROQ_API_KEY` to the root `.env` file.
 
-## Запуск
+## Run
 
-Из корня репозитория выполните:
+From the repository root:
 
 ```bash
 python day-02-response-control/main.py
 ```
 
-Введите запрос, например:
+Enter a request, for example:
 
 ```text
 Расскажи, как подготовиться к путешествию на Марс.
 ```
 
-Программа выведет два результата:
+The program prints:
 
 ```text
 ==================================================
@@ -157,13 +159,13 @@ python day-02-response-control/main.py
 - Пройди физическую и психологическую подготовку.
 ```
 
-Для завершения программы введите `выход`.
+Enter `выход` to stop the program.
 
-## Итог второго дня
+## Day 2 Takeaway
 
-Один и тот же запрос может приводить к заметно разным результатам в зависимости от переданных инструкций. Формат, длину и место завершения ответа можно контролировать через системный промпт и параметры API.
+The same request can produce noticeably different results depending on the instructions. Structure, visible length, and the completion point can be controlled through the system prompt and API parameters.
 
-## Полезные ссылки
+## Useful Links
 
 - [Groq: Text Generation](https://console.groq.com/docs/text-chat)
 - [Groq API Reference](https://console.groq.com/docs/api-reference)

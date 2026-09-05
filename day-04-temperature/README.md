@@ -1,20 +1,22 @@
-# День 4 — температура
+**English** | [Русский](README.ru.md)
 
-Четвёртое практическое задание курса AI Advent посвящено параметру `temperature` и его влиянию на ответы языковой модели.
+# Day 4 — Temperature
 
-Один и тот же запрос отправляется модели `openai/gpt-oss-20b` с тремя значениями температуры. Полученные ответы сравниваются по точности, креативности и разнообразию.
+The fourth AI Advent assignment explores the `temperature` parameter and its effect on language model responses.
 
-## Задание
+The same prompt is sent to `openai/gpt-oss-20b` with three temperature values. The responses are then compared by accuracy, creativity, and diversity.
 
-Выполнить один запрос с параметрами:
+## Assignment
+
+Run one request with:
 
 - `temperature=0`;
 - `temperature=0.7`;
 - `temperature=1.2`.
 
-Затем сравнить ответы и определить, для каких задач лучше подходит каждая настройка.
+Compare the responses and determine which types of tasks suit each setting.
 
-## Выбранный запрос
+## Selected Prompt
 
 ```text
 Придумай концепцию автономного робота для исследования подлёдного
@@ -23,19 +25,19 @@
 Не выдавай предположения за подтверждённые факты.
 ```
 
-Запрос сочетает фактические ограничения и творческую часть. Поэтому на его примере можно оценить не только оригинальность формулировок, но и способность модели сохранять правдоподобие при увеличении случайности.
+The prompt combines factual constraints with a creative task. This makes it possible to evaluate both originality and the model's ability to preserve technical plausibility as randomness increases.
 
-## Как работает эксперимент
+## How the Experiment Works
 
-Программа выполняет три независимых запроса. Во всех вызовах совпадают:
+The program performs three independent requests. Every call uses the same:
 
-- модель;
-- системный промпт;
-- пользовательский запрос;
-- `reasoning_effort`;
-- максимальное количество токенов.
+- model;
+- system prompt;
+- user prompt;
+- reasoning effort;
+- completion-token limit.
 
-Изменяется только `temperature`:
+Only `temperature` changes:
 
 ```python
 TEMPERATURES = (0.0, 0.7, 1.2)
@@ -47,51 +49,51 @@ for temperature in TEMPERATURES:
     )
 ```
 
-После этого выполняется отдельный четвёртый запрос при `temperature=0`. Он получает все три ответа, сравнивает их по заданным критериям и формулирует выводы.
+A fourth request is then executed with `temperature=0`. It receives all three responses, compares them using the selected criteria, and produces a conclusion.
 
-## Что регулирует `temperature`
+## What `temperature` Controls
 
-Температура влияет на выбор следующего токена из доступных вариантов:
+Temperature affects how the next token is selected:
 
-- низкое значение сильнее отдаёт предпочтение наиболее вероятным вариантам;
-- среднее значение допускает больше вариативности;
-- высокое значение увеличивает вероятность менее ожидаемых вариантов.
+- a low value strongly favors the most probable options;
+- a medium value allows more variation;
+- a high value increases the probability of less expected choices.
 
-Температура не добавляет модели знания и сама по себе не гарантирует правильность или оригинальность. Она регулирует случайность генерации.
+Temperature does not add knowledge to a model and cannot guarantee correctness or originality. It controls generation randomness.
 
-Groq API принимает значения `temperature` от `0` до `2`. При увеличении значения ответы обычно становятся разнообразнее, а при уменьшении — более сфокусированными и стабильными.
+Groq accepts `temperature` values from `0` to `2`. Higher values generally produce more varied responses, while lower values make generation more focused and stable.
 
-## Ожидаемые особенности
+## Expected Characteristics
 
-| Температура | Ожидаемое поведение | Подходящие задачи |
+| Temperature | Expected behavior | Suitable tasks |
 |---:|---|---|
-| `0` | Наиболее сфокусированный и предсказуемый ответ | Извлечение данных, классификация, технические инструкции, генерация структурированного результата |
-| `0.7` | Баланс точности и вариативности | Чат-боты, объяснения, идеи для продукта, обычные тексты |
-| `1.2` | Более неожиданные идеи и формулировки, но выше риск неточностей | Мозговой штурм, названия, слоганы, сюжетные идеи, творческие эксперименты |
+| `0` | The most focused and predictable response | Data extraction, classification, technical instructions, structured output |
+| `0.7` | A balance between accuracy and variation | Chatbots, explanations, product ideas, general writing |
+| `1.2` | More unexpected ideas and wording, with a higher risk of inaccuracies | Brainstorming, names, slogans, story ideas, creative experiments |
 
-Это ориентиры, а не строгие гарантии. Результат также зависит от модели, промпта, контекста и других параметров генерации.
+These are guidelines rather than guarantees. Results also depend on the model, prompt, context, and other generation parameters.
 
-## Критерии сравнения
+## Evaluation Criteria
 
-### Точность
+### Accuracy
 
-Проверяется:
+The evaluator checks whether:
 
-- выполнены ли все части задания;
-- логичны ли предложенные функции робота;
-- не представлены ли предположения как доказанные факты.
+- every requested part is present;
+- the proposed robot functions are logically plausible;
+- assumptions are not presented as confirmed facts.
 
-### Креативность
+### Creativity
 
-Оценивается оригинальность названия, функций, описания миссии и слогана.
+The evaluator considers the originality of the robot's name, functions, mission description, and slogan.
 
-### Разнообразие
+### Diversity
 
-Сравнивается, насколько идеи и формулировки отличаются от более очевидных решений в других ответах.
+The responses are compared to determine how much their ideas and wording differ from the more obvious alternatives.
 
-Один ответ при каждой температуре позволяет увидеть характерный пример, но не даёт статистически надёжной оценки разнообразия. Для полноценного эксперимента каждый вариант следовало бы запускать много раз.
+One response per temperature demonstrates a possible behavior, but it is not enough for a statistically reliable diversity measurement. A rigorous experiment would run every temperature multiple times.
 
-## Параметры модели
+## Model Parameters
 
 ```python
 response = client.chat.completions.create(
@@ -103,39 +105,37 @@ response = client.chat.completions.create(
 )
 ```
 
-Параметр `top_p` явно не устанавливается. Обычно рекомендуется изменять либо `temperature`, либо `top_p`, чтобы результаты эксперимента было проще интерпретировать.
+`top_p` is not set explicitly. It is generally easier to interpret an experiment when changing either `temperature` or `top_p`, rather than both at once.
 
-## Количество запросов
+## Number of API Calls
 
-| Этап | API-вызовы |
+| Stage | API calls |
 |---|---:|
-| Ответ при `temperature=0` | 1 |
-| Ответ при `temperature=0.7` | 1 |
-| Ответ при `temperature=1.2` | 1 |
-| Сравнение результатов | 1 |
-| **Всего** | **4** |
+| Response at `temperature=0` | 1 |
+| Response at `temperature=0.7` | 1 |
+| Response at `temperature=1.2` | 1 |
+| Final comparison | 1 |
+| **Total** | **4** |
 
-## Запуск
+## Setup and Run
 
-Выполните общую [настройку проекта](../README.md#подготовка-проекта) и добавьте `GROQ_API_KEY` в корневой файл `.env`.
-
-Из корня репозитория запустите:
+Complete the shared [project setup](../README.md#project-setup), add `GROQ_API_KEY` to the root `.env` file, and run:
 
 ```bash
 python day-04-temperature/main.py
 ```
 
-Программа выведет исходный запрос, три ответа и итоговое сравнение.
+The program prints the original prompt, three responses, and the final comparison.
 
-## Вывод
+## Day 4 Takeaway
 
-- `temperature=0` подходит, когда важны стабильность, соблюдение правил и минимальная случайность.
-- `temperature=0.7` является универсальной настройкой для большинства диалоговых и текстовых задач.
-- `temperature=1.2` полезна для поиска необычных вариантов, если результат можно проверить и отфильтровать.
+- `temperature=0` is useful when stability, rule-following, and minimal randomness are important.
+- `temperature=0.7` is a flexible default for many conversational and writing tasks.
+- `temperature=1.2` helps explore unusual ideas when the result can be reviewed and filtered.
 
-Для задач, где ошибка имеет высокую цену, одной низкой температуры недостаточно: результат всё равно необходимо проверять с помощью правил, тестов, источников или человека.
+For high-stakes tasks, a low temperature is not enough by itself. Outputs still require rules, tests, reliable sources, or human review.
 
-## Полезные ссылки
+## Useful Links
 
 - [Groq API Reference](https://console.groq.com/docs/api-reference)
 - [Groq: Text Generation](https://console.groq.com/docs/text-chat)

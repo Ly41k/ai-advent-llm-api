@@ -1,224 +1,223 @@
-# AI Advent — практика работы с LLM API
+**English** | [Русский](README.ru.md)
 
-Учебный репозиторий с практическими заданиями курса AI Advent.
+# AI Advent — Working with LLM APIs
 
-Проект последовательно знакомит с работой через LLM API: от первого запроса и сохранения истории диалога до управления форматом, сравнения способов рассуждения, исследования температуры и сопоставления моделей разного масштаба.
+A learning repository containing practical assignments from the AI Advent challenge.
 
-## Выполненные задания
+The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, and comparisons between models of different sizes.
 
-| День | Тема | Результат |
+## Completed Assignments
+
+| Day | Topic | Result |
 |---|---|---|
-| [День 1](day-01-first-api-request) | Первый запрос к LLM через API | Консольный чат-бот с историей диалога |
-| [День 2](day-02-response-control) | Управление форматом ответа | Сравнение обычного ответа и ответа с заданными ограничениями |
-| [День 3](day-03-reasoning-methods) | Способы рассуждения | Четыре решения одной задачи и автоматическое сравнение |
-| [День 4](day-04-temperature) | Температура | Сравнение точности, креативности и разнообразия ответов |
-| [День 5](day-05-model-versions) | Версии моделей | Сравнение качества, скорости, токенов и стоимости трёх моделей |
+| [Day 1](day-01-first-api-request) | First LLM API request | A CLI chatbot with conversation history |
+| [Day 2](day-02-response-control) | Response control | The same request with and without explicit constraints |
+| [Day 3](day-03-reasoning-methods) | Reasoning strategies | Four approaches to one problem with automated comparison |
+| [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and diversity at three temperatures |
+| [Day 5](day-05-model-versions) | Model versions | Quality, latency, token usage, and cost across three models |
 
-## Технологии
+## Technologies
 
 - Python;
 - [Groq API](https://console.groq.com/);
-- GPT-OSS 20B и 120B;
+- GPT-OSS 20B and 120B;
 - Qwen 3.6 27B;
 - Groq Python SDK;
 - `python-dotenv`.
 
-## Структура репозитория
+## Repository Structure
 
 ```text
 ai-advent-llm-api/
 ├── day-01-first-api-request/
 │   ├── main.py
-│   └── README.md
+│   ├── README.md
+│   └── README.ru.md
 ├── day-02-response-control/
 │   ├── main.py
-│   └── README.md
+│   ├── README.md
+│   └── README.ru.md
 ├── day-03-reasoning-methods/
 │   ├── main.py
-│   └── README.md
+│   ├── README.md
+│   └── README.ru.md
 ├── day-04-temperature/
 │   ├── main.py
-│   └── README.md
+│   ├── README.md
+│   └── README.ru.md
 ├── day-05-model-versions/
 │   ├── main.py
-│   └── README.md
+│   ├── README.md
+│   └── README.ru.md
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
-└── README.md
+├── README.md
+└── README.ru.md
 ```
 
-Каждая директория содержит самостоятельное практическое задание, запускаемый пример и отдельное описание.
+Each directory contains an independent practical assignment, a runnable example, and documentation in English and Russian.
 
-## Подготовка проекта
+## Project Setup
 
-### 1. Клонирование
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Ly41k/ai-advent-llm-api.git
 cd ai-advent-llm-api
 ```
 
-### 2. Виртуальное окружение
-
-Создайте виртуальное окружение:
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Активируйте его.
-
-macOS/Linux:
+Activate it on macOS or Linux:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Windows:
+On Windows:
 
 ```bash
 .venv\Scripts\activate
 ```
 
-### 3. Зависимости
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. API-ключ
+### 4. Add the API key
 
-Получите ключ в [Groq Console](https://console.groq.com/keys).
+Create a key in the [Groq Console](https://console.groq.com/keys).
 
-Создайте в корне проекта файл `.env` на основе `.env.example`:
+Create a `.env` file in the project root using `.env.example` as a template:
 
 ```env
 GROQ_API_KEY=your_api_key_here
 ```
 
-Файл `.env` уже добавлен в `.gitignore`. Не публикуйте API-ключ и не передавайте его другим людям.
+The `.env` file is excluded by `.gitignore`. Never publish or share your API key.
 
-## Запуск заданий
+## Running the Assignments
 
-Все команды выполняются из корня репозитория.
+Run all commands from the repository root.
 
-День 1:
+Day 1:
 
 ```bash
 python day-01-first-api-request/main.py
 ```
 
-День 2:
+Day 2:
 
 ```bash
 python day-02-response-control/main.py
 ```
 
-День 3:
+Day 3:
 
 ```bash
 python day-03-reasoning-methods/main.py
 ```
 
-День 4:
+Day 4:
 
 ```bash
 python day-04-temperature/main.py
 ```
 
-День 5:
+Day 5:
 
 ```bash
 python day-05-model-versions/main.py
 ```
 
-Программы первого и второго дня работают в интерактивном режиме. Для завершения введите:
+Days 1 and 2 are interactive. Enter `выход` to stop them.
 
-```text
-выход
-```
+Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results.
 
-Третий, четвёртый и пятый дни используют заранее заданные запросы и самостоятельно завершают работу после получения результатов.
+## What I Learned
 
-## Что изучено
+### Day 1 — First Request
 
-### День 1 — первый запрос
+- creating a Groq client;
+- using the `system`, `user`, and `assistant` roles;
+- sending a request and reading the response;
+- preserving conversation history;
+- handling API errors.
 
-- создание клиента Groq;
-- роли `system`, `user` и `assistant`;
-- отправка запроса и получение ответа;
-- хранение истории текущего диалога;
-- обработка ошибок API.
+### Day 2 — Response Control
 
-### День 2 — управление ответом
+- controlling response structure through a prompt;
+- semantic and technical length limits;
+- using `max_completion_tokens`;
+- defining an explicit completion condition;
+- comparing the same request with different levels of control.
 
-- управление структурой ответа через промпт;
-- смысловое ограничение длины;
-- параметр `max_completion_tokens`;
-- явное условие завершения;
-- сравнение результатов одного запроса с разным уровнем контроля.
+### Day 3 — Reasoning Strategies
 
-### День 3 — способы рассуждения
+- direct prompting;
+- step-by-step instructions;
+- asking the model to generate a prompt;
+- simulating a group of experts;
+- automated evaluation against a known answer;
+- handling token-per-minute limits.
 
-- прямой запрос без дополнительных инструкций;
-- пошаговое решение;
-- генерация промпта самой моделью;
-- имитация группы экспертов;
-- автоматическая оценка нескольких решений;
-- обработка ограничения токенов в минуту.
+### Day 4 — Temperature
 
-### День 4 — температура
+- how `temperature` affects generation;
+- comparing `0`, `0.7`, and `1.2`;
+- evaluating accuracy, creativity, and diversity;
+- choosing a temperature for different tasks;
+- automated comparison of the responses.
 
-- влияние параметра `temperature` на генерацию;
-- сравнение значений `0`, `0.7` и `1.2`;
-- оценка точности, креативности и разнообразия;
-- выбор температуры для разных типов задач;
-- автоматическое сравнение результатов.
+### Day 5 — Model Versions
 
-### День 5 — версии моделей
+- running the same prompt on models of different sizes;
+- comparing GPT-OSS 20B, Qwen 3.6 27B, and GPT-OSS 120B;
+- configuring model-specific reasoning modes;
+- measuring end-to-end latency with `perf_counter()`;
+- reading token usage from `response.usage`;
+- estimating cost from public Groq pricing;
+- anonymizing responses for quality evaluation;
+- understanding the limits of cloud-based resource measurements.
 
-- выполнение одинакового запроса на моделях разного масштаба;
-- использование GPT-OSS 20B, Qwen 3.6 27B и GPT-OSS 120B;
-- настройка reasoning-режима для разных семейств моделей;
-- измерение полного времени ответа через `perf_counter()`;
-- получение статистики токенов из `response.usage`;
-- расчёт ориентировочной стоимости по публичным ценам Groq;
-- сравнение качества анонимизированных ответов;
-- формирование короткого вывода и списка ссылок;
-- понимание ограничений оценки ресурсоёмкости через облачный API.
+See the [Day 5 README](day-05-model-versions/README.md) for the complete experiment.
 
-Подробности пятого эксперимента находятся в [README Дня 5](day-05-model-versions/README.md).
+The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
 
-Код заданий содержит комментарии на русском языке, объясняющие основные этапы выполнения программ.
+## Groq API Limits
 
-## Ограничения Groq API
+Available requests and tokens depend on the account tier and model.
 
-Доступное количество запросов и токенов зависит от тарифного плана и конкретной модели.
+Days 3 and 4 wait for 60 seconds and retry once after a supported rate-limit error.
 
-В третьем и четвёртом заданиях при ошибке минутного лимита программа ждёт 60 секунд и один раз повторяет запрос.
+Day 5 does not retry automatically because waiting would distort latency measurements. Its main requests use `max_completion_tokens=900`. If Qwen returns `429 rate_limit_exceeded`, wait for the rolling minute window to reset and run the complete experiment again.
 
-В пятом задании автоматический повтор не используется, чтобы ожидание не попало в измеряемое время. Основные запросы ограничены значением `max_completion_tokens=900`. Если Qwen возвращает ошибку `429 rate_limit_exceeded`, необходимо дождаться сброса минутного окна и повторить полный эксперимент.
+Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
 
-Reasoning-модели расходуют часть выходного лимита на внутренние рассуждения. Поэтому в пятом задании используются минимальные поддерживаемые режимы: `low` для GPT-OSS и `none` для Qwen.
+## Interpreting the Results
 
-## Интерпретация результатов
+Responses and latency can vary between runs. A single experiment demonstrates model behavior under specific conditions; it is not a universal ranking.
 
-Результаты генерации и время ответа могут отличаться между запусками. Один эксперимент показывает поведение моделей в конкретных условиях, но не создаёт универсальный рейтинг.
+For a more reliable comparison:
 
-Для более надёжного сравнения необходимо:
+- run every model multiple times;
+- use tasks from different categories;
+- compare median latency;
+- define evaluation criteria in advance;
+- verify actual pricing for the account tier in use.
 
-- выполнять несколько запусков каждой модели;
-- использовать набор заданий разных типов;
-- сравнивать медианное время;
-- проверять ответы по заранее определённым критериям;
-- учитывать фактическую стоимость на используемом тарифе.
+## Project Goal
 
-## Цель репозитория
+The goal is to understand, through small runnable examples, how prompts, API parameters, and model selection affect generation quality, latency, and cost.
 
-Главная цель проекта — на небольших запускаемых примерах понять, как промпт, параметры API и выбор модели влияют на качество, скорость и стоимость генерации.
-
-## Полезные ссылки
+## Useful Links
 
 - [Groq: Text Generation](https://console.groq.com/docs/text-chat)
 - [Groq: Prompting](https://console.groq.com/docs/prompting)

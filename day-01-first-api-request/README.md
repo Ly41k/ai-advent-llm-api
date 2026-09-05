@@ -1,42 +1,44 @@
-# День 1 — первый запрос к LLM через API
+**English** | [Русский](README.ru.md)
 
-Первое практическое задание курса AI Advent по работе с большими языковыми моделями через API.
+# Day 1 — First LLM API Request
 
-## Задание
+The first AI Advent assignment introduces large language models through a direct API call.
 
-Написать минимальный код, который:
+## Assignment
 
-- отправляет запрос в LLM через API;
-- получает ответ модели;
-- выводит результат в консоль или простой интерфейс.
+Write a minimal program that:
 
-## Результат
+- sends a request to an LLM through an API;
+- receives the model response;
+- displays it in a console or a simple interface.
 
-Создан консольный чат-бот, который обращается к модели `openai/gpt-oss-20b` через Groq API, выводит ответы и сохраняет историю текущего диалога.
+## Result
 
-## Что реализовано
+The result is a CLI chatbot that calls `openai/gpt-oss-20b` through the Groq API, prints responses, and preserves the current conversation history.
 
-- загрузка API-ключа из переменной окружения;
-- подключение к Groq API;
-- отправка сообщений языковой модели;
-- использование ролей `system`, `user` и `assistant`;
-- настройка персонажа через системный промпт;
-- сохранение истории диалога во время работы программы;
-- обработка пустого пользовательского ввода;
-- обработка ошибок API;
-- завершение программы командой `выход`.
+## Implemented Features
 
-## Персонажи
+- loading an API key from an environment variable;
+- connecting to the Groq API;
+- sending messages to a language model;
+- using the `system`, `user`, and `assistant` roles;
+- configuring a character through the system prompt;
+- preserving history while the program is running;
+- ignoring empty user input;
+- handling API errors;
+- exiting with the `выход` command.
 
-Модель выступает в роли бортового помощника космического корабля по имени **Бублик**.
+## Characters
 
-Пользователь — космический путешественник **Чебуратор**, который ищет приключения в галактике. Бублик отвечает ему на русском языке.
+The model acts as **Bublik**, the onboard assistant of a spaceship.
 
-## Как работает программа
+The user is **Cheburator**, a space traveler looking for adventures across the galaxy. Bublik responds in Russian.
 
-### Системный промпт
+## How It Works
 
-Первым элементом истории создаётся сообщение с ролью `system`:
+### System prompt
+
+The conversation starts with a `system` message:
 
 ```python
 messages = [
@@ -53,11 +55,11 @@ messages = [
 ]
 ```
 
-Системный промпт определяет роль модели, контекст общения и язык ответа.
+The system prompt defines the model's role, conversation context, and response language.
 
-### История диалога
+### Conversation history
 
-Перед каждым запросом сообщение пользователя добавляется в список `messages` с ролью `user`:
+Before every request, the user message is appended with the `user` role:
 
 ```python
 messages.append(
@@ -68,7 +70,7 @@ messages.append(
 )
 ```
 
-После успешного ответа результат модели добавляется с ролью `assistant`:
+After a successful request, the model response is appended with the `assistant` role:
 
 ```python
 messages.append(
@@ -79,15 +81,15 @@ messages.append(
 )
 ```
 
-В результате формируется последовательность:
+The resulting sequence is:
 
 ```text
 system → user → assistant → user → assistant
 ```
 
-При следующем запросе модель получает весь накопленный диалог и может учитывать предыдущие сообщения. История хранится только в памяти и удаляется после завершения программы.
+The model receives the complete accumulated conversation with every request. History exists only in memory and is discarded when the program stops.
 
-### Запрос к модели
+### Model request
 
 ```python
 response = client.chat.completions.create(
@@ -98,18 +100,18 @@ response = client.chat.completions.create(
 )
 ```
 
-Используемые параметры:
+Parameters:
 
-- `model` — модель, которая обрабатывает запрос;
-- `messages` — системный промпт и история диалога;
-- `temperature` — уровень вариативности ответа;
-- `reasoning_effort` — объём вычислений, выделяемый модели на рассуждение.
+- `model` selects the language model;
+- `messages` contains the system prompt and conversation history;
+- `temperature` controls response variability;
+- `reasoning_effort` controls the amount of computation used for reasoning.
 
-### Обработка ошибок
+### Error handling
 
-Если переменная `GROQ_API_KEY` отсутствует, программа завершается с понятным сообщением.
+The program stops with a clear message if `GROQ_API_KEY` is missing.
 
-Ошибки API перехватываются в блоке `try/except`. Если модель не ответила, последнее сообщение пользователя удаляется из истории:
+API calls are wrapped in `try/except`. If a request fails, the unmatched user message is removed from history:
 
 ```python
 except Exception as error:
@@ -117,21 +119,21 @@ except Exception as error:
     print(f"Ошибка при обращении к LLM: {error}\n")
 ```
 
-Так в истории не остаётся запроса без соответствующего ответа модели.
+This prevents a failed request without an assistant response from remaining in the conversation.
 
-## Подготовка к запуску
+## Setup
 
-Выполните общую [настройку проекта](../README.md#подготовка-проекта) и добавьте `GROQ_API_KEY` в корневой файл `.env`.
+Complete the shared [project setup](../README.md#project-setup) and add `GROQ_API_KEY` to the root `.env` file.
 
-## Запуск
+## Run
 
-Из корня репозитория выполните:
+From the repository root:
 
 ```bash
 python day-01-first-api-request/main.py
 ```
 
-После запуска появится приглашение:
+The program displays:
 
 ```text
 🤖 Чат-бот на Groq
@@ -140,7 +142,7 @@ python day-01-first-api-request/main.py
 Вы:
 ```
 
-Пример диалога:
+Example:
 
 ```text
 Вы: Как тебя зовут?
@@ -150,10 +152,10 @@ python day-01-first-api-request/main.py
 Бот: Предлагаю исследовать неизвестную планету!
 ```
 
-Для завершения программы введите `выход`.
+Enter `выход` to stop the program.
 
-## Итог первого дня
+## Day 1 Takeaway
 
-Выполнен первый полноценный запрос к LLM через API. Программа принимает пользовательский ввод, отправляет историю диалога модели, получает ответ и выводит его в консоль.
+The first complete LLM API integration is working. The program reads user input, sends the conversation history to the model, receives a response, and prints it to the console.
 
-Следующий шаг — [управление форматом и длиной ответа](../day-02-response-control).
+Next: [controlling response format and length](../day-02-response-control).

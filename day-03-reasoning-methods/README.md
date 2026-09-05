@@ -1,65 +1,67 @@
-# День 3 — разные способы рассуждения
+**English** | [Русский](README.ru.md)
 
-Третье практическое задание курса AI Advent посвящено тому, как формулировка промпта влияет на рассуждение и итоговый ответ языковой модели.
+# Day 3 — Reasoning Strategies
 
-Одна логическая задача решается через Groq API четырьмя способами. После этого модель сравнивает полученные ответы с проверяемым эталоном.
+The third AI Advent assignment explores how prompt formulation affects a model's reasoning and final answer.
 
-## Задание
+One logic problem is solved through the Groq API using four approaches. A final model call then compares all responses against a verifiable reference answer.
 
-Необходимо решить одну задачу через API четырьмя способами:
+## Assignment
 
-1. Получить прямой ответ без дополнительных инструкций.
-2. Добавить в промпт инструкцию `Решай пошагово`.
-3. Попросить модель сначала составить промпт для решения задачи, а затем использовать его.
-4. Создать в промпте группу экспертов и получить решение от каждого.
+Solve the same problem in four ways:
 
-В конце необходимо сравнить ответы и определить, какой способ дал наиболее точный результат.
+1. Request a direct answer without additional instructions.
+2. Add a step-by-step instruction.
+3. Ask the model to create a solution prompt, then use that prompt.
+4. Simulate a group of experts in one prompt.
 
-## Выбранная задача
+Finally, compare the responses and determine which approach produced the most accurate result.
 
-Четырём исследователям нужно ночью перейти мост. Они переходят его за 1, 2, 7 и 10 минут соответственно.
+## Selected Problem
 
-Условия:
+Four researchers must cross a bridge at night. Their crossing times are 1, 2, 7, and 10 minutes.
 
-- на мосту могут одновременно находиться не более двух человек;
-- у группы есть только один фонарь;
-- без фонаря переходить мост нельзя;
-- когда идут двое, они движутся со скоростью более медленного участника.
+Rules:
 
-Нужно найти минимальное время, за которое вся группа перейдёт мост.
+- no more than two people may be on the bridge at once;
+- the group has one flashlight;
+- nobody can cross without the flashlight;
+- a pair moves at the speed of its slower member.
 
-Задача подходит для сравнения, потому что требует нескольких связанных действий, допускает разные стратегии и имеет проверяемый правильный ответ — **17 минут**.
+The goal is to find the minimum time required for everyone to cross.
 
-## Схема программы
+This problem works well for comparison because it requires several related decisions, supports multiple strategies, and has a verifiable answer: **17 minutes**.
+
+## Program Flow
 
 ```mermaid
 flowchart TD
-    T["Одна задача"] --> D["1. Прямой ответ"]
-    T --> S["2. Пошаговое решение"]
-    T --> P["3. Генерация промпта"]
-    P --> R["Решение по промпту"]
-    T --> E["4. Группа экспертов"]
-    D --> C["Итоговое сравнение"]
+    T["One problem"] --> D["1. Direct answer"]
+    T --> S["2. Step-by-step solution"]
+    T --> P["3. Generate a prompt"]
+    P --> R["Solve with generated prompt"]
+    T --> E["4. Expert group"]
+    D --> C["Final comparison"]
     S --> C
     R --> C
     E --> C
 ```
 
-## Способы решения
+## Reasoning Approaches
 
-### 1. Прямой ответ
+### 1. Direct answer
 
-Модель получает только условие задачи:
+The model receives only the problem statement:
 
 ```python
 direct_answer = get_response(TASK)
 ```
 
-Дополнительных указаний о способе решения нет. Модель самостоятельно выбирает глубину и формат ответа.
+No solution strategy is prescribed. The model chooses the depth and format itself.
 
-### 2. Пошаговое решение
+### 2. Step-by-step solution
 
-К условию добавляется явная инструкция:
+An explicit instruction is appended to the problem:
 
 ```python
 step_by_step_answer = get_response(
@@ -67,11 +69,11 @@ step_by_step_answer = get_response(
 )
 ```
 
-Этот способ просит показать последовательность переходов, вычисления и проверку результата.
+This approach requests a visible sequence of crossings, calculations, and a final verification.
 
-### 3. Промпт, составленный моделью
+### 3. Model-generated prompt
 
-Сначала модель получает метазадачу: подготовить хороший промпт для решения исходной задачи.
+The model first receives a meta-task: create a clear prompt for solving the original problem.
 
 ```python
 generated_prompt = get_response(
@@ -80,61 +82,59 @@ generated_prompt = get_response(
 )
 ```
 
-Затем созданный текст отправляется модели как новый пользовательский запрос:
+The generated text is then sent back as a new user request:
 
 ```python
 generated_prompt_answer = get_response(generated_prompt)
 ```
 
-Поэтому третий способ состоит из двух API-вызовов:
+This approach requires two API calls:
 
-1. Создание промпта.
-2. Решение задачи по созданному промпту.
+1. Generate the prompt.
+2. Solve the problem using that prompt.
 
-### 4. Группа экспертов
+### 4. Expert group
 
-В одном промпте создаются три роли:
+One prompt defines three virtual roles:
 
-| Эксперт | Задача |
+| Expert | Responsibility |
 |---|---|
-| Аналитик | Рассмотреть возможные стратегии и выбрать лучшую |
-| Инженер | Расписать маршрут и проверить вычисления |
-| Критик | Найти ошибки и проверить, доказана ли минимальность |
+| Analyst | Explore possible strategies and select the best one |
+| Engineer | List the crossings and verify the calculations |
+| Critic | Find mistakes and check whether minimality was proven |
 
-Это не три отдельные модели и не настоящая мультиагентная система. Одна модель последовательно имитирует три точки зрения внутри одного ответа.
+This is not a real multi-agent system and does not use three separate models. One model sequentially simulates three perspectives in a single response.
 
-## Итоговое сравнение
+## Final Comparison
 
-После получения четырёх решений выполняется отдельный запрос для их оценки.
+After the four solutions are generated, a separate request evaluates them.
 
-Оценщик получает:
+The evaluator receives:
 
-- все четыре ответа;
-- эталонный результат — 17 минут;
-- правильную последовательность переходов;
-- критерии оценки: правильность, ясность и проверка минимальности.
+- all four responses;
+- the correct result of 17 minutes;
+- the correct crossing sequence;
+- evaluation criteria: correctness, clarity, and proof of minimality.
 
-Эталон не передаётся на этапах решения. Он появляется только в финальном запросе и поэтому не подсказывает первоначальный ответ.
+The reference answer is not included in any solution request. It appears only during evaluation, so it cannot reveal the answer to the original attempts.
 
-## Количество запросов
+## Number of API Calls
 
-| Этап | API-вызовы |
+| Stage | API calls |
 |---|---:|
-| Прямой ответ | 1 |
-| Пошаговое решение | 1 |
-| Создание промпта | 1 |
-| Решение по созданному промпту | 1 |
-| Группа экспертов | 1 |
-| Итоговое сравнение | 1 |
-| **Всего** | **6** |
+| Direct answer | 1 |
+| Step-by-step solution | 1 |
+| Prompt generation | 1 |
+| Solution with generated prompt | 1 |
+| Expert group | 1 |
+| Final comparison | 1 |
+| **Total** | **6** |
 
-Четыре способа решения требуют пяти запросов, поскольку третий способ состоит из двух этапов. Шестой запрос используется только для сравнения.
+Four approaches require five requests because the third approach has two stages. The sixth request is used only for evaluation.
 
-## Основные части кода
+## Main Code Components
 
-### Константы
-
-В начале файла находятся общие настройки:
+### Constants
 
 ```python
 MODEL = "openai/gpt-oss-20b"
@@ -142,39 +142,35 @@ MAX_COMPLETION_TOKENS = 2048
 RATE_LIMIT_WAIT_SECONDS = 60
 ```
 
-- `MODEL` определяет используемую модель;
-- `MAX_COMPLETION_TOKENS` ограничивает максимальную генерацию одного ответа;
-- `RATE_LIMIT_WAIT_SECONDS` задаёт паузу перед повторным запросом.
+- `MODEL` selects the model;
+- `MAX_COMPLETION_TOKENS` limits one generation;
+- `RATE_LIMIT_WAIT_SECONDS` defines the retry delay.
 
 ### `get_response()`
-
-Функция принимает пользовательский промпт, отправляет его модели и возвращает текст ответа:
 
 ```python
 def get_response(user_prompt: str) -> str:
 ```
 
-Все способы используют одну функцию и одинаковые параметры API. Благодаря этому сравнивается именно влияние промпта, а не разных настроек модели.
+All approaches use the same function and API parameters. This isolates the prompt as the variable being tested.
 
 ### `print_section()`
-
-Функция печатает заголовок, разделители и содержимое отдельного этапа:
 
 ```python
 def print_section(title: str, content: str) -> None:
 ```
 
-Она не обращается к API и нужна только для читаемого вывода в консоль.
+This helper formats console output and does not call the API.
 
 ### `main()`
 
-Главная функция последовательно запускает все способы решения, сохраняет ответы в переменные и передаёт их финальному оценщику.
+The main function runs all approaches in sequence, stores their responses, and sends them to the final evaluator.
 
-Код в `main.py` содержит подробные комментарии на русском языке. Они объясняют назначение импортов, констант, параметров API, условий, циклов и каждого этапа эксперимента.
+The source file contains detailed Russian comments explaining imports, constants, parameters, conditions, loops, and experiment stages.
 
-## Параметры модели
+## Model Parameters
 
-Во всех запросах используются одинаковые настройки:
+Every request uses:
 
 ```python
 temperature=0.2
@@ -184,29 +180,29 @@ max_completion_tokens=MAX_COMPLETION_TOKENS
 
 ### `temperature=0.2`
 
-Низкая температура уменьшает случайность. Для логической задачи важнее стабильность вычислений, чем разнообразие формулировок.
+A low temperature reduces randomness. Stable calculations matter more than varied wording for this logic problem.
 
 ### `reasoning_effort="low"`
 
-Модель использует небольшое количество внутренних reasoning-токенов. Пошаговый способ при этом всё равно получает явную инструкцию показать этапы решения в видимом ответе.
+The model uses a smaller internal reasoning budget. The step-by-step variant still explicitly requests visible reasoning in the response.
 
-Значение `low` также уменьшает вероятность ситуации, когда весь доступный лимит будет потрачен на внутреннее рассуждение, а `message.content` останется пустым.
+The `low` value also reduces the chance that internal reasoning consumes the full budget and leaves `message.content` empty.
 
 ### `max_completion_tokens=2048`
 
-Параметр задаёт верхнюю границу количества токенов, которые модель может использовать при формировании ответа, включая внутреннее рассуждение reasoning-модели.
+This parameter limits the complete generation budget, including internal reasoning tokens.
 
-Лимит выбран с учётом ограничения аккаунта Groq в 8000 токенов в минуту. Значение 8192 использовать нельзя: вместе с входным промптом оно превышает доступный TPM ещё до генерации ответа.
+The value respects the account's 8,000-token-per-minute limit. A value of 8,192 would exceed the available TPM when combined with the input prompt.
 
-## Обработка ограничения TPM
+## TPM Limit Handling
 
-Программа делает шесть запросов подряд, поэтому даже с лимитом 2048 может временно исчерпать доступное количество токенов в минуту.
+Six sequential requests may exhaust the minute-level token allowance.
 
-Если Groq возвращает статус `413` или `429` с кодом `rate_limit_exceeded`, функция:
+When Groq returns status `413` or `429` with `rate_limit_exceeded`, the program:
 
-1. Выводит предупреждение.
-2. Ждёт 60 секунд.
-3. Повторяет запрос один раз.
+1. Prints a warning.
+2. Waits for 60 seconds.
+3. Retries once.
 
 ```python
 if not is_rate_limit_error or attempt == 1:
@@ -220,60 +216,54 @@ print(
 time.sleep(RATE_LIMIT_WAIT_SECONDS)
 ```
 
-Неизвестные ошибки не скрываются и передаются во внешний обработчик.
+Unknown errors are not hidden and are propagated to the outer handler.
 
-## Правильное решение
+## Correct Solution
 
-Минимальное время — **17 минут**:
+The minimum time is **17 minutes**:
 
 ```text
-1 и 2 переходят: 2 минуты
-1 возвращается: 1 минута
-7 и 10 переходят: 10 минут
-2 возвращается: 2 минуты
-1 и 2 переходят: 2 минуты
+1 and 2 cross: 2 minutes
+1 returns: 1 minute
+7 and 10 cross: 10 minutes
+2 returns: 2 minutes
+1 and 2 cross: 2 minutes
 
-Итого: 2 + 1 + 10 + 2 + 2 = 17 минут
+Total: 2 + 1 + 10 + 2 + 2 = 17 minutes
 ```
 
-## Подготовка к запуску
+## Setup and Run
 
-Выполните общую [настройку проекта](../README.md#подготовка-проекта) и добавьте `GROQ_API_KEY` в корневой файл `.env`.
-
-## Запуск
-
-Из корня репозитория выполните:
+Complete the shared [project setup](../README.md#project-setup), add `GROQ_API_KEY` to the root `.env` file, and run:
 
 ```bash
 python day-03-reasoning-methods/main.py
 ```
 
-Ввод пользователя не требуется. Программа последовательно выведет условие, четыре решения и итоговое сравнение, после чего завершит работу.
+No user input is required. The program prints the problem, four solutions, and the final comparison, then exits.
 
-Если будет достигнут минутный лимит Groq, выполнение продолжится автоматически после указанной паузы.
+If the minute limit is reached, execution resumes automatically after the configured delay.
 
-## Результат эксперимента
+## Experiment Results
 
-Точное содержание ответов может меняться между запусками. Поэтому лучший способ определяется не заранее, а по фактическим результатам и проверяемым критериям.
+Exact responses may vary between runs. The best approach is therefore selected from actual results using verifiable criteria rather than assumed in advance.
 
-Обычно способы отличаются следующим образом:
-
-| Способ | Ожидаемая особенность |
+| Approach | Expected characteristic |
 |---|---|
-| Прямой ответ | Краткое решение с минимальным объяснением |
-| Пошаговый | Понятная последовательность действий и вычислений |
-| Созданный промпт | Более формализованные требования к решению и проверке |
-| Группа экспертов | Рассмотрение стратегии, вычислений и возможных ошибок |
+| Direct answer | A concise solution with minimal explanation |
+| Step-by-step | A clear sequence of actions and calculations |
+| Generated prompt | More formal requirements for solving and verification |
+| Expert group | Strategy, calculation, and error-checking perspectives |
 
-Больший объём ответа сам по себе не означает большую точность. Главные критерии — правильный результат, корректный маршрут и обоснование минимальности.
+A longer response is not automatically more accurate. The important criteria are the correct total, a valid crossing sequence, and a justification of minimality.
 
-## Итог третьего дня
+## Day 3 Takeaway
 
-Эксперимент показывает, что одна и та же модель с одинаковыми настройками может давать разные по структуре и убедительности ответы в зависимости от формулировки промпта.
+The same model with identical API settings can produce answers with different structure and persuasiveness depending on prompt formulation.
 
-Универсально лучшего способа нет: прямой запрос подходит для простых задач, пошаговая инструкция делает решение прозрачнее, создание отдельного промпта помогает сформулировать требования, а группа экспертов добавляет проверку с нескольких точек зрения.
+There is no universally best approach. Direct prompting suits simple tasks, step-by-step instructions improve transparency, prompt generation helps formalize requirements, and expert simulation adds multiple review perspectives.
 
-## Полезные ссылки
+## Useful Links
 
 - [Groq: Text Generation](https://console.groq.com/docs/text-chat)
 - [Groq: Prompting](https://console.groq.com/docs/prompting)

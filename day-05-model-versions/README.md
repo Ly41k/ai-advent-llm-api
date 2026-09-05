@@ -1,42 +1,42 @@
-# День 5 — версии моделей
+**English** | [Русский](README.ru.md)
 
-Пятое практическое задание курса AI Advent посвящено сравнению языковых моделей разного масштаба.
+# Day 5 — Model Versions
 
-Один и тот же технический запрос отправляется трём моделям через Groq API. Для каждого ответа программа измеряет время выполнения, количество токенов и расчётную стоимость. Затем отдельный запрос сравнивает качество полученных ответов и формирует короткий итог.
+The fifth AI Advent assignment compares language models of different sizes.
 
-## Задание
+The same technical prompt is sent to three models through the Groq API. The program measures latency, token usage, and estimated cost for each response. A separate request then compares response quality and produces a short conclusion.
 
-Выполнить один и тот же запрос:
+## Assignment
 
-- на слабой модели;
-- на средней модели;
-- на сильной модели.
+Run the same request on:
 
-Для каждого варианта необходимо измерить:
+- a smaller model;
+- a medium-sized model;
+- a larger model.
 
-- время ответа;
-- количество входных и выходных токенов;
-- стоимость запроса.
+Measure:
 
-После этого нужно сравнить качество, скорость и ресурсоёмкость моделей.
+- response time;
+- input and output tokens;
+- request cost.
 
-## Выбранные модели
+Then compare quality, speed, and resource usage.
 
-В эксперименте используются три модели, доступные через Groq API:
+## Selected Models
 
-| Условный уровень | Модель | Идентификатор Groq | Цена входа за 1 млн токенов | Цена выхода за 1 млн токенов |
+| Experiment level | Model | Groq model ID | Input per 1M tokens | Output per 1M tokens |
 |---|---|---|---:|---:|
-| Слабая | [GPT-OSS 20B](https://huggingface.co/openai/gpt-oss-20b) | `openai/gpt-oss-20b` | $0.075 | $0.30 |
-| Средняя | [Qwen 3.6 27B](https://huggingface.co/Qwen/Qwen3.6-27B) | `qwen/qwen3.6-27b` | $0.60 | $3.00 |
-| Сильная | [GPT-OSS 120B](https://huggingface.co/openai/gpt-oss-120b) | `openai/gpt-oss-120b` | $0.15 | $0.60 |
+| Smaller | [GPT-OSS 20B](https://huggingface.co/openai/gpt-oss-20b) | `openai/gpt-oss-20b` | $0.075 | $0.30 |
+| Medium | [Qwen 3.6 27B](https://huggingface.co/Qwen/Qwen3.6-27B) | `qwen/qwen3.6-27b` | $0.60 | $3.00 |
+| Larger | [GPT-OSS 120B](https://huggingface.co/openai/gpt-oss-120b) | `openai/gpt-oss-120b` | $0.15 | $0.60 |
 
-Цены зафиксированы в коде по состоянию на 4 сентября 2026 года. Перед повторным использованием их следует проверить в [официальном списке моделей Groq](https://console.groq.com/docs/models).
+Prices were recorded in the source code on September 4, 2026. Check the [official Groq model list](https://console.groq.com/docs/models) before reusing them because model availability and pricing can change.
 
-Обозначения «слабая», «средняя» и «сильная» условны. Они помогают организовать учебный эксперимент, но количество параметров само по себе не гарантирует более качественный ответ. На результат также влияют архитектура, обучение, специализация и режим рассуждения модели.
+The experiment levels are intentionally approximate. Parameter count alone does not guarantee better output. Architecture, training, specialization, and reasoning mode also affect quality.
 
-## Выбранный запрос
+## Selected Prompt
 
-Модели анализируют реальную проблему с одноразовым событием в Kotlin Multiplatform:
+The models analyze a real one-time-event problem in Kotlin Multiplatform:
 
 ```kotlin
 private val _resultFlow = MutableSharedFlow<VeriffResult>()
@@ -47,39 +47,39 @@ private fun onActivityResult(result: VeriffResult) {
 }
 ```
 
-Событие отправляется до начала `collect`, поэтому экран его не получает. Каждая модель должна:
+The event is emitted before collection starts, so the screen does not receive it. Every model must:
 
-1. Объяснить точную причину.
-2. Предложить минимальное исправление.
-3. Показать исправленный код.
-4. Сравнить `replay=1`, `extraBufferCapacity=1` и `Channel(BUFFERED)`.
-5. Объяснить, как избежать повторной обработки результата.
+1. Explain the exact cause.
+2. Propose the smallest fix.
+3. Provide corrected code.
+4. Compare `replay=1`, `extraBufferCapacity=1`, and `Channel(BUFFERED)`.
+5. Explain how to avoid processing the same result again.
 
-Дополнительно требуется учитывать несколько подписчиков, пересоздание экрана и ограничения гарантии `exactly-once` после завершения процесса приложения.
+The answer must also consider multiple collectors, screen recreation, one-time-event semantics, and the limits of exactly-once delivery after process death.
 
-## Условия эксперимента
+## Experiment Conditions
 
-Для трёх основных запросов совпадают:
+The three main requests use the same:
 
-- системный промпт;
-- пользовательский запрос;
+- system prompt;
+- user prompt;
 - `temperature=0.2`;
 - `max_completion_tokens=900`;
-- последовательный порядок выполнения.
+- sequential execution order.
 
-Изменяются модель и минимальный reasoning-режим, который она поддерживает:
+The model and its lowest supported reasoning mode change:
 
-| Модель | `reasoning_effort` |
+| Model | `reasoning_effort` |
 |---|---|
 | GPT-OSS 20B | `low` |
 | Qwen 3.6 27B | `none` |
 | GPT-OSS 120B | `low` |
 
-GPT-OSS и Qwen используют разные названия режимов. Минимальные значения уменьшают расход токенов на внутренние рассуждения и оставляют больше лимита для видимого ответа.
+GPT-OSS and Qwen use different mode names. Their lowest supported settings reduce internal reasoning-token usage and leave more of the completion budget for visible output.
 
-## Измерение времени
+## Measuring Latency
 
-Полное время запроса измеряется через `perf_counter()`:
+End-to-end request time is measured with `perf_counter()`:
 
 ```python
 started_at = perf_counter()
@@ -89,26 +89,24 @@ response = client.chat.completions.create(...)
 elapsed_seconds = perf_counter() - started_at
 ```
 
-В результат входит сетевой обмен, ожидание обработки на стороне Groq и генерация полного ответа. Один запуск показывает конкретное измерение, а не постоянную скорость модели.
+The value includes network transfer, provider-side waiting, processing, and complete response generation. One run is a sample, not a permanent speed rating. A stronger benchmark would repeat every request and compare median latency.
 
-Для более надёжного теста следует выполнить несколько запусков и сравнить медианное время.
+## Counting Tokens
 
-## Подсчёт токенов
-
-Количество токенов берётся из объекта `response.usage`:
+Token usage comes directly from `response.usage`:
 
 ```python
 input_tokens = response.usage.prompt_tokens
 output_tokens = response.usage.completion_tokens
 ```
 
-- `prompt_tokens` — токены системного и пользовательского сообщений;
-- `completion_tokens` — токены, использованные при генерации ответа;
-- общее количество — сумма входных и выходных токенов.
+- `prompt_tokens` counts the system and user messages;
+- `completion_tokens` counts tokens used during generation;
+- total tokens are the sum of input and output tokens.
 
-## Расчёт стоимости
+## Estimating Cost
 
-Стоимость рассчитывается отдельно для входных и выходных токенов:
+Input and output costs are calculated separately:
 
 ```python
 input_cost = input_tokens / 1_000_000 * input_price_per_million
@@ -116,13 +114,13 @@ output_cost = output_tokens / 1_000_000 * output_price_per_million
 estimated_cost = input_cost + output_cost
 ```
 
-Полученное значение является расчётом по публичному прайс-листу, а не фактическим списанием с аккаунта. На бесплатном тарифе реальная оплата может отсутствовать.
+This is an estimate based on public list prices, not the amount actually charged to the account. Actual charges may be zero on a free tier.
 
-Цена модели не обязана соответствовать её условному уровню. Например, Qwen 3.6 27B в используемом прайс-листе стоит дороже GPT-OSS 120B.
+Price does not necessarily follow model size. In this model set, Qwen 3.6 27B has a higher list price than GPT-OSS 120B.
 
-## Сравнение качества
+## Comparing Quality
 
-После выполнения трёх основных запросов программа делает отдельный запрос к `openai/gpt-oss-120b` с параметрами:
+After the three main requests, the program sends a separate evaluation request to `openai/gpt-oss-120b`:
 
 ```python
 temperature=0.0
@@ -130,52 +128,52 @@ reasoning_effort="low"
 max_completion_tokens=900
 ```
 
-Перед оценкой ответы анонимизируются:
+The responses are anonymized before evaluation:
 
 - `A` — GPT-OSS 20B;
 - `B` — Qwen 3.6 27B;
 - `C` — GPT-OSS 120B.
 
-Оценщик получает ответы и фактические метрики, после чего формирует короткий вывод из 3–5 предложений. Он должен определить:
+The evaluator receives the answers and measured metrics. It produces a 3–5 sentence conclusion identifying:
 
-- лучший ответ по качеству;
-- самую быструю модель;
-- самую дешёвую модель;
-- ограничения сравнения по одному запуску.
+- the best response by quality;
+- the fastest model;
+- the least expensive model;
+- the limitations of a single-run comparison.
 
-Токены и стоимость запроса-оценщика выводятся отдельно и не смешиваются с показателями трёх основных ответов.
+Evaluator token usage and cost are printed separately and are not mixed into the main comparison table.
 
-Автоматическая оценка остаётся мнением языковой модели. Для строгого сравнения потребуется независимый набор тестовых заданий и проверяемые эталонные ответы.
+The evaluation is still another model's opinion. A rigorous benchmark would require independent test cases, reference answers, and predefined scoring rules.
 
-## Оценка ресурсоёмкости
+## Estimating Resource Usage
 
-Groq API не сообщает клиенту фактическое использование GPU, оперативной памяти и электроэнергии. Поэтому ресурсоёмкость оценивается косвенно:
+The Groq API does not expose actual GPU, memory, or energy consumption. The experiment therefore uses indirect indicators:
 
-- по масштабу модели;
-- времени ответа;
-- количеству токенов;
-- расчётной стоимости.
+- model size;
+- response time;
+- token usage;
+- estimated cost.
 
-Для измерения аппаратных ресурсов модели необходимо запускать на контролируемом сервере и собирать системные метрики.
+Direct hardware measurements would require running the models on controlled infrastructure and collecting system metrics.
 
-## Ограничения Groq API
+## Groq API Limits
 
-У `qwen/qwen3.6-27b` на используемом тарифе может действовать ограничение `1000 OTPM` — выходных токенов в минуту. Основной запрос ограничен значением `900`, однако ранее использованные в текущем минутном окне токены также учитываются.
+On the account tier used for this project, `qwen/qwen3.6-27b` may have a `1000 OTPM` output-token-per-minute limit. The main request uses a maximum of 900 tokens, but tokens already consumed in the rolling minute window also count.
 
-Если Groq возвращает ошибку `429 rate_limit_exceeded`, дождитесь сброса минутного окна и запустите эксперимент повторно. Автоматический повтор в текущей версии не используется, поскольку ожидание исказило бы измеряемое время ответа.
+If Groq returns `429 rate_limit_exceeded`, wait for the rolling window to reset and run the complete experiment again. The current implementation does not retry automatically because waiting would distort the latency measurement.
 
-## Формат результата
+## Program Output
 
-Программа последовательно выводит:
+The program prints:
 
-1. Исходный запрос.
-2. Ответ каждой модели и её метрики.
-3. Общую таблицу времени, токенов и стоимости.
-4. Стоимость отдельного запроса-оценщика.
-5. Короткий вывод о различиях между моделями.
-6. Ссылки на все модели и официальный прайс Groq.
+1. The original prompt.
+2. Every model response and its metrics.
+3. A summary table containing latency, tokens, and cost.
+4. The separate evaluator cost.
+5. A short conclusion comparing the models.
+6. Links to all models and the Groq price list.
 
-Ссылки находятся в самом низу консольного вывода:
+The links appear at the bottom of the console output:
 
 ```text
 ССЫЛКИ НА ВСЕ МОДЕЛИ
@@ -185,34 +183,26 @@ Groq API не сообщает клиенту фактическое испол�
 - Groq Models and Pricing: https://console.groq.com/docs/models
 ```
 
-## Подготовка к запуску
+## Setup and Run
 
-Выполните общую [настройку проекта](../README.md#подготовка-проекта) и добавьте `GROQ_API_KEY` в корневой файл `.env`:
-
-```env
-GROQ_API_KEY=your_api_key_here
-```
-
-## Запуск
-
-Из корня репозитория выполните:
+Complete the shared [project setup](../README.md#project-setup), add `GROQ_API_KEY` to the root `.env` file, and run:
 
 ```bash
 python day-05-model-versions/main.py
 ```
 
-Ввод пользователя не требуется. После выполнения всех запросов программа самостоятельно выведет итог и завершит работу.
+No user input is required. The program exits after all requests and comparisons are complete.
 
-## Вывод
+## Day 5 Takeaway
 
-Модель большего размера может лучше понимать сложные требования, но обычно требует больше вычислительных ресурсов. При этом скорость и стоимость зависят не только от размера модели, но и от инфраструктуры и тарифов провайдера.
+A larger model may handle complex requirements better, but it usually requires more computational resources. Latency and price also depend on the provider's infrastructure and pricing rather than model size alone.
 
-Один эксперимент позволяет увидеть практические различия, однако не формирует универсальный рейтинг. Выбирать модель следует по сочетанию качества, задержки и стоимости на реальных задачах проекта.
+A single experiment can reveal practical differences, but it cannot produce a universal ranking. Model selection should balance quality, latency, and cost on representative project tasks.
 
-## Полезные ссылки
+## Useful Links
 
 - [Groq: Supported Models and Pricing](https://console.groq.com/docs/models)
-- [Groq: API Reference](https://console.groq.com/docs/api-reference)
+- [Groq API Reference](https://console.groq.com/docs/api-reference)
 - [Groq: Rate Limits](https://console.groq.com/docs/rate-limits)
 - [GPT-OSS 20B on Hugging Face](https://huggingface.co/openai/gpt-oss-20b)
 - [Qwen 3.6 27B on Hugging Face](https://huggingface.co/Qwen/Qwen3.6-27B)
