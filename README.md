@@ -4,7 +4,9 @@
 
 A learning repository containing practical assignments from the AI Advent challenge.
 
-The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, and comparisons between models of different sizes.
+The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, model comparison, and a standalone agent with persistent memory.
+
+The examples share one continuing story. **Cheburator** is the captain of a research spacecraft on a long expedition to distant galaxies, while **Bublik** evolves from a simple onboard assistant into an autonomous onboard computer.
 
 ## Completed Assignments
 
@@ -15,6 +17,7 @@ The project explores LLM APIs step by step: from the first request and conversat
 | [Day 3](day-03-reasoning-methods) | Reasoning strategies | Four approaches to one problem with automated comparison |
 | [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and diversity at three temperatures |
 | [Day 5](day-05-model-versions) | Model versions | Quality, latency, token usage, and cost across three models |
+| [Day 6](day-06-first-agent) | First agent | A standalone onboard agent with policies and persistent SQLite memory |
 
 ## Technologies
 
@@ -23,7 +26,8 @@ The project explores LLM APIs step by step: from the first request and conversat
 - GPT-OSS 20B and 120B;
 - Qwen 3.6 27B;
 - Groq Python SDK;
-- `python-dotenv`.
+- `python-dotenv`;
+- SQLite from the Python standard library.
 
 ## Repository Structure
 
@@ -47,6 +51,12 @@ ai-advent-llm-api/
 │   └── README.ru.md
 ├── day-05-model-versions/
 │   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-06-first-agent/
+│   ├── agent.py
+│   ├── main.py
+│   ├── memory.py
 │   ├── README.md
 │   └── README.ru.md
 ├── .env.example
@@ -137,7 +147,13 @@ Day 5:
 python day-05-model-versions/main.py
 ```
 
-Days 1 and 2 are interactive. Enter `выход` to stop them.
+Day 6:
+
+```bash
+python day-06-first-agent/main.py
+```
+
+Days 1, 2, and 6 are interactive. Enter `выход` to stop them. Day 6 also supports `/exit` and `/history`.
 
 Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results.
 
@@ -189,6 +205,20 @@ Days 3, 4, and 5 use predefined prompts and exit automatically after producing t
 
 See the [Day 5 README](day-05-model-versions/README.md) for the complete experiment.
 
+### Day 6 — First Agent
+
+- separating the user interface from agent logic;
+- encapsulating the complete request-response workflow in `BublikAgent`;
+- applying deterministic input and output policies;
+- storing conversations and messages in SQLite;
+- preserving history between program runs;
+- tracking `pending`, `completed`, and `failed` requests;
+- excluding failed requests from future LLM context;
+- loading only the latest completed messages into the prompt;
+- keeping the agent reusable for a future REST or web interface.
+
+See the [Day 6 README](day-06-first-agent/README.md) for the architecture, persistence test, and implementation details.
+
 The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
 
 ## Groq API Limits
@@ -200,6 +230,8 @@ Days 3 and 4 wait for 60 seconds and retry once after a supported rate-limit err
 Day 5 does not retry automatically because waiting would distort latency measurements. Its main requests use `max_completion_tokens=900`. If Qwen returns `429 rate_limit_exceeded`, wait for the rolling minute window to reset and run the complete experiment again.
 
 Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
+
+Day 6 uses `max_completion_tokens=1200` and sends only the latest 20 completed conversation messages. The full mission history remains in SQLite, while failed requests are retained for diagnostics and excluded from the LLM context.
 
 ## Interpreting the Results
 
@@ -215,7 +247,9 @@ For a more reliable comparison:
 
 ## Project Goal
 
-The goal is to understand, through small runnable examples, how prompts, API parameters, and model selection affect generation quality, latency, and cost.
+The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
+
+The first five days examine individual mechanisms. Day 6 begins combining them into a reusable agent that can later be extended with layered memory, topic branches, vector search, self-reflection, a judge, multiple model providers, and a REST interface.
 
 ## Useful Links
 

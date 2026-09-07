@@ -10,3 +10,8 @@ venv/
 
 # Временные файлы
 check_models.py
+
+
+*.db
+*.db-shm
+*.db-wal
