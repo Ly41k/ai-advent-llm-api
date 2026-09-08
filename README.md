@@ -4,7 +4,7 @@
 
 A learning repository containing practical assignments from the AI Advent challenge.
 
-The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, model comparison, and a standalone agent with persistent memory.
+The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, model comparison, a standalone agent, and multiple persistent conversation contexts.
 
 The examples share one continuing story. **Cheburator** is the captain of a research spacecraft on a long expedition to distant galaxies, while **Bublik** evolves from a simple onboard assistant into an autonomous onboard computer.
 
@@ -18,6 +18,7 @@ The examples share one continuing story. **Cheburator** is the captain of a rese
 | [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and diversity at three temperatures |
 | [Day 5](day-05-model-versions) | Model versions | Quality, latency, token usage, and cost across three models |
 | [Day 6](day-06-first-agent) | First agent | A standalone onboard agent with policies and persistent SQLite memory |
+| [Day 7](day-07-context-persistence) | Context persistence | Selecting, restoring, and isolating multiple dialogues between restarts |
 
 ## Technologies
 
@@ -54,6 +55,12 @@ ai-advent-llm-api/
 │   ├── README.md
 │   └── README.ru.md
 ├── day-06-first-agent/
+│   ├── agent.py
+│   ├── main.py
+│   ├── memory.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-07-context-persistence/
 │   ├── agent.py
 │   ├── main.py
 │   ├── memory.py
@@ -153,7 +160,13 @@ Day 6:
 python day-06-first-agent/main.py
 ```
 
-Days 1, 2, and 6 are interactive. Enter `выход` to stop them. Day 6 also supports `/exit` and `/history`.
+Day 7:
+
+```bash
+python day-07-context-persistence/main.py
+```
+
+Days 1, 2, 6, and 7 are interactive. Enter `выход` to stop them. Days 6 and 7 also support `/exit` and `/history`; Day 7 adds `/dialogs` for switching between saved topics.
 
 Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results.
 
@@ -219,6 +232,22 @@ See the [Day 5 README](day-05-model-versions/README.md) for the complete experim
 
 See the [Day 6 README](day-06-first-agent/README.md) for the architecture, persistence test, and implementation details.
 
+### Day 7 — Context Persistence
+
+- opening the same SQLite database after every restart;
+- creating and selecting multiple conversation topics;
+- switching between saved topics with `/dialogs`;
+- sorting previous dialogues by their latest activity;
+- restoring completed `user` and `assistant` messages;
+- rebuilding the LLM prompt from persisted history;
+- isolating messages by `conversation_id`;
+- reporting the number of restored messages at startup;
+- verifying continuity with a practical restart scenario;
+- keeping failed requests outside the future model context;
+- limiting the prompt without deleting the complete history.
+
+See the [Day 7 README](day-07-context-persistence/README.md) for the restart test and persistence flow.
+
 The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
 
 ## Groq API Limits
@@ -231,7 +260,7 @@ Day 5 does not retry automatically because waiting would distort latency measure
 
 Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
 
-Day 6 uses `max_completion_tokens=1200` and sends only the latest 20 completed conversation messages. The full mission history remains in SQLite, while failed requests are retained for diagnostics and excluded from the LLM context.
+Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. The full mission history remains in SQLite, while failed requests are retained for diagnostics and excluded from the LLM context.
 
 ## Interpreting the Results
 
@@ -249,7 +278,7 @@ For a more reliable comparison:
 
 The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
 
-The first five days examine individual mechanisms. Day 6 begins combining them into a reusable agent that can later be extended with layered memory, topic branches, vector search, self-reflection, a judge, multiple model providers, and a REST interface.
+The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, and Day 7 adds multiple selectable contexts with reliable restoration and isolation between process runs. The agent can later be extended with layered memory, topic branches, vector search, self-reflection, a judge, multiple model providers, and a REST interface.
 
 ## Useful Links
 
