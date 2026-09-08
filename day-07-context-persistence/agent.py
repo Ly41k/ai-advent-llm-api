@@ -60,7 +60,7 @@ class BublikAgent:
             response = self._client.chat.completions.create(
                 model=self._model,
                 messages=self._build_context(prepared_input),
-                temperature=1.4,
+                temperature=0.7,
                 reasoning_effort="low",
                 max_completion_tokens=1200,
             )
