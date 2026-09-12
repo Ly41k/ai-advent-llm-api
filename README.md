@@ -1,108 +1,319 @@
 **English** | [Русский](README.ru.md)
 
-# Day 8 — Working with Tokens
+# AI Advent — Working with LLM APIs
 
-The eighth assignment measures how the current request, saved history, and model response consume the context window and affect API cost.
+A learning repository containing practical assignments from the AI Advent challenge.
 
-## Assignment
+The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, model comparison, a standalone agent, persistent conversation contexts, and token-usage analysis.
 
-- count tokens in the current request, complete history, and model response;
-- compare a short, long, and oversized dialogue;
-- show how token usage and cost grow;
-- demonstrate what fails when the model limit is exceeded.
+The examples share one continuing story. **Cheburator** is the captain of a research spacecraft on a long expedition to distant galaxies, while **Bublik** evolves from a simple onboard assistant into an autonomous onboard computer.
 
-## Result
+## Completed Assignments
 
-`BublikAgent` now performs two complementary measurements:
+| Day | Topic | Result |
+|---|---|---|
+| [Day 1](day-01-first-api-request) | First LLM API request | A CLI chatbot with conversation history |
+| [Day 2](day-02-response-control) | Response control | The same request with and without explicit constraints |
+| [Day 3](day-03-reasoning-methods) | Reasoning strategies | Four approaches to one problem with automated comparison |
+| [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and diversity at three temperatures |
+| [Day 5](day-05-model-versions) | Model versions | Quality, latency, token usage, and cost across three models |
+| [Day 6](day-06-first-agent) | First agent | A standalone onboard agent with policies and persistent SQLite memory |
+| [Day 7](day-07-context-persistence) | Context persistence | Selecting, restoring, and isolating multiple dialogues between restarts |
+| [Day 8](day-08-token-usage) | Token usage | Measuring context growth, cost, and model-limit overflow |
 
-1. Before the API call, `GptOssTokenCounter` uses the GPT-OSS `o200k_harmony` encoding to estimate the current request, history, and complete prompt.
-2. After the API call, `response.usage` provides the actual billable prompt, completion, and total token counts reported by Groq.
+## Technologies
 
-The local estimate enables a preflight context check. The API result enables actual per-request and cumulative cost calculations.
+- Python;
+- [Groq API](https://console.groq.com/);
+- GPT-OSS 20B and 120B;
+- Qwen 3.6 27B;
+- Groq Python SDK;
+- `python-dotenv`;
+- `tiktoken`;
+- SQLite from the Python standard library.
 
-## Structure
+## Repository Structure
 
 ```text
-day-08-token-usage/
-├── agent.py
-├── experiment.py
-├── main.py
-├── memory.py
-├── tokens.py
+ai-advent-llm-api/
+├── day-01-first-api-request/
+│   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-02-response-control/
+│   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-03-reasoning-methods/
+│   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-04-temperature/
+│   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-05-model-versions/
+│   ├── main.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-06-first-agent/
+│   ├── agent.py
+│   ├── main.py
+│   ├── memory.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-07-context-persistence/
+│   ├── agent.py
+│   ├── main.py
+│   ├── memory.py
+│   ├── README.md
+│   └── README.ru.md
+├── day-08-token-usage/
+│   ├── agent.py
+│   ├── experiment.py
+│   ├── main.py
+│   ├── memory.py
+│   ├── tokens.py
+│   ├── README.md
+│   └── README.ru.md
+├── .env.example
+├── .gitignore
+├── requirements.txt
 ├── README.md
 └── README.ru.md
 ```
 
-- `tokens.py` owns token counting, model limits, prices, and metrics;
-- `agent.py` checks the context and combines estimates with Groq usage;
-- `memory.py` stores usage for every completed request;
-- `main.py` runs the interactive persistent agent;
-- `experiment.py` compares three histories without API requests.
+Each directory contains an independent practical assignment, a runnable example, and documentation in English and Russian.
 
-## Reported Metrics
+## Project Setup
 
-After every response, the CLI prints the current-request tokens, saved-history tokens, estimated and actual prompt tokens, completion tokens, visible-response tokens, total tokens, and estimated cost.
+### 1. Clone the repository
 
-Completion and visible-response tokens may differ because GPT-OSS is a reasoning model. Provider usage can include generated reasoning tokens that are absent from the final visible answer.
-
-## Context Protection
-
-GPT-OSS 20B on Groq currently has a 131,072-token context window. The agent reserves 1,200 tokens for the answer and checks:
-
-```text
-estimated prompt tokens + reserved completion tokens <= context window
+```bash
+git clone https://github.com/Ly41k/ai-advent-llm-api.git
+cd ai-advent-llm-api
 ```
 
-If it does not fit, `ContextWindowExceededError` is raised before the request is saved or sent. Without this check, the provider would reject the oversized request.
+### 2. Create a virtual environment
 
-## Cost
-
-The example uses the current GPT-OSS 20B prices: `$0.075` input and `$0.30` output per 1 million tokens.
-
-```text
-cost = input_tokens × input_price + output_tokens × output_price
+```bash
+python -m venv .venv
 ```
 
-These constants are an educational snapshot and should be checked before real billing calculations.
+Activate it on macOS or Linux:
 
-## Run
+```bash
+source .venv/bin/activate
+```
 
-Install dependencies and start the interactive agent:
+On Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
-python day-08-token-usage/main.py
 ```
 
-Commands:
+### 4. Add the API key
 
-- `/history` — current dialogue history;
-- `/stats` — cumulative actual tokens and cost;
-- `/dialogs` — switch dialogue;
-- `/exit` or `выход` — stop.
+Create a key in the [Groq Console](https://console.groq.com/keys).
 
-Run the reproducible comparison:
+Create a `.env` file in the project root using `.env.example` as a template:
+
+```env
+GROQ_API_KEY=your_api_key_here
+```
+
+The `.env` file is excluded by `.gitignore`. Never publish or share your API key.
+
+## Running the Assignments
+
+Run all commands from the repository root.
+
+Day 1:
 
 ```bash
+python day-01-first-api-request/main.py
+```
+
+Day 2:
+
+```bash
+python day-02-response-control/main.py
+```
+
+Day 3:
+
+```bash
+python day-03-reasoning-methods/main.py
+```
+
+Day 4:
+
+```bash
+python day-04-temperature/main.py
+```
+
+Day 5:
+
+```bash
+python day-05-model-versions/main.py
+```
+
+Day 6:
+
+```bash
+python day-06-first-agent/main.py
+```
+
+Day 7:
+
+```bash
+python day-07-context-persistence/main.py
+```
+
+Day 8:
+
+```bash
+python day-08-token-usage/main.py
 python day-08-token-usage/experiment.py
 ```
 
-It creates a short dialogue with 1 exchange, a long dialogue with 100 exchanges, and an oversized dialogue with 1,500 exchanges. For valid scenarios, it also accumulates the input tokens, output tokens, total tokens, and estimated cost of all completed exchanges. It does not call Groq or spend API credits.
+Days 1, 2, 6, 7, and 8 are interactive. Enter `выход` to stop them. Days 6, 7, and 8 also support `/exit` and `/history`; Days 7 and 8 add `/dialogs`, and Day 8 adds `/stats`.
 
-## Main Observation
+Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results. The Day 8 experiment is also non-interactive and makes no API calls.
 
-Every request resends the selected history. The prompt therefore grows, later turns cost more, and cumulative billable input grows faster than the unique stored text.
+## What I Learned
 
-Eventually the history plus the requested output no longer fits. The application must then remove old messages, summarize them, retrieve only relevant fragments, or use a larger context window.
+### Day 1 — First Request
 
-## Current Limitations
+- creating a Groq client;
+- using the `system`, `user`, and `assistant` roles;
+- sending a request and reading the response;
+- preserving conversation history;
+- handling API errors.
 
-- local prompt counts are estimates; Groq usage is authoritative for billing;
-- the full history is intentionally sent to demonstrate overflow;
-- truncation and summarization are not implemented yet;
-- prices and limits can change;
-- cached-input pricing is not included.
+### Day 2 — Response Control
 
-## Day 8 Outcome
+- controlling response structure through a prompt;
+- semantic and technical length limits;
+- using `max_completion_tokens`;
+- defining an explicit completion condition;
+- comparing the same request with different levels of control.
 
-Bublik now exposes token consumption, records the cost of every completed exchange, and stops oversized requests before they reach the model.
+### Day 3 — Reasoning Strategies
+
+- direct prompting;
+- step-by-step instructions;
+- asking the model to generate a prompt;
+- simulating a group of experts;
+- automated evaluation against a known answer;
+- handling token-per-minute limits.
+
+### Day 4 — Temperature
+
+- how `temperature` affects generation;
+- comparing `0`, `0.7`, and `1.2`;
+- evaluating accuracy, creativity, and diversity;
+- choosing a temperature for different tasks;
+- automated comparison of the responses.
+
+### Day 5 — Model Versions
+
+- running the same prompt on models of different sizes;
+- comparing GPT-OSS 20B, Qwen 3.6 27B, and GPT-OSS 120B;
+- configuring model-specific reasoning modes;
+- measuring end-to-end latency with `perf_counter()`;
+- reading token usage from `response.usage`;
+- estimating cost from public Groq pricing;
+- anonymizing responses for quality evaluation;
+- understanding the limits of cloud-based resource measurements.
+
+See the [Day 5 README](day-05-model-versions/README.md) for the complete experiment.
+
+### Day 6 — First Agent
+
+- separating the user interface from agent logic;
+- encapsulating the complete request-response workflow in `BublikAgent`;
+- applying deterministic input and output policies;
+- storing conversations and messages in SQLite;
+- preserving history between program runs;
+- tracking `pending`, `completed`, and `failed` requests;
+- excluding failed requests from future LLM context;
+- loading only the latest completed messages into the prompt;
+- keeping the agent reusable for a future REST or web interface.
+
+See the [Day 6 README](day-06-first-agent/README.md) for the architecture, persistence test, and implementation details.
+
+### Day 7 — Context Persistence
+
+- opening the same SQLite database after every restart;
+- creating and selecting multiple conversation topics;
+- switching between saved topics with `/dialogs`;
+- sorting previous dialogues by their latest activity;
+- restoring completed `user` and `assistant` messages;
+- rebuilding the LLM prompt from persisted history;
+- isolating messages by `conversation_id`;
+- reporting the number of restored messages at startup;
+- verifying continuity with a practical restart scenario;
+- keeping failed requests outside the future model context;
+- limiting the prompt without deleting the complete history.
+
+See the [Day 7 README](day-07-context-persistence/README.md) for the restart test and persistence flow.
+
+### Day 8 — Token Usage
+
+- estimating tokens in the current request, complete history, and full prompt;
+- reading actual prompt, completion, and total tokens from Groq;
+- counting visible response tokens separately from reasoning tokens;
+- storing per-request usage and cumulative dialogue cost;
+- comparing short, long, and oversized dialogues;
+- demonstrating how repeated history increases token usage and cost;
+- rejecting an oversized context before the API call.
+
+See the [Day 8 README](day-08-token-usage/README.md) for the metrics, comparison experiment, and overflow behavior.
+
+The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
+
+## Groq API Limits
+
+Available requests and tokens depend on the account tier and model.
+
+Days 3 and 4 wait for 60 seconds and retry once after a supported rate-limit error.
+
+Day 5 does not retry automatically because waiting would distort latency measurements. Its main requests use `max_completion_tokens=900`. If Qwen returns `429 rate_limit_exceeded`, wait for the rolling minute window to reset and run the complete experiment again.
+
+Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
+
+Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Failed requests remain excluded from the LLM context.
+
+## Interpreting the Results
+
+Responses and latency can vary between runs. A single experiment demonstrates model behavior under specific conditions; it is not a universal ranking.
+
+For a more reliable comparison:
+
+- run every model multiple times;
+- use tasks from different categories;
+- compare median latency;
+- define evaluation criteria in advance;
+- verify actual pricing for the account tier in use.
+
+## Project Goal
+
+The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
+
+The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, and Day 8 makes token consumption, cost growth, and context limits observable. The agent can later be extended with layered memory, topic branches, vector search, self-reflection, a judge, multiple model providers, and a REST interface.
+
+## Useful Links
+
+- [Groq: Text Generation](https://console.groq.com/docs/text-chat)
+- [Groq: Prompting](https://console.groq.com/docs/prompting)
+- [Groq: Reasoning](https://console.groq.com/docs/reasoning)
+- [Groq: Supported Models and Pricing](https://console.groq.com/docs/models)
+- [Groq: Rate Limits](https://console.groq.com/docs/rate-limits)
+- [Groq API Reference](https://console.groq.com/docs/api-reference)
