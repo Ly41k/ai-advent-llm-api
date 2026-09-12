@@ -20,6 +20,8 @@ The examples share one continuing story. **Cheburator** is the captain of a rese
 | [Day 6](day-06-first-agent) | First agent | A standalone onboard agent with policies and persistent SQLite memory |
 | [Day 7](day-07-context-persistence) | Context persistence | Selecting, restoring, and isolating multiple dialogues between restarts |
 | [Day 8](day-08-token-usage) | Token usage | Measuring context growth, cost, and model-limit overflow |
+| [Day 9](day-09-context-compression) | Context compression | Persistent summary plus recent verbatim messages |
+| [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and independent dialogue branches |
 
 ## Technologies
 
@@ -183,6 +185,20 @@ python day-08-token-usage/main.py
 python day-08-token-usage/experiment.py
 ```
 
+Day 9:
+
+```bash
+python day-09-context-compression/main.py
+python day-09-context-compression/experiment.py
+```
+
+Day 10:
+
+```bash
+python day-10-context-strategies/main.py
+python day-10-context-strategies/experiment.py
+```
+
 Days 1, 2, 6, 7, and 8 are interactive. Enter `выход` to stop them. Days 6, 7, and 8 also support `/exit` and `/history`; Days 7 and 8 add `/dialogs`, and Day 8 adds `/stats`.
 
 Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results. The Day 8 experiment is also non-interactive and makes no API calls.
@@ -277,6 +293,23 @@ See the [Day 7 README](day-07-context-persistence/README.md) for the restart tes
 
 See the [Day 8 README](day-08-token-usage/README.md) for the metrics, comparison experiment, and overflow behavior.
 
+### Day 9 — Context Compression
+
+- keeping recent messages verbatim while compressing old history;
+- persisting cumulative summary separately from the complete journal;
+- measuring summary-generation overhead and later prompt savings.
+
+See the [Day 9 README](day-09-context-compression/README.md) for the compression flow and comparison.
+
+### Day 10 — Context Strategies
+
+- switching between Sliding Window, Sticky Facts, and Branching;
+- updating structured key-value facts after every user message;
+- creating multiple independent branches from one checkpoint;
+- comparing quality, stability, tokens, cost, and user experience.
+
+See the [Day 10 README](day-10-context-strategies/README.md) for commands, tests, and the shared scenario.
+
 The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
 
 ## Groq API Limits
@@ -289,7 +322,7 @@ Day 5 does not retry automatically because waiting would distort latency measure
 
 Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
 
-Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Failed requests remain excluded from the LLM context.
+Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Day 9 adds summary compression. Day 10 compares three strategies without summary; its live experiment performs many requests and may need pauses between series. Failed requests remain excluded from the LLM context.
 
 ## Interpreting the Results
 
@@ -307,7 +340,7 @@ For a more reliable comparison:
 
 The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
 
-The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, and Day 8 makes token consumption, cost growth, and context limits observable. The agent can later be extended with layered memory, topic branches, vector search, self-reflection, a judge, multiple model providers, and a REST interface.
+The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, Day 8 makes token consumption observable, Day 9 compresses old history, and Day 10 compares window, structured-memory, and branching strategies. The agent can later be extended with vector search, self-reflection, a judge, multiple model providers, and a REST interface.
 
 ## Useful Links
 
