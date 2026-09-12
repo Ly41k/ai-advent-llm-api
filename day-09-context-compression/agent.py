@@ -17,6 +17,7 @@ from tokens import (
     MODEL_CONTEXT_WINDOW,
     MODEL_NAME,
     RequestTokenUsage,
+    SAFE_REQUEST_TOKEN_LIMIT,
 )
 
 
@@ -116,13 +117,18 @@ class BublikAgent:
         return self._memory.get_completed_message_count(self._conversation_id)
 
     def process(self, user_input: str) -> AgentResponse:
-        """Обновляет summary, вызывает LLM и сохраняет полный обмен."""
+        """При необходимости сжимает контекст и вызывает LLM."""
 
         prepared_input = self._prepare_input(user_input)
-        compression = self._compress_history()
         full_history = self._get_full_history_context()
-        compressed_history = self._get_compressed_history_context()
         full_history_tokens = self._token_counter.count_messages(full_history)
+        compressed_history = self._get_compressed_history_context()
+        compression = self._compress_until_safe(
+        history=compressed_history,
+        current_input=prepared_input,
+        )
+
+        compressed_history = self._get_compressed_history_context()
         estimate = self._estimate_or_raise(compressed_history, prepared_input)
 
         user_message_id = self._memory.start_user_request(
@@ -167,7 +173,14 @@ class BublikAgent:
         """Отправляет один вопрос с полной и сжатой историей без сохранения."""
 
         prepared_input = self._prepare_input(user_input)
-        self._compress_history()
+
+        compressed_history = self._get_compressed_history_context()
+
+        self._compress_until_safe(
+            history=compressed_history,
+            current_input=prepared_input,
+        )
+
         full_history = self._get_full_history_context()
         compressed_history = self._get_compressed_history_context()
         full_history_tokens = self._token_counter.count_messages(full_history)
@@ -210,11 +223,55 @@ class BublikAgent:
     def get_conversation_usage(self) -> ConversationUsage:
         return self._memory.get_conversation_usage(self._conversation_id)
 
-    def _compress_history(self) -> CompressionResult:
-        try:
-            return self._compressor.compress_if_needed(self._conversation_id)
-        except Exception as error:
-            raise AgentError(f"Не удалось обновить summary: {error}") from error
+    def _compress_until_safe(self, history: list[dict[str, str]], current_input: str,) -> CompressionResult:
+        """Сжимает старую историю, пока запрос не войдёт в безопасный бюджет."""
+
+        total_compressed_messages = 0
+        last_usage = None
+        current_history = history
+
+        while True:
+            estimate = self._token_counter.estimate_context(
+                system_prompt=SYSTEM_PROMPT,
+                history=current_history,
+                current_input=current_input,
+                reserved_completion_tokens=self._max_completion_tokens,
+                context_window=self._context_window,
+            )
+
+            print(
+                f"Контекст: {estimate.total_reserved_tokens:,} токенов "
+                f"(безопасный лимит: {SAFE_REQUEST_TOKEN_LIMIT:,})"
+            )
+
+            if estimate.total_reserved_tokens <= SAFE_REQUEST_TOKEN_LIMIT:
+                return CompressionResult(
+                    updated=total_compressed_messages > 0,
+                    source_message_count=total_compressed_messages,
+                    usage=last_usage,
+                )
+
+            print("Контекст слишком большой — сжимаю старую историю...")
+
+            try:
+                compression = self._compressor.compress_if_needed(
+                    self._conversation_id
+                )
+            except Exception as error:
+                raise AgentError(
+                    f"Не удалось обновить summary: {error}"
+                ) from error
+
+            if not compression.updated:
+                raise AgentError(
+                    "Контекст превышает безопасный лимит, "
+                    "но больше сообщений для сжатия нет."
+                )
+
+            total_compressed_messages += compression.source_message_count
+            last_usage = compression.usage
+
+            current_history = self._get_compressed_history_context()
 
     def _get_full_history_context(self) -> list[dict[str, str]]:
         return [

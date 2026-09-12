@@ -77,12 +77,9 @@ def print_request_usage(response: AgentResponse) -> None:
 
     usage = response.usage
     if response.compression.updated:
-        summary_usage = response.compression.usage
         print(
-            "Summary обновлён: сжато "
-            f"{response.compression.source_message_count} сообщений, "
-            f"затрачено {summary_usage.total_tokens:,} токенов "
-            f"(${summary_usage.estimated_cost_usd:.8f})."
+        "Summary обновлён: сжато "
+        f"{response.compression.source_message_count} сообщений."
         )
 
     print("Токены текущего обмена:")

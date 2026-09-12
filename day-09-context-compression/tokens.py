@@ -7,8 +7,15 @@ import tiktoken
 
 MODEL_NAME = "openai/gpt-oss-20b"
 MODEL_CONTEXT_WINDOW = 131_072
+
+# Ограничение текущего Groq tier — 8K TPM.
+# Не используем весь лимит, чтобы оставить безопасный запас.
+GROQ_TPM_LIMIT = 8_000
+SAFE_REQUEST_TOKEN_LIMIT = 6_000
+
 MAX_COMPLETION_TOKENS = 1_200
 SUMMARY_MAX_COMPLETION_TOKENS = 600
+
 INPUT_PRICE_PER_MILLION = 0.075
 OUTPUT_PRICE_PER_MILLION = 0.30
 

@@ -13,8 +13,8 @@ from tokens import (
 )
 
 
-RECENT_MESSAGES_LIMIT = 10
-SUMMARY_BATCH_SIZE = 10
+RECENT_MESSAGES_LIMIT = 4
+SUMMARY_BATCH_SIZE = 4
 
 SUMMARY_SYSTEM_PROMPT = (
     "Ты сжимаешь историю вымышленной космической симуляции, "
