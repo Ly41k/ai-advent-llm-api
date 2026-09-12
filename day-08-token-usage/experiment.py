@@ -24,27 +24,77 @@ class Scenario:
     exchange_count: int
 
 
+@dataclass(frozen=True)
+class CumulativeUsage:
+    """Оценка суммарного расхода завершённого диалога."""
+
+    prompt_tokens: int
+    completion_tokens: int
+
+    @property
+    def total_tokens(self) -> int:
+        return self.prompt_tokens + self.completion_tokens
+
+    @property
+    def estimated_cost_usd(self) -> float:
+        return estimate_request_cost(
+            prompt_tokens=self.prompt_tokens,
+            completion_tokens=self.completion_tokens,
+        )
+
+
+def build_exchange(number: int) -> tuple[dict[str, str], dict[str, str]]:
+    """Создаёт один воспроизводимый обмен для локального эксперимента."""
+
+    return (
+        {
+            "role": "user",
+            "content": f"Запись {number}. {MISSION_ENTRY}",
+        },
+        {
+            "role": "assistant",
+            "content": (
+                f"Запись {number} принята. Системы работают штатно. "
+                f"{MISSION_ENTRY}"
+            ),
+        },
+    )
+
+
 def build_history(exchange_count: int) -> list[dict[str, str]]:
     """Создаёт историю без API-вызовов и денежных расходов."""
 
     history: list[dict[str, str]] = []
     for number in range(1, exchange_count + 1):
-        history.extend(
-            [
-                {
-                    "role": "user",
-                    "content": f"Запись {number}. {MISSION_ENTRY}",
-                },
-                {
-                    "role": "assistant",
-                    "content": (
-                        f"Запись {number} принята. Системы работают штатно. "
-                        f"{MISSION_ENTRY}"
-                    ),
-                },
-            ]
-        )
+        history.extend(build_exchange(number))
     return history
+
+
+def estimate_cumulative_usage(
+    exchange_count: int,
+    counter: GptOssTokenCounter,
+) -> CumulativeUsage:
+    """Суммирует токены всех запросов и ответов по мере роста истории."""
+
+    history: list[dict[str, str]] = []
+    prompt_tokens = 0
+    completion_tokens = 0
+
+    for number in range(1, exchange_count + 1):
+        user_message, assistant_message = build_exchange(number)
+        estimate = counter.estimate_context(
+            system_prompt=SYSTEM_PROMPT,
+            history=history,
+            current_input=user_message["content"],
+        )
+        prompt_tokens += estimate.prompt_tokens
+        completion_tokens += counter.count_text(assistant_message["content"])
+        history.extend((user_message, assistant_message))
+
+    return CumulativeUsage(
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+    )
 
 
 def print_scenario(
@@ -76,7 +126,17 @@ def print_scenario(
     print(f"Состояние: {status}")
     print(f"Стоимость при ответе на весь резерв: ${cost:.6f}")
 
-    if not estimate.fits_context_window:
+    if estimate.fits_context_window:
+        cumulative_usage = estimate_cumulative_usage(
+            scenario.exchange_count,
+            counter,
+        )
+        print("Накоплено за завершённый диалог:")
+        print(f"  входных токенов: {cumulative_usage.prompt_tokens:,}")
+        print(f"  выходных токенов: {cumulative_usage.completion_tokens:,}")
+        print(f"  всего токенов: {cumulative_usage.total_tokens:,}")
+        print(f"  стоимость: ${cumulative_usage.estimated_cost_usd:.6f}")
+    else:
         print(
             "Что ломается: модель не сможет обработать запрос. "
             "BublikAgent остановит его до вызова Groq, иначе API вернёт ошибку "

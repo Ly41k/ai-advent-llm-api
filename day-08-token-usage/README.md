@@ -87,7 +87,7 @@ Run the reproducible comparison:
 python day-08-token-usage/experiment.py
 ```
 
-It creates a short dialogue with 1 exchange, a long dialogue with 100 exchanges, and an oversized dialogue with 1,500 exchanges. It does not call Groq or spend API credits.
+It creates a short dialogue with 1 exchange, a long dialogue with 100 exchanges, and an oversized dialogue with 1,500 exchanges. For valid scenarios, it also accumulates the input tokens, output tokens, total tokens, and estimated cost of all completed exchanges. It does not call Groq or spend API credits.
 
 ## Main Observation
 
