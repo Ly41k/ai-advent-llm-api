@@ -22,6 +22,7 @@ The examples share one continuing story. **Cheburator** is the captain of a rese
 | [Day 8](day-08-token-usage) | Token usage | Measuring context growth, cost, and model-limit overflow |
 | [Day 9](day-09-context-compression) | Context compression | Persistent summary plus recent verbatim messages |
 | [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and independent dialogue branches |
+| [Day 11](day-11-memory-layers) | Agent memory model | Separate short-term, working, and long-term memory layers |
 
 ## Technologies
 
@@ -199,6 +200,13 @@ python day-10-context-strategies/main.py
 python day-10-context-strategies/experiment.py
 ```
 
+Day 11:
+
+```bash
+python day-11-memory-layers/main.py
+python day-11-memory-layers/experiment.py
+```
+
 Days 1, 2, 6, 7, and 8 are interactive. Enter `выход` to stop them. Days 6, 7, and 8 also support `/exit` and `/history`; Days 7 and 8 add `/dialogs`, and Day 8 adds `/stats`.
 
 Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results. The Day 8 experiment is also non-interactive and makes no API calls.
@@ -310,6 +318,16 @@ See the [Day 9 README](day-09-context-compression/README.md) for the compression
 
 See the [Day 10 README](day-10-context-strategies/README.md) for commands, tests, and the shared scenario.
 
+### Day 11 — Agent Memory Model
+
+- separating recent dialogue, current-task data, and durable knowledge;
+- explicitly selecting the storage layer for each value;
+- building the model prompt from all three layers;
+- controlling task progress with a guarded state machine;
+- validating model responses against formalized invariants.
+
+See the [Day 11 README](day-11-memory-layers/README.md) for commands, tests, and the memory-influence experiment.
+
 The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
 
 ## Groq API Limits
@@ -322,7 +340,7 @@ Day 5 does not retry automatically because waiting would distort latency measure
 
 Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
 
-Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Day 9 adds summary compression. Day 10 compares three strategies without summary; its live experiment performs many requests and may need pauses between series. Failed requests remain excluded from the LLM context.
+Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Day 9 adds summary compression. Day 10 compares three strategies without summary; its live experiment performs many requests and may need pauses between series. Day 11 sends profile, invariants, long-term records, working task state, and the latest six short-term messages. Failed requests remain excluded from the LLM context.
 
 ## Interpreting the Results
 
@@ -340,7 +358,7 @@ For a more reliable comparison:
 
 The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
 
-The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, Day 8 makes token consumption observable, Day 9 compresses old history, and Day 10 compares window, structured-memory, and branching strategies. The agent can later be extended with vector search, self-reflection, a judge, multiple model providers, and a REST interface.
+The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, Day 8 makes token consumption observable, Day 9 compresses old history, Day 10 compares context strategies, and Day 11 introduces explicit memory layers and controlled task state. The agent can later be extended with vector search, self-reflection, a judge, multiple model providers, and a REST interface.
 
 ## Useful Links
 
