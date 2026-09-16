@@ -1,84 +1,90 @@
 **English** | [Русский](README.ru.md)
 
-# AI Advent — Working with LLM APIs
+# AI Advent — From the First LLM Request to a Personalized Agent
 
-A learning repository containing practical assignments from the AI Advent challenge.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, and personalization.
 
-The project explores LLM APIs step by step: from the first request and conversation history to response control, reasoning strategies, temperature, model comparison, a standalone agent, persistent conversation contexts, and token-usage analysis.
-
-The examples share one continuing story. **Cheburator** is the captain of a research spacecraft on a long expedition to distant galaxies, while **Bublik** evolves from a simple onboard assistant into an autonomous onboard computer.
+All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
 ## Completed Assignments
 
 | Day | Topic | Result |
 |---|---|---|
-| [Day 1](day-01-first-api-request) | First LLM API request | A CLI chatbot with conversation history |
-| [Day 2](day-02-response-control) | Response control | The same request with and without explicit constraints |
-| [Day 3](day-03-reasoning-methods) | Reasoning strategies | Four approaches to one problem with automated comparison |
-| [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and diversity at three temperatures |
-| [Day 5](day-05-model-versions) | Model versions | Quality, latency, token usage, and cost across three models |
-| [Day 6](day-06-first-agent) | First agent | A standalone onboard agent with policies and persistent SQLite memory |
-| [Day 7](day-07-context-persistence) | Context persistence | Selecting, restoring, and isolating multiple dialogues between restarts |
-| [Day 8](day-08-token-usage) | Token usage | Measuring context growth, cost, and model-limit overflow |
+| [Day 1](day-01-first-api-request) | First API request | A console chat with in-session history |
+| [Day 2](day-02-response-control) | Response control | Explicit response structure, length, and rules |
+| [Day 3](day-03-reasoning-methods) | Reasoning methods | Four approaches compared on the same task |
+| [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and variability comparison |
+| [Day 5](day-05-model-versions) | Model versions | Quality, latency, token, and cost comparison |
+| [Day 6](day-06-first-agent) | First agent | `BublikAgent`, thin CLI, and persistent SQLite memory |
+| [Day 7](day-07-context-persistence) | Context persistence | Independent dialogues restored after restart |
+| [Day 8](day-08-token-usage) | Token usage | Local estimates, actual usage, and request cost |
 | [Day 9](day-09-context-compression) | Context compression | Persistent summary plus recent verbatim messages |
-| [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and independent dialogue branches |
-| [Day 11](day-11-memory-layers) | Agent memory model | Separate short-term, working, and long-term memory layers |
+| [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and Branching |
+| [Day 11](day-11-memory-layers) | Memory model | Short-term, working, and long-term memory |
+| [Day 12](day-12-personalization) | Personalization | Profiles with style, format, and constraints in every request |
+
+## Architecture Evolution
+
+```text
+simple API call
+    ↓
+controlled prompt and model parameters
+    ↓
+BublikAgent + thin CLI
+    ↓
+SQLite + independent dialogues
+    ↓
+context measurement and compression
+    ↓
+context strategies
+    ↓
+explicit memory layers + state machine
+    ↓
+personalization for every request
+```
+
+In the latest assignments, the main flow is:
+
+```text
+CLI
+  → BublikAgent
+    → user profile
+    → long-term memory
+    → working memory
+    → recent short-term messages
+    → Groq API
+    → response validation
+    → SQLite
+```
 
 ## Technologies
 
-- Python;
+- Python 3.13;
 - [Groq API](https://console.groq.com/);
 - GPT-OSS 20B and 120B;
 - Qwen 3.6 27B;
-- Groq Python SDK;
+- SQLite;
+- `groq`;
 - `python-dotenv`;
-- `tiktoken`;
-- SQLite from the Python standard library.
+- `tiktoken` with the `o200k_harmony` encoding;
+- standard-library `unittest`.
 
 ## Repository Structure
 
 ```text
 ai-advent-llm-api/
 ├── day-01-first-api-request/
-│   ├── main.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-02-response-control/
-│   ├── main.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-03-reasoning-methods/
-│   ├── main.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-04-temperature/
-│   ├── main.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-05-model-versions/
-│   ├── main.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-06-first-agent/
-│   ├── agent.py
-│   ├── main.py
-│   ├── memory.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-07-context-persistence/
-│   ├── agent.py
-│   ├── main.py
-│   ├── memory.py
-│   ├── README.md
-│   └── README.ru.md
 ├── day-08-token-usage/
-│   ├── agent.py
-│   ├── experiment.py
-│   ├── main.py
-│   ├── memory.py
-│   ├── tokens.py
-│   ├── README.md
-│   └── README.ru.md
+├── day-09-context-compression/
+├── day-10-context-strategies/
+├── day-11-memory-layers/
+├── day-12-personalization/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -86,7 +92,7 @@ ai-advent-llm-api/
 └── README.ru.md
 ```
 
-Each directory contains an independent practical assignment, a runnable example, and documentation in English and Russian.
+Each directory is a standalone example with its own English and Russian documentation.
 
 ## Project Setup
 
@@ -100,271 +106,150 @@ cd ai-advent-llm-api
 ### 2. Create a virtual environment
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 ```
 
-Activate it on macOS or Linux:
+macOS/Linux:
 
 ```bash
 source .venv/bin/activate
 ```
 
-On Windows:
+Windows:
 
-```bash
+```text
 .venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ### 4. Add the API key
 
-Create a key in the [Groq Console](https://console.groq.com/keys).
-
-Create a `.env` file in the project root using `.env.example` as a template:
+Create a root-level `.env` based on `.env.example`:
 
 ```env
 GROQ_API_KEY=your_api_key_here
 ```
 
-The `.env` file is excluded by `.gitignore`. Never publish or share your API key.
+Create a key in the [Groq Console](https://console.groq.com/keys). `.env` is ignored by Git; never publish the key in the repository, logs, or screenshots.
 
 ## Running the Assignments
 
 Run all commands from the repository root.
 
-Day 1:
+| Day | Main program | Experiment |
+|---|---|---|
+| 1 | `python3 day-01-first-api-request/main.py` | — |
+| 2 | `python3 day-02-response-control/main.py` | — |
+| 3 | `python3 day-03-reasoning-methods/main.py` | — |
+| 4 | `python3 day-04-temperature/main.py` | — |
+| 5 | `python3 day-05-model-versions/main.py` | — |
+| 6 | `python3 day-06-first-agent/main.py` | — |
+| 7 | `python3 day-07-context-persistence/main.py` | — |
+| 8 | `python3 day-08-token-usage/main.py` | `python3 day-08-token-usage/experiment.py` |
+| 9 | `python3 day-09-context-compression/main.py` | `python3 day-09-context-compression/experiment.py` |
+| 10 | `python3 day-10-context-strategies/main.py` | `python3 day-10-context-strategies/experiment.py` |
+| 11 | `python3 day-11-memory-layers/main.py` | `python3 day-11-memory-layers/experiment.py` |
+| 12 | `python3 day-12-personalization/main.py` | `python3 day-12-personalization/experiment.py` |
+
+Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
+
+## Local Tests
+
+The tests do not call the Groq API or consume tokens.
 
 ```bash
-python day-01-first-api-request/main.py
+python3 -m unittest discover -s day-10-context-strategies -p "test_*.py" -v
+python3 -m unittest discover -s day-11-memory-layers -p "test_*.py" -v
+python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
 ```
 
-Day 2:
+They verify:
 
-```bash
-python day-02-response-control/main.py
+- Sliding Window size, facts injection, and branch isolation;
+- separation of short-term, working, and long-term memory;
+- valid state-machine transitions;
+- complete prompt construction;
+- profile injection into every request;
+- differences between profiles;
+- profile restoration and user-specific long-term memory isolation.
+
+## Current Agent Capabilities
+
+By Day 12, Bublik can:
+
+- manage multiple independent dialogues;
+- restore history after restart;
+- keep recent messages separate from task state;
+- explicitly store decisions and knowledge;
+- control tasks through `planning → execution → validation → done`;
+- apply user language, detail level, style, format, and constraints;
+- isolate long-term memory between profiles;
+- display the exact context before sending it to the model;
+- reject responses that violate formalized invariants.
+
+Main commands:
+
+| Command | Purpose |
+|---|---|
+| `/dialogs` | Switch or create a dialogue |
+| `/history` | Show the full completed history |
+| `/context` | Show the prompt that will be sent to the model |
+| `/memory short\|working\|long` | Show a selected memory layer |
+| `/remember working KEY VALUE` | Save current-task data |
+| `/remember long decision\|knowledge KEY VALUE` | Save a decision or knowledge item |
+| `/task ...` | Control the current task state |
+| `/profile` | Show the active profile |
+| `/profile PROFILE_ID` | Change the profile of an empty dialogue |
+| `/exit` | Exit the program |
+
+Values containing spaces must be quoted.
+
+## Day 12 Personalization
+
+A user profile contains:
+
+```text
+name + role
+language
+detail_level
+style
+response_format
+constraints
 ```
 
-Day 3:
+Before every request, `MemoryPromptBuilder` assembles context in a fixed order:
 
-```bash
-python day-03-reasoning-methods/main.py
+```text
+assistant identity + invariants
+user profile
+profile-scoped long-term memory
+dialogue-scoped working memory
+last 6 completed short-term messages
+current user request
 ```
 
-Day 4:
+The repository includes two contrasting profiles: concise `cheburator` and detailed scientific `scientist`. `experiment.py` sends them the same question with identical working memory, so response differences come from personalization.
 
-```bash
-python day-04-temperature/main.py
-```
+## Experiment Limitations
 
-Day 5:
-
-```bash
-python day-05-model-versions/main.py
-```
-
-Day 6:
-
-```bash
-python day-06-first-agent/main.py
-```
-
-Day 7:
-
-```bash
-python day-07-context-persistence/main.py
-```
-
-Day 8:
-
-```bash
-python day-08-token-usage/main.py
-python day-08-token-usage/experiment.py
-```
-
-Day 9:
-
-```bash
-python day-09-context-compression/main.py
-python day-09-context-compression/experiment.py
-```
-
-Day 10:
-
-```bash
-python day-10-context-strategies/main.py
-python day-10-context-strategies/experiment.py
-```
-
-Day 11:
-
-```bash
-python day-11-memory-layers/main.py
-python day-11-memory-layers/experiment.py
-```
-
-Days 1, 2, 6, 7, and 8 are interactive. Enter `выход` to stop them. Days 6, 7, and 8 also support `/exit` and `/history`; Days 7 and 8 add `/dialogs`, and Day 8 adds `/stats`.
-
-Days 3, 4, and 5 use predefined prompts and exit automatically after producing their results. The Day 8 experiment is also non-interactive and makes no API calls.
-
-## What I Learned
-
-### Day 1 — First Request
-
-- creating a Groq client;
-- using the `system`, `user`, and `assistant` roles;
-- sending a request and reading the response;
-- preserving conversation history;
-- handling API errors.
-
-### Day 2 — Response Control
-
-- controlling response structure through a prompt;
-- semantic and technical length limits;
-- using `max_completion_tokens`;
-- defining an explicit completion condition;
-- comparing the same request with different levels of control.
-
-### Day 3 — Reasoning Strategies
-
-- direct prompting;
-- step-by-step instructions;
-- asking the model to generate a prompt;
-- simulating a group of experts;
-- automated evaluation against a known answer;
-- handling token-per-minute limits.
-
-### Day 4 — Temperature
-
-- how `temperature` affects generation;
-- comparing `0`, `0.7`, and `1.2`;
-- evaluating accuracy, creativity, and diversity;
-- choosing a temperature for different tasks;
-- automated comparison of the responses.
-
-### Day 5 — Model Versions
-
-- running the same prompt on models of different sizes;
-- comparing GPT-OSS 20B, Qwen 3.6 27B, and GPT-OSS 120B;
-- configuring model-specific reasoning modes;
-- measuring end-to-end latency with `perf_counter()`;
-- reading token usage from `response.usage`;
-- estimating cost from public Groq pricing;
-- anonymizing responses for quality evaluation;
-- understanding the limits of cloud-based resource measurements.
-
-See the [Day 5 README](day-05-model-versions/README.md) for the complete experiment.
-
-### Day 6 — First Agent
-
-- separating the user interface from agent logic;
-- encapsulating the complete request-response workflow in `BublikAgent`;
-- applying deterministic input and output policies;
-- storing conversations and messages in SQLite;
-- preserving history between program runs;
-- tracking `pending`, `completed`, and `failed` requests;
-- excluding failed requests from future LLM context;
-- loading only the latest completed messages into the prompt;
-- keeping the agent reusable for a future REST or web interface.
-
-See the [Day 6 README](day-06-first-agent/README.md) for the architecture, persistence test, and implementation details.
-
-### Day 7 — Context Persistence
-
-- opening the same SQLite database after every restart;
-- creating and selecting multiple conversation topics;
-- switching between saved topics with `/dialogs`;
-- sorting previous dialogues by their latest activity;
-- restoring completed `user` and `assistant` messages;
-- rebuilding the LLM prompt from persisted history;
-- isolating messages by `conversation_id`;
-- reporting the number of restored messages at startup;
-- verifying continuity with a practical restart scenario;
-- keeping failed requests outside the future model context;
-- limiting the prompt without deleting the complete history.
-
-See the [Day 7 README](day-07-context-persistence/README.md) for the restart test and persistence flow.
-
-### Day 8 — Token Usage
-
-- estimating tokens in the current request, complete history, and full prompt;
-- reading actual prompt, completion, and total tokens from Groq;
-- counting visible response tokens separately from reasoning tokens;
-- storing per-request usage and cumulative dialogue cost;
-- comparing short, long, and oversized dialogues;
-- demonstrating how repeated history increases token usage and cost;
-- rejecting an oversized context before the API call.
-
-See the [Day 8 README](day-08-token-usage/README.md) for the metrics, comparison experiment, and overflow behavior.
-
-### Day 9 — Context Compression
-
-- keeping recent messages verbatim while compressing old history;
-- persisting cumulative summary separately from the complete journal;
-- measuring summary-generation overhead and later prompt savings.
-
-See the [Day 9 README](day-09-context-compression/README.md) for the compression flow and comparison.
-
-### Day 10 — Context Strategies
-
-- switching between Sliding Window, Sticky Facts, and Branching;
-- updating structured key-value facts after every user message;
-- creating multiple independent branches from one checkpoint;
-- comparing quality, stability, tokens, cost, and user experience.
-
-See the [Day 10 README](day-10-context-strategies/README.md) for commands, tests, and the shared scenario.
-
-### Day 11 — Agent Memory Model
-
-- separating recent dialogue, current-task data, and durable knowledge;
-- explicitly selecting the storage layer for each value;
-- building the model prompt from all three layers;
-- controlling task progress with a guarded state machine;
-- validating model responses against formalized invariants.
-
-See the [Day 11 README](day-11-memory-layers/README.md) for commands, tests, and the memory-influence experiment.
-
-The source code contains detailed Russian comments that explain the main steps of each program. User prompts and console output are also in Russian because they are part of the experiments.
-
-## Groq API Limits
-
-Available requests and tokens depend on the account tier and model.
-
-Days 3 and 4 wait for 60 seconds and retry once after a supported rate-limit error.
-
-Day 5 does not retry automatically because waiting would distort latency measurements. Its main requests use `max_completion_tokens=900`. If Qwen returns `429 rate_limit_exceeded`, wait for the rolling minute window to reset and run the complete experiment again.
-
-Reasoning models spend part of the output budget on internal reasoning. Day 5 therefore uses the lowest supported modes: `low` for GPT-OSS and `none` for Qwen.
-
-Days 6 and 7 use `max_completion_tokens=1200` and send only the latest 20 completed conversation messages. Day 8 intentionally sends the complete successful history to demonstrate context growth and overflow. Day 9 adds summary compression. Day 10 compares three strategies without summary; its live experiment performs many requests and may need pauses between series. Day 11 sends profile, invariants, long-term records, working task state, and the latest six short-term messages. Failed requests remain excluded from the LLM context.
-
-## Interpreting the Results
-
-Responses and latency can vary between runs. A single experiment demonstrates model behavior under specific conditions; it is not a universal ranking.
-
-For a more reliable comparison:
-
-- run every model multiple times;
-- use tasks from different categories;
-- compare median latency;
-- define evaluation criteria in advance;
-- verify actual pricing for the account tier in use.
+- Model availability and TPM/TPD limits depend on the current Groq plan.
+- Generated answers may vary between runs even with identical parameters.
+- Local token estimates can differ slightly from actual API usage.
+- Summary and Sticky Facts depend on model quality and can omit an important detail.
+- Automated tests validate architecture and prompt composition; real response quality is evaluated through experiments.
 
 ## Project Goal
 
-The goal is to understand, through small runnable examples, how prompts, API parameters, model selection, architecture, and memory affect an LLM-powered application.
-
-The first five days examine individual mechanisms. Day 6 combines them into a reusable agent, Day 7 adds multiple selectable contexts, Day 8 makes token consumption observable, Day 9 compresses old history, Day 10 compares context strategies, and Day 11 introduces explicit memory layers and controlled task state. The agent can later be extended with vector search, self-reflection, a judge, multiple model providers, and a REST interface.
+This repository demonstrates a continuous evolution of an LLM application rather than a collection of isolated API snippets. Each new mechanism can be run, measured, compared with the previous approach, and tested independently.
 
 ## Useful Links
 
-- [Groq: Text Generation](https://console.groq.com/docs/text-chat)
-- [Groq: Prompting](https://console.groq.com/docs/prompting)
-- [Groq: Reasoning](https://console.groq.com/docs/reasoning)
-- [Groq: Supported Models and Pricing](https://console.groq.com/docs/models)
-- [Groq: Rate Limits](https://console.groq.com/docs/rate-limits)
-- [Groq API Reference](https://console.groq.com/docs/api-reference)
+- [Groq Console](https://console.groq.com/)
+- [Groq Documentation](https://console.groq.com/docs)
+- [GPT-OSS Documentation](https://console.groq.com/docs/model/openai/gpt-oss-20b)
+- [tiktoken](https://github.com/openai/tiktoken)
