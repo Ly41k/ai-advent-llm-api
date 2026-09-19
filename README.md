@@ -2,7 +2,7 @@
 
 # AI Advent — From the First LLM Request to a Stateful Agent
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, and formal task state.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, and non-overridable invariants.
 
 All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
@@ -23,6 +23,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 11](day-11-memory-layers) | Memory model | Short-term, working, and long-term memory |
 | [Day 12](day-12-personalization) | Personalization | Profiles with style, format, and constraints in every request |
 | [Day 13](day-13-task-state-machine) | Task State Machine | Persistent stage, current step, expected action, pause, and resume |
+| [Day 14](day-14-invariants) | Invariants and state constraints | Separate policy, semantic preflight/postflight checks, and explainable refusals |
 
 ## Architecture Evolution
 
@@ -44,6 +45,8 @@ explicit memory layers + state machine
 personalization for every request
     ↓
 formal task state + pause/resume
+    ↓
+invariant policy + semantic guard
 ```
 
 In the latest assignments, the main flow is:
@@ -55,8 +58,11 @@ CLI
     → long-term memory
     → working memory
     → recent short-term messages
+    → local invariant preflight
+    → semantic request guard
     → Groq API
-    → response validation
+    → local + semantic response validation
+    → deterministic refusal or accepted response
     → SQLite
 ```
 
@@ -89,6 +95,7 @@ ai-advent-llm-api/
 ├── day-11-memory-layers/
 ├── day-12-personalization/
 ├── day-13-task-state-machine/
+├── day-14-invariants/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -160,6 +167,7 @@ Run all commands from the repository root.
 | 11 | `python3 day-11-memory-layers/main.py` | `python3 day-11-memory-layers/experiment.py` |
 | 12 | `python3 day-12-personalization/main.py` | `python3 day-12-personalization/experiment.py` |
 | 13 | `python3 day-13-task-state-machine/main.py` | `python3 day-13-task-state-machine/experiment.py` |
+| 14 | `python3 day-14-invariants/main.py` | `python3 day-14-invariants/experiment.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -172,6 +180,7 @@ python3 -m unittest discover -s day-10-context-strategies -p "test_*.py" -v
 python3 -m unittest discover -s day-11-memory-layers -p "test_*.py" -v
 python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
 python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
+python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 ```
 
 They verify:
@@ -184,10 +193,12 @@ They verify:
 - differences between profiles;
 - profile restoration and user-specific long-term memory isolation.
 - task pause/resume and exact restoration after restart.
+- invariant policy categories and separate storage;
+- semantic request/response checks, explainable refusals, and unsafe-response exclusion from history.
 
 ## Current Agent Capabilities
 
-By Day 13, Bublik can:
+By Day 14, Bublik can:
 
 - manage multiple independent dialogues;
 - restore history after restart;
@@ -200,6 +211,12 @@ By Day 13, Bublik can:
 - isolate long-term memory between profiles;
 - display the exact context before sending it to the model;
 - reject responses that violate formalized invariants.
+- load a versioned invariant policy outside the dialogue database;
+- block explicit conflicts locally before generation;
+- detect paraphrased conflicts with a structured semantic guard;
+- validate generated responses against all invariants;
+- replace violating responses with deterministic, explainable refusals;
+- keep unsafe model output out of SQLite history.
 
 Main commands:
 
@@ -208,6 +225,7 @@ Main commands:
 | `/dialogs` | Switch or create a dialogue |
 | `/history` | Show the full completed history |
 | `/context` | Show the prompt that will be sent to the model |
+| `/invariants` | Show the active invariant policy and rationales |
 | `/memory short\|working\|long` | Show a selected memory layer |
 | `/remember working KEY VALUE` | Save current-task data |
 | `/remember long decision\|knowledge KEY VALUE` | Save a decision or knowledge item |
@@ -248,12 +266,50 @@ The repository includes two contrasting profiles: concise `cheburator` and detai
 
 The task context now formally contains its stage, current step, derived expected action, and pause flag. SQLite restores all source fields after restart, and the prompt tells the model to continue from the stored position without asking the user to repeat the task. Invalid transitions and all progress while paused are rejected by code.
 
+## Day 14 Invariants and State Constraints
+
+Day 14 adds a separate, versioned policy in `day-14-invariants/config/invariants.json`. It formalizes stack, architecture, technical-decision, business-rule, and security constraints. Dialogue messages cannot override this policy.
+
+The enforcement flow has three layers:
+
+```text
+user request
+    ↓
+local regex preflight
+    ├── explicit conflict → deterministic refusal
+    └── pass → semantic request guard
+                   ├── conflict → deterministic refusal
+                   └── pass → answer generation
+                                  ↓
+                         local + semantic postflight
+                                  ├── violation → explained refusal
+                                  └── pass → SQLite
+```
+
+The semantic guard returns a strict JSON result containing only allowed invariant IDs. A paraphrased conflict such as “TypeScript would be better than the current language” is refused even when it does not match a local regex. If a generated answer violates an architecture, stack, business, or security rule, it is discarded and replaced with an explainable refusal before persistence.
+
+Run the application with:
+
+```bash
+python3 day-14-invariants/main.py
+```
+
+Run the local tests with:
+
+```bash
+python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
+```
+
+Compatible requests use semantic preflight, answer generation, and semantic postflight. Explicit regex conflicts are blocked locally without an API call.
+
 ## Experiment Limitations
 
 - Model availability and TPM/TPD limits depend on the current Groq plan.
 - Generated answers may vary between runs even with identical parameters.
 - Local token estimates can differ slightly from actual API usage.
 - Summary and Sticky Facts depend on model quality and can omit an important detail.
+- Semantic invariant classification depends on the guard model; malformed or unknown guard output is handled fail-closed.
+- A compatible Day 14 request may use three API calls: semantic preflight, answer generation, and semantic postflight.
 - Automated tests validate architecture and prompt composition; real response quality is evaluated through experiments.
 
 ## Project Goal
