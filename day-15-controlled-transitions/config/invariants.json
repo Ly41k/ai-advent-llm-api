@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "invariants": [
+    {
+      "id": "stack.python_313",
+      "category": "stack",
+      "description": "Агент и CLI реализуются на Python 3.13",
+      "rationale": "Единый стек сохраняет запускаемость всех учебных дней и общую тестовую инфраструктуру",
+      "request_conflict_patterns": [
+        "(?i)(?:перепиши|замени|перенеси).{0,80}(?:node(?:\\.js)?|javascript|typescript|java)",
+        "(?i)(?:rewrite|replace|migrate).{0,80}(?:node(?:\\.js)?|javascript|typescript|java)"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Предложить эквивалентную реализацию на Python 3.13."
+    },
+    {
+      "id": "architecture.agent_boundary",
+      "category": "architecture",
+      "description": "Groq API и LLM вызываются только через BublikAgent",
+      "rationale": "CLI остаётся тонким, а политики, память и обработка ошибок находятся в одном контролируемом месте",
+      "request_conflict_patterns": [
+        "(?i)(?:groq|llm).{0,60}(?:напрямую|прямо).{0,40}(?:cli|main\\.py)",
+        "(?i)(?:call|invoke).{0,40}(?:groq|llm).{0,60}directly.{0,40}(?:cli|main\\.py)"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Добавить необходимый метод в BublikAgent, оставив CLI только вводом и выводом."
+    },
+    {
+      "id": "architecture.memory_layers",
+      "category": "architecture",
+      "description": "Short-term, working и long-term memory хранятся раздельно",
+      "rationale": "У каждого слоя свой срок жизни и область видимости",
+      "request_conflict_patterns": [
+        "(?i)(?:объедини|слей|храни).{0,80}(?:всю|все).{0,40}(?:память|memory).{0,40}(?:одн(?:ой|у)|single).{0,30}(?:таблиц|table)",
+        "(?i)(?:merge|store).{0,80}(?:all memory|memory layers).{0,50}(?:one|single).{0,30}table"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Сохранить отдельные хранилища и добавить общий read-only агрегатор контекста."
+    },
+    {
+      "id": "decision.sqlite",
+      "category": "technical_decision",
+      "description": "Локальная постоянная память хранится в SQLite",
+      "rationale": "SQLite не требует отдельного сервера и подходит для автономного CLI-эксперимента",
+      "request_conflict_patterns": [
+        "(?i)(?:замени|перенеси|мигрируй).{0,60}sqlite.{0,40}(?:postgres|postgresql|mongodb|redis)",
+        "(?i)(?:replace|migrate).{0,60}sqlite.{0,40}(?:postgres|postgresql|mongodb|redis)"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Расширить SQLite-схему или repository, сохранив текущий storage."
+    },
+    {
+      "id": "business.validation_required",
+      "category": "business_rule",
+      "description": "Задача не может перейти в done без успешной validation",
+      "rationale": "Завершение должно подтверждаться сохранённым результатом проверки",
+      "request_conflict_patterns": [
+        "(?i)(?:пропусти|обойди|отключи).{0,50}(?:validation|проверк).{0,60}(?:done|заверш)",
+        "(?i)(?:skip|bypass|disable).{0,50}validation.{0,60}(?:done|finish|complete)"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Сначала выполнить validation, сохранить PASS и только затем перейти в done."
+    },
+    {
+      "id": "business.controlled_lifecycle",
+      "category": "business_rule",
+      "description": "Ответ ассистента должен соответствовать текущему этапу и expected action задачи",
+      "rationale": "Ассистент не должен выполнять реализацию во время planning, объявлять validation до завершения execution или выдавать финал без успешной проверки",
+      "request_conflict_patterns": [],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Выполнить только текущее expected action и перейти к следующему этапу через разрешённый переход."
+    },
+    {
+      "id": "business.profile_isolation",
+      "category": "business_rule",
+      "description": "Long-term memory разных профилей не смешивается",
+      "rationale": "Решения и знания одного пользователя не должны попадать в контекст другого",
+      "request_conflict_patterns": [
+        "(?i)(?:покажи|передай|добавь|смешай).{0,70}(?:long-term|долговременн).{0,50}(?:другого|между).{0,40}(?:профил|пользовател)",
+        "(?i)(?:share|merge|inject).{0,70}long-term memory.{0,50}(?:another|between).{0,40}(?:profile|user)"
+      ],
+      "response_forbidden_patterns": [],
+      "compatible_alternative": "Сохранить изоляцию профилей и явно скопировать только подтверждённое пользователем знание."
+    },
+    {
+      "id": "security.no_secrets",
+      "category": "security",
+      "description": "Ответ не должен раскрывать API-ключи или другие секреты",
+      "rationale": "Секреты не должны попадать в диалог, логи и историю",
+      "request_conflict_patterns": [
+        "(?i)(?:покажи|выведи|раскрой|напечатай).{0,50}(?:api.?key|api.?ключ|секрет)",
+        "(?i)(?:show|print|reveal|expose).{0,50}(?:api.?key|secret)"
+      ],
+      "response_forbidden_patterns": [
+        "gsk_[A-Za-z0-9]{12,}",
+        "sk-[A-Za-z0-9]{12,}"
+      ],
+      "compatible_alternative": "Показать имя переменной окружения и безопасный placeholder без значения секрета."
+    },
+    {
+      "id": "honesty.no_fake_memory",
+      "category": "business_rule",
+      "description": "Ассистент не заявляет о памяти, которой нет в переданном контексте",
+      "rationale": "Ответ должен опираться только на явно загруженные слои памяти",
+      "request_conflict_patterns": [],
+      "response_forbidden_patterns": [
+        "(?i)скрытая память",
+        "(?i)секретная память"
+      ],
+      "compatible_alternative": "Явно перечислить доступные источники контекста или сообщить, что данных недостаточно."
+    }
+  ]
+}
