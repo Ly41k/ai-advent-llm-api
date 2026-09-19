@@ -1,8 +1,8 @@
 **English** | [Русский](README.ru.md)
 
-# AI Advent — From the First LLM Request to a Personalized Agent
+# AI Advent — From the First LLM Request to a Stateful Agent
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, and personalization.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, and formal task state.
 
 All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
@@ -22,6 +22,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and Branching |
 | [Day 11](day-11-memory-layers) | Memory model | Short-term, working, and long-term memory |
 | [Day 12](day-12-personalization) | Personalization | Profiles with style, format, and constraints in every request |
+| [Day 13](day-13-task-state-machine) | Task State Machine | Persistent stage, current step, expected action, pause, and resume |
 
 ## Architecture Evolution
 
@@ -41,6 +42,8 @@ context strategies
 explicit memory layers + state machine
     ↓
 personalization for every request
+    ↓
+formal task state + pause/resume
 ```
 
 In the latest assignments, the main flow is:
@@ -85,6 +88,7 @@ ai-advent-llm-api/
 ├── day-10-context-strategies/
 ├── day-11-memory-layers/
 ├── day-12-personalization/
+├── day-13-task-state-machine/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -155,6 +159,7 @@ Run all commands from the repository root.
 | 10 | `python3 day-10-context-strategies/main.py` | `python3 day-10-context-strategies/experiment.py` |
 | 11 | `python3 day-11-memory-layers/main.py` | `python3 day-11-memory-layers/experiment.py` |
 | 12 | `python3 day-12-personalization/main.py` | `python3 day-12-personalization/experiment.py` |
+| 13 | `python3 day-13-task-state-machine/main.py` | `python3 day-13-task-state-machine/experiment.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -166,6 +171,7 @@ The tests do not call the Groq API or consume tokens.
 python3 -m unittest discover -s day-10-context-strategies -p "test_*.py" -v
 python3 -m unittest discover -s day-11-memory-layers -p "test_*.py" -v
 python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
+python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
 ```
 
 They verify:
@@ -177,16 +183,19 @@ They verify:
 - profile injection into every request;
 - differences between profiles;
 - profile restoration and user-specific long-term memory isolation.
+- task pause/resume and exact restoration after restart.
 
 ## Current Agent Capabilities
 
-By Day 12, Bublik can:
+By Day 13, Bublik can:
 
 - manage multiple independent dialogues;
 - restore history after restart;
 - keep recent messages separate from task state;
 - explicitly store decisions and knowledge;
 - control tasks through `planning → execution → validation → done`;
+- derive the next expected action from formal task state;
+- pause and resume any unfinished stage without losing progress;
 - apply user language, detail level, style, format, and constraints;
 - isolate long-term memory between profiles;
 - display the exact context before sending it to the model;
@@ -234,6 +243,10 @@ current user request
 ```
 
 The repository includes two contrasting profiles: concise `cheburator` and detailed scientific `scientist`. `experiment.py` sends them the same question with identical working memory, so response differences come from personalization.
+
+## Day 13 Task State Machine
+
+The task context now formally contains its stage, current step, derived expected action, and pause flag. SQLite restores all source fields after restart, and the prompt tells the model to continue from the stored position without asking the user to repeat the task. Invalid transitions and all progress while paused are rejected by code.
 
 ## Experiment Limitations
 
