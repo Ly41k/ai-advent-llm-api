@@ -2,7 +2,7 @@
 
 # AI Advent — From the First LLM Request to a Stateful Agent
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, and non-overridable invariants.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, and a controlled task lifecycle.
 
 All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
@@ -24,6 +24,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 12](day-12-personalization) | Personalization | Profiles with style, format, and constraints in every request |
 | [Day 13](day-13-task-state-machine) | Task State Machine | Persistent stage, current step, expected action, pause, and resume |
 | [Day 14](day-14-invariants) | Invariants and state constraints | Separate policy, semantic preflight/postflight checks, and explainable refusals |
+| [Day 15](day-15-controlled-transitions) | Controlled state transitions | Guard-aware transitions, explicit plan approval, lifecycle validation, and safe pause/resume |
 
 ## Architecture Evolution
 
@@ -47,6 +48,8 @@ personalization for every request
 formal task state + pause/resume
     ↓
 invariant policy + semantic guard
+    ↓
+guard-aware lifecycle + explicit plan approval
 ```
 
 In the latest assignments, the main flow is:
@@ -62,6 +65,7 @@ CLI
     → semantic request guard
     → Groq API
     → local + semantic response validation
+    → task-stage lifecycle validation
     → deterministic refusal or accepted response
     → SQLite
 ```
@@ -96,6 +100,7 @@ ai-advent-llm-api/
 ├── day-12-personalization/
 ├── day-13-task-state-machine/
 ├── day-14-invariants/
+├── day-15-controlled-transitions/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -168,6 +173,7 @@ Run all commands from the repository root.
 | 12 | `python3 day-12-personalization/main.py` | `python3 day-12-personalization/experiment.py` |
 | 13 | `python3 day-13-task-state-machine/main.py` | `python3 day-13-task-state-machine/experiment.py` |
 | 14 | `python3 day-14-invariants/main.py` | `python3 day-14-invariants/experiment.py` |
+| 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -181,6 +187,7 @@ python3 -m unittest discover -s day-11-memory-layers -p "test_*.py" -v
 python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
 python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
 python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
+python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
 ```
 
 They verify:
@@ -195,10 +202,13 @@ They verify:
 - task pause/resume and exact restoration after restart.
 - invariant policy categories and separate storage;
 - semantic request/response checks, explainable refusals, and unsafe-response exclusion from history.
+- guard-aware transition availability and explicit plan approval;
+- rejection of skipped stages and premature implementation;
+- pause/resume continuity across planning, execution, validation, and restart.
 
 ## Current Agent Capabilities
 
-By Day 14, Bublik can:
+By Day 15, Bublik can:
 
 - manage multiple independent dialogues;
 - restore history after restart;
@@ -217,6 +227,10 @@ By Day 14, Bublik can:
 - validate generated responses against all invariants;
 - replace violating responses with deterministic, explainable refusals;
 - keep unsafe model output out of SQLite history.
+- show only transitions that satisfy the current guards;
+- require explicit plan approval before execution;
+- validate generated answers against the current task stage and expected action;
+- block implementation during planning and finalization without successful validation.
 
 Main commands:
 
@@ -230,6 +244,8 @@ Main commands:
 | `/remember working KEY VALUE` | Save current-task data |
 | `/remember long decision\|knowledge KEY VALUE` | Save a decision or knowledge item |
 | `/task ...` | Control the current task state |
+| `/task approve` | Explicitly approve the current plan before execution |
+| `/task status` | Show stage, expected action, progress, and currently available transitions |
 | `/profile` | Show the active profile |
 | `/profile PROFILE_ID` | Change the profile of an empty dialogue |
 | `/exit` | Exit the program |
@@ -302,6 +318,28 @@ python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 
 Compatible requests use semantic preflight, answer generation, and semantic postflight. Explicit regex conflicts are blocked locally without an API call.
 
+## Day 15 Controlled State Transitions
+
+Day 15 turns the task lifecycle into an explicit, observable contract. The structural graph remains `planning → execution → validation → done`, while context-dependent guards decide which transition is actually available now.
+
+A plan must be created and explicitly approved with `/task approve` before execution can start. Editing the plan revokes approval. Validation becomes available only after every execution step is complete, and `done` requires a persisted successful validation result.
+
+`/task status` shows the current stage, plan approval, progress, derived expected action, and only the transitions whose guards currently pass. While paused, no task transition or progress mutation is available; resume restores the exact stage and current step from SQLite, including after restart.
+
+The semantic postflight also receives the active `TaskContext`. If the model produces implementation during planning, declares validation during execution, or returns a final result without successful validation, the unsafe answer is discarded and replaced with a deterministic refusal before persistence.
+
+Run the application with:
+
+```bash
+python3 day-15-controlled-transitions/main.py
+```
+
+Run all 35 local tests with:
+
+```bash
+python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
+```
+
 ## Experiment Limitations
 
 - Model availability and TPM/TPD limits depend on the current Groq plan.
@@ -310,6 +348,7 @@ Compatible requests use semantic preflight, answer generation, and semantic post
 - Summary and Sticky Facts depend on model quality and can omit an important detail.
 - Semantic invariant classification depends on the guard model; malformed or unknown guard output is handled fail-closed.
 - A compatible Day 14 request may use three API calls: semantic preflight, answer generation, and semantic postflight.
+- Day 15 lifecycle response classification is performed by the same semantic postflight and remains fail-closed when the guard result cannot be verified.
 - Automated tests validate architecture and prompt composition; real response quality is evaluated through experiments.
 
 ## Project Goal
