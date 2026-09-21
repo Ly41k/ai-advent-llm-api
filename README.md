@@ -2,7 +2,7 @@
 
 # AI Advent — From the First LLM Request to a Stateful Agent
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, and a controlled task lifecycle.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, a controlled task lifecycle, and MCP connectivity.
 
 All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
@@ -25,6 +25,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 13](day-13-task-state-machine) | Task State Machine | Persistent stage, current step, expected action, pause, and resume |
 | [Day 14](day-14-invariants) | Invariants and state constraints | Separate policy, semantic preflight/postflight checks, and explainable refusals |
 | [Day 15](day-15-controlled-transitions) | Controlled state transitions | Guard-aware transitions, explicit plan approval, lifecycle validation, and safe pause/resume |
+| [Day 16](day-16-mcp-connection) | MCP connection | Local MCP server, stdio client connection, initialization, and tool discovery |
 
 ## Architecture Evolution
 
@@ -50,25 +51,11 @@ formal task state + pause/resume
 invariant policy + semantic guard
     ↓
 guard-aware lifecycle + explicit plan approval
+    ↓
+MCP connection + tool discovery
 ```
 
-In the latest assignments, the main flow is:
-
-```text
-CLI
-  → BublikAgent
-    → user profile
-    → long-term memory
-    → working memory
-    → recent short-term messages
-    → local invariant preflight
-    → semantic request guard
-    → Groq API
-    → local + semantic response validation
-    → task-stage lifecycle validation
-    → deterministic refusal or accepted response
-    → SQLite
-```
+Day 16 is intentionally a standalone MCP experiment. It does not yet integrate MCP into `BublikAgent`: the goal is to verify the protocol lifecycle first.
 
 ## Technologies
 
@@ -80,6 +67,7 @@ CLI
 - `groq`;
 - `python-dotenv`;
 - `tiktoken` with the `o200k_harmony` encoding;
+- Python MCP SDK;
 - standard-library `unittest`.
 
 ## Repository Structure
@@ -101,6 +89,7 @@ ai-advent-llm-api/
 ├── day-13-task-state-machine/
 ├── day-14-invariants/
 ├── day-15-controlled-transitions/
+├── day-16-mcp-connection/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -143,6 +132,12 @@ Windows:
 python3 -m pip install -r requirements.txt
 ```
 
+Day 16 has its own MCP dependency:
+
+```bash
+python3 -m pip install -r day-16-mcp-connection/requirements.txt
+```
+
 ### 4. Add the API key
 
 Create a root-level `.env` based on `.env.example`:
@@ -153,11 +148,13 @@ GROQ_API_KEY=your_api_key_here
 
 Create a key in the [Groq Console](https://console.groq.com/keys). `.env` is ignored by Git; never publish the key in the repository, logs, or screenshots.
 
+The Day 16 local MCP example does not require a Groq API key.
+
 ## Running the Assignments
 
 Run all commands from the repository root.
 
-| Day | Main program | Experiment |
+| Day | Main program | Experiment / verification |
 |---|---|---|
 | 1 | `python3 day-01-first-api-request/main.py` | — |
 | 2 | `python3 day-02-response-control/main.py` | — |
@@ -174,6 +171,7 @@ Run all commands from the repository root.
 | 13 | `python3 day-13-task-state-machine/main.py` | `python3 day-13-task-state-machine/experiment.py` |
 | 14 | `python3 day-14-invariants/main.py` | `python3 day-14-invariants/experiment.py` |
 | 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
+| 16 | `python3 day-16-mcp-connection/client.py` | `python3 day-16-mcp-connection/test_mcp_connection.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -188,69 +186,24 @@ python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
 python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
 python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
+python3 day-16-mcp-connection/test_mcp_connection.py
 ```
 
-They verify:
-
-- Sliding Window size, facts injection, and branch isolation;
-- separation of short-term, working, and long-term memory;
-- valid state-machine transitions;
-- complete prompt construction;
-- profile injection into every request;
-- differences between profiles;
-- profile restoration and user-specific long-term memory isolation.
-- task pause/resume and exact restoration after restart.
-- invariant policy categories and separate storage;
-- semantic request/response checks, explainable refusals, and unsafe-response exclusion from history.
-- guard-aware transition availability and explicit plan approval;
-- rejection of skipped stages and premature implementation;
-- pause/resume continuity across planning, execution, validation, and restart.
+Days 10–15 verify the agent architecture, memory, profiles, state machine, invariants, and guarded lifecycle. Day 16 uses a standalone smoke test to verify that the MCP session initializes and that the expected tools are returned.
 
 ## Current Agent Capabilities
 
-By Day 15, Bublik can:
+By Day 15, Bublik can manage independent dialogues, explicit memory layers, personalization, formal task state, invariants, semantic guards, and controlled task transitions.
 
-- manage multiple independent dialogues;
-- restore history after restart;
-- keep recent messages separate from task state;
-- explicitly store decisions and knowledge;
-- control tasks through `planning → execution → validation → done`;
-- derive the next expected action from formal task state;
-- pause and resume any unfinished stage without losing progress;
-- apply user language, detail level, style, format, and constraints;
-- isolate long-term memory between profiles;
-- display the exact context before sending it to the model;
-- reject responses that violate formalized invariants.
-- load a versioned invariant policy outside the dialogue database;
-- block explicit conflicts locally before generation;
-- detect paraphrased conflicts with a structured semantic guard;
-- validate generated responses against all invariants;
-- replace violating responses with deterministic, explainable refusals;
-- keep unsafe model output out of SQLite history.
-- show only transitions that satisfy the current guards;
-- require explicit plan approval before execution;
-- validate generated answers against the current task stage and expected action;
-- block implementation during planning and finalization without successful validation.
+Day 16 deliberately keeps MCP separate from Bublik. The new experiment proves that an MCP client can:
 
-Main commands:
+- start a local MCP server through `stdio`;
+- establish a `ClientSession`;
+- complete `session.initialize()`;
+- request tools with `session.list_tools()`;
+- receive and print the server's available tools.
 
-| Command | Purpose |
-|---|---|
-| `/dialogs` | Switch or create a dialogue |
-| `/history` | Show the full completed history |
-| `/context` | Show the prompt that will be sent to the model |
-| `/invariants` | Show the active invariant policy and rationales |
-| `/memory short\|working\|long` | Show a selected memory layer |
-| `/remember working KEY VALUE` | Save current-task data |
-| `/remember long decision\|knowledge KEY VALUE` | Save a decision or knowledge item |
-| `/task ...` | Control the current task state |
-| `/task approve` | Explicitly approve the current plan before execution |
-| `/task status` | Show stage, expected action, progress, and currently available transitions |
-| `/profile` | Show the active profile |
-| `/profile PROFILE_ID` | Change the profile of an empty dialogue |
-| `/exit` | Exit the program |
-
-Values containing spaces must be quoted.
+This separation keeps the assignment focused on MCP connectivity before tool execution or agent integration is introduced.
 
 ## Day 12 Personalization
 
@@ -276,80 +229,69 @@ last 6 completed short-term messages
 current user request
 ```
 
-The repository includes two contrasting profiles: concise `cheburator` and detailed scientific `scientist`. `experiment.py` sends them the same question with identical working memory, so response differences come from personalization.
-
 ## Day 13 Task State Machine
 
-The task context now formally contains its stage, current step, derived expected action, and pause flag. SQLite restores all source fields after restart, and the prompt tells the model to continue from the stored position without asking the user to repeat the task. Invalid transitions and all progress while paused are rejected by code.
+The task context formally contains its stage, current step, derived expected action, and pause flag. SQLite restores all source fields after restart, and invalid transitions or progress while paused are rejected by code.
 
 ## Day 14 Invariants and State Constraints
 
-Day 14 adds a separate, versioned policy in `day-14-invariants/config/invariants.json`. It formalizes stack, architecture, technical-decision, business-rule, and security constraints. Dialogue messages cannot override this policy.
-
-The enforcement flow has three layers:
-
-```text
-user request
-    ↓
-local regex preflight
-    ├── explicit conflict → deterministic refusal
-    └── pass → semantic request guard
-                   ├── conflict → deterministic refusal
-                   └── pass → answer generation
-                                  ↓
-                         local + semantic postflight
-                                  ├── violation → explained refusal
-                                  └── pass → SQLite
-```
-
-The semantic guard returns a strict JSON result containing only allowed invariant IDs. A paraphrased conflict such as “TypeScript would be better than the current language” is refused even when it does not match a local regex. If a generated answer violates an architecture, stack, business, or security rule, it is discarded and replaced with an explainable refusal before persistence.
-
-Run the application with:
-
-```bash
-python3 day-14-invariants/main.py
-```
-
-Run the local tests with:
-
-```bash
-python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
-```
-
-Compatible requests use semantic preflight, answer generation, and semantic postflight. Explicit regex conflicts are blocked locally without an API call.
+Day 14 adds a separate, versioned invariant policy. Local and semantic preflight/postflight checks prevent requests and generated responses from violating formalized architecture, stack, business, and security constraints.
 
 ## Day 15 Controlled State Transitions
 
-Day 15 turns the task lifecycle into an explicit, observable contract. The structural graph remains `planning → execution → validation → done`, while context-dependent guards decide which transition is actually available now.
+Day 15 turns the task lifecycle into an explicit contract. A plan must be explicitly approved before execution, validation requires completed execution steps, and `done` requires successful validation. Pause/resume preserves the exact task position.
 
-A plan must be created and explicitly approved with `/task approve` before execution can start. Editing the plan revokes approval. Validation becomes available only after every execution step is complete, and `done` requires a persisted successful validation result.
+## Day 16 MCP Connection
 
-`/task status` shows the current stage, plan approval, progress, derived expected action, and only the transitions whose guards currently pass. While paused, no task transition or progress mutation is available; resume restores the exact stage and current step from SQLite, including after restart.
+Day 16 introduces the **Model Context Protocol (MCP)** with the smallest useful local example.
 
-The semantic postflight also receives the active `TaskContext`. If the model produces implementation during planning, declares validation during execution, or returns a final result without successful validation, the unsafe answer is discarded and replaced with a deterministic refusal before persistence.
+`server.py` exposes two tools:
 
-Run the application with:
+- `ping` — returns a message;
+- `add` — adds two integers.
 
-```bash
-python3 day-15-controlled-transitions/main.py
+`client.py` starts the server through the `stdio` transport and establishes an MCP session:
+
+```text
+MCP client
+    ↓
+stdio transport
+    ↓
+local MCP server
+    ↓
+initialize()
+    ↓
+list_tools()
+    ↓
+ping + add
 ```
 
-Run all 35 local tests with:
+The client performs the MCP initialization handshake with `session.initialize()` and then requests the server capabilities with `session.list_tools()`. Every returned tool is printed to the console.
+
+Run:
 
 ```bash
-python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
+python3 -m pip install -r day-16-mcp-connection/requirements.txt
+python3 day-16-mcp-connection/client.py
 ```
+
+Verify:
+
+```bash
+python3 day-16-mcp-connection/test_mcp_connection.py
+```
+
+The smoke test checks both requirements of the assignment: the MCP connection initializes successfully and the returned tool list contains the expected `ping` and `add` tools.
+
+No VPS, Groq request, API key, or external MCP service is required for this local experiment.
 
 ## Experiment Limitations
 
 - Model availability and TPM/TPD limits depend on the current Groq plan.
 - Generated answers may vary between runs even with identical parameters.
 - Local token estimates can differ slightly from actual API usage.
-- Summary and Sticky Facts depend on model quality and can omit an important detail.
-- Semantic invariant classification depends on the guard model; malformed or unknown guard output is handled fail-closed.
-- A compatible Day 14 request may use three API calls: semantic preflight, answer generation, and semantic postflight.
-- Day 15 lifecycle response classification is performed by the same semantic postflight and remains fail-closed when the guard result cannot be verified.
-- Automated tests validate architecture and prompt composition; real response quality is evaluated through experiments.
+- Semantic invariant classification depends on the guard model and is handled fail-closed when it cannot be verified.
+- Day 16 validates local MCP connectivity and tool discovery only; MCP tool execution and integration into `BublikAgent` are outside this assignment.
 
 ## Project Goal
 
@@ -361,3 +303,4 @@ This repository demonstrates a continuous evolution of an LLM application rather
 - [Groq Documentation](https://console.groq.com/docs)
 - [GPT-OSS Documentation](https://console.groq.com/docs/model/openai/gpt-oss-20b)
 - [tiktoken](https://github.com/openai/tiktoken)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
