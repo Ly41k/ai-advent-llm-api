@@ -2,7 +2,7 @@
 
 # AI Advent — From the First LLM Request to a Stateful Agent
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, a controlled task lifecycle, and MCP connectivity.
+A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, a controlled task lifecycle, MCP connectivity, and MCP tool calling against a real API.
 
 All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
 
@@ -26,6 +26,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 14](day-14-invariants) | Invariants and state constraints | Separate policy, semantic preflight/postflight checks, and explainable refusals |
 | [Day 15](day-15-controlled-transitions) | Controlled state transitions | Guard-aware transitions, explicit plan approval, lifecycle validation, and safe pause/resume |
 | [Day 16](day-16-mcp-connection) | MCP connection | Local MCP server, stdio client connection, initialization, and tool discovery |
+| [Day 17](day-17-first-mcp-tool) | First MCP tool | GitHub REST API tool, agent-driven invocation, and use of the returned result |
 
 ## Architecture Evolution
 
@@ -53,9 +54,11 @@ invariant policy + semantic guard
 guard-aware lifecycle + explicit plan approval
     ↓
 MCP connection + tool discovery
+    ↓
+GitHub REST API + first MCP tool + agent tool-calling loop
 ```
 
-Day 16 is intentionally a standalone MCP experiment. It does not yet integrate MCP into `BublikAgent`: the goal is to verify the protocol lifecycle first.
+Day 16 verifies the MCP protocol lifecycle in isolation. Day 17 builds on that foundation: a focused `BublikMcpAgent` discovers the registered GitHub tool, lets the model request it, executes the call through MCP, and returns the result to the model for the final answer.
 
 ## Technologies
 
@@ -68,6 +71,8 @@ Day 16 is intentionally a standalone MCP experiment. It does not yet integrate M
 - `python-dotenv`;
 - `tiktoken` with the `o200k_harmony` encoding;
 - Python MCP SDK;
+- GitHub REST API;
+- `httpx`;
 - standard-library `unittest`.
 
 ## Repository Structure
@@ -90,6 +95,7 @@ ai-advent-llm-api/
 ├── day-14-invariants/
 ├── day-15-controlled-transitions/
 ├── day-16-mcp-connection/
+├── day-17-first-mcp-tool/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -132,10 +138,11 @@ Windows:
 python3 -m pip install -r requirements.txt
 ```
 
-Day 16 has its own MCP dependency:
+Days 16 and 17 have isolated MCP dependencies:
 
 ```bash
 python3 -m pip install -r day-16-mcp-connection/requirements.txt
+python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
 ```
 
 ### 4. Add the API key
@@ -148,7 +155,7 @@ GROQ_API_KEY=your_api_key_here
 
 Create a key in the [Groq Console](https://console.groq.com/keys). `.env` is ignored by Git; never publish the key in the repository, logs, or screenshots.
 
-The Day 16 local MCP example does not require a Groq API key.
+The Day 16 example and the deterministic Day 17 demo do not require a Groq API key. Day 17 `main.py` uses Groq for real model-selected tool calls. `GITHUB_TOKEN` is optional for public repositories and only raises the GitHub API rate limit.
 
 ## Running the Assignments
 
@@ -172,6 +179,7 @@ Run all commands from the repository root.
 | 14 | `python3 day-14-invariants/main.py` | `python3 day-14-invariants/experiment.py` |
 | 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
 | 16 | `python3 day-16-mcp-connection/client.py` | `python3 day-16-mcp-connection/test_mcp_connection.py` |
+| 17 | `python3 day-17-first-mcp-tool/main.py` | `python3 day-17-first-mcp-tool/demo.py` / `python3 day-17-first-mcp-tool/test_day17.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -187,9 +195,10 @@ python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
 python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
 python3 day-16-mcp-connection/test_mcp_connection.py
+python3 day-17-first-mcp-tool/test_day17.py
 ```
 
-Days 10–15 verify the agent architecture, memory, profiles, state machine, invariants, and guarded lifecycle. Day 16 uses a standalone smoke test to verify that the MCP session initializes and that the expected tools are returned.
+Days 10–15 verify the agent architecture, memory, profiles, state machine, invariants, and guarded lifecycle. Day 16 uses a standalone smoke test to verify MCP initialization and tool discovery. Day 17 checks GitHub response mapping, the generated MCP input schema, the agent's tool request, the MCP call, and use of the returned data in the final answer without spending Groq tokens or GitHub API quota.
 
 ## Current Agent Capabilities
 
@@ -203,7 +212,13 @@ Day 16 deliberately keeps MCP separate from Bublik. The new experiment proves th
 - request tools with `session.list_tools()`;
 - receive and print the server's available tools.
 
-This separation keeps the assignment focused on MCP connectivity before tool execution or agent integration is introduced.
+Day 17 then adds the missing execution loop. Its focused `BublikMcpAgent`:
+
+- converts MCP tool descriptions and input schemas into model tools;
+- receives a model-generated `get_github_repo(owner, repo)` request;
+- executes it through `ClientSession.call_tool()`;
+- adds the returned payload as a `tool` message;
+- asks the model for a final answer grounded in the GitHub result.
 
 ## Day 12 Personalization
 
@@ -285,13 +300,59 @@ The smoke test checks both requirements of the assignment: the MCP connection in
 
 No VPS, Groq request, API key, or external MCP service is required for this local experiment.
 
+## Day 17 First MCP Tool
+
+Day 17 moves from tool discovery to tool execution. `server.py` registers the typed `get_github_repo(owner, repo)` tool with `@mcp.tool()`. Its annotations and docstring become the MCP input schema and description.
+
+The execution path is:
+
+```text
+user request
+    ↓
+BublikMcpAgent + model tools
+    ↓
+get_github_repo(owner, repo)
+    ↓
+MCP call over stdio
+    ↓
+GitHub REST API
+    ↓
+tool result returned to the model
+    ↓
+final grounded answer
+```
+
+The tool returns normalized repository data: name, owner, description, stars, forks, open issue count, default branch, and URL.
+
+Install and verify:
+
+```bash
+python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
+python3 day-17-first-mcp-tool/test_day17.py
+```
+
+Run the deterministic end-to-end demonstration without a Groq key:
+
+```bash
+python3 day-17-first-mcp-tool/demo.py
+```
+
+Run the interactive application with real Groq tool selection:
+
+```bash
+python3 day-17-first-mcp-tool/main.py
+```
+
+The MCP server and client remain local over `stdio`; only the GitHub REST request leaves the process. No VPS, open port, domain, Nginx, or SSL certificate is required.
+
 ## Experiment Limitations
 
 - Model availability and TPM/TPD limits depend on the current Groq plan.
 - Generated answers may vary between runs even with identical parameters.
 - Local token estimates can differ slightly from actual API usage.
 - Semantic invariant classification depends on the guard model and is handled fail-closed when it cannot be verified.
-- Day 16 validates local MCP connectivity and tool discovery only; MCP tool execution and integration into `BublikAgent` are outside this assignment.
+- Day 16 validates local MCP connectivity and tool discovery only; Day 17 adds tool execution through a focused standalone agent loop.
+- The Day 17 live demo requires internet access. Unauthenticated GitHub requests are subject to public API rate limits; `GITHUB_TOKEN` is optional.
 
 ## Project Goal
 
