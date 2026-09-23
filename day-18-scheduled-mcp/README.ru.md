@@ -40,7 +40,8 @@ python3 -m venv .venv
 .venv/bin/python day-18-scheduled-mcp/main.py
 ```
 
-Скажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой `python3 day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP.
+Скажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой
+`.venv/bin/python day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP..
 
 ## VPS (systemd)
 

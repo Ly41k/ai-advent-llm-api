@@ -91,6 +91,7 @@ journalctl -u bublik-day18 -f
     schedule Ly41k ai-advent-llm-api 15
 
 .venv/bin/python day-18-scheduled-mcp/mcp_cli.py jobs
+```
 
 ## Что именно выдаётся автоматически
 
