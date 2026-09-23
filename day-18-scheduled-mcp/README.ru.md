@@ -63,4 +63,4 @@ journalctl -u bublik-day18 -f
 | Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |
 | Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |
 | Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |
-| Работает 24/7 | worker + пример unit systemd | локальный процесс проверен; состояние VPS проверяется после установки сервиса |
+| Работает 24/7 | worker + пример unit systemd | проверяется на целевом VPS через systemctl, journalctl, restart и reboot |

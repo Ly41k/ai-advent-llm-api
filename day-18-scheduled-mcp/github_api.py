@@ -34,7 +34,7 @@ class GitHubApi:
         headers = {
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28",
-            "User-Agent": "bublik-day-17-mcp",
+            "User-Agent": "bublik-day-18-mcp",
         }
         if self._token:
             headers["Authorization"] = f"Bearer {self._token}"

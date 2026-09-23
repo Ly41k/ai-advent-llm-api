@@ -5,13 +5,13 @@ After=network-online.target
 
 [Service]
 Type=simple
-User=bublik
-WorkingDirectory=/home/bublik/ai-advent-llm-api/day-18-scheduled-mcp
+User=YOUR_LINUX_USER
+WorkingDirectory=/home/YOUR_LINUX_USER/ai-advent-llm-api/day-18-scheduled-mcp
 
-Environment=BUBLIK_DB_PATH=/home/bublik/ai-advent-llm-api/day-18-scheduled-mcp/schedule.db
+Environment=BUBLIK_DB_PATH=/home/YOUR_LINUX_USER/ai-advent-llm-api/day-18-scheduled-mcp/schedule.db
 Environment=PYTHONUNBUFFERED=1
 
-ExecStart=/home/bublik/ai-advent-llm-api/.venv/bin/python worker.py
+ExecStart=/home/YOUR_LINUX_USER/ai-advent-llm-api/.venv/bin/python worker.py
 
 Restart=always
 RestartSec=10

@@ -63,4 +63,4 @@ Create the schedule via `main.py` on that VPS or another MCP client sharing the 
 | Save data | SQLite `jobs`, `snapshots`, `runs` | Restart test |
 | Scheduled execution | `next_run`, polling loop, systemd unit | Two executions with controlled time |
 | Aggregate result | `get_github_summary` | Latest values, deltas and agent reply test |
-| 24/7 operation | Worker supervised by systemd | Local loop tested; VPS status requires deployment |
+| 24/7 operation | Worker supervised by systemd | Verify on the target VPS with systemctl, journalctl, service restart and host reboot |
