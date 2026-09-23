@@ -1,0 +1,20 @@
+[Unit]
+Description=Bublik periodic GitHub summaries
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=bublik
+WorkingDirectory=/home/bublik/ai-advent-llm-api/day-18-scheduled-mcp
+
+Environment=BUBLIK_DB_PATH=/home/bublik/ai-advent-llm-api/day-18-scheduled-mcp/schedule.db
+Environment=PYTHONUNBUFFERED=1
+
+ExecStart=/home/bublik/ai-advent-llm-api/.venv/bin/python worker.py
+
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

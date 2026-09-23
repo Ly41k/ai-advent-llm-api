@@ -27,6 +27,7 @@
 | [День 15](day-15-controlled-transitions/README.ru.md) | Контролируемые переходы состояний | Guard-aware переходы, явное утверждение плана, lifecycle-проверка и безопасные pause/resume |
 | [День 16](day-16-mcp-connection/README.ru.md) | Подключение MCP | Локальный MCP-сервер, stdio-соединение, инициализация и получение списка инструментов |
 | [День 17](day-17-first-mcp-tool/README.ru.md) | Первый MCP-инструмент | Инструмент вокруг GitHub REST API, вызов агентом и использование полученного результата |
+| [День 18](day-18-scheduled-mcp/README.ru.md) | Планировщик и фоновые задачи | MCP-расписание, worker, SQLite и агрегированная сводка |
 
 ## Эволюция архитектуры
 
@@ -96,6 +97,7 @@ ai-advent-llm-api/
 ├── day-15-controlled-transitions/
 ├── day-16-mcp-connection/
 ├── day-17-first-mcp-tool/
+├── day-18-scheduled-mcp/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -143,6 +145,7 @@ python3 -m pip install -r requirements.txt
 ```bash
 python3 -m pip install -r day-16-mcp-connection/requirements.txt
 python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
+python3 -m pip install -r day-18-scheduled-mcp/requirements.txt
 ```
 
 ### 4. API-ключ
@@ -180,6 +183,7 @@ GROQ_API_KEY=your_api_key_here
 | 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
 | 16 | `python3 day-16-mcp-connection/client.py` | `python3 day-16-mcp-connection/test_mcp_connection.py` |
 | 17 | `python3 day-17-first-mcp-tool/main.py` | `python3 day-17-first-mcp-tool/demo.py` / `python3 day-17-first-mcp-tool/test_day17.py` |
+| 18 | `python3 day-18-scheduled-mcp/main.py` + `python3 day-18-scheduled-mcp/worker.py` | `python3 day-18-scheduled-mcp/test_day18.py` |
 
 Интерактивные приложения поддерживают `выход` или `/exit`. Точный список команд указан в README соответствующего дня.
 
@@ -196,6 +200,7 @@ python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
 python3 day-16-mcp-connection/test_mcp_connection.py
 python3 day-17-first-mcp-tool/test_day17.py
+python3 day-18-scheduled-mcp/test_day18.py
 ```
 
 Дни 10–15 проверяют архитектуру агента, память, профили, state machine, invariants и контролируемый lifecycle. В Дне 16 отдельный smoke-тест проверяет инициализацию MCP-сессии и обнаружение инструментов. В Дне 17 проверяются преобразование ответа GitHub, сгенерированная схема входных параметров MCP, запрос инструмента агентом, сам MCP-вызов и использование результата в финальном ответе без расходования токенов Groq и лимита GitHub API.
@@ -365,3 +370,7 @@ MCP-сервер и клиент остаются локальными и вза
 - [GPT-OSS Documentation](https://console.groq.com/docs/model/openai/gpt-oss-20b)
 - [tiktoken](https://github.com/openai/tiktoken)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
+
+## День 18 — Планировщик и фоновые задачи
+
+День 18 добавляет сохранённое расписание GitHub-наблюдений и отдельный worker. Инструмент MCP возвращает изменения по сохранённым снимкам; описание запуска на VPS находится в [инструкции Дня 18](day-18-scheduled-mcp/README.ru.md).

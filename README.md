@@ -27,6 +27,7 @@ All assignments share one story. **Cheburator** is the captain of a research spa
 | [Day 15](day-15-controlled-transitions) | Controlled state transitions | Guard-aware transitions, explicit plan approval, lifecycle validation, and safe pause/resume |
 | [Day 16](day-16-mcp-connection) | MCP connection | Local MCP server, stdio client connection, initialization, and tool discovery |
 | [Day 17](day-17-first-mcp-tool) | First MCP tool | GitHub REST API tool, agent-driven invocation, and use of the returned result |
+| [Day 18](day-18-scheduled-mcp/README.md) | Scheduler and background jobs | MCP schedules, worker, SQLite and aggregate summaries |
 
 ## Architecture Evolution
 
@@ -96,6 +97,7 @@ ai-advent-llm-api/
 ├── day-15-controlled-transitions/
 ├── day-16-mcp-connection/
 ├── day-17-first-mcp-tool/
+├── day-18-scheduled-mcp/
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -143,6 +145,7 @@ Days 16 and 17 have isolated MCP dependencies:
 ```bash
 python3 -m pip install -r day-16-mcp-connection/requirements.txt
 python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
+python3 -m pip install -r day-18-scheduled-mcp/requirements.txt
 ```
 
 ### 4. Add the API key
@@ -180,6 +183,7 @@ Run all commands from the repository root.
 | 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
 | 16 | `python3 day-16-mcp-connection/client.py` | `python3 day-16-mcp-connection/test_mcp_connection.py` |
 | 17 | `python3 day-17-first-mcp-tool/main.py` | `python3 day-17-first-mcp-tool/demo.py` / `python3 day-17-first-mcp-tool/test_day17.py` |
+| 18 | `python3 day-18-scheduled-mcp/main.py` + `python3 day-18-scheduled-mcp/worker.py` | `python3 day-18-scheduled-mcp/test_day18.py` |
 
 Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
 
@@ -196,6 +200,7 @@ python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
 python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
 python3 day-16-mcp-connection/test_mcp_connection.py
 python3 day-17-first-mcp-tool/test_day17.py
+python3 day-18-scheduled-mcp/test_day18.py
 ```
 
 Days 10–15 verify the agent architecture, memory, profiles, state machine, invariants, and guarded lifecycle. Day 16 uses a standalone smoke test to verify MCP initialization and tool discovery. Day 17 checks GitHub response mapping, the generated MCP input schema, the agent's tool request, the MCP call, and use of the returned data in the final answer without spending Groq tokens or GitHub API quota.
@@ -365,3 +370,7 @@ This repository demonstrates a continuous evolution of an LLM application rather
 - [GPT-OSS Documentation](https://console.groq.com/docs/model/openai/gpt-oss-20b)
 - [tiktoken](https://github.com/openai/tiktoken)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
+
+## Day 18 — Scheduler and background jobs
+
+Day 18 adds a durable GitHub observation schedule and an independent worker. Its MCP tool returns changes across saved samples; see the [Day 18 instructions](day-18-scheduled-mcp/README.md) for VPS setup.
