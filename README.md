@@ -1,376 +1,132 @@
 **English** | [Русский](README.ru.md)
 
-# AI Advent — From the First LLM Request to a Stateful Agent
+# AI Advent — from an LLM API request to an agent with MCP tools
 
-A hands-on project for learning how to work with LLM APIs. Each day adds one new mechanism: response control, model comparison, persistent history, token accounting, context compression and strategies, explicit memory layers, personalization, formal task state, non-overridable invariants, a controlled task lifecycle, MCP connectivity, and MCP tool calling against a real API.
+A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, and separate MCP experiments. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-All assignments share one story. **Cheburator** is the captain of a research spacecraft, while **Bublik** gradually evolves from a simple console assistant into a personalized autonomous agent.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–19**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
 
-## Completed Assignments
+## Learning path
 
-| Day | Topic | Result |
+| Day | Lesson | What it adds |
 |---|---|---|
-| [Day 1](day-01-first-api-request) | First API request | A console chat with in-session history |
-| [Day 2](day-02-response-control) | Response control | Explicit response structure, length, and rules |
-| [Day 3](day-03-reasoning-methods) | Reasoning methods | Four approaches compared on the same task |
-| [Day 4](day-04-temperature) | Temperature | Accuracy, creativity, and variability comparison |
-| [Day 5](day-05-model-versions) | Model versions | Quality, latency, token, and cost comparison |
-| [Day 6](day-06-first-agent) | First agent | `BublikAgent`, thin CLI, and persistent SQLite memory |
-| [Day 7](day-07-context-persistence) | Context persistence | Independent dialogues restored after restart |
-| [Day 8](day-08-token-usage) | Token usage | Local estimates, actual usage, and request cost |
-| [Day 9](day-09-context-compression) | Context compression | Persistent summary plus recent verbatim messages |
-| [Day 10](day-10-context-strategies) | Context strategies | Sliding Window, Sticky Facts, and Branching |
-| [Day 11](day-11-memory-layers) | Memory model | Short-term, working, and long-term memory |
-| [Day 12](day-12-personalization) | Personalization | Profiles with style, format, and constraints in every request |
-| [Day 13](day-13-task-state-machine) | Task State Machine | Persistent stage, current step, expected action, pause, and resume |
-| [Day 14](day-14-invariants) | Invariants and state constraints | Separate policy, semantic preflight/postflight checks, and explainable refusals |
-| [Day 15](day-15-controlled-transitions) | Controlled state transitions | Guard-aware transitions, explicit plan approval, lifecycle validation, and safe pause/resume |
-| [Day 16](day-16-mcp-connection) | MCP connection | Local MCP server, stdio client connection, initialization, and tool discovery |
-| [Day 17](day-17-first-mcp-tool) | First MCP tool | GitHub REST API tool, agent-driven invocation, and use of the returned result |
-| [Day 18](day-18-scheduled-mcp/README.md) | Scheduler and background jobs | MCP schedules, worker, SQLite and aggregate summaries |
+| [01](day-01-first-api-request/README.md) | First API request | Interactive Groq chat with in-session history |
+| [02](day-02-response-control/README.md) | Response control | Structure, length, and explicit answer rules |
+| [03](day-03-reasoning-methods/README.md) | Reasoning methods | Four approaches compared on the same task |
+| [04](day-04-temperature/README.md) | Temperature | Compare factual consistency, creativity, and variability |
+| [05](day-05-model-versions/README.md) | Model comparison | Quality, latency, token use, and estimated cost |
+| [06](day-06-first-agent/README.md) | First agent | `BublikAgent`, console interface, and SQLite memory |
+| [07](day-07-context-persistence/README.md) | Context persistence | Isolated dialogues recovered after a restart |
+| [08](day-08-token-usage/README.md) | Token usage | Estimates, API usage, and approximate request cost |
+| [09](day-09-context-compression/README.md) | Compression | Persisted summary plus recent full messages |
+| [10](day-10-context-strategies/README.md) | Context strategies | Sliding Window, Sticky Facts, and Branching |
+| [11](day-11-memory-layers/README.md) | Memory model | Short-term, task working, and long-term memory |
+| [12](day-12-personalization/README.md) | Personalization | User profiles and profile-scoped context |
+| [13](day-13-task-state-machine/README.md) | Task state machine | Persistent stage, progress, expected action, and pause |
+| [14](day-14-invariants/README.md) | Invariants | Versioned policy and preflight/postflight semantic checks |
+| [15](day-15-controlled-transitions/README.md) | Guarded transitions | Plan approval, stage guards, validation, and resume |
+| [16](day-16-mcp-connection/README.md) | MCP connection | Local server and client, stdio handshake, tool discovery |
+| [17](day-17-first-mcp-tool/README.md) | First MCP tool | GitHub tool invoked through the model's tool-calling loop |
+| [18](day-18-scheduled-mcp/README.md) | Scheduled jobs | SQLite schedules, independent worker, stored snapshots, aggregate result |
+| [19](day-19-mcp-composition/README.md) | Tool composition | Three MCP calls: fetch → summarize → save Markdown |
 
-## Architecture Evolution
+## How the pieces fit
 
-```text
-simple API call
-    ↓
-controlled prompt and model parameters
-    ↓
-BublikAgent + thin CLI
-    ↓
-SQLite + independent dialogues
-    ↓
-context measurement and compression
-    ↓
-context strategies
-    ↓
-explicit memory layers + state machine
-    ↓
-personalization for every request
-    ↓
-formal task state + pause/resume
-    ↓
-invariant policy + semantic guard
-    ↓
-guard-aware lifecycle + explicit plan approval
-    ↓
-MCP connection + tool discovery
-    ↓
-GitHub REST API + first MCP tool + agent tool-calling loop
-```
+- **Days 1–5:** compare API parameters, reasoning prompts, models, and their measured output.
+- **Days 6–10:** separate agent logic from the CLI, persist dialogues in SQLite, and manage the context/token budget.
+- **Days 11–15:** add memory layers, user profiles, a task state machine, invariant checks, and guarded task transitions. Day 15 requires an approved plan before execution and successful validation before `done`.
+- **Day 16:** use the Python MCP SDK to discover `ping` and `add` from a local stdio server.
+- **Day 17:** register `get_github_repo(owner, repo)`; the focused `BublikMcpAgent` exposes its schema to the Groq model, executes the model-selected MCP call, and returns the result to the model.
+- **Day 18:** an MCP tool stores a periodic GitHub job in SQLite. A separate worker runs due jobs and saves snapshots; another tool returns an aggregate of those snapshots. The worker needs a separate long-running process for unattended operation.
+- **Day 19:** `BublikPipelineAgent` deterministically invokes `search_repository`, `summarize_repository`, and `save_report` in order. It passes each complete MCP result to the next call and stops on error. The summary itself does not call an LLM.
 
-Day 16 verifies the MCP protocol lifecycle in isolation. Day 17 builds on that foundation: a focused `BublikMcpAgent` discovers the registered GitHub tool, lets the model request it, executes the call through MCP, and returns the result to the model for the final answer.
+The MCP servers in Days 16–19 communicate with local clients over **stdio**. Days 17–19 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation; the Day 19 pipeline runs on demand.
 
-## Technologies
+## Requirements and setup
 
-- Python 3.13;
-- [Groq API](https://console.groq.com/);
-- GPT-OSS 20B and 120B;
-- Qwen 3.6 27B;
-- SQLite;
-- `groq`;
-- `python-dotenv`;
-- `tiktoken` with the `o200k_harmony` encoding;
-- Python MCP SDK;
-- GitHub REST API;
-- `httpx`;
-- standard-library `unittest`.
+- Python **3.13** is the project's target version.
+- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, and offline tests do not need one.
+- Internet access is needed when calling Groq or fetching live public GitHub data. `GITHUB_TOKEN` is optional for public repositories and can help with GitHub API rate limits.
 
-## Repository Structure
-
-```text
-ai-advent-llm-api/
-├── day-01-first-api-request/
-├── day-02-response-control/
-├── day-03-reasoning-methods/
-├── day-04-temperature/
-├── day-05-model-versions/
-├── day-06-first-agent/
-├── day-07-context-persistence/
-├── day-08-token-usage/
-├── day-09-context-compression/
-├── day-10-context-strategies/
-├── day-11-memory-layers/
-├── day-12-personalization/
-├── day-13-task-state-machine/
-├── day-14-invariants/
-├── day-15-controlled-transitions/
-├── day-16-mcp-connection/
-├── day-17-first-mcp-tool/
-├── day-18-scheduled-mcp/
-├── .env.example
-├── .gitignore
-├── requirements.txt
-├── README.md
-└── README.ru.md
-```
-
-Each directory is a standalone example with its own English and Russian documentation.
-
-## Project Setup
-
-### 1. Clone the repository
+Run from the repository root:
 
 ```bash
 git clone https://github.com/Ly41k/ai-advent-llm-api.git
 cd ai-advent-llm-api
-```
-
-### 2. Create a virtual environment
-
-```bash
-python3 -m venv .venv
-```
-
-macOS/Linux:
-
-```bash
+python3.13 -m venv .venv
 source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
-Windows:
+On Windows, activate the environment with `.venv\Scripts\activate`. If `python3.13` is not the name of your Python 3.13 executable, use its local command instead.
 
-```text
-.venv\Scripts\activate
-```
-
-### 3. Install dependencies
+The root `requirements.txt` contains the Groq, dotenv, and tokenizer dependencies used in earlier lessons. Install the **specific day's** additional dependencies before running an MCP lesson:
 
 ```bash
-python3 -m pip install -r requirements.txt
+python -m pip install -r day-19-mcp-composition/requirements.txt
 ```
 
-Days 16 and 17 have isolated MCP dependencies:
+Replace `day-19-mcp-composition` with `day-16-mcp-connection`, `day-17-first-mcp-tool`, or `day-18-scheduled-mcp` for those lessons.
+
+For Groq programs, copy `.env.example` to a root-level `.env` and set `GROQ_API_KEY` there. The `.env` file is ignored by Git. Keep credentials out of commits and recordings.
+
+## Run the examples
+
+From the root, Days 1–15 each have a `main.py` in their lesson directory. For example:
 
 ```bash
-python3 -m pip install -r day-16-mcp-connection/requirements.txt
-python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
-python3 -m pip install -r day-18-scheduled-mcp/requirements.txt
+python day-01-first-api-request/main.py
+python day-15-controlled-transitions/main.py
 ```
 
-### 4. Add the API key
+The later lessons have different entry points:
 
-Create a root-level `.env` based on `.env.example`:
-
-```env
-GROQ_API_KEY=your_api_key_here
-```
-
-Create a key in the [Groq Console](https://console.groq.com/keys). `.env` is ignored by Git; never publish the key in the repository, logs, or screenshots.
-
-The Day 16 example and the deterministic Day 17 demo do not require a Groq API key. Day 17 `main.py` uses Groq for real model-selected tool calls. `GITHUB_TOKEN` is optional for public repositories and only raises the GitHub API rate limit.
-
-## Running the Assignments
-
-Run all commands from the repository root.
-
-| Day | Main program | Experiment / verification |
+| Day | Command from the repository root | What to expect |
 |---|---|---|
-| 1 | `python3 day-01-first-api-request/main.py` | — |
-| 2 | `python3 day-02-response-control/main.py` | — |
-| 3 | `python3 day-03-reasoning-methods/main.py` | — |
-| 4 | `python3 day-04-temperature/main.py` | — |
-| 5 | `python3 day-05-model-versions/main.py` | — |
-| 6 | `python3 day-06-first-agent/main.py` | — |
-| 7 | `python3 day-07-context-persistence/main.py` | — |
-| 8 | `python3 day-08-token-usage/main.py` | `python3 day-08-token-usage/experiment.py` |
-| 9 | `python3 day-09-context-compression/main.py` | `python3 day-09-context-compression/experiment.py` |
-| 10 | `python3 day-10-context-strategies/main.py` | `python3 day-10-context-strategies/experiment.py` |
-| 11 | `python3 day-11-memory-layers/main.py` | `python3 day-11-memory-layers/experiment.py` |
-| 12 | `python3 day-12-personalization/main.py` | `python3 day-12-personalization/experiment.py` |
-| 13 | `python3 day-13-task-state-machine/main.py` | `python3 day-13-task-state-machine/experiment.py` |
-| 14 | `python3 day-14-invariants/main.py` | `python3 day-14-invariants/experiment.py` |
-| 15 | `python3 day-15-controlled-transitions/main.py` | `python3 day-15-controlled-transitions/experiment.py` |
-| 16 | `python3 day-16-mcp-connection/client.py` | `python3 day-16-mcp-connection/test_mcp_connection.py` |
-| 17 | `python3 day-17-first-mcp-tool/main.py` | `python3 day-17-first-mcp-tool/demo.py` / `python3 day-17-first-mcp-tool/test_day17.py` |
-| 18 | `python3 day-18-scheduled-mcp/main.py` + `python3 day-18-scheduled-mcp/worker.py` | `python3 day-18-scheduled-mcp/test_day18.py` |
+| 16 | `python day-16-mcp-connection/client.py` | Discover `ping` and `add`; no key or network |
+| 17 | `python day-17-first-mcp-tool/demo.py` | Real GitHub call and deterministic agent demo; no Groq key |
+| 17 | `python day-17-first-mcp-tool/main.py` | Interactive Groq-driven MCP tool selection |
+| 18 | `python day-18-scheduled-mcp/worker.py` and `python day-18-scheduled-mcp/main.py` in separate terminals | Periodic worker plus interactive Groq agent |
+| 19 | `python day-19-mcp-composition/main.py Ly41k ai-advent-llm-api` | One command executes three MCP tools and writes a report |
 
-Interactive programs support `выход` or `/exit`. See each day's README for the exact command set.
-
-## Local Tests
-
-The tests do not call the Groq API or consume tokens.
+For a **Day 18 check without Groq**, use `mcp_cli.py` to create a schedule, run due work once, and read its stored summary:
 
 ```bash
-python3 -m unittest discover -s day-10-context-strategies -p "test_*.py" -v
-python3 -m unittest discover -s day-11-memory-layers -p "test_*.py" -v
-python3 -m unittest discover -s day-12-personalization -p "test_*.py" -v
-python3 -m unittest discover -s day-13-task-state-machine -p "test_*.py" -v
-python3 -m unittest discover -s day-14-invariants -p "test_*.py" -v
-python3 -m unittest discover -s day-15-controlled-transitions -p "test_*.py" -v
-python3 day-16-mcp-connection/test_mcp_connection.py
-python3 day-17-first-mcp-tool/test_day17.py
-python3 day-18-scheduled-mcp/test_day18.py
+python day-18-scheduled-mcp/mcp_cli.py schedule Ly41k ai-advent-llm-api 60
+python day-18-scheduled-mcp/worker.py --once
+python day-18-scheduled-mcp/mcp_cli.py summary Ly41k ai-advent-llm-api
 ```
 
-Days 10–15 verify the agent architecture, memory, profiles, state machine, invariants, and guarded lifecycle. Day 16 uses a standalone smoke test to verify MCP initialization and tool discovery. Day 17 checks GitHub response mapping, the generated MCP input schema, the agent's tool request, the MCP call, and use of the returned data in the final answer without spending Groq tokens or GitHub API quota.
+For Day 19, inspect `day-19-mcp-composition/reports/Ly41k-ai-advent-llm-api-summary.md` after the run. Set `BUBLIK_REPORT_DIR` if you need a different output directory. The [Day 18 verification guide](day-18-scheduled-mcp/VERIFY.ru.md) covers worker and VPS checks; [Day 19 instructions](day-19-mcp-composition/README.md) explain the automatic pipeline.
 
-## Current Agent Capabilities
+## Tests
 
-By Day 15, Bublik can manage independent dialogues, explicit memory layers, personalization, formal task state, invariants, semantic guards, and controlled task transitions.
-
-Day 16 deliberately keeps MCP separate from Bublik. The new experiment proves that an MCP client can:
-
-- start a local MCP server through `stdio`;
-- establish a `ClientSession`;
-- complete `session.initialize()`;
-- request tools with `session.list_tools()`;
-- receive and print the server's available tools.
-
-Day 17 then adds the missing execution loop. Its focused `BublikMcpAgent`:
-
-- converts MCP tool descriptions and input schemas into model tools;
-- receives a model-generated `get_github_repo(owner, repo)` request;
-- executes it through `ClientSession.call_tool()`;
-- adds the returned payload as a `tool` message;
-- asks the model for a final answer grounded in the GitHub result.
-
-## Day 12 Personalization
-
-A user profile contains:
-
-```text
-name + role
-language
-detail_level
-style
-response_format
-constraints
-```
-
-Before every request, `MemoryPromptBuilder` assembles context in a fixed order:
-
-```text
-assistant identity + invariants
-user profile
-profile-scoped long-term memory
-dialogue-scoped working memory
-last 6 completed short-term messages
-current user request
-```
-
-## Day 13 Task State Machine
-
-The task context formally contains its stage, current step, derived expected action, and pause flag. SQLite restores all source fields after restart, and invalid transitions or progress while paused are rejected by code.
-
-## Day 14 Invariants and State Constraints
-
-Day 14 adds a separate, versioned invariant policy. Local and semantic preflight/postflight checks prevent requests and generated responses from violating formalized architecture, stack, business, and security constraints.
-
-## Day 15 Controlled State Transitions
-
-Day 15 turns the task lifecycle into an explicit contract. A plan must be explicitly approved before execution, validation requires completed execution steps, and `done` requires successful validation. Pause/resume preserves the exact task position.
-
-## Day 16 MCP Connection
-
-Day 16 introduces the **Model Context Protocol (MCP)** with the smallest useful local example.
-
-`server.py` exposes two tools:
-
-- `ping` — returns a message;
-- `add` — adds two integers.
-
-`client.py` starts the server through the `stdio` transport and establishes an MCP session:
-
-```text
-MCP client
-    ↓
-stdio transport
-    ↓
-local MCP server
-    ↓
-initialize()
-    ↓
-list_tools()
-    ↓
-ping + add
-```
-
-The client performs the MCP initialization handshake with `session.initialize()` and then requests the server capabilities with `session.list_tools()`. Every returned tool is printed to the console.
-
-Run:
+Install each lesson's dependencies before its tests. These local tests use fakes or a local HTTP server and do **not** spend Groq tokens or require a live GitHub request:
 
 ```bash
-python3 -m pip install -r day-16-mcp-connection/requirements.txt
-python3 day-16-mcp-connection/client.py
+python -m unittest discover -s day-10-context-strategies -p 'test_*.py' -v
+python -m unittest discover -s day-11-memory-layers -p 'test_*.py' -v
+python -m unittest discover -s day-12-personalization -p 'test_*.py' -v
+python -m unittest discover -s day-13-task-state-machine -p 'test_*.py' -v
+python -m unittest discover -s day-14-invariants -p 'test_*.py' -v
+python -m unittest discover -s day-15-controlled-transitions -p 'test_*.py' -v
+python day-16-mcp-connection/test_mcp_connection.py
+python day-17-first-mcp-tool/test_day17.py -v
+python day-18-scheduled-mcp/test_day18.py -v
+python day-19-mcp-composition/test_day19.py -v
 ```
 
-Verify:
+Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check.
 
-```bash
-python3 day-16-mcp-connection/test_mcp_connection.py
-```
+## Data and limitations
 
-The smoke test checks both requirements of the assignment: the MCP connection initializes successfully and the returned tool list contains the expected `ping` and `add` tools.
+- SQLite data from earlier lessons and Day 18 schedules/snapshots remain local. Day 18's default database is `day-18-scheduled-mcp/schedule.db`; `BUBLIK_DB_PATH` can point both the worker and client to a shared alternative.
+- Day 18 prints completed worker results to stdout or the service journal. It does not automatically send a chat message. Its sample systemd unit supports running a worker continuously on a VPS.
+- Day 19 writes a Markdown snapshot of current repository metadata to its ignored `reports/` directory. It does not run periodically and does not require a VPS.
+- Generated model answers, available Groq models, limits, and cost estimates may change. Check [Groq's current documentation](https://console.groq.com/docs) before relying on model names or pricing.
 
-No VPS, Groq request, API key, or external MCP service is required for this local experiment.
-
-## Day 17 First MCP Tool
-
-Day 17 moves from tool discovery to tool execution. `server.py` registers the typed `get_github_repo(owner, repo)` tool with `@mcp.tool()`. Its annotations and docstring become the MCP input schema and description.
-
-The execution path is:
-
-```text
-user request
-    ↓
-BublikMcpAgent + model tools
-    ↓
-get_github_repo(owner, repo)
-    ↓
-MCP call over stdio
-    ↓
-GitHub REST API
-    ↓
-tool result returned to the model
-    ↓
-final grounded answer
-```
-
-The tool returns normalized repository data: name, owner, description, stars, forks, open issue count, default branch, and URL.
-
-Install and verify:
-
-```bash
-python3 -m pip install -r day-17-first-mcp-tool/requirements.txt
-python3 day-17-first-mcp-tool/test_day17.py
-```
-
-Run the deterministic end-to-end demonstration without a Groq key:
-
-```bash
-python3 day-17-first-mcp-tool/demo.py
-```
-
-Run the interactive application with real Groq tool selection:
-
-```bash
-python3 day-17-first-mcp-tool/main.py
-```
-
-The MCP server and client remain local over `stdio`; only the GitHub REST request leaves the process. No VPS, open port, domain, Nginx, or SSL certificate is required.
-
-## Experiment Limitations
-
-- Model availability and TPM/TPD limits depend on the current Groq plan.
-- Generated answers may vary between runs even with identical parameters.
-- Local token estimates can differ slightly from actual API usage.
-- Semantic invariant classification depends on the guard model and is handled fail-closed when it cannot be verified.
-- Day 16 validates local MCP connectivity and tool discovery only; Day 17 adds tool execution through a focused standalone agent loop.
-- The Day 17 live demo requires internet access. Unauthenticated GitHub requests are subject to public API rate limits; `GITHUB_TOKEN` is optional.
-
-## Project Goal
-
-This repository demonstrates a continuous evolution of an LLM application rather than a collection of isolated API snippets. Each new mechanism can be run, measured, compared with the previous approach, and tested independently.
-
-## Useful Links
+## Resources
 
 - [Groq Console](https://console.groq.com/)
-- [Groq Documentation](https://console.groq.com/docs)
-- [GPT-OSS Documentation](https://console.groq.com/docs/model/openai/gpt-oss-20b)
-- [tiktoken](https://github.com/openai/tiktoken)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
-
-## Day 18 — Scheduler and background jobs
-
-Day 18 adds a durable GitHub observation schedule and an independent worker. Its MCP tool returns changes across saved samples; see the [Day 18 instructions](day-18-scheduled-mcp/README.md) for VPS setup.
+- [GitHub REST API documentation](https://docs.github.com/en/rest)
