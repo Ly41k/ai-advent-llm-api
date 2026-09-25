@@ -1,0 +1,4 @@
+mcp>=1.28,<2
+httpx>=0.28,<1
+groq
+python-dotenv

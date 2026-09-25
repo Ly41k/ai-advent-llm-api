@@ -4,7 +4,7 @@
 
 A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, and separate MCP experiments. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–19**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–20**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
 
 ## Learning path
 
@@ -29,6 +29,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 | [17](day-17-first-mcp-tool/README.md) | First MCP tool | GitHub tool invoked through the model's tool-calling loop |
 | [18](day-18-scheduled-mcp/README.md) | Scheduled jobs | SQLite schedules, independent worker, stored snapshots, aggregate result |
 | [19](day-19-mcp-composition/README.md) | Tool composition | Three MCP calls: fetch → summarize → save Markdown |
+| [20](day-20-mcp-orchestration/README.md) | MCP orchestration | Model-selected, verified five-call flow across three servers |
 
 ## How the pieces fit
 
@@ -40,12 +41,14 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 - **Day 18:** an MCP tool stores a periodic GitHub job in SQLite. A separate worker runs due jobs and saves snapshots; another tool returns an aggregate of those snapshots. The worker needs a separate long-running process for unattended operation.
 - **Day 19:** `BublikPipelineAgent` deterministically invokes `search_repository`, `summarize_repository`, and `save_report` in order. It passes each complete MCP result to the next call and stops on error. The summary itself does not call an LLM.
 
-The MCP servers in Days 16–19 communicate with local clients over **stdio**. Days 17–19 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation; the Day 19 pipeline runs on demand.
+- **Day 20:** three stdio MCP servers expose five namespaced tools. The model selects calls, while the agent checks arguments and ordering, reads the saved report back, and verifies it.
+
+The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation; the Day 19 pipeline runs on demand.
 
 ## Requirements and setup
 
 - Python **3.13** is the project's target version.
-- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, and offline tests do not need one.
+- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, and Day 20 offline checks do not need one.
 - Internet access is needed when calling Groq or fetching live public GitHub data. `GITHUB_TOKEN` is optional for public repositories and can help with GitHub API rate limits.
 
 Run from the repository root:
@@ -66,7 +69,7 @@ The root `requirements.txt` contains the Groq, dotenv, and tokenizer dependencie
 python -m pip install -r day-19-mcp-composition/requirements.txt
 ```
 
-Replace `day-19-mcp-composition` with `day-16-mcp-connection`, `day-17-first-mcp-tool`, or `day-18-scheduled-mcp` for those lessons.
+Replace `day-19-mcp-composition` with `day-20-mcp-orchestration`, `day-16-mcp-connection`, `day-17-first-mcp-tool`, or `day-18-scheduled-mcp` for those lessons.
 
 For Groq programs, copy `.env.example` to a root-level `.env` and set `GROQ_API_KEY` there. The `.env` file is ignored by Git. Keep credentials out of commits and recordings.
 
@@ -88,6 +91,7 @@ The later lessons have different entry points:
 | 17 | `python day-17-first-mcp-tool/main.py` | Interactive Groq-driven MCP tool selection |
 | 18 | `python day-18-scheduled-mcp/worker.py` and `python day-18-scheduled-mcp/main.py` in separate terminals | Periodic worker plus interactive Groq agent |
 | 19 | `python day-19-mcp-composition/main.py Ly41k ai-advent-llm-api` | One command executes three MCP tools and writes a report |
+| 20 | `python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline` | Five calls across three MCP servers; no Groq key |
 
 For a **Day 18 check without Groq**, use `mcp_cli.py` to create a schedule, run due work once, and read its stored summary:
 
@@ -114,14 +118,16 @@ python day-16-mcp-connection/test_mcp_connection.py
 python day-17-first-mcp-tool/test_day17.py -v
 python day-18-scheduled-mcp/test_day18.py -v
 python day-19-mcp-composition/test_day19.py -v
+python day-20-mcp-orchestration/test_day20.py -v
 ```
 
-Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check.
+Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run.
 
 ## Data and limitations
 
 - SQLite data from earlier lessons and Day 18 schedules/snapshots remain local. Day 18's default database is `day-18-scheduled-mcp/schedule.db`; `BUBLIK_DB_PATH` can point both the worker and client to a shared alternative.
 - Day 18 prints completed worker results to stdout or the service journal. It does not automatically send a chat message. Its sample systemd unit supports running a worker continuously on a VPS.
+- Day 20 saves and rereads a report in its ignored `reports/` directory. It runs on demand; no VPS is needed.
 - Day 19 writes a Markdown snapshot of current repository metadata to its ignored `reports/` directory. It does not run periodically and does not require a VPS.
 - Generated model answers, available Groq models, limits, and cost estimates may change. Check [Groq's current documentation](https://console.groq.com/docs) before relying on model names or pricing.
 
