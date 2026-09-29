@@ -2,9 +2,9 @@
 
 # AI Advent — from an LLM API request to an agent with MCP tools
 
-A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, and separate MCP experiments. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
+A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, MCP experiments, a local knowledge index, and the first RAG workflow. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–21**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–22**. Examples from different days demonstrate successive designs; later lessons reuse selected components instead of automatically merging every previous agent version into one application.
 
 ## Learning path
 
@@ -31,6 +31,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 | [19](day-19-mcp-composition/README.md) | Tool composition | Three MCP calls: fetch → summarize → save Markdown |
 | [20](day-20-mcp-orchestration/README.md) | MCP orchestration | Model-selected, verified five-call flow across three servers |
 | [21](day-21-document-indexing/README.md) | Document indexing | Shared SQLite knowledge base, two chunking strategies, local embeddings, retrieval comparison |
+| [22](day-22-first-rag/README.md) | First RAG request | NO RAG vs RAG, retrieved context, source provenance, and a 10-question evaluation set |
 
 ## How the pieces fit
 
@@ -41,17 +42,18 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 - **Day 17:** register `get_github_repo(owner, repo)`; the focused `BublikMcpAgent` exposes its schema to the Groq model, executes the model-selected MCP call, and returns the result to the model.
 - **Day 18:** an MCP tool stores a periodic GitHub job in SQLite. A separate worker runs due jobs and saves snapshots; another tool returns an aggregate of those snapshots. The worker needs a separate long-running process for unattended operation.
 - **Day 19:** `BublikPipelineAgent` deterministically invokes `search_repository`, `summarize_repository`, and `save_report` in order. It passes each complete MCP result to the next call and stops on error. The summary itself does not call an LLM.
-
 - **Day 20:** three stdio MCP servers expose five namespaced tools. The model selects calls, while the agent checks arguments and ordering, reads the saved report back, and verifies it.
 - **Day 21:** index README and code with a local embedding model into SQLite; compare fixed and structural chunks on a shared question set. Optional search, reranking, and local answers build on the same knowledge base.
+- **Day 22:** reuse the Day 21 index for the first full RAG request. The same generation model answers once without retrieval and once with retrieved chunks, while source provenance and a 10-question control set make the comparison reproducible.
 
-The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation; the Day 19 pipeline runs on demand.
+The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation. Days 21–22 run locally with Ollama by default: `bge-m3` provides embeddings and `llama3.2` generates answers.
 
 ## Requirements and setup
 
 - Python **3.13** is the project's target version.
-- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, and Day 20 offline checks do not need one.
+- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, Day 20 offline checks, and the local Day 21–22 Ollama flow do not need one.
 - Internet access is needed when calling Groq or fetching live public GitHub data. `GITHUB_TOKEN` is optional for public repositories and can help with GitHub API rate limits.
+- Days 21–22 use a local Ollama service by default. Pull `bge-m3` for embeddings and `llama3.2` for local answer generation before the live retrieval/RAG demos.
 
 Run from the repository root:
 
@@ -72,6 +74,15 @@ python -m pip install -r day-19-mcp-composition/requirements.txt
 ```
 
 Replace `day-19-mcp-composition` with `day-20-mcp-orchestration`, `day-16-mcp-connection`, `day-17-first-mcp-tool`, or `day-18-scheduled-mcp` for those lessons.
+
+For the local retrieval/RAG lessons, install and start Ollama, then pull the default models:
+
+```bash
+ollama pull bge-m3
+ollama pull llama3.2
+```
+
+If the Ollama desktop app is already serving locally, a separate `ollama serve` process is not required.
 
 For Groq programs, copy `.env.example` to a root-level `.env` and set `GROQ_API_KEY` there. The `.env` file is ignored by Git. Keep credentials out of commits and recordings.
 
@@ -95,6 +106,8 @@ The later lessons have different entry points:
 | 19 | `python day-19-mcp-composition/main.py Ly41k ai-advent-llm-api` | One command executes three MCP tools and writes a report |
 | 20 | `python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline` | Five calls across three MCP servers; no Groq key |
 | 21 | `python day-21-document-indexing/main.py corpus` then `build` | Local Ollama embeddings, two indexes in SQLite, reusable knowledge base |
+| 22 | `python day-22-first-rag/main.py compare "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?"` | Same question answered without RAG and with retrieved Day 21 context |
+| 22 | `python day-22-first-rag/main.py evaluate` | Run all 10 control questions and write `evaluation_results.json` |
 
 For a **Day 18 check without Groq**, use `mcp_cli.py` to create a schedule, run due work once, and read its stored summary:
 
@@ -105,6 +118,17 @@ python day-18-scheduled-mcp/mcp_cli.py summary Ly41k ai-advent-llm-api
 ```
 
 For Day 19, inspect `day-19-mcp-composition/reports/Ly41k-ai-advent-llm-api-summary.md` after the run. Set `BUBLIK_REPORT_DIR` if you need a different output directory. The [Day 18 verification guide](day-18-scheduled-mcp/VERIFY.ru.md) covers worker and VPS checks; [Day 19 instructions](day-19-mcp-composition/README.md) explain the automatic pipeline.
+
+For Day 22, build the Day 21 knowledge base once before a live RAG run if `day-21-document-indexing/knowledge.db` does not exist:
+
+```bash
+python day-21-document-indexing/main.py build
+python day-21-document-indexing/main.py verify
+python day-22-first-rag/main.py questions
+python day-22-first-rag/main.py compare \
+  "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?"
+python day-22-first-rag/main.py evaluate
+```
 
 ## Tests
 
@@ -123,20 +147,24 @@ python day-18-scheduled-mcp/test_day18.py -v
 python day-19-mcp-composition/test_day19.py -v
 python day-20-mcp-orchestration/test_day20.py -v
 python day-21-document-indexing/test_day21.py -v
+python day-22-first-rag/test_day22.py -v
 ```
 
-Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run.
+Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run. Day 22 offline tests verify that NO RAG does not call retrieval, RAG follows `question → search → context → LLM`, both A/B paths use the same question, and the control set contains exactly 10 complete records.
 
 ## Data and limitations
 
 - SQLite data from earlier lessons and Day 18 schedules/snapshots remain local. Day 18's default database is `day-18-scheduled-mcp/schedule.db`; `BUBLIK_DB_PATH` can point both the worker and client to a shared alternative.
 - Day 18 prints completed worker results to stdout or the service journal. It does not automatically send a chat message. Its sample systemd unit supports running a worker continuously on a VPS.
-- Day 20 saves and rereads a report in its ignored `reports/` directory. It runs on demand; no VPS is needed.
 - Day 19 writes a Markdown snapshot of current repository metadata to its ignored `reports/` directory. It does not run periodically and does not require a VPS.
-- Generated model answers, available Groq models, limits, and cost estimates may change. Check [Groq's current documentation](https://console.groq.com/docs) before relying on model names or pricing.
+- Day 20 saves and rereads a report in its ignored `reports/` directory. It runs on demand; no VPS is needed.
+- Day 21 stores the local knowledge index in the ignored `day-21-document-indexing/knowledge.db`. The index records its embedding model and corpus revision; rebuild it after changing the source corpus or embedding model when strict verification is required.
+- Day 22 reuses the Day 21 index instead of creating a second knowledge base. `evaluate` writes the ignored `day-22-first-rag/evaluation_results.json` with both answers, retrieved sources, expected-term coverage, and source-hit diagnostics. These diagnostics help comparison but do not replace human review of answer correctness.
+- Generated model answers, available Groq/Ollama models, limits, and cost estimates may change. Check the relevant provider documentation before relying on model names or pricing.
 
 ## Resources
 
 - [Groq Console](https://console.groq.com/)
+- [Ollama](https://ollama.com/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 - [GitHub REST API documentation](https://docs.github.com/en/rest)
