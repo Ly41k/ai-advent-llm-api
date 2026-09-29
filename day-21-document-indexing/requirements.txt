@@ -1,0 +1,2 @@
+# Runtime uses the Python standard library and local Ollama HTTP API.
+# Optional cross-encoder: pip install sentence-transformers

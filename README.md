@@ -4,7 +4,7 @@
 
 A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, and separate MCP experiments. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–20**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–21**. Examples from different days demonstrate successive designs; Day 19 does not replace or automatically merge the earlier agents into one application.
 
 ## Learning path
 
@@ -30,6 +30,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 | [18](day-18-scheduled-mcp/README.md) | Scheduled jobs | SQLite schedules, independent worker, stored snapshots, aggregate result |
 | [19](day-19-mcp-composition/README.md) | Tool composition | Three MCP calls: fetch → summarize → save Markdown |
 | [20](day-20-mcp-orchestration/README.md) | MCP orchestration | Model-selected, verified five-call flow across three servers |
+| [21](day-21-document-indexing/README.md) | Document indexing | Shared SQLite knowledge base, two chunking strategies, local embeddings, retrieval comparison |
 
 ## How the pieces fit
 
@@ -42,6 +43,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 - **Day 19:** `BublikPipelineAgent` deterministically invokes `search_repository`, `summarize_repository`, and `save_report` in order. It passes each complete MCP result to the next call and stops on error. The summary itself does not call an LLM.
 
 - **Day 20:** three stdio MCP servers expose five namespaced tools. The model selects calls, while the agent checks arguments and ordering, reads the saved report back, and verifies it.
+- **Day 21:** index README and code with a local embedding model into SQLite; compare fixed and structural chunks on a shared question set. Optional search, reranking, and local answers build on the same knowledge base.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation; the Day 19 pipeline runs on demand.
 
@@ -92,6 +94,7 @@ The later lessons have different entry points:
 | 18 | `python day-18-scheduled-mcp/worker.py` and `python day-18-scheduled-mcp/main.py` in separate terminals | Periodic worker plus interactive Groq agent |
 | 19 | `python day-19-mcp-composition/main.py Ly41k ai-advent-llm-api` | One command executes three MCP tools and writes a report |
 | 20 | `python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline` | Five calls across three MCP servers; no Groq key |
+| 21 | `python day-21-document-indexing/main.py corpus` then `build` | Local Ollama embeddings, two indexes in SQLite, reusable knowledge base |
 
 For a **Day 18 check without Groq**, use `mcp_cli.py` to create a schedule, run due work once, and read its stored summary:
 
@@ -119,6 +122,7 @@ python day-17-first-mcp-tool/test_day17.py -v
 python day-18-scheduled-mcp/test_day18.py -v
 python day-19-mcp-composition/test_day19.py -v
 python day-20-mcp-orchestration/test_day20.py -v
+python day-21-document-indexing/test_day21.py -v
 ```
 
 Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run.

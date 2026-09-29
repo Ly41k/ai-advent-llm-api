@@ -1,0 +1,4 @@
+knowledge.db
+knowledge.db-*
+*.jsonl
+__pycache__/

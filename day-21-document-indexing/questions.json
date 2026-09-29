@@ -1,0 +1,17 @@
+[
+  {"question": "How are dialogues isolated and restored after restarting Bublik?", "source": "day-07-context-persistence/README.md", "expected_terms": ["dialogue", "SQLite"]},
+  {"question": "Which context compression strategy stores a summary and recent messages?", "source": "day-09-context-compression/README.md", "expected_terms": ["summary"]},
+  {"question": "Which three context strategies are compared: sliding window, sticky facts and branching?", "source": "day-10-context-strategies/README.md", "expected_terms": ["Sliding Window", "Sticky Facts", "Branching"]},
+  {"question": "How are short-term, working and long-term memory separated in the agent?", "source": "day-11-memory-layers/README.md", "expected_terms": ["memory"]},
+  {"question": "How does the agent keep different user profiles separate?", "source": "day-12-personalization/README.md", "expected_terms": ["profile"]},
+  {"question": "What stages does the persistent task state machine use?", "source": "day-13-task-state-machine/README.md", "expected_terms": ["planning", "execution", "validation"]},
+  {"question": "Where are versioned invariants checked before and after the model response?", "source": "day-14-invariants/README.md", "expected_terms": ["preflight", "postflight"]},
+  {"question": "Why does execution require approved plan and done require successful validation?", "source": "day-15-controlled-transitions/README.md", "expected_terms": ["plan", "validation"]},
+  {"question": "How does the MCP client discover ping and add over stdio?", "source": "day-16-mcp-connection/README.md", "expected_terms": ["list_tools"]},
+  {"question": "How does Bublik call the first GitHub MCP tool?", "source": "day-17-first-mcp-tool/README.md", "expected_terms": ["get_github_repo"]},
+  {"question": "Which process periodically collects GitHub snapshots into SQLite?", "source": "day-18-scheduled-mcp/README.md", "expected_terms": ["worker"]},
+  {"question": "Which three tools form the repository fetch summarize save pipeline?", "source": "day-19-mcp-composition/README.md", "expected_terms": ["search_repository", "summarize_repository", "save_report"]},
+  {"question": "How are tool calls routed across three MCP servers and the report verified?", "source": "day-20-mcp-orchestration/README.md", "expected_terms": ["verify_report"]},
+  {"question": "Как агент хранит несколько диалогов после перезапуска?", "source": "day-07-context-persistence/README.ru.md", "expected_terms": ["диалог"]},
+  {"question": "Как проверить периодический сбор сводки на VPS?", "source": "day-18-scheduled-mcp/README.ru.md", "expected_terms": ["worker"]}
+]
