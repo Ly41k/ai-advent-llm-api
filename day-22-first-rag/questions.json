@@ -1,0 +1,110 @@
+[
+  {
+    "question": "How are multiple Bublik dialogues isolated and restored after restart?",
+    "expectation": "The answer should mention separate dialogue identity/state and persistence in SQLite.",
+    "expected_terms": [
+      "dialogue",
+      "SQLite"
+    ],
+    "expected_sources": [
+      "day-07-context-persistence/README.md"
+    ]
+  },
+  {
+    "question": "What stages does Bublik's persistent task state machine use?",
+    "expectation": "The answer should name the planning, execution, validation and done stages.",
+    "expected_terms": [
+      "planning",
+      "execution",
+      "validation",
+      "done"
+    ],
+    "expected_sources": [
+      "day-13-task-state-machine/README.md"
+    ]
+  },
+  {
+    "question": "Where are versioned invariants checked around the model response?",
+    "expectation": "The answer should identify preflight before the model call and postflight after it.",
+    "expected_terms": [
+      "preflight",
+      "postflight"
+    ],
+    "expected_sources": [
+      "day-14-invariants/README.md"
+    ]
+  },
+  {
+    "question": "Why can execution start only after plan approval, and why can done happen only after successful validation?",
+    "expectation": "The answer should describe guarded transitions: approved plan before execution and PASS validation before done.",
+    "expected_terms": [
+      "plan",
+      "validation"
+    ],
+    "expected_sources": [
+      "day-15-controlled-transitions/README.md"
+    ]
+  },
+  {
+    "question": "How does the Day 16 MCP client discover the ping and add tools over stdio?",
+    "expectation": "The answer should mention MCP initialization and session.list_tools().",
+    "expected_terms": [
+      "list_tools"
+    ],
+    "expected_sources": [
+      "day-16-mcp-connection/README.md"
+    ]
+  },
+  {
+    "question": "What is the name of the first GitHub MCP tool Bublik calls on Day 17?",
+    "expectation": "The answer should name get_github_repo.",
+    "expected_terms": [
+      "get_github_repo"
+    ],
+    "expected_sources": [
+      "day-17-first-mcp-tool/README.md"
+    ]
+  },
+  {
+    "question": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+    "expectation": "The answer should identify the independent worker/worker.py process.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md"
+    ]
+  },
+  {
+    "question": "Which three MCP tools form the Day 19 repository fetch, summarize and save pipeline?",
+    "expectation": "The answer should name search_repository, summarize_repository and save_report.",
+    "expected_terms": [
+      "search_repository",
+      "summarize_repository",
+      "save_report"
+    ],
+    "expected_sources": [
+      "day-19-mcp-composition/README.md"
+    ]
+  },
+  {
+    "question": "How is the Day 20 report flow routed across MCP servers and how is the saved report verified?",
+    "expectation": "The answer should describe routing across GitHub, analysis and storage, ending with analysis__verify_report.",
+    "expected_terms": [
+      "verify_report"
+    ],
+    "expected_sources": [
+      "day-20-mcp-orchestration/README.md"
+    ]
+  },
+  {
+    "question": "Как на Day 18 проверить, что периодический сбор GitHub-сводки действительно работает на VPS?",
+    "expectation": "Ответ должен ссылаться на worker/systemd и проверку периодических запусков или сохранённых сводок.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.ru.md"
+    ]
+  }
+]
