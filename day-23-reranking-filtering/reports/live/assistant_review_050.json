@@ -1,0 +1,300 @@
+{
+  "reviewer": "Assistant inspection of answers, expectations and supplied excerpts; not independent human labels",
+  "scope": "All 48 answers in evaluate_fixed_qwen_050_results.json",
+  "rubric": {
+    "adequate": "Answers the core expectation without an identified material false fact; does not certify every citation or completeness",
+    "partial": "Core information is incomplete, internally inconsistent or accompanied by an unsupported fact",
+    "incorrect": "Misses the requested mechanism or invents material operational instructions"
+  },
+  "original_human_review_fields": "Preserved unfilled",
+  "reviews": [
+    {
+      "question_id": "base-01",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "SQLite, selected topic and independent restoration are explained; source [2] contains these facts."
+    },
+    {
+      "question_id": "base-01",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "SQLite, selected topic and independent restoration are explained; source [2] contains these facts."
+    },
+    {
+      "question_id": "base-01",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "SQLite, selected topic and independent restoration are explained; source [2] contains these facts."
+    },
+    {
+      "question_id": "base-01",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "SQLite, selected topic and independent restoration are explained; source [2] contains these facts."
+    },
+    {
+      "question_id": "base-03",
+      "mode": "baseline",
+      "answer_adequacy": "partial",
+      "note": "Baseline omits preflight. Filter/rewrite mention preflight and postflight. Combined names both but announces three layers and lists two."
+    },
+    {
+      "question_id": "base-03",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "Baseline omits preflight. Filter/rewrite mention preflight and postflight. Combined names both but announces three layers and lists two."
+    },
+    {
+      "question_id": "base-03",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "Baseline omits preflight. Filter/rewrite mention preflight and postflight. Combined names both but announces three layers and lists two."
+    },
+    {
+      "question_id": "base-03",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "partial",
+      "note": "Baseline omits preflight. Filter/rewrite mention preflight and postflight. Combined names both but announces three layers and lists two."
+    },
+    {
+      "question_id": "base-04",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "Explicit plan approval and PASS before done are explained."
+    },
+    {
+      "question_id": "base-04",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "Explicit plan approval and PASS before done are explained."
+    },
+    {
+      "question_id": "base-04",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "Explicit plan approval and PASS before done are explained."
+    },
+    {
+      "question_id": "base-04",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "Explicit plan approval and PASS before done are explained."
+    },
+    {
+      "question_id": "base-06",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "Exact get_github_repo name is supported by Day 17 excerpts."
+    },
+    {
+      "question_id": "base-06",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "Exact get_github_repo name is supported by Day 17 excerpts."
+    },
+    {
+      "question_id": "base-06",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "Exact get_github_repo name is supported by Day 17 excerpts."
+    },
+    {
+      "question_id": "base-06",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "Exact get_github_repo name is supported by Day 17 excerpts."
+    },
+    {
+      "question_id": "base-08",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "All three exact Day 19 tool names are present and supported."
+    },
+    {
+      "question_id": "base-08",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "All three exact Day 19 tool names are present and supported."
+    },
+    {
+      "question_id": "base-08",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "All three exact Day 19 tool names are present and supported."
+    },
+    {
+      "question_id": "base-08",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "All three exact Day 19 tool names are present and supported."
+    },
+    {
+      "question_id": "base-10",
+      "mode": "baseline",
+      "answer_adequacy": "incorrect",
+      "note": "Contains valid worker/log ideas, but invents main.py schedule_github_summary syntax; rewritten modes invent Python 3.10 and your-repo URL. These commands are not in supplied context."
+    },
+    {
+      "question_id": "base-10",
+      "mode": "filter",
+      "answer_adequacy": "incorrect",
+      "note": "Contains valid worker/log ideas, but invents main.py schedule_github_summary syntax; rewritten modes invent Python 3.10 and your-repo URL. These commands are not in supplied context."
+    },
+    {
+      "question_id": "base-10",
+      "mode": "rewrite",
+      "answer_adequacy": "incorrect",
+      "note": "Contains valid worker/log ideas, but invents main.py schedule_github_summary syntax; rewritten modes invent Python 3.10 and your-repo URL. These commands are not in supplied context."
+    },
+    {
+      "question_id": "base-10",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "incorrect",
+      "note": "Contains valid worker/log ideas, but invents main.py schedule_github_summary syntax; rewritten modes invent Python 3.10 and your-repo URL. These commands are not in supplied context."
+    },
+    {
+      "question_id": "rewrite-en-01",
+      "mode": "baseline",
+      "answer_adequacy": "partial",
+      "note": "Correct independent worker, but unconditionally claims a 60-minute interval from a usage example. Actual interval is configurable."
+    },
+    {
+      "question_id": "rewrite-en-01",
+      "mode": "filter",
+      "answer_adequacy": "partial",
+      "note": "Correct independent worker, but unconditionally claims a 60-minute interval from a usage example. Actual interval is configurable."
+    },
+    {
+      "question_id": "rewrite-en-01",
+      "mode": "rewrite",
+      "answer_adequacy": "partial",
+      "note": "Correct independent worker, but unconditionally claims a 60-minute interval from a usage example. Actual interval is configurable."
+    },
+    {
+      "question_id": "rewrite-en-01",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "partial",
+      "note": "Correct independent worker, but unconditionally claims a 60-minute interval from a usage example. Actual interval is configurable."
+    },
+    {
+      "question_id": "rewrite-ru-02",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "Baseline/filter explain SQLite and isolation. Rewrite modes explain independent context restoration but omit SQLite."
+    },
+    {
+      "question_id": "rewrite-ru-02",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "Baseline/filter explain SQLite and isolation. Rewrite modes explain independent context restoration but omit SQLite."
+    },
+    {
+      "question_id": "rewrite-ru-02",
+      "mode": "rewrite",
+      "answer_adequacy": "partial",
+      "note": "Baseline/filter explain SQLite and isolation. Rewrite modes explain independent context restoration but omit SQLite."
+    },
+    {
+      "question_id": "rewrite-ru-02",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "partial",
+      "note": "Baseline/filter explain SQLite and isolation. Rewrite modes explain independent context restoration but omit SQLite."
+    },
+    {
+      "question_id": "rewrite-ru-03",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "All four stages are named correctly. Rewritten modes also cite [4] for a route diagram that is supported by [1]; citation [4] is imprecise."
+    },
+    {
+      "question_id": "rewrite-ru-03",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "All four stages are named correctly. Rewritten modes also cite [4] for a route diagram that is supported by [1]; citation [4] is imprecise."
+    },
+    {
+      "question_id": "rewrite-ru-03",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "All four stages are named correctly. Rewritten modes also cite [4] for a route diagram that is supported by [1]; citation [4] is imprecise."
+    },
+    {
+      "question_id": "rewrite-ru-03",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "All four stages are named correctly. Rewritten modes also cite [4] for a route diagram that is supported by [1]; citation [4] is imprecise."
+    },
+    {
+      "question_id": "rewrite-ru-05",
+      "mode": "baseline",
+      "answer_adequacy": "incorrect",
+      "note": "Does not explain storage__read_report followed by analysis__verify_report despite these facts in context; baseline/filter source-line attribution is also wrong."
+    },
+    {
+      "question_id": "rewrite-ru-05",
+      "mode": "filter",
+      "answer_adequacy": "incorrect",
+      "note": "Does not explain storage__read_report followed by analysis__verify_report despite these facts in context; baseline/filter source-line attribution is also wrong."
+    },
+    {
+      "question_id": "rewrite-ru-05",
+      "mode": "rewrite",
+      "answer_adequacy": "incorrect",
+      "note": "Does not explain storage__read_report followed by analysis__verify_report despite these facts in context; baseline/filter source-line attribution is also wrong."
+    },
+    {
+      "question_id": "rewrite-ru-05",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "incorrect",
+      "note": "Does not explain storage__read_report followed by analysis__verify_report despite these facts in context; baseline/filter source-line attribution is also wrong."
+    },
+    {
+      "question_id": "negative-03",
+      "mode": "baseline",
+      "answer_adequacy": "adequate",
+      "note": "Correctly refuses to invent revenue; filter modes retain one irrelevant chunk and still refuse."
+    },
+    {
+      "question_id": "negative-03",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "Correctly refuses to invent revenue; filter modes retain one irrelevant chunk and still refuse."
+    },
+    {
+      "question_id": "negative-03",
+      "mode": "rewrite",
+      "answer_adequacy": "adequate",
+      "note": "Correctly refuses to invent revenue; filter modes retain one irrelevant chunk and still refuse."
+    },
+    {
+      "question_id": "negative-03",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "Correctly refuses to invent revenue; filter modes retain one irrelevant chunk and still refuse."
+    },
+    {
+      "question_id": "negative-04",
+      "mode": "baseline",
+      "answer_adequacy": "partial",
+      "note": "All modes refuse medical advice. Baseline/rewrite add a wrong MCP expansion; deterministic filter refusals avoid it."
+    },
+    {
+      "question_id": "negative-04",
+      "mode": "filter",
+      "answer_adequacy": "adequate",
+      "note": "All modes refuse medical advice. Baseline/rewrite add a wrong MCP expansion; deterministic filter refusals avoid it."
+    },
+    {
+      "question_id": "negative-04",
+      "mode": "rewrite",
+      "answer_adequacy": "partial",
+      "note": "All modes refuse medical advice. Baseline/rewrite add a wrong MCP expansion; deterministic filter refusals avoid it."
+    },
+    {
+      "question_id": "negative-04",
+      "mode": "rewrite_filter",
+      "answer_adequacy": "adequate",
+      "note": "All modes refuse medical advice. Baseline/rewrite add a wrong MCP expansion; deterministic filter refusals avoid it."
+    }
+  ]
+}

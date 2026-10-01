@@ -1,0 +1,261 @@
+[
+  {
+    "question": "How are multiple Bublik dialogues isolated and restored after restart?",
+    "expectation": "The answer should mention separate dialogue identity/state and persistence in SQLite.",
+    "expected_terms": [
+      "dialogue",
+      "SQLite"
+    ],
+    "expected_sources": [
+      "day-07-context-persistence/README.md"
+    ],
+    "id": "base-01",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "question": "What stages does Bublik's persistent task state machine use?",
+    "expectation": "The answer should name the planning, execution, validation and done stages.",
+    "expected_terms": [
+      "planning",
+      "execution",
+      "validation",
+      "done"
+    ],
+    "expected_sources": [
+      "day-13-task-state-machine/README.md"
+    ],
+    "id": "base-02",
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "question": "Where are versioned invariants checked around the model response?",
+    "expectation": "The answer should identify preflight before the model call and postflight after it.",
+    "expected_terms": [
+      "preflight",
+      "postflight"
+    ],
+    "expected_sources": [
+      "day-14-invariants/README.md"
+    ],
+    "id": "base-03",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "question": "Why can execution start only after plan approval, and why can done happen only after successful validation?",
+    "expectation": "The answer should describe guarded transitions: approved plan before execution and PASS validation before done.",
+    "expected_terms": [
+      "plan",
+      "validation"
+    ],
+    "expected_sources": [
+      "day-15-controlled-transitions/README.md"
+    ],
+    "id": "base-04",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "question": "How does the Day 16 MCP client discover the ping and add tools over stdio?",
+    "expectation": "The answer should mention MCP initialization and session.list_tools().",
+    "expected_terms": [
+      "list_tools"
+    ],
+    "expected_sources": [
+      "day-16-mcp-connection/README.md"
+    ],
+    "id": "base-05",
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "question": "What is the name of the first GitHub MCP tool Bublik calls on Day 17?",
+    "expectation": "The answer should name get_github_repo.",
+    "expected_terms": [
+      "get_github_repo"
+    ],
+    "expected_sources": [
+      "day-17-first-mcp-tool/README.md"
+    ],
+    "id": "base-06",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "question": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+    "expectation": "The answer should identify the independent worker/worker.py process.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md"
+    ],
+    "id": "base-07",
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "question": "Which three MCP tools form the Day 19 repository fetch, summarize and save pipeline?",
+    "expectation": "The answer should name search_repository, summarize_repository and save_report.",
+    "expected_terms": [
+      "search_repository",
+      "summarize_repository",
+      "save_report"
+    ],
+    "expected_sources": [
+      "day-19-mcp-composition/README.md"
+    ],
+    "id": "base-08",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "question": "How is the Day 20 report flow routed across MCP servers and how is the saved report verified?",
+    "expectation": "The answer should describe routing across GitHub, analysis and storage, ending with analysis__verify_report.",
+    "expected_terms": [
+      "verify_report"
+    ],
+    "expected_sources": [
+      "day-20-mcp-orchestration/README.md"
+    ],
+    "id": "base-09",
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "question": "Как на Day 18 проверить, что периодический сбор GitHub-сводки действительно работает на VPS?",
+    "expectation": "Ответ должен ссылаться на worker/systemd и проверку периодических запусков или сохранённых сводок.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.ru.md"
+    ],
+    "id": "base-10",
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "id": "rewrite-en-01",
+    "question": "The background jobs thing on day 18: what runs while nobody is chatting?",
+    "expectation": "Independent worker periodically processes jobs.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md",
+      "day-18-scheduled-mcp/worker.py"
+    ],
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "id": "rewrite-ru-01",
+    "question": "На 18 дне кто выполняет фоновые джобы по расписанию?",
+    "expectation": "Независимый worker выполняет периодические задания.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.ru.md",
+      "day-18-scheduled-mcp/worker.py"
+    ],
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "id": "rewrite-ru-02",
+    "question": "На 7 дне как разговоры не смешиваются после перезапуска?",
+    "expectation": "Отдельные диалоги сохраняются в SQLite.",
+    "expected_terms": [
+      "SQLite"
+    ],
+    "expected_sources": [
+      "day-07-context-persistence/README.ru.md"
+    ],
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "id": "rewrite-ru-03",
+    "question": "Какие стадии проходит задача Бублика на 13 дне?",
+    "expectation": "Planning, execution, validation, done.",
+    "expected_terms": [
+      "planning",
+      "execution",
+      "validation",
+      "done"
+    ],
+    "expected_sources": [
+      "day-13-task-state-machine/README.ru.md"
+    ],
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "id": "rewrite-ru-04",
+    "question": "Как на 16 дне клиент узнаёт доступные инструменты МСП?",
+    "expectation": "Инициализация MCP и session.list_tools().",
+    "expected_terms": [
+      "list_tools"
+    ],
+    "expected_sources": [
+      "day-16-mcp-connection/README.ru.md",
+      "day-16-mcp-connection/client.py"
+    ],
+    "answerable": true,
+    "split": "calibration"
+  },
+  {
+    "id": "rewrite-ru-05",
+    "question": "На 20 дне как сохранённый отчёт проверяется через инструменты?",
+    "expectation": "Storage читает отчёт, analysis__verify_report проверяет.",
+    "expected_terms": [
+      "verify_report"
+    ],
+    "expected_sources": [
+      "day-20-mcp-orchestration/README.ru.md",
+      "day-20-mcp-orchestration/agent.py"
+    ],
+    "answerable": true,
+    "split": "evaluation"
+  },
+  {
+    "id": "negative-01",
+    "question": "What is the recommended oven temperature for baking sourdough bread?",
+    "expectation": "The corpus does not answer this question; abstain.",
+    "expected_terms": [],
+    "expected_sources": [],
+    "answerable": false,
+    "split": "calibration"
+  },
+  {
+    "id": "negative-02",
+    "question": "Как рассчитывается орбита спутника Юпитера?",
+    "expectation": "The corpus does not answer this question; abstain.",
+    "expected_terms": [],
+    "expected_sources": [],
+    "answerable": false,
+    "split": "calibration"
+  },
+  {
+    "id": "negative-03",
+    "question": "What was the exact revenue of Bublik Solutions in 2025?",
+    "expectation": "The corpus does not answer this question; abstain.",
+    "expected_terms": [],
+    "expected_sources": [],
+    "answerable": false,
+    "split": "evaluation"
+  },
+  {
+    "id": "negative-04",
+    "question": "Какой препарат нужно принимать при мигрени?",
+    "expectation": "The corpus does not answer this question; abstain.",
+    "expected_terms": [],
+    "expected_sources": [],
+    "answerable": false,
+    "split": "evaluation"
+  }
+]

@@ -1,0 +1,2 @@
+# Standard library only. Reuses Day 21 Ollama HTTP client and SQLite.
+# Install Ollama separately and pull bge-m3 + llama3.2 for live generation.

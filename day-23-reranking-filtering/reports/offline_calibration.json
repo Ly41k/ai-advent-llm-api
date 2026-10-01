@@ -1,0 +1,278 @@
+{
+  "selected_threshold": 0.15,
+  "calibration_ids": [
+    "base-02",
+    "base-05",
+    "base-07",
+    "base-09",
+    "rewrite-ru-01",
+    "rewrite-ru-04",
+    "negative-01",
+    "negative-02"
+  ],
+  "settings": {
+    "candidate_k": 20,
+    "final_k": 5,
+    "min_similarity": 0.35,
+    "strategy": "structural",
+    "rewrite_method": "heuristic"
+  },
+  "embedding_model": "offline-lexical-tfidf-hash-1024-v1",
+  "index": {
+    "strategy": "structural",
+    "model": "offline-lexical-tfidf-hash-1024-v1",
+    "dimension": 1024,
+    "limit_tokens": 500,
+    "overlap_tokens": 75,
+    "revision": "7e5cc6d6a75306eac586f51e62a0d0592c423c40@f72e390917f3ee45",
+    "built_at": "2026-09-30 19:43:14"
+  },
+  "sweep": [
+    {
+      "threshold": 0.05,
+      "balanced_score": 0.3333335,
+      "eligible_for_selection": true,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.833333,
+          "mean_source_precision": 0.233333,
+          "mrr": 0.7,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.666667,
+          "mean_source_precision": 0.233333,
+          "mrr": 0.583333,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.1,
+      "balanced_score": 0.3333335,
+      "eligible_for_selection": true,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.833333,
+          "mean_source_precision": 0.233333,
+          "mrr": 0.7,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.666667,
+          "mean_source_precision": 0.233333,
+          "mrr": 0.583333,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.15,
+      "balanced_score": 0.3333335,
+      "eligible_for_selection": true,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.833333,
+          "mean_source_precision": 0.366667,
+          "mrr": 0.7,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 4.5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.666667,
+          "mean_source_precision": 0.25,
+          "mrr": 0.583333,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 4.625,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.2,
+      "balanced_score": 0.1666665,
+      "eligible_for_selection": false,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.666667,
+          "mean_source_precision": 0.455556,
+          "mrr": 0.666667,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0,
+          "mean_selected_count": 2.75,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.333333,
+          "mean_source_precision": 0.122222,
+          "mrr": 0.333333,
+          "negative_abstention_rate": 0,
+          "positive_empty_rate": 0.166667,
+          "mean_selected_count": 2.75,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.3,
+      "balanced_score": 0.3333335,
+      "eligible_for_selection": false,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.166667,
+          "mean_source_precision": 0.111111,
+          "mrr": 0.166667,
+          "negative_abstention_rate": 0.5,
+          "positive_empty_rate": 0.833333,
+          "mean_selected_count": 0.5,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0.166667,
+          "mean_source_precision": 0.083333,
+          "mrr": 0.166667,
+          "negative_abstention_rate": 0.5,
+          "positive_empty_rate": 0.833333,
+          "mean_selected_count": 0.375,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.4,
+      "balanced_score": 0.5,
+      "eligible_for_selection": false,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0,
+          "mean_source_precision": 0.0,
+          "mrr": 0.0,
+          "negative_abstention_rate": 1,
+          "positive_empty_rate": 1,
+          "mean_selected_count": 0,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0,
+          "mean_source_precision": 0.0,
+          "mrr": 0.0,
+          "negative_abstention_rate": 1,
+          "positive_empty_rate": 1,
+          "mean_selected_count": 0,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    },
+    {
+      "threshold": 0.5,
+      "balanced_score": 0.5,
+      "eligible_for_selection": false,
+      "modes": {
+        "filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0,
+          "mean_source_precision": 0.0,
+          "mrr": 0.0,
+          "negative_abstention_rate": 1,
+          "positive_empty_rate": 1,
+          "mean_selected_count": 0,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        },
+        "rewrite_filter": {
+          "questions": 8,
+          "positive_questions": 6,
+          "negative_questions": 2,
+          "source_hit_rate": 0,
+          "mean_source_precision": 0.0,
+          "mrr": 0.0,
+          "negative_abstention_rate": 1,
+          "positive_empty_rate": 1,
+          "mean_selected_count": 0,
+          "mean_context_words": null,
+          "mean_expected_term_coverage": null
+        }
+      }
+    }
+  ],
+  "unfiltered_rewrite_reference": {
+    "questions": 8,
+    "positive_questions": 6,
+    "negative_questions": 2,
+    "source_hit_rate": 0.666667,
+    "mean_source_precision": 0.233333,
+    "mrr": 0.583333,
+    "negative_abstention_rate": 0,
+    "positive_empty_rate": 0,
+    "mean_selected_count": 5,
+    "mean_context_words": null,
+    "mean_expected_term_coverage": null
+  },
+  "selection_rule": "Preserve unfiltered rewrite source-hit rate and positive-empty rate on calibration; then max balanced(positive source hit, negative abstention) for rewrite_filter; tie: source precision, then lower threshold. No evaluation labels used.",
+  "note": "Apply the selected threshold explicitly, then evaluate on the evaluation split."
+}

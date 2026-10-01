@@ -7,7 +7,7 @@ import unittest
 
 from agent import BublikKnowledgeAgent
 from chunking import chunk_documents, fixed_chunks, structural_chunks
-from corpus import Document, ROOT, corpus_stats, load_documents
+from corpus import Document, ROOT, corpus_stats, load_documents, source_paths
 from embeddings import normalize
 from evaluation import evaluate_retrieval, load_questions
 from retrieval import retrieve
@@ -119,6 +119,16 @@ class Day21Tests(unittest.TestCase):
         sources = {d.source for d in docs}
         self.assertTrue(all(q["source"] in sources for q in load_questions()))
         self.assertEqual(len(sources), len(docs))
+
+    def test_later_rag_lessons_do_not_enter_shared_corpus(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for day in (20, 21, 22, 23):
+                folder = root / f"day-{day:02d}-lesson"
+                folder.mkdir()
+                (folder / "README.md").write_text("lesson")
+            self.assertEqual([p.relative_to(root).as_posix() for p in source_paths(root)],
+                             ["day-20-lesson/README.md"])
 
 
 if __name__ == "__main__":

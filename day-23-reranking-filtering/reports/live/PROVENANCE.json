@@ -1,0 +1,37 @@
+{
+  "runs": [
+    {
+      "file": "evaluate_results.json",
+      "sha256": "b8965989e2e339aa4352831d6da80d6bf24800731ee626a5c5247ab55c7c2914",
+      "origin": "User-uploaded live Ollama output; JSON bytes preserved",
+      "strategy": "structural",
+      "threshold": 0.55,
+      "answer_model": "llama3.2"
+    },
+    {
+      "file": "evaluate_fixed_results.json",
+      "sha256": "cb2c5e0669000dca41aa4ea8b781b0cdc7f2663559b740f19df84d4a1c11d604",
+      "origin": "User-uploaded live Ollama output; JSON bytes preserved",
+      "strategy": "fixed",
+      "threshold": 0.55,
+      "answer_model": "llama3.2"
+    },
+    {
+      "file": "evaluate_fixed_qwen_results.json",
+      "sha256": "182d651200cbd1b80a390f85e7715d30ae6c3c9b5282239b2e2bbf956cc8da74",
+      "origin": "User-uploaded live Ollama output; JSON bytes preserved",
+      "strategy": "fixed",
+      "threshold": 0.55,
+      "answer_model": "qwen2.5:7b"
+    },
+    {
+      "file": "evaluate_fixed_qwen_050_results.json",
+      "sha256": "66b62f34882d105b30ab24f2d189ff4f120d122b7b7589300b034a21aa63e024",
+      "origin": "User-uploaded live Ollama output; JSON bytes preserved",
+      "strategy": "fixed",
+      "threshold": 0.5,
+      "answer_model": "qwen2.5:7b"
+    }
+  ],
+  "calibration": "Only console summaries were provided. No complete sweep is included. Initial selected threshold: 0.55; later exploratory threshold: 0.50."
+}

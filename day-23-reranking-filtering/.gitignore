@@ -1,0 +1,7 @@
+__pycache__/
+*_results.json
+*_results.md
+# reports/offline_* are intentionally included as reproducible example evidence.
+/reports/check/
+/reports/video/
+/probe_*.json

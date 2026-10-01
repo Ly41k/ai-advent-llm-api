@@ -21,13 +21,15 @@ class Document:
 
 def source_paths(root: Path = ROOT) -> list[Path]:
     paths = set(root.glob("README*.md"))
-    paths.update(root.glob("day-[0-2][0-9]-*/README*.md"))
+    # Freeze the shared learning corpus at Days 1–20. Later RAG lesson
+    # instructions must not silently become evidence for their own evaluation.
+    for day in range(1, 21):
+        paths.update(root.glob(f"day-{day:02d}-*/README*.md"))
     for day in CODE_DAYS:
         for directory in root.glob(f"day-{day:02d}-*"):
             paths.update(path for path in directory.glob("*.py")
                          if not path.name.startswith("test_"))
-    return sorted(path for path in paths if path.is_file()
-                  and "day-21-" not in str(path))
+    return sorted(path for path in paths if path.is_file())
 
 
 def load_documents(root: Path = ROOT) -> list[Document]:
