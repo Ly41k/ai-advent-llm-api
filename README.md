@@ -1,10 +1,10 @@
 **English** | [Русский](README.ru.md)
 
-# AI Advent — from an LLM API request to an agent with MCP tools
+# AI Advent — from an LLM API request to MCP tools and retrieval-augmented answers
 
-A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, MCP experiments, a local knowledge index, and the first RAG workflow. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
+A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, MCP experiments, a shared local knowledge index, a first RAG workflow, and query rewrite with relevance filtering. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–22**. Examples from different days demonstrate successive designs; later lessons reuse selected components instead of automatically merging every previous agent version into one application.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–23**. Examples from different days demonstrate successive designs; later lessons reuse selected components instead of automatically merging every previous agent version into one application.
 
 ## Learning path
 
@@ -32,6 +32,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 | [20](day-20-mcp-orchestration/README.md) | MCP orchestration | Model-selected, verified five-call flow across three servers |
 | [21](day-21-document-indexing/README.md) | Document indexing | Shared SQLite knowledge base, two chunking strategies, local embeddings, retrieval comparison |
 | [22](day-22-first-rag/README.md) | First RAG request | NO RAG vs RAG, retrieved context, source provenance, and a 10-question evaluation set |
+| [23](day-23-reranking-filtering/README.md) | Relevance filtering and query rewrite | Candidate/final top-K, raw cosine threshold, heuristic/LLM rewrite, calibration, and four-mode comparison |
 
 ## How the pieces fit
 
@@ -46,14 +47,16 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 - **Day 21:** index README and code with a local embedding model into SQLite; compare fixed and structural chunks on a shared question set. Optional search, reranking, and local answers build on the same knowledge base.
 - **Day 22:** reuse the Day 21 index for the first full RAG request. The same generation model answers once without retrieval and once with retrieved chunks, while source provenance and a 10-question control set make the comparison reproducible.
 
-The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation. Days 21–22 run locally with Ollama by default: `bge-m3` provides embeddings and `llama3.2` generates answers.
+- **Day 23:** reuse the same index and Ollama adapter, expand the search query, filter candidate chunks by an inclusive raw cosine threshold, and cap the final context. Compare `baseline`, `filter`, `rewrite`, and `rewrite_filter`; choose a threshold on calibration questions and inspect a separate evaluation split.
+
+The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 also use the public GitHub REST API to fetch live data. Only the scheduled worker in Day 18 needs an always-running process for continuous observation. Days 21–23 run locally with Ollama by default: `bge-m3` provides embeddings and `llama3.2` generates answers.
 
 ## Requirements and setup
 
 - Python **3.13** is the project's target version.
-- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, Day 20 offline checks, and the local Day 21–22 Ollama flow do not need one.
+- A Groq key is needed for interactive Groq examples, including the model-driven applications in Days 17–18. The Day 16 connection, Day 19 pipeline, Day 20 offline checks, and the local Day 21–23 Ollama flow do not need one.
 - Internet access is needed when calling Groq or fetching live public GitHub data. `GITHUB_TOKEN` is optional for public repositories and can help with GitHub API rate limits.
-- Days 21–22 use a local Ollama service by default. Pull `bge-m3` for embeddings and `llama3.2` for local answer generation before the live retrieval/RAG demos.
+- Days 21–23 use a local Ollama service by default. Pull `bge-m3` for embeddings and `llama3.2` for local answer generation before the live retrieval/RAG demos. The Day 23 exploratory profile uses `qwen2.5:7b` through explicit `--answer-model` flags; the code default remains `llama3.2`. These three lessons use the Python standard library for the base workflow; an optional cross-encoder needs `sentence-transformers`.
 
 Run from the repository root:
 
@@ -80,6 +83,8 @@ For the local retrieval/RAG lessons, install and start Ollama, then pull the def
 ```bash
 ollama pull bge-m3
 ollama pull llama3.2
+# Additional model used in the documented Day 23 live experiments:
+ollama pull qwen2.5:7b
 ```
 
 If the Ollama desktop app is already serving locally, a separate `ollama serve` process is not required.
@@ -108,6 +113,8 @@ The later lessons have different entry points:
 | 21 | `python day-21-document-indexing/main.py corpus` then `build` | Local Ollama embeddings, two indexes in SQLite, reusable knowledge base |
 | 22 | `python day-22-first-rag/main.py compare "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?"` | Same question answered without RAG and with retrieved Day 21 context |
 | 22 | `python day-22-first-rag/main.py evaluate` | Run all 10 control questions and write `evaluation_results.json` |
+| 23 | `python day-23-reranking-filtering/main.py questions` | Inspect 20 labeled questions: 8 calibration and 12 evaluation |
+| 23 | `python day-23-reranking-filtering/main.py compare "How does the Day 18 worker run?" --retrieval-only` | Inspect four retrieval modes with the CLI defaults |
 
 For a **Day 18 check without Groq**, use `mcp_cli.py` to create a schedule, run due work once, and read its stored summary:
 
@@ -130,6 +137,41 @@ python day-22-first-rag/main.py compare \
 python day-22-first-rag/main.py evaluate
 ```
 
+## Day 23: search, filter, rewrite, and answer
+
+All Day 23 global flags go **before** the subcommand. This example explicitly uses the exploratory profile, rather than the CLI defaults:
+
+```bash
+python day-23-reranking-filtering/main.py \
+  --model bge-m3 --answer-model qwen2.5:7b \
+  --strategy fixed --candidate-k 20 --final-k 5 \
+  --min-similarity 0.50 --rewrite-method heuristic \
+  compare "На 18 дне кто выполняет фоновые джобы по расписанию?" \
+  --output day-23-reranking-filtering/reports/check/compare.json
+```
+
+Add `--retrieval-only` after the question to inspect retrieval without generating answers. `search` also skips the final answer; `ask --mode rewrite_filter` runs one mode. With `--rewrite-method llm`, a model call for rewrite still occurs even in retrieval-only commands. An empty selected context returns a deterministic refusal without an answer-model call.
+
+For a new index, calibrate first and apply its selected threshold explicitly:
+
+```bash
+python day-23-reranking-filtering/main.py \
+  --strategy fixed --candidate-k 20 --final-k 5 \
+  --rewrite-method heuristic \
+  calibrate --thresholds 0.15 0.25 0.35 0.45 0.50 0.55 0.65 \
+  --output day-23-reranking-filtering/reports/check/calibrate.json
+
+# Example only: replace 0.55 with selected_threshold from your calibration.
+python day-23-reranking-filtering/main.py \
+  --answer-model qwen2.5:7b --strategy fixed \
+  --candidate-k 20 --final-k 5 --min-similarity 0.55 \
+  --rewrite-method heuristic \
+  evaluate --split evaluation \
+  --output day-23-reranking-filtering/reports/check/evaluate.json
+```
+
+`evaluate` writes JSON traces and a Markdown summary for all four modes. The recorded fixed/20/5/0.50 experiment increased labeled source precision from 28.0% to 37.3% and reduced average context from 2007.8 to 1393.3 words, preserving document hits on 10/10 positive questions. This is an exploratory result on an already inspected evaluation set: some generated answers remain wrong, and rewrite did not improve every metric. See [Day 23](day-23-reranking-filtering/README.md) for defaults, metrics, report publication, and limitations.
+
 ## Tests
 
 Install each lesson's dependencies before its tests. These local tests use fakes or a local HTTP server and do **not** spend Groq tokens or require a live GitHub request:
@@ -148,9 +190,12 @@ python day-19-mcp-composition/test_day19.py -v
 python day-20-mcp-orchestration/test_day20.py -v
 python day-21-document-indexing/test_day21.py -v
 python day-22-first-rag/test_day22.py -v
+python day-23-reranking-filtering/test_day23.py -v
 ```
 
 Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run. Day 22 offline tests verify that NO RAG does not call retrieval, RAG follows `question → search → context → LLM`, both A/B paths use the same question, and the control set contains exactly 10 complete records.
+
+The Days 21–23 suites contain 7, 6, and 21 tests (34 total in the reviewed version). Day 23 tests cover inclusive thresholding before final-K, shared candidate pools, empty-context refusal without generation, rewrite/fallback, calibration split separation, and the CLI/HTTP/SQLite/report path. A local HTTP fixture verifies the Ollama contract; these tests do not establish real-model answer quality.
 
 ## Data and limitations
 
@@ -158,8 +203,10 @@ Day 19 tests assert MCP tool discovery, call order, **exact input/output transfe
 - Day 18 prints completed worker results to stdout or the service journal. It does not automatically send a chat message. Its sample systemd unit supports running a worker continuously on a VPS.
 - Day 19 writes a Markdown snapshot of current repository metadata to its ignored `reports/` directory. It does not run periodically and does not require a VPS.
 - Day 20 saves and rereads a report in its ignored `reports/` directory. It runs on demand; no VPS is needed.
-- Day 21 stores the local knowledge index in the ignored `day-21-document-indexing/knowledge.db`. The index records its embedding model and corpus revision; rebuild it after changing the source corpus or embedding model when strict verification is required.
+- Days 21–23 share the ignored `day-21-document-indexing/knowledge.db`. The corpus includes root READMEs, lesson READMEs from Days 1–20, and non-test Python files from Days 16–20. Day 21–23 lesson READMEs and reports are excluded; **root README changes still change the corpus**. `verify` compares both the Git HEAD and a content fingerprint, so a new commit can also require a rebuild. Build both strategies in the final checkout before strict verification.
 - Day 22 reuses the Day 21 index instead of creating a second knowledge base. `evaluate` writes the ignored `day-22-first-rag/evaluation_results.json` with both answers, retrieved sources, expected-term coverage, and source-hit diagnostics. These diagnostics help comparison but do not replace human review of answer correctness.
+- Day 23 uses document-level retrieval labels, not passage-level semantic judgments. `negative_abstention_rate` counts empty contexts, not every verbal refusal by a model; expected-term coverage is not answer accuracy.
+- Day 23 `reports/check/` and `reports/video/` are ignored. Keep selected final evidence under `reports/live/` with names such as `evaluate_050.json` and `.md`. The current `*_results.json` / `*_results.md` rules also match nested paths. The reviewed commit contains live verification summaries, provenance, and an assistant review, but not the original live `*_results` files.
 - Generated model answers, available Groq/Ollama models, limits, and cost estimates may change. Check the relevant provider documentation before relying on model names or pricing.
 
 ## Resources
