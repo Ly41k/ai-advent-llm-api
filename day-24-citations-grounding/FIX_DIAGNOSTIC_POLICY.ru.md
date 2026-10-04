@@ -1,0 +1,11 @@
+# v14: отдельный diagnostic режим; источник не равен автоматической полноте
+
+Многократные actual проверки показали false approvals при paraphrase и false refusals при extractive coverage. V13:8/10 +2/2,41 exact quote;09 теперь отвечает, но01/03 отказаны.01 содержит SQLite flowchart с загрузкой completed messages, UUID и isolated conversation_id;03 содержит preflight/postflight, local+semantic checks. Coverage признаёт часть смысла, но не принимает её как полный ответ. Попытки prompt tuning не обеспечили10/10.
+
+Задание требует answer/sources/quotes, ручную сверку10 вопросов и below-threshold не знаю. Автоматический LLM coverage gate — дополнительная функция. V14 сохраняет strict default и добавляет явный --coverage-policy diagnostic для проверки исходного контракта. Это смена политики публикации, а не исправление отрицательных verdicts или притворный quality pass.
+
+В diagnostic literal source candidate проходит те же quote/provenance guards. Negative coverage остаётся false; sources/quotes публикуются с manual_review_required=true и coverage_requires_review. Invalid coverage получает format retry, а затем exact candidate отмечается coverage_check_failed_review_required. Invalid selection/free-form quotes всё ещё отказаны; threshold/selector unknown/transport errors прежние. False model verdict не запускает повторную selection в diagnostic; strict retry/refusal сохраняется.
+
+Evaluator явно разделяет contract и quality: contract_includes_model_coverage=false для diagnostic; положительный source contract только про answer/sources/quotes/identity. positive_coverage_pass сохраняет число истинных модельных оценок. assignment_complete=false пока pending manual review. Reviewed добавляет manual quality outcome, не меняя original summary/results.
+
+116 tests: прежние109 +7 policy tests. Проверены negative-preservation, strict default, weak-context и selector-unknown refusals, rejection invented/free-form quotes, malformed audit logging, technical errors и реальная SQLite/HTTP/CLI diagnostic integration. Scripted10+2 не доказывает live quality. Нужен actual full10+2 v14 + manual review всех10. До этого задание не закрыто. Model diagnostic error и шум/cut source fragments остаются возможными.

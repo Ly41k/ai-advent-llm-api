@@ -4,7 +4,7 @@
 
 A day-by-day Python project built around the Groq API. The first lessons examine prompts, models, tokens, and context. Later lessons develop **BublikAgent** with SQLite-backed dialogues, explicit memory, personalization, task-state guards, MCP experiments, a shared local knowledge index, a first RAG workflow, and query rewrite with relevance filtering. **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that grows through the course.
 
-Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–23**. Examples from different days demonstrate successive designs; later lessons reuse selected components instead of automatically merging every previous agent version into one application.
+Each `day-XX-...` directory is a self-contained lesson with English and Russian instructions. The repository currently contains **Days 1–24**. Examples from different days demonstrate successive designs; later lessons reuse selected components instead of automatically merging every previous agent version into one application.
 
 ## Learning path
 
@@ -33,6 +33,7 @@ Each `day-XX-...` directory is a self-contained lesson with English and Russian 
 | [21](day-21-document-indexing/README.md) | Document indexing | Shared SQLite knowledge base, two chunking strategies, local embeddings, retrieval comparison |
 | [22](day-22-first-rag/README.md) | First RAG request | NO RAG vs RAG, retrieved context, source provenance, and a 10-question evaluation set |
 | [23](day-23-reranking-filtering/README.md) | Relevance filtering and query rewrite | Candidate/final top-K, raw cosine threshold, heuristic/LLM rewrite, calibration, and four-mode comparison |
+| [24](day-24-citations-grounding/README.md) | Citations and grounding | Evidence-backed claims, exact quotations, semantic verifier, abstention with clarification |
 
 ## How the pieces fit
 
@@ -172,6 +173,18 @@ python day-23-reranking-filtering/main.py \
 
 `evaluate` writes JSON traces and a Markdown summary for all four modes. The recorded fixed/20/5/0.50 experiment increased labeled source precision from 28.0% to 37.3% and reduced average context from 2007.8 to 1393.3 words, preserving document hits on 10/10 positive questions. This is an exploratory result on an already inspected evaluation set: some generated answers remain wrong, and rewrite did not improve every metric. See [Day 23](day-23-reranking-filtering/README.md) for defaults, metrics, report publication, and limitations.
 
+## Day 24: grounded answers
+
+Day 24 extends the shared RAG with sources containing `source`, `section`, `chunk_id`, exact quotations and a separate semantic check for every claim. Defaults use fixed / 20 / 5 / cosine >=0.50 / heuristic / qwen2.5:7b. Weak or unverified context returns “I don't know” with a clarification request.
+
+```bash
+python day-21-document-indexing/main.py build
+python day-24-citations-grounding/main.py evaluate \
+  --output day-24-citations-grounding/reports/check/evaluate.json
+```
+
+The control set contains 10 positive questions and 2 negative controls. Offline checks are complete; Day 24 live evaluation requires local Ollama. A semantic verifier can err: inspect the JSON/Markdown report and fill `manual_review`. See [instructions and limitations](day-24-citations-grounding/README.md).
+
 ## Tests
 
 Install each lesson's dependencies before its tests. These local tests use fakes or a local HTTP server and do **not** spend Groq tokens or require a live GitHub request:
@@ -191,6 +204,7 @@ python day-20-mcp-orchestration/test_day20.py -v
 python day-21-document-indexing/test_day21.py -v
 python day-22-first-rag/test_day22.py -v
 python day-23-reranking-filtering/test_day23.py -v
+python day-24-citations-grounding/test_day24.py -v
 ```
 
 Day 19 tests assert MCP tool discovery, call order, **exact input/output transfer** at both boundaries, persisted report content, replacement on a second run, and failure handling. The full command-line run is also exercised. The live GitHub run is a separate manual check. Day 20 tests launch three real servers and verify routing, order, input/output transfer, readback, and failure handling; model behavior with Groq needs a separate keyed run. Day 22 offline tests verify that NO RAG does not call retrieval, RAG follows `question → search → context → LLM`, both A/B paths use the same question, and the control set contains exactly 10 complete records.

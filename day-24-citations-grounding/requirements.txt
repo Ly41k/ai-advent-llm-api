@@ -1,0 +1,2 @@
+# Standard library only. Requires sibling Days 21 and 23.
+# Local Ollama models: bge-m3 and qwen2.5:14b (generator/verifier defaults).

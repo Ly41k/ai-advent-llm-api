@@ -1,0 +1,38 @@
+__pycache__/
+reports/check/
+
+# Локальные прогоны
+/reports/check/
+
+# Служебные манифесты архивов
+/ARCHIVE_MANIFEST.json
+/PATCH_MANIFEST.json
+
+# Логи тестов и упаковки
+/reports/*.txt
+/reports/PACKAGING_*.json
+/reports/console/core_tests.txt
+
+# Копии документации предыдущих версий
+/reports/README_v*.md
+/reports/VERIFICATION_*.md
+/reports/v*.md
+
+# Генерируемые результаты автономных проверок
+/reports/offline_*
+
+
+# Старые JSON-прогоны оставляем только локально
+/reports/live/*.json
+
+# Данные регрессионных тестов
+!/reports/live/evaluate_v7_both14b_original.json
+!/reports/live/recheck_v8_original.json
+!/reports/live/recheck_v9_original.json
+!/reports/live/recheck_v10_original.json
+!/reports/live/evaluate_v11_original.json
+!/reports/live/evaluate_v12_original.json
+
+# Итоговый подтверждённый прогон
+!/reports/live/evaluate_v14_original.json
+!/reports/live/evaluate_v14_reviewed.json

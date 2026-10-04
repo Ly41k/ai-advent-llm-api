@@ -16,3 +16,12 @@ check_models.py
 *.db-shm
 *.db-wal
 .deploy.local
+
+# Служебные файлы установочных архивов
+/APPLY_DAY24_*.ru.md
+/APPLY_CONSOLE_DEMO.ru.md
+/PATCH_MANIFEST.json
+/CONSOLE_PATCH_MANIFEST.json
+
+# Журнал консольной демонстрации
+/day24-console-recording.txt

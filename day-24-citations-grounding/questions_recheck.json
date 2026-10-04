@@ -1,0 +1,63 @@
+[
+  {
+    "question": "How are multiple Bublik dialogues isolated and restored after restart?",
+    "expectation": "The answer should mention separate dialogue identity/state and persistence in SQLite.",
+    "expected_terms": [
+      "dialogue",
+      "SQLite"
+    ],
+    "expected_sources": [
+      "day-07-context-persistence/README.md"
+    ],
+    "id": "positive-01",
+    "answerable": true
+  },
+  {
+    "question": "How does the Day 16 MCP client discover the ping and add tools over stdio?",
+    "expectation": "The answer should mention MCP initialization and session.list_tools().",
+    "expected_terms": [
+      "list_tools"
+    ],
+    "expected_sources": [
+      "day-16-mcp-connection/README.md"
+    ],
+    "id": "positive-05",
+    "answerable": true
+  },
+  {
+    "question": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+    "expectation": "The answer should identify the independent worker/worker.py process.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md"
+    ],
+    "id": "positive-07",
+    "answerable": true
+  },
+  {
+    "question": "How is the Day 20 report flow routed across MCP servers and how is the saved report verified?",
+    "expectation": "The answer should describe routing across GitHub, analysis and storage, ending with analysis__verify_report.",
+    "expected_terms": [
+      "verify_report"
+    ],
+    "expected_sources": [
+      "day-20-mcp-orchestration/README.md"
+    ],
+    "id": "positive-09",
+    "answerable": true
+  },
+  {
+    "question": "Как на Day 18 проверить, что периодический сбор GitHub-сводки действительно работает на VPS?",
+    "expectation": "Ответ должен ссылаться на worker/systemd и проверку периодических запусков или сохранённых сводок.",
+    "expected_terms": [
+      "worker"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.ru.md"
+    ],
+    "id": "positive-10",
+    "answerable": true
+  }
+]

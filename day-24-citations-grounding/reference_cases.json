@@ -1,0 +1,197 @@
+[
+  {
+    "id": "positive-01",
+    "claims": [
+      {
+        "text": "Each dialogue has a UUID/conversation_id, and requests use only messages from that dialogue. SQLite persists its messages, which are loaded when the selected dialogue is reopened.",
+        "citations": [
+          {
+            "chunk_id": "3ed667af5d9b09b484ff",
+            "quote": "The seventh assignment adds multiple persistent contexts to the Bublik agent. The user can create a new topic or select a previous dialogue. Its messages are loaded from SQLite and included in the next LLM request."
+          },
+          {
+            "chunk_id": "3ed667af5d9b09b484ff",
+            "quote": "Every new topic receives a UUID. The same `BublikAgent` class can therefore be reused for any dialogue, while each LLM request receives messages only from the selected `conversation_id`."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-02",
+    "claims": [
+      {
+        "text": "The task stages are planning, execution, validation, and done.",
+        "citations": [
+          {
+            "chunk_id": "86c78c2b6743616d18fe",
+            "quote": "| `state` | `planning`, `execution`, `validation`, or `done` |"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-03",
+    "claims": [
+      {
+        "text": "Preflight checks the request before answer generation; local and semantic postflight check the generated response before persistence.",
+        "citations": [
+          {
+            "chunk_id": "fb411216a0e054ae9613",
+            "quote": "InvariantValidator first catches explicit conflicts locally. SemanticInvariantGuard then checks the meaning of the request against every invariant using a separate structured call."
+          },
+          {
+            "chunk_id": "fb411216a0e054ae9613",
+            "quote": "- paraphrased conflicts make only the guard call and do not start answer generation;"
+          },
+          {
+            "chunk_id": "fb411216a0e054ae9613",
+            "quote": "The generated response is checked before persistence by both local rules and an independent semantic guard covering every invariant."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-04",
+    "claims": [
+      {
+        "text": "The transition guards require a non-empty explicitly approved plan for execution, every completed step for validation, and PASS validation for done.",
+        "citations": [
+          {
+            "chunk_id": "278d64d3279925070457",
+            "quote": "| planning | execution | A non-empty, explicitly approved plan is required |\n| execution | validation, planning | Validation requires every step; planning is controlled re-planning |\n| validation | done, execution | `done` requires PASS; failed validation returns to execution |"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-05",
+    "claims": [
+      {
+        "text": "The stdio MCP client establishes ClientSession, calls session.initialize(), then await session.list_tools() to discover the server tools.",
+        "citations": [
+          {
+            "chunk_id": "c5de6cc4dc780aa977f5",
+            "quote": "2. **MCP connection established** — `stdio_client(...)`, `ClientSession(...)`,\n   and `session.initialize()`.\n3. **Available tools requested** — `await session.list_tools()`."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-06",
+    "claims": [
+      {
+        "text": "The first GitHub MCP tool is get_github_repo(owner, repo).",
+        "citations": [
+          {
+            "chunk_id": "96300ca424f79a71d174",
+            "quote": "4. The model requests `get_github_repo(owner, repo)`."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-07",
+    "claims": [
+      {
+        "text": "The independent worker.py process periodically collects GitHub repository snapshots and stores them in SQLite.",
+        "citations": [
+          {
+            "chunk_id": "0e0d09735ed76bf66c2e",
+            "quote": "Bublik schedules periodic public GitHub repository observations through MCP. An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run. The agent can read the persisted summary via MCP and include it in its reply."
+          },
+          {
+            "chunk_id": "0e0d09735ed76bf66c2e",
+            "quote": "- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-08",
+    "claims": [
+      {
+        "text": "Day 19 calls search_repository(owner, repo), summarize_repository(repository), and save_report(summary), transferring repository data into a Markdown summary and then saving it.",
+        "citations": [
+          {
+            "chunk_id": "dfb3ad7d44874465e0ce",
+            "quote": "One command runs three separate MCP tools over stdio: `search_repository(owner, repo)` fetches public GitHub metadata, `summarize_repository(repository)` converts the exact result into Markdown, and `save_report(summary)` writes the exact summary to disk."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-09",
+    "claims": [
+      {
+        "text": "The registry routes calls across github, analysis, and storage. The flow fetches repository data, summarizes it, saves the report, reads it back, and verifies it.",
+        "citations": [
+          {
+            "chunk_id": "d51bc9e2de0500131e22",
+            "quote": "The registry discovers tools and routes each selected call to the correct server session."
+          },
+          {
+            "chunk_id": "d51bc9e2de0500131e22",
+            "quote": "github.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer"
+          }
+        ]
+      },
+      {
+        "text": "Verification compares the report read from disk with the original summary.",
+        "citations": [
+          {
+            "chunk_id": "d51bc9e2de0500131e22",
+            "quote": "The final verification compares the report read from disk with the original summary."
+          }
+        ]
+      },
+      {
+        "text": "Success is reported only after verified=true.",
+        "citations": [
+          {
+            "chunk_id": "d51bc9e2de0500131e22",
+            "quote": "the agent only reports success after `verified=true`."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "positive-10",
+    "claims": [
+      {
+        "text": "На VPS проверьте worker через sudo systemctl status bublik-day18 и journalctl -u bublik-day18 -f; затем запросите свежую сводку через агента.",
+        "citations": [
+          {
+            "chunk_id": "b165333c1d1e56698605",
+            "quote": "sudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f"
+          },
+          {
+            "chunk_id": "b165333c1d1e56698605",
+            "quote": "Проверяйте `journalctl` и запрашивайте свежую сводку через агента."
+          }
+        ]
+      },
+      {
+        "text": "Worker печатает агрегированную сводку в журнал после каждого запуска. Через get_github_summary можно проверить количество сохранённых снимков, последнее состояние и изменения; повторные сводки и снимки подтверждают повторный сбор.",
+        "citations": [
+          {
+            "chunk_id": "b165333c1d1e56698605",
+            "quote": "Бублик через MCP ставит публичный GitHub-репозиторий на периодическое наблюдение. Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска. Агент по запросу читает сохранённую сводку через MCP и отвечает с её данными."
+          },
+          {
+            "chunk_id": "b165333c1d1e56698605",
+            "quote": "- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков."
+          }
+        ]
+      }
+    ]
+  }
+]

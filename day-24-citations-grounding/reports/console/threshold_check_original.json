@@ -1,0 +1,247 @@
+{
+  "question": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+  "status": "unknown",
+  "answer": "I don't know: the retrieved context is insufficient for a supported answer.",
+  "clarification": "Please clarify the course day, file, or function you mean.",
+  "sources": [],
+  "quotes": [],
+  "claims": [],
+  "reason": "below_threshold",
+  "validation": {
+    "quotes_exact": false,
+    "sources_valid": false,
+    "semantic_supported": false,
+    "scope_supported": false,
+    "evidence_supported": false,
+    "verbatim_answer": false,
+    "coverage_supported": false,
+    "semantic_verifier_used": false,
+    "proof_kind": "verbatim_source_identity",
+    "coverage_policy": "diagnostic",
+    "manual_review_required": false,
+    "attempts": 0,
+    "errors": [],
+    "model_calls": [],
+    "format_adjustments": []
+  },
+  "retrieval": {
+    "mode": "rewrite_filter",
+    "question": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+    "rewrite": {
+      "original": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?",
+      "query": "Which process periodically collects GitHub repository snapshots into SQLite on Day 18?\nSearch vocabulary: SQLite database persistence",
+      "method": "heuristic",
+      "reason": "vocabulary_expansion"
+    },
+    "settings": {
+      "candidate_k": 20,
+      "final_k": 5,
+      "min_similarity": 0.99,
+      "strategy": "fixed",
+      "rewrite_method": "heuristic"
+    },
+    "filter_applied": true,
+    "candidate_count": 20,
+    "eligible_count": 0,
+    "selected_count": 0,
+    "abstained": true,
+    "candidates": [
+      {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "source": "day-18-scheduled-mcp/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 66,
+        "cosine": 0.5939477446770604,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "db3da55c9594e472eb20",
+        "source": "README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 190,
+        "end_line": 223,
+        "cosine": 0.5918808281266962,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "b165333c1d1e56698605",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 67,
+        "cosine": 0.5903634774383386,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "c07fdfea71fbb401fdea",
+        "source": "day-18-scheduled-mcp/scheduler.py",
+        "section": "scheduler.py",
+        "start_line": 1,
+        "end_line": 108,
+        "cosine": 0.5827282773096213,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "source": "day-18-scheduled-mcp/server.py",
+        "section": "server.py",
+        "start_line": 1,
+        "end_line": 41,
+        "cosine": 0.5624569663746404,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "e6d83ca30047e7e55078",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 61,
+        "end_line": 67,
+        "cosine": 0.5623728770019705,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "b4db8b35f45cc42a28a9",
+        "source": "day-19-mcp-composition/server.py",
+        "section": "server.py",
+        "start_line": 1,
+        "end_line": 83,
+        "cosine": 0.5350617729175899,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "1cb13c3f0d02da7fc5e1",
+        "source": "day-10-context-strategies/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 73,
+        "cosine": 0.5271261005170385,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "33176ba468a249ec6f72",
+        "source": "README.md",
+        "section": "README.md",
+        "start_line": 33,
+        "end_line": 58,
+        "cosine": 0.5264801073389258,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "3ed667af5d9b09b484ff",
+        "source": "day-07-context-persistence/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 106,
+        "cosine": 0.5243700124842705,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "18a6b5c19df092c83485",
+        "source": "day-19-mcp-composition/github_api.py",
+        "section": "github_api.py",
+        "start_line": 1,
+        "end_line": 37,
+        "cosine": 0.5198616882540236,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "0ca83f34b29ff6b0b7c0",
+        "source": "README.md",
+        "section": "README.md",
+        "start_line": 110,
+        "end_line": 174,
+        "cosine": 0.5188999805515825,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "e3ed8e9e098cf9189315",
+        "source": "README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 124,
+        "end_line": 203,
+        "cosine": 0.5186386803045326,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "5f61a89619e679fadf84",
+        "source": "day-07-context-persistence/README.md",
+        "section": "README.md",
+        "start_line": 91,
+        "end_line": 130,
+        "cosine": 0.5172771243456464,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "f043851d00b817bd8d43",
+        "source": "day-20-mcp-orchestration/github_api.py",
+        "section": "github_api.py",
+        "start_line": 1,
+        "end_line": 37,
+        "cosine": 0.5153626096015016,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "ebcc24024a4f2d10f0c2",
+        "source": "README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 42,
+        "cosine": 0.5111494083813392,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "cc1e2c440327bc2bbde5",
+        "source": "day-07-context-persistence/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 112,
+        "cosine": 0.5104095294463752,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "1681f29e2a1080e380d5",
+        "source": "README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 35,
+        "end_line": 74,
+        "cosine": 0.503522346181892,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "2edc8ed0fe913c9421c3",
+        "source": "day-19-mcp-composition/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 40,
+        "cosine": 0.5024744161547682,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "dfb3ad7d44874465e0ce",
+        "source": "day-19-mcp-composition/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 14,
+        "cosine": 0.5015093035387574,
+        "decision": "below_threshold"
+      }
+    ],
+    "sources": [],
+    "context": "",
+    "index": {
+      "strategy": "fixed",
+      "model": "bge-m3",
+      "dimension": 1024,
+      "limit_tokens": 500,
+      "overlap_tokens": 75,
+      "revision": "30b482563dab64226d4b335b04747b1b03a044a7@6b6f8cdbe1d56ffa",
+      "built_at": "2026-10-03 08:56:25"
+    },
+    "answer_model": "qwen2.5:14b",
+    "verifier_model": "qwen2.5:14b",
+    "grounding_protocol": "verbatim-extractive-v14",
+    "answer_style": "extractive",
+    "coverage_policy": "diagnostic"
+  }
+}
