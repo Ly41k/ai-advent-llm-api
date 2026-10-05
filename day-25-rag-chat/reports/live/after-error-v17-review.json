@@ -1,0 +1,84 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "previous_failed_turn_id": 67,
+  "successful_turn_id": 68,
+  "functional_check_passed": true,
+  "checks": {
+    "answered_after_failed_turn": true,
+    "same_session": true,
+    "full_memory_unchanged": true,
+    "source_contract": true,
+    "sources_rendered": true,
+    "goal_resolved_as_day20": true,
+    "retrieval_lesson20": true,
+    "two_new_query_branches_recorded": true,
+    "quotes_equal_repo_lines": true,
+    "initial_orphan_error_traced": true,
+    "refiner_removed_orphan": true,
+    "refiner_subset_only": true,
+    "refined_equals_published": true,
+    "final_intro_chain_valid": true,
+    "no_planning_warnings": true,
+    "no_final_validation_errors": true,
+    "coverage_pass": true,
+    "proofs_literal": true,
+    "published_fragments_complete": true,
+    "actual_cosine_matches_branches": true,
+    "generations_completed": true
+  },
+  "quotes": [
+    {
+      "quote_id": "q1_9",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 11,
+      "end_line": 11,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_10",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 13,
+      "end_line": 16,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_11",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 18,
+      "end_line": 18,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_12",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 20,
+      "end_line": 20,
+      "equals_whole_lines": true
+    }
+  ],
+  "initial_quote_ids": [
+    "q1_9",
+    "q1_10",
+    "q1_11",
+    "q1_12",
+    "q1_13",
+    "q1_14"
+  ],
+  "refined_quote_ids": [
+    "q1_9",
+    "q1_10",
+    "q1_11",
+    "q1_12"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "all_published_fragments_complete": true,
+    "concise": false,
+    "note": "A normal request after the real local connection failure succeeds on the same session without recovery/reset. All full memory fields match the failure export. A new day-20 retrieval and current selector/refiner/auditor calls are recorded. This live trace actually exercises the v16 fix: initial q1_14 lacks its q1_15 code, initial_fragment_errors records it, then model refinement omits q1_14 without adding any ID. Final intro q1_9 is followed by its full chain q1_10. Auditor proves registration/names/routing directly via p1_1. Four complete literal quotes remain somewhat verbose; no fabricated fact or incomplete published fragment. The persistence of turn 67 in a later export is not independently rechecked by this ask JSON, but was confirmed in the prior failure export."
+  },
+  "original_sha256": "cbc736e20ff3fa54096b169f2e61e192327227c3a5a620887ecaa0a57ca0d3e9",
+  "live_retry_verified": true,
+  "full_live_long_scenarios_passed": false
+}

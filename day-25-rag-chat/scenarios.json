@@ -1,0 +1,44 @@
+[
+  {
+    "id": "scheduler",
+    "goal": "Разобраться в планировщике дня 18 и подготовить его проверку.",
+    "constraints": ["Используем SQLite.", "Worker должен работать отдельно от чата."],
+    "terms": {"снимок": "сохранённые данные GitHub"},
+    "clarifications": ["Речь о расписании дня 18."],
+    "turns": [
+      {"message": "Цель: Разобраться в планировщике дня 18 и подготовить его проверку.\nОграничение: Используем SQLite.\nКакой процесс выполняет фоновые задания на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Ограничение: Worker должен работать отдельно от чата.\nКакие поля GitHub сохраняет worker на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Термин: снимок = сохранённые данные GitHub\nА где это хранится?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Уточнение: Речь о расписании дня 18.\nКакой инструмент создаёт расписание?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Когда назначается первый сбор на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "А какой у него допустимый интервал?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Что возвращает get_github_summary на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Что возвращает list_scheduled_jobs на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Что происходит с пропущенными заданиями после простоя worker на день 18?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Отправляет ли worker дня 18 результаты в чат автоматически?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Нужен ли worker дня 18 ключ Groq?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Где посмотреть журнал worker дня 18?", "expected_source": "day-18-scheduled-mcp/"}
+    ]
+  },
+  {
+    "id": "orchestration",
+    "goal": "Подготовить демонстрацию полного MCP-флоу дня 20.",
+    "constraints": ["Без VPS.", "Проверяем сохранённый файл."],
+    "terms": {"отчёт": "сохранённая Markdown-сводка"},
+    "clarifications": ["Нужен полный маршрут report."],
+    "turns": [
+      {"message": "Цель: Подготовить демонстрацию полного MCP-флоу дня 20.\nОграничение: Без VPS.\nКакие MCP-серверы зарегистрированы на день 20?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Ограничение: Проверяем сохранённый файл.\nКакие инструменты публикует сервер storage на день 20?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Термин: отчёт = сохранённая Markdown-сводка\nА какие инструменты у analysis?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Уточнение: Нужен полный маршрут report.\nВ каком порядке выполняется полный флоу дня 20?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Когда отчёт дня 20 считается завершённым?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "А что именно сравнивает последний шаг?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Что делает агент дня 20 при преждевременном выборе VERIFY?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Какой маршрут выбирается для --task info на день 20?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Какой маршрут выбирается для --task summary на день 20?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Для сравнения: какой процесс дня 18 выполняет фоновые задачи?", "expected_source": "day-18-scheduled-mcp/"},
+      {"message": "Вернёмся к цели дня 20: что делает mcp_registry.py?", "expected_source": "day-20-mcp-orchestration/"},
+      {"message": "Требуются ли для сценария дня 20 VPS и worker?", "expected_source": "day-20-mcp-orchestration/"}
+    ]
+  }
+]

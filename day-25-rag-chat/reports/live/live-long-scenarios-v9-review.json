@@ -1,0 +1,350 @@
+{
+  "summary": {
+    "backend": "manual-review-of-user-live-ollama-report",
+    "scenarios": 2,
+    "user_turns": 24,
+    "answered": 18,
+    "unknown": 6,
+    "literal_quotes_checked": 68,
+    "literal_quote_and_line_mismatches": 0,
+    "manually_acceptable_answers": 15,
+    "problem_turns": 9,
+    "overall_pass": false,
+    "live_v10_quality_verified": false,
+    "limitations": [
+      "Many otherwise supported answers contain unnecessary setup/code.",
+      "All v10 changes still need fresh live-model verification."
+    ]
+  },
+  "turns": [
+    {
+      "scenario": "scheduler",
+      "number": 1,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 2,
+      "status": "answered",
+      "manual_review": {
+        "relevant": false,
+        "complete": true,
+        "goal_respected": false
+      },
+      "notes": [
+        "Includes an unnecessary passage from Day 19 in a question explicitly scoped to another lesson. This can confuse tool behavior/field membership.",
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 3,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 4,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 5,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 6,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 7,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 8,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 9,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 10,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 11,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness."
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 12,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 1,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 2,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 3,
+      "status": "answered",
+      "manual_review": {
+        "relevant": false,
+        "complete": true,
+        "goal_respected": false
+      },
+      "notes": [
+        "Includes an unnecessary passage from Day 19 in a question explicitly scoped to another lesson. This can confuse tool behavior/field membership.",
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 4,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 5,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Incorrect positive coverage: saved/read report is not the completion criterion. Day20 README.ru.md explicitly requires verified=true.",
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 6,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 7,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 8,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 9,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 10,
+      "status": "answered",
+      "manual_review": {
+        "relevant": true,
+        "complete": true,
+        "goal_respected": true
+      },
+      "notes": [
+        "All selected quotes and line ranges match current source files. Exact text alone does not prove relevance/completeness.",
+        "Answer is unnecessarily long; includes setup, adjacent features or implementation details beyond the current question."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 11,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 12,
+      "status": "unknown",
+      "manual_review": {
+        "relevant": false,
+        "complete": false,
+        "goal_respected": false
+      },
+      "notes": [
+        "Expected repository fact was not answered; inspect reported retrieval/resolution/coverage failure."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 57,
+  "functional_check_passed": true,
+  "checks": {
+    "sources_contract": true,
+    "exact_line_ranges": true,
+    "memory_unchanged": true,
+    "lesson_retained": true,
+    "fresh_two_dense_branches": true,
+    "refinement_subset_valid": true,
+    "published_ids_match_refined_ids": true,
+    "proofs_exact": true,
+    "summary_mapping_explicit": true,
+    "wrong_full_report_chain_removed": true,
+    "coverage_supported": true,
+    "planner_warnings_absent": true,
+    "validation_errors_absent": true,
+    "all_model_calls_completed": true
+  },
+  "quotes_checked": 1,
+  "initial_quote_ids": [
+    "q1_3",
+    "q1_12",
+    "q1_10"
+  ],
+  "refined_quote_ids": [
+    "q1_12"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "concise": true,
+    "note": "One complete literal paragraph explicitly distinguishes the routes and states summary uses GitHub and analysis without saving a file. The model refinement removed the full-report chain and all-server table. Proof p1_1 directly supports the requested mapping. Follow-up retains day 20 and every saved memory entry is unchanged."
+  },
+  "full_live_long_scenarios_passed": false
+}

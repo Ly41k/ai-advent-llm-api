@@ -1,0 +1,81 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 64,
+  "functional_check_passed": true,
+  "checks": {
+    "answered": true,
+    "source_contract": true,
+    "sources_rendered": true,
+    "goal_return_without_day_in_user_question": true,
+    "memory_unchanged": true,
+    "retrieval_lesson20": true,
+    "only_day20_sources": true,
+    "two_fresh_retrieval_branches_recorded": true,
+    "quotes_equal_repo_lines": true,
+    "refiner_subset_only": true,
+    "refined_equals_published": true,
+    "coverage_pass": true,
+    "no_planning_warnings": true,
+    "no_validation_errors": true,
+    "one_candidate_attempt": true,
+    "registry_functions_directly_proved": true,
+    "proofs_literal": true,
+    "cosine_matches_actual_branch_max": true,
+    "all_generation_done_reason_stop": true,
+    "registry_intro_followed_by_complete_chain": true
+  },
+  "quotes": [
+    {
+      "quote_id": "q1_9",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 11,
+      "end_line": 11,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_10",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 13,
+      "end_line": 16,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_11",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 18,
+      "end_line": 18,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_12",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "start_line": 20,
+      "end_line": 20,
+      "equals_whole_lines": true
+    }
+  ],
+  "initial_quote_ids": [
+    "q1_3",
+    "q1_9",
+    "q1_10",
+    "q1_11",
+    "q1_12",
+    "q1_13"
+  ],
+  "refined_quote_ids": [
+    "q1_9",
+    "q1_10",
+    "q1_11",
+    "q1_12"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "all_published_fragments_complete": true,
+    "concise": false,
+    "note": "Registry registration, unique names and routing are directly proved by p1_1. The full source paragraph ending in a colon is immediately followed by the complete chain. All four quotes equal complete repository line ranges. No orphan installation instruction is published. Extra completion/fallback and route paragraphs are unnecessary for this narrow question, so concision is not perfect; they are correctly labelled literal current-source information, not an incorrect registry role or unlabeled alternative route. All task-memory fields and provenance exactly match v15. Unlike failed v15, the initial selection here already contains no q1_14; therefore this live result confirms a valid final answer on v16, but does not demonstrate removal of an initially orphaned intro (that path is covered by protocol tests)."
+  },
+  "original_sha256": "25397b99da38895dfeb336a52cee617a6cca4cc4a7cf9025abae8e046db54001",
+  "full_live_long_scenarios_passed": false
+}

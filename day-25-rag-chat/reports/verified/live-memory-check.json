@@ -1,0 +1,50 @@
+{
+  "input": "memory-turn.json",
+  "session_id": "2cb61350c3d54c218d260e6a5cd65969",
+  "turn_id": 3,
+  "status": "answered",
+  "fresh_retrieval": {
+    "question": "Какие поля входят в снимок, который сохраняет worker на день 18?",
+    "candidate_count": 20,
+    "eligible_count": 4,
+    "selected_count": 4
+  },
+  "source_quotes": [
+    {
+      "quote_id": "q1_3",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 5,
+      "end_line": 5,
+      "exact_in_local_file": true
+    },
+    {
+      "quote_id": "q1_4",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 9,
+      "end_line": 13,
+      "exact_in_local_file": true
+    },
+    {
+      "quote_id": "q1_10",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 15,
+      "end_line": 15,
+      "exact_in_local_file": true
+    },
+    {
+      "quote_id": "q3_1",
+      "source": "day-18-scheduled-mcp/scheduler.py",
+      "start_line": 93,
+      "end_line": 115,
+      "exact_in_local_file": true
+    }
+  ],
+  "goal_retained": true,
+  "constraints_retained": true,
+  "term_retained": true,
+  "previous_clarification_retained": false,
+  "new_clarification_recorded": true,
+  "failure": "Planner reused f561dcbbee5b for an additional clarification and overwrote the old value.",
+  "planner_raw": "{\n  \"resolved_question\": \"Какие поля входят в снимок, который сохраняет worker на день 18?\",\n  \"needs_clarification\": false,\n  \"updates\": [\n    {\n      \"kind\": \"clarifications\",\n      \"key\": \"f561dcbbee5b\",\n      \"value\": \"Первый сбор проверяем вручную.\",\n      \"evidence\": \"Первый сбор проверяем вручную.\"\n    }\n  ]\n}",
+  "live_model_retest_after_v2_pending": true
+}

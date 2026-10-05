@@ -1,0 +1,10 @@
+{
+  "scenarios": 2,
+  "user_turns": 24,
+  "messages_including_answers": 48,
+  "all_checks_pass": true,
+  "model_quality_verified": false,
+  "manual_source_review_required": true,
+  "live_ollama_used": false,
+  "restart_after_turn": 6
+}

@@ -76,11 +76,14 @@ def normalize_negative_excerpts(raw):
 
 
 class StrictRAGAgent(Day24RAGAgent):
-    def __init__(self, *args, coverage_policy="strict", **kwargs):
+    def __init__(self, *args, coverage_policy="strict", requirements_factory=None, **kwargs):
         if coverage_policy not in ("strict", "diagnostic"):
             raise ValueError("coverage_policy must be strict or diagnostic")
         super().__init__(*args, **kwargs)
         self.coverage_policy = coverage_policy
+        self.requirements_factory = strict_requirements if requirements_factory is None else requirements_factory
+        if not callable(self.requirements_factory):
+            raise ValueError("requirements_factory must be callable")
 
     def ask(self, question):
         if not isinstance(question, str) or not question.strip() or len(question) > 4000:
@@ -130,7 +133,15 @@ class StrictRAGAgent(Day24RAGAgent):
             return unknown("insufficient_context")
         schema = json.loads(json.dumps(EXTRACTION_SCHEMA))
         schema["properties"]["quote_ids"]["items"]["enum"] = list(available)
-        requirements = strict_requirements(question)
+        requirements = self.requirements_factory(question)
+        if (not isinstance(requirements, list) or not 1 <= len(requirements) <= 8
+                or any(not isinstance(row, dict) or set(row) != {"id", "need"}
+                       or not isinstance(row["id"], str) or not row["id"].strip()
+                       or not isinstance(row["need"], str) or not row["need"].strip()
+                       for row in requirements)
+                or len({row["id"] for row in requirements}) != len(requirements)
+                or not any(row["id"] in ("question", "mechanism") for row in requirements)):
+            raise ValueError("Coverage requirements must retain a full-question gate and unique nonempty criteria")
         trace["coverage_requirements"] = requirements
         feedback = None
         for attempt in range(2):

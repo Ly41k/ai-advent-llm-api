@@ -1,0 +1,1105 @@
+{
+  "question": "Когда назначается первый сбор на день 18?",
+  "status": "answered",
+  "answer": "```python\n@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.\n```\n[1]\n- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов. [2]",
+  "clarification": "",
+  "sources": [
+    {
+      "id": 1,
+      "chunk_id": "18589383c0bbc7f10af1",
+      "source": "day-18-scheduled-mcp/server.py",
+      "section": "server.py",
+      "start_line": 1,
+      "end_line": 41,
+      "cosine": 0.5378502308121412
+    },
+    {
+      "id": 2,
+      "chunk_id": "b165333c1d1e56698605",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "section": "README.ru.md",
+      "start_line": 1,
+      "end_line": 67,
+      "cosine": 0.6453075404412394
+    }
+  ],
+  "quotes": [
+    {
+      "claim_id": 1,
+      "source_id": 1,
+      "chunk_id": "18589383c0bbc7f10af1",
+      "quote": "@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.",
+      "source": "day-18-scheduled-mcp/server.py",
+      "section": "server.py",
+      "start_line": 10,
+      "end_line": 12,
+      "quote_id": "q5_4"
+    },
+    {
+      "claim_id": 2,
+      "source_id": 2,
+      "chunk_id": "b165333c1d1e56698605",
+      "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "section": "README.ru.md",
+      "start_line": 9,
+      "end_line": 13,
+      "quote_id": "q1_4"
+    }
+  ],
+  "claims": [
+    {
+      "id": 1,
+      "text": "@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.",
+      "citations": [
+        {
+          "chunk_id": "18589383c0bbc7f10af1",
+          "quote": "@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.",
+          "source": "day-18-scheduled-mcp/server.py",
+          "section": "server.py",
+          "start_line": 10,
+          "end_line": 12,
+          "quote_id": "q5_4"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+      "citations": [
+        {
+          "chunk_id": "b165333c1d1e56698605",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "section": "README.ru.md",
+          "start_line": 9,
+          "end_line": 13,
+          "quote_id": "q1_4"
+        }
+      ]
+    }
+  ],
+  "reason": "supported",
+  "validation": {
+    "quotes_exact": true,
+    "sources_valid": true,
+    "semantic_supported": false,
+    "scope_supported": false,
+    "evidence_supported": true,
+    "verbatim_answer": true,
+    "coverage_supported": true,
+    "semantic_verifier_used": false,
+    "proof_kind": "verbatim_source_identity",
+    "coverage_policy": "strict",
+    "manual_review_required": false,
+    "attempts": 1,
+    "errors": [],
+    "model_calls": [
+      {
+        "stage": "extractive_selector",
+        "raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q5_4\", \"q1_4\"]}",
+        "prompt_characters": 14426,
+        "ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 1216,
+          "eval_count": 23,
+          "total_duration": 7363853250,
+          "load_duration": 2796833,
+          "prompt_eval_duration": 5117721000,
+          "eval_duration": 1801731000,
+          "prompt_characters": 3887,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        }
+      },
+      {
+        "stage": "coverage_auditor",
+        "requirement_id": "question",
+        "raw_response": "{\n  \"reason\": \"Первый сбор назначается сразу при вызове schedule_github_summary.\",\n  \"proof_ids\": [\"p2_1\"],\n  \"covered\": true\n}",
+        "prompt_characters": 3303,
+        "ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 2481,
+          "eval_count": 42,
+          "total_duration": 26438406166,
+          "load_duration": 3315500,
+          "prompt_eval_duration": 22952251000,
+          "eval_duration": 3449215000,
+          "prompt_characters": 9520,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        }
+      }
+    ],
+    "format_adjustments": [],
+    "coverage_verdict": {
+      "checks": [
+        {
+          "id": "question",
+          "reason": "Первый сбор назначается сразу при вызове schedule_github_summary.",
+          "covered": true,
+          "proof_ids": [
+            "p2_1"
+          ],
+          "proofs": [
+            {
+              "id": "p2_1",
+              "text": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.",
+              "claim_id": 2,
+              "quote_id": "q1_4",
+              "chunk_id": "b165333c1d1e56698605",
+              "command_only": false
+            }
+          ],
+          "answer_excerpt": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу."
+        }
+      ]
+    },
+    "selection_refinements": [
+      {
+        "stage": "selection_refinement",
+        "initial_raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q1_4\", \"q5_4\"]}",
+        "initial_prompt_characters": 22396,
+        "initial_ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 6602,
+          "eval_count": 23,
+          "total_duration": 70306369208,
+          "load_duration": 9851583,
+          "prompt_eval_duration": 68154918999,
+          "eval_duration": 2090833999,
+          "prompt_characters": 23116,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        },
+        "allowed_quote_ids": [
+          "q1_4",
+          "q5_4"
+        ],
+        "prompt_characters": 3598,
+        "raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q5_4\", \"q1_4\"]}",
+        "ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 1216,
+          "eval_count": 23,
+          "total_duration": 7363853250,
+          "load_duration": 2796833,
+          "prompt_eval_duration": 5117721000,
+          "eval_duration": 1801731000,
+          "prompt_characters": 3887,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        }
+      }
+    ],
+    "fragment_filters": [
+      {
+        "stage": "source_fragment_filter",
+        "excluded": [
+          {
+            "quote_id": "q1_27",
+            "chunk_id": "b165333c1d1e56698605",
+            "reason": "table_row_width_mismatch",
+            "text": "| Пункт | Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает"
+          }
+        ]
+      }
+    ]
+  },
+  "retrieval": {
+    "mode": "rewrite_filter",
+    "question": "Когда назначается первый сбор на день 18?",
+    "rewrite": {
+      "original": "Когда назначается первый сбор на день 18?",
+      "query": "Когда назначается первый сбор на день 18?",
+      "method": "heuristic",
+      "reason": "unchanged"
+    },
+    "settings": {
+      "candidate_k": 20,
+      "final_k": 5,
+      "min_similarity": 0.5,
+      "strategy": "fixed",
+      "rewrite_method": "heuristic"
+    },
+    "filter_applied": true,
+    "candidate_count": 12,
+    "eligible_count": 5,
+    "selected_count": 5,
+    "abstained": false,
+    "candidates": [
+      {
+        "chunk_id": "b165333c1d1e56698605",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 67,
+        "cosine": 0.6453075404412394,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "source": "day-18-scheduled-mcp/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 66,
+        "cosine": 0.6452393761620553,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "88c6430f2cd257a6f421",
+        "source": "day-18-scheduled-mcp/mcp_client.py",
+        "section": "mcp_client.py",
+        "start_line": 1,
+        "end_line": 20,
+        "cosine": 0.5603777836707001,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "e6d83ca30047e7e55078",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 61,
+        "end_line": 67,
+        "cosine": 0.5535253899996203,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "source": "day-18-scheduled-mcp/server.py",
+        "section": "server.py",
+        "start_line": 1,
+        "end_line": 41,
+        "cosine": 0.5378502308121412,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "3658466ee3627d701200",
+        "source": "day-18-scheduled-mcp/scheduler.py",
+        "section": "scheduler.py",
+        "start_line": 93,
+        "end_line": 117,
+        "cosine": 0.47870379303554805,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "b93d85b13e118389b073",
+        "source": "day-18-scheduled-mcp/main.py",
+        "section": "main.py",
+        "start_line": 1,
+        "end_line": 33,
+        "cosine": 0.467613387032789,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "f9482fed6cd0adc7e6e0",
+        "source": "day-18-scheduled-mcp/mcp_cli.py",
+        "section": "mcp_cli.py",
+        "start_line": 1,
+        "end_line": 46,
+        "cosine": 0.4625451952908619,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "71ed6136d5ba18776174",
+        "source": "day-18-scheduled-mcp/agent.py",
+        "section": "agent.py",
+        "start_line": 1,
+        "end_line": 134,
+        "cosine": 0.45455995284916406,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "ec42c1c2bc20ab181bf4",
+        "source": "day-18-scheduled-mcp/worker.py",
+        "section": "worker.py",
+        "start_line": 1,
+        "end_line": 33,
+        "cosine": 0.4509251148371805,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "c07fdfea71fbb401fdea",
+        "source": "day-18-scheduled-mcp/scheduler.py",
+        "section": "scheduler.py",
+        "start_line": 1,
+        "end_line": 108,
+        "cosine": 0.4272296646643569,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "53fb2bb561b73f03f096",
+        "source": "day-18-scheduled-mcp/github_api.py",
+        "section": "github_api.py",
+        "start_line": 1,
+        "end_line": 83,
+        "cosine": 0.36045021201044947,
+        "decision": "below_threshold"
+      }
+    ],
+    "sources": [
+      {
+        "chunk_id": "b165333c1d1e56698605",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "text": "# День 18 — Планировщик и фоновые задачи\n\n**[Пошаговая проверка каждого пункта](VERIFY.ru.md)** — команды для локального запуска и отдельная проверка на VPS.\n\nБублик через MCP ставит публичный GitHub-репозиторий на периодическое наблюдение. Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска. Агент по запросу читает сохранённую сводку через MCP и отвечает с её данными.\n\n## Схема\n\n- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.\n\nДанные `schedule.db` сохраняются между перезапусками; файл исключён из Git. Временные метки — UTC. Пропущенные во время простоя запуски не воспроизводятся пачкой: после старта worker выполнит каждый просроченный job один раз. Рекомендуется один экземпляр worker. Сообщения о завершении worker печатает в stdout/systemd journal; автоматическая отправка сообщений в чат не реализована.\n\n## Локальная проверка\n\nИз корня репозитория:\n\n```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```\n\nТесты выполняют регистрацию через настоящий MCP stdio, обработку фоновой задачи через fake API, восстановление SQLite, агрегацию и использование результата агентом с fake LLM. API-ключ и сетевые запросы не нужны.\n\n## Запуск\n\nВ терминале 1 (из корня проекта):\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```\n\nВ терминале 2 (из корня, с `GROQ_API_KEY` в `.env`):\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```\n\nСкажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой\n`.venv/bin/python day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP..\n\n## VPS (systemd)\n\nНа VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nСоздайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему.\n\n## Проверка пунктов задания\n\n| Пункт | Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает",
+        "score": 0.6453075404412394,
+        "start_line": 1,
+        "end_line": 67
+      },
+      {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "source": "day-18-scheduled-mcp/README.md",
+        "section": "README.md",
+        "text": "# Day 18 — Scheduled MCP jobs\n\n[Step-by-step verification (Russian)](VERIFY.ru.md) covers local checks and VPS deployment.\n\nBublik schedules periodic public GitHub repository observations through MCP. An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run. The agent can read the persisted summary via MCP and include it in its reply.\n\n## Components\n\n- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors.\n- `main.py` connects the Groq agent to those MCP tools.\n\nThe ignored `schedule.db` persists across restarts. All timestamps are UTC. After downtime, an overdue job runs once rather than replaying every missed interval. Run a single worker process. The worker outputs summaries to stdout or the systemd journal; it does not push messages to a chat.\n\n## Offline verification\n\nFrom the repository root:\n\n```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```\n\nTests cover a real MCP stdio session, durable schedules and samples, two scheduled executions, aggregation, recovery after an API error, and agent use of the saved result. Fake GitHub and LLM clients avoid network and API keys.\n\n## Run locally\n\nStart the worker in one terminal:\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```\n\nWith `GROQ_API_KEY` in the root `.env`, start the agent in another:\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```\n\nAsk it to monitor `Ly41k/ai-advent-llm-api` every 60 minutes and then request its summary. The first scheduled run occurs within 15 seconds. The agent and worker must share `BUBLIK_DB_PATH` if using a custom path. `worker.py --once` processes currently due jobs and exits.\n\n## VPS\n\nInstall dependencies on the VPS, edit `bublik-day18.service.example` with the actual user and paths, copy it to `/etc/systemd/system/bublik-day18.service`, and run:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nCreate the schedule via `main.py` on that VPS or another MCP client sharing the same database. The worker needs outbound access to `api.github.com`, but does not need a Groq key. `GITHUB_TOKEN` is optional for public repositories. Verify the actual VPS deployment separately with `systemctl` and `journalctl`.\n\n## Assignment checklist\n\n| Requirement | Implementation | Verification |\n|---|---|---|\n| Periodic MCP tool | `schedule_github_summary` plus worker | MCP integration test |\n| Save data | SQLite `jobs`, `snapshots`, `runs` | Restart test |\n| Scheduled execution | `next_run`, polling loop, systemd unit | Two executions with controlled time |\n| Aggregate result | `get_github_summary` | Latest values, deltas and agent reply test |\n| 24/7 operation | Worker supervised by systemd | Verify on the target VPS with systemctl, journalctl, service restart and host reboot |",
+        "score": 0.6452393761620553,
+        "start_line": 1,
+        "end_line": 66
+      },
+      {
+        "chunk_id": "88c6430f2cd257a6f421",
+        "source": "day-18-scheduled-mcp/mcp_client.py",
+        "section": "mcp_client.py",
+        "text": "\"\"\"Connect to the Day 18 MCP server over stdio.\"\"\"\nimport sys\nimport os\nfrom contextlib import asynccontextmanager\nfrom pathlib import Path\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\n\n\n@asynccontextmanager\nasync def connect_mcp():\n    params = StdioServerParameters(command=sys.executable,\n                                   args=[str(Path(__file__).with_name(\"server.py\"))],\n                                   env={key: os.environ[key] for key in\n                                        (\"BUBLIK_DB_PATH\", \"GITHUB_TOKEN\", \"GITHUB_API_BASE_URL\")\n                                        if key in os.environ})\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()\n            yield session",
+        "score": 0.5603777836707001,
+        "start_line": 1,
+        "end_line": 20
+      },
+      {
+        "chunk_id": "e6d83ca30047e7e55078",
+        "source": "day-18-scheduled-mcp/README.ru.md",
+        "section": "README.ru.md",
+        "text": "| Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает 24/7 | worker + пример unit systemd | проверяется на целевом VPS через systemctl, journalctl, restart и reboot |",
+        "score": 0.5535253899996203,
+        "start_line": 61,
+        "end_line": 67
+      },
+      {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "source": "day-18-scheduled-mcp/server.py",
+        "section": "server.py",
+        "text": "\"\"\"MCP tools for scheduling GitHub observations and reading summaries.\"\"\"\n\nfrom mcp.server.fastmcp import FastMCP\nfrom scheduler import Scheduler\n\nmcp = FastMCP(\"Bublik Day 18 Scheduler\")\nscheduler = Scheduler()\n\n\n@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.\n\n    Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        interval_minutes: Period in minutes, from 1 to 10080.\n    \"\"\"\n    return scheduler.schedule(owner, repo, interval_minutes)\n\n\n@mcp.tool()\ndef get_github_summary(owner: str, repo: str, limit: int = 20) -> dict:\n    \"\"\"Return saved observations and change since the oldest selected observation.\n\n    Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        limit: Number of recent snapshots to aggregate, from 1 to 100.\n    \"\"\"\n    return scheduler.summary(owner, repo, limit)\n\n\n@mcp.tool()\ndef list_scheduled_jobs() -> list[dict]:\n    \"\"\"List persisted schedules, including next execution and latest error.\"\"\"\n    return scheduler.jobs()\n\n\nif __name__ == \"__main__\":\n    mcp.run(transport=\"stdio\")",
+        "score": 0.5378502308121412,
+        "start_line": 1,
+        "end_line": 41
+      }
+    ],
+    "context": "[1] day-18-scheduled-mcp/README.ru.md:1-67 (README.ru.md)\n# День 18 — Планировщик и фоновые задачи\n\n**[Пошаговая проверка каждого пункта](VERIFY.ru.md)** — команды для локального запуска и отдельная проверка на VPS.\n\nБублик через MCP ставит публичный GitHub-репозиторий на периодическое наблюдение. Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска. Агент по запросу читает сохранённую сводку через MCP и отвечает с её данными.\n\n## Схема\n\n- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.\n\nДанные `schedule.db` сохраняются между перезапусками; файл исключён из Git. Временные метки — UTC. Пропущенные во время простоя запуски не воспроизводятся пачкой: после старта worker выполнит каждый просроченный job один раз. Рекомендуется один экземпляр worker. Сообщения о завершении worker печатает в stdout/systemd journal; автоматическая отправка сообщений в чат не реализована.\n\n## Локальная проверка\n\nИз корня репозитория:\n\n```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```\n\nТесты выполняют регистрацию через настоящий MCP stdio, обработку фоновой задачи через fake API, восстановление SQLite, агрегацию и использование результата агентом с fake LLM. API-ключ и сетевые запросы не нужны.\n\n## Запуск\n\nВ терминале 1 (из корня проекта):\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```\n\nВ терминале 2 (из корня, с `GROQ_API_KEY` в `.env`):\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```\n\nСкажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой\n`.venv/bin/python day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP..\n\n## VPS (systemd)\n\nНа VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nСоздайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему.\n\n## Проверка пунктов задания\n\n| Пункт | Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает\n\n[2] day-18-scheduled-mcp/README.md:1-66 (README.md)\n# Day 18 — Scheduled MCP jobs\n\n[Step-by-step verification (Russian)](VERIFY.ru.md) covers local checks and VPS deployment.\n\nBublik schedules periodic public GitHub repository observations through MCP. An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run. The agent can read the persisted summary via MCP and include it in its reply.\n\n## Components\n\n- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors.\n- `main.py` connects the Groq agent to those MCP tools.\n\nThe ignored `schedule.db` persists across restarts. All timestamps are UTC. After downtime, an overdue job runs once rather than replaying every missed interval. Run a single worker process. The worker outputs summaries to stdout or the systemd journal; it does not push messages to a chat.\n\n## Offline verification\n\nFrom the repository root:\n\n```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```\n\nTests cover a real MCP stdio session, durable schedules and samples, two scheduled executions, aggregation, recovery after an API error, and agent use of the saved result. Fake GitHub and LLM clients avoid network and API keys.\n\n## Run locally\n\nStart the worker in one terminal:\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```\n\nWith `GROQ_API_KEY` in the root `.env`, start the agent in another:\n\n```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```\n\nAsk it to monitor `Ly41k/ai-advent-llm-api` every 60 minutes and then request its summary. The first scheduled run occurs within 15 seconds. The agent and worker must share `BUBLIK_DB_PATH` if using a custom path. `worker.py --once` processes currently due jobs and exits.\n\n## VPS\n\nInstall dependencies on the VPS, edit `bublik-day18.service.example` with the actual user and paths, copy it to `/etc/systemd/system/bublik-day18.service`, and run:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nCreate the schedule via `main.py` on that VPS or another MCP client sharing the same database. The worker needs outbound access to `api.github.com`, but does not need a Groq key. `GITHUB_TOKEN` is optional for public repositories. Verify the actual VPS deployment separately with `systemctl` and `journalctl`.\n\n## Assignment checklist\n\n| Requirement | Implementation | Verification |\n|---|---|---|\n| Periodic MCP tool | `schedule_github_summary` plus worker | MCP integration test |\n| Save data | SQLite `jobs`, `snapshots`, `runs` | Restart test |\n| Scheduled execution | `next_run`, polling loop, systemd unit | Two executions with controlled time |\n| Aggregate result | `get_github_summary` | Latest values, deltas and agent reply test |\n| 24/7 operation | Worker supervised by systemd | Verify on the target VPS with systemctl, journalctl, service restart and host reboot |\n\n[3] day-18-scheduled-mcp/mcp_client.py:1-20 (mcp_client.py)\n\"\"\"Connect to the Day 18 MCP server over stdio.\"\"\"\nimport sys\nimport os\nfrom contextlib import asynccontextmanager\nfrom pathlib import Path\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\n\n\n@asynccontextmanager\nasync def connect_mcp():\n    params = StdioServerParameters(command=sys.executable,\n                                   args=[str(Path(__file__).with_name(\"server.py\"))],\n                                   env={key: os.environ[key] for key in\n                                        (\"BUBLIK_DB_PATH\", \"GITHUB_TOKEN\", \"GITHUB_API_BASE_URL\")\n                                        if key in os.environ})\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()\n            yield session\n\n[4] day-18-scheduled-mcp/README.ru.md:61-67 (README.ru.md)\n| Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает 24/7 | worker + пример unit systemd | проверяется на целевом VPS через systemctl, journalctl, restart и reboot |\n\n[5] day-18-scheduled-mcp/server.py:1-41 (server.py)\n\"\"\"MCP tools for scheduling GitHub observations and reading summaries.\"\"\"\n\nfrom mcp.server.fastmcp import FastMCP\nfrom scheduler import Scheduler\n\nmcp = FastMCP(\"Bublik Day 18 Scheduler\")\nscheduler = Scheduler()\n\n\n@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.\n\n    Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        interval_minutes: Period in minutes, from 1 to 10080.\n    \"\"\"\n    return scheduler.schedule(owner, repo, interval_minutes)\n\n\n@mcp.tool()\ndef get_github_summary(owner: str, repo: str, limit: int = 20) -> dict:\n    \"\"\"Return saved observations and change since the oldest selected observation.\n\n    Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        limit: Number of recent snapshots to aggregate, from 1 to 100.\n    \"\"\"\n    return scheduler.summary(owner, repo, limit)\n\n\n@mcp.tool()\ndef list_scheduled_jobs() -> list[dict]:\n    \"\"\"List persisted schedules, including next execution and latest error.\"\"\"\n    return scheduler.jobs()\n\n\nif __name__ == \"__main__\":\n    mcp.run(transport=\"stdio\")",
+    "lesson_retrieval": {
+      "lesson": "18",
+      "namespace_sources": [
+        "day-18-scheduled-mcp/README.md",
+        "day-18-scheduled-mcp/README.ru.md",
+        "day-18-scheduled-mcp/agent.py",
+        "day-18-scheduled-mcp/github_api.py",
+        "day-18-scheduled-mcp/main.py",
+        "day-18-scheduled-mcp/mcp_cli.py",
+        "day-18-scheduled-mcp/mcp_client.py",
+        "day-18-scheduled-mcp/scheduler.py",
+        "day-18-scheduled-mcp/server.py",
+        "day-18-scheduled-mcp/worker.py"
+      ],
+      "policy": "namespace_before_limits; maximum_actual_cosine_across_queries",
+      "branches": [
+        {
+          "query": "Когда назначается первый сбор на день 18?",
+          "candidates": [
+            {
+              "chunk_id": "b165333c1d1e56698605",
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "cosine": 0.49876147467323756
+            },
+            {
+              "chunk_id": "0e0d09735ed76bf66c2e",
+              "source": "day-18-scheduled-mcp/README.md",
+              "cosine": 0.48475347714768163
+            },
+            {
+              "chunk_id": "88c6430f2cd257a6f421",
+              "source": "day-18-scheduled-mcp/mcp_client.py",
+              "cosine": 0.4514726431642333
+            },
+            {
+              "chunk_id": "3658466ee3627d701200",
+              "source": "day-18-scheduled-mcp/scheduler.py",
+              "cosine": 0.3946275501473868
+            },
+            {
+              "chunk_id": "18589383c0bbc7f10af1",
+              "source": "day-18-scheduled-mcp/server.py",
+              "cosine": 0.38117237999445325
+            },
+            {
+              "chunk_id": "c07fdfea71fbb401fdea",
+              "source": "day-18-scheduled-mcp/scheduler.py",
+              "cosine": 0.37108443678275005
+            },
+            {
+              "chunk_id": "ec42c1c2bc20ab181bf4",
+              "source": "day-18-scheduled-mcp/worker.py",
+              "cosine": 0.36138419298728097
+            },
+            {
+              "chunk_id": "f9482fed6cd0adc7e6e0",
+              "source": "day-18-scheduled-mcp/mcp_cli.py",
+              "cosine": 0.3550770074581199
+            },
+            {
+              "chunk_id": "71ed6136d5ba18776174",
+              "source": "day-18-scheduled-mcp/agent.py",
+              "cosine": 0.3457296091022672
+            },
+            {
+              "chunk_id": "b93d85b13e118389b073",
+              "source": "day-18-scheduled-mcp/main.py",
+              "cosine": 0.33537161374182967
+            },
+            {
+              "chunk_id": "e6d83ca30047e7e55078",
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "cosine": 0.3247981728068436
+            },
+            {
+              "chunk_id": "53fb2bb561b73f03f096",
+              "source": "day-18-scheduled-mcp/github_api.py",
+              "cosine": 0.3151826992055919
+            }
+          ]
+        },
+        {
+          "query": "Когда назначается первый сбор на день 18?\nIndexed document titles: День 18 — Планировщик и фоновые задачи | Day 18 — Scheduled MCP jobs",
+          "candidates": [
+            {
+              "chunk_id": "b165333c1d1e56698605",
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "cosine": 0.6453075404412394
+            },
+            {
+              "chunk_id": "0e0d09735ed76bf66c2e",
+              "source": "day-18-scheduled-mcp/README.md",
+              "cosine": 0.6452393761620553
+            },
+            {
+              "chunk_id": "88c6430f2cd257a6f421",
+              "source": "day-18-scheduled-mcp/mcp_client.py",
+              "cosine": 0.5603777836707001
+            },
+            {
+              "chunk_id": "e6d83ca30047e7e55078",
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "cosine": 0.5535253899996203
+            },
+            {
+              "chunk_id": "18589383c0bbc7f10af1",
+              "source": "day-18-scheduled-mcp/server.py",
+              "cosine": 0.5378502308121412
+            },
+            {
+              "chunk_id": "3658466ee3627d701200",
+              "source": "day-18-scheduled-mcp/scheduler.py",
+              "cosine": 0.47870379303554805
+            },
+            {
+              "chunk_id": "b93d85b13e118389b073",
+              "source": "day-18-scheduled-mcp/main.py",
+              "cosine": 0.467613387032789
+            },
+            {
+              "chunk_id": "f9482fed6cd0adc7e6e0",
+              "source": "day-18-scheduled-mcp/mcp_cli.py",
+              "cosine": 0.4625451952908619
+            },
+            {
+              "chunk_id": "71ed6136d5ba18776174",
+              "source": "day-18-scheduled-mcp/agent.py",
+              "cosine": 0.45455995284916406
+            },
+            {
+              "chunk_id": "ec42c1c2bc20ab181bf4",
+              "source": "day-18-scheduled-mcp/worker.py",
+              "cosine": 0.4509251148371805
+            },
+            {
+              "chunk_id": "c07fdfea71fbb401fdea",
+              "source": "day-18-scheduled-mcp/scheduler.py",
+              "cosine": 0.4272296646643569
+            },
+            {
+              "chunk_id": "53fb2bb561b73f03f096",
+              "source": "day-18-scheduled-mcp/github_api.py",
+              "cosine": 0.36045021201044947
+            }
+          ]
+        }
+      ]
+    },
+    "index": {
+      "strategy": "fixed",
+      "model": "bge-m3",
+      "dimension": 1024,
+      "limit_tokens": 500,
+      "overlap_tokens": 75,
+      "revision": "4d3a3b95be650ec2d85b7a9f64e77b941ab95354@fdbdbc17c9f1cbbc",
+      "built_at": "2026-10-04 12:10:10"
+    },
+    "answer_model": "qwen2.5:14b",
+    "verifier_model": "qwen2.5:14b",
+    "grounding_protocol": "verbatim-extractive-v14",
+    "answer_style": "extractive",
+    "coverage_policy": "strict",
+    "quote_catalog": {
+      "q1_1": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "# День 18 — Планировщик и фоновые задачи",
+        "heading": null,
+        "kind": "heading"
+      },
+      "q1_2": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "**[Пошаговая проверка каждого пункта](VERIFY.ru.md)** — команды для локального запуска и отдельная проверка на VPS.",
+        "heading": "День 18 — Планировщик и фоновые задачи",
+        "kind": "prose"
+      },
+      "q1_3": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Бублик через MCP ставит публичный GitHub-репозиторий на периодическое наблюдение. Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска. Агент по запросу читает сохранённую сводку через MCP и отвечает с её данными.",
+        "heading": "День 18 — Планировщик и фоновые задачи",
+        "kind": "prose"
+      },
+      "q1_4": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.\n- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_5": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_6": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_7": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_8": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_9": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+        "heading": "Схема",
+        "kind": "list"
+      },
+      "q1_10": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Данные `schedule.db` сохраняются между перезапусками; файл исключён из Git. Временные метки — UTC. Пропущенные во время простоя запуски не воспроизводятся пачкой: после старта worker выполнит каждый просроченный job один раз. Рекомендуется один экземпляр worker. Сообщения о завершении worker печатает в stdout/systemd journal; автоматическая отправка сообщений в чат не реализована.",
+        "heading": "Схема",
+        "kind": "prose"
+      },
+      "q1_11": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "## Локальная проверка",
+        "heading": "Схема",
+        "kind": "heading"
+      },
+      "q1_12": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Из корня репозитория:",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_13": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```",
+        "heading": "Локальная проверка",
+        "kind": "code"
+      },
+      "q1_14": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Тесты выполняют регистрацию через настоящий MCP stdio, обработку фоновой задачи через fake API, восстановление SQLite, агрегацию и использование результата агентом с fake LLM. API-ключ и сетевые запросы не нужны.",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_15": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "В терминале 1 (из корня проекта):",
+        "heading": "Запуск",
+        "kind": "prose"
+      },
+      "q1_16": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```",
+        "heading": "Запуск",
+        "kind": "code"
+      },
+      "q1_17": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "В терминале 2 (из корня, с `GROQ_API_KEY` в `.env`):",
+        "heading": "Запуск",
+        "kind": "prose"
+      },
+      "q1_18": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```",
+        "heading": "Запуск",
+        "kind": "code"
+      },
+      "q1_19": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Скажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой\n`.venv/bin/python day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP..",
+        "heading": "Запуск",
+        "kind": "prose"
+      },
+      "q1_20": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Скажите Бублику: «Каждые 60 минут собирай данные репозитория Ly41k/ai-advent-llm-api». Worker получит первый снимок не позднее 15 секунд после создания расписания. Затем спросите: «Покажи сводку Ly41k/ai-advent-llm-api». Без Groq можно проверить worker командой",
+        "heading": "Запуск",
+        "kind": "prose"
+      },
+      "q1_21": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "`.venv/bin/python day-18-scheduled-mcp/worker.py --once` после создания расписания через MCP..",
+        "heading": "Запуск",
+        "kind": "prose"
+      },
+      "q1_22": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "## VPS (systemd)",
+        "heading": "Запуск",
+        "kind": "heading"
+      },
+      "q1_23": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "На VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:",
+        "heading": "VPS (systemd)",
+        "kind": "prose"
+      },
+      "q1_24": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```",
+        "heading": "VPS (systemd)",
+        "kind": "code"
+      },
+      "q1_25": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "Создайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему.",
+        "heading": "VPS (systemd)",
+        "kind": "prose"
+      },
+      "q1_26": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "## Проверка пунктов задания",
+        "heading": "VPS (systemd)",
+        "kind": "heading"
+      },
+      "q1_27": {
+        "chunk_id": "b165333c1d1e56698605",
+        "quote": "| Пункт | Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает",
+        "heading": "Проверка пунктов задания",
+        "kind": "table"
+      },
+      "q2_1": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "# Day 18 — Scheduled MCP jobs",
+        "heading": null,
+        "kind": "heading"
+      },
+      "q2_2": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "[Step-by-step verification (Russian)](VERIFY.ru.md) covers local checks and VPS deployment.",
+        "heading": "Day 18 — Scheduled MCP jobs",
+        "kind": "prose"
+      },
+      "q2_3": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Bublik schedules periodic public GitHub repository observations through MCP. An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run. The agent can read the persisted summary via MCP and include it in its reply.",
+        "heading": "Day 18 — Scheduled MCP jobs",
+        "kind": "prose"
+      },
+      "q2_4": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "## Components",
+        "heading": "Day 18 — Scheduled MCP jobs",
+        "kind": "heading"
+      },
+      "q2_5": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors.\n- `main.py` connects the Groq agent to those MCP tools.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_6": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_7": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_8": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_9": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `list_scheduled_jobs()` shows next run times and errors.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_10": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "- `main.py` connects the Groq agent to those MCP tools.",
+        "heading": "Components",
+        "kind": "list"
+      },
+      "q2_11": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "The ignored `schedule.db` persists across restarts. All timestamps are UTC. After downtime, an overdue job runs once rather than replaying every missed interval. Run a single worker process. The worker outputs summaries to stdout or the systemd journal; it does not push messages to a chat.",
+        "heading": "Components",
+        "kind": "prose"
+      },
+      "q2_12": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "## Offline verification",
+        "heading": "Components",
+        "kind": "heading"
+      },
+      "q2_13": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "From the repository root:",
+        "heading": "Offline verification",
+        "kind": "prose"
+      },
+      "q2_14": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "```bash\npython3 -m venv .venv\n.venv/bin/python -m pip install -r day-18-scheduled-mcp/requirements.txt\n.venv/bin/python day-18-scheduled-mcp/test_day18.py -v\n```",
+        "heading": "Offline verification",
+        "kind": "code"
+      },
+      "q2_15": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Tests cover a real MCP stdio session, durable schedules and samples, two scheduled executions, aggregation, recovery after an API error, and agent use of the saved result. Fake GitHub and LLM clients avoid network and API keys.",
+        "heading": "Offline verification",
+        "kind": "prose"
+      },
+      "q2_16": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "## Run locally",
+        "heading": "Offline verification",
+        "kind": "heading"
+      },
+      "q2_17": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Start the worker in one terminal:",
+        "heading": "Run locally",
+        "kind": "prose"
+      },
+      "q2_18": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "```bash\n.venv/bin/python day-18-scheduled-mcp/worker.py\n```",
+        "heading": "Run locally",
+        "kind": "code"
+      },
+      "q2_19": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "With `GROQ_API_KEY` in the root `.env`, start the agent in another:",
+        "heading": "Run locally",
+        "kind": "prose"
+      },
+      "q2_20": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "```bash\n.venv/bin/python day-18-scheduled-mcp/main.py\n```",
+        "heading": "Run locally",
+        "kind": "code"
+      },
+      "q2_21": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Ask it to monitor `Ly41k/ai-advent-llm-api` every 60 minutes and then request its summary. The first scheduled run occurs within 15 seconds. The agent and worker must share `BUBLIK_DB_PATH` if using a custom path. `worker.py --once` processes currently due jobs and exits.",
+        "heading": "Run locally",
+        "kind": "prose"
+      },
+      "q2_22": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Install dependencies on the VPS, edit `bublik-day18.service.example` with the actual user and paths, copy it to `/etc/systemd/system/bublik-day18.service`, and run:",
+        "heading": "VPS",
+        "kind": "prose"
+      },
+      "q2_23": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```",
+        "heading": "VPS",
+        "kind": "code"
+      },
+      "q2_24": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "Create the schedule via `main.py` on that VPS or another MCP client sharing the same database. The worker needs outbound access to `api.github.com`, but does not need a Groq key. `GITHUB_TOKEN` is optional for public repositories. Verify the actual VPS deployment separately with `systemctl` and `journalctl`.",
+        "heading": "VPS",
+        "kind": "prose"
+      },
+      "q2_25": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "## Assignment checklist",
+        "heading": "VPS",
+        "kind": "heading"
+      },
+      "q2_26": {
+        "chunk_id": "0e0d09735ed76bf66c2e",
+        "quote": "| Requirement | Implementation | Verification |\n|---|---|---|\n| Periodic MCP tool | `schedule_github_summary` plus worker | MCP integration test |\n| Save data | SQLite `jobs`, `snapshots`, `runs` | Restart test |\n| Scheduled execution | `next_run`, polling loop, systemd unit | Two executions with controlled time |\n| Aggregate result | `get_github_summary` | Latest values, deltas and agent reply test |\n| 24/7 operation | Worker supervised by systemd | Verify on the target VPS with systemctl, journalctl, service restart and host reboot |",
+        "heading": "Assignment checklist",
+        "kind": "table"
+      },
+      "q3_1": {
+        "chunk_id": "88c6430f2cd257a6f421",
+        "quote": "\"\"\"Connect to the Day 18 MCP server over stdio.\"\"\"\nimport sys\nimport os\nfrom contextlib import asynccontextmanager\nfrom pathlib import Path\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client",
+        "heading": null,
+        "kind": "code"
+      },
+      "q3_2": {
+        "chunk_id": "88c6430f2cd257a6f421",
+        "quote": "@asynccontextmanager\nasync def connect_mcp():\n    params = StdioServerParameters(command=sys.executable,\n                                   args=[str(Path(__file__).with_name(\"server.py\"))],\n                                   env={key: os.environ[key] for key in\n                                        (\"BUBLIK_DB_PATH\", \"GITHUB_TOKEN\", \"GITHUB_API_BASE_URL\")\n                                        if key in os.environ})\n    async with stdio_client(params) as (read, write):\n        async with ClientSession(read, write) as session:\n            await session.initialize()\n            yield session",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_1": {
+        "chunk_id": "e6d83ca30047e7e55078",
+        "quote": "| Реализация | Проверка |\n|---|---|---|\n| MCP-инструмент с периодическим выполнением | `schedule_github_summary` + `worker.py` | `McpTests`, `SchedulerTests` |\n| Данные сохраняются | `jobs`, `snapshots`, `runs` в SQLite | восстановление после создания нового `Scheduler` |\n| Выполняется по расписанию | `next_run`, периодический цикл, `Restart=always` в systemd | повторный сбор при сдвиге часов, отсутствие преждевременного повтора |\n| Возвращает агрегированный результат | `get_github_summary`: latest, change, samples | проверка двух снимков и ответа агента |\n| Работает 24/7 | worker + пример unit systemd | проверяется на целевом VPS через systemctl, journalctl, restart и reboot |",
+        "heading": null,
+        "kind": "table"
+      },
+      "q5_1": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "\"\"\"MCP tools for scheduling GitHub observations and reading summaries.\"\"\"",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_2": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "from mcp.server.fastmcp import FastMCP\nfrom scheduler import Scheduler",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_3": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "mcp = FastMCP(\"Bublik Day 18 Scheduler\")\nscheduler = Scheduler()",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_4": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "@mcp.tool()\ndef schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:\n    \"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_5": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        interval_minutes: Period in minutes, from 1 to 10080.\n    \"\"\"\n    return scheduler.schedule(owner, repo, interval_minutes)",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_6": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "@mcp.tool()\ndef get_github_summary(owner: str, repo: str, limit: int = 20) -> dict:\n    \"\"\"Return saved observations and change since the oldest selected observation.",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_7": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "Args:\n        owner: GitHub repository owner.\n        repo: GitHub repository name.\n        limit: Number of recent snapshots to aggregate, from 1 to 100.\n    \"\"\"\n    return scheduler.summary(owner, repo, limit)",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_8": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "@mcp.tool()\ndef list_scheduled_jobs() -> list[dict]:\n    \"\"\"List persisted schedules, including next execution and latest error.\"\"\"\n    return scheduler.jobs()",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_9": {
+        "chunk_id": "18589383c0bbc7f10af1",
+        "quote": "if __name__ == \"__main__\":\n    mcp.run(transport=\"stdio\")",
+        "heading": null,
+        "kind": "code"
+      }
+    },
+    "selection_catalog_ids": [
+      "q1_1",
+      "q1_2",
+      "q1_3",
+      "q1_4",
+      "q1_10",
+      "q1_11",
+      "q1_12",
+      "q1_13",
+      "q1_14",
+      "q1_15",
+      "q1_16",
+      "q1_17",
+      "q1_18",
+      "q1_19",
+      "q1_22",
+      "q1_23",
+      "q1_24",
+      "q1_25",
+      "q1_26",
+      "q1_27",
+      "q2_1",
+      "q2_2",
+      "q2_3",
+      "q2_4",
+      "q2_5",
+      "q2_11",
+      "q2_12",
+      "q2_13",
+      "q2_14",
+      "q2_15",
+      "q2_16",
+      "q2_17",
+      "q2_18",
+      "q2_19",
+      "q2_20",
+      "q2_21",
+      "q2_22",
+      "q2_23",
+      "q2_24",
+      "q2_25",
+      "q2_26",
+      "q3_1",
+      "q3_2",
+      "q4_1",
+      "q5_1",
+      "q5_2",
+      "q5_3",
+      "q5_4",
+      "q5_5",
+      "q5_6",
+      "q5_7",
+      "q5_8",
+      "q5_9"
+    ],
+    "coverage_requirements": [
+      {
+        "id": "question",
+        "need": "Answer the original question in full, including every requested part."
+      }
+    ],
+    "answer_quote_ids": [
+      "q5_4",
+      "q1_4"
+    ],
+    "answer_proof_catalog": {
+      "p1_1": {
+        "id": "p1_1",
+        "text": "@mcp.tool()",
+        "claim_id": 1,
+        "quote_id": "q5_4",
+        "chunk_id": "18589383c0bbc7f10af1",
+        "command_only": false
+      },
+      "p1_2": {
+        "id": "p1_2",
+        "text": "def schedule_github_summary(owner: str, repo: str, interval_minutes: int = 60) -> dict:",
+        "claim_id": 1,
+        "quote_id": "q5_4",
+        "chunk_id": "18589383c0bbc7f10af1",
+        "command_only": false
+      },
+      "p1_3": {
+        "id": "p1_3",
+        "text": "\"\"\"Schedule recurring GitHub repository snapshots; first snapshot is due immediately.",
+        "claim_id": 1,
+        "quote_id": "q5_4",
+        "chunk_id": "18589383c0bbc7f10af1",
+        "command_only": false
+      },
+      "p2_1": {
+        "id": "p2_1",
+        "text": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      },
+      "p2_2": {
+        "id": "p2_2",
+        "text": "- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      },
+      "p2_3": {
+        "id": "p2_3",
+        "text": "Ошибки также записываются; повторный запуск будет через заданный интервал.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      },
+      "p2_4": {
+        "id": "p2_4",
+        "text": "- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      },
+      "p2_5": {
+        "id": "p2_5",
+        "text": "- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      },
+      "p2_6": {
+        "id": "p2_6",
+        "text": "- `main.py` запускает интерактивного агента с Groq, который получает схемы MCP и использует результаты инструментов.",
+        "claim_id": 2,
+        "quote_id": "q1_4",
+        "chunk_id": "b165333c1d1e56698605",
+        "command_only": false
+      }
+    }
+  },
+  "resolved_question": "Когда назначается первый сбор на день 18?",
+  "session_id": "7f95cd22a59c49a088a9f52d37726d5c",
+  "turn_id": 65,
+  "task_state": {
+    "goal": {
+      "value": "Когда назначается первый сбор на день 18?",
+      "evidence": "Когда назначается первый сбор на день 18?",
+      "turn": 65,
+      "origin": "initial_question"
+    },
+    "constraints": {},
+    "clarifications": {},
+    "terms": {}
+  },
+  "conversation": {
+    "warnings": [],
+    "raw": "{\n  \"resolved_question\": \"Когда назначается первый сбор на день 18?\",\n  \"needs_clarification\": false,\n  \"updates\": []\n}",
+    "recent_history": [],
+    "resolved_question": "Когда назначается первый сбор на день 18?",
+    "model_needs_clarification": false,
+    "effective_needs_clarification": false,
+    "initial_goal_from_user_request": true
+  }
+}

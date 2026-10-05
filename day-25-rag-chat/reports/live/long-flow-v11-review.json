@@ -1,0 +1,26 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 50,
+  "functional_check_passed": false,
+  "memory_check_passed": true,
+  "planner_warnings": [],
+  "new_clarification_exact": true,
+  "fresh_dense_branches": 2,
+  "top_source": "day-20-mcp-orchestration/README.ru.md",
+  "top_cosine": 0.643571123736584,
+  "selected_quote_ids": [
+    "q1_3",
+    "q1_10",
+    "q1_11"
+  ],
+  "auditor_original": {
+    "reason": "Порядок выполнения шагов не полностью указан в данных.",
+    "proof_ids": [
+      "p2_1",
+      "p2_2"
+    ],
+    "covered": false
+  },
+  "cause": "Selected proof p2_1/p2_2 contains all five tool calls in a multiline arrow chain. The v11 compact mixed-table audit omitted the consecutive-block navigation introduced in v7. Raw negative verdict is preserved.",
+  "live_v12_quality_verified": false
+}

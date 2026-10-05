@@ -1,0 +1,22 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 63,
+  "functional_check_passed": false,
+  "checks": {
+    "return_to_goal_resolved_as_day20": true,
+    "memory_unchanged": true,
+    "fresh_dense_branches": 2,
+    "retrieval_lesson": "20",
+    "no_planning_warnings": true,
+    "published_answer_supported": false
+  },
+  "selector_attempts": 2,
+  "published_sources": [],
+  "manual_review": {
+    "goal_return_and_memory_passed": true,
+    "final_answer_check_passed": false,
+    "note": "Both recorded initial selections contain q1_9-q1_14; q1_14 is an installation introduction whose following code q1_15 is absent. The final-output guard correctly rejects the orphan. However v15 applies the guard before the subset-refinement stage, preventing that model from omitting the unrelated introduction. No final candidate or coverage audit is reached. Source retrieval and goal resolution work; this live answer fails. v16 permits only a model-chosen valid initial-ID subset to remove the orphan, retains the dependency on missing partner in refinement DATA, and validates final fragments before the unchanged Day24 audit."
+  },
+  "original_sha256": "48ea5fa03952aabdc601cf2360b5f08f4b8fa57a633bf2492ae9e07b75f36e7b",
+  "full_live_long_scenarios_passed": false
+}

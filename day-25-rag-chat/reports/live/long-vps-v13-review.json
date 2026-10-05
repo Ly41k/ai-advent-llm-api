@@ -1,0 +1,24 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 60,
+  "functional_check_passed": true,
+  "checks": {
+    "sources_contract": true,
+    "exact_quotes_and_line_ranges": true,
+    "memory_unchanged": true,
+    "fresh_two_dense_branches": true,
+    "source_day20": true,
+    "vps_worker_not_needed_explicitly_proven": true,
+    "refinement_subset_valid": true,
+    "coverage_supported": true,
+    "no_errors_or_warnings": true
+  },
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "concise": true,
+    "note": "One complete literal paragraph directly says VPS and worker are not needed; proof p1_5 is exactly that sentence. Saved user preference Без VPS is not used as evidence. Every category of task state is unchanged. Initial two quotes were reduced to the one supporting passage."
+  },
+  "full_live_long_scenarios_passed": false
+}

@@ -1,0 +1,859 @@
+{
+  "original_sha256": "394c9fb1f2355255668f7da9a25b846d493b664b9906eeef5d2829b30e573ac0",
+  "live_ollama_used": true,
+  "summary": {
+    "scenarios": 2,
+    "user_turns": 24,
+    "messages_including_answers": 48,
+    "answered": 23,
+    "refused": 1,
+    "quotes": 45,
+    "all_published_quotes_literal": true,
+    "all_source_bindings_or_honest_refusal_valid": true,
+    "all_old_memory_provenance_preserved": true,
+    "both_history_complete": true,
+    "all_final_task_state_checks_pass": true,
+    "manual_acceptable_turns": 22,
+    "important_issues": 2,
+    "critical_data_loss_or_fabricated_sources": false,
+    "all_checks_pass": false,
+    "live_v22_summary_check_pending": true,
+    "all_v22_clean_long_dialogues_verified": false,
+    "minor_polish_deferred_per_user": true
+  },
+  "scenario_sessions": {
+    "scheduler": "57074d88adac45729fa3b7f923dc42bf",
+    "orchestration": "7a9e09bb97c74de4b2353b7513ddde24"
+  },
+  "original_auto_summary": {
+    "scenarios": 2,
+    "user_turns": 24,
+    "messages_including_answers": 48,
+    "all_checks_pass": false,
+    "model_quality_verified": false,
+    "manual_source_review_required": true,
+    "live_ollama_used": true,
+    "restart_after_turn": 6
+  },
+  "turns": [
+    {
+      "scenario": "scheduler",
+      "number": 1,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 97,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_3",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            5,
+            5
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_16",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            33,
+            35
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 2,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 98,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_4",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 3,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 99,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_3",
+          "source": "day-18-scheduled-mcp/README.md",
+          "lines": [
+            5,
+            5
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_11",
+          "source": "day-18-scheduled-mcp/README.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q2_3",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            5,
+            5
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q2_10",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 4,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 100,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_4",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 5,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 101,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_4",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_19",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            43,
+            44
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 6,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 102,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q2_4",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 7,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 103,
+      "status": "answered",
+      "review": "IMPORTANT",
+      "note": "Основной смысл результата summary подтверждён, но дополнительная цитата server.py начинается внутри docstring и содержит незакрытый delimiter; source filter исправлен в v22.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_5",
+          "source": "day-18-scheduled-mcp/README.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q4_7",
+          "source": "day-18-scheduled-mcp/server.py",
+          "lines": [
+            26,
+            31
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": false
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 8,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 104,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_4",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            9,
+            13
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q4_8",
+          "source": "day-18-scheduled-mcp/server.py",
+          "lines": [
+            34,
+            37
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 9,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 105,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_10",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q2_11",
+          "source": "day-18-scheduled-mcp/README.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 10,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 106,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_10",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 11,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 107,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_25",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            57,
+            57
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q2_24",
+          "source": "day-18-scheduled-mcp/README.md",
+          "lines": [
+            56,
+            56
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "scheduler",
+      "number": 12,
+      "session_id": "57074d88adac45729fa3b7f923dc42bf",
+      "turn_id": 108,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_10",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            15,
+            15
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_24",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            50,
+            55
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 1,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 109,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_2",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            3,
+            3
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_3",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            5,
+            9
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 2,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 110,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_3",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            5,
+            9
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_9",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            11,
+            11
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            13,
+            16
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 3,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 111,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_3",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            5,
+            9
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_9",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            11,
+            11
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            13,
+            16
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 4,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 112,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_9",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            11,
+            11
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            13,
+            16
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 5,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 113,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_11",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            18,
+            18
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 6,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 114,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_11",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            18,
+            18
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 7,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 115,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_9",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            11,
+            11
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            13,
+            16
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_11",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            18,
+            18
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 8,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 116,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_12",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            20,
+            20
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 9,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 117,
+      "status": "unknown",
+      "review": "IMPORTANT",
+      "note": "Ошибочный безопасный отказ: q1_12 явно описывает --task summary; auditor ошибочно требует повторить день 20 в тексте цитаты вопреки metadata источника. Compact route audit исправлен в v22; живая проверка ожидается.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": []
+    },
+    {
+      "scenario": "orchestration",
+      "number": 10,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 118,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_3",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            5,
+            5
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_16",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            33,
+            35
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_24",
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "lines": [
+            50,
+            55
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 11,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 119,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q1_9",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            11,
+            11
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        },
+        {
+          "quote_id": "q1_10",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            13,
+            16
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    },
+    {
+      "scenario": "orchestration",
+      "number": 12,
+      "session_id": "7a9e09bb97c74de4b2353b7513ddde24",
+      "turn_id": 120,
+      "status": "answered",
+      "review": "PASS",
+      "note": "Смысл запрошенного ответа и источник подтверждены; избыточные детали/дубли отложены.",
+      "source_contract_or_honest_refusal": true,
+      "old_goal_exact": true,
+      "old_memory_provenance_exact": true,
+      "fresh_retrieval_branches": 2,
+      "quotes": [
+        {
+          "quote_id": "q3_4",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "lines": [
+            50,
+            50
+          ],
+          "literal_within_reported_lines": true,
+          "fragment_complete_v22_rule": true
+        }
+      ]
+    }
+  ],
+  "literal_errors": [],
+  "source_binding_errors": [],
+  "fragment_errors": [
+    [
+      "scheduler",
+      7,
+      "q4_7"
+    ]
+  ],
+  "restart_scope": "Store and index close/reopen after turn6, not independently launched fresh process."
+}

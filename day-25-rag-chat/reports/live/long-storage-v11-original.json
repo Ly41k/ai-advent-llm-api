@@ -1,0 +1,1012 @@
+{
+  "question": "Ограничение: Проверяем сохранённый файл.\nКакие инструменты публикует сервер storage на день 20?",
+  "status": "answered",
+  "answer": "| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл | [1]",
+  "clarification": "",
+  "sources": [
+    {
+      "id": 1,
+      "chunk_id": "7e5cad922782fa195336",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "section": "README.ru.md",
+      "start_line": 1,
+      "end_line": 50,
+      "cosine": 0.666774796230011
+    }
+  ],
+  "quotes": [
+    {
+      "claim_id": 1,
+      "source_id": 1,
+      "chunk_id": "7e5cad922782fa195336",
+      "quote": "| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "section": "README.ru.md",
+      "start_line": 5,
+      "end_line": 9,
+      "quote_id": "q1_3"
+    }
+  ],
+  "claims": [
+    {
+      "id": 1,
+      "text": "| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+      "citations": [
+        {
+          "chunk_id": "7e5cad922782fa195336",
+          "quote": "| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+          "source": "day-20-mcp-orchestration/README.ru.md",
+          "section": "README.ru.md",
+          "start_line": 5,
+          "end_line": 9,
+          "quote_id": "q1_3"
+        }
+      ]
+    }
+  ],
+  "reason": "supported",
+  "validation": {
+    "quotes_exact": true,
+    "sources_valid": true,
+    "semantic_supported": false,
+    "scope_supported": false,
+    "evidence_supported": true,
+    "verbatim_answer": true,
+    "coverage_supported": true,
+    "semantic_verifier_used": false,
+    "proof_kind": "verbatim_source_identity",
+    "coverage_policy": "strict",
+    "manual_review_required": false,
+    "attempts": 1,
+    "errors": [],
+    "model_calls": [
+      {
+        "stage": "extractive_selector",
+        "raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q1_3\"]}",
+        "prompt_characters": 22948,
+        "ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 9422,
+          "eval_count": 17,
+          "total_duration": 104903673584,
+          "load_duration": 6775834,
+          "prompt_eval_duration": 103249822000,
+          "eval_duration": 1564923000,
+          "prompt_characters": 33070,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        }
+      },
+      {
+        "stage": "coverage_auditor",
+        "requirement_id": "question",
+        "raw_response": "{\n  \"reason\": \"Запрошенные инструменты сервера storage найдены в данных.\",\n  \"proof_ids\": [\"p1_5\"],\n  \"covered\": true\n}",
+        "prompt_characters": 2345,
+        "ollama": {
+          "done_reason": "stop",
+          "prompt_eval_count": 1277,
+          "eval_count": 43,
+          "total_duration": 15699061792,
+          "load_duration": 1394333,
+          "prompt_eval_duration": 11500700000,
+          "eval_duration": 3432095000,
+          "prompt_characters": 3732,
+          "num_ctx": 32768,
+          "num_predict": 2500
+        }
+      }
+    ],
+    "format_adjustments": [],
+    "coverage_verdict": {
+      "checks": [
+        {
+          "id": "question",
+          "reason": "Запрошенные инструменты сервера storage найдены в данных.",
+          "covered": true,
+          "proof_ids": [
+            "p1_5"
+          ],
+          "proofs": [
+            {
+              "id": "p1_5",
+              "text": "| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+              "claim_id": 1,
+              "quote_id": "q1_3",
+              "chunk_id": "7e5cad922782fa195336",
+              "command_only": false
+            }
+          ],
+          "answer_excerpt": "| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |"
+        }
+      ]
+    }
+  },
+  "retrieval": {
+    "mode": "rewrite_filter",
+    "question": "Какие инструменты публикует сервер storage на день 20?",
+    "rewrite": {
+      "original": "Какие инструменты публикует сервер storage на день 20?",
+      "query": "Какие инструменты публикует сервер storage на день 20?\nSearch vocabulary: tools discovery routing",
+      "method": "heuristic",
+      "reason": "vocabulary_expansion"
+    },
+    "settings": {
+      "candidate_k": 20,
+      "final_k": 5,
+      "min_similarity": 0.5,
+      "strategy": "fixed",
+      "rewrite_method": "heuristic"
+    },
+    "filter_applied": true,
+    "candidate_count": 12,
+    "eligible_count": 7,
+    "selected_count": 5,
+    "abstained": false,
+    "candidates": [
+      {
+        "chunk_id": "7e5cad922782fa195336",
+        "source": "day-20-mcp-orchestration/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 1,
+        "end_line": 50,
+        "cosine": 0.666774796230011,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "source": "day-20-mcp-orchestration/README.md",
+        "section": "README.md",
+        "start_line": 1,
+        "end_line": 40,
+        "cosine": 0.6438364533937193,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "source": "day-20-mcp-orchestration/README.ru.md",
+        "section": "README.ru.md",
+        "start_line": 42,
+        "end_line": 63,
+        "cosine": 0.5567399955744534,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "source": "day-20-mcp-orchestration/agent.py",
+        "section": "agent.py",
+        "start_line": 1,
+        "end_line": 112,
+        "cosine": 0.5557902086578673,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "911a11e54effe4927f42",
+        "source": "day-20-mcp-orchestration/mcp_registry.py",
+        "section": "mcp_registry.py",
+        "start_line": 1,
+        "end_line": 77,
+        "cosine": 0.5406809835181168,
+        "decision": "selected"
+      },
+      {
+        "chunk_id": "72049fac8c4bf817ff5f",
+        "source": "day-20-mcp-orchestration/agent.py",
+        "section": "agent.py",
+        "start_line": 98,
+        "end_line": 148,
+        "cosine": 0.535420829591494,
+        "decision": "final_k_limit"
+      },
+      {
+        "chunk_id": "773047af01c14bacacb3",
+        "source": "day-20-mcp-orchestration/github_server.py",
+        "section": "github_server.py",
+        "start_line": 1,
+        "end_line": 16,
+        "cosine": 0.5303544360011826,
+        "decision": "final_k_limit"
+      },
+      {
+        "chunk_id": "deb908aa7830ff0ec141",
+        "source": "day-20-mcp-orchestration/storage_server.py",
+        "section": "storage_server.py",
+        "start_line": 1,
+        "end_line": 56,
+        "cosine": 0.49551224052802656,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "f043851d00b817bd8d43",
+        "source": "day-20-mcp-orchestration/github_api.py",
+        "section": "github_api.py",
+        "start_line": 1,
+        "end_line": 37,
+        "cosine": 0.4954580967134302,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "69208adc7f6cb4850537",
+        "source": "day-20-mcp-orchestration/analysis_server.py",
+        "section": "analysis_server.py",
+        "start_line": 1,
+        "end_line": 56,
+        "cosine": 0.4838119946389123,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "aa6a19c65d57fdf0d00c",
+        "source": "day-20-mcp-orchestration/main.py",
+        "section": "main.py",
+        "start_line": 1,
+        "end_line": 54,
+        "cosine": 0.4834130569664521,
+        "decision": "below_threshold"
+      },
+      {
+        "chunk_id": "f6a7a1db1287a0563aa1",
+        "source": "day-20-mcp-orchestration/offline_model.py",
+        "section": "offline_model.py",
+        "start_line": 1,
+        "end_line": 27,
+        "cosine": 0.44276848695587384,
+        "decision": "below_threshold"
+      }
+    ],
+    "sources": [
+      {
+        "chunk_id": "7e5cad922782fa195336",
+        "source": "day-20-mcp-orchestration/README.ru.md",
+        "section": "README.ru.md",
+        "text": "# День 20 — Оркестрация нескольких MCP-серверов\n\nБублик подключается к **трём независимым MCP-серверам** через stdio. Каждый сервер стартует отдельным процессом и публикует инструменты через `list_tools()`:\n\n| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |\n\n`mcp_registry.py` регистрирует серверы, формирует уникальные имена вида `github__get_repository_info` и маршрутизирует вызов к исходному имени инструмента в нужной сессии. Модель видит короткие коды операций `FETCH`, `SUMMARIZE`, `SAVE`, `READ`, `VERIFY` и предлагает следующий код в строгом JSON: `{\"operation\":\"FETCH\"}`. `BublikOrchestrator` сопоставляет код с найденным MCP-инструментом, проверяет порядок, подставляет данные предыдущих результатов и вызывает нужный сервер. Если модель предлагает шаг слишком рано, агент выбирает допустимый следующий шаг и отмечает `agent correction` в выводе. Модели не нужно формировать нативный `tool_call` Groq или копировать Markdown отчёта в аргументы. Реальные входные схемы MCP остаются в реестре; каждый сервер валидирует полученный вызов. При успешном запросе путь следующий:\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → ответ\n```\n\nПоследний шаг сравнивает сводку с прочитанным из файла текстом. Отчёт считается завершённым только при `verified=true`. Для выбора Groq получает `response_format` со строгой JSON-схемой и допустимыми кодами операций. При HTTP 400 `tool_use_failed` агент выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.\n\nАгент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач.\n\n## Локальная проверка\n\nИз корня распакованного архива (рекомендуется Python 3.13; доступен Python 3.10+):\n\n```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```\n\nНа Windows используйте `.venv\\\\Scripts\\\\python` вместо `.venv/bin/python`. Тесты не используют Groq или живой GitHub: они запускают настоящие три MCP-процесса, а GitHub API заменяют локальным HTTP-сервером. Проверяются discovery, уникальные имена, маршрутизация, пять реальных вызовов, точная передача результатов, порядок, содержимое файла, исправление преждевременного выбора, отказ при неправильном JSON, остановка при ошибке GitHub и явный fallback при ошибке парсера Groq.\n\nЧтобы проверить отдельный реальный запуск без расходов токенов:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```\n\n`--offline` заменяет выбор модели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.\n\nДля проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nЭтот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного",
+        "score": 0.666774796230011,
+        "start_line": 1,
+        "end_line": 50
+      },
+      {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "source": "day-20-mcp-orchestration/README.md",
+        "section": "README.md",
+        "text": "# Day 20 — Orchestrating multiple MCP servers\n\nBublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```\n\nThe final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.\n\nThe user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces the dependencies.\n\n## Local setup and tests\n\nRun from the extracted repository root (Python 3.13 recommended, 3.10+ supported):\n\n```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```\n\nOn Windows replace `.venv/bin/python` with `.venv\\\\Scripts\\\\python`. Tests launch all three real MCP subprocesses, use a fake local GitHub HTTP API, check model-selected tool routing, exact data transfer, five calls in order, file content, invalid calls, and failure handling. No API key is required for tests.\n\nFor a live GitHub request using an offline deterministic model stand-in:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```\n\nFor **real model-selected calls**, set `GROQ_API_KEY` in the environment or root `.env` and omit `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nThis makes Groq and GitHub requests. `GITHUB_TOKEN` is optional for public GitHub repositories. The output file is under `day-20-mcp-orchestration/reports/`, or under `BUBLIK_REPORT_DIR` if set. The scripted offline mode validates real MCP transport and routing but does not establish the reliability of live Groq tool selection; use the second command for that check. See [Russian instructions](README.ru.md) for a requirement-by-requirement checklist.",
+        "score": 0.6438364533937193,
+        "start_line": 1,
+        "end_line": 40
+      },
+      {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "source": "day-20-mcp-orchestration/README.ru.md",
+        "section": "README.ru.md",
+        "text": "модели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.\n\nДля проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nЭтот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного аккаунта; значение `MODEL` задаётся в `agent.py`. При неверном выборе инструмента или неполном результате агент выдаст ошибку, а не заявит об успешном отчёте. Повторный запуск безопасно заменяет файл. VPS и worker для этого сценария не нужны.\n\n## Сверка задания\n\n| Пункт | Где реализован и чем проверен |\n|---|---|\n| Несколько зарегистрированных серверов | Три процесса в `connect_servers()`; тест проверяет пять инструментов в трёх сессиях |\n| Агент выбирает инструмент | Выбор кода операции моделью или обозначенный в выводе выбор агентом при неправильном ответе модели; тест отдельно проверяет `info` (1 вызов), `summary` (2 вызова), `report` (5 вызовов) |\n| Корректная маршрутизация | `ToolRegistry.call()` по пространству имён; тест проверяет принадлежность каждого шага серверу и отказ неизвестному имени |\n| Длинный флоу | Пять последовательных вызовов и ответ; интеграционный и CLI-тесты |\n| Инструменты разных серверов | Проверен порядок `github → analysis → storage → storage → analysis` |\n| Выбор и порядок вызовов | Проверка `FLOW`, передачи точных данных между серверами, исправления преждевременного `VERIFY` и отказа при ответе, который не соответствует JSON-схеме |\n\n**Ограничение проверки:** автоматические тесты проверяют протокол и поведение агентского цикла через локальную модель-заглушку. Поведение реальной Groq модели проверяется отдельной командой с вашим ключом.",
+        "score": 0.5567399955744534,
+        "start_line": 42,
+        "end_line": 63
+      },
+      {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "source": "day-20-mcp-orchestration/agent.py",
+        "section": "agent.py",
+        "text": "\"\"\"Model-directed orchestration with verified boundaries between servers.\"\"\"\n\nimport json\nfrom dataclasses import dataclass\nfrom typing import Any\n\nfrom github_api import validate_name\nfrom mcp_registry import ToolRegistry\n\nMODEL = \"openai/gpt-oss-20b\"\nFLOW = (\"github__get_repository_info\", \"analysis__summarize_repository\",\n        \"storage__save_report\", \"storage__read_report\", \"analysis__verify_report\")\nFLOWS = {\"info\": FLOW[:1], \"summary\": FLOW[:2], \"report\": FLOW}\nOPERATIONS = dict(zip((\"FETCH\", \"SUMMARIZE\", \"SAVE\", \"READ\", \"VERIFY\"), FLOW))\nCODE_BY_TOOL = {name: code for code, name in OPERATIONS.items()}\nPROMPT = (\n    \"Choose exactly one next operation code for the request. These are labels, \"\n    \"not functions to call. FETCH obtains repository data; SUMMARIZE creates a \"\n    \"summary; SAVE writes it; READ reads the saved file; VERIFY compares it. \"\n    \"An info request needs FETCH; a summary needs FETCH then SUMMARIZE; a \"\n    \"verified report needs FETCH, SUMMARIZE, SAVE, READ, VERIFY. Return only \"\n    \"a JSON object with the operation code. Never attempt a function call.\"\n)\n\n\n@dataclass(frozen=True)\nclass Step:\n    tool: str\n    server: str\n    arguments: dict\n    output: dict\n    selection_source: str\n\n\n@dataclass(frozen=True)\nclass AgentResult:\n    answer: str\n    steps: tuple[Step, ...]\n\n\nclass BublikOrchestrator:\n    def __init__(self, model_client: Any, registry: ToolRegistry):\n        self.model_client = model_client\n        self.registry = registry\n\n    async def run(self, owner: str, repo: str, task: str = \"report\") -> AgentResult:\n        owner, repo = validate_name(owner, \"owner\"), validate_name(repo, \"repo\")\n        if task not in FLOWS:\n            raise ValueError(f\"Unknown task: {task}\")\n        flow = FLOWS[task]\n        missing = set(flow) - set(self.registry.routes)\n        if missing:\n            raise RuntimeError(f\"Missing MCP tools: {sorted(missing)}\")\n        request = {\n            \"info\": f\"Get repository information for {owner}/{repo}.\",\n            \"summary\": f\"Summarize repository {owner}/{repo} without saving a file.\",\n            \"report\": f\"Create and verify a report for {owner}/{repo}.\",\n        }[task]\n        steps: list[Step] = []\n        for _ in range(len(flow)):\n            completed = [CODE_BY_TOOL[step.tool] for step in steps]\n            messages = [\n                {\"role\": \"system\", \"content\": PROMPT},\n                {\"role\": \"user\", \"content\": f\"Request: {request}\\n\"\n                 f\"Completed operations: {json.dumps(completed)}\\n\"\n                 \"Choose the next operation code.\"},\n            ]\n            try:\n                response = self.model_client.chat.completions.create(\n                    model=MODEL, messages=messages, temperature=0.1,\n                    reasoning_effort=\"low\", max_completion_tokens=250,\n                    response_format={\"type\": \"json_schema\", \"json_schema\": {\n                        \"name\": \"operation_selection\", \"strict\": True,\n                        \"schema\": {\"type\": \"object\", \"properties\": {\n                            \"operation\": {\"type\": \"string\", \"enum\": list(OPERATIONS)}\n                        }, \"required\": [\"operation\"], \"additionalProperties\": False},\n                    }},\n                )\n            except Exception as error:\n                body = getattr(error, \"body\", None)\n                code = getattr(error, \"code\", None)\n                if isinstance(body, dict):\n                    nested = body.get(\"error\")\n                    code = code or body.get(\"code\") or (\n                        nested.get(\"code\") if isinstance(nested, dict) else None)\n                if getattr(error, \"status_code\", None) != 400 or code != \"tool_use_failed\":\n                    raise\n                # Some Groq responses attempt a native call despite no tools being\n                # provided. Use the guarded workflow for this step and show provenance.\n                operation = CODE_BY_TOOL[flow[len(steps)]]\n                selection_source = \"agent fallback (Groq tool parser error)\"\n            else:\n                try:\n                    selection = json.loads(response.choices[0].message.content or \"\")\n                except (ValueError, TypeError) as error:\n                    raise RuntimeError(\"Model returned invalid operation JSON\") from error\n                if not isinstance(selection, dict) or set(selection) != {\"operation\"}:\n                    raise RuntimeError(\"Model returned an invalid operation selection\")\n                operation = selection[\"operation\"]\n                selection_source = \"model\"\n            if operation not in OPERATIONS:\n                raise RuntimeError(f\"Model selected an unknown operation: {operation!r}\")\n            name = OPERATIONS[operation]\n            if name != flow[len(steps)]:\n                # A model suggestion cannot skip dependencies. Correct it visibly\n                # rather than letting an unsafe or premature MCP call run.\n                selection_source = f\"agent correction (model chose {operation})\"\n                name = flow[len(steps)]\n            actual_arguments = self._arguments(len(steps), owner, repo, steps)\n            output = await self.registry.call(name, actual_arguments)\n            self._validate_output(len(steps), owner, repo, output, steps)\n            alias,",
+        "score": 0.5557902086578673,
+        "start_line": 1,
+        "end_line": 112
+      },
+      {
+        "chunk_id": "911a11e54effe4927f42",
+        "source": "day-20-mcp-orchestration/mcp_registry.py",
+        "section": "mcp_registry.py",
+        "text": "\"\"\"Connect three independent stdio servers and expose one namespaced catalog.\"\"\"\n\nimport os\nimport sys\nfrom contextlib import AsyncExitStack, asynccontextmanager\nfrom pathlib import Path\n\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\n\nSERVERS = {\n    \"github\": \"github_server.py\",\n    \"analysis\": \"analysis_server.py\",\n    \"storage\": \"storage_server.py\",\n}\n\n\nclass ToolRegistry:\n    def __init__(self, sessions: dict[str, ClientSession]):\n        self.sessions = sessions\n        self.routes: dict[str, tuple[str, str]] = {}\n        self.schemas: list[dict] = []\n\n    async def discover(self) -> list[dict]:\n        self.routes.clear()\n        self.schemas.clear()\n        for alias, session in self.sessions.items():\n            for tool in (await session.list_tools()).tools:\n                public_name = f\"{alias}__{tool.name}\"\n                if public_name in self.routes:\n                    raise RuntimeError(f\"Duplicate MCP tool: {public_name}\")\n                self.routes[public_name] = (alias, tool.name)\n                self.schemas.append({\"type\": \"function\", \"function\": {\n                    \"name\": public_name,\n                    \"description\": f\"Server {alias}: {tool.description or ''}\",\n                    \"parameters\": tool.inputSchema,\n                }})\n        return self.schemas\n\n    async def call(self, public_name: str, arguments: dict) -> dict:\n        if public_name not in self.routes:\n            raise ValueError(f\"Unknown MCP tool: {public_name}\")\n        alias, actual_name = self.routes[public_name]\n        result = await self.sessions[alias].call_tool(actual_name, arguments=arguments)\n        parts = [item.text for item in result.content if getattr(item, \"type\", None) == \"text\"]\n        if result.isError:\n            raise RuntimeError(f\"{public_name} failed: {' '.join(parts)}\")\n        if result.structuredContent and isinstance(result.structuredContent, dict):\n            # MCP SDKs can wrap a FastMCP return under `result` in structured content.\n            value = result.structuredContent\n            if set(value) == {\"result\"}:\n                value = value[\"result\"]\n        else:\n            import json\n            if len(parts) != 1:\n                raise RuntimeError(f\"Unexpected response from {public_name}\")\n            value = json.loads(parts[0])\n        if not isinstance(value, dict):\n            raise RuntimeError(f\"Expected JSON object from {public_name}\")\n        return value\n\n\n@asynccontextmanager\nasync def connect_servers():\n    async with AsyncExitStack() as stack:\n        sessions = {}\n        for alias, filename in SERVERS.items():\n            params = StdioServerParameters(command=sys.executable,\n                                           args=[str(Path(__file__).with_name(filename))],\n                                           env=os.environ.copy())\n            read, write = await stack.enter_async_context(stdio_client(params))\n            session = await stack.enter_async_context(ClientSession(read, write))\n            await session.initialize()\n            sessions[alias] = session\n        registry = ToolRegistry(sessions)\n        await registry.discover()\n        yield registry",
+        "score": 0.5406809835181168,
+        "start_line": 1,
+        "end_line": 77
+      }
+    ],
+    "context": "[1] day-20-mcp-orchestration/README.ru.md:1-50 (README.ru.md)\n# День 20 — Оркестрация нескольких MCP-серверов\n\nБублик подключается к **трём независимым MCP-серверам** через stdio. Каждый сервер стартует отдельным процессом и публикует инструменты через `list_tools()`:\n\n| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |\n\n`mcp_registry.py` регистрирует серверы, формирует уникальные имена вида `github__get_repository_info` и маршрутизирует вызов к исходному имени инструмента в нужной сессии. Модель видит короткие коды операций `FETCH`, `SUMMARIZE`, `SAVE`, `READ`, `VERIFY` и предлагает следующий код в строгом JSON: `{\"operation\":\"FETCH\"}`. `BublikOrchestrator` сопоставляет код с найденным MCP-инструментом, проверяет порядок, подставляет данные предыдущих результатов и вызывает нужный сервер. Если модель предлагает шаг слишком рано, агент выбирает допустимый следующий шаг и отмечает `agent correction` в выводе. Модели не нужно формировать нативный `tool_call` Groq или копировать Markdown отчёта в аргументы. Реальные входные схемы MCP остаются в реестре; каждый сервер валидирует полученный вызов. При успешном запросе путь следующий:\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → ответ\n```\n\nПоследний шаг сравнивает сводку с прочитанным из файла текстом. Отчёт считается завершённым только при `verified=true`. Для выбора Groq получает `response_format` со строгой JSON-схемой и допустимыми кодами операций. При HTTP 400 `tool_use_failed` агент выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.\n\nАгент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач.\n\n## Локальная проверка\n\nИз корня распакованного архива (рекомендуется Python 3.13; доступен Python 3.10+):\n\n```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```\n\nНа Windows используйте `.venv\\\\Scripts\\\\python` вместо `.venv/bin/python`. Тесты не используют Groq или живой GitHub: они запускают настоящие три MCP-процесса, а GitHub API заменяют локальным HTTP-сервером. Проверяются discovery, уникальные имена, маршрутизация, пять реальных вызовов, точная передача результатов, порядок, содержимое файла, исправление преждевременного выбора, отказ при неправильном JSON, остановка при ошибке GitHub и явный fallback при ошибке парсера Groq.\n\nЧтобы проверить отдельный реальный запуск без расходов токенов:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```\n\n`--offline` заменяет выбор модели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.\n\nДля проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nЭтот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного\n\n[2] day-20-mcp-orchestration/README.md:1-40 (README.md)\n# Day 20 — Orchestrating multiple MCP servers\n\nBublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```\n\nThe final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.\n\nThe user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces the dependencies.\n\n## Local setup and tests\n\nRun from the extracted repository root (Python 3.13 recommended, 3.10+ supported):\n\n```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```\n\nOn Windows replace `.venv/bin/python` with `.venv\\\\Scripts\\\\python`. Tests launch all three real MCP subprocesses, use a fake local GitHub HTTP API, check model-selected tool routing, exact data transfer, five calls in order, file content, invalid calls, and failure handling. No API key is required for tests.\n\nFor a live GitHub request using an offline deterministic model stand-in:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```\n\nFor **real model-selected calls**, set `GROQ_API_KEY` in the environment or root `.env` and omit `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nThis makes Groq and GitHub requests. `GITHUB_TOKEN` is optional for public GitHub repositories. The output file is under `day-20-mcp-orchestration/reports/`, or under `BUBLIK_REPORT_DIR` if set. The scripted offline mode validates real MCP transport and routing but does not establish the reliability of live Groq tool selection; use the second command for that check. See [Russian instructions](README.ru.md) for a requirement-by-requirement checklist.\n\n[3] day-20-mcp-orchestration/README.ru.md:42-63 (README.ru.md)\nмодели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.\n\nДля проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:\n\n```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```\n\nЭтот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного аккаунта; значение `MODEL` задаётся в `agent.py`. При неверном выборе инструмента или неполном результате агент выдаст ошибку, а не заявит об успешном отчёте. Повторный запуск безопасно заменяет файл. VPS и worker для этого сценария не нужны.\n\n## Сверка задания\n\n| Пункт | Где реализован и чем проверен |\n|---|---|\n| Несколько зарегистрированных серверов | Три процесса в `connect_servers()`; тест проверяет пять инструментов в трёх сессиях |\n| Агент выбирает инструмент | Выбор кода операции моделью или обозначенный в выводе выбор агентом при неправильном ответе модели; тест отдельно проверяет `info` (1 вызов), `summary` (2 вызова), `report` (5 вызовов) |\n| Корректная маршрутизация | `ToolRegistry.call()` по пространству имён; тест проверяет принадлежность каждого шага серверу и отказ неизвестному имени |\n| Длинный флоу | Пять последовательных вызовов и ответ; интеграционный и CLI-тесты |\n| Инструменты разных серверов | Проверен порядок `github → analysis → storage → storage → analysis` |\n| Выбор и порядок вызовов | Проверка `FLOW`, передачи точных данных между серверами, исправления преждевременного `VERIFY` и отказа при ответе, который не соответствует JSON-схеме |\n\n**Ограничение проверки:** автоматические тесты проверяют протокол и поведение агентского цикла через локальную модель-заглушку. Поведение реальной Groq модели проверяется отдельной командой с вашим ключом.\n\n[4] day-20-mcp-orchestration/agent.py:1-112 (agent.py)\n\"\"\"Model-directed orchestration with verified boundaries between servers.\"\"\"\n\nimport json\nfrom dataclasses import dataclass\nfrom typing import Any\n\nfrom github_api import validate_name\nfrom mcp_registry import ToolRegistry\n\nMODEL = \"openai/gpt-oss-20b\"\nFLOW = (\"github__get_repository_info\", \"analysis__summarize_repository\",\n        \"storage__save_report\", \"storage__read_report\", \"analysis__verify_report\")\nFLOWS = {\"info\": FLOW[:1], \"summary\": FLOW[:2], \"report\": FLOW}\nOPERATIONS = dict(zip((\"FETCH\", \"SUMMARIZE\", \"SAVE\", \"READ\", \"VERIFY\"), FLOW))\nCODE_BY_TOOL = {name: code for code, name in OPERATIONS.items()}\nPROMPT = (\n    \"Choose exactly one next operation code for the request. These are labels, \"\n    \"not functions to call. FETCH obtains repository data; SUMMARIZE creates a \"\n    \"summary; SAVE writes it; READ reads the saved file; VERIFY compares it. \"\n    \"An info request needs FETCH; a summary needs FETCH then SUMMARIZE; a \"\n    \"verified report needs FETCH, SUMMARIZE, SAVE, READ, VERIFY. Return only \"\n    \"a JSON object with the operation code. Never attempt a function call.\"\n)\n\n\n@dataclass(frozen=True)\nclass Step:\n    tool: str\n    server: str\n    arguments: dict\n    output: dict\n    selection_source: str\n\n\n@dataclass(frozen=True)\nclass AgentResult:\n    answer: str\n    steps: tuple[Step, ...]\n\n\nclass BublikOrchestrator:\n    def __init__(self, model_client: Any, registry: ToolRegistry):\n        self.model_client = model_client\n        self.registry = registry\n\n    async def run(self, owner: str, repo: str, task: str = \"report\") -> AgentResult:\n        owner, repo = validate_name(owner, \"owner\"), validate_name(repo, \"repo\")\n        if task not in FLOWS:\n            raise ValueError(f\"Unknown task: {task}\")\n        flow = FLOWS[task]\n        missing = set(flow) - set(self.registry.routes)\n        if missing:\n            raise RuntimeError(f\"Missing MCP tools: {sorted(missing)}\")\n        request = {\n            \"info\": f\"Get repository information for {owner}/{repo}.\",\n            \"summary\": f\"Summarize repository {owner}/{repo} without saving a file.\",\n            \"report\": f\"Create and verify a report for {owner}/{repo}.\",\n        }[task]\n        steps: list[Step] = []\n        for _ in range(len(flow)):\n            completed = [CODE_BY_TOOL[step.tool] for step in steps]\n            messages = [\n                {\"role\": \"system\", \"content\": PROMPT},\n                {\"role\": \"user\", \"content\": f\"Request: {request}\\n\"\n                 f\"Completed operations: {json.dumps(completed)}\\n\"\n                 \"Choose the next operation code.\"},\n            ]\n            try:\n                response = self.model_client.chat.completions.create(\n                    model=MODEL, messages=messages, temperature=0.1,\n                    reasoning_effort=\"low\", max_completion_tokens=250,\n                    response_format={\"type\": \"json_schema\", \"json_schema\": {\n                        \"name\": \"operation_selection\", \"strict\": True,\n                        \"schema\": {\"type\": \"object\", \"properties\": {\n                            \"operation\": {\"type\": \"string\", \"enum\": list(OPERATIONS)}\n                        }, \"required\": [\"operation\"], \"additionalProperties\": False},\n                    }},\n                )\n            except Exception as error:\n                body = getattr(error, \"body\", None)\n                code = getattr(error, \"code\", None)\n                if isinstance(body, dict):\n                    nested = body.get(\"error\")\n                    code = code or body.get(\"code\") or (\n                        nested.get(\"code\") if isinstance(nested, dict) else None)\n                if getattr(error, \"status_code\", None) != 400 or code != \"tool_use_failed\":\n                    raise\n                # Some Groq responses attempt a native call despite no tools being\n                # provided. Use the guarded workflow for this step and show provenance.\n                operation = CODE_BY_TOOL[flow[len(steps)]]\n                selection_source = \"agent fallback (Groq tool parser error)\"\n            else:\n                try:\n                    selection = json.loads(response.choices[0].message.content or \"\")\n                except (ValueError, TypeError) as error:\n                    raise RuntimeError(\"Model returned invalid operation JSON\") from error\n                if not isinstance(selection, dict) or set(selection) != {\"operation\"}:\n                    raise RuntimeError(\"Model returned an invalid operation selection\")\n                operation = selection[\"operation\"]\n                selection_source = \"model\"\n            if operation not in OPERATIONS:\n                raise RuntimeError(f\"Model selected an unknown operation: {operation!r}\")\n            name = OPERATIONS[operation]\n            if name != flow[len(steps)]:\n                # A model suggestion cannot skip dependencies. Correct it visibly\n                # rather than letting an unsafe or premature MCP call run.\n                selection_source = f\"agent correction (model chose {operation})\"\n                name = flow[len(steps)]\n            actual_arguments = self._arguments(len(steps), owner, repo, steps)\n            output = await self.registry.call(name, actual_arguments)\n            self._validate_output(len(steps), owner, repo, output, steps)\n            alias,\n\n[5] day-20-mcp-orchestration/mcp_registry.py:1-77 (mcp_registry.py)\n\"\"\"Connect three independent stdio servers and expose one namespaced catalog.\"\"\"\n\nimport os\nimport sys\nfrom contextlib import AsyncExitStack, asynccontextmanager\nfrom pathlib import Path\n\nfrom mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client\n\nSERVERS = {\n    \"github\": \"github_server.py\",\n    \"analysis\": \"analysis_server.py\",\n    \"storage\": \"storage_server.py\",\n}\n\n\nclass ToolRegistry:\n    def __init__(self, sessions: dict[str, ClientSession]):\n        self.sessions = sessions\n        self.routes: dict[str, tuple[str, str]] = {}\n        self.schemas: list[dict] = []\n\n    async def discover(self) -> list[dict]:\n        self.routes.clear()\n        self.schemas.clear()\n        for alias, session in self.sessions.items():\n            for tool in (await session.list_tools()).tools:\n                public_name = f\"{alias}__{tool.name}\"\n                if public_name in self.routes:\n                    raise RuntimeError(f\"Duplicate MCP tool: {public_name}\")\n                self.routes[public_name] = (alias, tool.name)\n                self.schemas.append({\"type\": \"function\", \"function\": {\n                    \"name\": public_name,\n                    \"description\": f\"Server {alias}: {tool.description or ''}\",\n                    \"parameters\": tool.inputSchema,\n                }})\n        return self.schemas\n\n    async def call(self, public_name: str, arguments: dict) -> dict:\n        if public_name not in self.routes:\n            raise ValueError(f\"Unknown MCP tool: {public_name}\")\n        alias, actual_name = self.routes[public_name]\n        result = await self.sessions[alias].call_tool(actual_name, arguments=arguments)\n        parts = [item.text for item in result.content if getattr(item, \"type\", None) == \"text\"]\n        if result.isError:\n            raise RuntimeError(f\"{public_name} failed: {' '.join(parts)}\")\n        if result.structuredContent and isinstance(result.structuredContent, dict):\n            # MCP SDKs can wrap a FastMCP return under `result` in structured content.\n            value = result.structuredContent\n            if set(value) == {\"result\"}:\n                value = value[\"result\"]\n        else:\n            import json\n            if len(parts) != 1:\n                raise RuntimeError(f\"Unexpected response from {public_name}\")\n            value = json.loads(parts[0])\n        if not isinstance(value, dict):\n            raise RuntimeError(f\"Expected JSON object from {public_name}\")\n        return value\n\n\n@asynccontextmanager\nasync def connect_servers():\n    async with AsyncExitStack() as stack:\n        sessions = {}\n        for alias, filename in SERVERS.items():\n            params = StdioServerParameters(command=sys.executable,\n                                           args=[str(Path(__file__).with_name(filename))],\n                                           env=os.environ.copy())\n            read, write = await stack.enter_async_context(stdio_client(params))\n            session = await stack.enter_async_context(ClientSession(read, write))\n            await session.initialize()\n            sessions[alias] = session\n        registry = ToolRegistry(sessions)\n        await registry.discover()\n        yield registry",
+    "lesson_retrieval": {
+      "lesson": "20",
+      "namespace_sources": [
+        "day-20-mcp-orchestration/README.md",
+        "day-20-mcp-orchestration/README.ru.md",
+        "day-20-mcp-orchestration/agent.py",
+        "day-20-mcp-orchestration/analysis_server.py",
+        "day-20-mcp-orchestration/github_api.py",
+        "day-20-mcp-orchestration/github_server.py",
+        "day-20-mcp-orchestration/main.py",
+        "day-20-mcp-orchestration/mcp_registry.py",
+        "day-20-mcp-orchestration/offline_model.py",
+        "day-20-mcp-orchestration/storage_server.py"
+      ],
+      "policy": "namespace_before_limits; maximum_actual_cosine_across_queries",
+      "branches": [
+        {
+          "query": "Какие инструменты публикует сервер storage на день 20?\nSearch vocabulary: tools discovery routing",
+          "candidates": [
+            {
+              "chunk_id": "7e5cad922782fa195336",
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "cosine": 0.5552061644312016
+            },
+            {
+              "chunk_id": "d51bc9e2de0500131e22",
+              "source": "day-20-mcp-orchestration/README.md",
+              "cosine": 0.5530545651692909
+            },
+            {
+              "chunk_id": "f777f638ca3452e9cfc5",
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "cosine": 0.5380699899746769
+            },
+            {
+              "chunk_id": "e3cc58747849ff8fd675",
+              "source": "day-20-mcp-orchestration/agent.py",
+              "cosine": 0.5304608142728866
+            },
+            {
+              "chunk_id": "f043851d00b817bd8d43",
+              "source": "day-20-mcp-orchestration/github_api.py",
+              "cosine": 0.4954580967134302
+            },
+            {
+              "chunk_id": "911a11e54effe4927f42",
+              "source": "day-20-mcp-orchestration/mcp_registry.py",
+              "cosine": 0.4688409415563002
+            },
+            {
+              "chunk_id": "72049fac8c4bf817ff5f",
+              "source": "day-20-mcp-orchestration/agent.py",
+              "cosine": 0.4657854555053586
+            },
+            {
+              "chunk_id": "69208adc7f6cb4850537",
+              "source": "day-20-mcp-orchestration/analysis_server.py",
+              "cosine": 0.4610897095931912
+            },
+            {
+              "chunk_id": "773047af01c14bacacb3",
+              "source": "day-20-mcp-orchestration/github_server.py",
+              "cosine": 0.4490840052691838
+            },
+            {
+              "chunk_id": "f6a7a1db1287a0563aa1",
+              "source": "day-20-mcp-orchestration/offline_model.py",
+              "cosine": 0.44276848695587384
+            },
+            {
+              "chunk_id": "deb908aa7830ff0ec141",
+              "source": "day-20-mcp-orchestration/storage_server.py",
+              "cosine": 0.440013145555908
+            },
+            {
+              "chunk_id": "aa6a19c65d57fdf0d00c",
+              "source": "day-20-mcp-orchestration/main.py",
+              "cosine": 0.37337438171161946
+            }
+          ]
+        },
+        {
+          "query": "Какие инструменты публикует сервер storage на день 20?\nSearch vocabulary: tools discovery routing\nIndexed document titles: День 20 — Оркестрация нескольких MCP-серверов | Day 20 — Orchestrating multiple MCP servers",
+          "candidates": [
+            {
+              "chunk_id": "7e5cad922782fa195336",
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "cosine": 0.666774796230011
+            },
+            {
+              "chunk_id": "d51bc9e2de0500131e22",
+              "source": "day-20-mcp-orchestration/README.md",
+              "cosine": 0.6438364533937193
+            },
+            {
+              "chunk_id": "f777f638ca3452e9cfc5",
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "cosine": 0.5567399955744534
+            },
+            {
+              "chunk_id": "e3cc58747849ff8fd675",
+              "source": "day-20-mcp-orchestration/agent.py",
+              "cosine": 0.5557902086578673
+            },
+            {
+              "chunk_id": "911a11e54effe4927f42",
+              "source": "day-20-mcp-orchestration/mcp_registry.py",
+              "cosine": 0.5406809835181168
+            },
+            {
+              "chunk_id": "72049fac8c4bf817ff5f",
+              "source": "day-20-mcp-orchestration/agent.py",
+              "cosine": 0.535420829591494
+            },
+            {
+              "chunk_id": "773047af01c14bacacb3",
+              "source": "day-20-mcp-orchestration/github_server.py",
+              "cosine": 0.5303544360011826
+            },
+            {
+              "chunk_id": "deb908aa7830ff0ec141",
+              "source": "day-20-mcp-orchestration/storage_server.py",
+              "cosine": 0.49551224052802656
+            },
+            {
+              "chunk_id": "69208adc7f6cb4850537",
+              "source": "day-20-mcp-orchestration/analysis_server.py",
+              "cosine": 0.4838119946389123
+            },
+            {
+              "chunk_id": "aa6a19c65d57fdf0d00c",
+              "source": "day-20-mcp-orchestration/main.py",
+              "cosine": 0.4834130569664521
+            },
+            {
+              "chunk_id": "f043851d00b817bd8d43",
+              "source": "day-20-mcp-orchestration/github_api.py",
+              "cosine": 0.4746852319850514
+            },
+            {
+              "chunk_id": "f6a7a1db1287a0563aa1",
+              "source": "day-20-mcp-orchestration/offline_model.py",
+              "cosine": 0.4209617726640862
+            }
+          ]
+        }
+      ]
+    },
+    "index": {
+      "strategy": "fixed",
+      "model": "bge-m3",
+      "dimension": 1024,
+      "limit_tokens": 500,
+      "overlap_tokens": 75,
+      "revision": "4d3a3b95be650ec2d85b7a9f64e77b941ab95354@fdbdbc17c9f1cbbc",
+      "built_at": "2026-10-04 12:10:10"
+    },
+    "answer_model": "qwen2.5:14b",
+    "verifier_model": "qwen2.5:14b",
+    "grounding_protocol": "verbatim-extractive-v14",
+    "answer_style": "extractive",
+    "coverage_policy": "strict",
+    "quote_catalog": {
+      "q1_1": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "# День 20 — Оркестрация нескольких MCP-серверов",
+        "heading": null,
+        "kind": "heading"
+      },
+      "q1_2": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Бублик подключается к **трём независимым MCP-серверам** через stdio. Каждый сервер стартует отдельным процессом и публикует инструменты через `list_tools()`:",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "prose"
+      },
+      "q1_3": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |\n| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_4": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "| Сервер | Инструменты | Задача |",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_5": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "|---|---|---|",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_6": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "| `github` | `get_repository_info` | Получить метаданные GitHub |",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_7": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_8": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "table"
+      },
+      "q1_9": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "`mcp_registry.py` регистрирует серверы, формирует уникальные имена вида `github__get_repository_info` и маршрутизирует вызов к исходному имени инструмента в нужной сессии. Модель видит короткие коды операций `FETCH`, `SUMMARIZE`, `SAVE`, `READ`, `VERIFY` и предлагает следующий код в строгом JSON: `{\"operation\":\"FETCH\"}`. `BublikOrchestrator` сопоставляет код с найденным MCP-инструментом, проверяет порядок, подставляет данные предыдущих результатов и вызывает нужный сервер. Если модель предлагает шаг слишком рано, агент выбирает допустимый следующий шаг и отмечает `agent correction` в выводе. Модели не нужно формировать нативный `tool_call` Groq или копировать Markdown отчёта в аргументы. Реальные входные схемы MCP остаются в реестре; каждый сервер валидирует полученный вызов. При успешном запросе путь следующий:",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "prose"
+      },
+      "q1_10": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → ответ\n```",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "code"
+      },
+      "q1_11": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Последний шаг сравнивает сводку с прочитанным из файла текстом. Отчёт считается завершённым только при `verified=true`. Для выбора Groq получает `response_format` со строгой JSON-схемой и допустимыми кодами операций. При HTTP 400 `tool_use_failed` агент выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "prose"
+      },
+      "q1_12": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Агент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач.",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "prose"
+      },
+      "q1_13": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "## Локальная проверка",
+        "heading": "День 20 — Оркестрация нескольких MCP-серверов",
+        "kind": "heading"
+      },
+      "q1_14": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Из корня распакованного архива (рекомендуется Python 3.13; доступен Python 3.10+):",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_15": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```",
+        "heading": "Локальная проверка",
+        "kind": "code"
+      },
+      "q1_16": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "На Windows используйте `.venv\\\\Scripts\\\\python` вместо `.venv/bin/python`. Тесты не используют Groq или живой GitHub: они запускают настоящие три MCP-процесса, а GitHub API заменяют локальным HTTP-сервером. Проверяются discovery, уникальные имена, маршрутизация, пять реальных вызовов, точная передача результатов, порядок, содержимое файла, исправление преждевременного выбора, отказ при неправильном JSON, остановка при ошибке GitHub и явный fallback при ошибке парсера Groq.",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_17": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Чтобы проверить отдельный реальный запуск без расходов токенов:",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_18": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```",
+        "heading": "Локальная проверка",
+        "kind": "code"
+      },
+      "q1_19": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "`--offline` заменяет выбор модели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_20": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Для проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q1_21": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```",
+        "heading": "Локальная проверка",
+        "kind": "code"
+      },
+      "q1_22": {
+        "chunk_id": "7e5cad922782fa195336",
+        "quote": "Этот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного",
+        "heading": "Локальная проверка",
+        "kind": "prose"
+      },
+      "q2_1": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "# Day 20 — Orchestrating multiple MCP servers",
+        "heading": null,
+        "kind": "heading"
+      },
+      "q2_2": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "Bublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.",
+        "heading": "Day 20 — Orchestrating multiple MCP servers",
+        "kind": "prose"
+      },
+      "q2_3": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```",
+        "heading": "Day 20 — Orchestrating multiple MCP servers",
+        "kind": "code"
+      },
+      "q2_4": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "The final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.",
+        "heading": "Day 20 — Orchestrating multiple MCP servers",
+        "kind": "prose"
+      },
+      "q2_5": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "The user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces the dependencies.",
+        "heading": "Day 20 — Orchestrating multiple MCP servers",
+        "kind": "prose"
+      },
+      "q2_6": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "## Local setup and tests",
+        "heading": "Day 20 — Orchestrating multiple MCP servers",
+        "kind": "heading"
+      },
+      "q2_7": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "Run from the extracted repository root (Python 3.13 recommended, 3.10+ supported):",
+        "heading": "Local setup and tests",
+        "kind": "prose"
+      },
+      "q2_8": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "```bash\npython3.13 -m venv .venv\n.venv/bin/python -m pip install -r day-20-mcp-orchestration/requirements.txt\n.venv/bin/python day-20-mcp-orchestration/test_day20.py -v\n```",
+        "heading": "Local setup and tests",
+        "kind": "code"
+      },
+      "q2_9": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "On Windows replace `.venv/bin/python` with `.venv\\\\Scripts\\\\python`. Tests launch all three real MCP subprocesses, use a fake local GitHub HTTP API, check model-selected tool routing, exact data transfer, five calls in order, file content, invalid calls, and failure handling. No API key is required for tests.",
+        "heading": "Local setup and tests",
+        "kind": "prose"
+      },
+      "q2_10": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "For a live GitHub request using an offline deterministic model stand-in:",
+        "heading": "Local setup and tests",
+        "kind": "prose"
+      },
+      "q2_11": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task info\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api --offline --task summary\n```",
+        "heading": "Local setup and tests",
+        "kind": "code"
+      },
+      "q2_12": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "For **real model-selected calls**, set `GROQ_API_KEY` in the environment or root `.env` and omit `--offline`:",
+        "heading": "Local setup and tests",
+        "kind": "prose"
+      },
+      "q2_13": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```",
+        "heading": "Local setup and tests",
+        "kind": "code"
+      },
+      "q2_14": {
+        "chunk_id": "d51bc9e2de0500131e22",
+        "quote": "This makes Groq and GitHub requests. `GITHUB_TOKEN` is optional for public GitHub repositories. The output file is under `day-20-mcp-orchestration/reports/`, or under `BUBLIK_REPORT_DIR` if set. The scripted offline mode validates real MCP transport and routing but does not establish the reliability of live Groq tool selection; use the second command for that check. See [Russian instructions](README.ru.md) for a requirement-by-requirement checklist.",
+        "heading": "Local setup and tests",
+        "kind": "prose"
+      },
+      "q3_1": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "модели воспроизводимым локальным планировщиком; при этом три настоящих MCP-сервера и GitHub API продолжают работать. В выводе будет пять нумерованных вызовов и подтверждение проверки файла `day-20-mcp-orchestration/reports/Ly41k-ai-advent-llm-api-summary.md`. Для публичного репозитория `GITHUB_TOKEN` необязателен, но помогает при ограничении числа запросов GitHub.",
+        "heading": null,
+        "kind": "prose"
+      },
+      "q3_2": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "Для проверки **выбора инструментов настоящей моделью** задайте `GROQ_API_KEY` через переменную окружения или корневой `.env` и запустите без `--offline`:",
+        "heading": null,
+        "kind": "prose"
+      },
+      "q3_3": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "```bash\n.venv/bin/python day-20-mcp-orchestration/main.py Ly41k ai-advent-llm-api\n```",
+        "heading": null,
+        "kind": "code"
+      },
+      "q3_4": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "Этот запуск обращается к Groq и GitHub. Модель `openai/gpt-oss-20b` может быть недоступна для конкретного аккаунта; значение `MODEL` задаётся в `agent.py`. При неверном выборе инструмента или неполном результате агент выдаст ошибку, а не заявит об успешном отчёте. Повторный запуск безопасно заменяет файл. VPS и worker для этого сценария не нужны.",
+        "heading": null,
+        "kind": "prose"
+      },
+      "q3_5": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "## Сверка задания",
+        "heading": null,
+        "kind": "heading"
+      },
+      "q3_6": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "| Пункт | Где реализован и чем проверен |\n|---|---|\n| Несколько зарегистрированных серверов | Три процесса в `connect_servers()`; тест проверяет пять инструментов в трёх сессиях |\n| Агент выбирает инструмент | Выбор кода операции моделью или обозначенный в выводе выбор агентом при неправильном ответе модели; тест отдельно проверяет `info` (1 вызов), `summary` (2 вызова), `report` (5 вызовов) |\n| Корректная маршрутизация | `ToolRegistry.call()` по пространству имён; тест проверяет принадлежность каждого шага серверу и отказ неизвестному имени |\n| Длинный флоу | Пять последовательных вызовов и ответ; интеграционный и CLI-тесты |\n| Инструменты разных серверов | Проверен порядок `github → analysis → storage → storage → analysis` |\n| Выбор и порядок вызовов | Проверка `FLOW`, передачи точных данных между серверами, исправления преждевременного `VERIFY` и отказа при ответе, который не соответствует JSON-схеме |",
+        "heading": "Сверка задания",
+        "kind": "table"
+      },
+      "q3_7": {
+        "chunk_id": "f777f638ca3452e9cfc5",
+        "quote": "**Ограничение проверки:** автоматические тесты проверяют протокол и поведение агентского цикла через локальную модель-заглушку. Поведение реальной Groq модели проверяется отдельной командой с вашим ключом.",
+        "heading": "Сверка задания",
+        "kind": "prose"
+      },
+      "q4_1": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "\"\"\"Model-directed orchestration with verified boundaries between servers.\"\"\"",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_2": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "import json\nfrom dataclasses import dataclass\nfrom typing import Any",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_3": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "from github_api import validate_name\nfrom mcp_registry import ToolRegistry",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_4": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "MODEL = \"openai/gpt-oss-20b\"\nFLOW = (\"github__get_repository_info\", \"analysis__summarize_repository\",\n        \"storage__save_report\", \"storage__read_report\", \"analysis__verify_report\")\nFLOWS = {\"info\": FLOW[:1], \"summary\": FLOW[:2], \"report\": FLOW}\nOPERATIONS = dict(zip((\"FETCH\", \"SUMMARIZE\", \"SAVE\", \"READ\", \"VERIFY\"), FLOW))\nCODE_BY_TOOL = {name: code for code, name in OPERATIONS.items()}\nPROMPT = (\n    \"Choose exactly one next operation code for the request. These are labels, \"\n    \"not functions to call. FETCH obtains repository data; SUMMARIZE creates a \"\n    \"summary; SAVE writes it; READ reads the saved file; VERIFY compares it. \"\n    \"An info request needs FETCH; a summary needs FETCH then SUMMARIZE; a \"\n    \"verified report needs FETCH, SUMMARIZE, SAVE, READ, VERIFY. Return only \"\n    \"a JSON object with the operation code. Never attempt a function call.\"\n)",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_5": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "@dataclass(frozen=True)\nclass Step:\n    tool: str\n    server: str\n    arguments: dict\n    output: dict\n    selection_source: str",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_6": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "@dataclass(frozen=True)\nclass AgentResult:\n    answer: str\n    steps: tuple[Step, ...]",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_7": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "class BublikOrchestrator:\n    def __init__(self, model_client: Any, registry: ToolRegistry):\n        self.model_client = model_client\n        self.registry = registry",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_8": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "async def run(self, owner: str, repo: str, task: str = \"report\") -> AgentResult:\n        owner, repo = validate_name(owner, \"owner\"), validate_name(repo, \"repo\")\n        if task not in FLOWS:\n            raise ValueError(f\"Unknown task: {task}\")\n        flow = FLOWS[task]\n        missing = set(flow) - set(self.registry.routes)\n        if missing:\n            raise RuntimeError(f\"Missing MCP tools: {sorted(missing)}\")\n        request = {\n            \"info\": f\"Get repository information for {owner}/{repo}.\",\n            \"summary\": f\"Summarize repository {owner}/{repo} without saving a file.\",\n            \"report\": f\"Create and verify a report for {owner}/{repo}.\",\n        }[task]\n        steps: list[Step] = []\n        for _ in range(len(flow)):\n            completed = [CODE_BY_TOOL[step.tool] for step in steps]\n            messages = [\n                {\"role\": \"system\", \"content\": PROMPT},\n                {\"role\": \"user\", \"content\": f\"Request: {request}\\n\"\n                 f\"Completed operations: {json.dumps(completed)}\\n\"\n                 \"Choose the next operation code.\"},\n            ]\n            try:\n                response = self.model_client.chat.completions.create(\n                    model=MODEL, messages=messages, temperature=0.1,\n                    reasoning_effort=\"low\", max_completion_tokens=250,\n                    response_format={\"type\": \"json_schema\", \"json_schema\": {\n                        \"name\": \"operation_selection\", \"strict\": True,",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_9": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "\"schema\": {\"type\": \"object\", \"properties\": {\n                            \"operation\": {\"type\": \"string\", \"enum\": list(OPERATIONS)}\n                        }, \"required\": [\"operation\"], \"additionalProperties\": False},\n                    }},\n                )\n            except Exception as error:\n                body = getattr(error, \"body\", None)\n                code = getattr(error, \"code\", None)\n                if isinstance(body, dict):\n                    nested = body.get(\"error\")\n                    code = code or body.get(\"code\") or (\n                        nested.get(\"code\") if isinstance(nested, dict) else None)\n                if getattr(error, \"status_code\", None) != 400 or code != \"tool_use_failed\":\n                    raise\n                # Some Groq responses attempt a native call despite no tools being\n                # provided. Use the guarded workflow for this step and show provenance.\n                operation = CODE_BY_TOOL[flow[len(steps)]]\n                selection_source = \"agent fallback (Groq tool parser error)\"\n            else:\n                try:\n                    selection = json.loads(response.choices[0].message.content or \"\")\n                except (ValueError, TypeError) as error:\n                    raise RuntimeError(\"Model returned invalid operation JSON\") from error\n                if not isinstance(selection, dict) or set(selection) != {\"operation\"}:",
+        "heading": null,
+        "kind": "code"
+      },
+      "q4_10": {
+        "chunk_id": "e3cc58747849ff8fd675",
+        "quote": "raise RuntimeError(\"Model returned an invalid operation selection\")\n                operation = selection[\"operation\"]\n                selection_source = \"model\"\n            if operation not in OPERATIONS:\n                raise RuntimeError(f\"Model selected an unknown operation: {operation!r}\")\n            name = OPERATIONS[operation]\n            if name != flow[len(steps)]:\n                # A model suggestion cannot skip dependencies. Correct it visibly\n                # rather than letting an unsafe or premature MCP call run.\n                selection_source = f\"agent correction (model chose {operation})\"\n                name = flow[len(steps)]\n            actual_arguments = self._arguments(len(steps), owner, repo, steps)\n            output = await self.registry.call(name, actual_arguments)\n            self._validate_output(len(steps), owner, repo, output, steps)\n            alias,",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_1": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "\"\"\"Connect three independent stdio servers and expose one namespaced catalog.\"\"\"",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_2": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "import os\nimport sys\nfrom contextlib import AsyncExitStack, asynccontextmanager\nfrom pathlib import Path",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_3": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "from mcp import ClientSession, StdioServerParameters\nfrom mcp.client.stdio import stdio_client",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_4": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "SERVERS = {\n    \"github\": \"github_server.py\",\n    \"analysis\": \"analysis_server.py\",\n    \"storage\": \"storage_server.py\",\n}",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_5": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "class ToolRegistry:\n    def __init__(self, sessions: dict[str, ClientSession]):\n        self.sessions = sessions\n        self.routes: dict[str, tuple[str, str]] = {}\n        self.schemas: list[dict] = []",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_6": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "async def discover(self) -> list[dict]:\n        self.routes.clear()\n        self.schemas.clear()\n        for alias, session in self.sessions.items():\n            for tool in (await session.list_tools()).tools:\n                public_name = f\"{alias}__{tool.name}\"\n                if public_name in self.routes:\n                    raise RuntimeError(f\"Duplicate MCP tool: {public_name}\")\n                self.routes[public_name] = (alias, tool.name)\n                self.schemas.append({\"type\": \"function\", \"function\": {\n                    \"name\": public_name,\n                    \"description\": f\"Server {alias}: {tool.description or ''}\",\n                    \"parameters\": tool.inputSchema,\n                }})\n        return self.schemas",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_7": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "async def call(self, public_name: str, arguments: dict) -> dict:\n        if public_name not in self.routes:\n            raise ValueError(f\"Unknown MCP tool: {public_name}\")\n        alias, actual_name = self.routes[public_name]\n        result = await self.sessions[alias].call_tool(actual_name, arguments=arguments)\n        parts = [item.text for item in result.content if getattr(item, \"type\", None) == \"text\"]\n        if result.isError:\n            raise RuntimeError(f\"{public_name} failed: {' '.join(parts)}\")\n        if result.structuredContent and isinstance(result.structuredContent, dict):\n            # MCP SDKs can wrap a FastMCP return under `result` in structured content.\n            value = result.structuredContent\n            if set(value) == {\"result\"}:\n                value = value[\"result\"]\n        else:\n            import json\n            if len(parts) != 1:\n                raise RuntimeError(f\"Unexpected response from {public_name}\")\n            value = json.loads(parts[0])\n        if not isinstance(value, dict):\n            raise RuntimeError(f\"Expected JSON object from {public_name}\")\n        return value",
+        "heading": null,
+        "kind": "code"
+      },
+      "q5_8": {
+        "chunk_id": "911a11e54effe4927f42",
+        "quote": "@asynccontextmanager\nasync def connect_servers():\n    async with AsyncExitStack() as stack:\n        sessions = {}\n        for alias, filename in SERVERS.items():\n            params = StdioServerParameters(command=sys.executable,\n                                           args=[str(Path(__file__).with_name(filename))],\n                                           env=os.environ.copy())\n            read, write = await stack.enter_async_context(stdio_client(params))\n            session = await stack.enter_async_context(ClientSession(read, write))\n            await session.initialize()\n            sessions[alias] = session\n        registry = ToolRegistry(sessions)\n        await registry.discover()\n        yield registry",
+        "heading": null,
+        "kind": "code"
+      }
+    },
+    "selection_catalog_ids": [
+      "q1_1",
+      "q1_2",
+      "q1_3",
+      "q1_9",
+      "q1_10",
+      "q1_11",
+      "q1_12",
+      "q1_13",
+      "q1_14",
+      "q1_15",
+      "q1_16",
+      "q1_17",
+      "q1_18",
+      "q1_19",
+      "q1_20",
+      "q1_21",
+      "q1_22",
+      "q2_1",
+      "q2_2",
+      "q2_3",
+      "q2_4",
+      "q2_5",
+      "q2_6",
+      "q2_7",
+      "q2_8",
+      "q2_9",
+      "q2_10",
+      "q2_11",
+      "q2_12",
+      "q2_13",
+      "q2_14",
+      "q3_1",
+      "q3_2",
+      "q3_3",
+      "q3_4",
+      "q3_5",
+      "q3_6",
+      "q3_7",
+      "q4_1",
+      "q4_2",
+      "q4_3",
+      "q4_4",
+      "q4_5",
+      "q4_6",
+      "q4_7",
+      "q4_8",
+      "q4_9",
+      "q4_10",
+      "q5_1",
+      "q5_2",
+      "q5_3",
+      "q5_4",
+      "q5_5",
+      "q5_6",
+      "q5_7",
+      "q5_8"
+    ],
+    "coverage_requirements": [
+      {
+        "id": "question",
+        "need": "Answer the original question in full, including every requested part."
+      }
+    ],
+    "answer_quote_ids": [
+      "q1_3"
+    ],
+    "answer_proof_catalog": {
+      "p1_1": {
+        "id": "p1_1",
+        "text": "| Сервер | Инструменты | Задача |",
+        "claim_id": 1,
+        "quote_id": "q1_3",
+        "chunk_id": "7e5cad922782fa195336",
+        "command_only": false
+      },
+      "p1_2": {
+        "id": "p1_2",
+        "text": "|---|---|---|",
+        "claim_id": 1,
+        "quote_id": "q1_3",
+        "chunk_id": "7e5cad922782fa195336",
+        "command_only": false
+      },
+      "p1_3": {
+        "id": "p1_3",
+        "text": "| `github` | `get_repository_info` | Получить метаданные GitHub |",
+        "claim_id": 1,
+        "quote_id": "q1_3",
+        "chunk_id": "7e5cad922782fa195336",
+        "command_only": false
+      },
+      "p1_4": {
+        "id": "p1_4",
+        "text": "| `analysis` | `summarize_repository`, `verify_report` | Подготовить сводку, затем проверить сохранённый текст |",
+        "claim_id": 1,
+        "quote_id": "q1_3",
+        "chunk_id": "7e5cad922782fa195336",
+        "command_only": false
+      },
+      "p1_5": {
+        "id": "p1_5",
+        "text": "| `storage` | `save_report`, `read_report` | Сохранить и перечитать файл |",
+        "claim_id": 1,
+        "quote_id": "q1_3",
+        "chunk_id": "7e5cad922782fa195336",
+        "command_only": false
+      }
+    }
+  },
+  "resolved_question": "Какие инструменты публикует сервер storage на день 20?",
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 48,
+  "task_state": {
+    "goal": {
+      "value": "Подготовить демонстрацию полного MCP-флоу дня 20.",
+      "evidence": "Цель: Подготовить демонстрацию полного MCP-флоу дня 20.",
+      "turn": 46,
+      "origin": "planner"
+    },
+    "constraints": {
+      "f0704653c253": {
+        "value": "Без VPS.",
+        "evidence": "Ограничение: Без VPS.",
+        "turn": 46,
+        "origin": "planner"
+      },
+      "4b894dbb8e4c": {
+        "value": "Проверяем сохранённый файл.",
+        "evidence": "Ограничение: Проверяем сохранённый файл.",
+        "turn": 48,
+        "origin": "planner"
+      }
+    },
+    "clarifications": {},
+    "terms": {}
+  },
+  "conversation": {
+    "warnings": [],
+    "raw": "{\n  \"resolved_question\": \"Какие инструменты публикует сервер storage на день 20?\",\n  \"needs_clarification\": true,\n  \"updates\": [\n    {\n      \"kind\": \"constraints\",\n      \"key\": \"\",\n      \"value\": \"Проверяем сохранённый файл.\",\n      \"evidence\": \"Ограничение: Проверяем сохранённый файл.\"\n    }\n  ]\n}",
+    "recent_history": [
+      {
+        "user": "Цель: Подготовить демонстрацию полного MCP-флоу дня 20.\nОграничение: Без VPS.\nКакие MCP-серверы зарегистрированы на день 20?",
+        "assistant": "Не знаю: найденного контекста недостаточно для подтверждённого ответа.",
+        "resolved_question": "Какие MCP-серверы зарегистрированы на день 20?",
+        "resolution_accepted": true,
+        "answer_status": "unknown",
+        "resolution_state": "50fa4eb224c5165da32bcc680fa12547d701b8631ee2dbfe1187298f4fd706d0"
+      },
+      {
+        "user": "Какие MCP-серверы зарегистрированы на день 20?",
+        "assistant": "Бублик подключается к **трём независимым MCP-серверам** через stdio. Каждый сервер стартует отдельным процессом и публикует инструменты через `list_tools()`: [1]\n| Сервер | Инструменты | Задача |\n|---|---|---|\n| `github` | `get_repository_info` | Получить метаданные GitHub |\n| `analysis` | `summariz",
+        "resolved_question": "Какие MCP-серверы зарегистрированы на день 20?",
+        "resolution_accepted": true,
+        "answer_status": "answered",
+        "resolution_state": "50fa4eb224c5165da32bcc680fa12547d701b8631ee2dbfe1187298f4fd706d0"
+      }
+    ],
+    "explicit_declarations": [
+      {
+        "kind": "constraints",
+        "key": "",
+        "value": "Проверяем сохранённый файл.",
+        "evidence": "Ограничение: Проверяем сохранённый файл."
+      }
+    ],
+    "declaration_proposals_ignored": [
+      {
+        "kind": "constraints",
+        "key": "",
+        "value": "Проверяем сохранённый файл.",
+        "evidence": "Ограничение: Проверяем сохранённый файл."
+      }
+    ],
+    "resolved_question": "Какие инструменты публикует сервер storage на день 20?",
+    "model_needs_clarification": true,
+    "effective_needs_clarification": false,
+    "clarification_adjustment": "self_contained_question_requires_evidence_search"
+  }
+}

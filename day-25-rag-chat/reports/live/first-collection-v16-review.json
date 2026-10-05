@@ -1,0 +1,47 @@
+{
+  "session_id": "7f95cd22a59c49a088a9f52d37726d5c",
+  "turn_id": 65,
+  "functional_core_passed": true,
+  "functional_check_passed": false,
+  "checks": {
+    "answered": true,
+    "source_contract": true,
+    "quotes_equal_repo_lines": true,
+    "first_due_immediately_directly_proved": true,
+    "fresh_dense_branches": 2,
+    "retrieval_lesson": "18",
+    "no_planning_warnings": true,
+    "no_validation_errors": true,
+    "coverage_pass": true,
+    "refiner_subset_only": true,
+    "published_fragments_complete": false
+  },
+  "quotes": [
+    {
+      "quote_id": "q5_4",
+      "source": "day-18-scheduled-mcp/server.py",
+      "start_line": 10,
+      "end_line": 12,
+      "equals_whole_lines": true,
+      "python_lexically_incomplete": true
+    },
+    {
+      "quote_id": "q1_4",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 9,
+      "end_line": 13,
+      "equals_whole_lines": true,
+      "python_lexically_incomplete": false
+    }
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete_requested_fact": true,
+    "goal_respected": true,
+    "concise": false,
+    "all_published_fragments_complete": false,
+    "note": "The answer and selected proof p2_1 correctly state that first collection is due immediately when a schedule is created/updated, rather than after the full interval. README source and the code excerpt are exactly bound to repository lines; two new search branches retrieve day 18. However q5_4 is decorator/function header followed by an UNTERMINATED triple-quoted docstring, printed inside a synthetic Python fence. Refiner retains that unnecessary truncated code despite sufficient direct README evidence. Therefore the factual question passes but the output-quality check fails. v17 filters this whole broken code ID without completing/rewriting source text. It does not alter the recorded positive verdict or claim success of a future live rerun."
+  },
+  "original_sha256": "722e582b0b76ba0879fd8bfb7845e0c35d2ff520231f9db97b1db0a82d7f35f1",
+  "full_live_long_scenarios_passed": false
+}

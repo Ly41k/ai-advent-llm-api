@@ -1,0 +1,16 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 61,
+  "functional_check_passed": false,
+  "memory_unchanged": true,
+  "fresh_dense_branches": 2,
+  "retrieval_lesson": "18",
+  "incomplete_table_filter_worked": true,
+  "selector_attempts": 2,
+  "published_sources": [],
+  "manual_review": {
+    "requested_process_directly_supported": true,
+    "note": "Both refined candidates retain q1_3, whose proof p1_2 directly identifies the separate worker and its scheduled polling action, plus the complete English assignment table q2_26. Auditor selects p1_2 but returns covered=false claiming process description is absent. Strict refusal preserves this negative verdict. Refiner discarded the short worker.py command in both attempts. Table clipping guard worked and memory is unchanged; the live question still fails."
+  },
+  "full_live_long_scenarios_passed": false
+}

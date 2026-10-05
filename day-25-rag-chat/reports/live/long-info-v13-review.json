@@ -1,0 +1,37 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 56,
+  "functional_check_passed": true,
+  "checks": {
+    "sources_contract": true,
+    "exact_line_ranges": true,
+    "memory_unchanged": true,
+    "refinement_subset_valid": true,
+    "published_ids_match_refined_ids": true,
+    "proofs_exact": true,
+    "wrong_full_report_chain_removed": true,
+    "coverage_supported": true,
+    "planner_warnings_absent": true,
+    "validation_errors_absent": true,
+    "all_model_calls_completed": true
+  },
+  "fresh_dense_branches": 2,
+  "quotes_checked": 2,
+  "initial_quote_ids": [
+    "q1_3",
+    "q1_12",
+    "q1_10"
+  ],
+  "refined_quote_ids": [
+    "q1_3",
+    "q1_12"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "concise": false,
+    "note": "Correct directly labelled info route: only GitHub. Refiner removed the unlabelled full-report arrow chain. The remaining all-server table is unnecessary but the following paragraph explicitly distinguishes info/summary/report, so the requested route is unambiguous. All published text is exact source content, proof p2_1 supports the requested mapping, and all task memory is byte-for-byte identical as JSON values."
+  },
+  "full_live_long_scenarios_passed": false
+}

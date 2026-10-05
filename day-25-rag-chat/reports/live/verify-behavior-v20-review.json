@@ -1,0 +1,33 @@
+{
+  "session_id": "587602c777d1483397cfd69ec151d32b",
+  "turn_id": 96,
+  "original_sha256": "b0acd4e7aa1d01788e1c3e3e51e0e11a452fa1b3c6ff6ea01cc762c21609f9b5",
+  "functional_answer_check_passed": false,
+  "checks": {
+    "answered": true,
+    "same_session": true,
+    "memory_and_provenance_exact": true,
+    "question_unchanged": true,
+    "source_contract": true,
+    "quotes_equal_whole_repo_lines": true,
+    "correct_single_mechanism_criterion": true,
+    "no_errors_warnings": true,
+    "direct_action_for_requested_condition": false,
+    "requested_correction_marker_present": true,
+    "two_fresh_scoped_retrieval_branches": true,
+    "cosine_matches_max_actual_branch": true,
+    "refined_selection_obeys_declared_enum": true
+  },
+  "manual_review": {
+    "result": "FAIL",
+    "action": "Missing direct next-admissible-step action for premature model selection. Published q1_11 assigns action to HTTP400 fallback and only a label to premature correction.",
+    "marker": "PASS",
+    "criteria_derivation": "PASS; exactly mechanism, no unrelated verification-observation.",
+    "selection_failure": "Initial q1_9 + q1_11 omitted caption dependency q1_10. Refiner generation domain allowed only empty or q1_11, so q1_9 direct action was lost.",
+    "coverage_false_positive": true,
+    "memory_and_history": "State and provenance unchanged; exported result does not independently prove full history persistence.",
+    "v21_fix": "Declared inseparable narrative source units before selection; narrow rejection guard against cited mixed-condition action transfer. Live v21 remains pending."
+  },
+  "live_ollama_used": true,
+  "assignment_completed": false
+}

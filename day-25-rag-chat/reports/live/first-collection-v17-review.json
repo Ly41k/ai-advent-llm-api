@@ -1,0 +1,64 @@
+{
+  "session_id": "7f95cd22a59c49a088a9f52d37726d5c",
+  "turn_id": 66,
+  "functional_check_passed": true,
+  "checks": {
+    "answered": true,
+    "source_contract": true,
+    "sources_rendered": true,
+    "same_session": true,
+    "memory_unchanged": true,
+    "question_unchanged": true,
+    "two_fresh_retrieval_branches_recorded": true,
+    "retrieval_lesson18": true,
+    "quotes_equal_repo_lines": true,
+    "refiner_subset_only": true,
+    "refined_equals_published": true,
+    "only_readme_published": true,
+    "first_due_time_directly_proved": true,
+    "coverage_pass": true,
+    "no_planning_warnings": true,
+    "no_validation_errors": true,
+    "one_candidate_attempt": true,
+    "bad_docstring_excluded": true,
+    "excluded_fragments_not_published": true,
+    "published_fragments_complete": true,
+    "cosine_matches_actual_branch_max": true,
+    "all_generation_done_reason_stop": true
+  },
+  "quotes": [
+    {
+      "quote_id": "q1_4",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 9,
+      "end_line": 13,
+      "equals_whole_lines": true
+    }
+  ],
+  "initial_quote_ids": [
+    "q1_4",
+    "q1_15",
+    "q1_16",
+    "q1_17",
+    "q1_18",
+    "q2_26"
+  ],
+  "refined_quote_ids": [
+    "q1_4"
+  ],
+  "excluded_quote_ids": [
+    "q1_27",
+    "q5_4",
+    "q5_6"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "all_published_fragments_complete": true,
+    "concise": false,
+    "note": "The first list item directly confirms that first collection is scheduled immediately on schedule creation/update. A single whole README list quote is exact and no Python is published. The live filter excludes q5_4, exactly matching the previously printed unclosed docstring, plus another broken Python excerpt and the clipped table. Refiner reduces six initial IDs to the one sufficient list. The remaining list includes unnecessary component descriptions because the extractive catalog treats it as one complete quote; this is verbose, but all information is literal, correctly labelled and not misleading about first-due time. Same session and all memory/provenance fields match v16. Two new query branches record current source evidence; this is an individual live pass, not completion of clean long scenarios."
+  },
+  "original_sha256": "77c30520aa7dca35321eae8936b93c47a1f4f346b07f97028ac8bb8fd1ba9f6b",
+  "full_live_long_scenarios_passed": false
+}

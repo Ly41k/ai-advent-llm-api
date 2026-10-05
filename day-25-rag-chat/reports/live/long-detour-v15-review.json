@@ -1,0 +1,69 @@
+{
+  "session_id": "4fb98ce5a966406688e4d80b51cfa7ba",
+  "turn_id": 62,
+  "functional_check_passed": true,
+  "checks": {
+    "answered": true,
+    "source_contract": true,
+    "sources_rendered": true,
+    "memory_unchanged": true,
+    "goal_still_day20": true,
+    "query_still_explicit_day18": true,
+    "no_planning_warnings": true,
+    "no_validation_errors": true,
+    "coverage_pass": true,
+    "retrieval_lesson18": true,
+    "only_day18_sources": true,
+    "one_candidate_attempt": true,
+    "quotes_equal_repo_lines": true,
+    "refiner_subset_only": true,
+    "refined_equals_published": true,
+    "excluded_fragments_not_published": true,
+    "proofs_literal": true,
+    "two_fresh_retrieval_branches_recorded": true,
+    "cosine_matches_actual_branch_max": true,
+    "all_generation_done_reason_stop": true
+  },
+  "quotes": [
+    {
+      "quote_id": "q1_3",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 5,
+      "end_line": 5,
+      "equals_whole_lines": true
+    },
+    {
+      "quote_id": "q1_16",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "start_line": 33,
+      "end_line": 35,
+      "equals_whole_lines": true
+    }
+  ],
+  "fresh_dense_branches": 2,
+  "initial_quote_ids": [
+    "q1_3",
+    "q1_15",
+    "q1_16",
+    "q1_17",
+    "q1_18",
+    "q2_26"
+  ],
+  "refined_quote_ids": [
+    "q1_3",
+    "q1_16"
+  ],
+  "excluded_quote_ids": [
+    "q1_27"
+  ],
+  "manual_review": {
+    "relevant": true,
+    "complete": true,
+    "goal_respected": true,
+    "all_published_fragments_complete": true,
+    "concise": true,
+    "note": "Direct paragraph names the separate worker and its background actions; a complete fenced command identifies worker.py. No assignment checklist or clipped table is published. The day-20 goal, both constraints, clarification, term and all provenance fields are exactly unchanged relative to v14. Auditor selects the literal process-description and command proofs. This individual check passes; clean live 2x12 scenarios remain pending."
+  },
+  "original_sha256": "d5d0a8290f921799042237969f77bcc148259f24ce3479f6a7f3f0047274e83a",
+  "full_live_long_scenarios_passed": false
+}

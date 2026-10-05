@@ -1,0 +1,12 @@
+test_answer_retries_once_with_best_evidence (__main__.Day21Tests.test_answer_retries_once_with_best_evidence) ... ok
+test_bad_parameters_and_zero_vectors (__main__.Day21Tests.test_bad_parameters_and_zero_vectors) ... ok
+test_code_sections (__main__.Day21Tests.test_code_sections) ... ok
+test_fixed_overlap_and_structural_sections (__main__.Day21Tests.test_fixed_overlap_and_structural_sections) ... ok
+test_later_rag_lessons_do_not_enter_shared_corpus (__main__.Day21Tests.test_later_rag_lessons_do_not_enter_shared_corpus) ... ok
+test_persistence_rebuild_and_search (__main__.Day21Tests.test_persistence_rebuild_and_search) ... ok
+test_project_corpus_and_gold_questions (__main__.Day21Tests.test_project_corpus_and_gold_questions) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.016s
+
+OK

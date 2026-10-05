@@ -1,0 +1,100 @@
+{
+  "input": "followup.json",
+  "session_id": "2cb61350c3d54c218d260e6a5cd65969",
+  "question": "А где это хранится?",
+  "resolved_question": "А где хранятся снимки, которые сохраняет worker на день 18?",
+  "status": "unknown",
+  "reason": "evidence_validation_failed",
+  "task_state": {
+    "goal": {
+      "value": "Подготовить проверку планировщика дня 18.",
+      "evidence": "Подготовить проверку планировщика дня 18.",
+      "turn": 0,
+      "origin": "command"
+    },
+    "constraints": {
+      "07aeccdbc81c": {
+        "value": "Используем SQLite.",
+        "evidence": "Используем SQLite.",
+        "turn": 0,
+        "origin": "command"
+      },
+      "78977b5c5ca8": {
+        "value": "Worker должен работать отдельно от чата.",
+        "evidence": "Worker должен работать отдельно от чата.",
+        "turn": 0,
+        "origin": "command"
+      }
+    },
+    "clarifications": {
+      "f561dcbbee5b": {
+        "value": "Проверяем локальный запуск.",
+        "evidence": "Проверяем локальный запуск.",
+        "turn": 0,
+        "origin": "command"
+      },
+      "6f7382f038ef": {
+        "value": "Первый сбор проверяем вручную.",
+        "evidence": "Уточнение: Первый сбор проверяем вручную.",
+        "turn": 4,
+        "origin": "planner"
+      }
+    },
+    "terms": {
+      "снимок": {
+        "value": "сохранённые данные GitHub",
+        "evidence": "снимок=сохранённые данные GitHub",
+        "turn": 0,
+        "origin": "command"
+      }
+    }
+  },
+  "planner_raw": "{\n  \"resolved_question\": \"А где хранятся снимки, которые сохраняет worker на день 18?\",\n  \"needs_clarification\": false,\n  \"updates\": [\n    {\n      \"kind\": \"clarifications\",\n      \"key\": \"6f7382f038ef\",\n      \"value\": \"Первый сбор проверяем вручную. А где хранятся снимки, которые сохраняет worker на день 18?\",\n      \"evidence\": \"Первый сбор проверяем вручную.\"\n    }\n  ]\n}",
+  "warnings": [
+    "Memory must be an exact substring of current user evidence"
+  ],
+  "retrieval": {
+    "candidate_count": 20,
+    "eligible_count": 2,
+    "selected_count": 2,
+    "settings": {
+      "candidate_k": 20,
+      "final_k": 5,
+      "min_similarity": 0.5,
+      "strategy": "fixed",
+      "rewrite_method": "heuristic"
+    }
+  },
+  "model_calls": [
+    {
+      "stage": "extractive_selector",
+      "raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q1_3\", \"q1_10\"]}"
+    },
+    {
+      "stage": "coverage_auditor",
+      "raw_response": "{\n  \"reason\": \"Предоставленные доказательства указывают, что снимки сохраняются в SQLite, но конкретный путь к файлу SQLite не указан.\",\n  \"proof_ids\": [\"p1_2\", \"p2_1\"],\n  \"covered\": false\n}"
+    },
+    {
+      "stage": "extractive_selector",
+      "raw_response": "{\"status\": \"answered\", \"quote_ids\": [\"q1_3\", \"q1_10\"]}"
+    },
+    {
+      "stage": "coverage_auditor",
+      "raw_response": "{\n  \"reason\": \"Предоставленные доказательства указывают, что снимки сохраняются в SQLite, но конкретный путь к файлу SQLite не указан.\",\n  \"proof_ids\": [\"p1_2\", \"p2_1\"],\n  \"covered\": false\n}"
+    }
+  ],
+  "local_storage_quotes": [
+    {
+      "quote_id": "q1_3",
+      "quote": "Бублик через MCP ставит публичный GitHub-репозиторий на периодическое наблюдение. Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска. Агент по запросу читает сохранённую сводку через MCP и отвечает с её данными.",
+      "exact_in_local_readme": true
+    },
+    {
+      "quote_id": "q1_10",
+      "quote": "Данные `schedule.db` сохраняются между перезапусками; файл исключён из Git. Временные метки — UTC. Пропущенные во время простоя запуски не воспроизводятся пачкой: после старта worker выполнит каждый просроченный job один раз. Рекомендуется один экземпляр worker. Сообщения о завершении worker печатает в stdout/systemd journal; автоматическая отправка сообщений в чат не реализована.",
+      "exact_in_local_readme": true
+    }
+  ],
+  "coverage_supported": false,
+  "live_model_retest_after_v3_pending": true
+}

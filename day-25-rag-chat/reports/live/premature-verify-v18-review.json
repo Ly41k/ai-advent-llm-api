@@ -1,0 +1,64 @@
+{
+  "session_id": "587602c777d1483397cfd69ec151d32b",
+  "turn_id": 93,
+  "original_sha256": "5ad4ed06d052cfe74f06f30ef29351a3357c1fae6d311b2cb4ade0464baafb2b",
+  "structural_fix_live_check_passed": true,
+  "source_and_memory_check_passed": true,
+  "full_behavior_coverage_confirmed": false,
+  "overall_manual_result": "PARTIAL",
+  "checks": {
+    "answered": true,
+    "same_session": true,
+    "memory_and_provenance_unchanged": true,
+    "question_unchanged": true,
+    "source_contract": true,
+    "sources_rendered": true,
+    "two_retrieval_branches_recorded": true,
+    "retrieval_scoped_to_day20": true,
+    "quote_equals_whole_repo_line": true,
+    "refiner_used_initial_subset": true,
+    "refiner_obeyed_array_enum": true,
+    "refined_equals_published": true,
+    "orphaned_introduction_removed": true,
+    "missing_partner_not_added": true,
+    "published_fragments_complete": true,
+    "cosine_equals_actual_branch_max": true,
+    "original_cosine_threshold_retained": true,
+    "one_candidate_attempt": true,
+    "no_final_validation_errors": true,
+    "no_memory_warnings": true,
+    "all_generation_finished_stop": true
+  },
+  "initial_quote_ids": [
+    "q1_9",
+    "q1_11"
+  ],
+  "refined_quote_ids": [
+    "q1_11"
+  ],
+  "structurally_valid_selections": [
+    [],
+    [
+      "q1_11"
+    ]
+  ],
+  "quote_source": {
+    "path": "day-20-mcp-orchestration/README.ru.md",
+    "lines": [
+      18,
+      18
+    ],
+    "cosine": 0.6856385504558894
+  },
+  "manual_review": {
+    "correction_label_directly_proved": true,
+    "correction_is_not_attributed_to_model": true,
+    "corrective_step_choice_directly_proved_by_published_quote": false,
+    "audit_reason_overstates_selected_proof": true,
+    "concise": false,
+    "note": "Published q1_11 directly states the selected by agent correction label for a premature model choice. Its selection of the next step is explicitly attached to HTTP 400 tool_use_failed / fallback. The auditor transfers that action to the premature VERIFY branch without direct wording in the selected quote. The unselected README line 11 explicitly states choosing the admissible next step, but cannot serve as proof for the published answer. Structural failure from v17 is fixed and real Ollama/Qwen accepts the array enum; full behavior needs a separate explicit two-part live check."
+  },
+  "live_ollama_used": true,
+  "new_code_change_in_this_review": false,
+  "assignment_completed": false
+}

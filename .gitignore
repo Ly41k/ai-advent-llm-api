@@ -25,3 +25,16 @@ check_models.py
 
 # Журнал консольной демонстрации
 /day24-console-recording.txt
+# Служебные файлы архивов Day25
+/DELIVERY_MANIFEST.json
+/START_DAY25.ru.md
+/day-25-rag-chat/*_MANIFEST.json
+
+# Локальные проверки и видео
+/day-25-rag-chat/reports/check/
+/day-25-rag-chat/reports/video/
+
+# Промежуточные журналы исправлений
+/day-25-rag-chat/reports/verified/*-fix-tests.txt
+/day-25-rag-chat/reports/verified/*-trace-replay.json
+/day-25-rag-chat/reports/verified/long-fix-planner-replay.json
