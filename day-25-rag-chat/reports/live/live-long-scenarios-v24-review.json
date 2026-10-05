@@ -1,0 +1,931 @@
+{
+  "version": 24,
+  "review_date": "2026-10-05",
+  "original_report": "live-long-scenarios-v24-original.json",
+  "original_sha256": "0eb6cbdc470130c5b1fc6735de0db055b419a70136b9f86ebade2e3566a7b26b",
+  "scope": "Manual review of these two user-run live dialogues. Not a universal semantic guarantee and not a new test execution.",
+  "summary": {
+    "manual_all_turns_pass": true,
+    "user_turns": 24,
+    "answers": 24,
+    "refusals": 0,
+    "technical_errors": 0,
+    "planner_warnings": 0,
+    "exact_quotes": 47,
+    "embedding_calls": 48,
+    "search_calls": 48,
+    "distinct_process_ids": 24,
+    "distinct_request_ids": 24,
+    "model": "qwen2.5:14b",
+    "embedding_model": "bge-m3",
+    "coverage_policy": "strict",
+    "source_file_review_done": true,
+    "uploaded_report_unchanged": true,
+    "pending_extra_live_checks": [],
+    "presentation_polish_remaining": true,
+    "extra_live_negative_controls_pass": true,
+    "extra_live_negative_controls_review": "negative-controls-v24-review.json"
+  },
+  "details": [
+    {
+      "scenario": "scheduler",
+      "session": "f3b5818b20b24bf79a3455d8ca351f75",
+      "turns": [
+        {
+          "number": 1,
+          "turn_id": 127,
+          "question": "Цель: Разобраться в планировщике дня 18 и подготовить его проверку.\nОграничение: Используем SQLite.\nКакой процесс выполняет фоновые задания на день 18?",
+          "resolved_question": "Какой процесс выполняет фоновые задания на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Отдельный worker назван и приведена команда запуска worker.py.",
+          "polish": [],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 5,
+              "end_line": 5,
+              "quote_id": "q1_3"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 33,
+              "end_line": 35,
+              "quote_id": "q1_16"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "turn_id": 128,
+          "question": "Ограничение: Worker должен работать отдельно от чата.\nКакие поля GitHub сохраняет worker на день 18?",
+          "resolved_question": "Какие поля GitHub сохраняет worker на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Сохранены stars, forks, open_issues и время; сведения явно присутствуют в русском списке.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_4"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q1_10"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "turn_id": 129,
+          "question": "Термин: снимок = сохранённые данные GitHub\nА где это хранится?",
+          "resolved_question": "Где хранятся снимки GitHub на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Снимки разрешены по текущему термину и предыдущей теме; SQLite и schedule.db названы явно.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 5,
+              "end_line": 5,
+              "quote_id": "q1_3"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q1_11"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 5,
+              "end_line": 5,
+              "quote_id": "q2_3"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q2_10"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "turn_id": 130,
+          "question": "Уточнение: Речь о расписании дня 18.\nКакой инструмент создаёт расписание?",
+          "resolved_question": "Какой инструмент создаёт расписание? (контекст: день 18)",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Текущий день восстановлен из уточнения; инструмент schedule_github_summary назван.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_4"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q2_5"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "turn_id": 131,
+          "question": "Когда назначается первый сбор на день 18?",
+          "resolved_question": "Когда назначается первый сбор на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Первый сбор назначается сразу.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_4"
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "turn_id": 132,
+          "question": "А какой у него допустимый интервал?",
+          "resolved_question": "Какой допустимый интервал у расписания дня 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Продолжение раскрыто как интервал расписания, диапазон 1–10080 минут сохранён.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_5"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q2_4"
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "turn_id": 133,
+          "question": "Что возвращает get_github_summary на день 18?",
+          "resolved_question": "Что возвращает get_github_summary на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Русская цитата подтверждает количество снимков, последнее состояние и изменения относительно самого старого выбранного.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_5"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q2_4"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "turn_id": 134,
+          "question": "Что возвращает list_scheduled_jobs на день 18?",
+          "resolved_question": "Что возвращает list_scheduled_jobs на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "list_scheduled_jobs возвращает расписание, следующий запуск и ошибку; Python-фрагмент целый.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 9,
+              "end_line": 13,
+              "quote_id": "q1_4"
+            },
+            {
+              "source": "day-18-scheduled-mcp/server.py",
+              "start_line": 34,
+              "end_line": 37,
+              "quote_id": "q4_8"
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "turn_id": 135,
+          "question": "Что происходит с пропущенными заданиями после простоя worker на день 18?",
+          "resolved_question": "Что происходит с пропущенными заданиями после простоя worker на день 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "После простоя каждый просроченный job выполняется один раз, без воспроизведения пропущенных запусков пачкой.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q1_10"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q2_11"
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "turn_id": 136,
+          "question": "Отправляет ли worker дня 18 результаты в чат автоматически?",
+          "resolved_question": "Отправляет ли worker дня 18 результаты в чат автоматически?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Автоматической отправки в чат нет; результат выводится в stdout/systemd journal.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q1_10"
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "turn_id": 137,
+          "question": "Нужен ли worker дня 18 ключ Groq?",
+          "resolved_question": "Нужен ли worker дня 18 ключ Groq?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Worker не требует Groq key; необходимость доступа к GitHub не перепутана с ключом Groq.",
+          "polish": [
+            "Дублирование RU/EN.",
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 57,
+              "end_line": 57,
+              "quote_id": "q1_25"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.md",
+              "start_line": 56,
+              "end_line": 56,
+              "quote_id": "q2_24"
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "turn_id": 138,
+          "question": "Где посмотреть журнал worker дня 18?",
+          "resolved_question": "Где посмотреть журнал worker дня 18?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Указаны stdout/systemd journal и подходящая команда journalctl; лишние команды установки не меняют ответ.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 15,
+              "end_line": 15,
+              "quote_id": "q1_10"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 50,
+              "end_line": 55,
+              "quote_id": "q1_24"
+            }
+          ]
+        }
+      ],
+      "final_memory": {
+        "goal": {
+          "value": "Разобраться в планировщике дня 18 и подготовить его проверку.",
+          "evidence": "Цель: Разобраться в планировщике дня 18 и подготовить его проверку.",
+          "turn": 127,
+          "origin": "planner"
+        },
+        "constraints": {
+          "07aeccdbc81c": {
+            "value": "Используем SQLite.",
+            "evidence": "Ограничение: Используем SQLite.",
+            "turn": 127,
+            "origin": "planner"
+          },
+          "78977b5c5ca8": {
+            "value": "Worker должен работать отдельно от чата.",
+            "evidence": "Ограничение: Worker должен работать отдельно от чата.",
+            "turn": 128,
+            "origin": "planner"
+          }
+        },
+        "clarifications": {
+          "edc8891b1234": {
+            "value": "Речь о расписании дня 18.",
+            "evidence": "Уточнение: Речь о расписании дня 18.",
+            "turn": 130,
+            "origin": "planner"
+          }
+        },
+        "terms": {
+          "снимок": {
+            "value": "сохранённые данные GitHub",
+            "evidence": "Термин: снимок = сохранённые данные GitHub",
+            "turn": 129,
+            "origin": "planner"
+          }
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "scenario": "orchestration",
+      "session": "dcdc95b6629241afb82eec8c72f9344f",
+      "turns": [
+        {
+          "number": 1,
+          "turn_id": 139,
+          "question": "Цель: Подготовить демонстрацию полного MCP-флоу дня 20.\nОграничение: Без VPS.\nКакие MCP-серверы зарегистрированы на день 20?",
+          "resolved_question": "Какие MCP-серверы зарегистрированы на день 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Три сервера github, analysis, storage названы в полной исходной таблице.",
+          "polish": [],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 3,
+              "end_line": 3,
+              "quote_id": "q1_2"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 5,
+              "end_line": 9,
+              "quote_id": "q1_3"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "turn_id": 140,
+          "question": "Ограничение: Проверяем сохранённый файл.\nКакие инструменты публикует сервер storage на день 20?",
+          "resolved_question": "Какие инструменты публикует сервер storage на день 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "У storage корректно указаны save_report и read_report.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 5,
+              "end_line": 9,
+              "quote_id": "q1_3"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 11,
+              "end_line": 11,
+              "quote_id": "q1_9"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 13,
+              "end_line": 16,
+              "quote_id": "q1_10"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "turn_id": 141,
+          "question": "Термин: отчёт = сохранённая Markdown-сводка\nА какие инструменты у analysis?",
+          "resolved_question": "Какие инструменты публикует сервер analysis на день 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Продолжение разрешено по актуальному дню 20; analysis публикует summarize_repository и verify_report.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 5,
+              "end_line": 9,
+              "quote_id": "q1_3"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 11,
+              "end_line": 11,
+              "quote_id": "q1_9"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 13,
+              "end_line": 16,
+              "quote_id": "q1_10"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "turn_id": 142,
+          "question": "Уточнение: Нужен полный маршрут report.\nВ каком порядке выполняется полный флоу дня 20?",
+          "resolved_question": "В каком порядке выполняется полный флоу дня 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Полный порядок GitHub → summarize → save → read → verify сохранён; исходная вводная к цепочке присутствует.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 11,
+              "end_line": 11,
+              "quote_id": "q1_9"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 13,
+              "end_line": 16,
+              "quote_id": "q1_10"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "turn_id": 143,
+          "question": "Когда отчёт дня 20 считается завершённым?",
+          "resolved_question": "Когда отчёт дня 20 считается завершённым?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Завершение полного отчёта требует verified=true.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 18,
+              "end_line": 18,
+              "quote_id": "q1_11"
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "turn_id": 144,
+          "question": "А что именно сравнивает последний шаг?",
+          "resolved_question": "Что именно сравнивает последний шаг? (контекст: день 20)",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Последний шаг сравнивает сводку с прочитанным из сохранённого файла текстом.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 18,
+              "end_line": 18,
+              "quote_id": "q1_11"
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "turn_id": 145,
+          "question": "Что делает агент дня 20 при преждевременном выборе VERIFY?",
+          "resolved_question": "Что делает агент дня 20 при преждевременном выборе VERIFY?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "При преждевременном выборе агент выбирает допустимый следующий шаг и отмечает agent correction. Действие прямо доказано отдельной фразой; HTTP400 fallback не подменяет это доказательство.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 11,
+              "end_line": 11,
+              "quote_id": "q1_9"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 13,
+              "end_line": 16,
+              "quote_id": "q1_10"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 18,
+              "end_line": 18,
+              "quote_id": "q1_11"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "turn_id": 146,
+          "question": "Какой маршрут выбирается для --task info на день 20?",
+          "resolved_question": "Какой маршрут выбирается для --task info на день 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "--task info использует только GitHub; остальные маршруты в той же цитате явно подписаны.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 20,
+              "end_line": 20,
+              "quote_id": "q1_12"
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "turn_id": 147,
+          "question": "Какой маршрут выбирается для --task summary на день 20?",
+          "resolved_question": "Какой маршрут выбирается для --task summary на день 20?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "--task summary использует GitHub и analysis без сохранения; ложного отказа нет.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 20,
+              "end_line": 20,
+              "quote_id": "q1_12"
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "turn_id": 148,
+          "question": "Для сравнения: какой процесс дня 18 выполняет фоновые задачи?",
+          "resolved_question": "Для сравнения: какой процесс дня 18 выполняет фоновые задачи?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "Временная тема дня 18 корректна: worker.py. Цель, ограничения, уточнение и термин дня 20 не изменены.",
+          "polish": [],
+          "quotes": [
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 5,
+              "end_line": 5,
+              "quote_id": "q1_3"
+            },
+            {
+              "source": "day-18-scheduled-mcp/README.ru.md",
+              "start_line": 33,
+              "end_line": 35,
+              "quote_id": "q1_16"
+            }
+          ]
+        },
+        {
+          "number": 11,
+          "turn_id": 149,
+          "question": "Вернёмся к цели дня 20: что делает mcp_registry.py?",
+          "resolved_question": "Вернёмся к цели дня 20: что делает mcp_registry.py?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "После detour запрос и retrieval вернулись к дню 20; функции mcp_registry.py названы прямо.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 11,
+              "end_line": 11,
+              "quote_id": "q1_9"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 13,
+              "end_line": 16,
+              "quote_id": "q1_10"
+            },
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 18,
+              "end_line": 18,
+              "quote_id": "q1_11"
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "turn_id": 150,
+          "question": "Требуются ли для сценария дня 20 VPS и worker?",
+          "resolved_question": "Требуются ли для сценария дня 20 VPS и worker?",
+          "manual_review": {
+            "relevant": true,
+            "complete": true,
+            "goal_respected": true
+          },
+          "source_contract_independent": true,
+          "quotes_match_actual_files_and_lines": true,
+          "fresh_calls_verified": true,
+          "memory_and_provenance_preserved": true,
+          "verdict": "PASS",
+          "reason": "VPS и worker не требуются для локального сценария дня 20; ограничение Без VPS не нарушено.",
+          "polish": [
+            "Лишние, но корректные детали из целого исходного фрагмента."
+          ],
+          "quotes": [
+            {
+              "source": "day-20-mcp-orchestration/README.ru.md",
+              "start_line": 50,
+              "end_line": 50,
+              "quote_id": "q3_4"
+            }
+          ]
+        }
+      ],
+      "final_memory": {
+        "goal": {
+          "value": "Подготовить демонстрацию полного MCP-флоу дня 20.",
+          "evidence": "Цель: Подготовить демонстрацию полного MCP-флоу дня 20.",
+          "turn": 139,
+          "origin": "planner"
+        },
+        "constraints": {
+          "f0704653c253": {
+            "value": "Без VPS.",
+            "evidence": "Ограничение: Без VPS.",
+            "turn": 139,
+            "origin": "planner"
+          },
+          "4b894dbb8e4c": {
+            "value": "Проверяем сохранённый файл.",
+            "evidence": "Ограничение: Проверяем сохранённый файл.",
+            "turn": 140,
+            "origin": "planner"
+          }
+        },
+        "clarifications": {
+          "32928fa84150": {
+            "value": "Нужен полный маршрут report.",
+            "evidence": "Уточнение: Нужен полный маршрут report.",
+            "turn": 142,
+            "origin": "planner"
+          }
+        },
+        "terms": {
+          "отчёт": {
+            "value": "сохранённая Markdown-сводка",
+            "evidence": "Термин: отчёт = сохранённая Markdown-сводка",
+            "turn": 141,
+            "origin": "planner"
+          }
+        }
+      },
+      "verdict": "PASS"
+    }
+  ]
+}

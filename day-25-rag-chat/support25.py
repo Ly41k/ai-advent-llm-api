@@ -13,6 +13,6 @@ for name in ("day-24-citations-grounding", "day-23-reranking-filtering", "day-21
 from support24 import KnowledgeBase, Settings, Day23RAGAgent  # noqa: E402,F401
 from grounded_agent import StructuredOllama, refusal  # noqa: E402,F401
 from strict_agent import StrictRAGAgent  # noqa: E402,F401
-from evidence import EvidenceError  # noqa: E402,F401
+from evidence import EvidenceError, parse_json  # noqa: E402,F401
 from coverage_proofs import strict_requirements  # noqa: E402,F401
 from corpus import revision  # noqa: E402,F401

@@ -20,6 +20,7 @@ from embeddings import normalize
 from chat_agent import ChatAgent
 from chat_store import ChatStore
 from evaluate25 import evaluate
+from io25 import validate_json_output, write_json
 
 
 def words(text):
@@ -170,6 +171,9 @@ def fixture_index(path):
 
 
 def run_demo(output=None):
+    output = Path(output or HERE / "reports/check/offline.json")
+    protected_paths = (HERE / "chats.db", ROOT / "day-21-document-indexing/knowledge.db")
+    validate_json_output(output, protected_paths)
     with tempfile.TemporaryDirectory() as temp, http_fixture() as (url, model):
         temp = Path(temp)
         kb = fixture_index(temp / "knowledge.db")
@@ -192,9 +196,7 @@ def run_demo(output=None):
         finally:
             agent.store.close()
             agent.kb.close()
-    output = Path(output or HERE / "reports/check/offline.json")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    write_json(output, report, protected_paths)
     return report
 
 

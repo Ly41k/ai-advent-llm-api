@@ -1,7 +1,9 @@
 """A persistent conversation around the Day 24 strict, extractive RAG pipeline."""
 import json
+import os
+import uuid
 from support25 import Day23RAGAgent, Settings, StrictRAGAgent, refusal
-from conversation import ContextProvider, plan, recent_context
+from conversation import ContextProvider, plan, recent_context, explicit_declarations
 from memory import public_state, update
 from retrieval25 import LessonRetriever
 from requirements25 import coverage_requirements25
@@ -25,14 +27,14 @@ class ChatAgent:
         turn, current = self.store.begin(session, message)
         state = current["state"]
         try:
-            history = recent_context(self.store.history(session, self.history_turns + 1))
+            history = recent_context(self.store.history(session, self.history_turns, completed_only=True))
             if self.progress:
                 self.progress("Resolving question and task memory…")
             question, state, ambiguous, planning = plan(self.provider, message, state, history, turn)
-            if not ambiguous and not state["goal"] and len(self.store.history(session, 2)) == 1:
+            if not ambiguous and not state["goal"] and not self.store.history(session, 1, completed_only=True):
                 # The first actual request defines an initial objective even if
                 # the planner proposes no goal. It is intent, not a repo fact.
-                value = message[:600].strip()
+                value = explicit_declarations(message)[1].strip()
                 try:
                     state = update(state, "goal", "", value, value, message, turn,
                                    origin="initial_question")
@@ -41,21 +43,32 @@ class ChatAgent:
                     planning["warnings"].append(str(error))
             context = {"original_question": message, "task_state": public_state(state), "recent_history": history}
             provider = ContextProvider(self.provider, context, self.progress, bundle_sequences=True)
+            searches = []
+            class SearchTrace:
+                def __getattr__(self, name):
+                    return getattr(self_kb, name)
+
+                def search(self, strategy, vector, limit):
+                    hits = self_kb.search(strategy, vector, limit)
+                    searches.append({"strategy": strategy, "limit": limit, "hits": len(hits)})
+                    return hits
+            self_kb = self.kb
+            traced_kb = SearchTrace()
             verifier = ContextProvider(self.verifier, context)
             if self.progress:
                 self.progress("Searching the knowledge base…")
             if ambiguous:
                 # Even an ambiguous question triggers fresh RAG retrieval; no old evidence is reused.
-                retrieval = LessonRetriever(self.kb, provider, self.settings).run(question, generate=False).to_dict()
+                retrieval = LessonRetriever(traced_kb, provider, self.settings).run(question, generate=False).to_dict()
                 answer, clarification = refusal(message)
                 result = {"status": "unknown", "answer": answer, "clarification": clarification,
                           "sources": [], "quotes": [], "claims": [], "validation": {},
                           "reason": "ambiguous_reference", "retrieval": retrieval}
             else:
-                rag = StrictRAGAgent(self.kb, provider, self.settings, verifier,
+                rag = StrictRAGAgent(traced_kb, provider, self.settings, verifier,
                     coverage_policy=self.coverage_policy, progress=self.progress,
                     requirements_factory=coverage_requirements25)
-                rag.retriever = LessonRetriever(self.kb, provider, self.settings)
+                rag.retriever = LessonRetriever(traced_kb, provider, self.settings)
                 result = rag.ask(question).to_dict()
                 if provider.selection_refinements:
                     result["validation"]["selection_refinements"] = provider.selection_refinements
@@ -79,11 +92,18 @@ class ChatAgent:
                     "Clarify the request or add a source supporting the requested data to the knowledge base.")
             result.update(question=message, resolved_question=question, session_id=session, turn_id=turn,
                           task_state=state, conversation=planning)
+            result["retrieval_trace"] = {"request_id": uuid.uuid4().hex, "process_id": os.getpid(),
+                                         "session_id": session, "turn_id": turn,
+                                         "embedding_calls": provider.embedding_calls, "search_calls": searches}
             # Use the same JSON-compatible types for fresh, resumed and exported turns.
             result = json.loads(json.dumps(result, ensure_ascii=False, allow_nan=False))
         except (Exception, KeyboardInterrupt) as error:
             # Persist technical failure as failure, never as a source-less generated answer.
-            self.store.finish(session, turn, current["version"], state, error=f"{type(error).__name__}: {error}")
+            try:
+                self.store.finish(session, turn, current["version"], state, error=f"{type(error).__name__}: {error}")
+            except Exception as persistence_error:
+                raise RuntimeError(f"Turn failed ({type(error).__name__}); failure could not be saved: "
+                                   f"{persistence_error}. Inspect history and recover after exiting.") from error
             raise
         self.store.finish(session, turn, current["version"], state, response=result)
         return result

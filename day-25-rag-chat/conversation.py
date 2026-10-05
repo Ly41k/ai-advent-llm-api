@@ -7,7 +7,7 @@ import tokenize
 from itertools import combinations
 
 from memory import public_state, update, memory_key
-from support25 import EvidenceError
+from support25 import EvidenceError, parse_json
 
 PLAN_SCHEMA = {
     "type": "object", "additionalProperties": False,
@@ -254,10 +254,10 @@ def plan(provider, message, state, history, turn):
             trace["warnings"].append(str(error))
     try:
         raw = provider.structured(prompt, PLAN_SCHEMA)
-        trace["raw"] = raw
+        trace["raw"] = raw[:40000] if isinstance(raw, str) else None
         if getattr(provider, "last_call_metadata", {}).get("done_reason") == "length":
             raise ValueError("Conversation planner exhausted its token limit")
-        value = json.loads(raw)
+        value = parse_json(raw)
         if not isinstance(value, dict) or set(value) != {"resolved_question", "needs_clarification", "updates"}:
             raise ValueError("Invalid conversation plan fields")
         question = value["resolved_question"]
@@ -289,7 +289,7 @@ def plan(provider, message, state, history, turn):
             trace["reference_review_prompt_characters"] = len(repair_prompt)
             repaired_raw = provider.structured(repair_prompt, PLAN_SCHEMA)
             trace["reference_review_raw"] = repaired_raw
-            repaired = json.loads(repaired_raw)
+            repaired = parse_json(repaired_raw)
             if (isinstance(repaired, dict) and set(repaired) == set(value)
                     and type(repaired["needs_clarification"]) is bool
                     and isinstance(repaired["resolved_question"], str)
@@ -392,6 +392,12 @@ class ContextProvider:
         self.bundle_sequences = bundle_sequences
         self.source_unit_selections = []
         self.route_audits = []
+        self.embedding_calls = []
+
+    def embed(self, queries):
+        vectors = self.provider.embed(queries)
+        self.embedding_calls.append({"queries": list(queries), "vectors": len(vectors)})
+        return vectors
 
     def __getattr__(self, name):
         return getattr(self.provider, name)
@@ -642,7 +648,7 @@ def sequence_selection_units(prompt, schema, links):
 def expand_sequence_selection(raw, units, schema):
     """Decode only predeclared units; malformed/duplicate/unknown IDs stay errors."""
     try:
-        value = json.loads(raw)
+        value = parse_json(raw)
     except (ValueError, TypeError):
         return raw
     if not isinstance(value, dict) or set(value) != {"status", "quote_ids"}:
@@ -681,7 +687,7 @@ def validate_conditional_action(raw, data):
     if not re.search(premature, question, re.I) or not re.search(action_request, question, re.I):
         return
     try:
-        verdict = json.loads(raw)
+        verdict = parse_json(raw)
     except (ValueError, TypeError):
         return  # Day24 validates malformed verdicts.
     if not isinstance(verdict, dict) or verdict.get("covered") is not True or not isinstance(verdict.get("proof_ids"), list):
@@ -702,7 +708,7 @@ def validate_conditional_action(raw, data):
 def selection_refinement_prompt(prompt, schema, raw, fragment_links=None):
     """Offer only valid, initially selected literal quotes; never repair bad IDs."""
     try:
-        value = json.loads(raw)
+        value = parse_json(raw)
         if not isinstance(value, dict) or set(value) != {"status", "quote_ids"}:
             return None
         ids = value["quote_ids"]
@@ -793,7 +799,7 @@ def selection_refinement_prompt(prompt, schema, raw, fragment_links=None):
 def validate_refined_subset(raw, allowed):
     """Day 24 validates structure; additionally prohibit any new catalog ID."""
     try:
-        value = json.loads(raw)
+        value = parse_json(raw)
         ids = value.get("quote_ids")
     except (ValueError, TypeError, AttributeError):
         return  # The unchanged Day 24 validator rejects malformed responses.
@@ -817,13 +823,12 @@ def complete_selection_options(source_order, links):
 def validate_selection_options(raw, options):
     """Reject bypassed structural schema; never silently reorder an answer."""
     try:
-        value = json.loads(raw)
-        if value.get("status") == "answered" and isinstance(value.get("quote_ids"), list):
-            if value["quote_ids"] not in options:
-                raise EvidenceError("Refinement must use a structurally complete selection in source order")
-    except (ValueError, TypeError, AttributeError) as error:
-        if isinstance(error, EvidenceError):
-            raise
+        value = parse_json(raw)
+    except (ValueError, TypeError, AttributeError):
+        return  # Preserve malformed JSON for the unchanged final validator.
+    if value.get("status") == "answered" and isinstance(value.get("quote_ids"), list):
+        if value["quote_ids"] not in options:
+            raise EvidenceError("Refinement must use a structurally complete selection in source order")
 
 
 def literal_semicolon_clauses(text):
@@ -1137,7 +1142,7 @@ def incomplete_markdown_table(text):
 
 def validate_excluded_fragments(raw, excluded):
     try:
-        ids = json.loads(raw).get("quote_ids")
+        ids = parse_json(raw).get("quote_ids")
     except (ValueError, TypeError, AttributeError):
         return  # The original validator handles malformed responses.
     forbidden = {row["quote_id"] for row in excluded}
@@ -1188,7 +1193,7 @@ def quote_links(prompt, schema, navigation=True):
 def validate_fragment_links(raw, links):
     """Reject an orphaned/misordered setup line; never invent or trim a quote."""
     try:
-        value = json.loads(raw)
+        value = parse_json(raw)
         ids = value.get("quote_ids")
         if value.get("status") != "answered" or not isinstance(ids, list):
             return  # The unchanged Day 24 validator handles malformed responses.

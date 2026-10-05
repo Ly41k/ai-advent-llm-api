@@ -1,18 +1,14 @@
 __pycache__/
 *.pyc
 chats.db*
+*.db-journal
 /reports/check/
+/reports/video/
 
 # Служебные файлы установочных архивов
-/DELIVERY_MANIFEST.json
-/START_DAY25.ru.md
-/day-25-rag-chat/*_MANIFEST.json
-
-# Локальные проверки и запись видео
-/day-25-rag-chat/reports/check/
-/day-25-rag-chat/reports/video/
+/*_MANIFEST.json
 
 # Промежуточные журналы исправлений
-/day-25-rag-chat/reports/verified/*-fix-tests.txt
-/day-25-rag-chat/reports/verified/*-trace-replay.json
-/day-25-rag-chat/reports/verified/long-fix-planner-replay.json
+/reports/verified/*-fix-tests.txt
+/reports/verified/*-trace-replay.json
+/reports/verified/long-fix-planner-replay.json

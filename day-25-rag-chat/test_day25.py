@@ -1,11 +1,13 @@
 """Contract and failure tests; no live Ollama or external API is used."""
 import copy
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from support25 import HERE, ROOT, KnowledgeBase, Settings, StructuredOllama, EvidenceError, StrictRAGAgent
 from chat_store import ChatStore
@@ -13,6 +15,7 @@ from chat_agent import ChatAgent, render_response
 from memory import empty_state, update, public_state
 from conversation import plan, recent_context, previous_resolution, resolution_state, ContextProvider, proof_identifiers, proof_table_rows, proof_blocks, followup_lesson, goal_lesson, existing_memory_noop, quote_links, validate_fragment_links, table_audit_prompt, quote_table_rows, selection_refinement_prompt, filter_incomplete_tables, incomplete_markdown_table, filter_incomplete_fragments, incomplete_python_fragment
 from main import memory_command
+from io25 import validate_json_output, write_json
 from conversation import literal_semicolon_clauses, proof_conditional_clauses, conditional_audit_prompt, sequence_selection_units, expand_sequence_selection, validate_conditional_action, route_audit_prompt
 from requirements25 import coverage_requirements25
 from offline_demo import fixture_index, http_fixture, ScriptedModel, run_demo
@@ -626,6 +629,15 @@ class RouteAuditTests(unittest.TestCase):
 
 
 class SourceUnitTests(unittest.TestCase):
+    def test_duplicate_json_keys_cannot_be_normalized_into_an_approved_selection(self):
+        raw = '{"status":"unknown","status":"answered","quote_ids":["q1"]}'
+        schema = {"properties": {"quote_ids": {"maxItems": 6, "items": {"enum": ["q1", "q2"]}}}}
+        units = [{"member_ids": ["q1", "q2"]}]
+        self.assertEqual(raw, expand_sequence_selection(raw, units, schema))
+        from support25 import parse_json
+        with self.assertRaises(EvidenceError):
+            parse_json(expand_sequence_selection(raw, units, schema))
+
     def setUp(self):
         self.data={'question':'Which route?', 'requirements':[], 'chunks':[{'chunk_id':'real','source':'README.md','quotes':[
             {'quote_id':'q1','text':'The complete report follows this sequence:'},
@@ -732,10 +744,60 @@ class StoreTests(unittest.TestCase):
 
     def test_recovery_preserves_unanswered_user_message(self):
         turn, current = self.store.begin(self.session, "Interrupted question")
+        self.store.close()
+        self.store = ChatStore(self.path)
         self.assertEqual(1, self.store.recover(self.session))
         self.assertEqual("Interrupted question", self.store.history(self.session)[0]["question"])
         with self.assertRaisesRegex(ValueError, "ownership"):
             self.store.finish(self.session, turn, current["version"], current["state"], {"answer": "late"})
+
+    def test_recover_refuses_live_owner_then_succeeds_after_process_is_killed(self):
+        code = ("from chat_store import ChatStore; import sys; "
+                "s=ChatStore(sys.argv[1]); s.begin(sys.argv[2], 'Interrupted child'); "
+                "print('reserved', flush=True); sys.stdin.read()")
+        child = subprocess.Popen([sys.executable, "-c", code, str(self.path), self.session],
+                                 cwd=HERE, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        try:
+            self.assertEqual("reserved", child.stdout.readline().strip())
+            with self.assertRaisesRegex(ValueError, "active"):
+                self.store.recover(self.session)
+            self.assertEqual("pending", self.store.history(self.session)[0]["status"])
+            other = self.store.create()
+            turn, current = self.store.begin(other, "Other session")
+            self.store.finish(other, turn, current["version"], current["state"], error="test")
+        finally:
+            child.kill()
+            child.communicate(timeout=10)
+        self.assertEqual(1, self.store.recover(self.session))
+        self.assertEqual(0, self.store.recover(self.session))
+        self.assertEqual("error", self.store.history(self.session)[0]["status"])
+        self.assertEqual("recovery", self.store.export(self.session)["events"][0]["kind"])
+
+    def test_export_uses_one_snapshot_during_concurrent_memory_change(self):
+        second = ChatStore(self.path)
+        original = self.store.history
+        try:
+            def interleaved_history(*args, **kwargs):
+                memory_command(second, self.session, "/goal", "New goal")
+                return original(*args, **kwargs)
+            with patch.object(self.store, "history", side_effect=interleaved_history):
+                exported = self.store.export(self.session)
+            self.assertIsNone(exported["session"]["state"]["goal"])
+            self.assertEqual([], exported["events"])
+            latest = self.store.export(self.session)
+            self.assertEqual("New goal", latest["session"]["state"]["goal"]["value"])
+            self.assertEqual(1, len(latest["events"]))
+        finally:
+            second.close()
+
+    def test_failed_retries_do_not_consume_completed_history_limit(self):
+        for question, error in [("Last accepted topic", None)] + [("Retry", "network")] * 6:
+            turn, current = self.store.begin(self.session, question)
+            self.store.finish(self.session, turn, current["version"], current["state"],
+                              {"answer": "Answer"} if error is None else None, error=error)
+        turn, _ = self.store.begin(self.session, "Followup")
+        self.assertEqual(["Last accepted topic"], [r["question"] for r in self.store.history(self.session, 4, completed_only=True)])
+        self.assertEqual(8, len(self.store.history(self.session)))
 
     def test_version_conflict_rolls_back_answer(self):
         turn, current = self.store.begin(self.session, "Question")
@@ -757,8 +819,177 @@ class StoreTests(unittest.TestCase):
         self.assertEqual({}, self.store.get(self.session)["state"]["terms"])
         self.assertEqual(3, len(self.store.export(self.session)["events"]))
 
+    def test_parallel_memory_command_cannot_erase_new_constraint(self):
+        second = ChatStore(self.path)
+        try:
+            def interleaved_update(*args, **kwargs):
+                current = second.get(self.session)
+                value = "Используем SQLite."
+                new_state = update(current["state"], "constraints", "", value, value, value, 0, origin="command")
+                second.set_state(self.session, new_state, {"command": "/constraint", "text": value}, current["version"])
+                return update(*args, **kwargs)
+            with patch("main.update", side_effect=interleaved_update):
+                with self.assertRaisesRegex(ValueError, "memory changed"):
+                    memory_command(self.store, self.session, "/goal", "Проверить день 18.")
+            current = self.store.get(self.session)
+            self.assertIsNone(current["state"]["goal"])
+            self.assertEqual(["Используем SQLite."], list(public_state(current["state"])["constraints"].values()))
+            self.assertEqual(1, current["version"])
+            self.assertEqual(1, len(self.store.export(self.session)["events"]))
+            memory_command(self.store, self.session, "/goal", "Проверить день 18.")
+            self.assertEqual(["Используем SQLite."], list(public_state(self.store.get(self.session)["state"])["constraints"].values()))
+        finally:
+            second.close()
+
+    def test_stale_forget_cannot_erase_new_term(self):
+        memory_command(self.store, self.session, "/term", "snapshot=data")
+        second = ChatStore(self.path)
+        try:
+            from memory import forget
+            def interleaved_forget(*args, **kwargs):
+                memory_command(second, self.session, "/term", "report=Markdown")
+                return forget(*args, **kwargs)
+            with patch("main.forget", side_effect=interleaved_forget):
+                with self.assertRaisesRegex(ValueError, "memory changed"):
+                    memory_command(self.store, self.session, "/forget", "terms snapshot")
+            self.assertEqual({"snapshot": "data", "report": "Markdown"},
+                             public_state(self.store.get(self.session)["state"])["terms"])
+            self.assertEqual(2, len(self.store.export(self.session)["events"]))
+        finally:
+            second.close()
+
+    def test_completed_turn_cannot_be_overwritten_by_stale_command(self):
+        old = self.store.get(self.session)
+        turn, current = self.store.begin(self.session, "Question")
+        state = update(current["state"], "goal", "", "New goal", "New goal", "New goal", turn, origin="command")
+        self.store.finish(self.session, turn, current["version"], state, {"answer": "Answer"})
+        with self.assertRaisesRegex(ValueError, "memory changed"):
+            self.store.set_state(self.session, old["state"], {"command": "/forget"}, old["version"])
+        self.assertEqual("New goal", public_state(self.store.get(self.session)["state"])["goal"])
+        self.assertEqual("complete", self.store.history(self.session)[0]["status"])
+        self.assertEqual([], self.store.export(self.session)["events"])
+
+    def test_other_session_update_does_not_block_memory_command(self):
+        other = self.store.create()
+        old = self.store.get(self.session)
+        memory_command(self.store, other, "/goal", "Other goal")
+        self.store.set_state(self.session, old["state"], {"command": "/forget"}, old["version"])
+        self.assertEqual(1, self.store.get(self.session)["version"])
+        self.assertEqual("Other goal", public_state(self.store.get(other)["state"])["goal"])
+
+
+class JsonOutputTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def test_database_and_all_sidecars_are_protected_even_before_creation(self):
+        database = self.root / "chat.db"
+        for suffix in ("", "-wal", "-shm", "-journal"):
+            with self.subTest(suffix=suffix):
+                with self.assertRaisesRegex(ValueError, "database"):
+                    write_json(Path(str(database) + suffix), {}, (database,))
+                self.assertFalse(Path(str(database) + suffix).exists())
+
+    def test_sqlite_database_is_protected_with_any_filename(self):
+        database = self.root / "renamed.json"
+        store = ChatStore(database)
+        session = store.create("Preserve this session")
+        store.close()
+        before = database.read_bytes()
+        with self.assertRaisesRegex(ValueError, "SQLite"):
+            write_json(database, {"replace": True})
+        self.assertEqual(before, database.read_bytes())
+        reopened = ChatStore(database)
+        try:
+            self.assertEqual("Preserve this session", reopened.get(session)["title"])
+        finally:
+            reopened.close()
+
+    def test_symlinks_and_hardlinks_cannot_bypass_database_or_sidecar_protection(self):
+        database = self.root / "chat.db"
+        database.write_bytes(b"protected")
+        sidecar = Path(str(database) + "-wal")
+        sidecar.write_bytes(b"WAL must survive")
+        for target in (database, sidecar):
+            for link_kind in ("symlink", "hardlink"):
+                alias = self.root / (target.name + "." + link_kind + ".json")
+                alias.symlink_to(target) if link_kind == "symlink" else os.link(target, alias)
+                with self.subTest(target=target, kind=link_kind):
+                    with self.assertRaisesRegex(ValueError, "database"):
+                        write_json(alias, {}, (database,))
+                    self.assertEqual(target.read_bytes(), alias.read_bytes())
+
+    def test_invalid_json_does_not_truncate_existing_report(self):
+        report = self.root / "report.json"
+        report.write_text('{"old":true}\n')
+        before = report.read_bytes()
+        with self.assertRaises(ValueError):
+            write_json(report, {"invalid": float("nan")})
+        self.assertEqual(before, report.read_bytes())
+        self.assertEqual([report], list(self.root.iterdir()))
+
+    def test_failed_atomic_replace_preserves_report_and_removes_temporary_file(self):
+        report = self.root / "report.json"
+        report.write_text('{"old":true}\n')
+        before = report.read_bytes()
+        with patch("io25.os.replace", side_effect=OSError("disk error")):
+            with self.assertRaisesRegex(OSError, "disk error"):
+                write_json(report, {"new": True})
+        self.assertEqual(before, report.read_bytes())
+        self.assertEqual([report], list(self.root.iterdir()))
+
+    def test_normal_json_export_replaces_report_and_creates_parents(self):
+        report = self.root / "reports" / "dialogue.json"
+        write_json(report, {"answer": "Ответ"})
+        write_json(report, {"answer": "Новый ответ"})
+        self.assertEqual({"answer": "Новый ответ"}, json.loads(report.read_text(encoding="utf-8")))
+        self.assertEqual([report], list(report.parent.iterdir()))
+
+    def test_offline_demo_rejects_sqlite_output_before_starting_fixture(self):
+        database = self.root / "index.json"
+        store = ChatStore(database)
+        store.close()
+        with patch("offline_demo.http_fixture") as fixture:
+            with self.assertRaisesRegex(ValueError, "SQLite"):
+                run_demo(database)
+            fixture.assert_not_called()
+
 
 class MemoryTests(unittest.TestCase):
+    def test_question_fragment_cannot_be_saved_as_a_confirmed_constraint(self):
+        message = "Используем SQLite?"
+        with self.assertRaisesRegex(ValueError, "Questions"):
+            update(empty_state(), "constraints", "", "SQLite", "SQLite", message, 1)
+
+    def test_extracted_positive_value_cannot_drop_immediate_negation(self):
+        for message, value in (("Не используем SQLite.", "используем SQLite."),
+                               ("We are not using SQLite.", "using SQLite.")):
+            with self.assertRaisesRegex(ValueError, "negation"):
+                update(empty_state(), "constraints", "", value, value, message, 1)
+            saved = update(empty_state(), "constraints", "", message, message, message, 1)
+            self.assertEqual(message, next(iter(saved["constraints"].values()))["value"])
+
+    def test_question_about_goal_does_not_authorize_goal_replacement(self):
+        state = update(empty_state(), "goal", "", "Prepare demo", "Prepare demo", "Prepare demo", 0, origin="command")
+        with self.assertRaisesRegex(ValueError, "question.*goal"):
+            update(state, "goal", "", "цель", "цель", "Какая цель дня 20?", 1)
+
+    def test_planner_duplicate_keys_nan_and_oversized_output_are_rejected_without_memory_loss(self):
+        class Provider:
+            def structured(self, prompt, schema): return self.raw
+        provider = Provider()
+        message = "Цель: Проверить день 18.\nКакие поля сохраняет worker на день 18?"
+        good = '{"resolved_question":"Какие поля сохраняет worker на день 18?","needs_clarification":false,"updates":[]}'
+        for raw in (good[:-1] + ',"updates":[]}', good.replace("false", "NaN"), "x" * 40001):
+            provider.raw = raw
+            _, state, _, trace = plan(provider, message, empty_state(), [], 1)
+            self.assertEqual("Проверить день 18.", public_state(state)["goal"])
+            self.assertTrue(any("Planner rejected" in warning for warning in trace["warnings"]))
+
     def test_process_identity_audit_preserves_negative_verdict_and_explicit_path_requirement(self):
         units = [{"id": "p1_1", "chunk_id": "a", "text": "A separate worker polls the schedule."},
                  {"id": "p2_1", "chunk_id": "a", "text": "| Name | Action |"},
@@ -2013,6 +2244,47 @@ class IntegrationTests(unittest.TestCase):
             self.assertEqual(2, len(payload["turns"]))
             self.assertEqual("data", public_state(payload["session"]["state"])["terms"]["snapshot"])
 
+    def test_cli_output_collision_rejected_before_question_and_network(self):
+        before_state = self.store.export(self.session)
+        index_before = self.index_path.read_bytes()
+        with http_fixture() as (url, model):
+            base = [sys.executable, str(HERE / "main.py"), "--db", str(self.index_path),
+                    "--chat-db", str(self.store.path), "--url", url]
+            for command in (["ask", "Which process on day 18?", "--session", self.session],
+                            ["export", self.session], ["evaluate"]):
+                for target in (self.store.path, self.index_path, Path(str(self.store.path) + "-wal")):
+                    with self.subTest(command=command[0], target=target):
+                        result = subprocess.run(base + command + ["--output", str(target)], capture_output=True, text=True)
+                        self.assertEqual(2, result.returncode, result.stderr)
+                        self.assertIn("JSON output cannot replace", result.stderr)
+            self.assertEqual([], model.calls)
+        self.assertEqual(before_state, self.store.export(self.session))
+        self.assertEqual(index_before, self.index_path.read_bytes())
+
+    def test_interactive_export_rejects_databases_and_continues_session(self):
+        output = Path(self.temp.name) / "safe.json"
+        with http_fixture() as (url, model):
+            result = subprocess.run([sys.executable, str(HERE / "main.py"),
+                "--db", str(self.index_path), "--chat-db", str(self.store.path),
+                "--url", url, "--model", "fixture-hash-256", "chat", "--session", self.session],
+                input=f"/export {self.store.path}\n/export {self.index_path}\n/state\n/export {output}\n/quit\n",
+                capture_output=True, text=True)
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertEqual(2, result.stderr.count("JSON output cannot replace"))
+            self.assertIn(f"Saved: {output}", result.stdout)
+            self.assertEqual([], model.calls)
+        self.assertEqual(self.store.export(self.session), json.loads(output.read_text()))
+
+    def test_same_database_hardlink_is_rejected_before_chat_schema_mutation(self):
+        alias = Path(self.temp.name) / "index-alias.db"
+        os.link(self.index_path, alias)
+        before = self.index_path.read_bytes()
+        result = subprocess.run([sys.executable, str(HERE / "main.py"), "--db", str(self.index_path),
+            "--chat-db", str(alias), "sessions"], capture_output=True, text=True)
+        self.assertEqual(2, result.returncode, result.stderr)
+        self.assertIn("different database files", result.stderr)
+        self.assertEqual(before, self.index_path.read_bytes())
+
     def test_cli_unavailable_ollama_keeps_failed_question_and_sources_block(self):
         import socket
         # Reserve a local port without listening: deterministic refused connection.
@@ -2078,18 +2350,149 @@ class IntegrationTests(unittest.TestCase):
                      and not b["prompt"].startswith("SELECTION REFINEMENT")]
         self.assertIn("Изучить серверы MCP.", selectors[-1])
 
-    def test_two_twelve_turn_scenarios_include_real_restarts(self):
+    def test_two_twelve_turn_scenarios_include_store_reopens(self):
         report = run_demo(Path(self.temp.name) / "long.json")
         self.assertTrue(report["summary"]["all_checks_pass"], str([
             (d["scenario"], d["checks"]) for d in report["details"]]))
         self.assertEqual(48, report["fixture"]["embedding_calls"])
         self.assertEqual(24, report["summary"]["user_turns"])
         self.assertEqual(6, report["summary"]["restart_after_turn"])
+        self.assertEqual("store_reopen", report["summary"]["restart_kind"])
         self.assertFalse(report["summary"]["model_quality_verified"])
 
     def test_scenarios_have_required_length(self):
         scenarios = load_scenarios(HERE / "scenarios.json")
         self.assertEqual([12, 12], [len(s["turns"]) for s in scenarios])
+
+    def test_failed_retries_keep_latest_topic_and_next_question_runs_fresh_search(self):
+        memory_command(self.store, self.session, "/goal", "Проверить день 18.")
+        with http_fixture() as (url, model):
+            agent = self.agent(url)
+            first = agent.ask(self.session, "Какие серверы зарегистрированы на день 20?")
+            for _ in range(6):
+                turn, current = self.store.begin(self.session, "Retry failed")
+                self.store.finish(self.session, turn, current["version"], current["state"], error="network")
+            second = agent.ask(self.session, "А какие у него инструменты?")
+        self.assertIn("20", second["resolved_question"])
+        self.assertEqual(4, sum(endpoint == "embed" for endpoint, _ in model.calls))
+        self.assertNotEqual(first["retrieval_trace"]["request_id"], second["retrieval_trace"]["request_id"])
+        self.assertEqual(8, len(self.store.history(self.session)))
+        self.assertEqual("Проверить день 18.", public_state(second["task_state"])["goal"])
+
+    def test_first_success_after_network_failure_initializes_goal(self):
+        turn, current = self.store.begin(self.session, "Network failed before planning")
+        self.store.finish(self.session, turn, current["version"], current["state"], error="network")
+        message = "Какие поля сохраняет worker на день 18?"
+        with http_fixture() as (url, _):
+            result = self.agent(url).ask(self.session, message)
+        self.assertEqual(message, public_state(result["task_state"])["goal"])
+
+    def test_long_initial_request_is_not_silently_truncated_into_a_goal(self):
+        with http_fixture() as (url, _):
+            message = "Какие поля сохраняет worker на день 18? " + "Подробности запроса. " * 35
+            result = self.agent(url).ask(self.session, message)
+        self.assertIsNone(result["task_state"]["goal"])
+        self.assertTrue(any("1–600" in warning for warning in result["conversation"]["warnings"]))
+        self.assertEqual(message, self.store.history(self.session)[0]["question"])
+
+    def test_failure_to_save_a_transport_error_does_not_claim_successful_persistence(self):
+        with http_fixture() as (url, _):
+            pass
+        with patch.object(self.store, "finish", side_effect=RuntimeError("disk unavailable")):
+            with self.assertRaisesRegex(RuntimeError, "failure could not be saved"):
+                self.agent(url).ask(self.session, "Какие поля сохраняет worker на день 18?")
+        self.assertEqual("pending", self.store.history(self.session)[0]["status"])
+
+    def test_empty_fresh_retrieval_is_traced_without_inventing_sources(self):
+        from evaluate25 import check_retrieval
+        with http_fixture() as (url, _), patch.object(self.kb, "search", return_value=[]):
+            result = self.agent(url).ask(self.session, "Какие поля сохраняет worker на день 18?")
+        self.assertEqual("unknown", result["status"])
+        self.assertEqual([], result["sources"])
+        self.assertTrue(check_retrieval(result, set()))
+        self.assertTrue(all(row["hits"] == 0 for row in result["retrieval_trace"]["search_calls"]))
+        seen = set()
+        self.assertTrue(check_retrieval(result, seen))
+        self.assertFalse(check_retrieval(result, seen))
+
+    def test_checkpoint_resume_skips_completed_turns_and_rejects_changed_configuration(self):
+        from evaluate25 import evaluate
+        checkpoint = Path(self.temp.name) / "checkpoint.json"
+        def save(report):
+            write_json(checkpoint, report)
+            if report["summary"]["user_turns"] == 6:
+                raise KeyboardInterrupt
+        with http_fixture() as (url, model):
+            agent = self.agent(url)
+            with self.assertRaises(KeyboardInterrupt):
+                evaluate(agent, HERE / "scenarios.json", "scripted-http-fixture", checkpoint=save)
+            partial = json.loads(checkpoint.read_text())
+            self.assertEqual("running", partial["run_status"])
+            self.assertFalse(partial["summary"]["all_checks_pass"])
+            self.assertEqual(12, sum(e == "embed" for e, _ in model.calls))
+            # The process may stop after DB commit but before saving its report.
+            partial["details"][0]["turns"].pop()
+            report = evaluate(agent, HERE / "scenarios.json", "scripted-http-fixture", resume_report=partial)
+            self.assertTrue(report["summary"]["all_checks_pass"])
+            self.assertTrue(report["details"][0]["turns"][5]["checkpoint_reconciled_from_history"])
+            self.assertEqual(48, sum(e == "embed" for e, _ in model.calls))
+            with self.assertRaisesRegex(ValueError, "configuration differ"):
+                evaluate(agent, HERE / "scenarios.json", "scripted-http-fixture", resume_report=partial,
+                         configuration={"model": "different"})
+            calls = len(model.calls)
+            report["details"][0]["turns"][0]["checks"] = {"invented": False}
+            repeated = evaluate(agent, HERE / "scenarios.json", "scripted-http-fixture", resume_report=report)
+            self.assertTrue(repeated["summary"]["all_checks_pass"])
+            self.assertEqual(calls, len(model.calls))
+            bad = copy.deepcopy(report)
+            bad["details"][0]["turns"][0]["result"]["answer"] = "Forged report answer"
+            with self.assertRaisesRegex(ValueError, "differs from persistent"):
+                evaluate(agent, HERE / "scenarios.json", "scripted-http-fixture", resume_report=bad)
+
+    def test_cli_long_scenarios_use_24_independent_processes_and_resume_without_network(self):
+        output = Path(self.temp.name) / "process-report.json"
+        chat_db = Path(self.temp.name) / "process-chat.db"
+        with http_fixture() as (url, model):
+            base = [sys.executable, str(HERE / "main.py"), "--db", str(self.index_path), "--chat-db", str(chat_db),
+                    "--url", url, "--model", "fixture-hash-256", "--answer-model", "scripted-fixture",
+                    "--candidate-k", "40", "--final-k", "20", "--min-similarity", "0",
+                    "evaluate", "--process-per-turn", "--output", str(output)]
+            completed = subprocess.run(base, capture_output=True, text=True, timeout=60)
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            report = json.loads(output.read_text())
+            pids = [row["result"]["retrieval_trace"]["process_id"] for d in report["details"] for row in d["turns"]]
+            self.assertEqual(24, len(set(pids)))
+            self.assertNotIn(os.getpid(), pids)
+            self.assertEqual("process_per_turn", report["summary"]["restart_kind"])
+            self.assertEqual(48, sum(e == "embed" for e, _ in model.calls))
+            before = len(model.calls)
+            resumed = subprocess.run(base + ["--resume"], capture_output=True, text=True, timeout=15)
+            self.assertEqual(0, resumed.returncode, resumed.stderr)
+            self.assertEqual(before, len(model.calls))
+
+    def test_source_report_rejects_tampered_lines_quote_claim_or_added_answer(self):
+        with http_fixture() as (url, _):
+            result = self.agent(url).ask(self.session, "Какие поля сохраняет worker на день 18?")
+        self.assertTrue(check_sources(result))
+        for target in ("lines", "quote", "claim", "answer", "cosine", "source"):
+            bad = copy.deepcopy(result)
+            if target == "lines": bad["quotes"][0]["start_line"] += 1
+            elif target == "quote": bad["quotes"][0]["quote"] = "Invented unsupported source quotation"
+            elif target == "claim": bad["claims"][0]["text"] = "Invented claim"
+            elif target == "answer": bad["answer"] += "\nInvented uncited answer"
+            elif target == "cosine": bad["sources"][0]["cosine"] = 999.0
+            else: bad["sources"][0]["source"] = "invented.py"
+            with self.subTest(target=target):
+                self.assertFalse(check_sources(bad))
+
+    def test_corrupt_chat_database_is_a_cli_error_with_sources_and_no_traceback(self):
+        broken = Path(self.temp.name) / "corrupt.db"
+        broken.write_text("not a database")
+        completed = subprocess.run([sys.executable, str(HERE / "main.py"), "--chat-db", str(broken), "sessions"],
+                                   capture_output=True, text=True)
+        self.assertEqual(2, completed.returncode)
+        self.assertIn("Источники / Sources:", completed.stderr)
+        self.assertNotIn("Traceback", completed.stderr)
 
 
 

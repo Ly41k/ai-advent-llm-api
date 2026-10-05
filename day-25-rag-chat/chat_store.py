@@ -5,11 +5,13 @@ import sqlite3
 import uuid
 
 from memory import empty_state, encode
+from lease25 import acquire, release
 
 
 class ChatStore:
     def __init__(self, path):
         self.path = Path(path)
+        self._leases = {}
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(self.path, timeout=10)
         self.db.row_factory = sqlite3.Row
@@ -34,6 +36,9 @@ class ChatStore:
 
     def close(self):
         self.db.close()
+        for lease in self._leases.values():
+            release(lease)
+        self._leases.clear()
 
     def create(self, title="Bublik RAG chat"):
         ident = uuid.uuid4().hex
@@ -57,29 +62,40 @@ class ChatStore:
             GROUP BY s.id ORDER BY s.created_at DESC,s.id
         """)]
 
-    def history(self, session, limit=None):
+    def history(self, session, limit=None, completed_only=False):
         self.get(session)
+        clause = " AND status='complete'" if completed_only else ""
         if limit is None:
-            rows = self.db.execute("SELECT * FROM chat_turns WHERE session_id=? ORDER BY id", (session,))
+            rows = self.db.execute("SELECT * FROM chat_turns WHERE session_id=?" + clause + " ORDER BY id", (session,))
         else:
-            rows = reversed(self.db.execute("SELECT * FROM chat_turns WHERE session_id=? "
+            rows = reversed(self.db.execute("SELECT * FROM chat_turns WHERE session_id=?" + clause + " "
                 "ORDER BY id DESC LIMIT ?", (session, limit)).fetchall())
         return [{**dict(row), "response": json.loads(row["response"]) if row["response"] else None}
                 for row in rows]
 
     def begin(self, session, question):
         # Reserve and persist the user's message before any network operation.
-        with self.db:
-            self.db.execute("BEGIN IMMEDIATE")
-            current = self.get(session)
-            try:
+        if session in self._leases:
+            raise ValueError("Session has an active pending turn")
+        lease = acquire(self.path, session)
+        try:
+            with self.db:
+                self.db.execute("BEGIN IMMEDIATE")
+                current = self.get(session)
                 cursor = self.db.execute("INSERT INTO chat_turns(session_id,question,status) VALUES(?,?,'pending')",
                                          (session, question))
-            except sqlite3.IntegrityError as error:
-                raise ValueError("Session has a pending turn; after a crashed process use /recover") from error
+        except sqlite3.IntegrityError as error:
+            release(lease)
+            raise ValueError("Session has a pending turn; after a crashed process use /recover") from error
+        except BaseException:
+            release(lease)
+            raise
+        self._leases[session] = lease
         return cursor.lastrowid, current
 
     def finish(self, session, turn, version, state, response=None, error=None):
+        if session not in self._leases:
+            raise ValueError("Turn ownership was lost")
         with self.db:
             cursor = self.db.execute("UPDATE chat_turns SET status=?,response=?,error=? "
                 "WHERE id=? AND session_id=? AND status='pending'",
@@ -90,24 +106,42 @@ class ChatStore:
                                      (encode(state), session, version))
             if cursor.rowcount != 1:
                 raise ValueError("Session changed during this turn; retry after inspecting history")
+        release(self._leases.pop(session))
 
-    def set_state(self, session, state, event):
+    def set_state(self, session, state, event, expected_version):
         with self.db:
             self.db.execute("BEGIN IMMEDIATE")
             if self.db.execute("SELECT 1 FROM chat_turns WHERE session_id=? AND status='pending'", (session,)).fetchone():
                 raise ValueError("Cannot edit memory during a pending turn")
             self.get(session)
-            self.db.execute("UPDATE chat_sessions SET state=?,version=version+1 WHERE id=?", (encode(state), session))
+            cursor = self.db.execute("UPDATE chat_sessions SET state=?,version=version+1 WHERE id=? AND version=?",
+                                     (encode(state), session, expected_version))
+            if cursor.rowcount != 1:
+                raise ValueError("Session memory changed; inspect /state and repeat the command")
             self.db.execute("INSERT INTO chat_events(session_id,kind,payload) VALUES(?,'memory',?)", (session, encode(event)))
 
     def recover(self, session):
-        self.get(session)
-        with self.db:
-            cursor = self.db.execute("UPDATE chat_turns SET status='error',error='interrupted process' "
-                                     "WHERE session_id=? AND status='pending'", (session,))
-        return cursor.rowcount
+        if session in self._leases:
+            raise ValueError("Session has an active pending turn; cannot recover")
+        lease = acquire(self.path, session)
+        try:
+            with self.db:
+                self.db.execute("BEGIN IMMEDIATE")
+                self.get(session)
+                cursor = self.db.execute("UPDATE chat_turns SET status='error',error='interrupted process' "
+                                         "WHERE session_id=? AND status='pending'", (session,))
+                if cursor.rowcount:
+                    self.db.execute("UPDATE chat_sessions SET version=version+1 WHERE id=?", (session,))
+                    self.db.execute("INSERT INTO chat_events(session_id,kind,payload) VALUES(?,'recovery',?)",
+                                    (session, encode({"recovered_turns": cursor.rowcount})))
+            return cursor.rowcount
+        finally:
+            release(lease)
 
     def export(self, session):
-        return {"session": self.get(session), "turns": self.history(session),
+        # The first SELECT establishes one WAL snapshot for all three sections.
+        with self.db:
+            self.db.execute("BEGIN")
+            return {"session": self.get(session), "turns": self.history(session),
                 "events": [{**dict(row), "payload": json.loads(row["payload"])} for row in
                     self.db.execute("SELECT * FROM chat_events WHERE session_id=? ORDER BY id", (session,))]}

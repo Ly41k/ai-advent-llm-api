@@ -1,0 +1,93 @@
+{
+  "version": "v24",
+  "review_date": "2026-10-05",
+  "scope": "Two user-run live negative controls, independently inspected; no runtime changes.",
+  "summary": {
+    "all_checks_pass": true,
+    "expected_refusals": 2,
+    "technical_errors": 0,
+    "embedding_calls": 3,
+    "search_calls": 3,
+    "fabricated_sources": 0,
+    "fabricated_snapshot_counts": 0
+  },
+  "notes": [
+    "False source/coverage validation flags are expected for an unknown response; no positive evidence is asserted.",
+    "Retrieved candidates are navigation context, not confirmed sources of a factual answer.",
+    "The initial goal in the local-data case records the user request, not the number of database rows.",
+    "These traces establish embeddings and index searches, not access to the user's live schedule.db.",
+    "Together with the prior 24-answer live review, the specified acceptance cases pass; this is not proof against every possible defect."
+  ],
+  "details": [
+    {
+      "id": "ambiguous-v24",
+      "original_report": "ambiguous-v24-original.json",
+      "original_sha256": "eb5ed0ea8ba4f5e278f780b0be677b1aa81bc777382ea05ad737eaa324a45777",
+      "session_id": "f7f1777c9a3842f180c89f5a689a0458",
+      "turn_id": 151,
+      "request_id": "6713276304394aa49e56e8a009957f69",
+      "process_id": 64793,
+      "embedding_calls": 1,
+      "search_calls": 1,
+      "status": "unknown",
+      "reason": "ambiguous_reference",
+      "checks": {
+        "original_copy_identical": true,
+        "expected_unknown_status": true,
+        "expected_reason": true,
+        "fresh_retrieval": true,
+        "isolated_new_session": true,
+        "separate_process": true,
+        "no_prior_history": true,
+        "question_not_rewritten_into_another_topic": true,
+        "no_planning_warnings": true,
+        "no_fabricated_answer_evidence": true,
+        "sources_block_rendered": true,
+        "absence_of_confirmed_sources_rendered": true,
+        "no_technical_errors": true,
+        "no_unconfirmed_constraints_terms_or_clarifications": true,
+        "clarification_requested": true,
+        "no_invented_goal": true,
+        "object_or_prior_topic_requested": true
+      },
+      "manual_interpretation": "Новая сессия не имеет предмета прежней беседы. Ассистент просит уточнить объект и не переносит тему из чужой сессии.",
+      "rendered_response": "Не знаю: найденного контекста недостаточно для подтверждённого ответа.\nУточните, какой объект или предыдущую тему вы имеете в виду.\n\nИсточники / Sources:\nНет подтверждённых источников / No confirmed sources.",
+      "all_checks_pass": true
+    },
+    {
+      "id": "unknown-local-v24",
+      "original_report": "unknown-local-v24-original.json",
+      "original_sha256": "1ac5717f1ee9aebeffa3c2aac47c5f18573c5cfaea553a90d63fad709e447177",
+      "session_id": "e92af10e400a4ae1a590bbb8c4b18fa0",
+      "turn_id": 152,
+      "request_id": "5c07dc1b7655484c99b65fd23b3b365d",
+      "process_id": 65168,
+      "embedding_calls": 2,
+      "search_calls": 2,
+      "status": "unknown",
+      "reason": "insufficient_context",
+      "checks": {
+        "original_copy_identical": true,
+        "expected_unknown_status": true,
+        "expected_reason": true,
+        "fresh_retrieval": true,
+        "isolated_new_session": true,
+        "separate_process": true,
+        "no_prior_history": true,
+        "question_not_rewritten_into_another_topic": true,
+        "no_planning_warnings": true,
+        "no_fabricated_answer_evidence": true,
+        "sources_block_rendered": true,
+        "absence_of_confirmed_sources_rendered": true,
+        "no_technical_errors": true,
+        "no_unconfirmed_constraints_terms_or_clarifications": true,
+        "goal_is_literal_initial_request": true,
+        "no_exact_snapshot_count_claimed": true,
+        "selector_explicitly_abstained": true
+      },
+      "manual_interpretation": "Поиск нашёл документацию дня 18, но она не содержит текущее число снимков в локальной базе пользователя. Selector вернул unknown. Начальная цель хранит буквальный запрос, а не выдуманный факт.",
+      "rendered_response": "Не знаю: найденного контекста недостаточно для подтверждённого ответа.\nУточните запрос или добавьте в базу знаний источник, подтверждающий запрошенные данные.\n\nИсточники / Sources:\nНет подтверждённых источников / No confirmed sources.",
+      "all_checks_pass": true
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+**Live v24 review:** both 12-turn dialogues pass manual review; 24 answers, 47 exact quotes, 48 fresh embedding/search calls and 24 separate processes. [Review](reports/live/live-long-scenarios-v24-review.ru.md). Both extra live negative controls also pass; [negative review](reports/live/negative-controls-v24-review.ru.md). The specified v24 acceptance cases are complete. Presentation polish remains.
+
+**Current v24:** [audit](AUDIT_V24.ru.md), [installation](RELEASE_V24.ru.md), [final live acceptance](ACCEPTANCE_V24.ru.md).
+
 **English** | [Русский](README.ru.md)
 
 # Day 25 — persistent RAG chat with sources and task memory
@@ -59,7 +63,7 @@ python day-25-rag-chat/main.py state <ID>
 python day-25-rag-chat/main.py export <ID> --output dialogue.json
 ```
 
-Inspection/export needs neither Ollama nor a knowledge index. The user message is persisted before network work. Technical failures are stored as errors, not generated answers. Ctrl+C records the interrupted turn; hard-killed processes leave pending history which `/recover` can release after the original process stops. SQLite prevents overlapping turns in one session; other sessions remain isolated.
+Inspection/export needs neither Ollama nor a knowledge index. The user message is persisted before network work. Technical failures are stored as errors, not generated answers. Ctrl+C records the interrupted turn; hard-killed processes leave pending history which `/recover` can release after the original process stops. SQLite prevents overlapping turns in one session; other sessions remain isolated. Memory commands reject a stale session version instead of overwriting concurrent changes. Export/report paths cannot replace the chat database, knowledge index or their SQLite sidecars; existing SQLite files are also protected by their header. JSON reports are written atomically so a failed write preserves the previous report.
 
 ## Sources and grounding
 
@@ -83,7 +87,7 @@ The offline run uses the actual corpus, chunker, SQLite cosine search, Ollama HT
 
 The live command uses your actual Ollama models and production defaults. It saves source/quote bindings, retrieval traces, planning warnings, coverage outcomes, per-turn goal retention, complete history and final retention of every memory field. Exit 0 means all automatic checks passed, exit 1 saves a failed report, exit 2 indicates setup/configuration failure. Individual turn failures are recorded and evaluation continues. Complete each turn's `manual_review` for relevance, completeness and respect of the task goal.
 
-Preparation environment: Python 3.12.14. **150 Day25 tests passed on v22; 135 Day24/console regression tests passed on v20 (Day24 has not changed since); 34 unchanged Day21–23 tests passed earlier.** There is no live Ollama here; live answer quality is unverified. Target Python 3.13 is compatible with the syntax and standard library used.
+Preparation environment: Python 3.12.14. **164 Day25 tests passed on v23; 135 Day24/console regression tests passed on v20 (Day24 has not changed since); 34 unchanged Day21–23 tests passed earlier.** There is no live Ollama here. The user's supplied live v22 summary-route check was reviewed against source and passed; this is not a new complete v23 live evaluation. Target Python 3.13 is compatible with the syntax and standard library used.
 
 The implementation is a local single-user CLI, without a web service or authentication. Recent model history is bounded while persistent history is complete. Old details outside saved task state and the recent window may need clarification. The planner can misinterpret intent despite valid literal provenance; inspect `/state` and correct it explicitly. Exact quotations and positive model coverage judgments still require source-based answer review. See the [Russian guide](README.ru.md) for detailed commands and the full file map.
 
@@ -111,4 +115,12 @@ Version 20: [REQUIREMENTS_INTENT_FIX.ru.md](REQUIREMENTS_INTENT_FIX.ru.md). The 
 
 Version 21: [SOURCE_UNIT_FIX.ru.md](SOURCE_UNIT_FIX.ru.md). Live v20 retained the correct criterion, source identity and memory but its answer omitted the requested corrective action. Day25 now declares inseparable caption/narrative-sequence units BEFORE selection, records the original and decoded IDs, and rejects the observed positive cross-branch action transfer. Independent negative audits remain negative. All 141 Day25 tests pass with scripted HTTP/SQLite fixtures; live v21 remains pending. Next: `python day-25-rag-chat/main.py evaluate --output day-25-rag-chat/reports/check/live-long-scenarios-v21.json` (two fresh 12-turn sessions).
 
-Version 22 submission candidate: [RELEASE_V22.ru.md](RELEASE_V22.ru.md). The real v21 12+12 dialogue report has full history/state and 45 literal quotes, with 23 answers and one false refusal. Two important issues (summary route audit and a docstring-tail lexical filter gap) are fixed; 150 Day25 tests pass. Minor verbosity/language duplication is deferred by user request. One live summary check remains pending; no completely clean v22 long run is claimed. [Video plan](VIDEO_DAY25.ru.md), [backlog](BACKLOG.ru.md).
+Version 22 submission candidate: [RELEASE_V22.ru.md](RELEASE_V22.ru.md). The real v21 12+12 dialogue report has full history/state and 45 literal quotes, with 23 answers and one false refusal. Two important issues (summary route audit and a docstring-tail lexical filter gap) are fixed; 150 Day25 tests pass. The subsequent live summary check passed with exact evidence and unchanged task memory; see [source review](reports/live/summary-route-v22-review.ru.md). No completely clean v22 long run is claimed. [Video plan](VIDEO_DAY25.ru.md), [backlog](BACKLOG.ru.md).
+
+Version 23: [RELEASE_V23.ru.md](RELEASE_V23.ru.md). Based on published commit `8f2b24f`, this update prevents stale memory commands from erasing concurrent changes, protects SQLite storage from JSON exports, and writes reports atomically. All 164 Day25 tests pass, including 14 new regressions. RAG prompts/retrieval and Days21–24 code are unchanged by this update; no new full live 12+12 run is claimed.
+
+## Version 24: durable ownership and truthful evaluation
+
+macOS/Linux on a local filesystem are supported; session leases use POSIX advisory locks. Failed retries no longer consume the completed-history window. Recovery refuses a live owner and records a recovery event after a crashed process releases its lease. Export reads one SQLite snapshot. Every question records actual embedding/search calls with request/session/turn IDs; an empty fresh search remains a fresh search. Model JSON parsing rejects duplicate keys and nonfinite constants. Memory guards reject question fragments and immediately dropped negation; these checks do not prove every semantic interpretation.
+
+`evaluate --process-per-turn` runs all 24 questions in separate CLI processes. Reports are checkpointed after every turn; `--resume` validates configuration and stored answers, reconciles one committed but uncheckpointed turn, and recomputes checks without repeating completed questions. Error turns remain failures. Source checking independently validates exact quotation offsets, source identity, claims and the complete rendered answer. 181 Day25 tests and 169 earlier-day regressions pass; fixtures are not live-model quality evidence. The user-run final live 12+12 now passes manual review of all answers. Both additional live negative controls pass. Acceptance is complete for the tested v24 cases; presentation polish remains.

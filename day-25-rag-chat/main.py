@@ -3,12 +3,16 @@ import argparse
 import json
 from pathlib import Path
 import shlex
+import sqlite3
+import subprocess
+import tempfile
 import sys
 
 from support25 import HERE, ROOT, KnowledgeBase, Settings, StructuredOllama, revision
 from chat_store import ChatStore
 from chat_agent import ChatAgent, render_response
 from memory import forget, update
+from io25 import validate_json_output, write_json
 
 
 HELP = """/new [title]    /use SESSION    /sessions    /state    /history
@@ -18,14 +22,9 @@ HELP = """/new [title]    /use SESSION    /sessions    /state    /history
 Ordinary messages run fresh RAG. Commands manage your conversation."""
 
 
-def write_json(path, payload):
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-
-
 def memory_command(store, session, command, text):
-    state = store.get(session)["state"]
+    current = store.get(session)
+    state = current["state"]
     if command == "/forget":
         parts = shlex.split(text)
         if not parts or len(parts) > 2 or (parts[0] != "goal" and len(parts) != 2):
@@ -41,7 +40,7 @@ def memory_command(store, session, command, text):
             if not key:
                 raise ValueError("Term name cannot be empty")
         state = update(state, kind, key, value, text, text, 0, origin="command")
-    store.set_state(session, state, {"command": command, "text": text})
+    store.set_state(session, state, {"command": command, "text": text}, current["version"])
     return state
 
 
@@ -83,7 +82,7 @@ def interactive(agent, store, session):
             elif command == "/export":
                 if not text.strip():
                     raise ValueError("Use /export PATH.json")
-                write_json(text.strip(), store.export(session))
+                write_json(text.strip(), store.export(session), (store.path, agent.kb.path))
                 print(f"Saved: {text.strip()}")
             elif command == "/recover":
                 print(f"Interrupted turns marked as errors: {store.recover(session)}")
@@ -91,10 +90,10 @@ def interactive(agent, store, session):
                 print(json.dumps(memory_command(store, session, command, text), ensure_ascii=False, indent=2))
             else:
                 raise ValueError("Unknown command; use /help")
-        except (ValueError, RuntimeError, OSError) as error:
+        except (ValueError, RuntimeError, OSError, sqlite3.Error) as error:
             print(f"Error: {error}\nИсточники / Sources: нет подтверждённых источников (technical/command error).", file=sys.stderr)
         except KeyboardInterrupt:
-            print(f"\nInterrupted turn saved as an error. Saved session: {session}")
+            print(f"\nInterrupted. Session: {session}. Inspect /history; use /recover after exiting if a turn remains pending.")
             return
 
 
@@ -134,6 +133,8 @@ def parser_for_cli():
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("--scenarios", type=Path, default=HERE / "scenarios.json")
     evaluate.add_argument("--output", type=Path, default=HERE / "reports/check/live.json")
+    evaluate.add_argument("--process-per-turn", action="store_true", help="Run each question in a new CLI process")
+    evaluate.add_argument("--resume", action="store_true", help="Continue an existing checkpoint without repeating saved turns")
     commands.add_parser("offline-demo")
     return parser
 
@@ -143,8 +144,13 @@ def main():
     args = parser.parse_args()
     store, kb = None, None
     try:
-        if args.db.resolve() == args.chat_db.resolve():
+        if args.db.resolve() == args.chat_db.resolve() or (
+                args.db.exists() and args.chat_db.exists() and args.db.samefile(args.chat_db)):
             raise ValueError("Knowledge index and chat history must use different database files")
+        protected_paths = (args.db, args.chat_db)
+        if getattr(args, "output", None) is not None:
+            # Reject destructive targets before reserving a turn or calling Ollama.
+            validate_json_output(args.output, protected_paths)
         if args.command == "offline-demo":
             from offline_demo import run_demo
             report = run_demo()
@@ -156,7 +162,7 @@ def main():
                 store.history(args.session) if args.command == "history" else
                 store.get(args.session)["state"] if args.command == "state" else store.export(args.session))
             if args.command == "export":
-                write_json(args.output, payload)
+                write_json(args.output, payload, protected_paths)
             else:
                 print(json.dumps(payload, ensure_ascii=False, indent=2))
             return 0
@@ -181,9 +187,33 @@ def main():
                 store = ChatStore(args.chat_db)
                 kb = KnowledgeBase(args.db)
                 agent.store, agent.kb = store, kb
+            def ask_process(session, message):
+                with tempfile.TemporaryDirectory() as directory:
+                    target = Path(directory) / "turn.json"
+                    command = [sys.executable, str(HERE / "main.py")]
+                    for flag in ("db", "chat_db", "url", "model", "answer_model", "verifier_model", "num_ctx",
+                                 "num_predict", "timeout", "strategy", "candidate_k", "final_k", "min_similarity",
+                                 "rewrite_method", "history_turns", "coverage_policy"):
+                        option = getattr(args, flag)
+                        if option is not None:
+                            command.extend(["--" + flag.replace("_", "-"), str(option)])
+                    if args.allow_stale_index:
+                        command.append("--allow-stale-index")
+                    command.extend(["ask", message, "--session", session, "--output", str(target)])
+                    completed = subprocess.run(command, stdout=subprocess.DEVNULL)
+                    if completed.returncode != 0:
+                        raise RuntimeError(f"Question process exited with code {completed.returncode}; inspect session history")
+                    return json.loads(target.read_text(encoding="utf-8"))
+            configuration = {key: str(value) for key, value in vars(args).items()
+                             if key not in ("resume", "output", "command", "scenarios")}
+            configuration["index_revision"] = info["revision"]
+            previous = json.loads(args.output.read_text(encoding="utf-8")) if args.resume else None
             report = evaluate(agent, args.scenarios, backend="live-ollama", restart=restart,
-                              progress=lambda text: print(text, file=sys.stderr, flush=True))
-            write_json(args.output, report)
+                              progress=lambda text: print(text, file=sys.stderr, flush=True),
+                              ask=ask_process if args.process_per_turn else None,
+                              checkpoint=lambda report: write_json(args.output, report, protected_paths),
+                              resume_report=previous, configuration=configuration)
+            write_json(args.output, report, protected_paths)
             print(json.dumps(report["summary"], ensure_ascii=False, indent=2))
             return 0 if report["summary"]["all_checks_pass"] else 1
         session = args.session or store.create()
@@ -193,10 +223,13 @@ def main():
         else:
             result = agent.ask(session, args.question)
             if args.output:
-                write_json(args.output, result)
+                write_json(args.output, result, protected_paths)
             print(f"Session: {session}\n" + render_response(result))
         return 0
-    except (ValueError, RuntimeError, OSError) as error:
+    except KeyboardInterrupt:
+        print("Interrupted. Completed turns remain in history; evaluate checkpoints can be continued with --resume.", file=sys.stderr)
+        return 130
+    except (ValueError, RuntimeError, OSError, sqlite3.Error) as error:
         print(f"Error: {error}\nИсточники / Sources:\nНет подтверждённых источников / No confirmed sources.", file=sys.stderr)
         return 2
     finally:

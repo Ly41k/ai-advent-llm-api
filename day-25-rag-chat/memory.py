@@ -42,7 +42,19 @@ def update(state, kind, key, value, evidence, message, turn, origin="planner"):
         raise ValueError("Memory must be an exact substring of current user evidence")
     if not isinstance(key, str) or len(key) > 80:
         raise ValueError("Memory key is too long")
+    if origin == "planner" and kind == "goal" and state["goal"]:
+        lines = [line for line in message.splitlines() if evidence in line]
+        if lines and all("?" in line and not re.match(r"^\s*(?:цель|goal)\s*:", line, re.I) for line in lines):
+            raise ValueError("A question about a goal cannot replace it; an explicit goal statement is required")
     if origin == "planner" and kind != "goal":
+        lines = [line for line in message.splitlines() if evidence in line]
+        if lines and all("?" in line for line in lines):
+            raise ValueError("Questions are not confirmed task-memory clarifications, constraints or terms")
+        # Exact-substring evidence alone must not turn 'not using SQLite'
+        # into 'using SQLite'. Conservative refusal keeps the previous memory.
+        offsets = [line.split(value, 1)[0].rstrip() for line in lines if value in line]
+        if offsets and all(re.search(r"\b(?:не|not|never)\s*$", prefix, re.I) for prefix in offsets):
+            raise ValueError("Memory value dropped the user's negation")
         interrogative = re.match(r"^\s*(?:какой|какая|какие|какое|как|где|когда|почему|зачем|что|кто|сколько|"
                                 r"what|which|how|where|when|why|who)(?:\s|$)", value, re.I)
         statement = re.match(r"^\s*как\s+(?:минимум|максимум|правило)\b", value, re.I)
