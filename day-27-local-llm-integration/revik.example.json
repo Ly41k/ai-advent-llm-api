@@ -1,0 +1,14 @@
+{
+  "language": "ru",
+  "tone": "professional",
+  "detekt_config": "detekt/detekt.yml",
+  "detekt_command": [
+    "detekt"
+  ],
+  "detekt_plugins": [],
+  "baseline": null,
+  "build_upon_default_config": false,
+  "model": "qwen2.5:14b",
+  "ollama_url": "http://127.0.0.1:11434",
+  "require_llm": true
+}
