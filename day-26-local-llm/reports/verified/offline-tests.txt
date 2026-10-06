@@ -1,0 +1,37 @@
+test_ask_completion_requires_manual_review (__main__.Integration.test_ask_completion_requires_manual_review) ... ok
+test_cloud_length_is_not_success (__main__.Integration.test_cloud_length_is_not_success) ... ok
+test_cloud_model_missing_key (__main__.Integration.test_cloud_model_missing_key) ... ok
+test_cloud_only_does_not_call_ollama (__main__.Integration.test_cloud_only_does_not_call_ollama) ... ok
+test_cloud_payload_auth_and_usage (__main__.Integration.test_cloud_payload_auth_and_usage) ... ok
+test_compare_identical_prompts_and_separate_calls (__main__.Integration.test_compare_identical_prompts_and_separate_calls) ... ok
+test_doctor_does_not_generate (__main__.Integration.test_doctor_does_not_generate) ... ok
+test_empty_answers_fail (__main__.Integration.test_empty_answers_fail) ... ok
+test_examples_make_no_network_calls (__main__.Integration.test_examples_make_no_network_calls) ... ok
+test_failed_local_preflight_keeps_cloud_results (__main__.Integration.test_failed_local_preflight_keeps_cloud_results) ... ok
+test_http_errors_redact_body_and_key (__main__.Integration.test_http_errors_redact_body_and_key) ... ok
+test_http_redirect_not_followed (__main__.Integration.test_http_redirect_not_followed) ... ok
+test_http_timeout (__main__.Integration.test_http_timeout) ... ok
+test_invalid_http_json (__main__.Integration.test_invalid_http_json) ... ok
+test_local_does_not_read_cloud_key (__main__.Integration.test_local_does_not_read_cloud_key) ... ok
+test_local_length_is_not_success (__main__.Integration.test_local_length_is_not_success) ... ok
+test_local_payload_and_metrics (__main__.Integration.test_local_payload_and_metrics) ... ok
+test_local_three_requests_and_reports (__main__.Integration.test_local_three_requests_and_reports) ... ok
+test_local_unfinished_flag_is_not_success (__main__.Integration.test_local_unfinished_flag_is_not_success) ... ok
+test_no_cloud_fallback_in_local_mode (__main__.Integration.test_no_cloud_fallback_in_local_mode) ... ok
+test_remote_model_rejected_in_doctor (__main__.Integration.test_remote_model_rejected_in_doctor) ... ok
+test_running_model_missing_does_not_verify_local_launch (__main__.Integration.test_running_model_missing_does_not_verify_local_launch) ... ok
+test_wrong_answer_fails_quality_but_inference_is_verified (__main__.Integration.test_wrong_answer_fails_quality_but_inference_is_verified) ... ok
+test_wrong_local_response_model_rejected (__main__.Integration.test_wrong_local_response_model_rejected) ... ok
+test_context_fixture_matches_repository_snapshot (__main__.Validation.test_context_fixture_matches_repository_snapshot) ... ok
+test_duplicate_nonfinite_fenced_json_rejected (__main__.Validation.test_duplicate_nonfinite_fenced_json_rejected) ... ok
+test_expected_answers (__main__.Validation.test_expected_answers) ... ok
+test_invalid_cli_numbers (__main__.Validation.test_invalid_cli_numbers) ... ok
+test_loopback_only_and_cloud_tag_rejected (__main__.Validation.test_loopback_only_and_cloud_tag_rejected) ... ok
+test_metrics_order_is_irrelevant (__main__.Validation.test_metrics_order_is_irrelevant) ... ok
+test_quote_substitution_and_invented_metric_rejected (__main__.Validation.test_quote_substitution_and_invented_metric_rejected) ... ok
+test_wrong_math_types_and_values (__main__.Validation.test_wrong_math_types_and_values) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.619s
+
+OK

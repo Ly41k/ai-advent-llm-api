@@ -1,0 +1,3 @@
+# Local HTTP mode and offline tests use the Python standard library.
+# Optional: load GROQ_API_KEY from an existing course .env file.
+python-dotenv>=1.0,<2
