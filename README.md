@@ -1,12 +1,12 @@
 **English** | [Русский](README.ru.md)
 
-# AI Advent — from an LLM API request to MCP tools and grounded RAG chat
+# AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, and a persistent RAG chat with task memory.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, and a local Kotlin pre-commit review application.
 
-**Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course.
+**Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–26**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–27**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -38,6 +38,7 @@ The repository currently contains **Days 1–26**. Each `day-XX-...` directory i
 | [24](day-24-citations-grounding/README.md) | Citations and grounding | Exact source passages, app-owned citations, coverage validation |
 | [25](day-25-rag-chat/README.md) | Persistent RAG chat | SQLite sessions, task memory, fresh retrieval, sources, long-dialogue evaluation |
 | [26](day-26-local-llm/README.md) | Local LLM launch | Three Ollama requests, Groq comparison, JSON checks, and local loading evidence |
+| [27](day-27-local-llm-integration/README.md) | Local LLM integration — Revik | Staged Kotlin analysis, Detekt commit gate, local explanations, linked reports and reviewer tones |
 
 ## How the architecture evolves
 
@@ -50,8 +51,8 @@ The repository currently contains **Days 1–26**. Each `day-XX-...` directory i
 - **Day 23:** add query rewrite, candidate filtering, calibrated cosine thresholds, and four retrieval modes.
 - **Day 24:** make answers evidence-bound. The application publishes exact source passages and validates coverage instead of allowing unconstrained synthesis.
 - **Day 25:** wrap the grounded RAG protocol in a persistent local chat. Full history and task memory survive restarts, every ordinary question performs fresh retrieval, and long conversations are evaluated with durable checkpoints and per-turn provenance.
-
 - **Day 26:** a standalone module verifies a downloaded Ollama model and sends three prompts of different difficulty. The same inputs can be sent to Groq; the application validates responses and saves JSON/Markdown reports.
+- **Day 27:** integrate local inference into Revik, a practical Kotlin pre-commit CLI. Detekt checks staged code using the project configuration; Qwen explains findings. The hook permits or blocks the commit and produces linked reports. Russian/English and three reviewer tones are configurable.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -62,7 +63,8 @@ Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlie
 - Python **3.13** is the project target.
 - A Groq key is required only by lessons that explicitly call Groq.
 - Internet access is required for Groq and live GitHub API calls.
-- Local retrieval/RAG lessons and Day 26 use **Ollama**.
+- Local retrieval/RAG lessons and Days 26–27 use **Ollama**.
+- Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -73,6 +75,7 @@ Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlie
 | 23 | `bge-m3` | `llama3.2` by default; `qwen2.5:7b` in documented experiments |
 | 24–25 | `bge-m3` | `qwen2.5:14b` in the current grounded/live profile |
 | 26 | Not required | `qwen2.5:7b` default; `qwen2.5:14b` in the verified run |
+| 27 | Not required | `qwen2.5:14b` default; configurable downloaded local model |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -109,7 +112,7 @@ ollama pull qwen2.5:7b
 ollama pull qwen2.5:14b
 ```
 
-You do not need all answer models at once; the commands above simply cover the documented profiles through Day 26.
+You do not need all answer models at once; the commands above simply cover the documented profiles through Day 27.
 
 If the Ollama desktop application is already serving the local API, a separate `ollama serve` process is not required.
 
@@ -143,6 +146,7 @@ Later lessons use specialized entry points:
 | 25 | `python day-25-rag-chat/main.py evaluate --process-per-turn --output day-25-rag-chat/reports/check/live.json` | Durable long-dialogue live evaluation |
 | 26 | `python day-26-local-llm/main.py demo --local-model qwen2.5:14b` | Three real local requests |
 | 26 | `python day-26-local-llm/main.py compare --local-model qwen2.5:14b` | Identical prompts in Ollama and Groq |
+| 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 
 ## Day 21 shared knowledge index
 
@@ -158,7 +162,7 @@ The indexed corpus rule remains intentionally narrow:
 - lesson READMEs from Days 1–20;
 - non-test Python files from Days 16–20.
 
-README files from Days 21–26 are not automatically added to that corpus. Day 26 does not use this index.
+README files from Days 21–27 are not automatically added to that corpus. Days 26–27 do not use this index.
 
 The index stores a repository/corpus revision. A new commit or a change to the **root README files** can make an existing index stale. After updating the root README, rebuild before strict verification or a Day 24/25 live run:
 
@@ -259,6 +263,32 @@ These results cover three examples with calculator assistance in the middle prom
 
 See the [Day 26 README](day-26-local-llm/README.md).
 
+## Day 27 — Revik, a local Kotlin pre-commit review agent
+
+Revik is a standalone Python CLI application for a real KMP development workflow. It reads staged `.kt`/`.kts` blobs, runs Detekt with `detekt/detekt.yml`, requests an explanation from downloaded Qwen through Ollama, and displays findings with file/line links. The Git hook permits or rejects the commit through its exit code.
+
+The configuration and Kotlin inputs come from the Git index, including partially staged changes. A configuration/baseline change checks the entire staged Kotlin tree. A missing configuration or no selected Kotlin files skips the check. Findings and technical errors block the commit; the LLM never overrides Detekt. By default, an unavailable/incomplete local model also blocks the commit.
+
+Revik supports `language=ru|en` and `tone=professional|light_troll|hard_troll`, uses no cloud API keys or fallback, and writes JSON/Markdown/HTML reports to the Git service directory. Analysis is AST-only without type resolution, so keep platform-specific Gradle/CI checks.
+
+From the course repository root:
+
+```bash
+python -m unittest discover -s day-27-local-llm-integration/tests -v
+
+# Requires installed Detekt CLI, Ollama and downloaded qwen2.5:14b.
+python day-27-local-llm-integration/live_demo.py \
+  --detekt-bin /absolute/path/to/detekt \
+  --language en --tone professional \
+  --output day-27-local-llm-integration/revik-live.json
+```
+
+The live demo creates a disposable repository and tries a rejected bad commit and a successful corrected commit. It does not install a hook in the course repository. The [Day 27 README](day-27-local-llm-integration/README.md) includes standalone JAR setup and instructions for copying the lesson into a working project's `tools/revik-agent/`.
+
+**28 integration tests pass** on the current Day 27 code. Their model and Detekt responses are scripted; a separate real Detekt 1.23.8 smoke check covers the demo's bad/clean inputs. Live Qwen explanations require review. See [validation](day-27-local-llm-integration/VALIDATION.md).
+
+Commit Revik's source, examples and template in the course repository. In the working KMP project, the agent directory and `.revik.json` can stay local and ignored. Downloaded JARs and temporary reports are not course source artifacts.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not spend Groq tokens unless a command explicitly performs a live model/API run.
@@ -281,10 +311,12 @@ python day-23-reranking-filtering/test_day23.py -v
 python day-24-citations-grounding/test_day24.py -v
 python day-25-rag-chat/test_day25.py -v
 python day-26-local-llm/test_day26.py -v
+python -m unittest discover -s day-27-local-llm-integration/tests -v
 ```
 
 ## Data and limitations
 
+- Day 27 is a local, bypassable pre-commit check. It analyzes entire changed files without type resolution and does not replace KMP compilation, Android Lint or CI. Reviewer style affects explanations only.
 - Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent.
 - Day 18 worker output goes to stdout or a service journal; it does not automatically push a message back into a chat.
 - Days 21–25 are local RAG experiments, not a hosted multi-user service.
@@ -299,3 +331,4 @@ python day-26-local-llm/test_day26.py -v
 - [Ollama](https://ollama.com/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 - [GitHub REST API documentation](https://docs.github.com/en/rest)
+
