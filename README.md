@@ -6,7 +6,7 @@ A day-by-day Python learning project that starts with direct LLM API calls and g
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course.
 
-The repository currently contains **Days 1–25**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–26**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -37,6 +37,7 @@ The repository currently contains **Days 1–25**. Each `day-XX-...` directory i
 | [23](day-23-reranking-filtering/README.md) | Relevance filtering and query rewrite | Candidate/final top-K, cosine threshold, rewrite, calibration |
 | [24](day-24-citations-grounding/README.md) | Citations and grounding | Exact source passages, app-owned citations, coverage validation |
 | [25](day-25-rag-chat/README.md) | Persistent RAG chat | SQLite sessions, task memory, fresh retrieval, sources, long-dialogue evaluation |
+| [26](day-26-local-llm/README.md) | Local LLM launch | Three Ollama requests, Groq comparison, JSON checks, and local loading evidence |
 
 ## How the architecture evolves
 
@@ -50,6 +51,8 @@ The repository currently contains **Days 1–25**. Each `day-XX-...` directory i
 - **Day 24:** make answers evidence-bound. The application publishes exact source passages and validates coverage instead of allowing unconstrained synthesis.
 - **Day 25:** wrap the grounded RAG protocol in a persistent local chat. Full history and task memory survive restarts, every ordinary question performs fresh retrieval, and long conversations are evaluated with durable checkpoints and per-turn provenance.
 
+- **Day 26:** a standalone module verifies a downloaded Ollama model and sends three prompts of different difficulty. The same inputs can be sent to Groq; the application validates responses and saves JSON/Markdown reports.
+
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
 Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlier assistant answers or remembered task facts as repository evidence: they help resolve intent, while the current answer is grounded in fresh retrieval.
@@ -59,16 +62,17 @@ Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlie
 - Python **3.13** is the project target.
 - A Groq key is required only by lessons that explicitly call Groq.
 - Internet access is required for Groq and live GitHub API calls.
-- Local retrieval/RAG lessons use **Ollama**.
+- Local retrieval/RAG lessons and Day 26 use **Ollama**.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
-### Local models used in the RAG lessons
+### Local models
 
 | Lessons | Embeddings | Generation |
 |---|---|---|
 | 21–22 | `bge-m3` | `llama3.2` in the documented base flow |
 | 23 | `bge-m3` | `llama3.2` by default; `qwen2.5:7b` in documented experiments |
 | 24–25 | `bge-m3` | `qwen2.5:14b` in the current grounded/live profile |
+| 26 | Not required | `qwen2.5:7b` default; `qwen2.5:14b` in the verified run |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -105,7 +109,7 @@ ollama pull qwen2.5:7b
 ollama pull qwen2.5:14b
 ```
 
-You do not need all answer models at once; the commands above simply cover the documented profiles through Day 25.
+You do not need all answer models at once; the commands above simply cover the documented profiles through Day 26.
 
 If the Ollama desktop application is already serving the local API, a separate `ollama serve` process is not required.
 
@@ -137,6 +141,8 @@ Later lessons use specialized entry points:
 | 24 | `python day-24-citations-grounding/main.py evaluate --output day-24-citations-grounding/reports/check/evaluate.json` | Grounded answers with exact citations |
 | 25 | `python day-25-rag-chat/main.py chat` | Persistent local RAG chat |
 | 25 | `python day-25-rag-chat/main.py evaluate --process-per-turn --output day-25-rag-chat/reports/check/live.json` | Durable long-dialogue live evaluation |
+| 26 | `python day-26-local-llm/main.py demo --local-model qwen2.5:14b` | Three real local requests |
+| 26 | `python day-26-local-llm/main.py compare --local-model qwen2.5:14b` | Identical prompts in Ollama and Groq |
 
 ## Day 21 shared knowledge index
 
@@ -152,7 +158,7 @@ The indexed corpus rule remains intentionally narrow:
 - lesson READMEs from Days 1–20;
 - non-test Python files from Days 16–20.
 
-README files from Days 21–25 are not automatically added to that corpus.
+README files from Days 21–26 are not automatically added to that corpus. Day 26 does not use this index.
 
 The index stores a repository/corpus revision. A new commit or a change to the **root README files** can make an existing index stale. After updating the root README, rebuild before strict verification or a Day 24/25 live run:
 
@@ -227,6 +233,32 @@ Final v24 verification recorded in the repository:
 
 See the [Day 25 README](day-25-rag-chat/README.md), [v24 audit](day-25-rag-chat/AUDIT_V24.ru.md), and [final acceptance](day-25-rag-chat/ACCEPTANCE_V24.ru.md).
 
+## Day 26 — local LLM and cloud comparison
+
+The standalone `day-26-local-llm/` module calls a downloaded model through the Ollama HTTP API. Local mode satisfies the assignment; Groq is an additional cloud comparison.
+
+The three examples cover a short `2 + 2` answer, JSON formatting of a Python calculator result, and five-field extraction with an exact quotation from a Day 18 README excerpt. The application calls the calculator before generation. This lesson does not perform model-selected tool calls, MCP calls, or RAG retrieval.
+
+With Qwen 14B already installed:
+
+```bash
+python day-26-local-llm/test_day26.py -v
+python day-26-local-llm/main.py doctor --local-model qwen2.5:14b
+python day-26-local-llm/main.py demo --local-model qwen2.5:14b \
+  --output day-26-local-llm/reports/check/local.json
+ollama ps
+
+# Requires GROQ_API_KEY; sends three additional requests to Groq.
+python day-26-local-llm/main.py compare --local-model qwen2.5:14b \
+  --output day-26-local-llm/reports/check/compare.json
+```
+
+The author-supplied `compare-v1.3.json` report dated 2026-10-06 records Python 3.13.3, Ollama 0.34.4, `qwen2.5:14b` Q4_K_M, and Groq `openai/gpt-oss-20b`. **3/3 local** and **3/3 cloud** answers passed validation; the local model was still loaded after generation. The 38 offline tests also passed on Python 3.12.
+
+These results cover three examples with calculator assistance in the middle prompt, not arbitrary-answer reliability. Keep selected live evidence in `reports/live/`; temporary `reports/check/` and `reports/video/` are ignored by Git.
+
+See the [Day 26 README](day-26-local-llm/README.md).
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not spend Groq tokens unless a command explicitly performs a live model/API run.
@@ -248,6 +280,7 @@ python day-22-first-rag/test_day22.py -v
 python day-23-reranking-filtering/test_day23.py -v
 python day-24-citations-grounding/test_day24.py -v
 python day-25-rag-chat/test_day25.py -v
+python day-26-local-llm/test_day26.py -v
 ```
 
 ## Data and limitations

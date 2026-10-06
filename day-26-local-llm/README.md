@@ -25,9 +25,9 @@ These are reused approaches. The third example receives a bundled README excerpt
 
 For `calculation`, the application calls `calculate_energy` before generation. Python computes cycle count, total expenditure, and remaining energy using integer arithmetic; the real tool result is passed to the model for JSON formatting. The report records the tool name, inputs, and result in `source`. Both models receive identical context.
 
-This follows the MCP lessons: a tool performs exact arithmetic. It is **not a test of unaided model arithmetic**. Generated JSON and values are still validated, and incorrect output remains FAIL. No model-generated Python is executed.
+This applies a principle from the MCP lessons: a tool performs exact arithmetic. MCP is not connected here; the application selects and calls the tool beforehand, then includes its result in the user message. It is **not a test of unaided model arithmetic**. Generated JSON and values are still validated, and incorrect output remains FAIL. No model-generated Python is executed.
 
-Keep original v1.1/v1.2 reports separately: Qwen made an arithmetic error in those runs. v1.3 is a different assisted profile and does not replace those observations. 38 offline tests passed on Python 3.12; real v1.3 inference must be checked on the Mac.
+Keep original v1.1/v1.2 reports separately: Qwen made an arithmetic error in those runs. v1.3 is a different assisted profile and does not replace those observations. 38 offline tests passed on Python 3.12; real v1.3 inference on the Mac is also supported by the author-supplied report summarized below.
 
 ## Quick start on macOS
 
@@ -163,23 +163,59 @@ This compares **models and their environments**. HTTP latency includes local loa
 
 ## Assignment demonstration
 
+For an installed `qwen2.5:14b`:
+
 ```bash
 ollama --version
 ollama list
-python day-26-local-llm/main.py doctor
-python day-26-local-llm/main.py examples
-python day-26-local-llm/main.py demo --output day-26-local-llm/reports/video/local.json
+python day-26-local-llm/main.py compare --local-model qwen2.5:14b \
+  --output day-26-local-llm/reports/video/compare-video.json
 ollama ps
-python day-26-local-llm/main.py compare --output day-26-local-llm/reports/video/compare.json
 ```
 
-Show the three local answers and `day26_local_three_requests_verified=true`, followed by identical cloud prompts/results. Review JSON/Markdown before submission. `reports/check/` and `reports/video/` are ignored by Git; copy a selected real result into `reports/live/` to commit it. Keep `.env` out of recordings.
+`compare` sends three local and three cloud prompts. The console prints answers, PASS/FAIL, and the summary; JSON preserves full prompts, sources, and metrics. Explain that the middle example uses a Python calculation. To record only the required local part, replace `compare` with `demo --provider local`, retaining the other options; no cloud key is needed.
 
-## Delivery verification
+Show `local_launch_verified=true` and `day26_local_three_requests_verified=true`. `all_checks_passed=true` means all answer checks passed; inference and answer correctness are separate checks. A generation-free `doctor` run alone is insufficient.
+
+`reports/check/` and `reports/video/` are ignored by Git. After manual review, keep selected evidence for a commit:
+
+```bash
+mkdir -p day-26-local-llm/reports/live
+cp day-26-local-llm/reports/check/compare-v1.3.json day-26-local-llm/reports/live/
+cp day-26-local-llm/reports/check/compare-v1.3.md day-26-local-llm/reports/live/
+```
+
+Adjust the source path to your actual report. Commit `.env.example`, code, tests, the fixture, READMEs, and selected reports. Keep the real `.env`, `.venv`, and `__pycache__` local, and do not expose credentials in recordings.
+
+## Offline verification
 
 38 offline tests on Python 3.12 exercise actual HTTP calls to a fixture server, both payloads, identical prompts, reports, strict JSON/exact quotes, errors, redirects, timeouts, empty/truncated answers, and absence of hidden cloud fallback.
 
-**No real Ollama or Groq generation was performed in this delivery.** Live evidence must be produced on the target Mac. Offline tests do not prove that a model has been installed or launched on the user's computer.
+Offline tests exercise the implementation and do not replace live inference. The author ran the models on the Mac; the following results were checked against the supplied `compare-v1.3.json`, separately from the tests.
+
+## Verified live run — 2026-10-06
+
+The live report records Python **3.13.3**, Ollama **0.34.4**, local **qwen2.5:14b** (14.8B, Q4_K_M), and cloud **openai/gpt-oss-20b** through Groq. Ollama serves `http://127.0.0.1:11434`; Qwen is installed and visible in `/api/ps` after the three generations. The installed and loaded model digests match.
+
+| Example | Local Qwen | Groq | Local / cloud HTTP seconds |
+|---|---|---|---|
+| Simple answer | PASS: `4` | PASS: `4` | 0.603 / 0.198 |
+| Calculator-result JSON | PASS: 6 cycles, 3600 total, 0 remaining | PASS: identical values | 4.077 / 0.486 |
+| Context facts and exact quotation | PASS: all five fields | PASS: all five fields | 5.804 / 0.542 |
+
+All six answers finished normally with `stop`. Each local/cloud pair used identical messages and matching input SHA-256 hashes. Summary: `complete_answers=6`, `checks_passed=6`, `all_checks_passed=true`, `local_launch_verified=true`, and `day26_local_three_requests_verified=true`.
+
+| Day 26 requirement | Evidence |
+|---|---|
+| Install and launch a local model | Downloaded Qwen in Ollama, installed=true, loaded after generation |
+| CLI or HTTP access | Three actual `/api/chat` requests; HTTP satisfies the requirement |
+| Answer a simple prompt | `2 + 2 → 4` |
+| At least three prompts of different difficulty | Short answer, tool-result JSON, context extraction with an exact quote |
+| Local LLM responds | Three complete local answers; 3/3 checks passed |
+
+The source is the author-supplied report with run_id `9004bb0a-1f3e-48c1-b87d-81d7eaa8f32e`, created at `2026-10-06T19:26:18.662483+00:00`. Updating this README does not add that JSON to the repository: save the report and sibling Markdown under `reports/live/`.
+
+In v1.1/v1.2, Qwen answered every prompt but made an unaided arithmetic error: 2/3 local checks versus 3/3 cloud checks. v1.3 supplies the actual calculator result, and both models passed 3/3. This changes the workflow; it does not establish that Qwen's unaided arithmetic was fixed. Future runs can produce different answers or provider errors.
 
 Files: `main.py` (CLI), `providers.py` (HTTP adapters), `examples.py` (prompts/checks), `runner.py` (execution/reports), `fixtures/day18-context.json` (source excerpt), and `test_day26.py` (offline tests).
 
