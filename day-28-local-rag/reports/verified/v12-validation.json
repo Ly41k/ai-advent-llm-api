@@ -1,0 +1,91 @@
+{
+  "day28_offline_tests": 63,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "openai_live": "pending",
+  "historical_report_checks": {
+    "compare-v2.json": {
+      "sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+      "consistency_passed": true
+    },
+    "retry-v3.json": {
+      "sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+      "consistency_passed": true
+    },
+    "local-retry-v4.json": {
+      "sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+      "consistency_passed": true
+    },
+    "local-retry-v5.json": {
+      "sha256": "2a97a9192aad8c2497485f36e1f062a8d2d0fd37649960be297d334acd20f2d4",
+      "consistency_passed": true
+    },
+    "local-retry-v6.json": {
+      "sha256": "f9d52ae164e0d238614a13ec7192e26240cb17fd7c36ce10ef010a21c7d53fe7",
+      "consistency_passed": true
+    },
+    "local-retry-v7.json": {
+      "sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+      "consistency_passed": true
+    },
+    "local-retry-v8.json": {
+      "sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+      "consistency_passed": true
+    },
+    "local-probe-v9.json": {
+      "sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+      "consistency_passed": true
+    },
+    "local-probe-v10.json": {
+      "sha256": "5e8072197d4058361095ae5283d5b8732f9da5e219b30eeca8111c7aca8a1f38",
+      "consistency_passed": true
+    },
+    "local-probe-v11.json": {
+      "sha256": "cee6711ba49560e24958abd4d883ebaed71761a509449d540e5c876997b482a2",
+      "consistency_passed": true
+    },
+    "local-stability-v11.json": {
+      "sha256": "16c1fd9e2cdd482e61aea16a37e7087c795e68a15626d3b8e3c97a554eef391e",
+      "consistency_passed": true
+    },
+    "cloud-retry-v11.json": {
+      "sha256": "05a199a64fa884ec033283d1d2e9acaf0e7275e74950dbea6df2c7dd4356a6b4",
+      "consistency_passed": true
+    }
+  },
+  "planned_small_run": {
+    "cloud_api": "openai",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "case_ids": [
+      "base-03",
+      "base-10",
+      "rewrite-ru-02"
+    ],
+    "trials_per_case": 3,
+    "planned_observations": 9,
+    "maximum_generation_calls": {
+      "local": 0,
+      "cloud": 9
+    },
+    "maximum_http_generation_attempts": 9,
+    "local_embedding_requests": "local bge-m3 remains necessary",
+    "synthesis": false,
+    "cloud_rate_retries": 0,
+    "max_output_tokens_per_call": 1000,
+    "cost_example_usd": 0.0288,
+    "cost_example_note": "6000 input +500 output tokens per call, no caching/retries; estimate, not measured cost",
+    "paid_inference": "not performed here; run on user Mac with existing OPENAI_API_KEY"
+  },
+  "tested_behaviors": [
+    "cloud-only avoids local generation and Groq",
+    "key selection has no provider fallback",
+    "strict schema for both stages with exact selected ID enums",
+    "snapshot pinning, usage, refusal/incomplete/malformed/error checks",
+    "OpenAI report API/endpoint/model provenance tampering rejected",
+    "cross-provider baseline retry rejected",
+    "missing key makes cloud-only run fail without API call",
+    "original three case rubrics unchanged"
+  ],
+  "scope": "Only Day 28 files; index and root/other days unchanged; no reindex"
+}

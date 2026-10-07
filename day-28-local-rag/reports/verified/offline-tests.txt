@@ -1,0 +1,125 @@
+V2 OFFLINE TESTS — scripted providers/synthetic vectors are not new live inference evidence.
+Actual first failed output is tested as a regression fixture.
+Python 3.12.14; 2026-10-07.
+
+=== Day 28: offline tests ===
+test_abstentions_do_not_verify_local_generation (__main__.Tests.test_abstentions_do_not_verify_local_generation) ... ok
+test_actual_week6_corpus_chunks_pass_read_only_integrity_checks (__main__.Tests.test_actual_week6_corpus_chunks_pass_read_only_integrity_checks) ... ok
+test_atomic_report_no_nan (__main__.Tests.test_atomic_report_no_nan) ... ok
+test_catalog_preserves_indentation_and_never_leaks_gold_terms (__main__.Tests.test_catalog_preserves_indentation_and_never_leaks_gold_terms) ... ok
+test_cloud_failure_and_no_key_keep_local_running (__main__.Tests.test_cloud_failure_and_no_key_keep_local_running) ... ok
+test_connection_reset_is_a_safe_reportable_provider_failure (__main__.Tests.test_connection_reset_is_a_safe_reportable_provider_failure) ... ok
+test_embed_api_wrong_model_nan_zero_and_count (__main__.Tests.test_embed_api_wrong_model_nan_zero_and_count) ... ok
+test_embedding_model_mismatch_and_dimension_fail (__main__.Tests.test_embedding_model_mismatch_and_dimension_fail) ... ok
+test_empty_context_never_calls_generation (__main__.Tests.test_empty_context_never_calls_generation) ... ok
+test_filter_and_no_rewrite_use_real_sqlite_search (__main__.Tests.test_filter_and_no_rewrite_use_real_sqlite_search) ... ok
+test_fingerprint_allows_code_only_commit_but_rejects_corpus_change (__main__.Tests.test_fingerprint_allows_code_only_commit_but_rejects_corpus_change) ... ok
+test_incomplete_error_invalid_do_not_count_as_success (__main__.Tests.test_incomplete_error_invalid_do_not_count_as_success) ... ok
+test_interrupt_saves_partial_report (__main__.Tests.test_interrupt_saves_partial_report) ... ok
+test_invalid_citations_quotes_json_and_flags (__main__.Tests.test_invalid_citations_quotes_json_and_flags) ... ok
+test_invalid_stored_line_metadata_rejected (__main__.Tests.test_invalid_stored_line_metadata_rejected) ... ok
+test_local_mode_never_reads_cloud_key (__main__.Tests.test_local_mode_never_reads_cloud_key) ... ok
+test_local_url_cloud_tag_and_remote_host_rejected (__main__.Tests.test_local_url_cloud_tag_and_remote_host_rejected) ... ok
+test_percentiles_and_model_loading_evidence (__main__.Tests.test_percentiles_and_model_loading_evidence) ... ok
+test_question_schema_and_numeric_inputs (__main__.Tests.test_question_schema_and_numeric_inputs) ... ok
+test_quote_id_abstention_requires_canonical_text_and_empty_selection (__main__.Tests.test_quote_id_abstention_requires_canonical_text_and_empty_selection) ... ok
+test_quote_ids_resolve_original_backticks_and_reject_unknown_or_duplicate (__main__.Tests.test_quote_ids_resolve_original_backticks_and_reject_unknown_or_duplicate) ... ok
+test_real_first_response_remains_invalid_even_if_trailing_quote_removed (__main__.Tests.test_real_first_response_remains_invalid_even_if_trailing_quote_removed) ... ok
+test_same_prompt_and_context_for_local_cloud (__main__.Tests.test_same_prompt_and_context_for_local_cloud) ... ok
+test_shared_index_read_only_and_missing (__main__.Tests.test_shared_index_read_only_and_missing) ... ok
+test_statistics_repeats_abstentions_and_failed_trial (__main__.Tests.test_statistics_repeats_abstentions_and_failed_trial) ... ok
+test_structured_requests_use_native_json_controls_without_changing_prompts (__main__.Tests.test_structured_requests_use_native_json_controls_without_changing_prompts) ... ok
+test_successful_cloud_pair_alternates_and_retrieves_once_per_trial (__main__.Tests.test_successful_cloud_pair_alternates_and_retrieves_once_per_trial) ... ok
+test_tampered_document_and_chunk_rejected (__main__.Tests.test_tampered_document_and_chunk_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.952s
+
+OK
+
+=== Day 21: offline tests ===
+test_answer_retries_once_with_best_evidence (__main__.Day21Tests.test_answer_retries_once_with_best_evidence) ... ok
+test_bad_parameters_and_zero_vectors (__main__.Day21Tests.test_bad_parameters_and_zero_vectors) ... ok
+test_code_sections (__main__.Day21Tests.test_code_sections) ... ok
+test_fixed_overlap_and_structural_sections (__main__.Day21Tests.test_fixed_overlap_and_structural_sections) ... ok
+test_later_rag_lessons_do_not_enter_shared_corpus (__main__.Day21Tests.test_later_rag_lessons_do_not_enter_shared_corpus) ... ok
+test_persistence_rebuild_and_search (__main__.Day21Tests.test_persistence_rebuild_and_search) ... ok
+test_project_corpus_and_gold_questions (__main__.Day21Tests.test_project_corpus_and_gold_questions) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.022s
+
+OK
+
+=== Day 23: offline tests ===
+test_cli_questions_needs_no_index_or_ollama (__main__.CLIIntegrationTests.test_cli_questions_needs_no_index_or_ollama) ... ok
+test_cli_rejects_missing_index_without_creating_it (__main__.CLIIntegrationTests.test_cli_rejects_missing_index_without_creating_it) ... ok
+test_ollama_http_sqlite_cli_evaluation_and_report (__main__.CLIIntegrationTests.test_ollama_http_sqlite_cli_evaluation_and_report) ... ok
+test_calibration_uses_only_calibration_queries_and_caches_grid (__main__.Day23Tests.test_calibration_uses_only_calibration_queries_and_caches_grid) ... ok
+test_compare_four_modes_share_candidate_pools (__main__.Day23Tests.test_compare_four_modes_share_candidate_pools) ... ok
+test_control_set_split_and_labels_match_real_corpus (__main__.Day23Tests.test_control_set_split_and_labels_match_real_corpus) ... ok
+test_custom_questions_reject_bad_labels (__main__.Day23Tests.test_custom_questions_reject_bad_labels) ... ok
+test_empty_context_never_uses_llm_or_rejected_hits (__main__.Day23Tests.test_empty_context_never_uses_llm_or_rejected_hits) ... ok
+test_invalid_llm_rewrite_falls_back_but_transport_errors_propagate (__main__.Day23Tests.test_invalid_llm_rewrite_falls_back_but_transport_errors_propagate) ... ok
+test_invalid_query_vectors_fail (__main__.Day23Tests.test_invalid_query_vectors_fail) ... ok
+test_llm_rewrite_is_once_and_original_question_is_answered (__main__.Day23Tests.test_llm_rewrite_is_once_and_original_question_is_answered) ... ok
+test_metrics_and_report_deltas_with_negative_denominators (__main__.Day23Tests.test_metrics_and_report_deltas_with_negative_denominators) ... ok
+test_model_mismatch_fails_before_embedding (__main__.Day23Tests.test_model_mismatch_fails_before_embedding) ... ok
+test_real_sqlite_top_k_filter_and_original_question_generation (__main__.Day23Tests.test_real_sqlite_top_k_filter_and_original_question_generation) ... ok
+test_reject_invalid_threshold_and_k (__main__.Day23Tests.test_reject_invalid_threshold_and_k) ... ok
+test_retrieval_only_skips_generation (__main__.Day23Tests.test_retrieval_only_skips_generation) ... ok
+test_rewrite_preserves_original_numbers_identifiers_negation (__main__.Day23Tests.test_rewrite_preserves_original_numbers_identifiers_negation) ... ok
+test_same_prompt_for_same_context_and_question (__main__.Day23Tests.test_same_prompt_for_same_context_and_question) ... ok
+test_threshold_is_inclusive_raw_cosine_before_final_k (__main__.Day23Tests.test_threshold_is_inclusive_raw_cosine_before_final_k) ... ok
+test_tied_scores_have_stable_chunk_id_order (__main__.Day23Tests.test_tied_scores_have_stable_chunk_id_order) ... ok
+test_unknown_mode_and_blank_question (__main__.Day23Tests.test_unknown_mode_and_blank_question) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.028s
+
+OK
+
+=== Day 26: offline tests ===
+test_ask_completion_requires_manual_review (__main__.Integration.test_ask_completion_requires_manual_review) ... ok
+test_cloud_length_is_not_success (__main__.Integration.test_cloud_length_is_not_success) ... ok
+test_cloud_model_missing_key (__main__.Integration.test_cloud_model_missing_key) ... ok
+test_cloud_only_does_not_call_ollama (__main__.Integration.test_cloud_only_does_not_call_ollama) ... ok
+test_cloud_payload_auth_and_usage (__main__.Integration.test_cloud_payload_auth_and_usage) ... ok
+test_compare_identical_prompts_and_separate_calls (__main__.Integration.test_compare_identical_prompts_and_separate_calls) ... ok
+test_doctor_does_not_generate (__main__.Integration.test_doctor_does_not_generate) ... ok
+test_empty_answers_fail (__main__.Integration.test_empty_answers_fail) ... ok
+test_examples_make_no_network_calls (__main__.Integration.test_examples_make_no_network_calls) ... ok
+test_explicit_application_headers (__main__.Integration.test_explicit_application_headers) ... ok
+test_failed_local_preflight_keeps_cloud_results (__main__.Integration.test_failed_local_preflight_keeps_cloud_results) ... ok
+test_html_error_diagnostic_without_raw_body (__main__.Integration.test_html_error_diagnostic_without_raw_body) ... ok
+test_http_errors_redact_body_and_key (__main__.Integration.test_http_errors_redact_body_and_key) ... ok
+test_http_redirect_not_followed (__main__.Integration.test_http_redirect_not_followed) ... ok
+test_http_timeout (__main__.Integration.test_http_timeout) ... ok
+test_invalid_http_json (__main__.Integration.test_invalid_http_json) ... ok
+test_json_error_type_diagnostic_without_message (__main__.Integration.test_json_error_type_diagnostic_without_message) ... ok
+test_local_does_not_read_cloud_key (__main__.Integration.test_local_does_not_read_cloud_key) ... ok
+test_local_length_is_not_success (__main__.Integration.test_local_length_is_not_success) ... ok
+test_local_payload_and_metrics (__main__.Integration.test_local_payload_and_metrics) ... ok
+test_local_three_requests_and_reports (__main__.Integration.test_local_three_requests_and_reports) ... ok
+test_local_unfinished_flag_is_not_success (__main__.Integration.test_local_unfinished_flag_is_not_success) ... ok
+test_no_cloud_fallback_in_local_mode (__main__.Integration.test_no_cloud_fallback_in_local_mode) ... ok
+test_remote_model_rejected_in_doctor (__main__.Integration.test_remote_model_rejected_in_doctor) ... ok
+test_running_model_missing_does_not_verify_local_launch (__main__.Integration.test_running_model_missing_does_not_verify_local_launch) ... ok
+test_upstream_1010_code_diagnostic_without_raw_body (__main__.Integration.test_upstream_1010_code_diagnostic_without_raw_body) ... ok
+test_wrong_answer_fails_quality_but_inference_is_verified (__main__.Integration.test_wrong_answer_fails_quality_but_inference_is_verified) ... ok
+test_wrong_local_response_model_rejected (__main__.Integration.test_wrong_local_response_model_rejected) ... ok
+test_context_fixture_matches_repository_snapshot (__main__.Validation.test_context_fixture_matches_repository_snapshot) ... ok
+test_duplicate_nonfinite_fenced_json_rejected (__main__.Validation.test_duplicate_nonfinite_fenced_json_rejected) ... ok
+test_energy_tool_boundary_and_remainder_cases (__main__.Validation.test_energy_tool_boundary_and_remainder_cases) ... ok
+test_energy_tool_invalid_inputs (__main__.Validation.test_energy_tool_invalid_inputs) ... ok
+test_expected_answers (__main__.Validation.test_expected_answers) ... ok
+test_invalid_cli_numbers (__main__.Validation.test_invalid_cli_numbers) ... ok
+test_loopback_only_and_cloud_tag_rejected (__main__.Validation.test_loopback_only_and_cloud_tag_rejected) ... ok
+test_metrics_order_is_irrelevant (__main__.Validation.test_metrics_order_is_irrelevant) ... ok
+test_quote_substitution_and_invented_metric_rejected (__main__.Validation.test_quote_substitution_and_invented_metric_rejected) ... ok
+test_wrong_math_types_and_values (__main__.Validation.test_wrong_math_types_and_values) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 0.744s
+
+OK

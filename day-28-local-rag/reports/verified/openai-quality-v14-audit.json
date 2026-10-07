@@ -1,0 +1,28 @@
+{
+  "run_id": "d533b831-c284-4677-b285-396751e5f976",
+  "source_sha256": "62a27ee17b30f69021bae6870f65b399a40c2f2c699fdf0d7483e8e9e7cb5860",
+  "strict_verifier": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "original_heuristic_quality": {
+    "kind": "heuristic",
+    "passed": true,
+    "missing_terms": [],
+    "expected_source_cited": true,
+    "semantic_grounding": "requires human review"
+  },
+  "manual_review": {
+    "core_phase_explanation_passed": true,
+    "all_final_sentences_supported_by_selected_quotes": false,
+    "issue": "Last sentence describes policy injection as a separate system block outside dialogue/memory. Retrieved but uncited sections support placement; selected quotations do not cover the whole statement.",
+    "issue_is_proven_false_fact": false
+  },
+  "next_probe_reason": "Improve selected-evidence coverage of final answer without changing original report or rubric.",
+  "generation_calls": 1,
+  "generation_wall_seconds": 3.384380874922499,
+  "pipeline_seconds": 4.535560416057706,
+  "stability_measured": false
+}

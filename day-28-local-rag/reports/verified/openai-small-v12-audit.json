@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-07",
+  "run_id": "191a3eb0-90f7-4d6f-874e-c5e931e88b6e",
+  "source_report": "reports/check/openai-small-v12.json",
+  "source_sha256": "2e9726135253803fc418289dc097de09d4632ac5d874712401943d74fec3e200",
+  "strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "summary": {
+    "cloud": {
+      "attempts": 9,
+      "valid_responses": 9,
+      "generated_responses": 9,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 5,
+      "heuristic_scored": 9,
+      "heuristic_failures": 4,
+      "generation_median_seconds": 2.9350650829728693,
+      "generation_p95_seconds": 3.996039791451767,
+      "first_trial_generation_median_seconds": 3.7939440407790244,
+      "later_trial_generation_median_seconds": 2.9195786039344966,
+      "pipeline_median_seconds": 3.015670249937102,
+      "repeated_cases": 3,
+      "exactly_stable_cases": 0,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "cases": {
+    "base-03": {
+      "question": "Where are versioned invariants checked around the model response?",
+      "expected_sources": [
+        "day-14-invariants/README.md"
+      ],
+      "attempts": 3,
+      "quality_passes": 0,
+      "exactly_distinct_responses": 2,
+      "generation_median_seconds": 2.9350650829728693
+    },
+    "base-10": {
+      "question": "Как на Day 18 проверить, что периодический сбор GitHub-сводки действительно работает на VPS?",
+      "expected_sources": [
+        "day-18-scheduled-mcp/README.ru.md"
+      ],
+      "attempts": 3,
+      "quality_passes": 2,
+      "exactly_distinct_responses": 3,
+      "generation_median_seconds": 3.010616875020787
+    },
+    "rewrite-ru-02": {
+      "question": "На 7 дне как разговоры не смешиваются после перезапуска?",
+      "expected_sources": [
+        "day-07-context-persistence/README.ru.md",
+        "day-07-context-persistence/README.md"
+      ],
+      "attempts": 3,
+      "quality_passes": 3,
+      "exactly_distinct_responses": 3,
+      "generation_median_seconds": 2.904092124896124
+    }
+  },
+  "http_attempts": 9,
+  "manual_review": {
+    "base-03": "Postflight described; preflight not clearly explained as a separate stage before generation. All three strict term rubrics fail; no retrospective relaxation. Some generic request guard description exists, so this is incomplete coverage, not proof every statement is false.",
+    "base-10": "Two trials satisfy rubric; trial 2 cites English README only while original rubric expects another source, and incorrectly describes GITHUB_TOKEN as needed only for public repositories. Source says optional for public repositories, not needed. No source alias relaxation or relabeling of result.",
+    "rewrite-ru-02": "All three explain SQLite, tables, restored completed history, conversation_id isolation with supporting exact citations. Test evidence is explicitly labeled as a test. Wording/citation choices vary; mechanisms are consistent by manual review, not an automated semantic-stability metric."
+  },
+  "tokens": {
+    "input": 38769,
+    "output": 1986
+  },
+  "cost_estimate_usd_without_cache_discount": 0.0186852,
+  "cost_note": "Published gpt-4.1-mini rates $0.40/$1.60 per 1M input/output, checked earlier 2026-10-07. Actual billing may include cached-input discounts; cache token details are not in this report. Dashboard is authoritative.",
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+  "scope": "Cloud-only small subset, single-call protocol, 1000 output token cap. No fresh paired local comparison; no new full 20-case result; no API failures in this nine-request run, not a general reliability guarantee.",
+  "changes": "Documentation/audit only; original report, rubrics, code, previous reports and index unchanged; no further inference."
+}

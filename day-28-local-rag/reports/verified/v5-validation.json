@@ -1,0 +1,91 @@
+{
+  "day28_offline_tests": 44,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "v5_live": "pending",
+  "source_v4_sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+  "source_v4_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v4_strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v4_summary": {
+    "local": {
+      "attempts": 6,
+      "valid_responses": 6,
+      "generated_responses": 6,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 3,
+      "heuristic_scored": 6,
+      "heuristic_failures": 3,
+      "generation_median_seconds": 17.90382583346218,
+      "generation_p95_seconds": 53.519227572192904,
+      "first_trial_generation_median_seconds": 47.83782172843348,
+      "later_trial_generation_median_seconds": 17.32452443742659,
+      "pipeline_median_seconds": 17.98675295850262,
+      "repeated_cases": 2,
+      "exactly_stable_cases": 2,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "local_retry_plan": {
+    "source_run_id": "40c05880-955c-49a2-a277-db02376537ec",
+    "source_sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/local-retry-v4.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 3
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 3,
+      "cloud": 0
+    }
+  },
+  "note": "Offline verification and planning only. No HTTP or model calls. Historical reports unchanged; V5 live quality remains unverified."
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "dbece1b2-2f3c-4981-8a6b-276c45b4df96",
+  "source_sha256": "c83486a9c24f61211ee00165814c925bf6e7d379b6397b2bad95ccd4b1d27025",
+  "strict_verifier": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "consistency_verifier": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "manual_final_answers": [
+    {
+      "case_id": "base-03",
+      "passed": false,
+      "reason": "Only Postflight is explained; no before-generation request guard or phase names in answer. Four claims reuse Postflight."
+    },
+    {
+      "case_id": "base-10",
+      "passed": true,
+      "reason": "Commands, shared schedule database, fresh summary, optional public-repository GITHUB_TOKEN supported by selected evidence; some repetition remains."
+    }
+  ],
+  "observations": 2,
+  "quality_passes": 1,
+  "usage": {
+    "input_tokens": 7489,
+    "output_tokens": 482
+  },
+  "estimated_usd_without_cache_discount": 0.0037668000000000003,
+  "estimate_is_bill": false,
+  "stability_measured": false,
+  "successful_case_retained": "base-10"
+}

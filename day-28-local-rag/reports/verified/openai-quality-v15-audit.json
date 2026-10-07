@@ -1,0 +1,27 @@
+{
+  "run_id": "3fb53348-fc63-4a64-af34-64643596f7b6",
+  "source_sha256": "117438f49733ed64ad771192dd1d3140ec56d8e5338bf870b5ca10a46fb1590f",
+  "strict_verifier": {
+    "passed": true,
+    "errors": [],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "original_heuristic_quality": {
+    "kind": "heuristic",
+    "passed": true,
+    "missing_terms": [],
+    "expected_source_cited": true,
+    "semantic_grounding": "requires human review"
+  },
+  "generation_calls": 1,
+  "generation_wall_seconds": 3.3669954161159694,
+  "pipeline_seconds": 4.509169291006401,
+  "manual_review": {
+    "all_requested_mechanisms_explained": false,
+    "selected_evidence_supports_answer": true,
+    "reason": "Postflight is explained. Semantic preflight is listed but not explained as request-meaning checks before main generation; explicit local conflict blocking is mentioned."
+  },
+  "stability_measured": false,
+  "next_probe_reason": "Require separate evidence-bound before/after explanations in one generation."
+}

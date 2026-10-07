@@ -6,7 +6,7 @@ A day-by-day Python learning project that starts with direct LLM API calls and g
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–27**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–28**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -39,6 +39,7 @@ The repository currently contains **Days 1–27**. Each `day-XX-...` directory i
 | [25](day-25-rag-chat/README.md) | Persistent RAG chat | SQLite sessions, task memory, fresh retrieval, sources, long-dialogue evaluation |
 | [26](day-26-local-llm/README.md) | Local LLM launch | Three Ollama requests, Groq comparison, JSON checks, and local loading evidence |
 | [27](day-27-local-llm-integration/README.md) | Local LLM integration — Revik | Staged Kotlin analysis, Detekt commit gate, local explanations, linked reports and reviewer tones |
+| [28](day-28-local-rag/README.md) | Local LLM + RAG | Week 6 index, local embedding/search/generation, paired cloud comparison and repeated evaluation |
 
 ## How the architecture evolves
 
@@ -53,17 +54,18 @@ The repository currently contains **Days 1–27**. Each `day-XX-...` directory i
 - **Day 25:** wrap the grounded RAG protocol in a persistent local chat. Full history and task memory survive restarts, every ordinary question performs fresh retrieval, and long conversations are evaluated with durable checkpoints and per-turn provenance.
 - **Day 26:** a standalone module verifies a downloaded Ollama model and sends three prompts of different difficulty. The same inputs can be sent to Groq; the application validates responses and saves JSON/Markdown reports.
 - **Day 27:** integrate local inference into Revik, a practical Kotlin pre-commit CLI. Detekt checks staged code using the project configuration; Qwen explains findings. The hook permits or blocks the commit and produces linked reports. Russian/English and three reviewer tones are configurable.
+- **Day 28:** reuse the Week 6 index for local RAG and compare local/cloud generation on identical retrieved context. Repeated trials record citation/quality checks, speed and stability; live metrics require an Ollama run.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
-Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlier assistant answers or remembered task facts as repository evidence: they help resolve intent, while the current answer is grounded in fresh retrieval.
+Days 21–25 and Day 28 use the shared Day 21 knowledge index. Day 25 does not treat earlier assistant answers or remembered task facts as repository evidence: they help resolve intent, while the current answer is grounded in fresh retrieval.
 
 ## Requirements
 
 - Python **3.13** is the project target.
 - A Groq key is required only by lessons that explicitly call Groq.
 - Internet access is required for Groq and live GitHub API calls.
-- Local retrieval/RAG lessons and Days 26–27 use **Ollama**.
+- Local retrieval/RAG lessons and Days 26–28 use **Ollama**.
 - Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
@@ -76,6 +78,7 @@ Days 21–25 use the shared Day 21 knowledge index. Day 25 does not treat earlie
 | 24–25 | `bge-m3` | `qwen2.5:14b` in the current grounded/live profile |
 | 26 | Not required | `qwen2.5:7b` default; `qwen2.5:14b` in the verified run |
 | 27 | Not required | `qwen2.5:14b` default; configurable downloaded local model |
+| 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq comparison |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -112,7 +115,7 @@ ollama pull qwen2.5:7b
 ollama pull qwen2.5:14b
 ```
 
-You do not need all answer models at once; the commands above simply cover the documented profiles through Day 27.
+You do not need all answer models at once; the commands above simply cover the documented profiles through Day 28.
 
 If the Ollama desktop application is already serving the local API, a separate `ollama serve` process is not required.
 
@@ -147,10 +150,11 @@ Later lessons use specialized entry points:
 | 26 | `python day-26-local-llm/main.py demo --local-model qwen2.5:14b` | Three real local requests |
 | 26 | `python day-26-local-llm/main.py compare --local-model qwen2.5:14b` | Identical prompts in Ollama and Groq |
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
+| 28 | `python day-28-local-rag/main.py evaluate --repeats 3` | Local RAG quality, speed and stability reports |
 
 ## Day 21 shared knowledge index
 
-Days 21–25 reuse:
+Days 21–25 and Day 28 reuse:
 
 ```text
 day-21-document-indexing/knowledge.db
@@ -162,9 +166,9 @@ The indexed corpus rule remains intentionally narrow:
 - lesson READMEs from Days 1–20;
 - non-test Python files from Days 16–20.
 
-README files from Days 21–27 are not automatically added to that corpus. Days 26–27 do not use this index.
+README files from Days 21–28 are not automatically added to that corpus. Days 26–27 do not use this index.
 
-The index stores a repository/corpus revision. A new commit or a change to the **root README files** can make an existing index stale. After updating the root README, rebuild before strict verification or a Day 24/25 live run:
+The index stores a repository/corpus revision. A new commit or a change to the **root README files** can make an existing index stale. After updating the root README, rebuild before strict verification or a Day 24/25/28 live run:
 
 ```bash
 python day-21-document-indexing/main.py build
@@ -289,6 +293,19 @@ The live demo creates a disposable repository and tries a rejected bad commit an
 
 Commit Revik's source, examples and template in the course repository. In the working KMP project, the agent directory and `.revik.json` can stay local and ignored. Downloaded JARs and temporary reports are not course source artifacts.
 
+## Day 28 — local LLM + RAG
+
+The [Day 28 module](day-28-local-rag/README.md) opens the Day 21 index read-only and reuses Day 23 filtering and Day 26 HTTP clients. `ask` and `evaluate` use downloaded local models without a cloud key; `compare` adds Groq when available, with identical prompts/excerpts per pair. Reports record exact citation checks, heuristic quality checks, retrieval/generation timing and repeated-response stability.
+
+```bash
+python day-28-local-rag/test_day28.py -v
+python day-28-local-rag/main.py doctor
+python day-28-local-rag/main.py evaluate --repeats 3
+python day-28-local-rag/main.py compare --repeats 3
+```
+
+Offline tests verify the implementation. Real model quality/speed/stability and disconnected-internet operation still require a live run with Ollama and `knowledge.db`; no live Day 28 benchmark is claimed here. See the [validation checklist](day-28-local-rag/VALIDATION.ru.md).
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not spend Groq tokens unless a command explicitly performs a live model/API run.
@@ -331,4 +348,3 @@ python -m unittest discover -s day-27-local-llm-integration/tests -v
 - [Ollama](https://ollama.com/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 - [GitHub REST API documentation](https://docs.github.com/en/rest)
-

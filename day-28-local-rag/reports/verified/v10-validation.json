@@ -1,0 +1,73 @@
+{
+  "day28_offline_tests": 50,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "v10_live": "pending",
+  "source_v9_sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+  "source_v9_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v9_strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v9_summary": {
+    "local": {
+      "attempts": 1,
+      "valid_responses": 1,
+      "generated_responses": 1,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 0,
+      "heuristic_scored": 1,
+      "heuristic_failures": 1,
+      "generation_median_seconds": 76.89471241692081,
+      "generation_p95_seconds": 76.89471241692081,
+      "first_trial_generation_median_seconds": 76.89471241692081,
+      "later_trial_generation_median_seconds": null,
+      "pipeline_median_seconds": 78.02143537602387,
+      "repeated_cases": 0,
+      "exactly_stable_cases": 0,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "source_v9_semantic_review": "Storage name omitted, first three statements in English despite Russian question; redundant general outcome. SQLite evidence and history/identifier sources available.",
+  "local_probe_plan": {
+    "source_run_id": "3b959d03-1cf6-4a96-82d6-7f6d4b062e5a",
+    "source_sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/local-probe-v9.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 1,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 1,
+      "cloud": 0
+    }
+  },
+  "note": "Input ordering experiment, not a confirmed quality fix. Offline checks/planning only. No HTTP or generation here; one diagnostic trial cannot measure stability. Historical results unchanged."
+}

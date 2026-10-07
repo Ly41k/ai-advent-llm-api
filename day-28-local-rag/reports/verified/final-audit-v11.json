@@ -1,0 +1,411 @@
+{
+  "review_date": "2026-10-07",
+  "offline_tests_day28": 57,
+  "source_reports": {
+    "compare-v2.json": {
+      "sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+      "run_id": "3d656a5e-3266-49df-ad13-af197c2b9013",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "full_run",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Unsuccessful observation: ('base-01', 1, 'cloud').",
+          "Unsuccessful observation: ('base-10', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 1, 'cloud').",
+          "Unsuccessful observation: ('base-01', 2, 'cloud').",
+          "Unsuccessful observation: ('base-10', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 2, 'cloud').",
+          "Unsuccessful observation: ('base-01', 3, 'cloud').",
+          "Unsuccessful observation: ('base-10', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 3, 'cloud').",
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "full_run",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "retry-v3.json": {
+      "sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+      "run_id": "e666c443-1454-4ec4-8f84-ba46fa50eb43",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Unsuccessful observation: ('base-01', 1, 'cloud').",
+          "Unsuccessful observation: ('base-03', 1, 'cloud').",
+          "Unsuccessful observation: ('base-10', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 1, 'cloud').",
+          "Unsuccessful observation: ('base-01', 2, 'cloud').",
+          "Unsuccessful observation: ('base-03', 2, 'cloud').",
+          "Unsuccessful observation: ('base-10', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 2, 'cloud').",
+          "Unsuccessful observation: ('base-01', 3, 'cloud').",
+          "Unsuccessful observation: ('base-03', 3, 'cloud').",
+          "Unsuccessful observation: ('base-10', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 3, 'cloud').",
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v4.json": {
+      "sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+      "run_id": "40c05880-955c-49a2-a277-db02376537ec",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v5.json": {
+      "sha256": "2a97a9192aad8c2497485f36e1f062a8d2d0fd37649960be297d334acd20f2d4",
+      "run_id": "816917fb-28b7-48f7-9a19-e2fa83d0ffcc",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v6.json": {
+      "sha256": "f9d52ae164e0d238614a13ec7192e26240cb17fd7c36ce10ef010a21c7d53fe7",
+      "run_id": "7c798453-9c22-4adc-a97b-863fd8d70231",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v7.json": {
+      "sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+      "run_id": "372842e3-85bf-476c-a210-629599feaf0a",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v8.json": {
+      "sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+      "run_id": "ec34783e-681e-4cc7-8272-e8987ad7d098",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-probe-v9.json": {
+      "sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+      "run_id": "3b959d03-1cf6-4a96-82d6-7f6d4b062e5a",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-probe-v10.json": {
+      "sha256": "5e8072197d4058361095ae5283d5b8732f9da5e219b30eeca8111c7aca8a1f38",
+      "run_id": "32dcbe61-3c27-48b5-99d9-e95e89467437",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-probe-v11.json": {
+      "sha256": "cee6711ba49560e24958abd4d883ebaed71761a509449d540e5c876997b482a2",
+      "run_id": "be097a54-376e-4f65-9bd5-9a4fceb4ad5f",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-stability-v11.json": {
+      "sha256": "16c1fd9e2cdd482e61aea16a37e7087c795e68a15626d3b8e3c97a554eef391e",
+      "run_id": "578e902c-4bff-43b6-8cea-9c606f8d3665",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "cloud-retry-v11.json": {
+      "sha256": "05a199a64fa884ec033283d1d2e9acaf0e7275e74950dbea6df2c7dd4356a6b4",
+      "run_id": "8cff0d09-70d4-4606-a436-6c31d26dca59",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      },
+      "strict": {
+        "passed": false,
+        "errors": [
+          "Unsuccessful observation: ('rewrite-ru-03', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 1, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 1, 'cloud').",
+          "Unsuccessful observation: ('base-01', 2, 'cloud').",
+          "Unsuccessful observation: ('base-03', 2, 'cloud').",
+          "Unsuccessful observation: ('base-10', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 2, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 2, 'cloud').",
+          "Unsuccessful observation: ('base-01', 3, 'cloud').",
+          "Unsuccessful observation: ('base-03', 3, 'cloud').",
+          "Unsuccessful observation: ('base-10', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-02', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-03', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-04', 3, 'cloud').",
+          "Unsuccessful observation: ('rewrite-ru-05', 3, 'cloud').",
+          "Local inference or complete quality/error checks were not verified."
+        ],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    }
+  },
+  "local_historical_coverage": {
+    "base-01": {
+      "report": "retry-v3.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-02": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-03": {
+      "report": "local-retry-v4.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-04": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-05": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-06": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-07": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-08": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-09": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "base-10": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "negative-01": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "negative-02": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "negative-03": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "negative-04": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-en-01": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-ru-01": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-ru-02": {
+      "report": "local-stability-v11.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-ru-03": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-ru-04": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    },
+    "rewrite-ru-05": {
+      "report": "compare-v2.json",
+      "retained_pass": true,
+      "trials": 3
+    }
+  },
+  "local_coverage_note": "20 cases x3 with current rubrics across retained versions; not a fresh full V11 benchmark or semantic proof of every historical claim.",
+  "v11_stability_summary": {
+    "local": {
+      "attempts": 3,
+      "valid_responses": 3,
+      "generated_responses": 3,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 3,
+      "heuristic_scored": 3,
+      "heuristic_failures": 0,
+      "generation_median_seconds": 43.03347479109652,
+      "generation_p95_seconds": 43.15678420406766,
+      "first_trial_generation_median_seconds": 43.170485249953344,
+      "later_trial_generation_median_seconds": 43.01825339556672,
+      "pipeline_median_seconds": 43.11550208320841,
+      "repeated_cases": 1,
+      "exactly_stable_cases": 1,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid.",
+      "generation_calls": 6
+    }
+  },
+  "manual_v11_review": "Russian answer; SQLite conversations/messages, startup restoration of completed messages and isolation by conversation_id all supported by exact selected source quotations. Three final answers and citations identical.",
+  "cloud_v11": {
+    "scheduled_observations": 21,
+    "http_attempts": 10,
+    "http_ok": 4,
+    "http_429": 6,
+    "skipped_without_http": 16,
+    "successful_http_median_seconds": 1.2205745835090056,
+    "wall_median_with_retries_seconds": 31.111062958603725,
+    "quality_passes": 3,
+    "quality_scored": 4,
+    "failed_quality_case": "base-03",
+    "exact_rate_limit_type": "unknown; current report discards response headers/body details"
+  },
+  "assignment_status": "Local RAG and quality/speed/stability evaluation demonstrated; optional cloud comparison includes documented failures. Cloud retry is not all-pass and must not be reported as such. No more model calls needed to assess these existing results.",
+  "scope": "Day 28 only; original reports unchanged; no root/other-day/index changes",
+  "network_disabled_live_test": "not recorded; local-only design/loopback adapters tested; models must be downloaded beforehand",
+  "rate_limit_reference": "https://console.groq.com/docs/rate-limits",
+  "rate_limit_reference_checked": "2026-10-07"
+}

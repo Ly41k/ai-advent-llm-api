@@ -1,0 +1,2 @@
+# Runtime and offline tests: standard library; optional root .env support:
+python-dotenv>=1.0,<2

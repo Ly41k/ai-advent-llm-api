@@ -1,0 +1,73 @@
+{
+  "day28_offline_tests": 50,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "v9_live": "pending",
+  "source_v8_sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+  "source_v8_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v8_strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v8_summary": {
+    "local": {
+      "attempts": 3,
+      "valid_responses": 3,
+      "generated_responses": 3,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 0,
+      "heuristic_scored": 3,
+      "heuristic_failures": 3,
+      "generation_median_seconds": 20.79099787515588,
+      "generation_p95_seconds": 69.91697722503449,
+      "first_trial_generation_median_seconds": 75.37541937502101,
+      "later_trial_generation_median_seconds": 20.789879000047222,
+      "pipeline_median_seconds": 20.869695333065465,
+      "repeated_cases": 1,
+      "exactly_stable_cases": 1,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "source_v8_semantic_review": "Storage name omitted. Test topic Aurora is presented as normal startup behavior instead of explaining history restoration. Isolation and database evidence now available in selected quotes.",
+  "local_probe_plan": {
+    "source_run_id": "ec34783e-681e-4cc7-8272-e8987ad7d098",
+    "source_sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/local-retry-v8.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 1,
+      "cloud": 0
+    }
+  },
+  "note": "Offline checks/planning only. One live diagnostic trial cannot measure stability. No HTTP/generation performed here; historical results remain unchanged."
+}

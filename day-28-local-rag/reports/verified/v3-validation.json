@@ -1,0 +1,795 @@
+{
+  "timestamp": "2026-10-07T17:13:46.620210+00:00",
+  "offline_tests": {
+    "day28": 39,
+    "day21": 7,
+    "day23": 21,
+    "day26": 38,
+    "total": 105,
+    "passed": true
+  },
+  "live_v3": "pending; no Ollama/Groq inference performed in this environment",
+  "original_ask_v2_verification": {
+    "passed": true,
+    "errors": [],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "original_compare_v2_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "retry_plan_from_user_compare_v2": {
+    "source_run_id": "3d656a5e-3266-49df-ad13-af197c2b9013",
+    "source_sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "base-01",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-01",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite",
+                "conversation_id | UUID | identifier | идентификатор"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite",
+                "conversation_id | UUID | identifier | идентификатор"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 3,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "SQLite",
+                "conversation_id | UUID | identifier | идентификатор"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "base-02",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-02",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-04",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-04",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-05",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "base-05",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-06",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-06",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-07",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-07",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-08",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-08",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-09",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-09",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-10",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "worker"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "worker"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 3,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [
+                "worker"
+              ],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "negative-01",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-01",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-02",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-02",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-03",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-03",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-04",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "negative-04",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-en-01",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 3,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "rewrite-en-01",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-01",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-01",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-03",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 2,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-03",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-04",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 2,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-04",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-05",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 2,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": true,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review"
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "rewrite-ru-05",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": true,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "base-01",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "base-01",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "base-01",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "base-01",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "base-01",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "base-01",
+        "provider": "local",
+        "trial": 3
+      },
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 3
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-03",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-03",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-03",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-04",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-04",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-04",
+        "provider": "cloud",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-05",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-05",
+        "provider": "cloud",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-05",
+        "provider": "cloud",
+        "trial": 3
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 9,
+      "cloud": 21
+    }
+  }
+}

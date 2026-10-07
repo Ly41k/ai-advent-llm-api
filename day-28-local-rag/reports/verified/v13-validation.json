@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-07",
+  "offline_tests": {
+    "tests": 67,
+    "passed": true
+  },
+  "historical_report_compatibility": [
+    {
+      "file": "cloud-retry-v11.json",
+      "sha256": "05a199a64fa884ec033283d1d2e9acaf0e7275e74950dbea6df2c7dd4356a6b4",
+      "run_id": "8cff0d09-70d4-4606-a436-6c31d26dca59",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "compare-v2.json",
+      "sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+      "run_id": "3d656a5e-3266-49df-ad13-af197c2b9013",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-probe-v10.json",
+      "sha256": "5e8072197d4058361095ae5283d5b8732f9da5e219b30eeca8111c7aca8a1f38",
+      "run_id": "32dcbe61-3c27-48b5-99d9-e95e89467437",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-probe-v11.json",
+      "sha256": "cee6711ba49560e24958abd4d883ebaed71761a509449d540e5c876997b482a2",
+      "run_id": "be097a54-376e-4f65-9bd5-9a4fceb4ad5f",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-probe-v9.json",
+      "sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+      "run_id": "3b959d03-1cf6-4a96-82d6-7f6d4b062e5a",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-retry-v4.json",
+      "sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+      "run_id": "40c05880-955c-49a2-a277-db02376537ec",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-retry-v5.json",
+      "sha256": "2a97a9192aad8c2497485f36e1f062a8d2d0fd37649960be297d334acd20f2d4",
+      "run_id": "816917fb-28b7-48f7-9a19-e2fa83d0ffcc",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-retry-v6.json",
+      "sha256": "f9d52ae164e0d238614a13ec7192e26240cb17fd7c36ce10ef010a21c7d53fe7",
+      "run_id": "7c798453-9c22-4adc-a97b-863fd8d70231",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-retry-v7.json",
+      "sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+      "run_id": "372842e3-85bf-476c-a210-629599feaf0a",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-retry-v8.json",
+      "sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+      "run_id": "ec34783e-681e-4cc7-8272-e8987ad7d098",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "local-stability-v11.json",
+      "sha256": "16c1fd9e2cdd482e61aea16a37e7087c795e68a15626d3b8e3c97a554eef391e",
+      "run_id": "578e902c-4bff-43b6-8cea-9c606f8d3665",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "offline-final.json",
+      "sha256": "b1faa1fcfa018503b556d2e52989640a19d55dd4db1f915fe42b95f2482aad60",
+      "run_id": "793f1b81-77a3-4b4b-b917-f5fb3f1a6c27",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "openai-small-v12.json",
+      "sha256": "2e9726135253803fc418289dc097de09d4632ac5d874712401943d74fec3e200",
+      "run_id": "191a3eb0-90f7-4d6f-874e-c5e931e88b6e",
+      "consistent": true,
+      "errors": []
+    },
+    {
+      "file": "retry-v3.json",
+      "sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+      "run_id": "e666c443-1454-4ec4-8f84-ba46fa50eb43",
+      "consistent": true,
+      "errors": []
+    }
+  ],
+  "probe_plan": {
+    "source_run_id": "191a3eb0-90f7-4d6f-874e-c5e931e88b6e",
+    "source_sha256": "2e9726135253803fc418289dc097de09d4632ac5d874712401943d74fec3e200",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/openai-small-v12.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 2,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "cloud",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "base-03",
+        "provider": "cloud",
+        "trial": 1
+      },
+      {
+        "case_id": "base-10",
+        "provider": "cloud",
+        "trial": 1
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 0,
+      "cloud": 2
+    }
+  },
+  "live_quality_v13": "pending: run on user Mac",
+  "original_rubrics_changed": false,
+  "model_api_index_changed": false
+}

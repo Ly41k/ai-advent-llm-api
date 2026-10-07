@@ -1,0 +1,144 @@
+{
+  "day28_offline_tests": 50,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "v8_live": "pending",
+  "historical_report_checks": {
+    "compare-v2.json": {
+      "sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "full_run",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "retry-v3.json": {
+      "sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v4.json": {
+      "sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v5.json": {
+      "sha256": "2a97a9192aad8c2497485f36e1f062a8d2d0fd37649960be297d334acd20f2d4",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v6.json": {
+      "sha256": "f9d52ae164e0d238614a13ec7192e26240cb17fd7c36ce10ef010a21c7d53fe7",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v7.json": {
+      "sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    }
+  },
+  "source_v7_strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v7_summary": {
+    "local": {
+      "attempts": 3,
+      "valid_responses": 3,
+      "generated_responses": 3,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 0,
+      "heuristic_scored": 3,
+      "heuristic_failures": 3,
+      "generation_median_seconds": 22.25108908303082,
+      "generation_p95_seconds": 66.66846954612993,
+      "first_trial_generation_median_seconds": 71.60373404202983,
+      "later_trial_generation_median_seconds": 22.24034260411281,
+      "pipeline_median_seconds": 22.324900083011016,
+      "repeated_cases": 1,
+      "exactly_stable_cases": 1,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "source_v7_semantic_review": {
+    "c1": "Supports general outcome only.",
+    "c2": "Database path alone does not identify SQLite or automatic creation.",
+    "c3": "Test startup instruction does not describe history restoration.",
+    "c4": "Direct support for isolated conversation_id history."
+  },
+  "local_retry_plan": {
+    "source_run_id": "372842e3-85bf-476c-a210-629599feaf0a",
+    "source_sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/local-retry-v7.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 3
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 3,
+      "cloud": 0
+    }
+  },
+  "catalog_comparison": {
+    "old_entries": 90,
+    "new_entries": 40,
+    "old_json_chars": 14684,
+    "new_json_chars": 16372,
+    "all_sections_exact_substrings": true
+  },
+  "note": "Offline validation/planning only, no HTTP or generation. Historical reports unchanged; current model quality unverified. Metrics describe the new subset only."
+}

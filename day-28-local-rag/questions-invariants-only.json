@@ -1,0 +1,16 @@
+[
+  {
+    "question": "Where are versioned invariants checked around the model response?",
+    "expectation": "The answer should identify preflight before the model call and postflight after it.",
+    "expected_terms": [
+      "preflight",
+      "postflight"
+    ],
+    "expected_sources": [
+      "day-14-invariants/README.md"
+    ],
+    "id": "base-03",
+    "answerable": true,
+    "split": "evaluation"
+  }
+]

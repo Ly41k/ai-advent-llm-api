@@ -1,0 +1,16 @@
+{
+  "note": "Actual first local response: malformed JSON and altered exact quotes. Must remain invalid.",
+  "raw": "{\"answer\": \"Фоновые задания на Day 18 выполняет процесс `worker.py`, который берёт просроченные задания, вызывает GitHub REST API и сохраняет данные в SQLite.\", \"abstained\": false, \"citations\": [{\"excerpt\": 1, \"quote\": \"worker.py берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite.\"}, {\"excerpt\": 2, \"quote\": \"worker.py collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite.\"}]}\"",
+  "excerpts": [
+    {
+      "excerpt": 1,
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "text": "- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал."
+    },
+    {
+      "excerpt": 2,
+      "source": "day-18-scheduled-mcp/README.md",
+      "text": "- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval."
+    }
+  ]
+}

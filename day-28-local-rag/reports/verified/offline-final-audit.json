@@ -1,0 +1,22 @@
+{
+  "run_id": "793f1b81-77a3-4b4b-b917-f5fb3f1a6c27",
+  "source_sha256": "b1faa1fcfa018503b556d2e52989640a19d55dd4db1f915fe42b95f2482aad60",
+  "strict_verifier": {
+    "passed": true,
+    "errors": [],
+    "scope": "full_run",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "local_rag_verified": true,
+  "manual_final_answer_review": {
+    "passed": true,
+    "note": "worker.py executes due jobs, calls GitHub REST API and stores data in SQLite; selected source supports all final claims."
+  },
+  "generation_calls": 2,
+  "pipeline_seconds": 93.21583520900458,
+  "generation_wall_seconds": 92.09354070900008,
+  "local_url": "http://127.0.0.1:11434",
+  "cloud_called": false,
+  "external_network_state": "not recorded by supplied JSON/terminal transcript",
+  "scope": "one custom question; no heuristic quality rubric or stability measurement"
+}

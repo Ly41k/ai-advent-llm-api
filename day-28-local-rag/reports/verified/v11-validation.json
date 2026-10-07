@@ -1,0 +1,168 @@
+{
+  "day28_offline_tests": 57,
+  "passed": true,
+  "compileall": true,
+  "git_diff_check": true,
+  "v11_live": "pending",
+  "historical_reports": {
+    "compare-v2.json": {
+      "sha256": "b7d33d29e7a601ecdefafb32adafc5bb4e60ce9f258a13878c65c493fbd6f8bf",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "full_run",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "retry-v3.json": {
+      "sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v4.json": {
+      "sha256": "0f87c433072689c70242d98b21b807c31b6c2abc5961b50f2034f02239c9543d",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v5.json": {
+      "sha256": "2a97a9192aad8c2497485f36e1f062a8d2d0fd37649960be297d334acd20f2d4",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v6.json": {
+      "sha256": "f9d52ae164e0d238614a13ec7192e26240cb17fd7c36ce10ef010a21c7d53fe7",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v7.json": {
+      "sha256": "c5f307669441e8d22882ff9f67dcdc032334269d1f62f69d29d113d6f1a5f420",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-retry-v8.json": {
+      "sha256": "6c220e00512aa20d31e69ebd0e946f2547f67c2d09dcc875dac2316e5217c6f9",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-probe-v9.json": {
+      "sha256": "47f4a5c589af80f86187b0c7204af89e1fdbfffbc212ab0323601b1414a48fbf",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    },
+    "local-probe-v10.json": {
+      "sha256": "5e8072197d4058361095ae5283d5b8732f9da5e219b30eeca8111c7aca8a1f38",
+      "consistency": {
+        "passed": true,
+        "errors": [],
+        "scope": "selective_retry",
+        "note": "Internal consistency checks only; manually review semantic support and answer quality."
+      }
+    }
+  },
+  "source_v10_run_id": "32dcbe61-3c27-48b5-99d9-e95e89467437",
+  "source_v10_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v10_strict": {
+    "passed": false,
+    "errors": [
+      "Local inference or complete quality/error checks were not verified."
+    ],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "source_v10_summary": {
+    "local": {
+      "attempts": 1,
+      "valid_responses": 1,
+      "generated_responses": 1,
+      "errors_or_invalid": 0,
+      "success_rate": 1.0,
+      "heuristic_passes": 0,
+      "heuristic_scored": 1,
+      "heuristic_failures": 1,
+      "generation_median_seconds": 77.47990183299407,
+      "generation_p95_seconds": 77.47990183299407,
+      "first_trial_generation_median_seconds": 77.47990183299407,
+      "later_trial_generation_median_seconds": null,
+      "pipeline_median_seconds": 78.59277762519196,
+      "repeated_cases": 0,
+      "exactly_stable_cases": 0,
+      "stability_note": "Cases with failures are excluded; exact response identity requires all trials valid."
+    }
+  },
+  "source_v10_semantic_review": "SQLite omitted in answer; mostly English for Russian question. Chosen source quotations contain storage, restoration and identifier evidence.",
+  "synthesis_preparation": {
+    "selected_quote_ids": [
+      "e1-q5",
+      "e2-q4",
+      "e2-q6",
+      "e3-q4"
+    ],
+    "original_user_chars": 16458,
+    "synthesis_user_chars": 2287,
+    "model_statement_text_used_as_evidence": false,
+    "source_quotations_unchanged": true
+  },
+  "local_probe_plan": {
+    "source_run_id": "32dcbe61-3c27-48b5-99d9-e95e89467437",
+    "source_sha256": "5e8072197d4058361095ae5283d5b8732f9da5e219b30eeca8111c7aca8a1f38",
+    "source_report": "/workspace/scratch/6b80672ae560/upload/local-probe-v10.json",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 1,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 2,
+      "cloud": 0
+    }
+  },
+  "note": "Offline verification only; no HTTP or generation. Two explicit local calls at most for one probe. V11 live quality/speed/stability unverified; historical results unchanged."
+}

@@ -1,0 +1,161 @@
+{
+  "day28_offline_tests": 44,
+  "passed": true,
+  "v4_live": "pending",
+  "source_v3_consistency": {
+    "passed": true,
+    "errors": [],
+    "scope": "selective_retry",
+    "note": "Internal consistency checks only; manually review semantic support and answer quality."
+  },
+  "local_retry_plan": {
+    "source_run_id": "e666c443-1454-4ec4-8f84-ba46fa50eb43",
+    "source_sha256": "fc9ca50cfcff6fe0c55745983ca40a39d93d29cb95a53b3d415ee70b78ad34be",
+    "scope": "selective_retry",
+    "note": "Historical rows remain unchanged. New metrics describe this subset only. An unpaired retry is not a new local/cloud comparison.",
+    "assessments": [
+      {
+        "case_id": "base-01",
+        "provider": "local",
+        "action": "retain",
+        "observations": 3,
+        "current_passes": 3,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": false,
+        "reassessments": []
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "action": "rerun",
+        "observations": 3,
+        "current_passes": 0,
+        "rubric_changed": true,
+        "reassessments": [
+          {
+            "trial": 1,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review",
+              "missing_evidence_groups": [
+                "conversation_id | UUID | conversation identifier | идентификатор"
+              ]
+            }
+          },
+          {
+            "trial": 2,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review",
+              "missing_evidence_groups": [
+                "conversation_id | UUID | conversation identifier | идентификатор"
+              ]
+            }
+          },
+          {
+            "trial": 3,
+            "previous_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": false,
+              "semantic_grounding": "requires human review"
+            },
+            "current_quality": {
+              "kind": "heuristic",
+              "passed": false,
+              "missing_terms": [],
+              "expected_source_cited": true,
+              "semantic_grounding": "requires human review",
+              "missing_evidence_groups": [
+                "conversation_id | UUID | conversation identifier | идентификатор"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "planned_observations": [
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "base-03",
+        "provider": "local",
+        "trial": 3
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 1
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 2
+      },
+      {
+        "case_id": "rewrite-ru-02",
+        "provider": "local",
+        "trial": 3
+      }
+    ],
+    "generation_upper_bound": {
+      "local": 6,
+      "cloud": 0
+    }
+  },
+  "catalog_comparison": [
+    {
+      "case_id": "base-03",
+      "old_catalog_entries": 147,
+      "new_catalog_entries": 42,
+      "old_context_chars": 8395,
+      "new_context_chars": 7028,
+      "exact_passages": true
+    },
+    {
+      "case_id": "rewrite-ru-02",
+      "old_catalog_entries": 305,
+      "new_catalog_entries": 90,
+      "old_context_chars": 17587,
+      "new_context_chars": 14684,
+      "exact_passages": true
+    }
+  ]
+}
