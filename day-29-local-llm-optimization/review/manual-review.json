@@ -1,0 +1,394 @@
+{
+  "kind": "independent_assistant_manual_review",
+  "source_report": "reports/check/control-v5.json",
+  "source_report_sha256": "2b648b0f265ebc7e3e6761e3c9020a0d05004444f471becc08f1531c0d98e8ba",
+  "source_report_integrity_sha256": "b3d4180a89449eacbfb7c70ae6c492b477144fefbcc76229ba285f6d65efd765",
+  "source_responses_modified": false,
+  "selected_profile": "focused-v3-q4",
+  "approved_scope": "Short factual repository lookup and unsupported-question abstention",
+  "approved_case_ids": [
+    "base-06",
+    "base-07",
+    "base-08",
+    "negative-03"
+  ],
+  "selected_scope_observations": 12,
+  "selected_scope_manual_passes": 12,
+  "full_control_heuristic_passes": 15,
+  "full_control_selected_manual_passes": 12,
+  "full_control_selected_manual_total": 15,
+  "full_control_manual_verified": false,
+  "limitations": [
+    "Small sample; three repeats per case.",
+    "The VPS procedure remains unapproved.",
+    "Human-style assessment is separate from transport/keyword verification, not a live model auditor call."
+  ],
+  "observations": [
+    {
+      "profile": "baseline",
+      "case_id": "base-06",
+      "trial": 1,
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Повторён один факт. Дополнительный claim о названии инструмента привязан к общему коду agent.py, где это имя не названо."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-06",
+      "trial": 2,
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Повторён один факт. Дополнительный claim о названии инструмента привязан к общему коду agent.py, где это имя не названо."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-06",
+      "trial": 3,
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Повторён один факт. Дополнительный claim о названии инструмента привязан к общему коду agent.py, где это имя не названо."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-07",
+      "trial": 1,
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Добавлены ненужные инструкции по VPS.",
+        "Утверждение о Groq/GITHUB_TOKEN привязано к e2-q6, которое его не подтверждает."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-07",
+      "trial": 2,
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Добавлены ненужные инструкции по VPS.",
+        "Утверждение о Groq/GITHUB_TOKEN привязано к e2-q6, которое его не подтверждает."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-07",
+      "trial": 3,
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "verdict": "needs_improvement",
+      "notes": [
+        "Добавлены ненужные инструкции по VPS.",
+        "Утверждение о Groq/GITHUB_TOKEN привязано к e2-q6, которое его не подтверждает."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-08",
+      "trial": 1,
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-08",
+      "trial": 2,
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-08",
+      "trial": 3,
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-10",
+      "trial": 1,
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "raw_answer_sha256": "fd6de0604ea2590b55602a0a70f5be2c27565c1a63a80fc5b6bc4291128c1e46",
+      "verdict": "needs_improvement",
+      "notes": [
+        "В процедуре есть смешение подробностей VPS и чек-листа: выбранные цитаты не подтверждают все факты отдельных claims."
+      ],
+      "in_selected_scope": false
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-10",
+      "trial": 2,
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "raw_answer_sha256": "fd6de0604ea2590b55602a0a70f5be2c27565c1a63a80fc5b6bc4291128c1e46",
+      "verdict": "needs_improvement",
+      "notes": [
+        "В процедуре есть смешение подробностей VPS и чек-листа: выбранные цитаты не подтверждают все факты отдельных claims."
+      ],
+      "in_selected_scope": false
+    },
+    {
+      "profile": "baseline",
+      "case_id": "base-10",
+      "trial": 3,
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "raw_answer_sha256": "967aaf8b3a3e1dbd4f9a7cb19b86a95ae98ff741093c97c1a6c0898a3dcab75b",
+      "verdict": "needs_improvement",
+      "notes": [
+        "В процедуре есть смешение подробностей VPS и чек-листа: выбранные цитаты не подтверждают все факты отдельных claims."
+      ],
+      "in_selected_scope": false
+    },
+    {
+      "profile": "baseline",
+      "case_id": "negative-03",
+      "trial": 1,
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "negative-03",
+      "trial": 2,
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "baseline",
+      "case_id": "negative-03",
+      "trial": 3,
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-06",
+      "trial": 1,
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-06",
+      "trial": 2,
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-06",
+      "trial": 3,
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-07",
+      "trial": 1,
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-07",
+      "trial": 2,
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-07",
+      "trial": 3,
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-08",
+      "trial": 1,
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-08",
+      "trial": 2,
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-08",
+      "trial": 3,
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "verdict": "pass",
+      "notes": [
+        "Ответ соответствует вопросу и поддержан выбранной цитатой."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "negative-03",
+      "trial": 1,
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "negative-03",
+      "trial": 2,
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "negative-03",
+      "trial": 3,
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "verdict": "pass",
+      "notes": [
+        "Модель отказалась от неподтверждённого ответа; цитаты отсутствуют."
+      ],
+      "in_selected_scope": true
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-10",
+      "trial": 1,
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "verdict": "needs_improvement",
+      "notes": [
+        "c3 содержит точную команду systemctl status bublik-day18, которой нет в e1-q6.",
+        "Проверка состояния службы названа проверкой выполнения задачи; это не доказательство повторного выполнения заданий."
+      ],
+      "in_selected_scope": false
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-10",
+      "trial": 2,
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "verdict": "needs_improvement",
+      "notes": [
+        "c3 содержит точную команду systemctl status bublik-day18, которой нет в e1-q6.",
+        "Проверка состояния службы названа проверкой выполнения задачи; это не доказательство повторного выполнения заданий."
+      ],
+      "in_selected_scope": false
+    },
+    {
+      "profile": "focused-v3-q4",
+      "case_id": "base-10",
+      "trial": 3,
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "verdict": "needs_improvement",
+      "notes": [
+        "c3 содержит точную команду systemctl status bublik-day18, которой нет в e1-q6.",
+        "Проверка состояния службы названа проверкой выполнения задачи; это не доказательство повторного выполнения заданий."
+      ],
+      "in_selected_scope": false
+    }
+  ]
+}

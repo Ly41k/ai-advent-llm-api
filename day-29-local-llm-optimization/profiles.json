@@ -1,0 +1,11 @@
+{
+  "baseline": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 2048, "num_ctx": 16384, "prompt": "baseline"},
+  "temperature-01": {"model": "qwen2.5:14b", "temperature": 0.1, "max_tokens": 2048, "num_ctx": 16384, "prompt": "baseline"},
+  "temperature-02": {"model": "qwen2.5:14b", "temperature": 0.2, "max_tokens": 2048, "num_ctx": 16384, "prompt": "baseline"},
+  "tokens-1024": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 1024, "num_ctx": 16384, "prompt": "baseline"},
+  "tokens-512": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 512, "num_ctx": 16384, "prompt": "baseline"},
+  "context-8192": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 2048, "num_ctx": 8192, "prompt": "baseline"},
+  "prompt-compact": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 2048, "num_ctx": 16384, "prompt": "compact"},
+  "candidate-q4": {"model": "qwen2.5:14b", "temperature": 0, "max_tokens": 1024, "num_ctx": 8192, "prompt": "compact"},
+  "candidate-q5": {"model": "qwen2.5:14b-instruct-q5_K_M", "temperature": 0, "max_tokens": 1024, "num_ctx": 8192, "prompt": "compact"}
+}

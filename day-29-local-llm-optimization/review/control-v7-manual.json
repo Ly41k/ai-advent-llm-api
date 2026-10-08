@@ -1,0 +1,181 @@
+{
+  "protocol": "day29-v7-calibration-semantic-review-1",
+  "reviewer": "Codex: source-grounded semantic assessment, separate from automated guard",
+  "source_report_sha256": "9d30ecb0b120885df200cf408e093694c46aed3aef1eeb2b5ad7343736adfd68",
+  "source_responses_modified": false,
+  "additional_model_calls": 0,
+  "exact_reused_result_objects": 27,
+  "new_completed_observations": 3,
+  "scope": "Known Russian base-10 periodic Day 18 VPS verification question; no universal procedure quality claim.",
+  "verdict": "PASS: 3/3 fresh calibration observations",
+  "answer_contract": "Local Qwen selects four evidence IDs; application renders a source-extractive procedure.",
+  "comparison": {
+    "v6_wall_median_seconds": 16.571688042022288,
+    "v7_wall_median_seconds": 6.077138958033174,
+    "wall_reduction_percent": 63.32818393260338,
+    "limitation": "Different output contracts and input lengths; not an isolated free-text model speed comparison. First-run prefill and later cached prompts differ."
+  },
+  "frozen_v7_files_sha256": {
+    "guard7.py": "00710105dea451737883162ee50358ba1eca04b4a34fa87e6c5d36ac9c46f49c",
+    "http7.py": "d828d2ff1a4b748b36ce3d093020569bcb7a17b52d61c795a927d90a16a03cf9",
+    "main.py": "0971466ab9146cf2b94c21d47478ce632ef65b46aa19e86d8de25c2e986f972b",
+    "selection7.py": "90d985377b6456c5c278280c91a60124a11b1928821125689e46e37327892dfb",
+    "test_quality_v7.py": "35c59f5aebbe96de7f5810d1bf05fe5e05e6ce987912b6a417ab188201a949f8",
+    "questions-transfer.json": "51e5d60cdf49cf30b997c184c8cf15fd21c42b66022a369cee41fb8c20a4010a"
+  },
+  "transfer_evaluation": {
+    "state": "pending",
+    "cases": [
+      "quality-v7-transfer-01",
+      "quality-v7-transfer-02"
+    ],
+    "repeats_per_case": 3,
+    "maximum_new_answer_observations": 6
+  },
+  "observations": [
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "cbe7f4957dce1f0feee3cc852b5e59a93c7ad416f34593794258f8b2a9e302f7",
+      "trial": 1,
+      "verdict": "PASS",
+      "raw_answer_sha256": "b60aea66abbfb9f908b36a691a50c14977e6e7e336a517d3e61a7ed9640769b0",
+      "checks": {
+        "language": "PASS: procedure instructions are Russian; selected sources are Russian.",
+        "relevance": "PASS: observation commands only; no installation/restart commands or unrelated VPS setup.",
+        "source_bindings": "PASS: each selected unit is an exact substring of its original source quote and has the correct role.",
+        "procedure_coverage": "PASS: status, logs, actual execution output, and successive persisted snapshots/timestamps are covered.",
+        "limitations": "PASS: process status is distinguished from task execution; actual VPS operation is not asserted."
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e3-q5-status-3",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e3-q5-logs-4",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e3-q1-execution-1",
+          "original_quote_id": "e3-q1",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e3-q2-recurrence-2",
+          "original_quote_id": "e3-q2",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "generation_wall_seconds": 14.024984666146338,
+      "model_output_tokens": 75,
+      "rendered_answer_characters": 1419
+    },
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "cbe7f4957dce1f0feee3cc852b5e59a93c7ad416f34593794258f8b2a9e302f7",
+      "trial": 2,
+      "verdict": "PASS",
+      "raw_answer_sha256": "b60aea66abbfb9f908b36a691a50c14977e6e7e336a517d3e61a7ed9640769b0",
+      "checks": {
+        "language": "PASS: procedure instructions are Russian; selected sources are Russian.",
+        "relevance": "PASS: observation commands only; no installation/restart commands or unrelated VPS setup.",
+        "source_bindings": "PASS: each selected unit is an exact substring of its original source quote and has the correct role.",
+        "procedure_coverage": "PASS: status, logs, actual execution output, and successive persisted snapshots/timestamps are covered.",
+        "limitations": "PASS: process status is distinguished from task execution; actual VPS operation is not asserted."
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e3-q5-status-3",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e3-q5-logs-4",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e3-q1-execution-1",
+          "original_quote_id": "e3-q1",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e3-q2-recurrence-2",
+          "original_quote_id": "e3-q2",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "generation_wall_seconds": 6.030794666847214,
+      "model_output_tokens": 75,
+      "rendered_answer_characters": 1419
+    },
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "cbe7f4957dce1f0feee3cc852b5e59a93c7ad416f34593794258f8b2a9e302f7",
+      "trial": 3,
+      "verdict": "PASS",
+      "raw_answer_sha256": "b60aea66abbfb9f908b36a691a50c14977e6e7e336a517d3e61a7ed9640769b0",
+      "checks": {
+        "language": "PASS: procedure instructions are Russian; selected sources are Russian.",
+        "relevance": "PASS: observation commands only; no installation/restart commands or unrelated VPS setup.",
+        "source_bindings": "PASS: each selected unit is an exact substring of its original source quote and has the correct role.",
+        "procedure_coverage": "PASS: status, logs, actual execution output, and successive persisted snapshots/timestamps are covered.",
+        "limitations": "PASS: process status is distinguished from task execution; actual VPS operation is not asserted."
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e3-q5-status-3",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e3-q5-logs-4",
+          "original_quote_id": "e3-q5",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e3-q1-execution-1",
+          "original_quote_id": "e3-q1",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e3-q2-recurrence-2",
+          "original_quote_id": "e3-q2",
+          "excerpt": 3,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "generation_wall_seconds": 6.077138958033174,
+      "model_output_tokens": 75,
+      "rendered_answer_characters": 1419
+    }
+  ]
+}

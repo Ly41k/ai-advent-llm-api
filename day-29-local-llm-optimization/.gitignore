@@ -1,0 +1,6 @@
+__pycache__/
+reports/check/
+reports/video/
+cache/
+*.lock
+

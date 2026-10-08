@@ -1,0 +1,1334 @@
+{
+  "protocol": "procedure-evidence-guard-v6",
+  "origin": "offline_reanalysis_of_original_live_observations",
+  "source_report": "reports/check/control-v5.json",
+  "source_report_sha256": "2b648b0f265ebc7e3e6761e3c9020a0d05004444f471becc08f1531c0d98e8ba",
+  "audit_policy_sha256": "9bd841a8f16b9d0eb428a55d779688ce54bc58b1f24501c4f83f064f80588f60",
+  "source_responses_modified": false,
+  "additional_model_calls": 0,
+  "human_semantic_review_required": true,
+  "semantically_verified": false,
+  "automatic_publication_allowed": false,
+  "limitations": [
+    "Checks detect concrete technical-binding defects and selected coverage gaps.",
+    "Lexical coverage and supported technical literals do not prove all natural-language entailment.",
+    "No repairs, substituted citations, invented claims or hidden regeneration."
+  ],
+  "state": "completed",
+  "missing_observations": 0,
+  "summary": {
+    "baseline": {
+      "observations": 15,
+      "blocked": 12,
+      "ready_for_manual_review": 3
+    },
+    "focused-v3-q4": {
+      "observations": 15,
+      "blocked": 3,
+      "ready_for_manual_review": 12
+    }
+  },
+  "observations": [
+    {
+      "case_id": "base-06",
+      "profile": "baseline",
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "trial": 1,
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "technical_fragments": [
+            "agent.py",
+            "get_github_repo"
+          ],
+          "unsupported": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "fragments": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-06",
+      "profile": "baseline",
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "trial": 2,
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "technical_fragments": [
+            "agent.py",
+            "get_github_repo"
+          ],
+          "unsupported": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "fragments": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-06",
+      "profile": "baseline",
+      "job_key": "836fece895ec338fe85dc9b62eabef17379ac5f13e7a19a04eb6498ba7c711a0",
+      "trial": 3,
+      "raw_answer_sha256": "472f22b282c41f6021e588b7d0ad19fb0df774ea7705f501bfa2055c4bb1813a",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "technical_fragments": [
+            "agent.py",
+            "get_github_repo"
+          ],
+          "unsupported": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e4-q1",
+          "fragments": [
+            "agent.py",
+            "get_github_repo"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "baseline",
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "trial": 1,
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q1",
+          "technical_fragments": [],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service",
+            "bublik-day18.service.example",
+            "journalctl -u bublik-day18 -f",
+            "sudo systemctl daemon-reload",
+            "sudo systemctl enable --now bublik-day18",
+            "sudo systemctl status bublik-day18",
+            "systemctl daemon-reload",
+            "systemctl enable --now bublik-day18",
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "technical_fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ],
+          "unsupported": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "baseline",
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "trial": 2,
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q1",
+          "technical_fragments": [],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service",
+            "bublik-day18.service.example",
+            "journalctl -u bublik-day18 -f",
+            "sudo systemctl daemon-reload",
+            "sudo systemctl enable --now bublik-day18",
+            "sudo systemctl status bublik-day18",
+            "systemctl daemon-reload",
+            "systemctl enable --now bublik-day18",
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "technical_fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ],
+          "unsupported": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "baseline",
+      "job_key": "c35d0b50e44357904975cb5fde46e42bd4766f87a58ba6793f34e6f6de3ed076",
+      "trial": 3,
+      "raw_answer_sha256": "97c8892db6889eef3dd0bb18fa319ff31e9ca157e5103d0c5f021b6e2c6102a1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q1",
+          "technical_fragments": [],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service",
+            "bublik-day18.service.example",
+            "journalctl -u bublik-day18 -f",
+            "sudo systemctl daemon-reload",
+            "sudo systemctl enable --now bublik-day18",
+            "sudo systemctl status bublik-day18",
+            "systemctl daemon-reload",
+            "systemctl enable --now bublik-day18",
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "technical_fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ],
+          "unsupported": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c4",
+          "quote_id": "e2-q6",
+          "fragments": [
+            "GITHUB_TOKEN",
+            "api.github.com"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "baseline",
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "trial": 1,
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "technical_fragments": [
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "summarize_repository"
+          ],
+          "unsupported": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "fragments": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "fragments": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "baseline",
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "trial": 2,
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "technical_fragments": [
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "summarize_repository"
+          ],
+          "unsupported": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "fragments": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "fragments": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "baseline",
+      "job_key": "a65bc574d6c2024a4f9641021b4827f8dda7798f4bccd9cb6a1afa297c68a397",
+      "trial": 3,
+      "raw_answer_sha256": "28a934e69e02391d999636343e84ca1944174f0e9e40291c2580579e1dbfbdbc",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "technical_fragments": [
+            "search_repository",
+            "search_repository(owner, repo)",
+            "summarize_repository",
+            "summarize_repository(repository)"
+          ],
+          "unsupported": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "save_report",
+            "save_report(summary)",
+            "summarize_repository"
+          ],
+          "unsupported": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c2",
+          "quote_id": "e2-q1",
+          "fragments": [
+            "search_repository(owner, repo)",
+            "summarize_repository(repository)"
+          ]
+        },
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e2-q2",
+          "fragments": [
+            "save_report(summary)"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-10",
+      "profile": "baseline",
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "trial": 1,
+      "raw_answer_sha256": "fd6de0604ea2590b55602a0a70f5be2c27565c1a63a80fc5b6bc4291128c1e46",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "technical_fragments": [],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "BUBLIK_DB_PATH",
+            "journalctl",
+            "main.py"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": true,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-10",
+      "profile": "baseline",
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "trial": 2,
+      "raw_answer_sha256": "fd6de0604ea2590b55602a0a70f5be2c27565c1a63a80fc5b6bc4291128c1e46",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "technical_fragments": [],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "BUBLIK_DB_PATH",
+            "journalctl",
+            "main.py"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": true,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-10",
+      "profile": "baseline",
+      "job_key": "81a08f4cfb6104f42f178dfd12f947a5b3c81523f695acade2c2904fbcdc35c6",
+      "trial": 3,
+      "raw_answer_sha256": "967aaf8b3a3e1dbd4f9a7cb19b86a95ae98ff741093c97c1a6c0898a3dcab75b",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "/etc/systemd/system/bublik-day18.service",
+            "bublik-day18.service"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "BUBLIK_DB_PATH",
+            "main.py"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c4",
+          "quote_id": "e3-q6",
+          "technical_fragments": [],
+          "unsupported": []
+        }
+      ],
+      "issues": [
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": true,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "baseline",
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "trial": 1,
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "baseline",
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "trial": 2,
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "baseline",
+      "job_key": "9d5042378dbf5ff9576b67d757a489a987079055d9cb66aeb53d4bbcad5058bf",
+      "trial": 3,
+      "raw_answer_sha256": "8664d0f762c634c2f2c1dc86e117f9a8c83bbfcecaf525ea3258414d72b44baf",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "base-06",
+      "profile": "focused-v3-q4",
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "trial": 1,
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-06",
+      "profile": "focused-v3-q4",
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "trial": 2,
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-06",
+      "profile": "focused-v3-q4",
+      "job_key": "814d3e07297c78095f6650c6e25139765c1b676e6451d044e2b07b59e7d2cd07",
+      "trial": 3,
+      "raw_answer_sha256": "4acb72f837e47a0be6dfc6fe7b3ac5a0befb5836b429fa9b895c9d6096fd71fe",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q2",
+          "technical_fragments": [
+            "get_github_repo"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "focused-v3-q4",
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "trial": 1,
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "focused-v3-q4",
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "trial": 2,
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-07",
+      "profile": "focused-v3-q4",
+      "job_key": "fa77097b21b50d80463e74dc5b934548b714e0e3525124f724812951568230a7",
+      "trial": 3,
+      "raw_answer_sha256": "479c71cab9a006afcd652ef1c5866f24d63945fb34b4412799eeb186db2160d1",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e2-q2",
+          "technical_fragments": [
+            "forks",
+            "open_issues",
+            "stars",
+            "worker.py"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "focused-v3-q4",
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "trial": 1,
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "search_repository",
+            "summarize_repository"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "focused-v3-q4",
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "trial": 2,
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "search_repository",
+            "summarize_repository"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "base-08",
+      "profile": "focused-v3-q4",
+      "job_key": "62b36984a83535642e3f9f1d6e698668934a937226fac20f2721a23fe3d264ff",
+      "trial": 3,
+      "raw_answer_sha256": "887e27af6a9d8724de59a2c3530b22df44334a4e6456ce8fe72eb384392cfe31",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q1",
+          "technical_fragments": [
+            "save_report",
+            "search_repository",
+            "summarize_repository"
+          ],
+          "unsupported": []
+        }
+      ],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": null,
+      "decision": "ready_for_manual_review"
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "focused-v3-q4",
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "trial": 1,
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "focused-v3-q4",
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "trial": 2,
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "negative-03",
+      "profile": "focused-v3-q4",
+      "job_key": "f1d9e787f7ee66eeae193b59a9ece39c8976ba565c7c252c6b7388424d8b44d3",
+      "trial": 3,
+      "raw_answer_sha256": "36b3f4dd3bfe923d5e61ff03f364a785fe4d340879d4d49dc2935712282ab910",
+      "checks": [],
+      "issues": [],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "decision": "ready_for_manual_review",
+      "coverage": null,
+      "note": "Refusal remains unchanged; a human must assess whether evidence was sufficient."
+    },
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "trial": 1,
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "journalctl",
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "journalctl -u bublik-day18 -f"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "technical_fragments": [
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": [
+            "systemctl status bublik-day18"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "fragments": [
+            "systemctl status bublik-day18"
+          ]
+        },
+        {
+          "kind": "process_status_is_not_execution_proof",
+          "slot": "c3",
+          "quote_id": "e1-q6"
+        },
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "recurrence",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": false,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "trial": 2,
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "journalctl",
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "journalctl -u bublik-day18 -f"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "technical_fragments": [
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": [
+            "systemctl status bublik-day18"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "fragments": [
+            "systemctl status bublik-day18"
+          ]
+        },
+        {
+          "kind": "process_status_is_not_execution_proof",
+          "slot": "c3",
+          "quote_id": "e1-q6"
+        },
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "recurrence",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": false,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    },
+    {
+      "case_id": "base-10",
+      "profile": "focused-v3-q4",
+      "job_key": "34064bff8c6f26a84c2973d4646536d9838b4c6292fd6bc5f0145ad8ec195779",
+      "trial": 3,
+      "raw_answer_sha256": "0f28afb6c3aeffa028bdef235bdd6843d608c7c378eb96bf84d10067d83fb510",
+      "checks": [
+        {
+          "slot": "c1",
+          "quote_id": "e1-q5",
+          "technical_fragments": [
+            "journalctl",
+            "systemctl"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c2",
+          "quote_id": "e3-q5",
+          "technical_fragments": [
+            "journalctl -u bublik-day18 -f"
+          ],
+          "unsupported": []
+        },
+        {
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "technical_fragments": [
+            "systemctl status bublik-day18"
+          ],
+          "unsupported": [
+            "systemctl status bublik-day18"
+          ]
+        }
+      ],
+      "issues": [
+        {
+          "kind": "unsupported_technical_fragment",
+          "slot": "c3",
+          "quote_id": "e1-q6",
+          "fragments": [
+            "systemctl status bublik-day18"
+          ]
+        },
+        {
+          "kind": "process_status_is_not_execution_proof",
+          "slot": "c3",
+          "quote_id": "e1-q6"
+        },
+        {
+          "kind": "incomplete_periodic_procedure",
+          "missing": [
+            "execution_result",
+            "recurrence",
+            "process_state"
+          ]
+        }
+      ],
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "coverage": {
+        "kind": "conservative_lexical_procedure_check",
+        "process_state": false,
+        "logs": true,
+        "execution_result": false,
+        "recurrence": false,
+        "periodic_requested": true
+      },
+      "decision": "blocked"
+    }
+  ]
+}

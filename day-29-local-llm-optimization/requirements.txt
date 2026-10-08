@@ -1,0 +1,3 @@
+# RAG runtime imports use the standard library. Process sampling needs psutil.
+psutil>=5.9,<8
+

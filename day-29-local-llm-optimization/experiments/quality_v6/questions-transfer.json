@@ -1,0 +1,38 @@
+[
+  {
+    "id": "quality-transfer-01",
+    "question": "How can I verify on a VPS that the Day 18 worker repeatedly produces and persists repository snapshots?",
+    "expectation": "A complete procedure separates process state from recurring execution and persisted snapshots; each claim must have direct evidence.",
+    "answerable": true,
+    "expected_terms": [
+      "systemctl",
+      "journalctl"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md",
+      "day-18-scheduled-mcp/README.ru.md"
+    ],
+    "split": "evaluation"
+  },
+  {
+    "id": "quality-transfer-02",
+    "question": "Как на Day 20 проверить, что сохранённый отчёт совпадает с рассчитанной сводкой, и при каком условии агент сообщает об успехе?",
+    "expectation": "Explain reading the saved report and verification against the original summary, then success only after verification.",
+    "answerable": true,
+    "expected_terms": [
+      "read_report",
+      "verify_report"
+    ],
+    "expected_term_groups": [
+      [
+        "verified",
+        "провер"
+      ]
+    ],
+    "expected_sources": [
+      "day-20-mcp-orchestration/README.md",
+      "day-20-mcp-orchestration/README.ru.md"
+    ],
+    "split": "evaluation"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "profile_name": "focused-v3-q4",
+  "settings": {
+    "model": "qwen2.5:14b",
+    "temperature": 0,
+    "max_tokens": 1024,
+    "num_ctx": 8192,
+    "prompt": "compact"
+  },
+  "verified_quantization": "Q4_K_M",
+  "task_template": "experiments/focused_v3/template.py:FOCUSED",
+  "launcher": "experiments/focused_v3/main.py",
+  "approved_scope": "Short factual repository lookup and unsupported-question abstention",
+  "approved_case_ids": [
+    "base-06",
+    "base-07",
+    "base-08",
+    "negative-03"
+  ],
+  "weights_fine_tuned": false,
+  "temperature_isolated_effect_measured": false,
+  "procedure_templates_experimental": [
+    "experiments/task_v4",
+    "experiments/task_v5",
+    "experiments/quality_v6",
+    "experiments/quality_v7"
+  ],
+  "measurement_report": "reports/check/control-v5.json",
+  "manual_review": "review/manual-review.json",
+  "procedure_quality_status": "v6_manual_fail_v7_live_and_transfer_pending",
+  "v7_procedure_contract": "Local evidence selections plus explicit application source-extractive rendering"
+}

@@ -1,0 +1,340 @@
+{
+  "protocol": "procedure-selection-quality-v7",
+  "origin": "offline_reanalysis_of_sealed_observations",
+  "source_report": "day-29-local-llm-optimization/reports/check/quality-transfer-v7.json",
+  "source_report_sha256": "bd2ed154d5d725d14a775a04a100313010b90ccf12bbcf8f631692805627df06",
+  "audit_policy_sha256": "2beadf20fbbc07305258234607ccb4ed96c2576896b09ae7c4f3bbc64e4d24c4",
+  "source_responses_modified": false,
+  "additional_model_calls": 0,
+  "human_semantic_review_required": true,
+  "semantically_verified": false,
+  "state": "completed",
+  "automatic_publication_allowed": false,
+  "missing_observations": 0,
+  "limitations": [
+    "The procedural model selects evidence; application-owned rendering is not a free-text LLM answer.",
+    "Source units and role candidates use conservative lexical extraction; relevance and adequacy need manual review.",
+    "Legacy lexical coverage is tightened; previous audits and original responses remain historical evidence."
+  ],
+  "summary": {
+    "focused-v3-q4": {
+      "observations": 6,
+      "blocked": 0,
+      "ready_for_manual_review": 6
+    }
+  },
+  "observations": [
+    {
+      "case_id": "quality-v7-transfer-01",
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "trial": 1,
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "contract": "periodic-evidence-selection-v7-en",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1245,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "trial": 1,
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "contract": "periodic-evidence-selection-v7-ru",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1419,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    },
+    {
+      "case_id": "quality-v7-transfer-01",
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "trial": 2,
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "contract": "periodic-evidence-selection-v7-en",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1245,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "trial": 2,
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "contract": "periodic-evidence-selection-v7-ru",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1419,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    },
+    {
+      "case_id": "quality-v7-transfer-01",
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "trial": 3,
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "contract": "periodic-evidence-selection-v7-en",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1245,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "trial": 3,
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "contract": "periodic-evidence-selection-v7-ru",
+      "answer_origin": "application_source_extractive",
+      "model_output_kind": "four_evidence_selections",
+      "source_responses_modified": false,
+      "rendered_answer_characters": 1419,
+      "human_semantic_review_required": true,
+      "semantically_verified": false,
+      "automatic_publication_allowed": false,
+      "issues": [],
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      },
+      "selection_errors": [],
+      "model_abstained": false,
+      "required_roles_present": true,
+      "rendered_response_reproducible": true,
+      "decision": "ready_for_manual_review",
+      "note": "Application rendering is explicit. Complete role coverage is not a universal semantic entailment proof."
+    }
+  ]
+}

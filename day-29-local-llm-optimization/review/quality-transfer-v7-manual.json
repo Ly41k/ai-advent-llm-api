@@ -1,0 +1,342 @@
+{
+  "kind": "independent_assistant_semantic_review",
+  "reviewer": "Codex, using supplied original JSON and repository sources",
+  "source_report": "reports/check/quality-transfer-v7.json",
+  "source_report_sha256": "bd2ed154d5d725d14a775a04a100313010b90ccf12bbcf8f631692805627df06",
+  "source_responses_modified": false,
+  "additional_model_calls": 0,
+  "verdict": "PASS",
+  "passed_observations": 6,
+  "total_observations": 6,
+  "cases_frozen_before_transfer_run": true,
+  "frozen_v7_files_sha256": {
+    "guard7.py": "00710105dea451737883162ee50358ba1eca04b4a34fa87e6c5d36ac9c46f49c",
+    "http7.py": "d828d2ff1a4b748b36ce3d093020569bcb7a17b52d61c795a927d90a16a03cf9",
+    "main.py": "0971466ab9146cf2b94c21d47478ce632ef65b46aa19e86d8de25c2e986f972b",
+    "selection7.py": "90d985377b6456c5c278280c91a60124a11b1928821125689e46e37327892dfb",
+    "test_quality_v7.py": "35c59f5aebbe96de7f5810d1bf05fe5e05e6ce987912b6a417ab188201a949f8",
+    "questions-transfer.json": "51e5d60cdf49cf30b997c184c8cf15fd21c42b66022a369cee41fb8c20a4010a"
+  },
+  "scope": "Two previously unrun Russian/English formulations of the Day 18 periodic VPS snapshot verification task.",
+  "answer_contract": "Local model evidence selections plus deterministic application source-extractive rendering.",
+  "limitations": [
+    "Small within-task transfer set, not a universal benchmark.",
+    "No new matched baseline or Q5 procedural transfer measurements.",
+    "Application rendering is not free-text model generation.",
+    "The actual VPS was not inspected."
+  ],
+  "case_summary": [
+    {
+      "case_id": "quality-v7-transfer-01",
+      "question": "How can I verify on a VPS that the Day 18 worker repeatedly produces and persists repository snapshots?",
+      "verdict": "PASS",
+      "passed": 3,
+      "total": 3,
+      "identical_response_within_three_trials": true,
+      "generation_wall_seconds": [
+        13.496094207977876,
+        6.034261542139575,
+        6.067203625105321
+      ],
+      "median_generation_wall_seconds": 6.067203625105321
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "question": "Как убедиться, что фоновые наблюдения Day 18 на VPS выполняются повторно, а не останавливаются после первого снимка?",
+      "verdict": "PASS",
+      "passed": 3,
+      "total": 3,
+      "identical_response_within_three_trials": true,
+      "generation_wall_seconds": [
+        12.636531417025253,
+        6.1047643749043345,
+        6.049330125097185
+      ],
+      "median_generation_wall_seconds": 6.1047643749043345
+    }
+  ],
+  "observations": [
+    {
+      "case_id": "quality-v7-transfer-01",
+      "trial": 1,
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      }
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "trial": 1,
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      }
+    },
+    {
+      "case_id": "quality-v7-transfer-01",
+      "trial": 2,
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      }
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "trial": 2,
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      }
+    },
+    {
+      "case_id": "quality-v7-transfer-01",
+      "trial": 3,
+      "profile": "focused-v3-q4",
+      "job_key": "2b279f6dab82761f038f0e83e5c9f17a1324c8d952e638af3e20af37fa49fd91",
+      "raw_answer_sha256": "4b7825e5b6c1b0e879db15c8c131c85e8e5c51d201b9ff7eb7c6b0e12bffd8b7",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e2-q5-status-7",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e2-q5-logs-8",
+          "original_quote_id": "e2-q5",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e2-q1-execution-5",
+          "original_quote_id": "e2-q1",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "An independent worker polls due jobs, stores snapshots in SQLite and writes an aggregate summary to stdout after each run."
+        },
+        "recurrence": {
+          "quote_id": "e2-q2-recurrence-6",
+          "original_quote_id": "e2-q2",
+          "excerpt": 2,
+          "source": "day-18-scheduled-mcp/README.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` creates or updates a recurring job (1–10080 minutes), due immediately.\n- `worker.py` collects `stars`, `forks`, and `open_issues` using the GitHub REST API, storing snapshots and failures in SQLite. Failures retry on the next interval.\n- `get_github_summary(owner, repo, limit)` returns the most recent values and changes since the oldest of the selected samples.\n- `list_scheduled_jobs()` shows next run times and errors."
+        }
+      }
+    },
+    {
+      "case_id": "quality-v7-transfer-02",
+      "trial": 3,
+      "profile": "focused-v3-q4",
+      "job_key": "03e73cf9126cb4995e79eb0340e8bf9ed79d66282e3b384e11c5f212d7be038e",
+      "raw_answer_sha256": "fc32b1e30def1c6a17e22bb54769a3b73c42d28a52c6a92625770e6f20d56198",
+      "verdict": "PASS",
+      "criteria": {
+        "question_language": "PASS",
+        "source_exactness_and_bindings": "PASS",
+        "question_relevance": "PASS",
+        "observation_commands_only": "PASS",
+        "execution_and_recurrence_coverage": "PASS",
+        "status_distinguished_from_execution": "PASS",
+        "no_asserted_actual_vps_operation": "PASS"
+      },
+      "selected_evidence": {
+        "status": {
+          "quote_id": "e1-q5-status-3",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "sudo systemctl status bublik-day18"
+        },
+        "logs": {
+          "quote_id": "e1-q5-logs-4",
+          "original_quote_id": "e1-q5",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "journalctl -u bublik-day18 -f"
+        },
+        "execution": {
+          "quote_id": "e1-q1-execution-1",
+          "original_quote_id": "e1-q1",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "Отдельный worker постоянно проверяет расписание, сохраняет снимки в SQLite и печатает агрегированную сводку в журнал после каждого запуска."
+        },
+        "recurrence": {
+          "quote_id": "e1-q2-recurrence-2",
+          "original_quote_id": "e1-q2",
+          "excerpt": 1,
+          "source": "day-18-scheduled-mcp/README.ru.md",
+          "quote": "- `schedule_github_summary(owner, repo, interval_minutes)` создаёт или обновляет расписание (1–10080 минут); первый сбор назначается сразу.\n- `worker.py` берёт просроченные задания, вызывает GitHub REST API и сохраняет `stars`, `forks`, `open_issues` и время в SQLite. Ошибки также записываются; повторный запуск будет через заданный интервал.\n- `get_github_summary(owner, repo, limit)` возвращает количество снимков, последнее состояние и изменения относительно самого старого из выбранных снимков.\n- `list_scheduled_jobs()` возвращает текущее расписание, время следующего запуска и ошибку."
+        }
+      }
+    }
+  ]
+}

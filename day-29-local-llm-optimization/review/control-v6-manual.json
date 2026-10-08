@@ -1,0 +1,51 @@
+{
+  "kind": "independent_assistant_manual_review",
+  "source_report": "reports/check/control-v6.json",
+  "source_report_sha256": "08b7a32d09743ff8cede05ea4ae026bd27bd89b57dc492f1efa4734762a9aea3",
+  "source_responses_modified": false,
+  "review_model_api_calls": 0,
+  "scope": "Three new optimized base-10 responses; other 27 observations unchanged from V5.",
+  "verdict": "FAIL",
+  "semantic_quote_binding": "All four claims are directly supported, but the procedure fails task/language/completeness.",
+  "observations": [
+    {
+      "job_key": "0486d3ba143ee4d83583977e8341280542e2082a369a5dc01814bc6c9aa208f5",
+      "trial": 1,
+      "raw_answer_sha256": "c2439f4e4a5b7194ea64dbda16acf5baee690621c66ba9fe4d00f142b22bc4e0",
+      "verdict": "FAIL",
+      "issues": [
+        "English prose for a Russian question.",
+        "c1 includes daemon-reload and enable instead of only observation.",
+        "c2 describes output but does not instruct verification of recurring execution.",
+        "c3 retries after failure is not a recurring-success verification step.",
+        "c4 restart/downtime persistence is not a complete procedure for the asked ordinary periodic operation."
+      ]
+    },
+    {
+      "job_key": "0486d3ba143ee4d83583977e8341280542e2082a369a5dc01814bc6c9aa208f5",
+      "trial": 2,
+      "raw_answer_sha256": "c2439f4e4a5b7194ea64dbda16acf5baee690621c66ba9fe4d00f142b22bc4e0",
+      "verdict": "FAIL",
+      "issues": [
+        "English prose for a Russian question.",
+        "c1 includes daemon-reload and enable instead of only observation.",
+        "c2 describes output but does not instruct verification of recurring execution.",
+        "c3 retries after failure is not a recurring-success verification step.",
+        "c4 restart/downtime persistence is not a complete procedure for the asked ordinary periodic operation."
+      ]
+    },
+    {
+      "job_key": "0486d3ba143ee4d83583977e8341280542e2082a369a5dc01814bc6c9aa208f5",
+      "trial": 3,
+      "raw_answer_sha256": "c2439f4e4a5b7194ea64dbda16acf5baee690621c66ba9fe4d00f142b22bc4e0",
+      "verdict": "FAIL",
+      "issues": [
+        "English prose for a Russian question.",
+        "c1 includes daemon-reload and enable instead of only observation.",
+        "c2 describes output but does not instruct verification of recurring execution.",
+        "c3 retries after failure is not a recurring-success verification step.",
+        "c4 restart/downtime persistence is not a complete procedure for the asked ordinary periodic operation."
+      ]
+    }
+  ]
+}

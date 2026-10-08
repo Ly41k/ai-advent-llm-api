@@ -1,0 +1,32 @@
+[
+  {
+    "id": "quality-v7-transfer-01",
+    "question": "How can I verify on a VPS that the Day 18 worker repeatedly produces and persists repository snapshots?",
+    "expectation": "Separate service status, logs, execution output and recurring stored observations; verify exact evidence for each step.",
+    "answerable": true,
+    "expected_terms": [
+      "systemctl",
+      "journalctl"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md",
+      "day-18-scheduled-mcp/README.ru.md"
+    ],
+    "split": "evaluation"
+  },
+  {
+    "id": "quality-v7-transfer-02",
+    "question": "Как убедиться, что фоновые наблюдения Day 18 на VPS выполняются повторно, а не останавливаются после первого снимка?",
+    "expectation": "Inspect recurring execution and persisted results against scheduling; do not treat one snapshot or running process as proof.",
+    "answerable": true,
+    "expected_terms": [
+      "systemctl",
+      "journalctl"
+    ],
+    "expected_sources": [
+      "day-18-scheduled-mcp/README.md",
+      "day-18-scheduled-mcp/README.ru.md"
+    ],
+    "split": "evaluation"
+  }
+]
