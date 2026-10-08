@@ -54,7 +54,7 @@ The repository currently contains **Days 1–28**. Each `day-XX-...` directory i
 - **Day 25:** wrap the grounded RAG protocol in a persistent local chat. Full history and task memory survive restarts, every ordinary question performs fresh retrieval, and long conversations are evaluated with durable checkpoints and per-turn provenance.
 - **Day 26:** a standalone module verifies a downloaded Ollama model and sends three prompts of different difficulty. The same inputs can be sent to Groq; the application validates responses and saves JSON/Markdown reports.
 - **Day 27:** integrate local inference into Revik, a practical Kotlin pre-commit CLI. Detekt checks staged code using the project configuration; Qwen explains findings. The hook permits or blocks the commit and produces linked reports. Russian/English and three reviewer tones are configurable.
-- **Day 28:** reuse the Week 6 index for local RAG and compare local/cloud generation on identical retrieved context. Repeated trials record citation/quality checks, speed and stability; live metrics require an Ollama run.
+- **Day 28:** reuse the Week 6 index for fully local RAG, retain an initial paired Groq comparison and evaluate selective local/OpenAI fixes. Live reports record quality, speed, exact stability and manual citation support.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -63,8 +63,8 @@ Days 21–25 and Day 28 use the shared Day 21 knowledge index. Day 25 does not t
 ## Requirements
 
 - Python **3.13** is the project target.
-- A Groq key is required only by lessons that explicitly call Groq.
-- Internet access is required for Groq and live GitHub API calls.
+- A Groq key is required only by lessons that explicitly call Groq. Day 28 optionally supports OpenAI with `OPENAI_API_KEY`; local operation needs neither key.
+- Internet access is required for Groq, OpenAI and live GitHub API calls.
 - Local retrieval/RAG lessons and Days 26–28 use **Ollama**.
 - Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
@@ -78,7 +78,7 @@ Days 21–25 and Day 28 use the shared Day 21 knowledge index. Day 25 does not t
 | 24–25 | `bge-m3` | `qwen2.5:14b` in the current grounded/live profile |
 | 26 | Not required | `qwen2.5:7b` default; `qwen2.5:14b` in the verified run |
 | 27 | Not required | `qwen2.5:14b` default; configurable downloaded local model |
-| 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq comparison |
+| 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq/OpenAI comparison |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -150,7 +150,7 @@ Later lessons use specialized entry points:
 | 26 | `python day-26-local-llm/main.py demo --local-model qwen2.5:14b` | Three real local requests |
 | 26 | `python day-26-local-llm/main.py compare --local-model qwen2.5:14b` | Identical prompts in Ollama and Groq |
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
-| 28 | `python day-28-local-rag/main.py evaluate --repeats 3` | Local RAG quality, speed and stability reports |
+| 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 
 ## Day 21 shared knowledge index
 
@@ -168,7 +168,7 @@ The indexed corpus rule remains intentionally narrow:
 
 README files from Days 21–28 are not automatically added to that corpus. Days 26–27 do not use this index.
 
-The index stores a repository/corpus revision. A new commit or a change to the **root README files** can make an existing index stale. After updating the root README, rebuild before strict verification or a Day 24/25/28 live run:
+The index stores document digests and a corpus revision. A change to the **root README files** changes indexed content. After installing these updated root READMEs, rebuild before the next strict verification or Day 24/25/28 live run. This does not alter saved historical reports. Day 28 accepts a Git commit alone when the indexed corpus fingerprint is unchanged:
 
 ```bash
 python day-21-document-indexing/main.py build
@@ -295,20 +295,41 @@ Commit Revik's source, examples and template in the course repository. In the wo
 
 ## Day 28 — local LLM + RAG
 
-The [Day 28 module](day-28-local-rag/README.md) opens the Day 21 index read-only and reuses Day 23 filtering and Day 26 HTTP clients. `ask` and `evaluate` use downloaded local models without a cloud key; `compare` adds Groq when available, with identical prompts/excerpts per pair. Reports record exact citation checks, heuristic quality checks, retrieval/generation timing and repeated-response stability.
+The [Day 28 module](day-28-local-rag/README.md) reuses the Week 6 / Day 21 index read-only, local bge-m3 embeddings, Day 23 retrieval/filtering and downloaded Qwen through Ollama. `ask` and `evaluate` require no cloud key. `compare` optionally adds Groq or OpenAI. A fresh pair shares the first prompt and retrieved context; with two-stage synthesis, each provider's final evidence/prompt can differ.
+
+Quick local demonstration:
 
 ```bash
-python day-28-local-rag/test_day28.py -v
 python day-28-local-rag/main.py doctor
-python day-28-local-rag/main.py evaluate --repeats 3
-python day-28-local-rag/main.py compare --repeats 3
+python day-28-local-rag/main.py ask \
+  "Какой процесс выполняет фоновые задания на Day 18?" \
+  --repeats 1 --max-tokens 512 \
+  --output day-28-local-rag/reports/check/video-local.json
+python day-28-local-rag/verify_report.py \
+  day-28-local-rag/reports/check/video-local.json
 ```
 
-Offline tests verify the implementation. Real model quality/speed/stability and disconnected-internet operation still require a live run with Ollama and `knowledge.db`; no live Day 28 benchmark is claimed here. See the [validation checklist](day-28-local-rag/VALIDATION.ru.md).
+`doctor` does not generate an answer; zero attempts and `local_rag_verified=false` are expected. A successful local request records answer/source evidence, loading confirmation and `local_rag_verified=true`. Models and index must be prepared before disconnecting internet access. JSON records the local endpoints and generation; the recording/environment must show the actual network disconnection.
+
+Live evidence is committed in [reports/accepted](day-28-local-rag/reports/accepted/):
+
+| Run | Recorded result | Generation median |
+|---|---|---:|
+| Original V2, 20 cases ×3 per provider | Local: 60/60 valid, heuristic quality 48/60; Groq: 48/60 valid, quality 38/48 | Local 54.53 s / Groq 0.82 s |
+| V11, one corrected local isolation case ×3 | Quality/manual review 3/3; exact answer/citation stability 1/1 group; two calls per trial | 43.03 s, both stages |
+| V12, three OpenAI cases ×3 | 9/9 valid without API errors; initial quality 5/9 | 2.94 s |
+| V16, corrected OpenAI invariant case ×3 | Quality/manual review 3/3; citations identical, wording varies | 2.84 s |
+| Published video-local, one custom local question | Valid cited answer; local model loaded; no predefined heuristic rubric | 20.03 s (pipeline 21.40 s) |
+
+The V2 quality scores are historical; validity includes application abstentions. Later selective successes across versions are retained without merging them into a fresh full-suite score. V16 exact answer stability is 0/1 group, while manual review confirms the same mechanisms and citations across three trials. Its cloud-only measurement is not a fresh speed comparison with the two-stage V11 local run.
+
+The reviewed V16 implementation has **71 passing offline tests**. [Local/paired results](day-28-local-rag/FINAL_REPORT.md), [OpenAI baseline](day-28-local-rag/OPENAI_RESULTS.md), [quality fixes](day-28-local-rag/QUALITY_RESULTS_V16.md) and [final focused stability](day-28-local-rag/STABILITY_RESULTS_V16.md) document scope and limitations. Local RAG, cloud comparison and quality/speed/stability evaluation are complete; no full rerun is required for submission.
+
+For an optional cloud run use `compare --cloud-provider openai` with `OPENAI_API_KEY`, or the default Groq provider with `GROQ_API_KEY`. Keys can come from the existing root `.env`; local commands do not load them. The default local mode stays `baseline`; the specialized `phases` mode is only for before/after questions. See the Day 28 README for commands and call counts.
 
 ## Tests
 
-The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not spend Groq tokens unless a command explicitly performs a live model/API run.
+The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.
 
 ```bash
 python -m unittest discover -s day-10-context-strategies -p 'test_*.py' -v
@@ -329,12 +350,13 @@ python day-24-citations-grounding/test_day24.py -v
 python day-25-rag-chat/test_day25.py -v
 python day-26-local-llm/test_day26.py -v
 python -m unittest discover -s day-27-local-llm-integration/tests -v
+python -m unittest discover -s day-28-local-rag -p 'test*28.py'
 ```
 
 ## Data and limitations
 
 - Day 27 is a local, bypassable pre-commit check. It analyzes entire changed files without type resolution and does not replace KMP compilation, Android Lint or CI. Reviewer style affects explanations only.
-- Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent.
+- Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent. Day 28 keeps selected original JSON in `reports/accepted/` and audits in `reports/verified/`; working `reports/check/` and recording `reports/video/` are ignored.
 - Day 18 worker output goes to stdout or a service journal; it does not automatically push a message back into a chat.
 - Days 21–25 are local RAG experiments, not a hosted multi-user service.
 - Day 25 is a local single-user CLI. It does not execute arbitrary user code or call external MCP tools from the chat.
