@@ -62,9 +62,17 @@ API без нового поля сохраняет прежнее поведе�
 Инструкция направляет Qwen, но не гарантирует язык произвольного ответа.
 FTS5 остаётся лексическим: semantic multilingual retrieval не добавлен.
 
-0.10.3 усиливает языковую подсказку с явным приоритетом над языковыми пожеланиями вопроса к последнему вопросу только для inference.
+0.10.3 добавляет к последнему вопросу подсказку только для inference: она направляет
+Qwen следовать выбранному языку ответа даже при противоположной просьбе пользователя.
 Исходные сообщения не изменяются; подсказка сохраняется в snapshot и входит в
 бюджет контекста. [Установка и проверка](LANGUAGE_EXPLICIT_HINT_FIX.ru.md).
+
+Проверено: [229/229 offline-тестов](reports/verified/languages-policy-v4-offline-20261011.json)
+и [33/33 live-проверок HTTPS/Qwen на Mac](reports/verified/languages-policy-v4-live-mac-20261011.json).
+Четыре завершённые генерации покрыли RU/EN без RAG и с RAG в следующем сообщении,
+противоположные языковые просьбы, фиксацию языка/входа модели и сохранение исходных сообщений.
+Оператор отдельно подтвердил переключение языков через UI и работу на телефоне.
+Live JSON checker не проверял физические телефоны и локализацию браузера.
 
 ## Устройство сервиса
 
@@ -249,14 +257,15 @@ Liveness сам по себе не доказывает готовность Qwe
 ## Проверки и документация
 
 ```bash
-python scripts/verify_report.py reports/verified/languages-policy-v2-offline-20261011.json
+python scripts/verify_report.py reports/verified/languages-policy-v4-offline-20261011.json
+python scripts/verify_report.py reports/verified/languages-policy-v4-live-mac-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-Первый вызов сверяет новые221/221 offline проверок с81 source files,
-второй запускает полный текущий offline suite и создаёт новый отчёт. Прежние
-RAG198/198, 143/143 и storage-only69/69 отчёты остаются историческими: новый RAG меняет runtime
-и общий manifest. Хеши не являются подписью или доказательством сети/LLM.
+Первые два вызова сверяют текущие offline (229 тестов) и live (33 проверки)
+отчёты с 86 файлами исходников. Третий запускает полный текущий offline suite
+и создаёт новый отчёт. Прежние отчёты языковых политик, RAG198/198, 143/143
+и storage-only69/69 остаются историческими: их manifests относятся к прежним версиям. Хеши не являются подписью или доказательством сети/LLM.
 Browser/PWA tests требуют `requirements.browser.lock` и Chromium. Исходные успешные
 и неуспешные JSON в `reports/verified/` не перезаписаны.
 

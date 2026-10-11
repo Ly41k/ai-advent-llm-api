@@ -159,7 +159,7 @@ Later lessons use specialized entry points:
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json` | Verify the new221/221 offline regression, languages and RAG memory checks; see Day 30 README for server setup |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Verify the current 229/229 offline regression, languages and RAG memory checks; see Day 30 README for server setup |
 
 ## Day 21 shared knowledge index
 
@@ -372,7 +372,12 @@ See [final measurements](day-29-local-llm-optimization/FINAL_REPORT.ru.md), [sel
 are separate, saved per user and shared across devices. SQLite schema 3 adds
 preferences; archive/restore accepts schemas 2/3 without replacing originals.
 See [upgrade and language checks](day-30-private-ai-service/LANGUAGES.ru.md).
-Offline regression: 221/221. New RU/EN Qwen/device checks remain separate.
+Current validation: [229/229 offline checks](day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json)
+and [33/33 live HTTPS/Qwen checks on the Mac](day-30-private-ai-service/reports/verified/languages-policy-v4-live-mac-20261011.json).
+Four live generations covered Russian/English replies with plain input and a RAG follow-up,
+including user instructions asking for the opposite language. The operator also confirmed
+language switching through the UI and phone use. This manual check is separate from the
+JSON report; these examples do not guarantee the language of every possible answer.
 
 After the course, **0.9.1** adds lexical RAG enabled by default in the Web UI over both sides of saved conversations,
 owner-specific SQLite FTS5 caches, role/status-aware source links, original conversation windows and immutable RAG snapshots.
@@ -415,7 +420,7 @@ From the root, with an active Python 3.13 virtualenv:
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json
+  day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json
 ```
 
 This verifies saved evidence against source hashes; it does not start the server.

@@ -56,10 +56,18 @@ Legacy API requests without this field retain previous behavior.
 An additive migration upgrades SQLite **2 → 3**; verified archives support both
 schemas and new archives include language settings. Back up before upgrading;
 the old runtime cannot reopen schema 3. See [upgrade and device checks](LANGUAGES.ru.md).
-Version 0.10.3 adds an explicit model-only language hint that overrides contrary language requests to the latest user input; its bytes
+Version 0.10.3 appends an explicit model-only hint to the latest user input, instructing
+Qwen to prioritize the selected reply language over contrary user requests. Its bytes
 are frozen and budgeted while stored messages remain original. See [update checks](LANGUAGE_EXPLICIT_HINT_FIX.ru.md).
 Language instructions guide Qwen; they do not guarantee every output.
 FTS5 remains lexical, without automatic multilingual semantic retrieval.
+
+Validation: [229/229 offline tests](reports/verified/languages-policy-v4-offline-20261011.json)
+and [33/33 live HTTPS/Qwen checks on the Mac](reports/verified/languages-policy-v4-live-mac-20261011.json).
+Four completed generations covered RU/EN plain input and RAG follow-ups, contrary
+language requests, frozen language/input metadata and saved original messages.
+The operator separately confirmed UI language switching and phone use. Physical
+phones and browser localization were not exercised by the live JSON checker.
 
 ## Architecture
 
@@ -231,12 +239,14 @@ authenticated readiness, routes, error codes and token scopes.
 ## Verification and docs
 
 ```bash
-python scripts/verify_report.py reports/verified/languages-policy-v2-offline-20261011.json
+python scripts/verify_report.py reports/verified/languages-policy-v4-offline-20261011.json
+python scripts/verify_report.py reports/verified/languages-policy-v4-live-mac-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-The first checks the new221/221 offline report against81 source files; the
-second runs the complete current offline suite and writes a new report. Earlier
+The first two commands compare the current offline report (229 tests) and live
+report (33 checks) against 86 source files; the third runs the complete current
+offline suite and writes a new report. Earlier language-policy reports,
 RAG198/198, storage-only69/69 and course143/143 reports remain historical; their full-source
 manifests need not match the new runtime. Hashes are neither
 signatures nor live network/model proof.

@@ -159,7 +159,7 @@ python day-15-controlled-transitions/main.py
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Два реальных коммита во временном репозитории и ответы локальной LLM |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | Один локальный RAG-ответ с цитатами источников |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline-проверка согласованности сохранённых доказательств V7 |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json` | Сверить новые221/221 offline regression, RU/EN и RAG memory проверки; запуск сервера — README дня 30 |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Сверить текущие 229/229 offline regression, RU/EN и RAG memory проверки; запуск сервера — README дня 30 |
 
 ## Общий индекс Дня 21
 
@@ -372,7 +372,12 @@ python day-29-local-llm-optimization/experiments/quality_v7/main.py verify \
 выбирается отдельно, сохраняется у владельца и загружается на всех устройствах.
 Schema 3 добавляет настройки; archive/restore принимает схемы 2/3 без замены
 оригиналов. [Обновление и языковые проверки](day-30-private-ai-service/LANGUAGES.ru.md).
-Offline regression: 221/221; новые Qwen/device RU/EN проверки отдельно.
+Текущая проверка: [229/229 offline-тестов](day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json)
+и [33/33 live-проверок HTTPS/Qwen на Mac](day-30-private-ai-service/reports/verified/languages-policy-v4-live-mac-20261011.json).
+Четыре реальные генерации проверили русский/английский ответ без RAG и с RAG в следующем
+сообщении, включая просьбу пользователя отвечать на противоположном языке. Оператор
+также подтвердил переключение языков через UI и работу на телефоне. Ручная проверка
+отделена от JSON-отчёта; эти примеры не гарантируют язык любого возможного ответа.
 
 После курса **0.9.1** добавляет включённый по умолчанию в Web UI RAG по обеим сторонам
 сохранённой переписки: отдельный FTS5-индекс владельца, точные источники с ролями/статусами, исходный разговор и
@@ -417,7 +422,7 @@ fallback нет.** В принятой версии0.8.0 RAG не использ
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json
+  day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json
 ```
 
 Это сверка сохранённых доказательств с хешами исходников, а не запуск сервера.
