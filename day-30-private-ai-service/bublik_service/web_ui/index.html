@@ -56,11 +56,13 @@
       <div id="message-scroll" class="message-scroll" tabindex="0" aria-label="История диалога">
         <button id="older-messages" class="quiet older" type="button" hidden>Загрузить более ранние сообщения</button>
         <section id="empty-state" class="empty-state"><span class="brand-mark" aria-hidden="true">Б</span><h2>О чём поговорим?</h2><p>Создайте диалог или откройте сохранённый.<br>Полная история остаётся на сервере.</p></section>
+        <aside id="source-preview" class="source-preview" aria-label="Исходное сообщение памяти" hidden></aside>
         <div id="messages" aria-label="Сообщения"></div>
       </div>
       <footer class="composer-panel">
         <div id="generation-info" class="generation-info" role="status"></div>
         <button id="retry-generation" class="quiet" type="button" hidden>Повторить генерацию последнего вопроса</button>
+        <label class="memory-toggle"><input id="use-memory" type="checkbox" checked> Искать в прошлых разговорах</label>
         <form id="composer" class="composer">
           <label class="sr-only" for="message-input">Сообщение</label>
           <textarea id="message-input" rows="2" placeholder="Напишите сообщение…" disabled></textarea>

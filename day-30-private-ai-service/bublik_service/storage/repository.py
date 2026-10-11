@@ -164,8 +164,8 @@ class ChatRepository:
             raise InvalidInput("invalid_history_cursor")
         with self.database.connect() as db:
             self._chat(db, owner, chat)
-            return [dict(r) for r in db.execute(
-                "SELECT m.*,g.id AS generation_id,g.attempt,g.error_code "
+            return [self._history_row(r) for r in db.execute(
+                "SELECT m.*,g.id AS generation_id,g.attempt,g.error_code,g.context_json "
                 "FROM messages m LEFT JOIN generations g ON g.assistant_message_id=m.id "
                 "WHERE m.chat_id=? AND m.sequence>? ORDER BY m.sequence LIMIT ?",
                 (chat, after_sequence, limit))]
@@ -183,10 +183,19 @@ class ChatRepository:
                 clause = " AND m.sequence<?"
             params.append(limit)
             rows = db.execute(
-                "SELECT m.*,g.id AS generation_id,g.attempt,g.error_code "
+                "SELECT m.*,g.id AS generation_id,g.attempt,g.error_code,g.context_json "
                 "FROM messages m LEFT JOIN generations g ON g.assistant_message_id=m.id "
                 "WHERE m.chat_id=?" + clause + " ORDER BY m.sequence DESC LIMIT ?", params).fetchall()
-            return [dict(r) for r in reversed(rows)]
+            return [self._history_row(r) for r in reversed(rows)]
+
+    @staticmethod
+    def _history_row(row):
+        result = dict(row)
+        context = json.loads(result.pop("context_json") or "{}")
+        # Expose only the citations, never full inference prompts/engine provenance.
+        if context.get("memory", {}).get("enabled"):
+            result["memory"] = context["memory"]
+        return result
 
     @staticmethod
     def _completed(db, chat, max_turns=100):
@@ -211,6 +220,46 @@ class ChatRepository:
                     "total_completed_turns": db.execute(
                         "SELECT count(*) FROM generations WHERE chat_id=? AND status='completed'", (chat,)).fetchone()[0]}
 
+    def memory_source(self, owner, chat, message):
+        with self.database.connect() as db:
+            self._chat(db, owner, chat)
+            row = db.execute("SELECT * FROM messages WHERE id=? AND chat_id=?",
+                             (message, chat)).fetchone()
+            if row is None:
+                raise NotFound()
+            return dict(row)
+
+    @staticmethod
+    def _memory_row(db, owner, message):
+        # Accepted user text is immutable even when its answer failed or is pending.
+        # Only immutable terminal assistant text enters retrieval snapshots.
+        return db.execute(
+            "SELECT m.* FROM messages m JOIN chats c ON c.id=m.chat_id "
+            "WHERE m.id=? AND c.owner_id=? AND m.content<>'' AND "
+            "(m.role='user' OR (m.status IN ('completed','truncated','failed','interrupted') "
+            "AND EXISTS (SELECT 1 FROM generations g WHERE g.assistant_message_id=m.id "
+            "AND g.status=m.status)))", (message, owner)).fetchone()
+
+    def memory_context(self, owner, chat, message, *, before=4, after=4):
+        """Bounded original conversation window; independent of inference budget."""
+        if not integer(before) or not integer(after) or before > 10 or after > 10:
+            raise InvalidInput("invalid_history_cursor")
+        with self.database.connect() as db:
+            self._chat(db, owner, chat)
+            anchor = db.execute("SELECT * FROM messages WHERE id=? AND chat_id=?",
+                                (message, chat)).fetchone()
+            if anchor is None:
+                raise NotFound()
+            lo, hi = max(1, anchor["sequence"] - before), anchor["sequence"] + after
+            rows = db.execute(
+                "SELECT m.*,g.id AS generation_id,g.attempt,g.error_code,g.context_json "
+                "FROM messages m LEFT JOIN generations g ON g.assistant_message_id=m.id "
+                "WHERE m.chat_id=? AND m.sequence BETWEEN ? AND ? ORDER BY m.sequence",
+                (chat, lo, hi)).fetchall()
+            return {"anchor_message_id": message, "items": [self._history_row(r) for r in rows],
+                    "has_earlier": bool(db.execute("SELECT 1 FROM messages WHERE chat_id=? AND sequence<? LIMIT 1", (chat,lo)).fetchone()),
+                    "has_later": bool(db.execute("SELECT 1 FROM messages WHERE chat_id=? AND sequence>? LIMIT 1", (chat,hi)).fetchone())}
+
     def _snapshot(self, db, chat, content, plan, profile):
         if not isinstance(plan, ContextPlan) or not isinstance(profile, ModelProfile):
             raise InvalidInput("invalid_context_plan")
@@ -224,7 +273,7 @@ class ChatRepository:
         if (count % 2 or count > len(completed)
                 or tuple(x["id"] for x in selected) != plan.history_message_ids):
             raise InvalidInput("context_not_complete_suffix")
-        return {"policy_version": plan.policy_version,
+        snapshot = {"policy_version": plan.policy_version,
                 "history_message_ids": list(plan.history_message_ids),
                 "omitted_turns": total - count // 2,
                 "input_token_upper_bound": plan.input_token_upper_bound,
@@ -232,6 +281,44 @@ class ChatRepository:
                 "messages": [{"role": "system", "content": profile.system_prompt},
                              *[{"role": x["role"], "content": x["content"]} for x in selected],
                              {"role": "user", "content": content}]}
+        if plan.memory_enabled:
+            from bublik_service.memory import memory_messages
+            owner = db.execute("SELECT owner_id FROM chats WHERE id=?", (chat,)).fetchone()[0]
+            for source in plan.memory_sources:
+                row = self._memory_row(db, owner, source.message_id)
+                if (row is None or row["chat_id"] != source.chat_id or row["sequence"] != source.sequence
+                        or row["created_at"] != source.created_at
+                        or row["role"] != source.role or row["status"] != source.status
+                        or hashlib.sha256(row["content"].encode()).hexdigest() != source.source_sha256
+                        or row["content"][source.start:source.end] != source.quote):
+                    raise InvalidInput("memory_source_mismatch")
+            snapshot["messages"][1:1] = memory_messages(plan.memory_sources)
+            snapshot["memory"] = {"enabled": True, "policy_version": plan.memory_policy,
+                                  "sources": [asdict(x) for x in plan.memory_sources],
+                                  "indexed_messages": plan.memory_indexed_messages,
+                                  "search_seconds": plan.memory_search_seconds}
+            from bublik_service.inference.context import upper_bound
+            if upper_bound(snapshot["messages"]) != plan.input_token_upper_bound:
+                raise InvalidInput("invalid_context_plan")
+        return snapshot
+
+    @staticmethod
+    def _message_payload(content, expected_revision, use_memory):
+        if type(use_memory) is not bool:
+            raise InvalidInput("invalid_memory_mode")
+        result = {"content": content, "expected_revision": expected_revision}
+        if use_memory:
+            result["use_memory"] = True
+        return result
+
+    @staticmethod
+    def _retry_payload(expected_revision, use_memory):
+        if type(use_memory) is not bool:
+            raise InvalidInput("invalid_memory_mode")
+        result = {"expected_revision": expected_revision}
+        if use_memory:
+            result["use_memory"] = True
+        return result
 
     def _admission(self, db, owner, chat, expected_revision):
         if db.execute("SELECT inference_uncertain FROM service_state WHERE id=1").fetchone()[0]:
@@ -253,7 +340,7 @@ class ChatRepository:
             self.admission_policy(db, owner)
         return current
 
-    def replay_message(self, owner, chat, content, *, expected_revision, key):
+    def replay_message(self, owner, chat, content, *, expected_revision, key, use_memory=False):
         text(content, MAX_MESSAGE_BYTES, "invalid_message")
         request_key(key)
         if not integer(expected_revision):
@@ -261,7 +348,7 @@ class ChatRepository:
         with self.database.connect() as db:
             self._chat(db, owner, chat)
             return self._replay(db, owner, "message.create:" + chat, key,
-                                {"content": content, "expected_revision": expected_revision})[0]
+                                self._message_payload(content, expected_revision, use_memory))[0]
 
     def retry_candidate(self, owner, message):
         with self.database.connect() as db:
@@ -271,7 +358,7 @@ class ChatRepository:
                 raise NotFound()
             return dict(row)
 
-    def replay_retry(self, owner, message, *, expected_revision, key):
+    def replay_retry(self, owner, message, *, expected_revision, key, use_memory=False):
         request_key(key)
         if not integer(expected_revision):
             raise InvalidInput("invalid_revision")
@@ -281,7 +368,7 @@ class ChatRepository:
             if row is None:
                 raise NotFound()
             return self._replay(db, owner, "message.retry:" + message, key,
-                                {"expected_revision": expected_revision})[0]
+                                self._retry_payload(expected_revision, use_memory))[0]
 
     def recovery_context(self):
         """Trusted coordinator only: last transition that could have set the inference gate."""
@@ -303,7 +390,7 @@ class ChatRepository:
             self._chat(db, owner, chat)
             operation = "message.create:" + chat
             replay, fingerprint = self._replay(db, owner, operation, key,
-                                              {"content": content, "expected_revision": expected_revision})
+                                              self._message_payload(content, expected_revision, context.memory_enabled))
             if replay:
                 return replay
             self._admission(db, owner, chat, expected_revision)
@@ -347,7 +434,7 @@ class ChatRepository:
             if row is None:
                 raise NotFound()
             operation = "message.retry:" + message
-            replay, fingerprint = self._replay(db, owner, operation, key, {"expected_revision": expected_revision})
+            replay, fingerprint = self._replay(db, owner, operation, key, self._retry_payload(expected_revision, context.memory_enabled))
             if replay:
                 return replay
             chat = row["chat_id"]

@@ -39,3 +39,4 @@ dist/
 # Private memory archives and restore copies
 /memory-archives/
 /memory-restore/
+/memory-index/

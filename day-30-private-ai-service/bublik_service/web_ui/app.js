@@ -88,8 +88,8 @@ if (typeof document !== "undefined") {
     stopWatch(); state.view++;
     Object.assign(state,{session:null,csrf:"",chat:null,messages:[],chats:[],cursor:null,
       before:null,pending:null,ready:false,loading:false});
-    $("messages").replaceChildren(); $("chat-list").replaceChildren();
-    $("message-input").value=""; $("password").value=""; $("account-name").textContent="";
+    $("messages").replaceChildren(); $("chat-list").replaceChildren(); $("source-preview").replaceChildren(); $("source-preview").hidden=true;
+    $("message-input").value=""; $("password").value=""; $("use-memory").checked=true; $("account-name").textContent="";
     $("chat-title").textContent="Ваш приватный чат"; $("generation-info").textContent="";
     $("model-status").textContent="Проверяем модель…"; $("new-title").value="Новый диалог";
     $("create-dialog").close(); $("workspace").hidden=true; $("login-screen").hidden=false;
@@ -100,6 +100,7 @@ if (typeof document !== "undefined") {
     const bytes=messageBytes($("message-input").value);
     $("message-size").textContent=`${bytes.toLocaleString("ru-RU")} / 16 384 байт`;
     const busy = state.messages.some(m=>m.role==="assistant" && !TERMINAL.has(m.status));
+    $("use-memory").disabled=state.mutating || Boolean(state.pending);
     $("message-input").disabled=!state.chat || state.loading || state.mutating || Boolean(state.pending);
     $("send-button").disabled=!state.chat || !state.ready || busy || state.loading || state.mutating || Boolean(state.pending)
       || !$("message-input").value.trim() || bytes>16384 || Date.now()<state.cooldown;
@@ -145,17 +146,37 @@ if (typeof document !== "undefined") {
     const text=document.createElement("pre"); text.className="message-text"; text.textContent=message.content;
     const info=document.createElement("div"); info.className="message-state";
     info.textContent=message.role==="assistant"?(LABELS[message.status] || "Неизвестный статус"):"";
-    node.append(label,text,info); return node;
+    node.append(label,text,info);
+    if (message.memory?.enabled) {
+      const details=document.createElement("details"); details.className="memory-sources";
+      const summary=document.createElement("summary");
+      summary.textContent=`Поиск в истории: ${message.memory.sources.length} источников для контекста`;
+      details.append(summary);
+      if (!message.memory.sources.length) {
+        const note=document.createElement("p"); note.textContent="Подходящие фрагменты в контекст не вошли. Это не означает, что такого сообщения нет в полной истории.";
+        details.append(note);
+      }
+      message.memory.sources.forEach((source,i)=>{
+        const author=source.role==="assistant"?"Бублик":"Вы";
+        const partial=source.role==="assistant" && source.status!=="completed"?` · ${LABELS[source.status] || source.status}`:"";
+        const link=document.createElement("a"); link.textContent=`[M${i+1}] ${author} · Сообщение №${source.sequence}${partial}`;
+        link.href=`#chat=${source.chat_id}&message=${source.message_id}`;
+        const quote=document.createElement("blockquote"); quote.textContent=source.quote;
+        details.append(link,quote);
+      });
+      node.append(details);
+    }
+    return node;
   }
   function renderHistory() {
     $("messages").replaceChildren(...state.messages.map(messageNode));
     $("empty-state").hidden=state.messages.length>0;
     controls();
   }
-  async function openChat(id) {
+  async function openChat(id, sourceMessage=null) {
     if (!safeId(id) || !state.session) return;
     stopWatch(); const view=++state.view; state.loading=true; state.chat=null;
-    state.messages=[]; state.before=null; renderHistory(); controls(); drawer(false);
+    state.messages=[]; state.before=null; $("source-preview").replaceChildren(); $("source-preview").hidden=true; renderHistory(); controls(); drawer(false);
     try {
       const page=await api(`/chats/${id}/messages?latest=true&limit=50`);
       const chat=await api("/chats/"+id);
@@ -164,6 +185,25 @@ if (typeof document !== "undefined") {
       $("chat-title").textContent=chat.title; $("generation-info").textContent="";
       history.replaceState(null,"",`#chat=${id}`); renderChats(); renderHistory(); scrollBottom();
       watchOutstanding();
+      if (sourceMessage && safeId(sourceMessage)) {
+        const context=await api(`/chats/${id}/messages/${sourceMessage}/context`);
+        if (view!==state.view || !state.session) return;
+        // Keep the paginated timeline complete; show an older source separately.
+        const panel=$("source-preview"); panel.replaceChildren();
+        const heading=document.createElement("strong"); heading.textContent="Исходный разговор";
+        panel.append(heading);
+        for (const source of context.items) {
+          const item=document.createElement("section");
+          const label=document.createElement("p");
+          label.textContent=`${source.id===sourceMessage?"Источник · ":""}${source.role==="user"?"Вы":"Бублик"} · №${source.sequence} · ${new Date(source.created_at).toLocaleString("ru-RU")} · ${LABELS[source.status] || source.status}`;
+          const quote=document.createElement("pre"); quote.className="message-text"; quote.textContent=source.content;
+          item.append(label,quote); panel.append(item);
+        }
+        const note=document.createElement("p"); note.textContent="Показан фрагмент разговора вокруг источника. Полная переписка доступна в истории этого диалога.";
+        panel.append(note); panel.hidden=false;
+        panel.scrollIntoView({block:"nearest"});
+        history.replaceState(null,"",`#chat=${id}&message=${sourceMessage}`);
+      }
     } finally { if (view===state.view) {state.loading=false; controls();} }
   }
   async function refreshChat(force=false) {
@@ -198,7 +238,7 @@ if (typeof document !== "undefined") {
     if (watcher.stopped || watcher!==state.watcher || data.chat_id!==state.chat?.id
         || data.id!==watcher.id || !newerSnapshot(watcher.last,data)) return;
     watcher.last=data; const bottom=atBottom();
-    const row={...data.assistant,generation_id:data.id,error_code:data.error_code};
+    const row={...data.assistant,generation_id:data.id,error_code:data.error_code,memory:data.context?.memory};
     state.messages=mergeMessages(state.messages,[row]);
     let node=[...$("messages").children].find(n=>n.dataset.messageId===row.id);
     if (node) node.replaceWith(messageNode(row)); else $("messages").append(messageNode(row));
@@ -271,9 +311,10 @@ if (typeof document !== "undefined") {
     state.session=user; $("account-name").textContent=user.username;
     $("login-screen").hidden=true; $("workspace").hidden=false; $("password").value="";
     await loadChats();
-    const requested=location.hash.match(/^#chat=([a-f0-9]{32})$/)?.[1];
+    const route=location.hash.match(/^#chat=([a-f0-9]{32})(?:&message=([a-f0-9]{32}))?$/);
+    const requested=route?.[1];
     if (!state.chat && requested) {
-      try {await openChat(requested);} catch(e) {status(errorText(e)); history.replaceState(null,"",location.pathname);}
+      try {await openChat(requested,route?.[2]);} catch(e) {status(errorText(e)); history.replaceState(null,"",location.pathname);}
     }
     await ready();
   }
@@ -327,7 +368,7 @@ if (typeof document !== "undefined") {
   });
   $("composer").addEventListener("submit",event=>{
     event.preventDefault(); if ($("send-button").disabled) return;
-    startOperation(`/chats/${state.chat.id}/messages`,{content:$("message-input").value,expected_revision:state.chat.revision},"send");
+    startOperation(`/chats/${state.chat.id}/messages`,{content:$("message-input").value,expected_revision:state.chat.revision,use_memory:$("use-memory").checked},"send");
   });
   $("message-input").addEventListener("input",controls);
   $("message-input").addEventListener("keydown",event=>{
@@ -337,7 +378,7 @@ if (typeof document !== "undefined") {
   });
   $("retry-generation").addEventListener("click",()=>{
     const user=[...state.messages].reverse().find(m=>m.role==="user"); if (!user) return;
-    startOperation(`/messages/${user.id}/retry`,{expected_revision:state.chat.revision},"retry");
+    startOperation(`/messages/${user.id}/retry`,{expected_revision:state.chat.revision,use_memory:$("use-memory").checked},"retry");
   });
   $("replay-request").addEventListener("click",deliver);
   $("discard-request").addEventListener("click",async()=>{
@@ -355,8 +396,8 @@ if (typeof document !== "undefined") {
   $("drawer-backdrop").addEventListener("click",()=>{drawer(false); $("menu-button").focus();});
   document.addEventListener("keydown",event=>{if (event.key==="Escape") drawer(false);});
   addEventListener("hashchange",()=>{
-    const id=location.hash.match(/^#chat=([a-f0-9]{32})$/)?.[1];
-    if (id) openChat(id).catch(e=>status(errorText(e)));
+    const route=location.hash.match(/^#chat=([a-f0-9]{32})(?:&message=([a-f0-9]{32}))?$/);
+    if (route) openChat(route[1],route[2]).catch(e=>status(errorText(e)));
   });
   document.addEventListener("visibilitychange",()=>{
     if (document.hidden) stopWatch(); else if (state.session) bootstrap().then(()=>refreshChat(true)).catch(e=>status(errorText(e)));
@@ -367,7 +408,7 @@ if (typeof document !== "undefined") {
     if (state.pending || $("message-input").value.trim()) {event.preventDefault(); event.returnValue="";}
   });
   addEventListener("pagehide",()=>{
-    stopWatch(); $("messages").replaceChildren(); $("chat-list").replaceChildren();
+    stopWatch(); $("messages").replaceChildren(); $("chat-list").replaceChildren(); $("source-preview").replaceChildren(); $("source-preview").hidden=true;
     $("message-input").value=""; $("password").value="";
   });
   addEventListener("pageshow",event=>{if (event.persisted) {clearPrivate(); bootstrap();}});

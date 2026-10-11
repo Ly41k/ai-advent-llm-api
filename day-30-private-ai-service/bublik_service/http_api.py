@@ -31,7 +31,7 @@ from .security import AuthError, COOKIE, Forbidden, RateLimited, SecurityStore, 
 from .storage import ChatRepository
 
 PREFIX = "/api/v1"
-SAFE_CONTEXT = {"policy_version", "omitted_turns", "input_token_upper_bound", "model_identity"}
+SAFE_CONTEXT = {"policy_version", "omitted_turns", "input_token_upper_bound", "model_identity", "memory"}
 UI_FILES = {"/": ("index.html", "text/html"),
             "/assets/app.js": ("app.js", "text/javascript"),
             "/assets/app.css": ("app.css", "text/css"),
@@ -237,10 +237,16 @@ class CreateChat(StrictBody):
 class SendMessage(StrictBody):
     content: str = Field(min_length=1,max_length=16384)
     expected_revision: int = Field(ge=0)
+    use_memory: bool = False
 
 
 class RetryMessage(StrictBody):
     expected_revision: int = Field(ge=0)
+    use_memory: bool = False
+
+
+class SearchMemory(StrictBody):
+    query: str = Field(min_length=1,max_length=2048)
 
 
 class Login(StrictBody):
@@ -470,13 +476,29 @@ def create_app(settings, *, adapter_factory=None, repository=None, security=None
 
     @app.post(PREFIX+"/chats/{chat}/messages",status_code=202)
     async def send_message(chat:str,body:SendMessage,request:Request,user=Depends(require("chats:write"))):
-        receipt = await app.state.coordinator.service.send(user.owner,chat,body.content,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"))
+        receipt = await app.state.coordinator.service.send(user.owner,chat,body.content,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory)
         return JSONResponse(asdict(receipt),status_code=200 if receipt.replayed else 202)
 
     @app.post(PREFIX+"/messages/{message}/retry",status_code=202)
     async def retry_message(message:str,body:RetryMessage,request:Request,user=Depends(require("chats:write"))):
-        receipt = await app.state.coordinator.service.retry(user.owner,message,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"))
+        receipt = await app.state.coordinator.service.retry(user.owner,message,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory)
         return JSONResponse(asdict(receipt),status_code=200 if receipt.replayed else 202)
+
+    @app.post(PREFIX+"/memory/search")
+    async def search_memory(body:SearchMemory,user=Depends(require("chats:read"))):
+        # JSON body avoids putting personal search terms in URLs/access logs.
+        from .storage.repository import text
+        text(body.query,2048,"invalid_memory_query")
+        return await asyncio.to_thread(app.state.coordinator.service.memory.search,user.owner,body.query)
+
+    @app.get(PREFIX+"/chats/{chat}/messages/{message}")
+    async def source_message(chat:str,message:str,user=Depends(require("chats:read"))):
+        return await asyncio.to_thread(app.state.repository.memory_source,user.owner,chat,message)
+
+    @app.get(PREFIX+"/chats/{chat}/messages/{message}/context")
+    async def source_context(chat:str,message:str,before:int=4,after:int=4,user=Depends(require("chats:read"))):
+        return await asyncio.to_thread(app.state.repository.memory_context,user.owner,chat,message,
+                                       before=before,after=after)
 
     @app.get(PREFIX+"/generations/{generation}")
     async def generation(generation:str,user=Depends(require("chats:read"))):

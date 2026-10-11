@@ -14,7 +14,7 @@ def main():
     try:
         report = json.loads(args.report.read_text(encoding="utf-8"))
         records = report["tests"]
-        valid = (report["format"] in {"bublik-storage-check-v1", "bublik-offline-check-v2"}
+        valid = (report["format"] in {"bublik-storage-check-v1", "bublik-offline-check-v2", "bublik-rag-live-v1"}
                  and report["status"] == "passed"
                  and report["source"]["unchanged_during_run"] is True
                  and report["source"]["source_sha256"] == manifest()

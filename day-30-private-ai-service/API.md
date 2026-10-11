@@ -204,3 +204,51 @@ readiness failing does not prevent authorized history access if SQLite is health
 No private response caching; no access-log request lines by default. Error responses
 never serialize submitted validation input/upstream bodies/tracebacks. Full chat
 export currently materializes one snapshot in RAM: paged/streaming export is backlog.
+
+## Post-course history RAG (0.9.1, schema 2)
+
+Message creation and retry accept optional strict boolean `use_memory`, default
+`false`. It is part of the idempotency fingerprint when true; changing the mode
+for an already-used key yields 409. Omitted/false preserves old fingerprints.
+The Web UI defaults to enabled and always sends the explicit mode. Reload/logout
+restores enabled; browser storage is not used for this preference.
+
+`POST /api/v1/memory/search` accepts `{"query":"What laptop did I mention?"}`
+(up to 2048 UTF-8 bytes), requires `chats:read` and returns `policy_version`,
+`indexed_messages`, `search_seconds`, `reason` and up to three `sources`.
+Browser sessions require the existing exact Origin/CSRF headers even for this
+read-only POST. Queries are in JSON, not URLs. Existing request quotas apply.
+This endpoint requires no loaded model; generation still requires Ollama readiness.
+
+`GET /api/v1/chats/{chat}/messages/{message}` requires `chats:read`, validates
+both the chat owner and message/chat relationship, and returns the original
+message. Unauthenticated requests are401; foreign/mismatched IDs return404.
+
+`GET /api/v1/chats/{chat}/messages/{message}/context?before=4&after=4`
+requires the same scope/owner checks. Both ranges are integers0..10. It returns
+`anchor_message_id`, ordered original `items` (at most21), `has_earlier`,
+`has_later`; no full inference prompt is exposed. It works without Ollama.
+Use the existing history pagination to read beyond this bounded window.
+
+A RAG generation's public `context.memory` contains `enabled`, `policy_version`,
+`indexed_messages`, `search_seconds`, and `sources`. Each source contains
+`chat_id`, `message_id`, `sequence`, character `start`/`end`, whole-message
+`source_sha256`, exact `quote`, `created_at`, `role` and `status`. Historical
+0.9.0 sources without role/status represent accepted user text. The history endpoint includes
+the same `memory` on assistant messages; prompts/engine provenance remain private.
+The source block and policy are frozen at admission and survive retries/restarts
+without repeating retrieval for idempotent replay. A new retry can request a new
+mode explicitly and runs a new search. The UI retry uses the current checkbox.
+
+All accepted user messages and nonempty terminal assistant text belonging to
+the authenticated owner are indexed (`history-fts-v2`). Failed/interrupted turns
+are preserved and searchable with status. Running/queued assistant text is still
+mutable and is excluded from RAG until terminal; it remains readable in history.
+Assistant statements are not verified facts about the user.
+FTS5 uses words/prefixes, not embeddings. Sources shown are retrieved context, not
+automated grounding verification. Index failure returns503 (public
+`storage_unavailable`) and does not insert messages or fall back to normal chat.
+No matches remains explicit memory mode with an empty archive and uncertainty
+instruction. Context remains at most8192, including1024 output and512 margin;
+memory messages are bounded to2600 conservative input tokens and three800-byte
+quotes; recent complete pairs fill the remaining input budget.

@@ -4,14 +4,13 @@ A private chat backed by local Qwen. The MacBook performs inference and stores
 full history; Mac, Android and iPhone continue the same conversations. Other
 applications use a versioned HTTP API. No cloud LLM or automatic fallback.
 
-**Stages 1–9 implemented.** Runtime **0.8.0**, SQLite schema **2**, prompt
+**Stages 1–9 implemented.** Course baseline **0.8.0**, SQLite schema **2**, prompt
 **private-chat-v2**. The MacBook Pro M1 / 32 GB baseline passed **259/259 technical
 and 13/13 quality checks**, saved history after restart **11/11**, and current
 LAN HTTPS/launchd **6/6**. Three-device sync, mobile-data chat and Tailscale
 reconnection were manually confirmed. See [final evidence and limits](FINAL_REPORT.ru.md).
 
-Production backup restoration and old console-owner history transfer remain
-explicitly deferred. Saved tailnet policy has not been independently audited;
+Working-history archive/restore was rehearsed on the operator's Mac after the course; physical transfer to another host and old console-owner transfer remain pending. Saved tailnet policy has not been independently audited;
 phone LAN CA installation is deferred. These are not recorded as passed.
 
 ## History portability after Day 30
@@ -22,7 +21,29 @@ Restored browser sessions are cleared and API tokens revoked. No API/runtime or
 model behavior changes. See [the portability guide](MEMORY_PORTABILITY.ru.md) for
 commands, limits and a transfer rehearsal. Archives are not encrypted; pending or
 uncertain inference snapshots cannot be restored by this first-stage tool.
-Long-term fact memory and retrieval of older conversations are not implemented.
+Versioned long-term facts are not implemented. Lexical retrieval over both sides of history is added below.
+
+## Post-course history RAG — 0.9.1
+
+The **«Искать в прошлых разговорах»** switch enables local FTS5 retrieval over
+all saved user text and nonempty terminal assistant text owned by the signed-in user. Up to three
+exact fragments, timestamps, IDs and SHA-256 hashes are frozen in each generation
+snapshot and displayed below the reply, with author and completion status. Sources
+and the surrounding original conversation can be reopened.
+
+The private `memory-index/` cache is rebuilt from the primary history. Core schema
+stays **2**; archives preserve history and RAG snapshots, without transporting the
+cache. No embeddings or second model are loaded. Lexical search cannot guarantee
+recall of paraphrases. The Web UI enables retrieval by default; users can disable
+it for a request. API v1 omission still means false for compatibility. Index failures reject RAG
+admission with 503; there is no silent fallback.
+
+See [installation and Mac checks](RAG_MEMORY.ru.md). The Day 30 live results above
+belong to 0.8.0; 0.9.1 Qwen/phone checks are separate. Displayed sources are context
+supplied to the model, not automatic verification of every generated claim.
+
+See [memory continuity and future layers](MEMORY_ARCHITECTURE.ru.md). Summaries and
+structured facts remain future work; originals are not replaced or aged out.
 
 ## Architecture
 
@@ -175,8 +196,9 @@ no hidden replay. Old v1 snapshots survive new v2 turns in the same conversation
 No credentials, drafts or history in browser localStorage/sessionStorage; no
 CDN/analytics or raw HTML model output. Access logs are disabled; errors do not expose
 input/secrets/upstream tracebacks. Discarded launchd output limits diagnostics.
-Backup uses the SQLite backup API and refuses overwrite; production restoration,
-retention and off-host copies remain a separate task.
+Backup uses the SQLite backup API and refuses overwrite. Working-history restore
+into a separate database was rehearsed by the operator; retention, off-host copies
+and physical transfer remain separate tasks.
 
 After starting the API, from a second terminal where `BUBLIK_TAIL_URL` is set:
 
@@ -193,14 +215,14 @@ authenticated readiness, routes, error codes and token scopes.
 ## Verification and docs
 
 ```bash
-python scripts/verify_report.py reports/verified/memory-portability-linux-final-20261011.json
+python scripts/verify_report.py reports/verified/rag-memory-v2-offline-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-The first checks the new storage-only 69/69 report against 70 source files; the
-second runs the complete current offline suite and writes a new report. The earlier
-143/143 report remains historical: adding these tools changes the full-source
-manifest, while all 27 API runtime files remain unchanged. Hashes are neither
+The first checks the new198/198 offline report against74 source files; the
+second runs the complete current offline suite and writes a new report. Earlier
+storage-only69/69 and course143/143 reports remain historical; their full-source
+manifests need not match the new runtime. Hashes are neither
 signatures nor live network/model proof.
 Chromium/PWA fixtures use synthetic inference; real Mac Qwen and device evidence
 are recorded separately. Original successful and failed JSON are preserved.

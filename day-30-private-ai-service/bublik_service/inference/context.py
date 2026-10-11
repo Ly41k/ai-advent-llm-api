@@ -1,5 +1,6 @@
 """Conservative byte-BPE bound for a single reviewed Qwen2.5 ChatML template."""
-from bublik_service.domain import ContextPlan, InvalidInput
+from bublik_service.domain import ContextPlan, InvalidInput, MemorySource
+from bublik_service.memory import memory_messages
 from bublik_service.storage.repository import MAX_MESSAGE_BYTES, text
 
 # Published Ollama qwen2.5:14b template, eb4402837c78 (full normalized SHA-256).
@@ -26,7 +27,7 @@ class ContextBuilder:
             raise InvalidInput("unsupported_template")
         self.profile, self.identity = profile, identity
 
-    def build(self, candidates, content):
+    def build(self, candidates, content, *, memory=None):
         text(content, MAX_MESSAGE_BYTES, "invalid_message")
         history = candidates["messages"]
         if len(history) % 2:
@@ -36,13 +37,31 @@ class ContextBuilder:
         budget = self.profile.num_ctx - self.profile.max_output - self.profile.margin
         if upper_bound(base) > budget:
             raise InvalidInput("context_budget_exceeded")
+        sources, extra = [], []
+        if memory is not None:
+            for value in memory["sources"]:
+                source = MemorySource(**value)
+                source.validate()
+                trial = memory_messages([*sources, source])
+                if (upper_bound(trial) <= 2600
+                        and upper_bound([base[0], *trial, base[1]]) <= budget):
+                    sources.append(source)
+            extra = memory_messages(sources)
+            if upper_bound([base[0], *extra, base[1]]) > budget:
+                # Memory mode must not silently become a normal ungrounded request.
+                raise InvalidInput("context_budget_exceeded")
         selected = []
         for offset in range(len(history) - 2, -1, -2):
             pair = history[offset:offset + 2]
-            trial = [base[0], *pair, *selected, base[1]]
+            trial = [base[0], *extra, *pair, *selected, base[1]]
             if upper_bound(trial) > budget:
                 break
             selected = pair + selected
-        messages = [base[0], *selected, base[1]]
+        messages = [base[0], *extra, *selected, base[1]]
         return ContextPlan(tuple(m["id"] for m in selected), upper_bound(messages),
-                           model_identity=self.identity)
+                           policy_version="recent-complete-pairs-memory-v1" if memory is not None else "recent-complete-pairs-v1",
+                           model_identity=self.identity, memory_enabled=memory is not None,
+                           memory_sources=tuple(sources),
+                           memory_indexed_messages=memory["indexed_messages"] if memory is not None else 0,
+                           memory_search_seconds=memory["search_seconds"] if memory is not None else 0,
+                           memory_policy=memory["policy_version"] if memory is not None else "")

@@ -134,6 +134,43 @@ class ModelIdentity:
 
 
 @dataclass(frozen=True)
+class MemorySource:
+    chat_id: str
+    message_id: str
+    sequence: int
+    start: int
+    end: int
+    source_sha256: str
+    quote: str
+    created_at: str
+
+    role: str = "user"
+    status: str = "accepted"
+
+    def validate(self):
+        import re
+        if ((self.role, self.status) not in {("user", "accepted"),
+                ("assistant", "completed"), ("assistant", "truncated"),
+                ("assistant", "failed"), ("assistant", "interrupted")}
+                or any(not isinstance(v, str) or not re.fullmatch(r"[a-f0-9]{32}", v)
+                for v in (self.chat_id, self.message_id))
+                or not integer(self.sequence, 1) or not integer(self.start)
+                or not integer(self.end, self.start + 1)
+                or not isinstance(self.source_sha256, str)
+                or not re.fullmatch(r"[a-f0-9]{64}", self.source_sha256)
+                or not isinstance(self.quote, str) or not self.quote
+                or len(self.quote.encode("utf-8")) > 800
+                or len(self.quote) != self.end - self.start):
+            raise InvalidInput("invalid_memory_source")
+        from datetime import datetime
+        try:
+            if datetime.fromisoformat(self.created_at).tzinfo is None:
+                raise ValueError()
+        except (ValueError, TypeError):
+            raise InvalidInput("invalid_memory_source") from None
+
+
+@dataclass(frozen=True)
 class ContextPlan:
     """Prepared by the future server ContextBuilder against a chat revision.
 
@@ -145,6 +182,11 @@ class ContextPlan:
     input_token_upper_bound: int = 0
     policy_version: str = "recent-complete-pairs-v1"
     model_identity: ModelIdentity | None = None
+    memory_enabled: bool = False
+    memory_sources: tuple[MemorySource, ...] = ()
+    memory_indexed_messages: int = 0
+    memory_search_seconds: float = 0
+    memory_policy: str = ""
 
     def validate(self, profile):
         profile.validate()
@@ -156,8 +198,26 @@ class ContextPlan:
                 or any(not isinstance(x, str) for x in self.history_message_ids)
                 or len(set(self.history_message_ids)) != len(self.history_message_ids)
                 or not integer(self.input_token_upper_bound, 1)
-                or self.policy_version != "recent-complete-pairs-v1"):
+                or type(self.memory_enabled) is not bool
+                or self.policy_version != ("recent-complete-pairs-memory-v1" if self.memory_enabled
+                                           else "recent-complete-pairs-v1")):
             raise InvalidInput("invalid_context_plan")
+        if (type(self.memory_sources) is not tuple or len(self.memory_sources) > 3
+                or not integer(self.memory_indexed_messages)
+                or type(self.memory_search_seconds) not in (int, float)
+                or not math.isfinite(self.memory_search_seconds) or self.memory_search_seconds < 0
+                or not isinstance(self.memory_policy, str)
+                or (self.memory_enabled and (not self.memory_policy or len(self.memory_policy) > 64
+                    or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-" for c in self.memory_policy)))
+                or (not self.memory_enabled and (self.memory_sources or self.memory_indexed_messages
+                                                or self.memory_search_seconds or self.memory_policy))):
+            raise InvalidInput("invalid_context_plan")
+        for source in self.memory_sources:
+            if not isinstance(source, MemorySource):
+                raise InvalidInput("invalid_memory_source")
+            source.validate()
+        if len({source.message_id for source in self.memory_sources}) != len(self.memory_sources):
+            raise InvalidInput("invalid_memory_source")
         if self.input_token_upper_bound + profile.max_output + profile.margin > profile.num_ctx:
             raise InvalidInput("context_budget_exceeded")
 

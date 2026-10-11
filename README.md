@@ -159,7 +159,7 @@ Later lessons use specialized entry points:
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json` | Verify the new 69/69 storage-portability checks; see Day 30 README for server setup |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/rag-memory-v2-offline-20261011.json` | Verify the new198/198 offline regression and RAG memory checks; see Day 30 README for server setup |
 
 ## Day 21 shared knowledge index
 
@@ -368,6 +368,12 @@ See [final measurements](day-29-local-llm-optimization/FINAL_REPORT.ru.md), [sel
 
 ## Day 30 — Bublik Private AI Service
 
+After the course, **0.9.1** adds lexical RAG enabled by default in the Web UI over both sides of saved conversations,
+owner-specific SQLite FTS5 caches, role/status-aware source links, original conversation windows and immutable RAG snapshots.
+Core schema 2 and full-history archives remain compatible; no embedding model or
+cloud LLM is used. See [history RAG setup and checks](day-30-private-ai-service/RAG_MEMORY.ru.md).
+The 0.8.0 live evidence below is historical and does not prove 0.9.1 model quality.
+
 [Day 30](day-30-private-ai-service/README.md) turns local Qwen into a private HTTP
 service with multiple conversations, durable SQLite history and a responsive
 Web UI. Mac, Android and iPhone can open the same conversation and continue it.
@@ -375,8 +381,8 @@ The PWA can be added to the phone's home screen.
 
 The tested host is a **MacBook Pro M1 with 32 GB unified memory**. Ollama runs
 Qwen2.5:14b Q4_K_M on localhost; FastAPI handles authentication, API v1, context
-budgets, quotas and the durable queue. **No cloud LLM, automatic cloud fallback
-or default RAG** is used. Complete saved history is separate from the bounded
+budgets, quotas and the durable queue. **No cloud LLM or automatic cloud fallback** is used. The accepted0.8.0 course
+runtime used no RAG; the post-course0.9.1 Web UI enables history retrieval by default. Complete saved history is separate from the bounded
 recent context sent to the model.
 
 **Tailscale Serve** is the main private HTTPS route on home Wi-Fi and mobile data.
@@ -403,7 +409,7 @@ From the root, with an active Python 3.13 virtualenv:
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json
+  day-30-private-ai-service/reports/verified/rag-memory-v2-offline-20261011.json
 ```
 
 This verifies saved evidence against source hashes; it does not start the server.
@@ -413,8 +419,9 @@ login, phones, launchd and stopping the service before sleep. The user has recor
 a UI demonstration of cross-device chat; the
 [console scenario](day-30-private-ai-service/CONSOLE_VIDEO.ru.md) is optional.
 
-Operational backup restoration, phone LAN CA setup and an independent audit of
-the saved tailnet policy remain separate tasks. See the
+Working-history restore into a separate database was rehearsed on the operator's Mac.
+Physical transfer, phone LAN CA setup and an independent audit of the saved tailnet
+policy remain separate tasks. See the
 [acceptance checklist](day-30-private-ai-service/ACCEPTANCE.ru.md) and
 [backlog](day-30-private-ai-service/BACKLOG.ru.md). Rust is not implemented; a
 separate API overhead benchmark is deferred until after the course.
@@ -424,9 +431,10 @@ index before a new strict RAG live run; Day 30 and saved-report verification do
 not use it. Earlier lesson implementations and historical JSON reports are preserved.
 
 After Day 30, a separate [history portability extension](day-30-private-ai-service/MEMORY_PORTABILITY.ru.md)
-adds verified backup and restoration into a new database. API runtime is unchanged;
-semantic long-term recall is not yet implemented. Its new 69/69 report covers storage
-only; the original 143/143 model/API fixture report retains its historical scope.
+adds verified backup and restoration into a new database. That first tool did not
+change API runtime. The subsequent0.9.1 lexical RAG extension is described above;
+semantic retrieval and versioned facts remain future work. The historical69/69
+report covers storage only; the original 143/143 model/API fixture report retains its historical scope.
 
 ## Tests
 
