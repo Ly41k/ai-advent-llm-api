@@ -159,7 +159,7 @@ python day-15-controlled-transitions/main.py
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Два реальных коммита во временном репозитории и ответы локальной LLM |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | Один локальный RAG-ответ с цитатами источников |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline-проверка согласованности сохранённых доказательств V7 |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json` | Сверить сохранённые143/143 с исходниками; запуск сервера описан в README дня30 |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json` | Сверить новые 69/69 storage-проверок; запуск сервера — README дня 30 |
 
 ## Общий индекс Дня 21
 
@@ -404,7 +404,7 @@ fallback и RAG по умолчанию нет.** Полная сохранён�
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json
+  day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json
 ```
 
 Это сверка сохранённых доказательств с хешами исходников, а не запуск сервера.
@@ -423,6 +423,11 @@ python day-30-private-ai-service/scripts/verify_report.py \
 Изменение корневых README меняет fingerprint корпуса дня 21. Перед новым строгим
 RAG live-запуском пересоберите индекс; день 30 и проверка сохранённых отчётов его
 не используют. Реализации предыдущих дней и исторические JSON сохранены.
+
+После дня 30 добавлен отдельный [этап переносимости истории](day-30-private-ai-service/MEMORY_PORTABILITY.ru.md):
+проверяемый backup и восстановление в новую базу. Runtime API не меняется;
+долговременное вспоминание ещё не реализовано. Новый отчёт 69/69 проверяет только
+storage; исходные 143/143 model/API fixture остаются историческим результатом.
 
 ## Тесты
 

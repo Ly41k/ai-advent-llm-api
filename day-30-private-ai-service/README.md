@@ -14,6 +14,16 @@ Production backup restoration and old console-owner history transfer remain
 explicitly deferred. Saved tailnet policy has not been independently audited;
 phone LAN CA installation is deferred. These are not recorded as passed.
 
+## History portability after Day 30
+
+The first extension adds verified SQLite archives and restoration into a new
+private database, preserving conversation IDs, original messages and snapshots.
+Restored browser sessions are cleared and API tokens revoked. No API/runtime or
+model behavior changes. See [the portability guide](MEMORY_PORTABILITY.ru.md) for
+commands, limits and a transfer rehearsal. Archives are not encrypted; pending or
+uncertain inference snapshots cannot be restored by this first-stage tool.
+Long-term fact memory and retrieval of older conversations are not implemented.
+
 ## Architecture
 
 FastAPI/Uvicorn authenticates requests and atomically admits jobs into SQLite WAL.
@@ -183,12 +193,15 @@ authenticated readiness, routes, error codes and token scopes.
 ## Verification and docs
 
 ```bash
-python scripts/verify_report.py reports/verified/stage8-prompt-v2-offline.json
+python scripts/verify_report.py reports/verified/memory-portability-linux-final-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-The first checks the saved 143/143 report against all 67 source files; the second
-writes a new report. Hashes are neither signatures nor live network/model proof.
+The first checks the new storage-only 69/69 report against 70 source files; the
+second runs the complete current offline suite and writes a new report. The earlier
+143/143 report remains historical: adding these tools changes the full-source
+manifest, while all 27 API runtime files remain unchanged. Hashes are neither
+signatures nor live network/model proof.
 Chromium/PWA fixtures use synthetic inference; real Mac Qwen and device evidence
 are recorded separately. Original successful and failed JSON are preserved.
 

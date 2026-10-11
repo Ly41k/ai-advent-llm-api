@@ -224,10 +224,13 @@ launchctl bootstrap "gui/$(id -u)" \
 idle. Новое поколение запускается явным новым запросом; old inference не replay.
 Partial/failed/interrupted сообщения остаются в полной истории.
 
-## Backup — отдельный следующий пункт
+## Backup и перенос истории
 
-Базовый SQLite backup API реализован и проверен тестами. На этом этапе operational
-restore/retention/off-host copies и перенос console owner не выполнялись. После
+Базовый SQLite backup API реализован и проверен тестами. После дня 30 добавлен
+[инструмент переносимости истории](MEMORY_PORTABILITY.ru.md): verified archive
+и restore в новую базу, с сохранением исходных данных и отзывом старых credentials.
+Практический перенос личной базы, retention/off-host copies и перенос console
+owner ещё не выполнялись. После
 согласования проверяйте восстановление в отдельной базе, сохранность IDs/receipts,
 состояние queued/running, auth/session policy и применимость миграций. Не копируйте
 один живой sqlite3 без WAL и не восстанавливайте поверх работающего сервиса.

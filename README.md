@@ -159,7 +159,7 @@ Later lessons use specialized entry points:
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json` | Verify saved 143/143 checks against sources; see Day 30 README for server setup |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json` | Verify the new 69/69 storage-portability checks; see Day 30 README for server setup |
 
 ## Day 21 shared knowledge index
 
@@ -403,7 +403,7 @@ From the root, with an active Python 3.13 virtualenv:
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json
+  day-30-private-ai-service/reports/verified/memory-portability-linux-final-20261011.json
 ```
 
 This verifies saved evidence against source hashes; it does not start the server.
@@ -422,6 +422,11 @@ separate API overhead benchmark is deferred until after the course.
 Changing these root READMEs changes the Day 21 corpus fingerprint. Rebuild that
 index before a new strict RAG live run; Day 30 and saved-report verification do
 not use it. Earlier lesson implementations and historical JSON reports are preserved.
+
+After Day 30, a separate [history portability extension](day-30-private-ai-service/MEMORY_PORTABILITY.ru.md)
+adds verified backup and restoration into a new database. API runtime is unchanged;
+semantic long-term recall is not yet implemented. Its new 69/69 report covers storage
+only; the original 143/143 model/API fixture report retains its historical scope.
 
 ## Tests
 

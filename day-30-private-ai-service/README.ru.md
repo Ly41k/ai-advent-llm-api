@@ -15,6 +15,17 @@ Mac, Android и iPhone продолжают одни и те же диалоги
 отложены отдельно по решению пользователя. Сохранённая tailnet policy не прошла
 независимый аудит; установка LAN CA на телефоны отложена. Это не скрытые PASS.
 
+## Перенос истории после дня 30
+
+Первое дополнение добавляет проверяемые SQLite-архивы и восстановление в новую
+приватную базу с сохранением IDs диалогов, исходных сообщений и snapshots.
+В восстановленной копии browser sessions удаляются, API tokens отзываются.
+Runtime/API и поведение модели не меняются. Команды, ограничения и репетиция
+переноса: [MEMORY_PORTABILITY.ru.md](MEMORY_PORTABILITY.ru.md). Архивы пока не
+зашифрованы; снимки с queued/running или неопределённым inference не восстанавливаются
+этим первым инструментом. Долговременная память фактов и поиск старой переписки
+ещё не реализованы.
+
 ## Устройство сервиса
 
 | Компонент | Назначение |
@@ -197,12 +208,14 @@ Liveness сам по себе не доказывает готовность Qwe
 ## Проверки и документация
 
 ```bash
-python scripts/verify_report.py reports/verified/stage8-prompt-v2-offline.json
+python scripts/verify_report.py reports/verified/memory-portability-linux-final-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-Первый вызов сравнивает 143/143 сохранённых теста с текущими 67 source files,
-второй создаёт новый отчёт. Хеши не являются подписью или доказательством сети/LLM.
+Первый вызов сверяет новые 69/69 storage-only проверок с 70 source files,
+второй запускает полный текущий offline suite и создаёт новый отчёт. Прежний
+143/143 отчёт остаётся историческим: добавление tools/tests изменяет общий manifest,
+но все 27 runtime files API прежние. Хеши не являются подписью или доказательством сети/LLM.
 Browser/PWA tests требуют `requirements.browser.lock` и Chromium. Исходные успешные
 и неуспешные JSON в `reports/verified/` не перезаписаны.
 

@@ -35,3 +35,7 @@ dist/
 
 # Local delivery archives; web_ui icons and verified JSON remain trackable.
 /*.zip
+
+# Private memory archives and restore copies
+/memory-archives/
+/memory-restore/

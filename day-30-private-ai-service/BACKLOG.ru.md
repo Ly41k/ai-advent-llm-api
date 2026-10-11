@@ -20,9 +20,11 @@ API/UI, queue/quotas и versioned prompt реализованы. Ниже — о
 
 ## После полной реализации дня 30
 
-- По решению пользователя: вернуться к operational backup/restore, расписанию,
-  retention и переносу полезной истории старого console owner. Базовый SQLite
-  backup API уже реализован; его проверенные возможности не удаляются.
+- Первый инструмент [verified archive/restore](MEMORY_PORTABILITY.ru.md) добавлен
+  после дня 30. Выполнить приёмку на личной базе и физическом новом хосте.
+  Расписание, шифрование/off-host копии, retention, аварийный restore pending
+  inference и перенос полезной истории старого console owner остаются отдельно.
+  Базовый SQLite backup API сохраняется.
 - UI: безопасный локальный Markdown renderer/code blocks, user-controlled export,
   темы/доступность и расширенная работа с очень большими списками диалогов.
   Не добавлять CDN, сырые HTML ответы или persistent browser copies личной истории.
