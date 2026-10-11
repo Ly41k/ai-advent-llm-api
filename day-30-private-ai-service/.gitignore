@@ -1,0 +1,37 @@
+__pycache__/
+*.pyc
+*.sqlite3*
+*.db*
+.env
+.env.*
+!.env.example
+.venv/
+*.egg-info/
+build/
+dist/
+/data/
+/backups/
+/reports/check/
+/reports/video/
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.csr
+*.der
+*token*.json
+*cookie*.txt
+*.log
+
+# Generated deployment state; commit only reviewed templates under deploy/.
+/tls/
+/caddy-data/
+/caddy-config/
+/launchd/
+/Caddyfile
+/tailnet-policy.local.*
+
+# Local delivery archives; web_ui icons and verified JSON remain trackable.
+/*.zip

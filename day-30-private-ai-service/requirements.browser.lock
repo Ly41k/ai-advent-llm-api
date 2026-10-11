@@ -1,0 +1,5 @@
+# Optional isolated UI checks only. Not required by the running service.
+playwright==1.55.0
+pyee==13.0.1
+greenlet==3.5.6
+typing_extensions==4.16.0

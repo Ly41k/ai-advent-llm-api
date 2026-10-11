@@ -6,7 +6,7 @@ A day-by-day Python learning project that starts with direct LLM API calls and g
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–29**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–30**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -41,6 +41,7 @@ The repository currently contains **Days 1–29**. Each `day-XX-...` directory i
 | [27](day-27-local-llm-integration/README.md) | Local LLM integration — Revik | Staged Kotlin analysis, Detekt commit gate, local explanations, linked reports and reviewer tones |
 | [28](day-28-local-rag/README.md) | Local LLM + RAG | Week 6 index, local embedding/search/generation, paired cloud comparison and repeated evaluation |
 | [29](day-29-local-llm-optimization/README.md) | Local LLM optimization | Task-specific prompts and limits, Q4/Q5 measurements, resource sampling and frozen V7 evidence selections |
+| [30](day-30-private-ai-service/README.md) | Private AI service | FastAPI, local Qwen, SQLite history, Web UI/PWA, LAN/Tailscale HTTPS, queue and limits |
 
 ## How the architecture evolves
 
@@ -57,6 +58,7 @@ The repository currently contains **Days 1–29**. Each `day-XX-...` directory i
 - **Day 27:** integrate local inference into Revik, a practical Kotlin pre-commit CLI. Detekt checks staged code using the project configuration; Qwen explains findings. The hook permits or blocks the commit and produces linked reports. Russian/English and three reviewer tones are configurable.
 - **Day 28:** reuse the Week 6 index for fully local RAG, retain an initial paired Groq comparison and evaluate selective local/OpenAI fixes. Live reports record quality, speed, exact stability and manual citation support.
 - **Day 29:** optimize local Qwen parameters and task contracts, compare Q4/Q5 and resource measurements, and validate V7 evidence selections on frozen RU/EN procedure questions.
+- **Day 30:** local Qwen becomes a private HTTP service. The Mac stores full history, Android/iPhone continue the same chats, and Tailscale Serve provides mobile access. Cookie/CSRF, ownership, idempotency, a durable queue, quotas and launchd are separate from inference; no RAG or cloud fallback.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -67,8 +69,9 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 - Python **3.13** is the project target.
 - A Groq key is required only by lessons that explicitly call Groq. Day 28 optionally supports OpenAI with `OPENAI_API_KEY`; local operation needs neither key.
 - Internet access is required for Groq, OpenAI and live GitHub API calls.
-- Local retrieval/RAG lessons and Days 26–29 use **Ollama**.
+- Local retrieval/RAG lessons and Days 26–30 use **Ollama**.
 - Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
+- Day 30 has its own `requirements.lock` (FastAPI/httpx/Uvicorn/Argon2); its main Mac/phone path uses Tailscale, direct LAN uses Caddy and a trusted local CA. No knowledge index or embedding model is required.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -82,6 +85,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 | 27 | Not required | `qwen2.5:14b` default; configurable downloaded local model |
 | 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq/OpenAI comparison |
 | 29 | `bge-m3` | `qwen2.5:14b` Q4_K_M selected; Q5_K_M compared on one factual case |
+| 30 | Not required | `qwen2.5:14b` Q4_K_M; private-chat-v2, context8192/output1024 |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -118,7 +122,7 @@ ollama pull qwen2.5:7b
 ollama pull qwen2.5:14b
 ```
 
-You do not need all answer models at once; the commands above simply cover the documented profiles through Day 29.
+You do not need all answer models at once; the commands above simply cover the documented profiles through Day 30.
 
 If the Ollama desktop application is already serving the local API, a separate `ollama serve` process is not required.
 
@@ -155,6 +159,7 @@ Later lessons use specialized entry points:
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json` | Compare saved143/143 with sources; see Day30 README for server setup |
 
 ## Day 21 shared knowledge index
 
@@ -170,7 +175,7 @@ The indexed corpus rule remains intentionally narrow:
 - lesson READMEs from Days 1–20;
 - non-test Python files from Days 16–20.
 
-README files from Days 21–29 are not automatically added to that corpus. Days 26–27 do not use this index.
+README files from Days 21–30 are not automatically added to that corpus. Days 26–27 and 30 do not use this index.
 
 The index stores document digests and a corpus revision. A change to the **root README files** changes indexed content. After installing these updated root READMEs, rebuild before the next strict verification or Day 24/25/28/29 live run. This does not alter saved historical reports. Day 28 accepts a Git commit alone when the indexed corpus fingerprint is unchanged:
 
@@ -361,6 +366,37 @@ python day-29-local-llm-optimization/experiments/quality_v7/main.py verify \
 
 See [final measurements](day-29-local-llm-optimization/FINAL_REPORT.ru.md), [selected profile](day-29-local-llm-optimization/SELECTED_PROFILE.json), [assignment checklist](day-29-local-llm-optimization/ASSIGNMENT_CHECKLIST.ru.md), and [validation](day-29-local-llm-optimization/VALIDATION.md). The assignment is complete within the stated scope; new generation is optional.
 
+## Day 30 — private AI chat
+
+[Day 30](day-30-private-ai-service/README.md) implements Bublik Private AI Service:
+local Qwen on the MacBook, API v1, SQLite history and a responsive Web UI/PWA.
+Tailscale Serve is the main HTTPS path for Mac/Android/iPhone, including mobile data.
+Caddy supports additional direct LAN access. API/Ollama stay on localhost; Python
+does not load the model. No cloud LLM/fallback or default RAG.
+
+Verified0.8.0/private-chat-v2: real Mac baseline259/259 technical,13/13 quality,
+16completed; seven chats/32messages unchanged after restart11/11, current LAN/launchd6/6
+with a new PID. Offline143/143, Chromium26/26 and PWA11/11 use synthetic inference;
+they do not replace physical Android handoff8/8 or manually confirmed three-device sync.
+
+From the root, with an active Python3.13 virtualenv:
+
+```bash
+python -m pip install -r day-30-private-ai-service/requirements.lock
+python day-30-private-ai-service/scripts/verify_report.py \
+  day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json
+```
+
+See the lesson README and [runbook](day-30-private-ai-service/RUNBOOK.ru.md) for setup,
+browser login and phones. The [final report](day-30-private-ai-service/FINAL_REPORT.ru.md)
+preserves failed historical runs and limitations: production restore/phone LAN CA
+are deferred, saved policy/independent remote scan are not audited, and LaunchAgents
+require user login and an awake Mac. [Video script](day-30-private-ai-service/CONSOLE_VIDEO.ru.md)
+and [backlog](day-30-private-ai-service/BACKLOG.ru.md) are separate. Rust/Kerry memory
+are future work; original data is preserved. These root updates require a Day21
+index rebuild before a new strict RAG live run, not for Day30 or saved-report checking.
+Previous lesson sources and historical reports remain unchanged.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.
@@ -387,6 +423,7 @@ python -m unittest discover -s day-27-local-llm-integration/tests -v
 python -m unittest discover -s day-28-local-rag -p 'test*28.py'
 python day-29-local-llm-optimization/test_day29.py -v
 python -m unittest discover -s day-29-local-llm-optimization/experiments/quality_v7 -p test_quality_v7.py -v
+python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage.py
 ```
 
 ## Data and limitations

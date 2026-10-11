@@ -1,0 +1,27 @@
+{
+    admin off
+    persist_config off
+    auto_https disable_redirects
+    skip_install_trust
+    log default {
+        output discard
+    }
+    servers {
+        protocols h1 h2
+        timeouts {
+            read_header 10s
+            read_body 15s
+            idle 1m
+        }
+    }
+}
+
+https://@@LAN_IP@@:@@LAN_PORT@@ {
+    bind @@LAN_IP@@
+    tls internal
+    reverse_proxy http://127.0.0.1:@@API_PORT@@ {
+        header_up X-Forwarded-Proto https
+        header_up X-Forwarded-Host {hostport}
+        header_up -Forwarded
+    }
+}

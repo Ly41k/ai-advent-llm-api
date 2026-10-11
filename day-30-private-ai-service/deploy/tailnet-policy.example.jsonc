@@ -1,0 +1,19 @@
+// Example for a PERSONAL tailnet. Replace BOTH placeholders in the admin editor.
+// Merge with existing policy deliberately; broad existing allow rules can defeat
+// this restriction. Tailscale grants are additive. Policy tests must pass.
+{
+  "grants": [
+    {
+      "src": ["YOUR_TAILSCALE_LOGIN"],
+      "dst": ["MAC_TAILSCALE_IPV4"],
+      "ip": ["tcp:443"]
+    }
+  ],
+  "tests": [
+    {
+      "src": "YOUR_TAILSCALE_LOGIN",
+      "accept": ["MAC_TAILSCALE_IPV4:443"],
+      "deny": ["MAC_TAILSCALE_IPV4:8000", "MAC_TAILSCALE_IPV4:11434"]
+    }
+  ]
+}

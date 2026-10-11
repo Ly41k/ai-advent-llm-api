@@ -1,0 +1,2372 @@
+{
+  "format": "bublik-stage8-prompt-experiment-v1",
+  "run_id": "43cebe85c05d439592b1456f98050d92",
+  "created_at": "2026-10-10T21:10:34.082174+00:00",
+  "status": "passed",
+  "technical_status": "passed",
+  "source_sha256": {
+    "bublik_service/__init__.py": "75414c10d5fd0443bb2500d8b6917697de1983b56d21f6999349bd2d3caecc9e",
+    "bublik_service/__main__.py": "e70fecd4c1dd40e34ca80e2e14f2030196bc7125f91d136e37f56ff2c8d9f29d",
+    "bublik_service/admin_cli.py": "325d1512044098999a9520e3d1b689a6f5f79d0262b542d20bd049af0c9ade37",
+    "bublik_service/domain.py": "df337acf1255b53df18f22a3eeab8238240c6a3e05029cf32e55bf66a581474c",
+    "bublik_service/http_api.py": "5d1856b49c30d7704725ea98baf82643631c4e8f161557ff0f9ebfd75f609efd",
+    "bublik_service/inference/__init__.py": "1d032dd738b97b782bf236ad8774e28b0b5e41519611c2c7b7ff1e8da1b9692c",
+    "bublik_service/inference/context.py": "0146b5dc7332c40b2d2d1d7f6b65d3959aad75e450c9a7d1fe756ac51635a7a5",
+    "bublik_service/inference/coordinator.py": "e0bfa5b9419d2839c41aa4fa6402ec3ecbd88e8e63cac576e2d73d3ef98b6e1a",
+    "bublik_service/inference/engine.py": "f8931566c0b0a79a1cd1e15192a5ec11942309c900286cee6972f8d30b5cd2c8",
+    "bublik_service/inference/ollama.py": "d83d4ceeaa2d30dedc4310f9769b5339a61c95461dd73ecba297233274402311",
+    "bublik_service/local_cli.py": "3bd4b7e5bdeb686536eaa81e7d7a7fef932a596cf2ca55bc268f5a91bf470672",
+    "bublik_service/security.py": "5138f990c78cd93bdb6470b3a767116638d196e33dc4b9eac2e030a2227059bd",
+    "bublik_service/service.py": "7f86ce124b01b1313a50e8124e4e82c3107aa09dafe19125f9afe355a84c8a65",
+    "bublik_service/settings.py": "adae1b9264139675bf5a571ef084d1c2c590de8895ce4a9f5d57ec7f1b0697d3",
+    "bublik_service/storage/__init__.py": "124eb9e8a8b91aab94b5c5cd0d71ad4eb925a63be0c81156428a56b41068012e",
+    "bublik_service/storage/database.py": "4c359bd1704df8b6d8f65fd87e565dc40829e29ce410d205ec209b2cc7942f94",
+    "bublik_service/storage/migrations/001_initial.sql": "df70b5f82e79f792aba78a19655a1d65f5d984c4d05a21cc3db02bd3753c7d70",
+    "bublik_service/storage/migrations/002_auth.sql": "f8e70cc1953bb0a0e200ed77ad711e0377a1246907f7e5a9f1100494e0ea76dd",
+    "bublik_service/storage/repository.py": "db19c5abbba2bdf3fc9a84c858e1f7abd685418904f8e45bffa10e1f58f0b7be",
+    "bublik_service/storage/worker.py": "5e4b72eb2c47d71d545e373cbbb0213bfa48df13a72fc9d45a1f4b17264ed43e",
+    "bublik_service/web_ui/app.css": "49c70d3684f07b1813befd12cdae28a7828bb5fd93311c85c43b415f10966428",
+    "bublik_service/web_ui/app.js": "8e5bc4080ed9e57128f58ac7f8d483599bc989b19086563829e89648198d895e",
+    "bublik_service/web_ui/icon-180.png": "deca0015cbba7f5539a83a26bb7b099549e7a04c3a1519e139de70933257a59b",
+    "bublik_service/web_ui/icon-192.png": "563f74c4fcf660ff685650ccade4e70387e2b4fa39f8370699945e2248023c99",
+    "bublik_service/web_ui/icon-512.png": "9ef2adc236de8ce9b647247e2b01ee7f76ace890e95b684aa7bfa67c532f09d3",
+    "bublik_service/web_ui/index.html": "3748ead4c666ec271f964ae028eed0ac81f298256ff0bedfec7d55eddd4abb2d",
+    "bublik_service/web_ui/manifest.webmanifest": "7d8b95b21b7b1660c66dc061d6292e824d17b949e8d439d916489e6267e547c1",
+    "deploy/Caddyfile.lan.template": "0adedcfe1a557cc5f8b9012acba22c547f6fc0437dfa6707f814a35aec482883",
+    "deploy/tailnet-policy.example.jsonc": "b5c165be972f91b04af01cc3c4d1b03760d2e3fe8b1655adfdbfe96f15eb6f8b",
+    "pyproject.toml": "57625934bac9ae81dc395560a9d5cd4943bbcf628dad1be58e551d8e6b2f0fe6",
+    "requirements.browser.lock": "5339e9421bdd9d112f155eea25f397167febdc3ce6b297fa21aa8650eef9a34d",
+    "requirements.lock": "b75817dc36eb6819b3eb945a2b21cb2dbb2f1565a07d927b2086fb2652d64da2",
+    "scripts/acceptance_support.py": "8c4ad61570b9b69c1c09acb07b5f40f7ab64ac4fd5c608244a5ed7a24099f3a1",
+    "scripts/check_acceptance_live.py": "9768a569cc5225a4e421750347091bcbddc8a032142d619bf242e32a3434989b",
+    "scripts/check_browser_https.py": "ef5e6a3ce2f1679a7af900e5bda173d8bc3a5882da6c0a7c4e1b1fbf97ebe12b",
+    "scripts/check_device_handoff.py": "9f1e44e4b89e6a42c34787d40bb39967c56373afddb937d33a450bf26784ae62",
+    "scripts/check_http_live.py": "0b9b7a19208372e03016c4f37db5abb4377157908605eaa125685eb2f33657e6",
+    "scripts/check_inference_live.py": "4de6843eb23ee61d48c2a5ac41504554606db1a2cdae06cfdf80c42036fa8d02",
+    "scripts/check_launchd_live.py": "aeb523a51f02260852939a4b3157f38e62971fcd461da32361e9b1f523c6e50c",
+    "scripts/check_network_live.py": "bb36ac14dde5b30a039012dd3b07fee79954aa9a01f09026bb945439e88606c4",
+    "scripts/check_network_ui_live.py": "d75fe0036a6dd95e3a1237338ce1f6354985f5d12e74a872666fc9dd343f6e7d",
+    "scripts/check_prompt_compare.py": "2e2adc252f43364957046136fa06328ad6f8da99f9535442a73fd9ac5b22c79e",
+    "scripts/check_pwa.py": "45b4a3bb7f2cfe8138b8a7e9fac4ae53a65182d309317a2e1cfc2aa32dce6cf5",
+    "scripts/check_recovery_live.py": "f43aab0a1d8620b60d7879964d2f5aafbdc08e510ff5a09e3ed38e0674b5c5b0",
+    "scripts/check_storage.py": "4af12271ecd5b4e2b29819ef2736beb2e5f585bea5247d0e3171e63c56cbfe7a",
+    "scripts/check_web_ui.py": "426e99ea5f9e58a0cd5e6a015d8ccd00b051b4a7a17972c6f0df9aab91d0102b",
+    "scripts/check_web_ui_live.py": "0f2a876d3fc500d6de87eebe77733fdb291e361f132f8289654049697a46de74",
+    "scripts/configure_launchd.py": "ab650425b4ee0a505a1604b2d986cdbe36dd07510e35cd888b5ac9803f60f56d",
+    "scripts/configure_network.py": "f237a80f98b7a1011b6de40fdc8109cc4da4cde93484a03bed299bc22771c060",
+    "scripts/install_launchd.py": "2fd5be68cfb72490a1490f3f2e2d88806dc469854cd26c787d1b80ccabd920fd",
+    "scripts/network_common.py": "ce7d07fc6cd5e9b74426fe7e95d37c362e9dc8726b4f2aa5b0ce82b8f1bf9bfa",
+    "scripts/resource_observer.py": "fb2c338a63605af9398c8b54724b7d77cbe4e0ca35be744d3d444916b4c02bf5",
+    "scripts/verify_report.py": "761a4797e9cdc9f244370f52a995936e24f719130847b93a00e4f96b4782c661",
+    "tests/browser_fixture.py": "b15288a9bb512e01f09b2b5ca198a88a003b0a030af116e3d788bd59653dc3c8",
+    "tests/check_proxy_integration.py": "866dd2bf40cae8217b2e53215ea37083499e03a84a7c06041d5225c5d636b5e7",
+    "tests/check_ui_live_harness.py": "533a048d972f63e60f8a25fa3812f6efa3cd661865623f404d6334708c4128c9",
+    "tests/test_acceptance.py": "a6a82a42c061953c2e26407e51973af29e389279bfeaf7167c4d0450e6ab2a1b",
+    "tests/test_http.py": "1f54b7f6b5975b63f8e0ca16c9472c16bf7ede7ad0af0f2a1adef209b5c943c7",
+    "tests/test_http_live_quota.py": "65f6f9d5cb09c9b84b1d99386d2d442b1a17dac66f4a47d687fa9896f562be03",
+    "tests/test_http_network.py": "f24d17abe3f5aed8d07906f685b406ce3080020799e60150fe7faa20e3069258",
+    "tests/test_inference.py": "4b0179ed5a723a06a19cecd5d288becfe45149cddd01a4c08a6b33fe91c1114d",
+    "tests/test_networking.py": "2e9c7dfa85fa359ecd368ff34e63e67855c7a49d47f1f874ad3f32bed1d89403",
+    "tests/test_operations.py": "240b0d629b90fbbdf4a34f59c3826fdf679672aa805b90ad0bd47f854fb13f99",
+    "tests/test_prompt_compare.py": "eef15693b2b109b2c711c66e3d1aa5cd2a5202fdc6eacfdf1772df96823aad78",
+    "tests/test_storage.py": "cb0486516fe8e4c1c8db40e51ce9169e844a7912f87244051c60c3e112786f04",
+    "tests/test_web_ui.py": "b6e166287a8b64abcaed5b099f6b5e59e1b21291247f6d25f44605362dfd50f5"
+  },
+  "checks": [
+    {
+      "name": "api_stopped_before_experiment",
+      "passed": true
+    },
+    {
+      "name": "same_reference_model_identity",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "same_model_and_engine_epoch",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "same_model_and_engine_epoch",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "same_model_and_engine_epoch",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "api_stopped_before_request",
+      "passed": true
+    },
+    {
+      "name": "control_response_completed",
+      "passed": true
+    },
+    {
+      "name": "same_model_and_engine_epoch",
+      "passed": true
+    },
+    {
+      "name": "api_still_stopped",
+      "passed": true
+    }
+  ],
+  "baseline_sha256": "5bbc3c5a5899f29fd2bea7c59d4bf8566da1b9ad4796db9fa9165a1a81104653",
+  "operator_exclusive_use_confirmed": true,
+  "environment": {
+    "python": "3.13.3",
+    "system": "Darwin",
+    "machine": "arm64"
+  },
+  "evidence": "Actual local Ollama responses to frozen SYNTHETIC contexts; no API/working DB writes or cloud fallback",
+  "not_run": [
+    "candidate as deployed API prompt",
+    "dynamic candidate multi-turn history",
+    "concurrent inference",
+    "physical device observation",
+    "RSS/CPU/GPU measurements",
+    "first-token timing",
+    "forced cold eviction"
+  ],
+  "frozen_cases": [
+    {
+      "case": "remember_ru",
+      "reference_context_sha256": "2eefc1a64421d50f7bc10331b0ed4b76db7a897e6fb2f8b805c10ee79a217d4e",
+      "omitted_turns": 0
+    },
+    {
+      "case": "recall_ru",
+      "reference_context_sha256": "b9ae3a8eb7d3e74792c8f524fc2e26c860949455d8b85696d484baa6650dee86",
+      "omitted_turns": 0
+    },
+    {
+      "case": "remember_en",
+      "reference_context_sha256": "a7a9d20eae6c3d2b54b6711dc801372e067787c831fc3a4b3dfd2f30eaee93a9",
+      "omitted_turns": 0
+    },
+    {
+      "case": "recall_en",
+      "reference_context_sha256": "29f996c5d2061745d7dcbaae8c40adc64cb742bcfbbd33bc0a2b75ee7450de62",
+      "omitted_turns": 0
+    },
+    {
+      "case": "correct_ru",
+      "reference_context_sha256": "3bce23838aabd5622ef2ddd71aedf9590ddb6e3dfd8b49a1bcc0fa5d75327a6b",
+      "omitted_turns": 0
+    },
+    {
+      "case": "recall_correction",
+      "reference_context_sha256": "2e78d3a3ab62817b415ac2c41f5bcf3f72a06ff56e961efce3f9e22996606512",
+      "omitted_turns": 0
+    },
+    {
+      "case": "topic_change",
+      "reference_context_sha256": "309df8f7d420cac6f15f4cd9001e1e00c5e791ab30c9c0d7f6917ec4c5089256",
+      "omitted_turns": 0
+    },
+    {
+      "case": "continuity",
+      "reference_context_sha256": "ac6b81e5a99e60a7ed916bc8610e6b86841075c0c8f446de1993ee5202fd9b36",
+      "omitted_turns": 0
+    },
+    {
+      "case": "long_a",
+      "reference_context_sha256": "c9b22a298095f5f3f09bb2d67fd9b055ab65ca67ed680f550ea1f42583444660",
+      "omitted_turns": 0
+    },
+    {
+      "case": "long_b",
+      "reference_context_sha256": "ba9a5fa9c6d821409f9daaa598514eab3d37ee67887d7f8408b2f3fdeba6adb2",
+      "omitted_turns": 9
+    },
+    {
+      "case": "russian-greeting-0",
+      "reference_context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "omitted_turns": 0
+    },
+    {
+      "case": "concurrent-0",
+      "reference_context_sha256": "ad479156c20f87bb09f5c5497a2956568bafdb0b8cf453ca39bc58d1a338b1d1",
+      "omitted_turns": 0
+    },
+    {
+      "case": "russian-greeting-1",
+      "reference_context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "omitted_turns": 0
+    },
+    {
+      "case": "concurrent-1",
+      "reference_context_sha256": "a45d07a7d978958b89cb451561a6b661fc1a1400eceede3f8ee8b97e3148cc53",
+      "omitted_turns": 0
+    },
+    {
+      "case": "russian-greeting-2",
+      "reference_context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "omitted_turns": 0
+    },
+    {
+      "case": "concurrent-2",
+      "reference_context_sha256": "0f8b4489de81b76706a1857bf230eaee7c38a89546b10ce7489111a43196ced2",
+      "omitted_turns": 0
+    }
+  ],
+  "variants": {
+    "private-chat-v1": {
+      "system_prompt": "You are Bublik, a private local AI assistant. Reply in the user's language. Be clear about uncertainty and do not claim to have used tools or sources that were not provided.",
+      "sha256": "6af998f5412d460f956e6ff723c7319b0410f3bb716b95799f712c32054659f4"
+    },
+    "candidate-latest-request-v1": {
+      "system_prompt": "You are Bublik, a private local AI assistant. Follow the latest user request and its output format; use history as context. Reply in the user's language. State uncertainty; don't claim unprovided tools or sources.",
+      "sha256": "5bdf464e0468ca5b66da4048a6ab119e7f04042ea4dca0f1c47e8ab0fc650139"
+    }
+  },
+  "records": [
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "remember_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "2eefc1a64421d50f7bc10331b0ed4b76db7a897e6fb2f8b805c10ee79a217d4e",
+      "history_and_request_sha256": "86a1a1c6c3b95fd98b5f645d56796050bbbda9b80f684f3663ef847d6c0c5467",
+      "input_upper_bound": 673,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "запомнил",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 77,
+        "output_tokens": 6,
+        "inference_seconds": 0.40037,
+        "load_seconds": 1.560523833,
+        "tokens_per_second": 14.986137822514173,
+        "client_total_seconds": 2.83084479199988
+      },
+      "matched": null
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "recall_ru",
+      "method": "exact_literal",
+      "expected": "мандарин",
+      "context_sha256": "b9ae3a8eb7d3e74792c8f524fc2e26c860949455d8b85696d484baa6650dee86",
+      "history_and_request_sha256": "a9e38575b3858a4126dbc5f6d94ac8d6fd745916c9d3c430f4f8d401bfdd64ad",
+      "input_upper_bound": 1044,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "мандарин",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 111,
+        "output_tokens": 5,
+        "inference_seconds": 0.320837,
+        "load_seconds": 0.0025875,
+        "tokens_per_second": 15.584237478844399,
+        "client_total_seconds": 0.6420250410001245
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "remember_en",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "a7a9d20eae6c3d2b54b6711dc801372e067787c831fc3a4b3dfd2f30eaee93a9",
+      "history_and_request_sha256": "4a04874051074c37bdf2174f2d6292eeaf370fb43af6422bba0a48b08dff403e",
+      "input_upper_bound": 1387,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "remembered",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 139,
+        "output_tokens": 3,
+        "inference_seconds": 0.161505,
+        "load_seconds": 0.0029275,
+        "tokens_per_second": 18.575276307235068,
+        "client_total_seconds": 0.4819573750000927
+      },
+      "matched": null
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "recall_en",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "29f996c5d2061745d7dcbaae8c40adc64cb742bcfbbd33bc0a2b75ee7450de62",
+      "history_and_request_sha256": "8a51ac8aa9236e6e8565e94ee01f9f745d6243f53b1fb4d62cd45657252bd598",
+      "input_upper_bound": 1718,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 166,
+        "output_tokens": 3,
+        "inference_seconds": 0.160552,
+        "load_seconds": 0.0019855,
+        "tokens_per_second": 18.685534904579203,
+        "client_total_seconds": 0.477551291999589
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "correct_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "3bce23838aabd5622ef2ddd71aedf9590ddb6e3dfd8b49a1bcc0fa5d75327a6b",
+      "history_and_request_sha256": "24c153a2cef7cc88c89aa0eb2cd18a6e94bb4b385af25a57b6d0dfe1468123bc",
+      "input_upper_bound": 2127,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "принято",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 206,
+        "output_tokens": 5,
+        "inference_seconds": 0.320328,
+        "load_seconds": 0.001915667,
+        "tokens_per_second": 15.609000774206438,
+        "client_total_seconds": 0.9051087920006466
+      },
+      "matched": null
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "recall_correction",
+      "method": "exact_literal",
+      "expected": "сапфир",
+      "context_sha256": "2e78d3a3ab62817b415ac2c41f5bcf3f72a06ff56e961efce3f9e22996606512",
+      "history_and_request_sha256": "f0d59c5e996dadff231e140b6f709d3a0f104f41f9c1c660ae51f299a542cde1",
+      "input_upper_bound": 2498,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "сапфир",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 238,
+        "output_tokens": 5,
+        "inference_seconds": 0.320771,
+        "load_seconds": 0.003904042,
+        "tokens_per_second": 15.587444002107423,
+        "client_total_seconds": 0.6431664589999855
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "topic_change",
+      "method": "exact_literal",
+      "expected": "4",
+      "context_sha256": "309df8f7d420cac6f15f4cd9001e1e00c5e791ab30c9c0d7f6917ec4c5089256",
+      "history_and_request_sha256": "56f1eb25ba0f116a62418107de6bcfeaaf77342ea7c98707733f53f33e808220",
+      "input_upper_bound": 2838,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "4",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 269,
+        "output_tokens": 2,
+        "inference_seconds": 0.08182,
+        "load_seconds": 0.0022565,
+        "tokens_per_second": 24.443901246638962,
+        "client_total_seconds": 0.4030783750004048
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "continuity",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "ac6b81e5a99e60a7ed916bc8610e6b86841075c0c8f446de1993ee5202fd9b36",
+      "history_and_request_sha256": "24fc0343ee9514726c0d4f9b63b2a960d9742e18e228411ae1d43c6f695fc6a0",
+      "input_upper_bound": 3211,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 303,
+        "output_tokens": 3,
+        "inference_seconds": 0.162649,
+        "load_seconds": 0.002545667,
+        "tokens_per_second": 18.44462615816882,
+        "client_total_seconds": 0.7518859579995478
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "long_a",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "c9b22a298095f5f3f09bb2d67fd9b055ab65ca67ed680f550ea1f42583444660",
+      "history_and_request_sha256": "68656521d9a6870f11c0a3ad31ca2102dca425be2c8b5928961774c28556b9af",
+      "input_upper_bound": 6613,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1542,
+        "output_tokens": 3,
+        "inference_seconds": 0.165415,
+        "load_seconds": 0.002423208,
+        "tokens_per_second": 18.136202883656257,
+        "client_total_seconds": 11.648695750000115
+      },
+      "matched": false
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "long_b",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "ba9a5fa9c6d821409f9daaa598514eab3d37ee67887d7f8408b2f3fdeba6adb2",
+      "history_and_request_sha256": "73e074a18326ca668f74caf260d2b2dd0e9d929520157fe262a23fd235272bdb",
+      "input_upper_bound": 3664,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1271,
+        "output_tokens": 2,
+        "inference_seconds": 0.083409,
+        "load_seconds": 0.00284675,
+        "tokens_per_second": 23.97822776918558,
+        "client_total_seconds": 11.39781983299963
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-0",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.34772,
+        "load_seconds": 0.002291958,
+        "tokens_per_second": 12.844562866667465,
+        "client_total_seconds": 3.703032166000412
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "concurrent-0",
+      "method": "exact_literal",
+      "expected": "queue-0",
+      "context_sha256": "ad479156c20f87bb09f5c5497a2956568bafdb0b8cf453ca39bc58d1a338b1d1",
+      "history_and_request_sha256": "34a8900fa58ac22fb8055eaaad461093f7c33f07dafd4551a91314e9df901c9b",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-0",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.240323,
+        "load_seconds": 0.002670958,
+        "tokens_per_second": 16.644266258327335,
+        "client_total_seconds": 0.5646849579998161
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-1",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.347319,
+        "load_seconds": 0.003003375,
+        "tokens_per_second": 12.84610161146876,
+        "client_total_seconds": 3.6672545829997034
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "concurrent-1",
+      "method": "exact_literal",
+      "expected": "queue-1",
+      "context_sha256": "a45d07a7d978958b89cb451561a6b661fc1a1400eceede3f8ee8b97e3148cc53",
+      "history_and_request_sha256": "2b6fb7aef0bcd62876db53693eb3e3dd2cc74c0090cf2a814873c53a0c1d2908",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-1",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.240266,
+        "load_seconds": 0.002207667,
+        "tokens_per_second": 16.648214895157867,
+        "client_total_seconds": 0.560209666999981
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-2",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.345243,
+        "load_seconds": 0.002276083,
+        "tokens_per_second": 12.854073680148199,
+        "client_total_seconds": 3.6635953750001136
+      },
+      "matched": true
+    },
+    {
+      "block": 0,
+      "variant": "private-chat-v1",
+      "case": "concurrent-2",
+      "method": "exact_literal",
+      "expected": "queue-2",
+      "context_sha256": "0f8b4489de81b76706a1857bf230eaee7c38a89546b10ce7489111a43196ced2",
+      "history_and_request_sha256": "1af720aa18e6719519b40e7f9447a46825a1b422d81730f9efeba9134b4981d9",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-2",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.239269,
+        "load_seconds": 0.00253375,
+        "tokens_per_second": 16.717585646280963,
+        "client_total_seconds": 0.558252791999621
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "remember_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "d1c3f56d4cc4c9ee7513aa424863110f3fbff1a7f7ae28b95d200fb2b906d068",
+      "history_and_request_sha256": "86a1a1c6c3b95fd98b5f645d56796050bbbda9b80f684f3663ef847d6c0c5467",
+      "input_upper_bound": 713,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "запомнил",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 85,
+        "output_tokens": 6,
+        "inference_seconds": 0.399797,
+        "load_seconds": 0.005326542,
+        "tokens_per_second": 15.007616365305392,
+        "client_total_seconds": 1.2665144590000637
+      },
+      "matched": null
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_ru",
+      "method": "exact_literal",
+      "expected": "мандарин",
+      "context_sha256": "564a7cc8693505413e804d3c9a36b03b20b567b1de5a196fff61a933ff09f1d5",
+      "history_and_request_sha256": "a9e38575b3858a4126dbc5f6d94ac8d6fd745916c9d3c430f4f8d401bfdd64ad",
+      "input_upper_bound": 1084,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "мандарин",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 119,
+        "output_tokens": 5,
+        "inference_seconds": 0.319573,
+        "load_seconds": 0.002437959,
+        "tokens_per_second": 15.645877467746024,
+        "client_total_seconds": 0.6409791249998307
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "remember_en",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "213517b566e2e451bdbfe32a4eda2b37c70accaf4bd91f569a6e3b56718a7192",
+      "history_and_request_sha256": "4a04874051074c37bdf2174f2d6292eeaf370fb43af6422bba0a48b08dff403e",
+      "input_upper_bound": 1427,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "remembered",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 147,
+        "output_tokens": 3,
+        "inference_seconds": 0.162206,
+        "load_seconds": 0.002416833,
+        "tokens_per_second": 18.495000184950005,
+        "client_total_seconds": 0.479651957999522
+      },
+      "matched": null
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_en",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "c4d3dfe1593a161bcbfac3adfdb41f0b88eb86ae415e9d7102d7d0f485017996",
+      "history_and_request_sha256": "8a51ac8aa9236e6e8565e94ee01f9f745d6243f53b1fb4d62cd45657252bd598",
+      "input_upper_bound": 1758,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 174,
+        "output_tokens": 3,
+        "inference_seconds": 0.162763,
+        "load_seconds": 0.002831125,
+        "tokens_per_second": 18.431707451939324,
+        "client_total_seconds": 0.48622237500057963
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "correct_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "6dbe8f6fd041a449e98aaaf7e3847ef8d2e5c3c3a310c50587818bee0bd1491a",
+      "history_and_request_sha256": "24c153a2cef7cc88c89aa0eb2cd18a6e94bb4b385af25a57b6d0dfe1468123bc",
+      "input_upper_bound": 2167,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "принято",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 214,
+        "output_tokens": 5,
+        "inference_seconds": 0.321699,
+        "load_seconds": 0.003729166,
+        "tokens_per_second": 15.54247914976422,
+        "client_total_seconds": 0.9125204169995413
+      },
+      "matched": null
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_correction",
+      "method": "exact_literal",
+      "expected": "сапфир",
+      "context_sha256": "82bbf1efc5755a7e5588051a90c1362ef8933f14ccd67b59188a6b5e5c1fe833",
+      "history_and_request_sha256": "f0d59c5e996dadff231e140b6f709d3a0f104f41f9c1c660ae51f299a542cde1",
+      "input_upper_bound": 2538,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "сапфир",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 246,
+        "output_tokens": 5,
+        "inference_seconds": 0.321001,
+        "load_seconds": 0.002523167,
+        "tokens_per_second": 15.576275463316314,
+        "client_total_seconds": 0.6437062499999229
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "topic_change",
+      "method": "exact_literal",
+      "expected": "4",
+      "context_sha256": "edbcfa1543d25169b8f9a2dcd5ec524d2e7079cb97d32e4153ef651772183ebb",
+      "history_and_request_sha256": "56f1eb25ba0f116a62418107de6bcfeaaf77342ea7c98707733f53f33e808220",
+      "input_upper_bound": 2878,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "4",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 277,
+        "output_tokens": 2,
+        "inference_seconds": 0.081651,
+        "load_seconds": 0.002525708,
+        "tokens_per_second": 24.4944948622797,
+        "client_total_seconds": 0.40655991600033303
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "continuity",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "7f96df64d41feb7b503545c64eeebd88279a95198c81a4d3368237719bc1698a",
+      "history_and_request_sha256": "24fc0343ee9514726c0d4f9b63b2a960d9742e18e228411ae1d43c6f695fc6a0",
+      "input_upper_bound": 3251,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 311,
+        "output_tokens": 3,
+        "inference_seconds": 0.160665,
+        "load_seconds": 0.00230675,
+        "tokens_per_second": 18.672392867145923,
+        "client_total_seconds": 0.750905832999706
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "long_a",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "b6a9aa9515e84ec1aec54cb404bb51f86b16620ca579496c0269f8ef7cf59fe6",
+      "history_and_request_sha256": "68656521d9a6870f11c0a3ad31ca2102dca425be2c8b5928961774c28556b9af",
+      "input_upper_bound": 6653,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1550,
+        "output_tokens": 2,
+        "inference_seconds": 0.08349,
+        "load_seconds": 0.002298084,
+        "tokens_per_second": 23.95496466642712,
+        "client_total_seconds": 11.503420583000661
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "long_b",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "3c96665617f7f34f62a5c578b5a90a00f7b68164ccea073b7b1d965368b7058d",
+      "history_and_request_sha256": "73e074a18326ca668f74caf260d2b2dd0e9d929520157fe262a23fd235272bdb",
+      "input_upper_bound": 3704,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1279,
+        "output_tokens": 2,
+        "inference_seconds": 0.083232,
+        "load_seconds": 0.002414958,
+        "tokens_per_second": 24.029219530949636,
+        "client_total_seconds": 11.413739708000321
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-0",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.223491,
+        "load_seconds": 0.001856708,
+        "tokens_per_second": 12.785631601914151,
+        "client_total_seconds": 4.595842832999551
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-0",
+      "method": "exact_literal",
+      "expected": "queue-0",
+      "context_sha256": "43a5f9a6bc60fc184842b2451fffa03f2f079e324707144782a6915d0a198528",
+      "history_and_request_sha256": "34a8900fa58ac22fb8055eaaad461093f7c33f07dafd4551a91314e9df901c9b",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-0",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.240374,
+        "load_seconds": 0.002171333,
+        "tokens_per_second": 16.64073485485119,
+        "client_total_seconds": 0.5646390410001914
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-1",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.221756999,
+        "load_seconds": 0.002172292,
+        "tokens_per_second": 12.790883040589707,
+        "client_total_seconds": 4.536686874999759
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-1",
+      "method": "exact_literal",
+      "expected": "queue-1",
+      "context_sha256": "92d235cd2cc58bede3a668bdfa2d8ade282a170d9a267c8ddd6b67876cfacf09",
+      "history_and_request_sha256": "2b6fb7aef0bcd62876db53693eb3e3dd2cc74c0090cf2a814873c53a0c1d2908",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-1",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.241173,
+        "load_seconds": 0.002104958,
+        "tokens_per_second": 16.585604524552913,
+        "client_total_seconds": 0.5604854160001196
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-2",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.221468,
+        "load_seconds": 0.00232475,
+        "tokens_per_second": 12.791758696263955,
+        "client_total_seconds": 4.537344833000134
+      },
+      "matched": true
+    },
+    {
+      "block": 1,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-2",
+      "method": "exact_literal",
+      "expected": "queue-2",
+      "context_sha256": "21ea8c1f0f1fee36a72a0e683ded59c6dfe6f622267fff5ec5295439e9f01140",
+      "history_and_request_sha256": "1af720aa18e6719519b40e7f9447a46825a1b422d81730f9efeba9134b4981d9",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-2",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.240605,
+        "load_seconds": 0.004352542,
+        "tokens_per_second": 16.624758421479186,
+        "client_total_seconds": 0.5628209999995306
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "remember_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "d1c3f56d4cc4c9ee7513aa424863110f3fbff1a7f7ae28b95d200fb2b906d068",
+      "history_and_request_sha256": "86a1a1c6c3b95fd98b5f645d56796050bbbda9b80f684f3663ef847d6c0c5467",
+      "input_upper_bound": 713,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "запомнил",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 85,
+        "output_tokens": 6,
+        "inference_seconds": 0.399541,
+        "load_seconds": 0.0057645,
+        "tokens_per_second": 15.017232274034455,
+        "client_total_seconds": 0.7273840829993787
+      },
+      "matched": null
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_ru",
+      "method": "exact_literal",
+      "expected": "мандарин",
+      "context_sha256": "564a7cc8693505413e804d3c9a36b03b20b567b1de5a196fff61a933ff09f1d5",
+      "history_and_request_sha256": "a9e38575b3858a4126dbc5f6d94ac8d6fd745916c9d3c430f4f8d401bfdd64ad",
+      "input_upper_bound": 1084,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "мандарин",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 119,
+        "output_tokens": 5,
+        "inference_seconds": 0.320547,
+        "load_seconds": 0.002096291,
+        "tokens_per_second": 15.59833659338568,
+        "client_total_seconds": 0.6390288329994291
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "remember_en",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "213517b566e2e451bdbfe32a4eda2b37c70accaf4bd91f569a6e3b56718a7192",
+      "history_and_request_sha256": "4a04874051074c37bdf2174f2d6292eeaf370fb43af6422bba0a48b08dff403e",
+      "input_upper_bound": 1427,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "remembered",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 147,
+        "output_tokens": 3,
+        "inference_seconds": 0.161484,
+        "load_seconds": 0.002324375,
+        "tokens_per_second": 18.577691907557405,
+        "client_total_seconds": 0.48010825000073964
+      },
+      "matched": null
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_en",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "c4d3dfe1593a161bcbfac3adfdb41f0b88eb86ae415e9d7102d7d0f485017996",
+      "history_and_request_sha256": "8a51ac8aa9236e6e8565e94ee01f9f745d6243f53b1fb4d62cd45657252bd598",
+      "input_upper_bound": 1758,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 174,
+        "output_tokens": 3,
+        "inference_seconds": 0.161356,
+        "load_seconds": 0.002080292,
+        "tokens_per_second": 18.59242916284489,
+        "client_total_seconds": 0.4802845410004011
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "correct_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "6dbe8f6fd041a449e98aaaf7e3847ef8d2e5c3c3a310c50587818bee0bd1491a",
+      "history_and_request_sha256": "24c153a2cef7cc88c89aa0eb2cd18a6e94bb4b385af25a57b6d0dfe1468123bc",
+      "input_upper_bound": 2167,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "принято",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 214,
+        "output_tokens": 5,
+        "inference_seconds": 0.320994,
+        "load_seconds": 0.002933375,
+        "tokens_per_second": 15.576615139223787,
+        "client_total_seconds": 0.9112910409994583
+      },
+      "matched": null
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "recall_correction",
+      "method": "exact_literal",
+      "expected": "сапфир",
+      "context_sha256": "82bbf1efc5755a7e5588051a90c1362ef8933f14ccd67b59188a6b5e5c1fe833",
+      "history_and_request_sha256": "f0d59c5e996dadff231e140b6f709d3a0f104f41f9c1c660ae51f299a542cde1",
+      "input_upper_bound": 2538,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "сапфир",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 246,
+        "output_tokens": 5,
+        "inference_seconds": 0.322112,
+        "load_seconds": 0.002579334,
+        "tokens_per_second": 15.52255116232863,
+        "client_total_seconds": 0.6440561669996896
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "topic_change",
+      "method": "exact_literal",
+      "expected": "4",
+      "context_sha256": "edbcfa1543d25169b8f9a2dcd5ec524d2e7079cb97d32e4153ef651772183ebb",
+      "history_and_request_sha256": "56f1eb25ba0f116a62418107de6bcfeaaf77342ea7c98707733f53f33e808220",
+      "input_upper_bound": 2878,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "4",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 277,
+        "output_tokens": 2,
+        "inference_seconds": 0.082012,
+        "load_seconds": 0.001781334,
+        "tokens_per_second": 24.38667512071404,
+        "client_total_seconds": 0.409406540999953
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "continuity",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "7f96df64d41feb7b503545c64eeebd88279a95198c81a4d3368237719bc1698a",
+      "history_and_request_sha256": "24fc0343ee9514726c0d4f9b63b2a960d9742e18e228411ae1d43c6f695fc6a0",
+      "input_upper_bound": 3251,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 311,
+        "output_tokens": 3,
+        "inference_seconds": 0.161314,
+        "load_seconds": 0.002194292,
+        "tokens_per_second": 18.597269920775627,
+        "client_total_seconds": 0.749198792000243
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "long_a",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "b6a9aa9515e84ec1aec54cb404bb51f86b16620ca579496c0269f8ef7cf59fe6",
+      "history_and_request_sha256": "68656521d9a6870f11c0a3ad31ca2102dca425be2c8b5928961774c28556b9af",
+      "input_upper_bound": 6653,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1550,
+        "output_tokens": 2,
+        "inference_seconds": 0.084017,
+        "load_seconds": 0.00187725,
+        "tokens_per_second": 23.804706190413846,
+        "client_total_seconds": 11.546541833000447
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "long_b",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "3c96665617f7f34f62a5c578b5a90a00f7b68164ccea073b7b1d965368b7058d",
+      "history_and_request_sha256": "73e074a18326ca668f74caf260d2b2dd0e9d929520157fe262a23fd235272bdb",
+      "input_upper_bound": 3704,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1279,
+        "output_tokens": 2,
+        "inference_seconds": 0.081419,
+        "load_seconds": 0.002317459,
+        "tokens_per_second": 24.56429089033272,
+        "client_total_seconds": 0.18907866700010345
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-0",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.219354,
+        "load_seconds": 0.002509375,
+        "tokens_per_second": 12.798167681592965,
+        "client_total_seconds": 4.328252667000015
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-0",
+      "method": "exact_literal",
+      "expected": "queue-0",
+      "context_sha256": "43a5f9a6bc60fc184842b2451fffa03f2f079e324707144782a6915d0a198528",
+      "history_and_request_sha256": "34a8900fa58ac22fb8055eaaad461093f7c33f07dafd4551a91314e9df901c9b",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-0",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.240226,
+        "load_seconds": 0.002235417,
+        "tokens_per_second": 16.65098698725367,
+        "client_total_seconds": 0.5613407500004541
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-1",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.223508,
+        "load_seconds": 0.002711875,
+        "tokens_per_second": 12.785580138595689,
+        "client_total_seconds": 4.540665625000656
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-1",
+      "method": "exact_literal",
+      "expected": "queue-1",
+      "context_sha256": "92d235cd2cc58bede3a668bdfa2d8ade282a170d9a267c8ddd6b67876cfacf09",
+      "history_and_request_sha256": "2b6fb7aef0bcd62876db53693eb3e3dd2cc74c0090cf2a814873c53a0c1d2908",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-1",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.240137,
+        "load_seconds": 0.001957625,
+        "tokens_per_second": 16.657158205524347,
+        "client_total_seconds": 0.560422667000239
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "russian-greeting-2",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "282c30d1f1060a97c2d5f637a404036365181625bf3bac0af22a2983bdb54b50",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 685,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией, ответами на вопросы, написанием текстов и многим другим. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 78,
+        "output_tokens": 54,
+        "inference_seconds": 4.222979,
+        "load_seconds": 0.003259541,
+        "tokens_per_second": 12.787181750134208,
+        "client_total_seconds": 4.540652417000274
+      },
+      "matched": true
+    },
+    {
+      "block": 2,
+      "variant": "candidate-latest-request-v1",
+      "case": "concurrent-2",
+      "method": "exact_literal",
+      "expected": "queue-2",
+      "context_sha256": "21ea8c1f0f1fee36a72a0e683ded59c6dfe6f622267fff5ec5295439e9f01140",
+      "history_and_request_sha256": "1af720aa18e6719519b40e7f9447a46825a1b422d81730f9efeba9134b4981d9",
+      "input_upper_bound": 616,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-2",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 65,
+        "output_tokens": 4,
+        "inference_seconds": 0.240388,
+        "load_seconds": 0.002231042,
+        "tokens_per_second": 16.639765712098775,
+        "client_total_seconds": 0.5603251660004389
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "remember_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "2eefc1a64421d50f7bc10331b0ed4b76db7a897e6fb2f8b805c10ee79a217d4e",
+      "history_and_request_sha256": "86a1a1c6c3b95fd98b5f645d56796050bbbda9b80f684f3663ef847d6c0c5467",
+      "input_upper_bound": 673,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "запомнил",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 77,
+        "output_tokens": 6,
+        "inference_seconds": 0.398226,
+        "load_seconds": 0.007956084,
+        "tokens_per_second": 15.06682135269922,
+        "client_total_seconds": 0.7320281249994878
+      },
+      "matched": null
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "recall_ru",
+      "method": "exact_literal",
+      "expected": "мандарин",
+      "context_sha256": "b9ae3a8eb7d3e74792c8f524fc2e26c860949455d8b85696d484baa6650dee86",
+      "history_and_request_sha256": "a9e38575b3858a4126dbc5f6d94ac8d6fd745916c9d3c430f4f8d401bfdd64ad",
+      "input_upper_bound": 1044,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "мандарин",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 111,
+        "output_tokens": 5,
+        "inference_seconds": 0.319657,
+        "load_seconds": 0.003283459,
+        "tokens_per_second": 15.64176601795049,
+        "client_total_seconds": 0.643784207999488
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "remember_en",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "a7a9d20eae6c3d2b54b6711dc801372e067787c831fc3a4b3dfd2f30eaee93a9",
+      "history_and_request_sha256": "4a04874051074c37bdf2174f2d6292eeaf370fb43af6422bba0a48b08dff403e",
+      "input_upper_bound": 1387,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "remembered",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 139,
+        "output_tokens": 3,
+        "inference_seconds": 0.160635,
+        "load_seconds": 0.002059292,
+        "tokens_per_second": 18.675880100849753,
+        "client_total_seconds": 0.482019749999381
+      },
+      "matched": null
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "recall_en",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "29f996c5d2061745d7dcbaae8c40adc64cb742bcfbbd33bc0a2b75ee7450de62",
+      "history_and_request_sha256": "8a51ac8aa9236e6e8565e94ee01f9f745d6243f53b1fb4d62cd45657252bd598",
+      "input_upper_bound": 1718,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 166,
+        "output_tokens": 3,
+        "inference_seconds": 0.161326,
+        "load_seconds": 0.002178917,
+        "tokens_per_second": 18.595886589886316,
+        "client_total_seconds": 0.4787452079999639
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "correct_ru",
+      "method": "human_review",
+      "expected": null,
+      "context_sha256": "3bce23838aabd5622ef2ddd71aedf9590ddb6e3dfd8b49a1bcc0fa5d75327a6b",
+      "history_and_request_sha256": "24c153a2cef7cc88c89aa0eb2cd18a6e94bb4b385af25a57b6d0dfe1468123bc",
+      "input_upper_bound": 2127,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "принято",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 206,
+        "output_tokens": 5,
+        "inference_seconds": 0.320518,
+        "load_seconds": 0.002733416,
+        "tokens_per_second": 15.599747908073804,
+        "client_total_seconds": 0.9095505839995894
+      },
+      "matched": null
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "recall_correction",
+      "method": "exact_literal",
+      "expected": "сапфир",
+      "context_sha256": "2e78d3a3ab62817b415ac2c41f5bcf3f72a06ff56e961efce3f9e22996606512",
+      "history_and_request_sha256": "f0d59c5e996dadff231e140b6f709d3a0f104f41f9c1c660ae51f299a542cde1",
+      "input_upper_bound": 2498,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "сапфир",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 238,
+        "output_tokens": 5,
+        "inference_seconds": 0.320401,
+        "load_seconds": 0.002107834,
+        "tokens_per_second": 15.60544442745185,
+        "client_total_seconds": 0.6427454160002526
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "topic_change",
+      "method": "exact_literal",
+      "expected": "4",
+      "context_sha256": "309df8f7d420cac6f15f4cd9001e1e00c5e791ab30c9c0d7f6917ec4c5089256",
+      "history_and_request_sha256": "56f1eb25ba0f116a62418107de6bcfeaaf77342ea7c98707733f53f33e808220",
+      "input_upper_bound": 2838,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "4",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 269,
+        "output_tokens": 2,
+        "inference_seconds": 0.081904,
+        "load_seconds": 0.001737541,
+        "tokens_per_second": 24.41883180308654,
+        "client_total_seconds": 0.4022314580006423
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "continuity",
+      "method": "exact_literal",
+      "expected": "lantern",
+      "context_sha256": "ac6b81e5a99e60a7ed916bc8610e6b86841075c0c8f446de1993ee5202fd9b36",
+      "history_and_request_sha256": "24fc0343ee9514726c0d4f9b63b2a960d9742e18e228411ae1d43c6f695fc6a0",
+      "input_upper_bound": 3211,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 303,
+        "output_tokens": 3,
+        "inference_seconds": 0.16199,
+        "load_seconds": 0.002165958,
+        "tokens_per_second": 18.51966170751281,
+        "client_total_seconds": 0.750872249999702
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "long_a",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "c9b22a298095f5f3f09bb2d67fd9b055ab65ca67ed680f550ea1f42583444660",
+      "history_and_request_sha256": "68656521d9a6870f11c0a3ad31ca2102dca425be2c8b5928961774c28556b9af",
+      "input_upper_bound": 6613,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "lantern",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1542,
+        "output_tokens": 3,
+        "inference_seconds": 0.165856,
+        "load_seconds": 0.001961,
+        "tokens_per_second": 18.087979934400927,
+        "client_total_seconds": 11.630406249999396
+      },
+      "matched": false
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "long_b",
+      "method": "exact_literal",
+      "expected": "ok",
+      "context_sha256": "ba9a5fa9c6d821409f9daaa598514eab3d37ee67887d7f8408b2f3fdeba6adb2",
+      "history_and_request_sha256": "73e074a18326ca668f74caf260d2b2dd0e9d929520157fe262a23fd235272bdb",
+      "input_upper_bound": 3664,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "OK",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 1271,
+        "output_tokens": 2,
+        "inference_seconds": 0.081171,
+        "load_seconds": 0.0032525,
+        "tokens_per_second": 24.639341636791467,
+        "client_total_seconds": 0.19073070800004643
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-0",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.34547,
+        "load_seconds": 0.001908084,
+        "tokens_per_second": 12.853201493362667,
+        "client_total_seconds": 3.671418832999734
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "concurrent-0",
+      "method": "exact_literal",
+      "expected": "queue-0",
+      "context_sha256": "ad479156c20f87bb09f5c5497a2956568bafdb0b8cf453ca39bc58d1a338b1d1",
+      "history_and_request_sha256": "34a8900fa58ac22fb8055eaaad461093f7c33f07dafd4551a91314e9df901c9b",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-0",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.24035,
+        "load_seconds": 0.002479083,
+        "tokens_per_second": 16.642396505096734,
+        "client_total_seconds": 0.5088707499999146
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-1",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.346759,
+        "load_seconds": 0.002396333,
+        "tokens_per_second": 12.848251099048364,
+        "client_total_seconds": 3.6625832079998872
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "concurrent-1",
+      "method": "exact_literal",
+      "expected": "queue-1",
+      "context_sha256": "a45d07a7d978958b89cb451561a6b661fc1a1400eceede3f8ee8b97e3148cc53",
+      "history_and_request_sha256": "2b6fb7aef0bcd62876db53693eb3e3dd2cc74c0090cf2a814873c53a0c1d2908",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-1",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.240603,
+        "load_seconds": 0.003096833,
+        "tokens_per_second": 16.624896613924182,
+        "client_total_seconds": 0.5615783749999537
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "russian-greeting-2",
+      "method": "cyrillic_present_no_CJK_screen",
+      "expected": null,
+      "context_sha256": "ed6e4b43426da8670d12019030325d0e5b41008e5dd45e9ad31e3c6943b3b61e",
+      "history_and_request_sha256": "88d4a9a7a179503ed4733adcb9e99b4e13ec8055a3fa25e01f8f2f4b44d04361",
+      "input_upper_bound": 645,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "Привет! У меня все хорошо, спасибо. Я здесь, чтобы помочь вам с информацией и ответами на ваши вопросы. Чем могу быть полезен сегодня?",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 70,
+        "output_tokens": 43,
+        "inference_seconds": 3.343404,
+        "load_seconds": 0.0033545,
+        "tokens_per_second": 12.861143912013025,
+        "client_total_seconds": 3.66177479199996
+      },
+      "matched": true
+    },
+    {
+      "block": 3,
+      "variant": "private-chat-v1",
+      "case": "concurrent-2",
+      "method": "exact_literal",
+      "expected": "queue-2",
+      "context_sha256": "0f8b4489de81b76706a1857bf230eaee7c38a89546b10ce7489111a43196ced2",
+      "history_and_request_sha256": "1af720aa18e6719519b40e7f9447a46825a1b422d81730f9efeba9134b4981d9",
+      "input_upper_bound": 576,
+      "dispatched": true,
+      "terminal_seen": true,
+      "http_status": 200,
+      "answer": "queue-2",
+      "status": "completed",
+      "metrics": {
+        "input_tokens": 57,
+        "output_tokens": 4,
+        "inference_seconds": 0.240834,
+        "load_seconds": 0.003447292,
+        "tokens_per_second": 16.60895056345865,
+        "client_total_seconds": 0.560866167000313
+      },
+      "matched": true
+    }
+  ],
+  "inference_settings": {
+    "model": "qwen2.5:14b",
+    "temperature": 0,
+    "max_output": 1024,
+    "num_ctx": 8192,
+    "margin": 512
+  },
+  "reference_context_profile": {
+    "model": "qwen2.5:14b",
+    "temperature": 0,
+    "max_output": 1024,
+    "num_ctx": 8192,
+    "margin": 512,
+    "prompt_version": "private-chat-v1"
+  },
+  "doctor_before": {
+    "identity": {
+      "model": "qwen2.5:14b",
+      "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+      "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175",
+      "server_version": "0.40.2",
+      "parameters_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tokenizer": "qwen2-byte-bpe",
+      "quantization": "Q4_K_M",
+      "counter_version": "qwen2-utf8-upper-v1"
+    },
+    "engine_epoch": "e22a8470addbb5000641c39edd87b37ef6a713692472495c59a9afcf029365c2",
+    "loaded_models": [],
+    "installed_bytes": 8988124069
+  },
+  "variant_order": [
+    "private-chat-v1",
+    "candidate-latest-request-v1",
+    "candidate-latest-request-v1",
+    "private-chat-v1"
+  ],
+  "doctor_after": {
+    "identity": {
+      "model": "qwen2.5:14b",
+      "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+      "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175",
+      "server_version": "0.40.2",
+      "parameters_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tokenizer": "qwen2-byte-bpe",
+      "quantization": "Q4_K_M",
+      "counter_version": "qwen2-utf8-upper-v1"
+    },
+    "engine_epoch": "e22a8470addbb5000641c39edd87b37ef6a713692472495c59a9afcf029365c2",
+    "loaded_models": [
+      {
+        "name": "qwen2.5:14b",
+        "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+        "size": 10383418981,
+        "size_vram": 10383418981,
+        "context_length": 8192
+      }
+    ],
+    "installed_bytes": 8988124069
+  },
+  "comparison": {
+    "private-chat-v1": {
+      "completed": 32,
+      "controls": 26,
+      "passed_controls": 24,
+      "failed_cases": [
+        "long_a"
+      ],
+      "client_total_seconds": {
+        "n": 32,
+        "median": 0.6434753334997367,
+        "p95_nearest_rank": 11.630406249999396,
+        "max": 11.648695750000115
+      },
+      "tokens_per_second": {
+        "n": 32,
+        "median": 16.63364655951046,
+        "p95_nearest_rank": 24.443901246638962,
+        "max": 24.639341636791467
+      }
+    },
+    "candidate-latest-request-v1": {
+      "completed": 32,
+      "controls": 26,
+      "passed_controls": 26,
+      "failed_cases": [],
+      "client_total_seconds": {
+        "n": 32,
+        "median": 0.6438812084998062,
+        "p95_nearest_rank": 11.503420583000661,
+        "max": 11.546541833000447
+      },
+      "tokens_per_second": {
+        "n": 32,
+        "median": 16.632262066788982,
+        "p95_nearest_rank": 24.4944948622797,
+        "max": 24.56429089033272
+      }
+    }
+  },
+  "improvement_observed_cases": [
+    "long_a"
+  ],
+  "candidate_quality_status": "passed",
+  "inference_outcome_unknown": false,
+  "service_prompt_changed": false,
+  "semantic_review": "pending_human_review",
+  "source_unchanged": true,
+  "elapsed_seconds": 149.41840708400014
+}

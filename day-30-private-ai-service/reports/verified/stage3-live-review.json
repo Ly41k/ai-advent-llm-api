@@ -1,0 +1,17 @@
+{
+  "format": "bublik-stage3-live-review-v1",
+  "original_report": "stage3-live-20261009T180550-ee1b051c.json",
+  "original_sha256": "322cbf16ac4744b0895533327494dd6ad0367acfe940a81746801342ec3cd831",
+  "original_manifest_matches_stage3_tree": "d8759bfd7436fbad3875605e5aa68cdb14ca64ed",
+  "technical_checks_passed": 9,
+  "generations_completed": 13,
+  "max_service_active": 1,
+  "quality_status": "partial_failure",
+  "uncovered_literal_failure": {
+    "case": "long_a",
+    "requested_literal": "OK",
+    "actual_answer": "lantern",
+    "old_harness_had_no_literal_assertion_for_case": true
+  },
+  "decision": "Proceed to stage 4 HTTP infrastructure; long-context instruction following remains an open quality acceptance item. Old report preserved unchanged. New harness v2 checks both long cases exactly."
+}

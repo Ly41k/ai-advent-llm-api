@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173f35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Бублик">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/assets/icon-180.png">
+  <title>Bublik — приватный AI-чат</title>
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <main id="login-screen" class="login-screen">
+    <section class="login-card" aria-labelledby="login-title">
+      <span class="brand-mark" aria-hidden="true">Б</span>
+      <p class="eyebrow">BUBLIK PRIVATE AI</p>
+      <h1 id="login-title">Место для ваших мыслей.</h1>
+      <p class="muted">Приватный чат с локальной Qwen. Диалоги сохраняются на вашем сервере.</p>
+      <form id="login-form">
+        <label for="username">Имя пользователя</label>
+        <input id="username" name="username" autocomplete="username" maxlength="80" required>
+        <label for="password">Пароль</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required>
+        <button id="login-button" class="primary" type="submit" disabled>Войти</button>
+      </form>
+      <p id="login-status" class="notice" role="status">Подключаемся к серверу…</p>
+      <button id="connect-button" type="button" class="quiet" hidden>Повторить подключение</button>
+      <p class="privacy-note">Учётную запись создаёт владелец сервера. Облачные LLM не используются.</p>
+    </section>
+  </main>
+  <div id="workspace" class="workspace" hidden>
+    <button id="drawer-backdrop" class="drawer-backdrop" aria-label="Закрыть список диалогов" hidden></button>
+    <aside id="sidebar" class="sidebar" aria-label="Диалоги">
+      <div class="brand"><span class="brand-mark small" aria-hidden="true">Б</span><div><strong>Bublik</strong><small>PRIVATE AI SERVICE</small></div></div>
+      <button id="new-chat" class="primary" type="button">+ Новый диалог</button>
+      <div class="list-heading"><span>Ваши диалоги</span><button id="refresh-chats" class="quiet compact" type="button" aria-label="Обновить список диалогов">↻</button></div>
+      <nav id="chat-list" aria-label="Список диалогов"></nav>
+      <button id="more-chats" class="quiet" type="button" hidden>Ещё диалоги</button>
+      <div class="account"><span id="account-name"></span><button id="logout" class="quiet" type="button">Выйти</button></div>
+    </aside>
+    <main class="chat-pane">
+      <header class="chat-header">
+        <button id="menu-button" class="quiet menu-button" type="button" aria-label="Открыть список диалогов" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div class="chat-heading"><h1 id="chat-title">Ваш приватный чат</h1><p id="model-status" class="muted">Проверяем модель…</p></div>
+        <button id="refresh-chat" class="quiet" type="button" aria-label="Обновить диалог">↻</button>
+      </header>
+      <section id="delivery-notice" class="delivery-notice" hidden aria-label="Доставка запроса">
+        <p>Подтверждение доставки не получено. Повтор использует тот же запрос и не создаёт дубликат.</p>
+        <button id="replay-request" class="primary" type="button">Повторить доставку</button>
+        <button id="discard-request" class="quiet" type="button">Проверить историю и отменить повтор</button>
+      </section>
+      <p id="app-status" class="app-status" role="status"></p>
+      <div id="message-scroll" class="message-scroll" tabindex="0" aria-label="История диалога">
+        <button id="older-messages" class="quiet older" type="button" hidden>Загрузить более ранние сообщения</button>
+        <section id="empty-state" class="empty-state"><span class="brand-mark" aria-hidden="true">Б</span><h2>О чём поговорим?</h2><p>Создайте диалог или откройте сохранённый.<br>Полная история остаётся на сервере.</p></section>
+        <div id="messages" aria-label="Сообщения"></div>
+      </div>
+      <footer class="composer-panel">
+        <div id="generation-info" class="generation-info" role="status"></div>
+        <button id="retry-generation" class="quiet" type="button" hidden>Повторить генерацию последнего вопроса</button>
+        <form id="composer" class="composer">
+          <label class="sr-only" for="message-input">Сообщение</label>
+          <textarea id="message-input" rows="2" placeholder="Напишите сообщение…" disabled></textarea>
+          <button id="send-button" class="primary" type="submit" disabled>Отправить</button>
+        </form>
+        <div class="composer-hint"><span id="message-size">0 / 16 384 байт</span><span>Qwen может ошибаться. Проверяйте важные ответы.</span></div>
+      </footer>
+    </main>
+  </div>
+  <dialog id="create-dialog" aria-labelledby="create-title">
+    <form id="create-form">
+      <p class="eyebrow">НОВЫЙ ДИАЛОГ</p><h2 id="create-title">Дайте ему имя</h2>
+      <label for="new-title">Название</label><input id="new-title" maxlength="120" value="Новый диалог" required>
+      <div class="dialog-actions"><button id="cancel-create" class="quiet" type="button">Отмена</button><button class="primary" type="submit">Создать</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

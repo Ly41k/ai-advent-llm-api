@@ -1,0 +1,145 @@
+{
+  "format": "bublik-stage7-launchd-live-v1",
+  "run_id": "c690976f98a74ce6a282b975ab6f07fb",
+  "created_at": "2026-10-10T19:16:45.200793+00:00",
+  "status": "failed",
+  "checks": [
+    {
+      "name": "private_owned_launch_agent",
+      "passed": true
+    },
+    {
+      "name": "expected_supervisor_configuration",
+      "passed": true
+    },
+    {
+      "name": "launchd_pid_owns_only_loopback_listener",
+      "passed": true
+    },
+    {
+      "name": "verified_https_ready_current_runtime",
+      "passed": true
+    },
+    {
+      "name": "idle_without_recovery_gate",
+      "passed": true
+    },
+    {
+      "name": "nonempty_terminal_history",
+      "passed": true
+    },
+    {
+      "name": "passed_baseline_same_source",
+      "passed": true
+    },
+    {
+      "name": "same_endpoint_chat_and_configuration",
+      "passed": true
+    },
+    {
+      "name": "same_complete_saved_history",
+      "passed": true
+    },
+    {
+      "name": "same_model_and_profile",
+      "passed": false
+    }
+  ],
+  "url": "https://yuriys-macbook-pro.tail893c10.ts.net",
+  "chat_id": "a13531f84dd941d3acbebd1d40cf1a63",
+  "kind": "reboot",
+  "source_sha256": {
+    "bublik_service/__init__.py": "75414c10d5fd0443bb2500d8b6917697de1983b56d21f6999349bd2d3caecc9e",
+    "bublik_service/__main__.py": "e70fecd4c1dd40e34ca80e2e14f2030196bc7125f91d136e37f56ff2c8d9f29d",
+    "bublik_service/admin_cli.py": "325d1512044098999a9520e3d1b689a6f5f79d0262b542d20bd049af0c9ade37",
+    "bublik_service/domain.py": "df337acf1255b53df18f22a3eeab8238240c6a3e05029cf32e55bf66a581474c",
+    "bublik_service/http_api.py": "5d1856b49c30d7704725ea98baf82643631c4e8f161557ff0f9ebfd75f609efd",
+    "bublik_service/inference/__init__.py": "1d032dd738b97b782bf236ad8774e28b0b5e41519611c2c7b7ff1e8da1b9692c",
+    "bublik_service/inference/context.py": "0146b5dc7332c40b2d2d1d7f6b65d3959aad75e450c9a7d1fe756ac51635a7a5",
+    "bublik_service/inference/coordinator.py": "e0bfa5b9419d2839c41aa4fa6402ec3ecbd88e8e63cac576e2d73d3ef98b6e1a",
+    "bublik_service/inference/engine.py": "f8931566c0b0a79a1cd1e15192a5ec11942309c900286cee6972f8d30b5cd2c8",
+    "bublik_service/inference/ollama.py": "d83d4ceeaa2d30dedc4310f9769b5339a61c95461dd73ecba297233274402311",
+    "bublik_service/local_cli.py": "3bd4b7e5bdeb686536eaa81e7d7a7fef932a596cf2ca55bc268f5a91bf470672",
+    "bublik_service/security.py": "5138f990c78cd93bdb6470b3a767116638d196e33dc4b9eac2e030a2227059bd",
+    "bublik_service/service.py": "7f86ce124b01b1313a50e8124e4e82c3107aa09dafe19125f9afe355a84c8a65",
+    "bublik_service/settings.py": "adae1b9264139675bf5a571ef084d1c2c590de8895ce4a9f5d57ec7f1b0697d3",
+    "bublik_service/storage/__init__.py": "124eb9e8a8b91aab94b5c5cd0d71ad4eb925a63be0c81156428a56b41068012e",
+    "bublik_service/storage/database.py": "4c359bd1704df8b6d8f65fd87e565dc40829e29ce410d205ec209b2cc7942f94",
+    "bublik_service/storage/migrations/001_initial.sql": "df70b5f82e79f792aba78a19655a1d65f5d984c4d05a21cc3db02bd3753c7d70",
+    "bublik_service/storage/migrations/002_auth.sql": "f8e70cc1953bb0a0e200ed77ad711e0377a1246907f7e5a9f1100494e0ea76dd",
+    "bublik_service/storage/repository.py": "db19c5abbba2bdf3fc9a84c858e1f7abd685418904f8e45bffa10e1f58f0b7be",
+    "bublik_service/storage/worker.py": "5e4b72eb2c47d71d545e373cbbb0213bfa48df13a72fc9d45a1f4b17264ed43e",
+    "bublik_service/web_ui/app.css": "49c70d3684f07b1813befd12cdae28a7828bb5fd93311c85c43b415f10966428",
+    "bublik_service/web_ui/app.js": "8e5bc4080ed9e57128f58ac7f8d483599bc989b19086563829e89648198d895e",
+    "bublik_service/web_ui/icon-180.png": "deca0015cbba7f5539a83a26bb7b099549e7a04c3a1519e139de70933257a59b",
+    "bublik_service/web_ui/icon-192.png": "563f74c4fcf660ff685650ccade4e70387e2b4fa39f8370699945e2248023c99",
+    "bublik_service/web_ui/icon-512.png": "9ef2adc236de8ce9b647247e2b01ee7f76ace890e95b684aa7bfa67c532f09d3",
+    "bublik_service/web_ui/index.html": "3748ead4c666ec271f964ae028eed0ac81f298256ff0bedfec7d55eddd4abb2d",
+    "bublik_service/web_ui/manifest.webmanifest": "7d8b95b21b7b1660c66dc061d6292e824d17b949e8d439d916489e6267e547c1",
+    "deploy/Caddyfile.lan.template": "0adedcfe1a557cc5f8b9012acba22c547f6fc0437dfa6707f814a35aec482883",
+    "deploy/tailnet-policy.example.jsonc": "b5c165be972f91b04af01cc3c4d1b03760d2e3fe8b1655adfdbfe96f15eb6f8b",
+    "pyproject.toml": "57625934bac9ae81dc395560a9d5cd4943bbcf628dad1be58e551d8e6b2f0fe6",
+    "requirements.browser.lock": "5339e9421bdd9d112f155eea25f397167febdc3ce6b297fa21aa8650eef9a34d",
+    "requirements.lock": "b75817dc36eb6819b3eb945a2b21cb2dbb2f1565a07d927b2086fb2652d64da2",
+    "scripts/check_browser_https.py": "ef5e6a3ce2f1679a7af900e5bda173d8bc3a5882da6c0a7c4e1b1fbf97ebe12b",
+    "scripts/check_device_handoff.py": "9f1e44e4b89e6a42c34787d40bb39967c56373afddb937d33a450bf26784ae62",
+    "scripts/check_http_live.py": "0b9b7a19208372e03016c4f37db5abb4377157908605eaa125685eb2f33657e6",
+    "scripts/check_inference_live.py": "4de6843eb23ee61d48c2a5ac41504554606db1a2cdae06cfdf80c42036fa8d02",
+    "scripts/check_launchd_live.py": "aeb523a51f02260852939a4b3157f38e62971fcd461da32361e9b1f523c6e50c",
+    "scripts/check_network_live.py": "bb36ac14dde5b30a039012dd3b07fee79954aa9a01f09026bb945439e88606c4",
+    "scripts/check_network_ui_live.py": "d75fe0036a6dd95e3a1237338ce1f6354985f5d12e74a872666fc9dd343f6e7d",
+    "scripts/check_pwa.py": "45b4a3bb7f2cfe8138b8a7e9fac4ae53a65182d309317a2e1cfc2aa32dce6cf5",
+    "scripts/check_storage.py": "6463a4390e15c2a4dc7a771c4bda944af87bb8390e2ee986ebebbd1d6e5fa532",
+    "scripts/check_web_ui.py": "426e99ea5f9e58a0cd5e6a015d8ccd00b051b4a7a17972c6f0df9aab91d0102b",
+    "scripts/check_web_ui_live.py": "0f2a876d3fc500d6de87eebe77733fdb291e361f132f8289654049697a46de74",
+    "scripts/configure_launchd.py": "ab650425b4ee0a505a1604b2d986cdbe36dd07510e35cd888b5ac9803f60f56d",
+    "scripts/configure_network.py": "f237a80f98b7a1011b6de40fdc8109cc4da4cde93484a03bed299bc22771c060",
+    "scripts/install_launchd.py": "2fd5be68cfb72490a1490f3f2e2d88806dc469854cd26c787d1b80ccabd920fd",
+    "scripts/network_common.py": "ce7d07fc6cd5e9b74426fe7e95d37c362e9dc8726b4f2aa5b0ce82b8f1bf9bfa",
+    "scripts/verify_report.py": "761a4797e9cdc9f244370f52a995936e24f719130847b93a00e4f96b4782c661",
+    "tests/browser_fixture.py": "b15288a9bb512e01f09b2b5ca198a88a003b0a030af116e3d788bd59653dc3c8",
+    "tests/check_proxy_integration.py": "866dd2bf40cae8217b2e53215ea37083499e03a84a7c06041d5225c5d636b5e7",
+    "tests/check_ui_live_harness.py": "533a048d972f63e60f8a25fa3812f6efa3cd661865623f404d6334708c4128c9",
+    "tests/test_http.py": "1f54b7f6b5975b63f8e0ca16c9472c16bf7ede7ad0af0f2a1adef209b5c943c7",
+    "tests/test_http_live_quota.py": "65f6f9d5cb09c9b84b1d99386d2d442b1a17dac66f4a47d687fa9896f562be03",
+    "tests/test_http_network.py": "f24d17abe3f5aed8d07906f685b406ce3080020799e60150fe7faa20e3069258",
+    "tests/test_inference.py": "4b0179ed5a723a06a19cecd5d288becfe45149cddd01a4c08a6b33fe91c1114d",
+    "tests/test_networking.py": "2e9c7dfa85fa359ecd368ff34e63e67855c7a49d47f1f874ad3f32bed1d89403",
+    "tests/test_operations.py": "240b0d629b90fbbdf4a34f59c3826fdf679672aa805b90ad0bd47f854fb13f99",
+    "tests/test_storage.py": "cb0486516fe8e4c1c8db40e51ce9169e844a7912f87244051c60c3e112786f04",
+    "tests/test_web_ui.py": "b6e166287a8b64abcaed5b099f6b5e59e1b21291247f6d25f44605362dfd50f5"
+  },
+  "evidence": "Read-only launchd PID/listener/OS boot + verified HTTPS and full saved history hashes. No inference replay.",
+  "not_run": [
+    "independent phone/PWA installation observation",
+    "active inference crash recovery",
+    "CPU/RAM",
+    "backup/restore"
+  ],
+  "plist_sha256": "9471f08c0fb6f42259ec4dcf1cc71874f0eac86a4d565649492698c4b882fc90",
+  "api_pid": 868,
+  "os_boot_sha256": "581bbbceb2fec1af91c91f3a907170c9da8dfd666ff518a866393f0fc22444dd",
+  "model_identity": {
+    "model": "qwen2.5:14b",
+    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+    "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175",
+    "server_version": "0.40.2",
+    "parameters_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tokenizer": "qwen2-byte-bpe",
+    "quantization": "Q4_K_M",
+    "counter_version": "qwen2-utf8-upper-v1"
+  },
+  "profile": {
+    "model": "qwen2.5:14b",
+    "temperature": 0,
+    "max_output": 1024,
+    "num_ctx": 8192,
+    "margin": 512,
+    "prompt_version": "private-chat-v1"
+  },
+  "history_sha256": "a0d49d6b4da8250dc451b2719bfa138d5f70b9d0427b9b1c1eac79e2c4f91c10",
+  "message_count": 4,
+  "error_code": "launchd_check_failed",
+  "failure_type": "ValueError",
+  "elapsed_seconds": 0.9649119580000161
+}

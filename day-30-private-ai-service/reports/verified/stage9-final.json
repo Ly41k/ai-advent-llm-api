@@ -1,0 +1,451 @@
+{
+  "format": "bublik-stage9-documentation-v1",
+  "created_at": "2026-10-11T08:50:16.567024+00:00",
+  "status": "passed",
+  "scope": "Documentation/source/evidence consistency, example syntax and docs-only installer in isolated fixtures; NO new live model/network/Mac execution",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "note": "3.12 used for hashes/docs only, NOT supported runtime test execution"
+  },
+  "runtime_version": "0.8.0",
+  "schema_version": 2,
+  "profile": "private-chat-v2",
+  "checks": [
+    {
+      "name": "current_evidence_stage8-prompt-v2-offline.json",
+      "passed": true,
+      "checks": 143
+    },
+    {
+      "name": "current_evidence_stage8-prompt-v2-browser.json",
+      "passed": true,
+      "checks": 26
+    },
+    {
+      "name": "current_evidence_stage8-prompt-v2-pwa.json",
+      "passed": true,
+      "checks": 11
+    },
+    {
+      "name": "current_evidence_stage8-prompt-v2-package.json",
+      "passed": true,
+      "checks": 10
+    },
+    {
+      "name": "current_evidence_acceptance-baseline-v2-20261010-214340.json",
+      "passed": true,
+      "checks": 259
+    },
+    {
+      "name": "current_evidence_acceptance-history-v2-20261010-215306.json",
+      "passed": true,
+      "checks": 11
+    },
+    {
+      "name": "current_evidence_prompt-upgrade-20261010-214330.json",
+      "passed": true,
+      "checks": 30
+    },
+    {
+      "name": "current_evidence_launchd-lan-v2-20261010-215633.json",
+      "passed": true,
+      "checks": 6
+    },
+    {
+      "name": "quality_13_of_13",
+      "passed": true
+    },
+    {
+      "name": "real_16_completed",
+      "passed": true
+    },
+    {
+      "name": "previous_lessons_unchanged",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_README.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_README.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/README.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/README.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/API.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/ARCHITECTURE.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/PLAN.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/ACCEPTANCE.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/BACKLOG.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/FINAL_REPORT.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/RUNBOOK.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/CONSOLE_VIDEO.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/INSTALL_STAGE9.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/PROMPT_V2.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/PROMPT_EXPERIMENT.ru.md",
+      "passed": true
+    },
+    {
+      "name": "balanced_fences_day-30-private-ai-service/VALIDATION.stage8.ru.md",
+      "passed": true
+    },
+    {
+      "name": "local_markdown_links",
+      "passed": true,
+      "links_checked": 188,
+      "missing": []
+    },
+    {
+      "name": "shell_examples_parse",
+      "passed": true,
+      "blocks_checked": 65,
+      "errors": []
+    },
+    {
+      "name": "embedded_python_examples_parse",
+      "passed": true,
+      "blocks_checked": 6,
+      "errors": []
+    },
+    {
+      "name": "root_day30_links_README.md",
+      "passed": true
+    },
+    {
+      "name": "root_day30_links_README.ru.md",
+      "passed": true
+    },
+    {
+      "name": "day21_root_readmes_in_corpus",
+      "passed": true
+    },
+    {
+      "name": "day30_readmes_not_added_to_corpus",
+      "passed": true
+    },
+    {
+      "name": "root_changes_corpus_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "git_diff_check",
+      "passed": true
+    },
+    {
+      "name": "docs_only_installer_positive_fixture",
+      "passed": true,
+      "result": {
+        "docs_copied": 31,
+        "new_reports_added": 69,
+        "existing_reports_overwritten": 0,
+        "runtime_changed": false
+      },
+      "error": ""
+    },
+    {
+      "name": "existing_report_not_rewritten",
+      "passed": true
+    },
+    {
+      "name": "private_fixture_files_untouched",
+      "passed": true
+    },
+    {
+      "name": "fixture_runtime_source_unchanged",
+      "passed": true
+    },
+    {
+      "name": "fixture_docs_copied",
+      "passed": true
+    },
+    {
+      "name": "installer_conflict_refuses_before_copy",
+      "passed": true
+    },
+    {
+      "name": "installer_source_mismatch_refuses_before_copy",
+      "passed": true
+    },
+    {
+      "name": "original_json_preserved",
+      "passed": true,
+      "files": 70
+    },
+    {
+      "name": "source_unchanged_during_documentation_validation",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "bublik_service/__init__.py": "33379bd334087590c09affbdf9a4154744b06b24d9fcb901e6d2767485bd0c21",
+    "bublik_service/__main__.py": "b53f5e8d5266df3b174ae3d5bbfaf45746f516181fe745a0a3ae1726388813c9",
+    "bublik_service/admin_cli.py": "4754130f54735c77f86adc3042893da77d0b13ead6564394bd31bd830311e78d",
+    "bublik_service/domain.py": "1564e83a5a039cd0240ac4e0162086bc887bc8170c2e33d6d87edb3e3379932a",
+    "bublik_service/http_api.py": "aad311f19e1ee544a5ed0d9d5b933e8d87cecea366bf90ab8e72d4771a895bc7",
+    "bublik_service/inference/__init__.py": "1d032dd738b97b782bf236ad8774e28b0b5e41519611c2c7b7ff1e8da1b9692c",
+    "bublik_service/inference/context.py": "2dde696fd76510d953509fad204d05b89ec28a4d3ca45db483478bc8297246c9",
+    "bublik_service/inference/coordinator.py": "079954411ba91e503c6242ba7b18d6c6c91e63bedca0d2b2cecae4d9d7bc016d",
+    "bublik_service/inference/engine.py": "f8931566c0b0a79a1cd1e15192a5ec11942309c900286cee6972f8d30b5cd2c8",
+    "bublik_service/inference/ollama.py": "189a0a643a50a700598ff2f5169ea2c2116225fb4cfaa5702d240738c3b93f35",
+    "bublik_service/local_cli.py": "5c82e0b52d4cfa61435c195f4077faec1d27637d4d6fb2c718d294fc73d34e04",
+    "bublik_service/security.py": "5138f990c78cd93bdb6470b3a767116638d196e33dc4b9eac2e030a2227059bd",
+    "bublik_service/service.py": "7f86ce124b01b1313a50e8124e4e82c3107aa09dafe19125f9afe355a84c8a65",
+    "bublik_service/settings.py": "adae1b9264139675bf5a571ef084d1c2c590de8895ce4a9f5d57ec7f1b0697d3",
+    "bublik_service/storage/__init__.py": "124eb9e8a8b91aab94b5c5cd0d71ad4eb925a63be0c81156428a56b41068012e",
+    "bublik_service/storage/database.py": "4c359bd1704df8b6d8f65fd87e565dc40829e29ce410d205ec209b2cc7942f94",
+    "bublik_service/storage/migrations/001_initial.sql": "df70b5f82e79f792aba78a19655a1d65f5d984c4d05a21cc3db02bd3753c7d70",
+    "bublik_service/storage/migrations/002_auth.sql": "f8e70cc1953bb0a0e200ed77ad711e0377a1246907f7e5a9f1100494e0ea76dd",
+    "bublik_service/storage/repository.py": "2d9c953b5fdfe18606a48c6c44559212f9a86a9c537d943e6b061c8c3d6d4979",
+    "bublik_service/storage/worker.py": "13df5daf631fccd9bba71d98b770ffb700c66f4c123a6a8796aef009730d3a79",
+    "bublik_service/web_ui/app.css": "49c70d3684f07b1813befd12cdae28a7828bb5fd93311c85c43b415f10966428",
+    "bublik_service/web_ui/app.js": "8e5bc4080ed9e57128f58ac7f8d483599bc989b19086563829e89648198d895e",
+    "bublik_service/web_ui/icon-180.png": "deca0015cbba7f5539a83a26bb7b099549e7a04c3a1519e139de70933257a59b",
+    "bublik_service/web_ui/icon-192.png": "563f74c4fcf660ff685650ccade4e70387e2b4fa39f8370699945e2248023c99",
+    "bublik_service/web_ui/icon-512.png": "9ef2adc236de8ce9b647247e2b01ee7f76ace890e95b684aa7bfa67c532f09d3",
+    "bublik_service/web_ui/index.html": "3748ead4c666ec271f964ae028eed0ac81f298256ff0bedfec7d55eddd4abb2d",
+    "bublik_service/web_ui/manifest.webmanifest": "7d8b95b21b7b1660c66dc061d6292e824d17b949e8d439d916489e6267e547c1",
+    "deploy/Caddyfile.lan.template": "0adedcfe1a557cc5f8b9012acba22c547f6fc0437dfa6707f814a35aec482883",
+    "deploy/tailnet-policy.example.jsonc": "b5c165be972f91b04af01cc3c4d1b03760d2e3fe8b1655adfdbfe96f15eb6f8b",
+    "pyproject.toml": "c87ee642f8091f90f22969ad1e1f1b75f53a16caa872ce5cfbe54d6ecf758aa7",
+    "requirements.browser.lock": "5339e9421bdd9d112f155eea25f397167febdc3ce6b297fa21aa8650eef9a34d",
+    "requirements.lock": "b75817dc36eb6819b3eb945a2b21cb2dbb2f1565a07d927b2086fb2652d64da2",
+    "scripts/acceptance_support.py": "8c4ad61570b9b69c1c09acb07b5f40f7ab64ac4fd5c608244a5ed7a24099f3a1",
+    "scripts/check_acceptance_live.py": "9768a569cc5225a4e421750347091bcbddc8a032142d619bf242e32a3434989b",
+    "scripts/check_browser_https.py": "ef5e6a3ce2f1679a7af900e5bda173d8bc3a5882da6c0a7c4e1b1fbf97ebe12b",
+    "scripts/check_device_handoff.py": "9f1e44e4b89e6a42c34787d40bb39967c56373afddb937d33a450bf26784ae62",
+    "scripts/check_http_live.py": "0b9b7a19208372e03016c4f37db5abb4377157908605eaa125685eb2f33657e6",
+    "scripts/check_inference_live.py": "4de6843eb23ee61d48c2a5ac41504554606db1a2cdae06cfdf80c42036fa8d02",
+    "scripts/check_launchd_live.py": "aeb523a51f02260852939a4b3157f38e62971fcd461da32361e9b1f523c6e50c",
+    "scripts/check_network_live.py": "bb36ac14dde5b30a039012dd3b07fee79954aa9a01f09026bb945439e88606c4",
+    "scripts/check_network_ui_live.py": "d75fe0036a6dd95e3a1237338ce1f6354985f5d12e74a872666fc9dd343f6e7d",
+    "scripts/check_prompt_compare.py": "40579000a85e5436734697ce175936f2acc173b7076292ada4380b68e8408934",
+    "scripts/check_prompt_upgrade.py": "25667d1e3ed1095984f27c4226b791701c35673730eaebbf437f0bf878c15e9e",
+    "scripts/check_pwa.py": "45b4a3bb7f2cfe8138b8a7e9fac4ae53a65182d309317a2e1cfc2aa32dce6cf5",
+    "scripts/check_recovery_live.py": "f43aab0a1d8620b60d7879964d2f5aafbdc08e510ff5a09e3ed38e0674b5c5b0",
+    "scripts/check_storage.py": "4af12271ecd5b4e2b29819ef2736beb2e5f585bea5247d0e3171e63c56cbfe7a",
+    "scripts/check_web_ui.py": "426e99ea5f9e58a0cd5e6a015d8ccd00b051b4a7a17972c6f0df9aab91d0102b",
+    "scripts/check_web_ui_live.py": "0f2a876d3fc500d6de87eebe77733fdb291e361f132f8289654049697a46de74",
+    "scripts/configure_launchd.py": "ab650425b4ee0a505a1604b2d986cdbe36dd07510e35cd888b5ac9803f60f56d",
+    "scripts/configure_network.py": "f237a80f98b7a1011b6de40fdc8109cc4da4cde93484a03bed299bc22771c060",
+    "scripts/install_launchd.py": "2fd5be68cfb72490a1490f3f2e2d88806dc469854cd26c787d1b80ccabd920fd",
+    "scripts/network_common.py": "ce7d07fc6cd5e9b74426fe7e95d37c362e9dc8726b4f2aa5b0ce82b8f1bf9bfa",
+    "scripts/resource_observer.py": "fb2c338a63605af9398c8b54724b7d77cbe4e0ca35be744d3d444916b4c02bf5",
+    "scripts/verify_report.py": "761a4797e9cdc9f244370f52a995936e24f719130847b93a00e4f96b4782c661",
+    "tests/browser_fixture.py": "b15288a9bb512e01f09b2b5ca198a88a003b0a030af116e3d788bd59653dc3c8",
+    "tests/check_proxy_integration.py": "866dd2bf40cae8217b2e53215ea37083499e03a84a7c06041d5225c5d636b5e7",
+    "tests/check_ui_live_harness.py": "533a048d972f63e60f8a25fa3812f6efa3cd661865623f404d6334708c4128c9",
+    "tests/test_acceptance.py": "d9c31f832dd70b00409d8ea6af790884ea35c2044de6a718bf566079f6138f03",
+    "tests/test_http.py": "1f54b7f6b5975b63f8e0ca16c9472c16bf7ede7ad0af0f2a1adef209b5c943c7",
+    "tests/test_http_live_quota.py": "65f6f9d5cb09c9b84b1d99386d2d442b1a17dac66f4a47d687fa9896f562be03",
+    "tests/test_http_network.py": "f24d17abe3f5aed8d07906f685b406ce3080020799e60150fe7faa20e3069258",
+    "tests/test_inference.py": "bf1921ec4840b8cef6f496c770d9bf6e2c929a551d49e5b7e8e17222cc59e150",
+    "tests/test_networking.py": "2e9c7dfa85fa359ecd368ff34e63e67855c7a49d47f1f874ad3f32bed1d89403",
+    "tests/test_operations.py": "240b0d629b90fbbdf4a34f59c3826fdf679672aa805b90ad0bd47f854fb13f99",
+    "tests/test_prompt_compare.py": "0f58b9f48646a5e0fc5340e44da846b493565fafbb72096f8cd15f6a957e8630",
+    "tests/test_storage.py": "cb0486516fe8e4c1c8db40e51ce9169e844a7912f87244051c60c3e112786f04",
+    "tests/test_web_ui.py": "b6e166287a8b64abcaed5b099f6b5e59e1b21291247f6d25f44605362dfd50f5"
+  },
+  "documentation_sha256": {
+    "README.md": "030d3b77c6bf22980e0ac24c6c24b9ba7884d1deb1c0aaf99c96ccad9f7ef5c9",
+    "README.ru.md": "efc1699bb87e3a713f4102aef9bbce19a90ffb8ef974babb0f37979161f68fc5",
+    "day-30-private-ai-service/README.md": "229b534b822669164320472b38acc84ad287cde6b4f2c1087bbcb92041f5799e",
+    "day-30-private-ai-service/README.ru.md": "565d0da80f8f0572adbd0f852f56cfe31d40d8a1284e0338972e76015f29bb50",
+    "day-30-private-ai-service/API.md": "d543f66989bacd6a60921afab4b0b6a9de9a1a8c21987794b49660289d88f4b4",
+    "day-30-private-ai-service/ARCHITECTURE.ru.md": "4053f5e163a2f65c7b1232e07f0de5652009c7092be590580d6a560677d658dc",
+    "day-30-private-ai-service/PLAN.ru.md": "cd284f781b56163756ca0f36ae9a998d9942a132e1296de70186bd0e4ebd29e3",
+    "day-30-private-ai-service/ACCEPTANCE.ru.md": "6810365190cf9dc95d908fd37b392c2c32095ca012e019199e64c12e871c7cf5",
+    "day-30-private-ai-service/BACKLOG.ru.md": "42d55cec5b16909c08be7c19305cee2264cfb7f04abab6bbd9027a5f9479f875",
+    "day-30-private-ai-service/FINAL_REPORT.ru.md": "e376827be911e976b3046ec8f6aa0c005ed89af6e12cac241d0c952d57a36927",
+    "day-30-private-ai-service/RUNBOOK.ru.md": "98034cf876c54f8988ddd99e1ae6d3d15e8f4c2e8120e75e799c2bb639a4813e",
+    "day-30-private-ai-service/CONSOLE_VIDEO.ru.md": "3df6f613766ecb44cca2f0cb4dce854a2e8ffedf9ceb283fd868de0986e79b0b",
+    "day-30-private-ai-service/INSTALL_STAGE9.ru.md": "b18e2e525b64a82af559554053ddacf4c348caf49936ef06b7bcec0639c664aa",
+    "day-30-private-ai-service/PROMPT_V2.ru.md": "ccb4bd24e32b4793be86c5713b18954204030a516fda187058c703fe300647b1",
+    "day-30-private-ai-service/PROMPT_EXPERIMENT.ru.md": "de6f11553eb934b77ebc3c2b382e0fd8c3f0835b2233b8a135afe1493550ad25",
+    "day-30-private-ai-service/VALIDATION.stage8.ru.md": "b3adc259b68e2a54bfaa08d57e7d49eeca7871c9e99b665928122a0213d94690"
+  },
+  "preserved_original_report_sha256": {
+    "launchd-after-reboot-20261010-221644.json": "f5fcff07d48b509f4c2b5ef4536654d1feddc9150038a517ea107f4beb7fcf0a",
+    "stage7-pwa-before-pwa-navigation-fix.json": "be418057a8bd09d7140ad3b3f6bc35998152ac98cee684292b7f426f4c418da0",
+    "mac-stage4-offline-20261009T190907-71a14e3f.json": "903c8b88d5b0e500f60f8317f5d77fe6b5fb7f2bf2a0149a1f48daccd9fe6e6d",
+    "stage7-package-before-pwa-navigation-fix.json": "6599ed649f94a14719b77a7ab3d92821f2e1966024b4b223811c2f693413b5c9",
+    "device-prepare-20261010T172433-62e1dba4.json": "0ab4d92c20e70b1e035b9ba046230594f153d8dd0218ee61fadc4459f570b15a",
+    "recovery-prepare-20261010-203648.json": "6228e3fa94052fa46c48fbaf7533b03f154ab343f0b258a1f53e4606683fb385",
+    "launchd-after-reboot-20261010-220819.json": "2442d228b9c954caf16c4bc887881e11da8cc3e097948ff80f93baee0c28df2f",
+    "stage4-offline.json": "c5c4e249d57d08b16f5d2514cfe6823d81aec49c8c3af991d59515b0ffd550d4",
+    "web-ui-live-20261010-152509.json": "5c7395f142fdb383edb798039440970875ff4f77c18311b4157bda2b4aac8d84",
+    "device-verify-after-restart-20261010T180935-607caa57.json": "a7d126ed9297ff3c3d5276d05d522cf66fa3f41e98309a4197c3aaf82a623538",
+    "stage8-prompt-experiment-offline.json": "28cceb8a5b1c6f900dde04e5ca740a5410dc23ac45dc6a6ee5b60fb562ed82fa",
+    "device-verify-20261010T172523-56c6bb8c.json": "4e4d2633c1111ab254f0815cfe9376946eeb6b1232c53ef563d79889ec51ee73",
+    "lan-api-20261010-190613.json": "f0752c6dbc13378edd31e17fdf805a330786858758475bd9de6a6c8f5b1ecbca",
+    "acceptance-baseline-20261010-202012.json": "5bbc3c5a5899f29fd2bea7c59d4bf8566da1b9ad4796db9fa9165a1a81104653",
+    "stage6-offline-before-policy.json": "3ac8f96782167b6a90d67f815454e373569791b8ae540e49bcb20c8a03cb01bb",
+    "https-auth-20261009-230121.json": "7bbe8463039c0284702ffdc98aae86cd5c656e38a036c37cb3164b9aad78cf5b",
+    "prompt-upgrade-20261010-213642.json": "a091faec1be460d48bc88edccb09cf5845ab835fa4b076845126457aa8c1af68",
+    "stage7-offline.json": "e2664869abd5b4b0eccc628a16e8c43829da69ba577e0c1b3e175063c6016c43",
+    "recovery-interrupted-20261010-203121.json": "8148dd467035b2079b384973d7cca303a7683afed43fdf10eecc8c5c9b4b4cca",
+    "mac-stage-1-2-20261009-201916.json": "83a1628bccce82f0a3ec9ecc57a62149584169faae15cd153d8ca343c7998817",
+    "stage5-live-checker-review.json": "1a5987fff1e4188682019bb21b2ada7dd2dec0624a695074a39a0cb2b864f512",
+    "http-after-restart-20261009-224326.json": "b08d18b83336311bff8dae8dfdd2312c61756e028dfde73cf23219ab4dd852ef",
+    "http-live-20261009-223827.json": "618d0114d690fcb47563beaee7e8598767e27252db8598d635767aaf82c16395",
+    "stage8-package-before-final-source-guard.json": "ea442ce8a78cca6bea0b9a26cddae81672303db71db7c0ea4f95d0cac38a0e6e",
+    "stage6-proxy.json": "186fcb80de9b59fbd183acc75f7b237181ca9556dc46fa490f9fd52a2245ab1c",
+    "stage6-offline.json": "6b291ccd1a63e12e8f4d1120cabb14f4e779877ed78379ce3468f23222e08fe8",
+    "tailnet-api-20261010-193244.json": "b09249ae241e76ea6ddc19e4d7715c1a0450737ef002f84ec5f81d3c1970f751",
+    "stages-1-2.json": "73ef52b6982b5cb4439750145c0362036e2f99021adfe55bbf72e482c71f6741",
+    "launchd-initial-20261010-215614.json": "da41f5b4f0a04526ccc66b968d7e387f71da8fd6634d93584c4211444b17bd48",
+    "recovery-interrupted-20261010-203739.json": "2d96316a3dc1806bb1b5af5417f727d49c97270f95eed8cf9779ef17d7fd5044",
+    "stage8-package.json": "a739546a278e9c9b9f89940d637b9978c0ea0e7fa94f467d5c0bde8b097df02b",
+    "stage3-live-review.json": "274305b36fe8c104ead3a2eb47224253319911beb1f8be34fa56b422ce921467",
+    "stage7-web-ui.json": "fbda0352e3d7325b2071e3be5e284328cf030e283e3a6c39e62b8557fe6f4286",
+    "prompt-upgrade-20261010-214330.json": "49ad006feaef5801c2643bf9af2a336714a5dba7a2c89b89c183d6d6a2ef08a4",
+    "launchd-lan-v2-20261010-215633.json": "80b677a0c2fd0511d09ddfd30ab4c108bbab69f19baa65fac20f18c10ebeeafe",
+    "stage5-offline.json": "51ac50c565ef52ee12dfa057dd25cf286194da698990bcb797527e3c0521e0a8",
+    "recovery-restored-20261010-205125.json": "a8fa4735be55b0b4aaa9c4489ed210153a1d00be025fdb4d1721d44d5b4211e5",
+    "stage5-package.json": "14a65ba6ec3ce14c632c0a4896d9d131ce521db3954a56f5ce3c57451ebc1564",
+    "stage3-live-20261009T180550-ee1b051c.json": "322cbf16ac4744b0895533327494dd6ad0367acfe940a81746801342ec3cd831",
+    "stage3-offline.json": "b0da259136750b2b844d449a28e90e6ee4bff9103c155ade9ea133c1ffd2f3df",
+    "tailnet-ui-20261010-200618.json": "c4fd7e772fb7027ddd9fbd6739318e24c2b811746e7cba7be93a0b2cd5d96798",
+    "recovery-prepare-20261010-203034.json": "dcd1922865af35fa870c75e2000f979294b4ec94313b66599d7781d75017a571",
+    "stage8-prompt-v2-package.json": "94ffa5e046525b6591957e59b5cda3099b8ba21604e36cebc0c46d649a4976c3",
+    "launchd-after-restart-20261010-220026.json": "ed549697aa245d2db0d4c9a1676d53dbd2c87d4763501985d3bb49d2900ce696",
+    "stage7-package.json": "8f19181112edc0bfbbb00415183724c7a324e7cfa28eedb9933d36a0ad2a9231",
+    "stage8-prompt-v2-pwa.json": "4970b848a84b30e7e9b041f721ef434edd89702a83facb11991a180a9bd5ec8d",
+    "stage4-package.json": "35b39933f5c5db745f6919bf497fc730a5e8a7692ffd4efaa725652548108932",
+    "recovery-interrupted-20261010-204758.json": "e918f31496c94ea17d870dbbcd02a91d4c031493cd5b54d3cd17d158f182598a",
+    "stage6-engine-fix-offline.json": "d538fe818f7e9de9311b44fa45c8e7cc2d98ec12e5475a7a99da3e3d2128a6f4",
+    "stage8-offline-before-final-source-guard.json": "eb67dff330256f176109dd98072a212662e1f5621c1c3bd1ad534fb2a31a0b1a",
+    "stage7-offline-before-pwa-navigation-fix.json": "a05e0d0f990a2be20c2bc1aa6688fdc467dcae24a8bff14314fc08750291dad7",
+    "stage8-prompt-v2-browser.json": "c0c4146527b69af6e8d4380440eb95dc22facc4baf0c4524f8ad92b91e6e672b",
+    "stage6-package.json": "31232a1d6225e2b495cefb2cf2995815a3c366fb9409a97b3e045a271cd7304b",
+    "stage4-quota-fix-offline.json": "55a8477476b630092912c6bccd3686d79ed774c4b91d8af1477e186ca338661c",
+    "stage8-prompt-v2-offline.json": "a869ad5dcea1c744415ffdcb1e466a49b262d59ea4e2b046f69970b3cf9b052e",
+    "stage7-pwa.json": "7080f664c7b081952644f64eaa1f6105e4a252725512c3204e3f57cb8b3be6a0",
+    "stage8-recovery-checker-fix-offline.json": "232c46eec2aea779a9294a84ff211582f4418c84f1fad8d5ce24520db7967e97",
+    "stage5-offline-before-live-review.json": "7ad603ec7b45370f741e985e260d2b221b1c1e347cdbaaafb6e58f3f8ee4dc16",
+    "stage9-documentation.json": "adcdda0d902d6b1a76453cad64a88b9d8f760bd48c8a86679cba12e065e6cc12",
+    "stage5-browser.json": "180cb3d89e248bb507e45666b1d1d0bcf1c46cec6454541ad497577f33e92991",
+    "stage5-browser-before-live-review.json": "b8ec1014a4ab9f535f3ebd99cc22b68fe110cebeeb88c1ca2aba3e863df0550e",
+    "stage7-web-ui-before-pwa-navigation-fix.json": "1ebc347d1409e13b5c821683476d9ee998be3e70ca6d12ee5784fd3962404c73",
+    "prompt-compare-20261010-211034.json": "2981e322548805bcd894105cd548caa6be705f42563ad37e436e94800f5ea788",
+    "stage6-proxy-before-policy.json": "6064a99d35976bfbdb6e5d7119da0ef54132d8b228cdfd3819d0661072408905",
+    "tailnet-api-policy-20261010-202114.json": "90f9fc155e579bc73ac2ba7f2b9f9c80817e927197ed4a127b1d3b8107045aea",
+    "recovery-prepare-20261010-204716.json": "e8632f0d944efc44c38116f12424738684aa18d8ccdcc076449b3960728c1e45",
+    "device-verify-20261010T180635-1c0e31e2.json": "f4853836097a2104ca3eb19f7d99e7b85946347a5f00c691cee09ac3a39c3d84",
+    "acceptance-baseline-v2-20261010-214340.json": "2000a986072a3aab41e36de5f9d4b2cbd080020bd10f6584b32f0bdca0cf28b5",
+    "acceptance-history-v2-20261010-215306.json": "7a0fefe15edfc057e449bd43f14b205f6ab294e15c44a248ea0770b34812e8e0",
+    "stage8-offline.json": "d4e6b12fce6f56ea704299812a7cddc018c2eeb285b0c2120ae4300d69e115c6"
+  },
+  "current_evidence": {
+    "stage8-prompt-v2-offline.json": {
+      "sha256": "a869ad5dcea1c744415ffdcb1e466a49b262d59ea4e2b046f69970b3cf9b052e",
+      "checks": 143,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "stage8-prompt-v2-browser.json": {
+      "sha256": "c0c4146527b69af6e8d4380440eb95dc22facc4baf0c4524f8ad92b91e6e672b",
+      "checks": 26,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "stage8-prompt-v2-pwa.json": {
+      "sha256": "4970b848a84b30e7e9b041f721ef434edd89702a83facb11991a180a9bd5ec8d",
+      "checks": 11,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "stage8-prompt-v2-package.json": {
+      "sha256": "94ffa5e046525b6591957e59b5cda3099b8ba21604e36cebc0c46d649a4976c3",
+      "checks": 10,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "acceptance-baseline-v2-20261010-214340.json": {
+      "sha256": "2000a986072a3aab41e36de5f9d4b2cbd080020bd10f6584b32f0bdca0cf28b5",
+      "checks": 259,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "acceptance-history-v2-20261010-215306.json": {
+      "sha256": "7a0fefe15edfc057e449bd43f14b205f6ab294e15c44a248ea0770b34812e8e0",
+      "checks": 11,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "prompt-upgrade-20261010-214330.json": {
+      "sha256": "49ad006feaef5801c2643bf9af2a336714a5dba7a2c89b89c183d6d6a2ef08a4",
+      "checks": 30,
+      "source_matches_current": true,
+      "original_status": "passed"
+    },
+    "launchd-lan-v2-20261010-215633.json": {
+      "sha256": "80b677a0c2fd0511d09ddfd30ab4c108bbab69f19baa65fac20f18c10ebeeafe",
+      "checks": 6,
+      "source_matches_current": true,
+      "original_status": "passed"
+    }
+  },
+  "day21_corpus": {
+    "before_root_readme_update_sha256": "e8d3f8ed027b2a58df68ee8c36619b2f909045095ae5d2edef740d213f0e1d85",
+    "after_root_readme_update_sha256": "f3acedb811af0cfff38ad96adcd375175d185ef41bb952a08c4f4acc7e72ee10",
+    "document_count": 71,
+    "index_rebuilt": false,
+    "requires_rebuild_before_new_strict_rag_live": true
+  },
+  "manual_confirmation": {
+    "date_local": "2026-10-11",
+    "user_quote": "все сработало",
+    "interpretation": "Confirmed proposed phone mobile-data/Tailscale off-on flow, with Mac online",
+    "saved_policy_audited": false,
+    "fresh_serve_funnel_cli_snapshot_received": false
+  },
+  "not_run": [
+    "new real Qwen/network/physical-device runs",
+    "saved grants/ACL policy audit",
+    "physical independent remote port scan",
+    "operational production backup restore",
+    "phone LAN CA setup",
+    "Git commit/push",
+    "video recording"
+  ],
+  "historical_json_overwritten": false
+}
