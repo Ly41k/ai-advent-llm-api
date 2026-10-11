@@ -18,7 +18,7 @@ bounded durable queue, idempotency, восстановление после rest
 измерения и проверяемые отчёты. LAN-доступ должен работать без обязательного
 Tailscale на каждом домашнем клиенте; внешний мобильный доступ — через Tailscale.
 Cloud LLM и автоматического fallback нет. После полной реализации оформлен консольный
-сценарий видео; сама запись не выполнена. Phone LAN CA отложен, основной путь — Tailscale Serve.
+сценарий видео; пользователь записал UI-демонстрацию чата с нескольких устройств. Phone LAN CA отложен, основной путь — Tailscale Serve.
 
 ## Этапы
 
@@ -32,10 +32,10 @@ Cloud LLM и автоматического fallback нет. После полн
 | 6 | LAN HTTPS и Tailscale Serve, настройки доверия/доступа | Реальные LAN устройства и телефон по мобильному интернету | Mac LAN API 20/20, tailnet API 20/20, tailnet browser+Qwen 19/19 после engine fix; Android/iPhone/Mac sync, mobile chat и Tailscale off/on вручную подтверждены; phone handoff 8/8 и after-restart 8/8, полный history hash/generation snapshot совпали; Serve status tailnet only подтверждён; пользователь подтвердил работу трёх устройств и разрешил этап 7; точная policy не прочитана checker |
 | 7 | launchd, shutdown/recovery, PWA | Restart/reboot на целевом MacBook | Основной путь принят: Mac initial 6/6, restart 11/11, reboot API/HTTPS/history/new boot подтверждены; strict reboot report failed на изменении Ollama 0.34.4 → 0.40.2, Qwen/profile прежние; Android/iPhone Home Screen, sync и новый сохранённый ответ вручную подтверждены; текущий Caddy/LAN проверен6/6 на этапе8; backup отложен |
 | 8 | Итоговая приёмка, качество/скорость/ресурсы | 10 sequential, 3 concurrent, отказы, сеть и все обязательные проверки | Mac baseline: technical 259/259, 16/16 completed, resources collected; quality 12/13, long_a=lantern вместо OK; три greetings без CJK; real interruption/recovery 21/21 → 9/9 → 15/15; live frozen-context ABBA: candidate26/26 против v1 24/26, long_a исправлен дважды; runtime0.8.0/private-chat-v2 установлен; upgrade30/30, новый API baseline259/259 technical/13/13 quality, 16/16 completed; offline143/143; v2 saved history11/11; LAN/launchd6/6 с новым PID32253 против27580, localhost8000 и прежней history; финальный mobile/Tailscale off-on подтверждён11 октября; saved policy audit не приложен |
-| 9 | Финальные RU/EN и root README, отчёты, сценарий видео | Документы отражают проверенный runtime | Завершён: RU/EN дня/корня, final report/checklist/runbook/backlog, видео-сценарий и delivery checks; Git push/видеозапись отдельно |
+| 9 | Финальные RU/EN и root README, отчёты, сценарий видео | Документы отражают проверенный runtime | Завершён: RU/EN дня/корня, final report/checklist/runbook/backlog, видео-сценарий и delivery checks; поставка опубликована в main; UI-видео записано пользователем |
 
 Документация этапов не выдаёт future endpoints за работающий API. Корневые README
-обновлены на этапе9; исходные historical JSON не изменены. Rust и полноценная Kerry — после курса.
+обновлены на этапе9; исходные historical JSON не изменены. Исследование Rust — после курса.
 По решению пользователя operational backup/restore и перенос старой истории
 выполняются после полной реализации; существующий storage backup API остаётся.
 

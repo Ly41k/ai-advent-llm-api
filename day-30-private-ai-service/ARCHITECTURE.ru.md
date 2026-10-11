@@ -4,7 +4,7 @@
 Отдельный каталог дня30, public API v1, SQLite schema2, private-chat-v2.
 Реализованы этапы1–9. Детальные evidence и ограничения: FINAL_REPORT.ru.md.
 Облачные LLM/fallback, RAG по умолчанию, voice/MCP/tools/agents не входят в задачу.
-Rust и полноценная Kerry — будущее исследование, не текущая реализация.
+Rust — отдельное будущее исследование, не текущая реализация.
 
 ## Доступ и границы доверия
 
@@ -177,7 +177,7 @@ RSS+size_vram не складываются в physical unified-memory peak; GPU
 не скрытно выгружает их и не гарантирует exclusivity engine. Приёмка в отдельном
 окне без RAG/Revik/bge-m3. keep_alive не является доказательством экономии памяти.
 
-## Переиспользование, Kerry и corpus
+## Переиспользование и корпус документов
 
 Переиспользованы принципы Day18 lifecycle, Day25 persistence/ownership, Day26 local
 HTTP/model validation, Day29 profile/resource evidence. Day25 CLI/ChatStore не
@@ -187,10 +187,10 @@ sources/tests/JSON не меняются. Day30 не зависит от embeddi
 
 Root README обновлены на этапе9: они входят в Day21 corpus и меняют fingerprint.
 Rebuild/verify перед следующим строгим RAG live run, не перепись old reports.
-Kerry memory/identity/personality отделены от storage/model/service/UI. StableIDs,
-исходная history, attempts/snapshots/versioned migrations — фундамент continuity;
-полная долговременная память ещё не реализована. Сохранённая история не означает,
-что модель одновременно видит её всю. Перенос железа требует проверенного restore.
+Модель, сервис, UI и долговременное хранилище имеют отдельные границы.
+Стабильные IDs, исходная история и версионируемые миграции сохраняют данные
+независимо от модели. Сохранённая история не означает, что модель одновременно
+видит её всю. Перенос железа требует проверенного восстановления.
 Rust/Axum/Tokio — отдельный after-course API overhead benchmark, не снижение Qwen/KV RAM.
 
 ## Primary references

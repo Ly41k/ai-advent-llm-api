@@ -29,8 +29,9 @@ See [architecture](ARCHITECTURE.ru.md) and [API v1](API.md).
 
 ## MacBook setup
 
-For the existing0.8.0 deployment, [install stage9 docs only](INSTALL_STAGE9.ru.md)
-without changing runtime, configuration or the private database.
+The repository contains the complete implementation. Use these commands for a
+new installation; an existing installation should keep its database and owners.
+Documentation-only updates do not require restarting the API.
 
 Python **3.13+**, macOS/POSIX, SQLite, and Ollama with downloaded
 `qwen2.5:14b` Q4_K_M are required. From the repository root, for a new setup:
@@ -105,6 +106,34 @@ Direct home access uses Caddy at `https://LAN_IP:8443`, a matching allowed origi
 and trust in your own root CA. Tailscale is optional on that direct route.
 Current Caddy/LAN HTTPS was checked from the Mac; phone CA setup is deferred.
 
+## Daily use and Mac sleep
+
+With launchd installed, open the chat URL after connecting the Mac and phone to
+Tailscale; do not start a second `serve` process. Wait for **«Ответ сохранён»**
+(answer saved) and check the same conversation on another device. Readiness and
+saved history have different roles: history remains readable during model outages.
+
+Before turning off the Mac's internet or closing its lid, wait for all replies to
+be saved and stop sending new requests. To stop the installed API cleanly:
+
+```bash
+launchctl bootout "gui/$(id -u)/local.bublik.private-ai.api"
+/usr/sbin/lsof -nP -a -iTCP:8000 -sTCP:LISTEN
+```
+
+Wait until the listener check has no output. After waking the Mac, restore its
+network and Tailscale connection, open Ollama if you quit it, then start the API:
+
+```bash
+launchctl bootstrap "gui/$(id -u)" \
+  "$HOME/Library/LaunchAgents/local.bublik.private-ai.api.plist"
+```
+
+If you did not stop the API before sleep, check `launchctl print` and reopen the
+chat first; do not bootstrap a service that is already running. Keep the same
+database. The chat is unavailable while its Mac host sleeps or is offline.
+Details and interruption recovery: [RUNBOOK.ru.md](RUNBOOK.ru.md).
+
 ## API, persistence and limits
 
 `/api/v1` exposes live/ready, browser login/session/logout, chats/history,
@@ -139,6 +168,18 @@ input/secrets/upstream tracebacks. Discarded launchd output limits diagnostics.
 Backup uses the SQLite backup API and refuses overwrite; production restoration,
 retention and off-host copies remain a separate task.
 
+After starting the API, from a second terminal where `BUBLIK_TAIL_URL` is set:
+
+```bash
+curl --max-time 10 "$BUBLIK_TAIL_URL/api/v1/health/live"
+curl --max-time 10 -i "$BUBLIK_TAIL_URL/api/v1/chats"
+```
+
+Expected: `200` / `{"status":"alive"}` and `401` without credentials. Open the
+same HTTPS URL in the browser, sign in, create a conversation and wait for a saved
+reply. Liveness alone does not prove that Qwen is ready. See [API.md](API.md) for
+authenticated readiness, routes, error codes and token scopes.
+
 ## Verification and docs
 
 ```bash
@@ -151,10 +192,13 @@ writes a new report. Hashes are neither signatures nor live network/model proof.
 Chromium/PWA fixtures use synthetic inference; real Mac Qwen and device evidence
 are recorded separately. Original successful and failed JSON are preserved.
 
+The user has recorded a UI demonstration with messages shared across devices.
+The console scenario is optional; it does not replace saved verification reports.
+
 See [final report](FINAL_REPORT.ru.md), [acceptance](ACCEPTANCE.ru.md),
 [console video](CONSOLE_VIDEO.ru.md), [detailed stage-8 evidence](VALIDATION.stage8.ru.md),
 [prompt upgrade](PROMPT_V2.ru.md), [launchd/PWA](STAGE7.ru.md), [plan](PLAN.ru.md)
-and [backlog](BACKLOG.ru.md). Rust and full Kerry memory are future work.
+and [backlog](BACKLOG.ru.md). Rust is deferred until after the course.
 
 Stage 9 updates root READMEs. This changes the Day 21 indexed corpus: rebuild that
 index before a new strict RAG live run. Day 30 does not use the index. Previous

@@ -2,7 +2,7 @@
 
 Текущий runtime0.8.0 принят в проверенной конфигурации. Базовая история/owners,
 API/UI, queue/quotas и versioned prompt реализованы. Ниже — отдельные задачи,
-не скрытые обязательства внедрить всю Kerry в дне30. См. FINAL_REPORT.ru.md.
+за пределами принятого задания дня 30. См. FINAL_REPORT.ru.md.
 
 ## После курса
 
@@ -10,9 +10,6 @@ API/UI, queue/quotas и versioned prompt реализованы. Ниже — о
   Сейчас Rust не внедряется. Одинаковые API, данные, модель, оборудование и нагрузка;
   измерять RAM, CPU, latency, concurrency, stability. API-память отдельно от Qwen
   и KV-cache; экономия памяти модели от переписывания API не заявляется.
-- Kerry: долговременная память и continuity отдельно от inference context;
-  сохранение исходной истории, lineage памяти, явные versioned migrations,
-  проверяемые backups/restore и перенос на новое железо без скрытого удаления.
 - Exact local tokenizer, если проверены vocabulary/template/digest и ресурсы.
 - Улучшение доступа к старой истории без её потери: summary с provenance и
   независимым оригиналом, позднее retrieval. Не включать RAG по умолчанию.
@@ -30,7 +27,8 @@ API/UI, queue/quotas и versioned prompt реализованы. Ниже — о
   темы/доступность и расширенная работа с очень большими списками диалогов.
   Не добавлять CDN, сырые HTML ответы или persistent browser copies личной истории.
 
-- Записать видео по готовому CONSOLE_VIDEO.ru.md; сам сценарий завершён на этапе9.
+- UI-видео записано пользователем: чат и сообщения с телефонов.
+  CONSOLE_VIDEO.ru.md остаётся необязательным сценарием повторной демонстрации.
 - При необходимости вернуться к прямому LAN с телефона без Tailscale: trust
   собственного CA, phone Wi-Fi-only условия и отдельный свежий handoff report.
   Основной Tailscale URL не требует этих сертификатов.

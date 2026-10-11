@@ -248,7 +248,7 @@ verify хранит hashes/IDs/metrics и отдельно обозначенн�
 Реальные peak RAM/CPU/swap, длинные ответы/quality и итоговый load/recovery — этап 8.
 long_a failure остаётся открытым; короткие controls его не закрывают. Backup/restore,
 старый owner/history перенос — после полной реализации по решению пользователя.
-Автозапуск, reboot/PWA — этап 7; Rust и Kerry memory — после курса.
+Автозапуск, reboot/PWA — этап 7; исследование Rust — после курса.
 
 ## Контрольный handoff — 2026-10-10, 20:24–20:28 Europe/Kiev
 

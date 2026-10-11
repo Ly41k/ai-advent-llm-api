@@ -2,7 +2,7 @@
 
 # AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, and a local Kotlin pre-commit review application.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, and a private AI chat accessible from computers and phones.
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
@@ -85,7 +85,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 | 27 | Not required | `qwen2.5:14b` default; configurable downloaded local model |
 | 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq/OpenAI comparison |
 | 29 | `bge-m3` | `qwen2.5:14b` Q4_K_M selected; Q5_K_M compared on one factual case |
-| 30 | Not required | `qwen2.5:14b` Q4_K_M; private-chat-v2, context8192/output1024 |
+| 30 | Not required | `qwen2.5:14b` Q4_K_M; private-chat-v2, context 8192 / output 1024 |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -159,7 +159,7 @@ Later lessons use specialized entry points:
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Two real commits in a disposable repository with local LLM explanations |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json` | Compare saved143/143 with sources; see Day30 README for server setup |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json` | Verify saved 143/143 checks against sources; see Day 30 README for server setup |
 
 ## Day 21 shared knowledge index
 
@@ -366,20 +366,39 @@ python day-29-local-llm-optimization/experiments/quality_v7/main.py verify \
 
 See [final measurements](day-29-local-llm-optimization/FINAL_REPORT.ru.md), [selected profile](day-29-local-llm-optimization/SELECTED_PROFILE.json), [assignment checklist](day-29-local-llm-optimization/ASSIGNMENT_CHECKLIST.ru.md), and [validation](day-29-local-llm-optimization/VALIDATION.md). The assignment is complete within the stated scope; new generation is optional.
 
-## Day 30 — private AI chat
+## Day 30 — Bublik Private AI Service
 
-[Day 30](day-30-private-ai-service/README.md) implements Bublik Private AI Service:
-local Qwen on the MacBook, API v1, SQLite history and a responsive Web UI/PWA.
-Tailscale Serve is the main HTTPS path for Mac/Android/iPhone, including mobile data.
-Caddy supports additional direct LAN access. API/Ollama stay on localhost; Python
-does not load the model. No cloud LLM/fallback or default RAG.
+[Day 30](day-30-private-ai-service/README.md) turns local Qwen into a private HTTP
+service with multiple conversations, durable SQLite history and a responsive
+Web UI. Mac, Android and iPhone can open the same conversation and continue it.
+The PWA can be added to the phone's home screen.
 
-Verified0.8.0/private-chat-v2: real Mac baseline259/259 technical,13/13 quality,
-16completed; seven chats/32messages unchanged after restart11/11, current LAN/launchd6/6
-with a new PID. Offline143/143, Chromium26/26 and PWA11/11 use synthetic inference;
-they do not replace physical Android handoff8/8 or manually confirmed three-device sync.
+The tested host is a **MacBook Pro M1 with 32 GB unified memory**. Ollama runs
+Qwen2.5:14b Q4_K_M on localhost; FastAPI handles authentication, API v1, context
+budgets, quotas and the durable queue. **No cloud LLM, automatic cloud fallback
+or default RAG** is used. Complete saved history is separate from the bounded
+recent context sent to the model.
 
-From the root, with an active Python3.13 virtualenv:
+**Tailscale Serve** is the main private HTTPS route on home Wi-Fi and mobile data.
+It requires Tailscale on the client, application login and an awake, connected
+Mac. Its `.ts.net` URL needs no manually installed local CA. An optional **Caddy**
+route provides direct LAN HTTPS; that route requires trusting your own CA.
+Ollama and the API remain bound to localhost.
+
+| Recorded evidence for runtime 0.8.0 / private-chat-v2 | Result |
+|---|---|
+| Real Mac API/Qwen baseline, including 10 sequential and 3 concurrent requests | 259/259 technical checks; 13/13 quality controls |
+| Persisted history after API restart | 11/11; seven chats and 32 messages unchanged |
+| Current LAN HTTPS / launchd check from the Mac | 6/6 |
+| Offline / Chromium / PWA fixtures | 143/143; 26/26; 11/11 |
+| Physical phone handoff and daily use | Android handoff 8/8; Mac/Android/iPhone sync and mobile access manually confirmed |
+
+Concurrent API requests are queued; the model runs **one generation at a time**.
+Fixture tests do not prove real network or model availability. Quality controls
+cover the recorded examples, not arbitrary-answer reliability. Original successful
+and failed reports are retained in the [final report](day-30-private-ai-service/FINAL_REPORT.ru.md).
+
+From the root, with an active Python 3.13 virtualenv:
 
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
@@ -387,15 +406,22 @@ python day-30-private-ai-service/scripts/verify_report.py \
   day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json
 ```
 
-See the lesson README and [runbook](day-30-private-ai-service/RUNBOOK.ru.md) for setup,
-browser login and phones. The [final report](day-30-private-ai-service/FINAL_REPORT.ru.md)
-preserves failed historical runs and limitations: production restore/phone LAN CA
-are deferred, saved policy/independent remote scan are not audited, and LaunchAgents
-require user login and an awake Mac. [Video script](day-30-private-ai-service/CONSOLE_VIDEO.ru.md)
-and [backlog](day-30-private-ai-service/BACKLOG.ru.md) are separate. Rust/Kerry memory
-are future work; original data is preserved. These root updates require a Day21
-index rebuild before a new strict RAG live run, not for Day30 or saved-report checking.
-Previous lesson sources and historical reports remain unchanged.
+This verifies saved evidence against source hashes; it does not start the server.
+Follow the [lesson README](day-30-private-ai-service/README.md) and
+[Mac runbook](day-30-private-ai-service/RUNBOOK.ru.md) for installation, secure
+login, phones, launchd and stopping the service before sleep. The user has recorded
+a UI demonstration of cross-device chat; the
+[console scenario](day-30-private-ai-service/CONSOLE_VIDEO.ru.md) is optional.
+
+Operational backup restoration, phone LAN CA setup and an independent audit of
+the saved tailnet policy remain separate tasks. See the
+[acceptance checklist](day-30-private-ai-service/ACCEPTANCE.ru.md) and
+[backlog](day-30-private-ai-service/BACKLOG.ru.md). Rust is not implemented; a
+separate API overhead benchmark is deferred until after the course.
+
+Changing these root READMEs changes the Day 21 corpus fingerprint. Rebuild that
+index before a new strict RAG live run; Day 30 and saved-report verification do
+not use it. Earlier lesson implementations and historical JSON reports are preserved.
 
 ## Tests
 

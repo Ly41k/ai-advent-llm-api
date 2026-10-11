@@ -2,7 +2,7 @@
 
 # AI Advent — от первого LLM-запроса до MCP, подтверждённого RAG и локальных приложений
 
-Практический проект на Python, который начинается с прямых запросов к LLM API и постепенно приходит к агентам, сохраняемому состоянию, MCP-инструментам, индексации документов, RAG, подтверждённым цитатам, постоянному RAG-чату с памятью задачи и локальному приложению проверки Kotlin перед коммитом.
+Практический проект на Python, который начинается с прямых запросов к LLM API и постепенно приходит к агентам, сохраняемому состоянию, MCP-инструментам, индексации документов, RAG, подтверждённым цитатам, постоянному RAG-чату с памятью задачи локальному приложению проверки Kotlin перед коммитом и приватному AI-чату с доступом с компьютера и телефонов.
 
 **Чебуратор** — капитан исследовательского корабля, **Бублик** — помощник, который развивается по ходу курса. **Ревик**, добавленный на Дне 27, — отдельный локальный помощник проверки Kotlin-кода.
 
@@ -85,7 +85,7 @@ MCP-серверы дней 16–20 общаются с локальными к�
 | 27 | Не требуются | `qwen2.5:14b` по умолчанию; настраиваемая скачанная локальная модель |
 | 28 | `bge-m3` | `qwen2.5:14b` по умолчанию; опциональное сравнение с Groq/OpenAI |
 | 29 | `bge-m3` | Выбрана `qwen2.5:14b` Q4_K_M; Q5_K_M сравнивалась на одном справочном кейсе |
-| 30 | Не нужны | `qwen2.5:14b` Q4_K_M; private-chat-v2, context8192/output1024 |
+| 30 | Не нужны | `qwen2.5:14b` Q4_K_M; private-chat-v2, context 8192 / output 1024 |
 
 Загружайте только те модели, которые нужны конкретному этапу.
 
@@ -366,20 +366,40 @@ python day-29-local-llm-optimization/experiments/quality_v7/main.py verify \
 
 Подробнее: [итоговые замеры](day-29-local-llm-optimization/FINAL_REPORT.ru.md), [выбранный профиль](day-29-local-llm-optimization/SELECTED_PROFILE.json), [приёмка задания](day-29-local-llm-optimization/ASSIGNMENT_CHECKLIST.ru.md) и [валидация](day-29-local-llm-optimization/VALIDATION.md). Задание выполнено в указанной области; новая генерация необязательна.
 
-## День 30 — приватный AI-чат
+## День 30 — Bublik Private AI Service
 
-[День 30](day-30-private-ai-service/README.ru.md) реализует Bublik Private AI Service:
-локальная Qwen на MacBook, API v1, SQLite-история и адаптивный Web UI/PWA.
-Основной HTTPS-доступ с Mac/Android/iPhone — Tailscale Serve, включая мобильную сеть.
-Caddy поддерживает дополнительный прямой LAN путь. API/Ollama остаются localhost;
-модель не загружается в Python. Нет cloud LLM/fallback и RAG по умолчанию.
+[День 30](day-30-private-ai-service/README.ru.md) превращает локальную Qwen в
+приватный HTTP-сервис: несколько диалогов, история в SQLite и адаптивный Web UI.
+Mac, Android и iPhone открывают один диалог и продолжают переписку. PWA можно
+добавить на домашний экран телефона.
 
-Проверенная версия0.8.0/private-chat-v2: реальный Mac baseline259/259 technical,
-13/13 quality,16completed; после restart семь чатов/32сообщения unchanged11/11,
-LAN/launchd6/6 с новым PID. Offline143/143, Chromium26/26 и PWA11/11 используют
-synthetic inference и не подменяют physical Android handoff8/8/ручной three-device sync.
+Проверенный сервер — **MacBook Pro M1 с 32 GB unified memory**. Ollama выполняет
+Qwen2.5:14b Q4_K_M на localhost; FastAPI отвечает за авторизацию, API v1, бюджет
+контекста, лимиты и сохраняемую очередь. **Облачных LLM, автоматического cloud
+fallback и RAG по умолчанию нет.** Полная сохранённая история отделена от
+ограниченного недавнего контекста, передаваемого модели.
 
-Из корня, с активным Python3.13 venv:
+**Tailscale Serve** — основной приватный HTTPS-доступ через домашний Wi-Fi и
+мобильную сеть. Нужны Tailscale на клиенте, вход в приложение и бодрствующий Mac
+с подключением к сети. Для `.ts.net` URL не требуется вручную устанавливать
+локальный CA. Дополнительный путь через **Caddy** даёт прямой LAN HTTPS и требует
+доверия собственному CA. Ollama и API слушают только localhost.
+
+| Сохранённые проверки runtime 0.8.0 / private-chat-v2 | Результат |
+|---|---|
+| Реальный Mac API/Qwen, включая 10 последовательных и 3 конкурентных запроса | 259/259 технических проверок; 13/13 контрольных проверок качества |
+| История после рестарта API | 11/11; семь чатов и 32 сообщения без изменений |
+| Текущий LAN HTTPS / launchd с Mac | 6/6 |
+| Offline / Chromium / PWA fixtures | 143/143; 26/26; 11/11 |
+| Реальный телефон и повседневная работа | Android handoff 8/8; синхронизация Mac/Android/iPhone и мобильный доступ подтверждены вручную |
+
+Конкурентные API-запросы ставятся в очередь; модель выполняет **одну генерацию
+за раз**. Fixtures не доказывают реальную сетевую доступность или работу модели.
+Проверки качества относятся к сохранённым примерам, а не любым возможным ответам.
+Исходные успешные и неуспешные отчёты сохранены в
+[итоговом отчёте](day-30-private-ai-service/FINAL_REPORT.ru.md).
+
+Из корня, с активным Python 3.13 virtualenv:
 
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
@@ -387,14 +407,22 @@ python day-30-private-ai-service/scripts/verify_report.py \
   day-30-private-ai-service/reports/verified/stage8-prompt-v2-offline.json
 ```
 
-Установку/запуск, browser login и подключения телефонов см. в [runbook](day-30-private-ai-service/RUNBOOK.ru.md).
-Полный [итоговый отчёт](day-30-private-ai-service/FINAL_REPORT.ru.md) сохраняет failed
-исторические прогоны и ограничения: production backup/restore и phone LAN CA отложены,
-saved policy/independent remote scan не audited, LaunchAgents требуют user login и awakeMac.
-[Видео](day-30-private-ai-service/CONSOLE_VIDEO.ru.md) и [backlog](day-30-private-ai-service/BACKLOG.ru.md)
-оформлены отдельно. Rust/Kerry memory — после курса, исходные данные не пересоздаются.
-Root README обновлены: rebuild Day21 index нужен перед новым strict RAG live run,
-но не для Day30 или проверки saved reports. Старые lesson sources/reports не изменены.
+Это сверка сохранённых доказательств с хешами исходников, а не запуск сервера.
+Установку, безопасный вход, телефоны, launchd и остановку перед сном Mac описывают
+[README дня](day-30-private-ai-service/README.ru.md) и
+[инструкция эксплуатации](day-30-private-ai-service/RUNBOOK.ru.md).
+Пользователь записал UI-видео с чатом на нескольких устройствах;
+[консольный сценарий](day-30-private-ai-service/CONSOLE_VIDEO.ru.md) остаётся необязательным.
+
+Практическое восстановление из backup, настройка LAN CA на телефонах и независимый
+аудит сохранённой tailnet policy остаются отдельными задачами. См.
+[приёмку](day-30-private-ai-service/ACCEPTANCE.ru.md) и
+[backlog](day-30-private-ai-service/BACKLOG.ru.md). Rust сейчас не внедряется;
+сопоставимое исследование накладных расходов API отложено до окончания курса.
+
+Изменение корневых README меняет fingerprint корпуса дня 21. Перед новым строгим
+RAG live-запуском пересоберите индекс; день 30 и проверка сохранённых отчётов его
+не используют. Реализации предыдущих дней и исторические JSON сохранены.
 
 ## Тесты
 

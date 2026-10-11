@@ -133,7 +133,7 @@ unchanged. Исходный вариант может failed — это допу
 snapshot tests и повторным API baseline/history, или продолжить эксперимент.
 Нельзя заменить текст под старым private-chat-v1 и переписать прошлые snapshots.
 Старые chats, message/generation IDs, model/profile/context snapshots сохраняются.
-Rust, RAG, Kerry memory и backup/owner transfer этим экспериментом не внедряются.
+Rust, RAG и backup/owner transfer этим экспериментом не внедряются.
 
 Проверка реализации: targeted4/4, полный suite **140/140** (45.364s),
 ResourceWarning как ошибка; source66 и runtime27 проверены. Исходные Mac

@@ -43,9 +43,11 @@ PASS. Synthetic inference, Mac→свойLANIP и viewport не доказыва
 - [x] Текущий offline143/143, Chromium26/26, PWA11/11, clean wheel10/10.
 - [x] README.md/README.ru.md дня30 и корня; API, architecture, Mac/phone runbook.
 - [x] Отдельный final report, сохранённые original passed/failed JSON и source hashes.
-- [x] Backlog: Rust после курса, Kerry continuity, backup/restore и другие улучшения.
+- [x] Backlog: Rust после курса, backup/restore и другие улучшения.
 - [x] Консольный сценарий видео с запуском, реальным API и новым report directory.
-- [ ] Само видео не записано; Git commit/push не выполнялись автоматически.
+- [x] Пользователь записал UI-видео с сообщениями с телефонов.
+- [x] Код опубликован пользователем в main: `d6c651c75d8f44c99f4780a3dffb9f1c8c5ef348`.
+  Само видео здесь не анализировалось; факт записи подтверждён пользователем.
 
 ## Явно отложено / не доказано
 
@@ -57,7 +59,7 @@ PASS. Synthetic inference, Mac→свойLANIP и viewport не доказыва
 
 Этот список не создаёт скрытой гарантии полной security certification или защиты
 от отказа диска. До переноса важных данных operational backup/restore остаётся
-отдельной практической задачей. Будущая Kerry memory/agents/RAG/voice и Rust не
+отдельной практической задачей. Agents/RAG/voice и Rust не
 реализуются в дне30.
 
 ## Повторная проверка

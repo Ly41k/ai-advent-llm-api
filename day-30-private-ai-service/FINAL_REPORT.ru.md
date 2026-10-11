@@ -2,8 +2,8 @@
 
 Дата оформления: **2026-10-11**. Реализация и документация этапов1–9 готовы.
 Основной сценарий приватного чата принят на MacBook/Android/iPhone в проверенной
-конфигурации. Это первый серверный прототип для последующего развития Kerry,
-не реализация её долговременной памяти или автономных действий.
+конфигурации. Это повторно используемый фундамент приватного AI-чата;
+автономные действия не входят в текущую реализацию.
 
 Live evidence получены на Mac пользователя 9–11 октября; offline/browser/package
 fixtures выполнены отдельно на Linux. Этап9 меняет документацию, а не runtime:
@@ -19,7 +19,7 @@ fixtures выполнены отдельно на Linux. Этап9 меняет 
 | Курс: rate limit / max context | 429/Retry-After, durable quotas, bounded inference suffix, omission и oversize rejection |
 | Расширения | Owners, несколько диалогов, SQLite history, cross-device sync, auth/CSRF/TLS, idempotency, очередь, partial/recovery, launchd/PWA, отчёты |
 | Отдельно после реализации | Operational backup/restore и перенос console-owner истории; телефонные LAN CA настройки |
-| После курса | Kerry memory/continuity и сопоставимый Python→Rust benchmark; голос/tools/RAG только отдельными решениями |
+| После курса | Сопоставимый Python→Rust benchmark; голос/tools/RAG только отдельными решениями |
 
 Облачных LLM или cloud fallback нет. Tailscale — транспорт, включая возможный
 зашифрованный relay; Qwen inference и SQLite история остаются на Mac. Доступ извне
@@ -147,19 +147,24 @@ Prompt ABBA client-time medians были близкими; там нет соп�
   browser logout/background matrix и точные версии телефонных браузеров не выполнены.
 - Export материализует snapshot в RAM; exact tokenizer и summary/retrieval старой
   истории — будущие улучшения. Нет Markdown renderer/voice/tools/RAG по умолчанию.
-- Код/документы подготовлены в workspace; финальный Git commit/push и запись видео
-  не выполнялись автоматически. Сценарий видео подготовлен отдельно.
+- Пользователь опубликовал поставку в main:
+  `d6c651c75d8f44c99f4780a3dffb9f1c8c5ef348`, 11 октября 2026.
+  UI-видео с сообщениями с телефонов записано по подтверждению пользователя;
+  видеозапись здесь не анализировалась. Консольный сценарий остаётся необязательным.
 
 Backlog: [BACKLOG.ru.md](BACKLOG.ru.md). Rust не внедряется; будущее сравнение
-измеряет API overhead отдельно от Qwen/KV-cache. Kerry должна сохранить оригинальную
-историю и управляемые миграции/backup при смене моделей и оборудования.
+измеряет API overhead отдельно от Qwen/KV-cache. Исходная история и управляемые
+миграции/backup должны сохранять данные при смене моделей и оборудования.
 
 ## Документы и индекс
 
 RU/EN README дня и корня обновлены; API/architecture/runbook/checklist/backlog/video
 согласованы с текущим runtime. Исторические JSON не перезаписаны. Финальный
 `reports/verified/stage9-final.json` содержит отдельные hashes и результаты
-проверки документации/доставки; это не новый live report.
+проверки документации/доставки; это не новый live report. Он фиксирует документацию
+на момент поставки этапа 9. После текущих Markdown-правок его documentation hashes
+закономерно отличаются; исходный JSON не переписывается. Runtime/source manifest
+не изменился, сохранённые v2 тестовые отчёты остаются применимыми.
 
 Root README входят в корпус дня21; новые тексты меняют fingerprint. Индекс не
 пересобирался здесь. Перед следующим strict RAG live run из корня:

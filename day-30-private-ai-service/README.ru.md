@@ -34,8 +34,9 @@ Mac, Android и iPhone продолжают одни и те же диалоги
 
 ## Запуск на MacBook
 
-Для уже работающей установки0.8.0: [установить только документы этапа9](INSTALL_STAGE9.ru.md),
-не меняя runtime, конфигурацию и личную базу.
+В репозитории находится полная реализация. Команды ниже предназначены для новой
+установки. У существующего сервиса сохраняйте рабочую базу и владельцев диалогов.
+Обновление только Markdown-документации не требует рестарта API.
 
 Python **3.13+**, macOS/POSIX, локальная Ollama с загруженной `qwen2.5:14b`.
 Из корня checkout, для новой установки:
@@ -69,13 +70,32 @@ python -m bublik_service --db "$BUBLIK_DB" doctor
 `~/Library/Application Support/BublikPrivateAI/chats.sqlite3`;
 `BUBLIK_DATA_DIR` меняет каталог по умолчанию.
 
-Настройте Serve по [RUNBOOK](RUNBOOK.ru.md), задайте реальный канонический
-`BUBLIK_TAIL_URL` из Tailscale status и запустите:
+Подключите Tailscale на Mac и телефонах к одному tailnet. Для проверенного macOS
+приложения получите свой HTTPS hostname:
 
 ```bash
+BUBLIK_TS_CLI="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+"$BUBLIK_TS_CLI" status
+BUBLIK_TAIL_HOST="$("$BUBLIK_TS_CLI" status --json | python -c 'import json,sys; print(json.load(sys.stdin)["Self"]["DNSName"].rstrip("."))')"
+BUBLIK_TAIL_URL="https://$BUBLIK_TAIL_HOST"
+"$BUBLIK_TS_CLI" serve status
+```
+
+Включите MagicDNS/HTTPS certificates и задайте минимальные права доступа к Mac
+TCP:443 по [RUNBOOK](RUNBOOK.ru.md). Сначала проверьте текущие routes. Если
+443/root свободен, настройте Serve и запустите API:
+
+```bash
+"$BUBLIK_TS_CLI" serve --bg --https=443 http://127.0.0.1:8000
+"$BUBLIK_TS_CLI" serve status
+"$BUBLIK_TS_CLI" funnel status
 python -m bublik_service --db "$BUBLIK_DB" serve --port 8000 \
   --trusted-loopback-proxy --origin "$BUBLIK_TAIL_URL"
 ```
+
+Ожидается **tailnet only**, без публичного Funnel и проброса портов роутера.
+Проверьте grants и legacy ACLs: узкое разрешение не отменяет широкое правило.
+Подключение к tailnet не заменяет вход в приложение Бублика.
 
 API слушает **только `127.0.0.1:8000`**, один worker, без reload. В proxy режиме
 прямой plain HTTP корректно возвращает `secure_transport_required`.
@@ -98,6 +118,34 @@ persistent browser cache отсутствуют. На обоих телефон�
 вашему CA на клиенте и согласованный LAN origin; Tailscale не обязателен.
 Подробности: [STAGE6.ru.md](STAGE6.ru.md). Текущий Caddy/LAN путь проверен с Mac;
 телефонные CA настройки отложены, основной путь — Serve.
+
+## Повседневная работа и сон Mac
+
+При установленном launchd откройте URL чата после подключения Mac и телефона к
+Tailscale; второй ручной `serve` не нужен. Дождитесь **«Ответ сохранён»** и
+проверьте тот же диалог на другом устройстве. Готовность модели и доступность
+истории проверяются отдельно: при недоступной Ollama история остаётся доступной.
+
+Перед отключением интернета на Mac или закрытием крышки дождитесь сохранения всех
+ответов и прекратите новые отправки. Для штатной остановки установленного API:
+
+```bash
+launchctl bootout "gui/$(id -u)/local.bublik.private-ai.api"
+/usr/sbin/lsof -nP -a -iTCP:8000 -sTCP:LISTEN
+```
+
+Дождитесь пустого вывода проверки listener. После пробуждения восстановите сеть и
+Tailscale на Mac, откройте Ollama, если закрывали её, затем запустите API:
+
+```bash
+launchctl bootstrap "gui/$(id -u)" \
+  "$HOME/Library/LaunchAgents/local.bublik.private-ai.api.plist"
+```
+
+Если перед сном API не останавливали, сначала проверьте `launchctl print` и откройте
+чат; уже работающий сервис повторно не загружайте. Используйте прежнюю базу.
+При спящем или отключённом от сети Mac чат недоступен. Подробности и recovery
+прерванной генерации: [RUNBOOK.ru.md](RUNBOOK.ru.md).
 
 ## API, история и ограничения
 
@@ -134,6 +182,18 @@ UI не сохраняет API tokens, пароли, историю или че�
 это ограничивает эксплуатационную диагностику. Backup API учитывает WAL и запрещает
 перезапись файла; operational restore/retention/off-host copies — отдельная задача.
 
+После запуска API, во втором терминале с заданным `BUBLIK_TAIL_URL`:
+
+```bash
+curl --max-time 10 "$BUBLIK_TAIL_URL/api/v1/health/live"
+curl --max-time 10 -i "$BUBLIK_TAIL_URL/api/v1/chats"
+```
+
+Ожидается `200` / `{"status":"alive"}` и `401` без авторизации. Откройте тот же
+HTTPS URL в браузере, войдите, создайте диалог и дождитесь сохранённого ответа.
+Liveness сам по себе не доказывает готовность Qwen. Авторизованную readiness,
+маршруты, коды ошибок и scopes токенов описывает [API.md](API.md).
+
 ## Проверки и документация
 
 ```bash
@@ -146,15 +206,18 @@ python -W error::ResourceWarning scripts/check_storage.py
 Browser/PWA tests требуют `requirements.browser.lock` и Chromium. Исходные успешные
 и неуспешные JSON в `reports/verified/` не перезаписаны.
 
+Пользователь записал UI-видео с сообщениями на нескольких устройствах. Запись
+не заменяет сохранённые отчёты технических и интеграционных проверок.
+
 | Документ | Назначение |
 |---|---|
 | [RUNBOOK.ru.md](RUNBOOK.ru.md) | Установка, повседневный запуск, телефон, 502/recovery |
 | [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md), [ACCEPTANCE.ru.md](ACCEPTANCE.ru.md) | Итоговые результаты, критерии и ограничения |
 | [API.md](API.md), [ARCHITECTURE.ru.md](ARCHITECTURE.ru.md) | Работающий контракт и устройство сервиса |
-| [CONSOLE_VIDEO.ru.md](CONSOLE_VIDEO.ru.md) | Терминальная демонстрация с новыми отчётами |
+| [CONSOLE_VIDEO.ru.md](CONSOLE_VIDEO.ru.md) | Необязательная терминальная демонстрация; UI-видео записано пользователем |
 | [VALIDATION.stage8.ru.md](VALIDATION.stage8.ru.md), [PROMPT_V2.ru.md](PROMPT_V2.ru.md) | Live evidence и переход v1→v2 |
 | [STAGE7.ru.md](STAGE7.ru.md), [VALIDATION.stage7.ru.md](VALIDATION.stage7.ru.md) | launchd/PWA и исторический reboot identity mismatch |
-| [PLAN.ru.md](PLAN.ru.md), [BACKLOG.ru.md](BACKLOG.ru.md) | Границы, отложенный backup, Kerry и исследование Rust |
+| [PLAN.ru.md](PLAN.ru.md), [BACKLOG.ru.md](BACKLOG.ru.md) | Границы, отложенный backup и исследование Rust |
 
 Корневые README обновлены на этапе 9. Это меняет корпус дня 21: перед следующим
 строгим RAG live run пересоберите индекс. Сам день 30 индекс не использует;
