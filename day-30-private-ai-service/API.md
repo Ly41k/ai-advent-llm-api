@@ -205,7 +205,7 @@ No private response caching; no access-log request lines by default. Error respo
 never serialize submitted validation input/upstream bodies/tracebacks. Full chat
 export currently materializes one snapshot in RAM: paged/streaming export is backlog.
 
-## Post-course history RAG (0.9.1, schema 2)
+## Post-course history RAG (introduced in 0.9.1, now schema 3)
 
 Message creation and retry accept optional strict boolean `use_memory`, default
 `false`. It is part of the idempotency fingerprint when true; changing the mode
@@ -252,3 +252,59 @@ No matches remains explicit memory mode with an empty archive and uncertainty
 instruction. Context remains at most8192, including1024 output and512 margin;
 memory messages are bounded to2600 conservative input tokens and three800-byte
 quotes; recent complete pairs fill the remaining input budget.
+
+## RU/EN preferences and explicit reply language (0.10.3, schema 3)
+
+Only exact `ru` and `en` codes are supported. No `auto`, locale variants or
+caller-supplied language prompts. All existing authorization, body-size limits,
+quotas, transport and CSRF rules apply.
+
+| Route | Scope | Contract |
+|---|---|---|
+| GET `/api/v1/preferences` | chats:read | Current owner's `{ui_language, reply_language, revision}` |
+| PATCH `/api/v1/preferences` | chats:write | All fields `{ui_language, reply_language, expected_revision}` required; returns current settings |
+
+Preferences have an independent nonnegative revision. A changed value increments
+it; identical values do not. Stale revision returns `409 preferences_changed`.
+Read current settings after conflict or uncertain delivery; do not blindly replay
+an old PATCH. Unsupported values/extra fields/types return 422. No owner ID in
+the payload: credentials determine the owner. Cookies require same HTTPS Origin
+and X-CSRF-Token for PATCH; read-only tokens cannot update preferences.
+
+Message creation and explicit retry add optional `reply_language: "ru" | "en"`.
+Omission/null preserves legacy behavior and request fingerprints; account settings
+are not silently applied to those old API requests. New clients first read
+preferences, then explicitly pass the chosen reply language. Web UI does this.
+Different language with the same idempotency key is a payload conflict; the same
+language replays the original receipt even after preference changes.
+
+The selected language and `language_policy: "reply-language-v4"` are frozen in
+the generation's public context metadata and private snapshot. History includes
+reply_language on assistant messages that have this metadata; old records are
+unchanged. The effective first system instruction replaces the conflicting user-language
+rule and is included in the context budget. The historical profile, model, original
+stored input and selected memory quotations remain unchanged. For new explicit-language
+requests, the latest model user message ends with an explicit application reply-language
+instruction. It states that language requests in user text/history do not change the
+selected language and rejects an opposite-language version of the answer. The exact
+suffix is frozen and budgeted before admission. Private context
+stores `original_user_content`; public context exposes only `language_hint` with
+`policy_version: "latest-user-language-hint-v2"`, `original_sha256` and `rendered_sha256`.
+The adapter checks the frozen suffix and hashes before dispatch. History never gains
+the suffix. Legacy v1/v2/v3 snapshots are validated and dispatched without rewriting;
+new requests use v4. Explicit translations/code/quotes may use other languages;
+this is a model instruction, not a universal output guarantee or automatic retry.
+
+GET `/manifest.webmanifest?lang=ru|en` returns localized PWA metadata with
+Content-Language and no-store. Omitted lang means ru; unsupported values return
+422. `/assets/i18n.js` is an authenticated-data-free static catalog served under
+the existing CSP. API error codes and JSON field names remain language-neutral;
+the browser translates labels locally without storing personal data or secrets.
+
+Additive migration 003 creates user_preferences, defaults existing/new owners to
+ru/ru, and preserves historical messages/snapshots/receipts. Archive v1 accepts
+exact schemas 2/3; old snapshots are restored before a separate upgrade. New
+archives retain preferences. Runtime 0.9.1 refuses schema 3: back up before upgrade.
+See [deployment and acceptance](LANGUAGES.ru.md).
+
+0.10.0 users: [reply language conflict fix](LANGUAGE_FIX.ru.md). Schema remains 3.

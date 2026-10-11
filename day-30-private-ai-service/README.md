@@ -31,8 +31,8 @@ exact fragments, timestamps, IDs and SHA-256 hashes are frozen in each generatio
 snapshot and displayed below the reply, with author and completion status. Sources
 and the surrounding original conversation can be reopened.
 
-The private `memory-index/` cache is rebuilt from the primary history. Core schema
-stays **2**; archives preserve history and RAG snapshots, without transporting the
+The private `memory-index/` cache is rebuilt from the primary history. At its introduction, core schema
+stayed **2**; archives preserve history and RAG snapshots, without transporting the
 cache. No embeddings or second model are loaded. Lexical search cannot guarantee
 recall of paraphrases. The Web UI enables retrieval by default; users can disable
 it for a request. API v1 omission still means false for compatibility. Index failures reject RAG
@@ -44,6 +44,22 @@ supplied to the model, not automatic verification of every generated claim.
 
 See [memory continuity and future layers](MEMORY_ARCHITECTURE.ru.md). Summaries and
 structured facts remain future work; originals are not replaced or aged out.
+
+## Russian and English — 0.10.3
+
+Two independent settings select the interface language and new reply language.
+Settings are stored per user and loaded across devices. Only `ru` and `en`
+are accepted; originals and memory quotations retain their saved text.
+The Web UI sends an explicit reply language, frozen in the generation snapshot.
+Legacy API requests without this field retain previous behavior.
+
+An additive migration upgrades SQLite **2 → 3**; verified archives support both
+schemas and new archives include language settings. Back up before upgrading;
+the old runtime cannot reopen schema 3. See [upgrade and device checks](LANGUAGES.ru.md).
+Version 0.10.3 adds an explicit model-only language hint that overrides contrary language requests to the latest user input; its bytes
+are frozen and budgeted while stored messages remain original. See [update checks](LANGUAGE_EXPLICIT_HINT_FIX.ru.md).
+Language instructions guide Qwen; they do not guarantee every output.
+FTS5 remains lexical, without automatic multilingual semantic retrieval.
 
 ## Architecture
 
@@ -215,13 +231,13 @@ authenticated readiness, routes, error codes and token scopes.
 ## Verification and docs
 
 ```bash
-python scripts/verify_report.py reports/verified/rag-memory-v2-offline-20261011.json
+python scripts/verify_report.py reports/verified/languages-policy-v2-offline-20261011.json
 python -W error::ResourceWarning scripts/check_storage.py
 ```
 
-The first checks the new198/198 offline report against74 source files; the
+The first checks the new221/221 offline report against81 source files; the
 second runs the complete current offline suite and writes a new report. Earlier
-storage-only69/69 and course143/143 reports remain historical; their full-source
+RAG198/198, storage-only69/69 and course143/143 reports remain historical; their full-source
 manifests need not match the new runtime. Hashes are neither
 signatures nor live network/model proof.
 Chromium/PWA fixtures use synthetic inference; real Mac Qwen and device evidence

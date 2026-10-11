@@ -233,7 +233,7 @@ class MemoryArchiveTests(unittest.TestCase):
         self.assertEqual(self.repo.export_chat(self.owner, self.chat), before)
 
     def test_failure_during_snapshot_cleans_only_its_new_directory(self):
-        with patch.object(ChatRepository, "backup", side_effect=OSError("synthetic failure")):
+        with patch.object(archive, "inspect_snapshot", side_effect=OSError("synthetic failure")):
             with self.assertRaises(OSError):
                 self.create()
         self.assertFalse(self.folder.exists())

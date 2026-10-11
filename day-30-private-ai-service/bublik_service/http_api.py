@@ -15,6 +15,7 @@ import secrets
 import time
 from urllib.parse import urlsplit,parse_qsl
 import uuid
+from typing import Literal
 
 from fastapi import Depends, FastAPI, Request, Security
 from fastapi.exceptions import RequestValidationError
@@ -31,9 +32,10 @@ from .security import AuthError, COOKIE, Forbidden, RateLimited, SecurityStore, 
 from .storage import ChatRepository
 
 PREFIX = "/api/v1"
-SAFE_CONTEXT = {"policy_version", "omitted_turns", "input_token_upper_bound", "model_identity", "memory"}
+SAFE_CONTEXT = {"language_hint", "policy_version", "omitted_turns", "input_token_upper_bound", "model_identity", "memory", "reply_language", "language_policy"}
 UI_FILES = {"/": ("index.html", "text/html"),
             "/assets/app.js": ("app.js", "text/javascript"),
+            "/assets/i18n.js": ("i18n.js", "text/javascript"),
             "/assets/app.css": ("app.css", "text/css"),
             "/manifest.webmanifest": ("manifest.webmanifest", "application/manifest+json"),
             "/assets/icon-180.png": ("icon-180.png", "image/png"),
@@ -238,11 +240,19 @@ class SendMessage(StrictBody):
     content: str = Field(min_length=1,max_length=16384)
     expected_revision: int = Field(ge=0)
     use_memory: bool = False
+    reply_language: Literal["ru", "en"] | None = None
 
 
 class RetryMessage(StrictBody):
     expected_revision: int = Field(ge=0)
     use_memory: bool = False
+    reply_language: Literal["ru", "en"] | None = None
+
+
+class Preferences(StrictBody):
+    ui_language: Literal["ru", "en"]
+    reply_language: Literal["ru", "en"]
+    expected_revision: int = Field(ge=0)
 
 
 class SearchMemory(StrictBody):
@@ -311,6 +321,16 @@ def create_app(settings, *, adapter_factory=None, repository=None, security=None
     async def ui_file(request:Request):
         name, media = UI_FILES[request.url.path]
         data = await asyncio.to_thread((Path(__file__).resolve().parent/"web_ui"/name).read_bytes)
+        if name == "manifest.webmanifest":
+            from .languages import validate_language
+            language = request.query_params.get("lang", "ru")
+            validate_language(language)
+            value = json.loads(data)
+            value["lang"] = language
+            if language == "en":
+                value["short_name"] = "Bublik"
+                value["description"] = "Private chat with a local model. History stays on your server."
+            return JSONResponse(value,media_type=media,headers={"Content-Language":language})
         return Response(data,media_type=media)
     for path in UI_FILES:
         app.add_api_route(path,ui_file,methods=["GET","HEAD"],include_in_schema=False)
@@ -453,6 +473,15 @@ def create_app(settings, *, adapter_factory=None, repository=None, security=None
         receipt = await asyncio.to_thread(app.state.repository.create_chat,user.owner,body.title,key=request.headers.get("idempotency-key"))
         return JSONResponse(asdict(receipt),status_code=200 if receipt.replayed else 201)
 
+    @app.get(PREFIX+"/preferences")
+    async def preferences(user=Depends(require("chats:read"))):
+        return await asyncio.to_thread(app.state.repository.preferences,user.owner)
+
+    @app.patch(PREFIX+"/preferences")
+    async def update_preferences(body:Preferences,user=Depends(require("chats:write"))):
+        return await asyncio.to_thread(app.state.repository.set_preferences,user.owner,
+            ui_language=body.ui_language,reply_language=body.reply_language,expected_revision=body.expected_revision)
+
     @app.get(PREFIX+"/chats")
     async def chats(limit:int=50,cursor:str|None=None,user=Depends(require("chats:read"))):
         rows = await asyncio.to_thread(app.state.repository.list_chats,user.owner,limit=limit,after=parse_cursor(cursor))
@@ -476,12 +505,12 @@ def create_app(settings, *, adapter_factory=None, repository=None, security=None
 
     @app.post(PREFIX+"/chats/{chat}/messages",status_code=202)
     async def send_message(chat:str,body:SendMessage,request:Request,user=Depends(require("chats:write"))):
-        receipt = await app.state.coordinator.service.send(user.owner,chat,body.content,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory)
+        receipt = await app.state.coordinator.service.send(user.owner,chat,body.content,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory,reply_language=body.reply_language)
         return JSONResponse(asdict(receipt),status_code=200 if receipt.replayed else 202)
 
     @app.post(PREFIX+"/messages/{message}/retry",status_code=202)
     async def retry_message(message:str,body:RetryMessage,request:Request,user=Depends(require("chats:write"))):
-        receipt = await app.state.coordinator.service.retry(user.owner,message,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory)
+        receipt = await app.state.coordinator.service.retry(user.owner,message,expected_revision=body.expected_revision,key=request.headers.get("idempotency-key"),use_memory=body.use_memory,reply_language=body.reply_language)
         return JSONResponse(asdict(receipt),status_code=200 if receipt.replayed else 202)
 
     @app.post(PREFIX+"/memory/search")

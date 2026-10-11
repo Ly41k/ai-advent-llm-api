@@ -1,6 +1,7 @@
 """Conservative byte-BPE bound for a single reviewed Qwen2.5 ChatML template."""
 from bublik_service.domain import ContextPlan, InvalidInput, MemorySource
 from bublik_service.memory import memory_messages
+from bublik_service.languages import system_prompt_for_reply, user_content_for_reply
 from bublik_service.storage.repository import MAX_MESSAGE_BYTES, text
 
 # Published Ollama qwen2.5:14b template, eb4402837c78 (full normalized SHA-256).
@@ -27,13 +28,13 @@ class ContextBuilder:
             raise InvalidInput("unsupported_template")
         self.profile, self.identity = profile, identity
 
-    def build(self, candidates, content, *, memory=None):
+    def build(self, candidates, content, *, memory=None, reply_language=None):
         text(content, MAX_MESSAGE_BYTES, "invalid_message")
         history = candidates["messages"]
         if len(history) % 2:
             raise InvalidInput("invalid_context_candidates")
-        base = [{"role": "system", "content": self.profile.system_prompt},
-                {"role": "user", "content": content}]
+        base = [{"role": "system", "content": system_prompt_for_reply(self.profile, reply_language)},
+                {"role": "user", "content": user_content_for_reply(content, reply_language)}]
         budget = self.profile.num_ctx - self.profile.max_output - self.profile.margin
         if upper_bound(base) > budget:
             raise InvalidInput("context_budget_exceeded")
@@ -64,4 +65,5 @@ class ContextBuilder:
                            memory_sources=tuple(sources),
                            memory_indexed_messages=memory["indexed_messages"] if memory is not None else 0,
                            memory_search_seconds=memory["search_seconds"] if memory is not None else 0,
-                           memory_policy=memory["policy_version"] if memory is not None else "")
+                           memory_policy=memory["policy_version"] if memory is not None else "",
+                           reply_language=reply_language)

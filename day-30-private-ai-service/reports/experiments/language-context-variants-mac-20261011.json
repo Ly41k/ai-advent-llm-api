@@ -1,0 +1,98 @@
+{
+  "format": "bublik-language-context-variants-v1",
+  "status": "completed",
+  "created_at": "2026-10-11T20:18:26.796090+00:00",
+  "model": "qwen2.5:14b",
+  "script_sha256": "8278cfedbdcdb51ef99729dea2937cb424c4fa74a74b13d26babd3a9137e9ff2",
+  "scope": "Direct sequential localhost inference on completed synthetic control; readonly DB; no job replay",
+  "baseline_context_sha256": "5683df84c302b1d7689c9ac548c9d991aca5db9894ab2435f5a21c6ff62f8057",
+  "options": {
+    "temperature": 0,
+    "num_ctx": 8192,
+    "num_predict": 1024
+  },
+  "cases": [
+    {
+      "case": "baseline",
+      "answer": "In Russian: 3*3 равно 9, потому что умножение трёх на три дает девять.",
+      "done_reason": "stop",
+      "english_screen_passed": false,
+      "control_number_passed": true,
+      "input_token_upper_bound": 3851,
+      "input_tokens": 912,
+      "output_tokens": 29,
+      "request_sha256": "f3cca61e65c91b81143de508480a4500e0d0dcb4f87de6fe97eb84aba51d26a5"
+    },
+    {
+      "case": "explicit_suffix_1",
+      "answer": "3*3 equals 9 because when you multiply three by three, you are essentially adding three to itself three times, resulting in nine.",
+      "done_reason": "stop",
+      "english_screen_passed": true,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4077,
+      "input_tokens": 953,
+      "output_tokens": 29,
+      "request_sha256": "92357380bc7d7fc559edfada9db8a4ae1476f16af8153849b8ee70b78070f51e"
+    },
+    {
+      "case": "json_request_1",
+      "answer": "In English, 3*3 equals 9 because multiplying three by three gives the product nine.",
+      "done_reason": "stop",
+      "english_screen_passed": true,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4231,
+      "input_tokens": 984,
+      "output_tokens": 21,
+      "request_sha256": "cb7ccd6d2f226934cb6b6972fbca4d16c5444b6f26179f9fc51394849e0743b3"
+    },
+    {
+      "case": "additional_system_1",
+      "answer": "In Russian, 3*3 равно 9, потому что умножение трёх на три дает девять.",
+      "done_reason": "stop",
+      "english_screen_passed": false,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4228,
+      "input_tokens": 958,
+      "output_tokens": 29,
+      "request_sha256": "2487318f03c9f84028fcccfd4db1c927e951cd0e53a6184d9530d2e981336a8b"
+    },
+    {
+      "case": "explicit_suffix_2",
+      "answer": "3*3 equals 9 because when you multiply three by three, you are essentially adding three to itself three times, resulting in nine.",
+      "done_reason": "stop",
+      "english_screen_passed": true,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4077,
+      "input_tokens": 953,
+      "output_tokens": 29,
+      "request_sha256": "92357380bc7d7fc559edfada9db8a4ae1476f16af8153849b8ee70b78070f51e"
+    },
+    {
+      "case": "json_request_2",
+      "answer": "In English, 3*3 equals 9 because multiplying three by three gives the product nine.",
+      "done_reason": "stop",
+      "english_screen_passed": true,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4231,
+      "input_tokens": 984,
+      "output_tokens": 21,
+      "request_sha256": "cb7ccd6d2f226934cb6b6972fbca4d16c5444b6f26179f9fc51394849e0743b3"
+    },
+    {
+      "case": "additional_system_2",
+      "answer": "In Russian, 3*3 равно 9, потому что умножение трёх на три дает девять.",
+      "done_reason": "stop",
+      "english_screen_passed": false,
+      "control_number_passed": true,
+      "input_token_upper_bound": 4228,
+      "input_tokens": 958,
+      "output_tokens": 29,
+      "request_sha256": "2487318f03c9f84028fcccfd4db1c927e951cd0e53a6184d9530d2e981336a8b"
+    }
+  ],
+  "all_generations_finished": true,
+  "privacy": "No original prompt, history, retrieved quotations or credentials exported",
+  "ollama_version": "0.40.3",
+  "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "limitation": "Two repetitions on one failing context do not prove general language reliability."
+}

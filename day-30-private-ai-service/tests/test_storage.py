@@ -537,9 +537,9 @@ class DatabaseTests(RepositoryCase):
         directory.mkdir()
         for source in (HERE / "bublik_service/storage/migrations").glob("*.sql"):
             (directory / source.name).write_bytes(source.read_bytes())
-        (directory / "003_metadata.sql").write_text("CREATE TABLE future_metadata(id INTEGER PRIMARY KEY);\n")
+        (directory / "004_metadata.sql").write_text("CREATE TABLE future_metadata(id INTEGER PRIMARY KEY);\n")
         migrated = Database(self.path, migrations=directory)
-        self.assertEqual(migrated.status()["schema_version"], 3)
+        self.assertEqual(migrated.status()["schema_version"], 4)
         self.assertEqual(self.repo.export_chat(self.owner, self.chat), before)
         self.assertTrue(self.message(revision=0).replayed)
         # A previous release must refuse a newer database, not downgrade it.
@@ -554,16 +554,16 @@ class DatabaseTests(RepositoryCase):
         directory.mkdir()
         for source in (HERE / "bublik_service/storage/migrations").glob("*.sql"):
             (directory / source.name).write_bytes(source.read_bytes())
-        (directory / "003_broken.sql").write_text("CREATE TABLE partial_upgrade(id INTEGER);\nINVALID SQL;\n")
+        (directory / "004_broken.sql").write_text("CREATE TABLE partial_upgrade(id INTEGER);\nINVALID SQL;\n")
         with self.assertRaises(StorageUnavailable):
             Database(self.path, migrations=directory)
         reopened = ChatRepository(self.path)
-        self.assertEqual(reopened.storage_status()["schema_version"], 2)
+        self.assertEqual(reopened.storage_status()["schema_version"], 3)
         self.assertEqual(reopened.export_chat(self.owner, self.chat), before)
         self.assertTrue(self.message(revision=0).replayed)
         with reopened.database.connect() as db:
             self.assertIsNone(db.execute("SELECT name FROM sqlite_master WHERE name='partial_upgrade'").fetchone())
-            self.assertEqual(db.execute("SELECT count(*) FROM schema_migrations").fetchone()[0], 2)
+            self.assertEqual(db.execute("SELECT count(*) FROM schema_migrations").fetchone()[0], 3)
 
     def test_foreign_database_is_not_adopted_or_changed_to_wal(self):
         path = self.root / "previous-lesson.sqlite3"
@@ -580,12 +580,12 @@ class DatabaseTests(RepositoryCase):
 
     def test_newer_schema_and_user_version_tampering_are_rejected(self):
         with self.repo.database.connect(write=True) as db:
-            db.execute("INSERT INTO schema_migrations VALUES(3,'003_future.sql','future')")
+            db.execute("INSERT INTO schema_migrations VALUES(4,'004_future.sql','future')")
         with self.assertRaises(SchemaError) as caught:
             ChatRepository(self.path)
         self.assertEqual(caught.exception.code, "newer_database_schema")
         with self.repo.database.connect(write=True) as db:
-            db.execute("DELETE FROM schema_migrations WHERE version=3")
+            db.execute("DELETE FROM schema_migrations WHERE version=4")
             db.execute("PRAGMA user_version=99")
         with self.assertRaises(SchemaError) as caught:
             ChatRepository(self.path)
@@ -665,7 +665,7 @@ class CliTests(unittest.TestCase):
             self.assertFalse(path.exists())
             initialized = invoke("init-db")
             self.assertEqual(initialized.returncode, 0, initialized.stderr)
-            self.assertEqual(json.loads(initialized.stdout)["schema_version"], 2)
+            self.assertEqual(json.loads(initialized.stdout)["schema_version"], 3)
             self.assertEqual(invoke("storage-status").returncode, 0)
             self.assertEqual(invoke("backup", str(backup)).returncode, 0)
             self.assertEqual(invoke("backup", str(backup)).returncode, 1)

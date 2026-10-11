@@ -58,7 +58,7 @@
 - **День 27:** локальная LLM интегрируется в Ревика — CLI для рабочего Kotlin/KMP-проекта. Detekt проверяет staged-код по настройкам проекта, Qwen объясняет нарушения, а pre-commit hook разрешает или блокирует коммит. Добавлены отчёты со ссылками, два языка и три стиля комментариев.
 - **День 28:** индекс Недели 6 используется для полностью локального RAG. Сохранены исходное парное сравнение с Groq и выборочные исправления local/OpenAI. Живые отчёты фиксируют качество, скорость, точную стабильность и ручную проверку цитат.
 - **День 29:** оптимизация параметров и контрактов локальной Qwen, сравнение Q4/Q5 и ресурсов, проверка выбора доказательств V7 на зафиксированных новых RU/EN вопросах о процедуре.
-- **День 30:** локальная Qwen становится приватным HTTP-сервисом. История хранится на Mac, чат продолжается на Android/iPhone, мобильный доступ идёт через Tailscale Serve. Cookie/CSRF, owners, idempotency, очередь, persistent quotas и launchd отделены от модели; RAG и cloud fallback не включаются.
+- **День 30:** локальная Qwen становится приватным HTTP-сервисом. История хранится на Mac, чат продолжается на Android/iPhone, мобильный доступ идёт через Tailscale Serve. Cookie/CSRF, owners, idempotency, очередь, persistent quotas и launchd отделены от модели; курс использовал версию без RAG; последующий history RAG отключаемый, cloud fallback нет.
 
 MCP-серверы дней 16–20 общаются с локальными клиентами через **stdio**. Дни 17–20 могут получать живые данные через публичный GitHub REST API. Для постоянного выполнения расписания непрерывный процесс требуется только worker Дня 18.
 
@@ -159,7 +159,7 @@ python day-15-controlled-transitions/main.py
 | 27 | `python day-27-local-llm-integration/live_demo.py --detekt-bin /absolute/path/to/detekt` | Два реальных коммита во временном репозитории и ответы локальной LLM |
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | Один локальный RAG-ответ с цитатами источников |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline-проверка согласованности сохранённых доказательств V7 |
-| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/rag-memory-v2-offline-20261011.json` | Сверить новые198/198 offline regression и RAG memory проверок; запуск сервера — README дня 30 |
+| 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json` | Сверить новые221/221 offline regression, RU/EN и RAG memory проверки; запуск сервера — README дня 30 |
 
 ## Общий индекс Дня 21
 
@@ -368,9 +368,15 @@ python day-29-local-llm-optimization/experiments/quality_v7/main.py verify \
 
 ## День 30 — Bublik Private AI Service
 
+**Текущее расширение: 0.10.3.** Язык интерфейса и ответов (русский/английский)
+выбирается отдельно, сохраняется у владельца и загружается на всех устройствах.
+Schema 3 добавляет настройки; archive/restore принимает схемы 2/3 без замены
+оригиналов. [Обновление и языковые проверки](day-30-private-ai-service/LANGUAGES.ru.md).
+Offline regression: 221/221; новые Qwen/device RU/EN проверки отдельно.
+
 После курса **0.9.1** добавляет включённый по умолчанию в Web UI RAG по обеим сторонам
 сохранённой переписки: отдельный FTS5-индекс владельца, точные источники с ролями/статусами, исходный разговор и
-неизменяемые RAG snapshots. Основная схема 2 и архивы истории совместимы; embedding
+неизменяемые RAG snapshots. В RAG 0.9.1 использовалась схема 2; текущая схема 3 описана выше. Embedding
 модель и облачные LLM не используются. [Установка и проверки](day-30-private-ai-service/RAG_MEMORY.ru.md).
 Live-результаты 0.8.0 ниже исторические и не доказывают качество 0.9.1.
 
@@ -411,7 +417,7 @@ fallback нет.** В принятой версии0.8.0 RAG не использ
 ```bash
 python -m pip install -r day-30-private-ai-service/requirements.lock
 python day-30-private-ai-service/scripts/verify_report.py \
-  day-30-private-ai-service/reports/verified/rag-memory-v2-offline-20261011.json
+  day-30-private-ai-service/reports/verified/languages-policy-v2-offline-20261011.json
 ```
 
 Это сверка сохранённых доказательств с хешами исходников, а не запуск сервера.

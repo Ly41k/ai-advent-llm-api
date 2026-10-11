@@ -1,0 +1,1238 @@
+{
+  "format": "bublik-offline-check-v2",
+  "run_id": "20261011T180919-928d12e4",
+  "created_at": "2026-10-11T18:09:19.897859+00:00",
+  "stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "status": "passed",
+  "environment": {
+    "python": "3.13.16",
+    "sqlite": "3.53.1",
+    "system": "Linux",
+    "machine": "x86_64",
+    "implementation": "CPython"
+  },
+  "source": {
+    "git_head_at_run": null,
+    "interpretation": "HEAD plus the source_sha256 manifest; files may be uncommitted",
+    "unchanged_during_run": true,
+    "source_sha256": {
+      "bublik_service/__init__.py": "e60594b2435a320c8b4a016a3ee5821b27e4b9a4b1e085901f259e2d2ae2698d",
+      "bublik_service/__main__.py": "b53f5e8d5266df3b174ae3d5bbfaf45746f516181fe745a0a3ae1726388813c9",
+      "bublik_service/admin_cli.py": "4754130f54735c77f86adc3042893da77d0b13ead6564394bd31bd830311e78d",
+      "bublik_service/domain.py": "5c790512c01b4b1648cb62cce58798bd9555e5561875619c95cf630b3c9063b3",
+      "bublik_service/http_api.py": "3835383f7c11396bd9116265888cba7f5e8dde49ff5bfb7d4d659139ab540e70",
+      "bublik_service/inference/__init__.py": "1d032dd738b97b782bf236ad8774e28b0b5e41519611c2c7b7ff1e8da1b9692c",
+      "bublik_service/inference/context.py": "b0246ef5618b13510c55ed34875596a11d4648090798757f4a54fe2b7ab4734e",
+      "bublik_service/inference/coordinator.py": "079954411ba91e503c6242ba7b18d6c6c91e63bedca0d2b2cecae4d9d7bc016d",
+      "bublik_service/inference/engine.py": "f8931566c0b0a79a1cd1e15192a5ec11942309c900286cee6972f8d30b5cd2c8",
+      "bublik_service/inference/ollama.py": "7ba545db32ce2f493cc822108469f4b6edca3a76acb9ad7ce51ce127e943ac0f",
+      "bublik_service/languages.py": "6f1da8bd518bcb3ea930bafea9a576b11280a3c873ae2e3fc9365cb82a872ddc",
+      "bublik_service/local_cli.py": "5c82e0b52d4cfa61435c195f4077faec1d27637d4d6fb2c718d294fc73d34e04",
+      "bublik_service/memory.py": "096d04e3c2ca81afea8d3fab1b374610e0ac933bbdfc9d4643c27c4742ec2480",
+      "bublik_service/security.py": "5138f990c78cd93bdb6470b3a767116638d196e33dc4b9eac2e030a2227059bd",
+      "bublik_service/service.py": "221f515168dc6fd60054613e40bf56ae487e58bbdffe303d3dc1767d573163a6",
+      "bublik_service/settings.py": "adae1b9264139675bf5a571ef084d1c2c590de8895ce4a9f5d57ec7f1b0697d3",
+      "bublik_service/storage/__init__.py": "124eb9e8a8b91aab94b5c5cd0d71ad4eb925a63be0c81156428a56b41068012e",
+      "bublik_service/storage/database.py": "4c359bd1704df8b6d8f65fd87e565dc40829e29ce410d205ec209b2cc7942f94",
+      "bublik_service/storage/migrations/001_initial.sql": "df70b5f82e79f792aba78a19655a1d65f5d984c4d05a21cc3db02bd3753c7d70",
+      "bublik_service/storage/migrations/002_auth.sql": "f8e70cc1953bb0a0e200ed77ad711e0377a1246907f7e5a9f1100494e0ea76dd",
+      "bublik_service/storage/migrations/003_languages.sql": "f18e5472d46fd6fdb802032b34a76d63ce4e98ae438384b964ffb5509def260d",
+      "bublik_service/storage/repository.py": "6b34ea011703887d30baaff6f5d5c101a3e6b4d0e0547e467a5c768d21b37928",
+      "bublik_service/storage/worker.py": "13df5daf631fccd9bba71d98b770ffb700c66f4c123a6a8796aef009730d3a79",
+      "bublik_service/web_ui/app.css": "8eb9acaf64ad480c4f0b307c1aa13c5833e6d1386dfbd20fe290639a48be7235",
+      "bublik_service/web_ui/app.js": "13a6f3e545baf491fc13f0cfdd033b6190a4ebf6ee9817d99012e287d15e3d0a",
+      "bublik_service/web_ui/i18n.js": "6c8611b868b2df962952841a1ec8eaf7cbf738145fe61b46b60db296a06cd6db",
+      "bublik_service/web_ui/icon-180.png": "deca0015cbba7f5539a83a26bb7b099549e7a04c3a1519e139de70933257a59b",
+      "bublik_service/web_ui/icon-192.png": "563f74c4fcf660ff685650ccade4e70387e2b4fa39f8370699945e2248023c99",
+      "bublik_service/web_ui/icon-512.png": "9ef2adc236de8ce9b647247e2b01ee7f76ace890e95b684aa7bfa67c532f09d3",
+      "bublik_service/web_ui/index.html": "2469d986005ddcbd1c71c92c73f71999c6010424bbb91c7e7129b939a93ab2fb",
+      "bublik_service/web_ui/manifest.webmanifest": "7d8b95b21b7b1660c66dc061d6292e824d17b949e8d439d916489e6267e547c1",
+      "deploy/Caddyfile.lan.template": "0adedcfe1a557cc5f8b9012acba22c547f6fc0437dfa6707f814a35aec482883",
+      "deploy/tailnet-policy.example.jsonc": "b5c165be972f91b04af01cc3c4d1b03760d2e3fe8b1655adfdbfe96f15eb6f8b",
+      "pyproject.toml": "cfc645359222237e13399950d916030c2785eebf5f708355b6cb401020a92808",
+      "requirements.browser.lock": "5339e9421bdd9d112f155eea25f397167febdc3ce6b297fa21aa8650eef9a34d",
+      "requirements.lock": "b75817dc36eb6819b3eb945a2b21cb2dbb2f1565a07d927b2086fb2652d64da2",
+      "scripts/acceptance_support.py": "8c4ad61570b9b69c1c09acb07b5f40f7ab64ac4fd5c608244a5ed7a24099f3a1",
+      "scripts/check_acceptance_live.py": "9768a569cc5225a4e421750347091bcbddc8a032142d619bf242e32a3434989b",
+      "scripts/check_browser_https.py": "ef5e6a3ce2f1679a7af900e5bda173d8bc3a5882da6c0a7c4e1b1fbf97ebe12b",
+      "scripts/check_device_handoff.py": "9f1e44e4b89e6a42c34787d40bb39967c56373afddb937d33a450bf26784ae62",
+      "scripts/check_http_live.py": "0b9b7a19208372e03016c4f37db5abb4377157908605eaa125685eb2f33657e6",
+      "scripts/check_inference_live.py": "4de6843eb23ee61d48c2a5ac41504554606db1a2cdae06cfdf80c42036fa8d02",
+      "scripts/check_languages_live.py": "6d263bc9b0f1a2d6f1b9f1cd104e686235b095f0bbff38823a70a51248cee6d4",
+      "scripts/check_languages_ui.py": "ab7d42071f5d4e0bc7420a9185dce84a39d73aa894cfd0a437c7581893bbbfdb",
+      "scripts/check_launchd_live.py": "aeb523a51f02260852939a4b3157f38e62971fcd461da32361e9b1f523c6e50c",
+      "scripts/check_memory_archive.py": "bd7195d62892540359c1df176b7905a00706cbcb467faf99e439a7f88f8871be",
+      "scripts/check_network_live.py": "bb36ac14dde5b30a039012dd3b07fee79954aa9a01f09026bb945439e88606c4",
+      "scripts/check_network_ui_live.py": "d75fe0036a6dd95e3a1237338ce1f6354985f5d12e74a872666fc9dd343f6e7d",
+      "scripts/check_prompt_compare.py": "40579000a85e5436734697ce175936f2acc173b7076292ada4380b68e8408934",
+      "scripts/check_prompt_upgrade.py": "25667d1e3ed1095984f27c4226b791701c35673730eaebbf437f0bf878c15e9e",
+      "scripts/check_pwa.py": "45b4a3bb7f2cfe8138b8a7e9fac4ae53a65182d309317a2e1cfc2aa32dce6cf5",
+      "scripts/check_rag_live.py": "e1de029ced064c86ca3d246c1076aaea9cb256838183fb29c0b24c42f424d186",
+      "scripts/check_rag_ui.py": "2471d83bb26b82bd8a5c5b649c6e40e43b9cdb23f4d807d14f62b7b93bbf2784",
+      "scripts/check_recovery_live.py": "f43aab0a1d8620b60d7879964d2f5aafbdc08e510ff5a09e3ed38e0674b5c5b0",
+      "scripts/check_storage.py": "4af12271ecd5b4e2b29819ef2736beb2e5f585bea5247d0e3171e63c56cbfe7a",
+      "scripts/check_web_ui.py": "426e99ea5f9e58a0cd5e6a015d8ccd00b051b4a7a17972c6f0df9aab91d0102b",
+      "scripts/check_web_ui_live.py": "0f2a876d3fc500d6de87eebe77733fdb291e361f132f8289654049697a46de74",
+      "scripts/configure_launchd.py": "ab650425b4ee0a505a1604b2d986cdbe36dd07510e35cd888b5ac9803f60f56d",
+      "scripts/configure_network.py": "f237a80f98b7a1011b6de40fdc8109cc4da4cde93484a03bed299bc22771c060",
+      "scripts/install_launchd.py": "2fd5be68cfb72490a1490f3f2e2d88806dc469854cd26c787d1b80ccabd920fd",
+      "scripts/memory_archive.py": "d41af268111a8aaf0e97c39a8b99ed2f6ce33c71ab652fe6098a2291bc59d868",
+      "scripts/network_common.py": "ce7d07fc6cd5e9b74426fe7e95d37c362e9dc8726b4f2aa5b0ce82b8f1bf9bfa",
+      "scripts/resource_observer.py": "fb2c338a63605af9398c8b54724b7d77cbe4e0ca35be744d3d444916b4c02bf5",
+      "scripts/verify_report.py": "7161f0a344ad58a31dbd3121bc243a9859714e1130c1acc6579411549fe2834f",
+      "tests/browser_fixture.py": "b15288a9bb512e01f09b2b5ca198a88a003b0a030af116e3d788bd59653dc3c8",
+      "tests/check_proxy_integration.py": "866dd2bf40cae8217b2e53215ea37083499e03a84a7c06041d5225c5d636b5e7",
+      "tests/check_ui_live_harness.py": "533a048d972f63e60f8a25fa3812f6efa3cd661865623f404d6334708c4128c9",
+      "tests/test_acceptance.py": "d9c31f832dd70b00409d8ea6af790884ea35c2044de6a718bf566079f6138f03",
+      "tests/test_http.py": "cd4600a3bdcb7623345f26ba7df4afbdbd462358cffadd8c45052279c45a00fc",
+      "tests/test_http_live_quota.py": "65f6f9d5cb09c9b84b1d99386d2d442b1a17dac66f4a47d687fa9896f562be03",
+      "tests/test_http_network.py": "f24d17abe3f5aed8d07906f685b406ce3080020799e60150fe7faa20e3069258",
+      "tests/test_inference.py": "bf1921ec4840b8cef6f496c770d9bf6e2c929a551d49e5b7e8e17222cc59e150",
+      "tests/test_language_policy.py": "74ceb83b7c95160031c6b8be2ad7b7a46fc53d437fb19454777bb51dcc6724c2",
+      "tests/test_languages.py": "5fbe9f2948607f9bb1190e0f276aecf9144202bd2c870775ecd4e248aa1e3594",
+      "tests/test_memory_archive.py": "f9192a10b360622beba9f8bf7e1e8d0c74dcd6fc18e154b596ae6d000e6afbec",
+      "tests/test_networking.py": "2e9c7dfa85fa359ecd368ff34e63e67855c7a49d47f1f874ad3f32bed1d89403",
+      "tests/test_operations.py": "240b0d629b90fbbdf4a34f59c3826fdf679672aa805b90ad0bd47f854fb13f99",
+      "tests/test_prompt_compare.py": "0f58b9f48646a5e0fc5340e44da846b493565fafbb72096f8cd15f6a957e8630",
+      "tests/test_rag_memory.py": "f98cebefc9d94bedf2b4da20ffc68c76bbb5842b41695a17df01b94ffc925b09",
+      "tests/test_storage.py": "fa351b38b281b1edce3b166917ced9e2695e544bf34ffd0b7bfa774c2825121c",
+      "tests/test_web_ui.py": "b6e166287a8b64abcaed5b099f6b5e59e1b21291247f6d25f44605362dfd50f5"
+    }
+  },
+  "summary": {
+    "tests": 221,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 55.227245012000026
+  },
+  "tests": [
+    {
+      "id": "test_acceptance.AcceptanceTests.test_acceptance_workload_over_actual_certificate_verified_tls",
+      "status": "passed",
+      "elapsed_seconds": 10.096337389000041
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_actual_sqlite_http_suite_and_quality_failure_remains_visible",
+      "status": "passed",
+      "elapsed_seconds": 2.14724770600003
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_completed_control_is_not_interruption_and_failure_keeps_observation",
+      "status": "passed",
+      "elapsed_seconds": 0.40008816600004593
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_mac_parsers_cpu_units_topology_and_no_other_process_names",
+      "status": "passed",
+      "elapsed_seconds": 0.001006824000000961
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_post_ambiguity_not_retried_and_429_reuses_exact_request",
+      "status": "passed",
+      "elapsed_seconds": 0.0011855719999402936
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_recovery_real_sqlite_partial_gate_epoch_and_no_replay",
+      "status": "passed",
+      "elapsed_seconds": 0.48428540099996553
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_resource_failure_never_becomes_technical_success",
+      "status": "passed",
+      "elapsed_seconds": 1.0029513880000422
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_small_sample_metrics_language_and_overlap_failure",
+      "status": "passed",
+      "elapsed_seconds": 0.0004307389999667066
+    },
+    {
+      "id": "test_acceptance.AcceptanceTests.test_v1_history_upgrade_check_and_changed_answer_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 1.1892605059999823
+    },
+    {
+      "id": "test_http.HTTPTests.test_actual_chunked_body_limit_and_content_type",
+      "status": "passed",
+      "elapsed_seconds": 0.5751799480000273
+    },
+    {
+      "id": "test_http.HTTPTests.test_atomic_admission_quota_rollback_and_window_expiry",
+      "status": "passed",
+      "elapsed_seconds": 0.8362766479999664
+    },
+    {
+      "id": "test_http.HTTPTests.test_context_budget_rejection_preserves_history",
+      "status": "passed",
+      "elapsed_seconds": 0.6114995509999517
+    },
+    {
+      "id": "test_http.HTTPTests.test_credentials_are_hashed_and_tokens_revocable",
+      "status": "passed",
+      "elapsed_seconds": 0.575050522999959
+    },
+    {
+      "id": "test_http.HTTPTests.test_csrf_and_origin_required_including_login",
+      "status": "passed",
+      "elapsed_seconds": 0.5753783290000456
+    },
+    {
+      "id": "test_http.HTTPTests.test_expiry_reset_and_revocation_preserve_history",
+      "status": "passed",
+      "elapsed_seconds": 0.5832934670000895
+    },
+    {
+      "id": "test_http.HTTPTests.test_foreign_resources_return_same_404_as_unknown",
+      "status": "passed",
+      "elapsed_seconds": 0.6955614170000217
+    },
+    {
+      "id": "test_http.HTTPTests.test_host_origin_query_and_duplicate_header_guards",
+      "status": "passed",
+      "elapsed_seconds": 0.5807704710000507
+    },
+    {
+      "id": "test_http.HTTPTests.test_http_live_harness_rejects_fixture_quality_and_verifies_resume",
+      "status": "passed",
+      "elapsed_seconds": 1.207032359999971
+    },
+    {
+      "id": "test_http.HTTPTests.test_inference_gate_503_history_and_replay_available",
+      "status": "passed",
+      "elapsed_seconds": 0.7619225790000428
+    },
+    {
+      "id": "test_http.HTTPTests.test_login_rotates_cookie_csrf_and_logout_revokes",
+      "status": "passed",
+      "elapsed_seconds": 0.572520714999996
+    },
+    {
+      "id": "test_http.HTTPTests.test_login_throttled_and_errors_generic",
+      "status": "passed",
+      "elapsed_seconds": 0.5645882379999421
+    },
+    {
+      "id": "test_http.HTTPTests.test_model_offline_history_available_and_ready_recovers",
+      "status": "passed",
+      "elapsed_seconds": 0.7097771400000283
+    },
+    {
+      "id": "test_http.HTTPTests.test_pagination_openapi_and_headers",
+      "status": "passed",
+      "elapsed_seconds": 0.5622347849999869
+    },
+    {
+      "id": "test_http.HTTPTests.test_plain_http_browser_denied_but_loopback_bearer_works",
+      "status": "passed",
+      "elapsed_seconds": 0.5622476339999594
+    },
+    {
+      "id": "test_http.HTTPTests.test_private_routes_unauthorized_and_live_minimal",
+      "status": "passed",
+      "elapsed_seconds": 0.563751467999964
+    },
+    {
+      "id": "test_http.HTTPTests.test_quotas_survive_restart_replay_is_free",
+      "status": "passed",
+      "elapsed_seconds": 0.8799175390000755
+    },
+    {
+      "id": "test_http.HTTPTests.test_retry_latest_failed_question_no_duplicate_user",
+      "status": "passed",
+      "elapsed_seconds": 0.7979690160000246
+    },
+    {
+      "id": "test_http.HTTPTests.test_running_stream_revocation_disconnects_without_cancel_job",
+      "status": "passed",
+      "elapsed_seconds": 0.7059886630000847
+    },
+    {
+      "id": "test_http.HTTPTests.test_schema1_upgrade_preserves_messages_receipts_and_backup",
+      "status": "passed",
+      "elapsed_seconds": 0.5654209009999249
+    },
+    {
+      "id": "test_http.HTTPTests.test_scopes_and_ambiguous_credentials",
+      "status": "passed",
+      "elapsed_seconds": 0.5692792790000567
+    },
+    {
+      "id": "test_http.HTTPTests.test_send_replay_conflict_snapshots_and_export",
+      "status": "passed",
+      "elapsed_seconds": 0.6737248560000353
+    },
+    {
+      "id": "test_http.HTTPTests.test_sse_durable_snapshot_reconnect_and_auth",
+      "status": "passed",
+      "elapsed_seconds": 0.6711857550000104
+    },
+    {
+      "id": "test_http.HTTPTests.test_stream_revoked_mid_subscription_and_cancel_cleanup",
+      "status": "passed",
+      "elapsed_seconds": 1.1022220380000363
+    },
+    {
+      "id": "test_http.HTTPTests.test_strict_payload_no_input_echo_or_trusted_roles",
+      "status": "passed",
+      "elapsed_seconds": 0.5747728569999708
+    },
+    {
+      "id": "test_http.HTTPTests.test_ten_sequential_and_three_concurrent_api_requests",
+      "status": "passed",
+      "elapsed_seconds": 2.3491712549999875
+    },
+    {
+      "id": "test_http_live_quota.QuotaHarnessTests.test_batch_rejection_records_status_without_private_message",
+      "status": "passed",
+      "elapsed_seconds": 0.05461995600001046
+    },
+    {
+      "id": "test_http_live_quota.QuotaHarnessTests.test_full_live_flow_waits_for_three_slots",
+      "status": "passed",
+      "elapsed_seconds": 0.054432803000054264
+    },
+    {
+      "id": "test_http_live_quota.QuotaHarnessTests.test_old_wait_frees_only_one_slot",
+      "status": "passed",
+      "elapsed_seconds": 0.034322329000019636
+    },
+    {
+      "id": "test_http_network.NetworkTests.test_real_tls_login_auth_persistence_restart_and_redacted_logs",
+      "status": "passed",
+      "elapsed_seconds": 1.7064559379999764
+    },
+    {
+      "id": "test_inference.ContextBuilderTests.test_complete_suffix_is_bounded_without_mutating_candidates",
+      "status": "passed",
+      "elapsed_seconds": 0.00028047199998582073
+    },
+    {
+      "id": "test_inference.ContextBuilderTests.test_one_oversized_question_is_rejected_before_inference",
+      "status": "passed",
+      "elapsed_seconds": 6.036100000983424e-05
+    },
+    {
+      "id": "test_inference.ContextBuilderTests.test_real_byte_bound_handles_unicode_and_control_overhead",
+      "status": "passed",
+      "elapsed_seconds": 4.176299989921972e-05
+    },
+    {
+      "id": "test_inference.ContextBuilderTests.test_unknown_template_cannot_be_selected",
+      "status": "passed",
+      "elapsed_seconds": 3.04559999904086e-05
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_mac_sized_process_table_is_verified_without_truncation",
+      "status": "passed",
+      "elapsed_seconds": 0.0015648460000647901
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_orphan_after_original_output_limit_still_blocks_witness",
+      "status": "passed",
+      "elapsed_seconds": 0.00100574400005371
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_orphan_runner_blocks_recovery_witness",
+      "status": "passed",
+      "elapsed_seconds": 0.00017635500000778848
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_process_start_time_changes_epoch_without_trusting_api_ps",
+      "status": "passed",
+      "elapsed_seconds": 0.00028318600004695327
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_process_table_allowance_does_not_remove_failure_limits",
+      "status": "passed",
+      "elapsed_seconds": 0.000769908999927793
+    },
+    {
+      "id": "test_inference.EngineWitnessTests.test_wildcard_and_non_ollama_listener_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.00210707199994431
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_actual_token_or_output_counter_overflow_never_completes",
+      "status": "passed",
+      "elapsed_seconds": 0.28864766900005634
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_arbitrary_tcp_fragmentation_preserves_utf8",
+      "status": "passed",
+      "elapsed_seconds": 0.037465398999984245
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_crash_before_dispatch_can_recover_without_restart",
+      "status": "passed",
+      "elapsed_seconds": 0.060462202999929104
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_doctor_records_local_digest_template_and_rejects_remote",
+      "status": "passed",
+      "elapsed_seconds": 0.04724763499996243
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_eof_preserves_partial_and_requires_verified_restart",
+      "status": "passed",
+      "elapsed_seconds": 0.31724670199992033
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_legacy_stage2_queued_job_is_preserved_but_not_inferred",
+      "status": "passed",
+      "elapsed_seconds": 0.255089130999977
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_length_is_truncated_and_not_part_of_next_context",
+      "status": "passed",
+      "elapsed_seconds": 0.14529275899997174
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_live_harness_preserves_observations_but_fixture_fails_quality",
+      "status": "passed",
+      "elapsed_seconds": 1.6470487799999773
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_malformed_stream_is_safe_and_not_automatically_retried",
+      "status": "passed",
+      "elapsed_seconds": 0.14704742799995074
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_model_digest_drift_does_not_publish_success",
+      "status": "passed",
+      "elapsed_seconds": 0.14733403499997166
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_nan_metrics_and_unrequested_tools_cannot_complete",
+      "status": "passed",
+      "elapsed_seconds": 0.2814589379999006
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_oversized_context_never_saves_or_posts",
+      "status": "passed",
+      "elapsed_seconds": 0.04170763199999783
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_prompt_upgrade_preserves_queued_job_and_old_snapshots",
+      "status": "passed",
+      "elapsed_seconds": 0.2823010060000115
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_proxy_environment_is_ignored_and_remote_url_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.04138687800002572
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_replay_does_not_require_model_and_ownership_precedes_doctor",
+      "status": "passed",
+      "elapsed_seconds": 0.14491882799995892
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_shutdown_cancels_stream_and_retains_history",
+      "status": "passed",
+      "elapsed_seconds": 0.09035952099998212
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_terminal_record_without_final_newline_is_accepted",
+      "status": "passed",
+      "elapsed_seconds": 0.14277878500001862
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_three_concurrent_admissions_have_one_inference",
+      "status": "passed",
+      "elapsed_seconds": 0.3123954379999532
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_total_deadline_records_timeout_and_preserves_partial",
+      "status": "passed",
+      "elapsed_seconds": 0.15451929500000006
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_two_turns_persist_options_context_and_metrics",
+      "status": "passed",
+      "elapsed_seconds": 0.28325242799996886
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_unavailable_model_rejects_new_message_but_history_remains",
+      "status": "passed",
+      "elapsed_seconds": 0.030130411000072854
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_unknown_template_and_foreign_loaded_model_fail_closed",
+      "status": "passed",
+      "elapsed_seconds": 0.048694875000023785
+    },
+    {
+      "id": "test_inference.ProtocolTests.test_wrong_prompt_bytes_are_rejected_before_inference_dispatch",
+      "status": "passed",
+      "elapsed_seconds": 0.035259841000083725
+    },
+    {
+      "id": "test_language_policy.LanguagePolicyProtocolTests.test_legacy_v1_language_snapshot_is_dispatched_without_rewriting",
+      "status": "passed",
+      "elapsed_seconds": 0.05251823200001127
+    },
+    {
+      "id": "test_language_policy.LanguagePolicyProtocolTests.test_new_english_root_is_sent_unchanged_over_real_loopback_http",
+      "status": "passed",
+      "elapsed_seconds": 0.048819872999956715
+    },
+    {
+      "id": "test_language_policy.LanguagePolicyProtocolTests.test_stored_v1_history_and_replay_survive_new_language_admission",
+      "status": "passed",
+      "elapsed_seconds": 0.045283997000069576
+    },
+    {
+      "id": "test_language_policy.LanguagePolicyProtocolTests.test_tampered_policy_root_or_legacy_language_never_dispatches",
+      "status": "passed",
+      "elapsed_seconds": 0.04985245800003213
+    },
+    {
+      "id": "test_language_policy.LanguagePolicyTests.test_explicit_roots_have_no_user_language_conflict_in_both_profiles",
+      "status": "passed",
+      "elapsed_seconds": 0.0001199110000698056
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_manifest_and_translation_asset_allowlist",
+      "status": "passed",
+      "elapsed_seconds": 0.5720049319999134
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_preferences_auth_csrf_and_scope",
+      "status": "passed",
+      "elapsed_seconds": 0.5685247010000012
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_preferences_on_second_client_and_other_owner",
+      "status": "passed",
+      "elapsed_seconds": 0.5605912849999868
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_retry_can_select_language_but_replay_keeps_it",
+      "status": "passed",
+      "elapsed_seconds": 0.7949964709999904
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_selected_language_snapshot_transport_and_idempotency",
+      "status": "passed",
+      "elapsed_seconds": 0.6642045889999508
+    },
+    {
+      "id": "test_languages.LanguageHTTPTests.test_unsupported_languages_strict_payload_and_stale_update",
+      "status": "passed",
+      "elapsed_seconds": 0.5608678510000118
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_concurrent_preference_updates_have_one_winner",
+      "status": "passed",
+      "elapsed_seconds": 0.006215954000026613
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_default_preferences_and_new_owner_are_ru",
+      "status": "passed",
+      "elapsed_seconds": 0.004896117000043887
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_language_and_rag_share_the_same_context_budget",
+      "status": "passed",
+      "elapsed_seconds": 0.01028802199994061
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_language_instruction_preserves_profile_and_original_input",
+      "status": "passed",
+      "elapsed_seconds": 0.008686511000064456
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_language_is_frozen_and_change_conflicts_with_same_request_key",
+      "status": "passed",
+      "elapsed_seconds": 0.006442704999926718
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_legacy_request_fingerprint_and_snapshot_are_unchanged",
+      "status": "passed",
+      "elapsed_seconds": 0.005792326000005232
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_legacy_schema2_archive_is_not_migrated_until_restored_copy_opens",
+      "status": "passed",
+      "elapsed_seconds": 0.02160223600003519
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_new_archive_preserves_preferences_language_snapshots_and_originals",
+      "status": "passed",
+      "elapsed_seconds": 0.018080686999951467
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_only_exact_ru_en_codes_are_allowed",
+      "status": "passed",
+      "elapsed_seconds": 0.0033977230000346026
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_preferences_are_owner_scoped_durable_and_independent",
+      "status": "passed",
+      "elapsed_seconds": 0.0045703080000976115
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_stale_settings_do_not_overwrite_and_noop_has_no_revision_bump",
+      "status": "passed",
+      "elapsed_seconds": 0.004200320999984797
+    },
+    {
+      "id": "test_languages.LanguageStorageTests.test_translation_catalog_parity_static_hooks_and_optional_node",
+      "status": "passed",
+      "elapsed_seconds": 0.05713400399997681
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_auth_revoked_only_in_restored_copy_passwords_kept",
+      "status": "passed",
+      "elapsed_seconds": 0.017114414000047873
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_cli_real_separate_process_transfer_and_error_diagnostics",
+      "status": "passed",
+      "elapsed_seconds": 0.23828302300000814
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_continue_restored_chat_without_changing_source",
+      "status": "passed",
+      "elapsed_seconds": 0.021619983999926262
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_corrupt_payload_is_rejected_before_creating_target",
+      "status": "passed",
+      "elapsed_seconds": 0.01141213300002164
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_duplicate_keys_and_oversize_manifest_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.013802900000086993
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_failure_during_snapshot_cleans_only_its_new_directory",
+      "status": "passed",
+      "elapsed_seconds": 0.010182823000036478
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_foreign_or_changed_schema_is_not_migrated_by_create",
+      "status": "passed",
+      "elapsed_seconds": 0.011507406000077935
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_pending_or_uncertain_snapshot_is_preserved_but_not_replayed",
+      "status": "passed",
+      "elapsed_seconds": 0.03813996299993505
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_permission_and_manifest_do_not_include_dialogue_or_secret_fields",
+      "status": "passed",
+      "elapsed_seconds": 0.019370328000036352
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_public_archive_or_member_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.012324155999976938
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_repeated_create_never_changes_existing_archive",
+      "status": "passed",
+      "elapsed_seconds": 0.01156274899994969
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_restore_keeps_history_ids_snapshots_receipts_and_ownership",
+      "status": "passed",
+      "elapsed_seconds": 0.020597544999986894
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_restore_publication_race_keeps_other_file_and_cleans_temporary",
+      "status": "passed",
+      "elapsed_seconds": 0.01758998899993003
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_restore_rejects_existing_db_or_orphan_sidecar",
+      "status": "passed",
+      "elapsed_seconds": 0.017576529000052687
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_symlink_members_and_archive_or_target_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.012328862000003937
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_unknown_members_including_sidecars_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.010917858999960117
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_wal_snapshot_preserves_every_table_and_original_source",
+      "status": "passed",
+      "elapsed_seconds": 0.012722134000000551
+    },
+    {
+      "id": "test_memory_archive.MemoryArchiveTests.test_wrong_logical_manifest_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.012974193000104606
+    },
+    {
+      "id": "test_networking.ConfigTests.test_cli_proxy_requires_explicit_origins_without_backend_tls",
+      "status": "passed",
+      "elapsed_seconds": 5.866799995146721e-05
+    },
+    {
+      "id": "test_networking.ConfigTests.test_external_checker_rejects_public_urls_and_config_injection",
+      "status": "passed",
+      "elapsed_seconds": 0.00033832899998742505
+    },
+    {
+      "id": "test_networking.ConfigTests.test_handoff_requires_unchanged_seed_exact_question_answer_and_count",
+      "status": "passed",
+      "elapsed_seconds": 0.00011440200000834011
+    },
+    {
+      "id": "test_networking.ConfigTests.test_private_config_validates_before_exclusive_creation",
+      "status": "passed",
+      "elapsed_seconds": 0.00079703000005793
+    },
+    {
+      "id": "test_networking.ProxyTests.test_default_mode_does_not_trust_headers_or_remote_plaintext",
+      "status": "passed",
+      "elapsed_seconds": 0.07569784800000434
+    },
+    {
+      "id": "test_networking.ProxyTests.test_https_cookie_same_origin_csrf_auth_and_spoofed_identity",
+      "status": "passed",
+      "elapsed_seconds": 0.1155027949999976
+    },
+    {
+      "id": "test_networking.ProxyTests.test_proxy_requires_raw_loopback_single_https_marker_and_matching_host",
+      "status": "passed",
+      "elapsed_seconds": 0.07301438600006804
+    },
+    {
+      "id": "test_operations.OperationsTests.test_install_is_private_exclusive_and_never_loads_jobs",
+      "status": "passed",
+      "elapsed_seconds": 0.0020036559999425663
+    },
+    {
+      "id": "test_operations.OperationsTests.test_launch_agent_preserves_venv_arguments_and_rejects_overwrite",
+      "status": "passed",
+      "elapsed_seconds": 0.000783168999987538
+    },
+    {
+      "id": "test_operations.OperationsTests.test_manifest_packaged_icons_and_source_hashes",
+      "status": "passed",
+      "elapsed_seconds": 0.015514672999984214
+    },
+    {
+      "id": "test_operations.OperationsTests.test_restart_and_reboot_require_independent_witness_and_same_history",
+      "status": "passed",
+      "elapsed_seconds": 0.00033196000003954396
+    },
+    {
+      "id": "test_operations.OperationsTests.test_sigterm_releases_lease_and_restart_preserves_completed_history",
+      "status": "passed",
+      "elapsed_seconds": 1.0696683840000105
+    },
+    {
+      "id": "test_prompt_compare.PromptCompareTests.test_active_api_blocks_dispatch_and_malformed_baseline_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.03984615400008806
+    },
+    {
+      "id": "test_prompt_compare.PromptCompareTests.test_ambiguous_post_is_recorded_and_never_retried",
+      "status": "passed",
+      "elapsed_seconds": 0.00942736700005753
+    },
+    {
+      "id": "test_prompt_compare.PromptCompareTests.test_frozen_pair_contexts_abba_and_visible_quality_failure",
+      "status": "passed",
+      "elapsed_seconds": 0.06688638000002811
+    },
+    {
+      "id": "test_prompt_compare.PromptCompareTests.test_invalid_counters_and_missing_terminal_are_not_success",
+      "status": "passed",
+      "elapsed_seconds": 0.0018345130000625431
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_assistant_only_retrieval_is_frozen_with_role_and_status",
+      "status": "passed",
+      "elapsed_seconds": 0.8180914630000871
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_browser_search_requires_csrf_and_origin",
+      "status": "passed",
+      "elapsed_seconds": 0.563887206000004
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_index_failure_rejects_admission_without_silent_fallback",
+      "status": "passed",
+      "elapsed_seconds": 0.6059275309999066
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_original_assistant_and_context_endpoints_are_authorized_and_bounded",
+      "status": "passed",
+      "elapsed_seconds": 0.7111620189999712
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_rag_transport_snapshot_retry_mode_conflict_and_history",
+      "status": "passed",
+      "elapsed_seconds": 0.8208262469998999
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_search_requires_auth_and_scopes_and_owner_isolation",
+      "status": "passed",
+      "elapsed_seconds": 0.6791930789999014
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_search_size_type_and_model_offline_independence",
+      "status": "passed",
+      "elapsed_seconds": 0.6732233540000152
+    },
+    {
+      "id": "test_rag_memory.RAGHTTPTests.test_source_endpoint_validates_both_chat_and_owner",
+      "status": "passed",
+      "elapsed_seconds": 0.6732775410000613
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_all_terminal_assistant_states_are_searchable_as_incomplete",
+      "status": "passed",
+      "elapsed_seconds": 0.021906274000002668
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_archive_restore_preserves_both_roles_and_interrupted_text",
+      "status": "passed",
+      "elapsed_seconds": 0.016512757999976202
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_assistant_guesses_are_indexed_with_explicit_role_not_user_facts",
+      "status": "passed",
+      "elapsed_seconds": 0.00879310200002692
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_assistant_role_and_status_cannot_be_forged_at_admission",
+      "status": "passed",
+      "elapsed_seconds": 0.013091560000020763
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_backup_restore_preserves_rag_snapshot_and_rebuilds_index",
+      "status": "passed",
+      "elapsed_seconds": 0.030717184000081943
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_context_budget_sources_and_latest_question_are_preserved",
+      "status": "passed",
+      "elapsed_seconds": 0.03801859099996818
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_context_window_is_bounded_owner_scoped_and_preserves_roles",
+      "status": "passed",
+      "elapsed_seconds": 0.011629260000063368
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_contradictory_user_statements_remain_separate_dated_sources",
+      "status": "passed",
+      "elapsed_seconds": 0.013937053000063315
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_empty_memory_is_explicit_and_budget_overflow_has_no_side_effects",
+      "status": "passed",
+      "elapsed_seconds": 0.007849453000062567
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_english_query_exact_provenance_date_and_unicode_chunks",
+      "status": "passed",
+      "elapsed_seconds": 0.014835093999977289
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_foreign_source_is_rejected_atomically_by_storage",
+      "status": "passed",
+      "elapsed_seconds": 0.011005662000002303
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_incremental_refresh_includes_failed_turn_with_status",
+      "status": "passed",
+      "elapsed_seconds": 0.020532428000024083
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_index_and_folder_are_private_and_symlinks_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.010352377999993223
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_index_can_be_deleted_and_rebuilt_without_history_loss",
+      "status": "passed",
+      "elapsed_seconds": 0.013000163000015164
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_index_deadline_does_not_advance_checkpoint_or_lose_history",
+      "status": "passed",
+      "elapsed_seconds": 0.013066423000054783
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_injection_is_quoted_data_with_separate_guard_and_latest_request",
+      "status": "passed",
+      "elapsed_seconds": 0.010358537999991313
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_long_identifier_crossing_chunk_boundary_is_not_lost",
+      "status": "passed",
+      "elapsed_seconds": 0.009826757000041653
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_match_query_operators_are_data_not_executable_syntax",
+      "status": "passed",
+      "elapsed_seconds": 0.010255613000026642
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_negative_control_and_empty_terms_do_not_return_arbitrary_history",
+      "status": "passed",
+      "elapsed_seconds": 0.008964769999920463
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_normal_chat_idempotency_and_snapshot_keep_old_contract",
+      "status": "passed",
+      "elapsed_seconds": 0.006000410000069678
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_old_history_is_searchable_outside_recent_context_and_after_reopen",
+      "status": "passed",
+      "elapsed_seconds": 0.14429775099995368
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_owner_isolation_including_same_search_terms",
+      "status": "passed",
+      "elapsed_seconds": 0.011788199999955395
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_queued_user_is_searchable_and_assistant_only_after_completion",
+      "status": "passed",
+      "elapsed_seconds": 0.011914468999975725
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_retrieval_backend_can_change_without_changing_source_contract",
+      "status": "passed",
+      "elapsed_seconds": 0.014430986000093071
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_running_partial_is_not_frozen_but_terminal_checkpoint_is_indexed",
+      "status": "passed",
+      "elapsed_seconds": 0.009621828999911486
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_snapshot_and_idempotency_survive_additional_indexed_history",
+      "status": "passed",
+      "elapsed_seconds": 0.01984477300004528
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_tampered_cache_quote_cannot_enter_inference",
+      "status": "passed",
+      "elapsed_seconds": 0.010590746999923795
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_three_concurrent_searches_remain_owner_scoped",
+      "status": "passed",
+      "elapsed_seconds": 0.016700701999980083
+    },
+    {
+      "id": "test_rag_memory.RetrievalTests.test_web_memory_default_and_explicit_v1_compatibility",
+      "status": "passed",
+      "elapsed_seconds": 0.0036123969999835026
+    },
+    {
+      "id": "test_storage.CliTests.test_storage_cli_initializes_inspects_and_backs_up_without_model",
+      "status": "passed",
+      "elapsed_seconds": 0.276580942999999
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_distinct_processes_share_the_same_idempotency_record",
+      "status": "passed",
+      "elapsed_seconds": 0.061043665000056535
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_global_queue_limit_is_atomic_across_users",
+      "status": "passed",
+      "elapsed_seconds": 0.018392247000065254
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_killed_process_releases_lease_but_requires_explicit_engine_recovery",
+      "status": "passed",
+      "elapsed_seconds": 0.04960289299992837
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_per_user_limit_is_atomic_across_chats_and_threads",
+      "status": "passed",
+      "elapsed_seconds": 0.01776182800006154
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_ten_simultaneous_replays_have_one_durable_message",
+      "status": "passed",
+      "elapsed_seconds": 0.019008755000072597
+    },
+    {
+      "id": "test_storage.ConcurrencyTests.test_two_devices_with_different_keys_cannot_interleave_one_chat",
+      "status": "passed",
+      "elapsed_seconds": 0.007079083000007813
+    },
+    {
+      "id": "test_storage.ContextTests.test_bounded_candidate_reads_preserve_total_count",
+      "status": "passed",
+      "elapsed_seconds": 0.019855307999932847
+    },
+    {
+      "id": "test_storage.ContextTests.test_failed_and_truncated_answers_are_not_context_evidence",
+      "status": "passed",
+      "elapsed_seconds": 0.011958093999965058
+    },
+    {
+      "id": "test_storage.ContextTests.test_invalid_profiles_and_context_metadata_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.00983854399999018
+    },
+    {
+      "id": "test_storage.ContextTests.test_last_complete_pairs_selected_without_erasing_history",
+      "status": "passed",
+      "elapsed_seconds": 0.012645047999967574
+    },
+    {
+      "id": "test_storage.ContextTests.test_orphan_foreign_duplicate_and_non_suffix_context_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.015847207000092567
+    },
+    {
+      "id": "test_storage.ContextTests.test_supplied_context_budget_includes_output_reserve_and_margin",
+      "status": "passed",
+      "elapsed_seconds": 0.0060765949999677105
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_backup_does_not_overwrite_destination_database_or_sidecars",
+      "status": "passed",
+      "elapsed_seconds": 0.0034821400000737412
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_backup_publication_race_cannot_overwrite_another_file",
+      "status": "passed",
+      "elapsed_seconds": 0.007107956000027116
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_backup_restores_history_ownership_and_idempotency_with_wal_active",
+      "status": "passed",
+      "elapsed_seconds": 0.013507666999998946
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_busy_database_fails_without_partial_write",
+      "status": "passed",
+      "elapsed_seconds": 0.016505597999980637
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_database_replacement_and_symlink_cannot_silently_redirect_store",
+      "status": "passed",
+      "elapsed_seconds": 0.005879908999986583
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_failed_forward_migration_preserves_version_history_and_receipts",
+      "status": "passed",
+      "elapsed_seconds": 0.011567766999974083
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_failed_migration_does_not_leave_partial_schema_or_ledger",
+      "status": "passed",
+      "elapsed_seconds": 0.003755331999968803
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_foreign_database_is_not_adopted_or_changed_to_wal",
+      "status": "passed",
+      "elapsed_seconds": 0.004149344999973437
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_foreign_key_violation_is_rolled_back_and_diagnostics_are_redacted",
+      "status": "passed",
+      "elapsed_seconds": 0.004641525000010915
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_forward_migration_preserves_history_and_receipts",
+      "status": "passed",
+      "elapsed_seconds": 0.009905446000061602
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_migration_is_repeatable_but_modified_checksum_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.006185827999956928
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_newer_schema_and_user_version_tampering_are_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.004910177999931875
+    },
+    {
+      "id": "test_storage.DatabaseTests.test_wal_full_sync_foreign_keys_and_private_mode",
+      "status": "passed",
+      "elapsed_seconds": 0.00427141800003028
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_chat_creation_is_idempotent_and_owner_scoped",
+      "status": "passed",
+      "elapsed_seconds": 0.004768846000047233
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_chat_pagination_is_owner_scoped",
+      "status": "passed",
+      "elapsed_seconds": 0.007632305000015549
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_enqueue_and_idempotency_rollback_together",
+      "status": "passed",
+      "elapsed_seconds": 0.007248808999975154
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_export_excludes_credentials_and_worker_fencing_tokens",
+      "status": "passed",
+      "elapsed_seconds": 0.00660949600001004
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_export_uses_one_snapshot_during_an_actual_concurrent_write",
+      "status": "passed",
+      "elapsed_seconds": 0.006656916999986606
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_finish_revision_conflict_rolls_back_answer",
+      "status": "passed",
+      "elapsed_seconds": 0.008024144000046363
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_history_pagination_has_no_overlaps_and_keeps_raw_text",
+      "status": "passed",
+      "elapsed_seconds": 0.023036384999954862
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_invalid_request_never_creates_a_turn",
+      "status": "passed",
+      "elapsed_seconds": 0.011022501999946144
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_owner_checks_cover_reads_send_retry_export_and_cursor",
+      "status": "passed",
+      "elapsed_seconds": 0.012557065999999395
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_replay_survives_profile_change_and_full_queue",
+      "status": "passed",
+      "elapsed_seconds": 0.00965292600005796
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_restart_retains_owner_history_and_receipt",
+      "status": "passed",
+      "elapsed_seconds": 0.009322488000066187
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_same_key_different_content_or_revision_conflicts",
+      "status": "passed",
+      "elapsed_seconds": 0.007404712000038671
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_stale_revision_and_second_turn_leave_no_extra_messages",
+      "status": "passed",
+      "elapsed_seconds": 0.010841314000003877
+    },
+    {
+      "id": "test_storage.PersistenceTests.test_unauthorized_and_unknown_ids_have_same_error",
+      "status": "passed",
+      "elapsed_seconds": 0.0039965940000001865
+    },
+    {
+      "id": "test_storage.WorkerTests.test_fifo_and_one_active_generation_for_three_chats",
+      "status": "passed",
+      "elapsed_seconds": 0.015262596999946254
+    },
+    {
+      "id": "test_storage.WorkerTests.test_finalization_is_atomic_and_cannot_run_twice",
+      "status": "passed",
+      "elapsed_seconds": 0.009354256000051464
+    },
+    {
+      "id": "test_storage.WorkerTests.test_invalid_terminal_and_metrics_cannot_publish_an_answer",
+      "status": "passed",
+      "elapsed_seconds": 0.008375151999985064
+    },
+    {
+      "id": "test_storage.WorkerTests.test_live_worker_blocks_second_worker_even_through_hardlink_alias",
+      "status": "passed",
+      "elapsed_seconds": 0.005572154999981649
+    },
+    {
+      "id": "test_storage.WorkerTests.test_queue_expiry_retains_question_and_does_not_claim_model",
+      "status": "passed",
+      "elapsed_seconds": 0.007960888999946292
+    },
+    {
+      "id": "test_storage.WorkerTests.test_queue_expiry_uses_utc_for_non_utc_clock",
+      "status": "passed",
+      "elapsed_seconds": 0.006680622999965635
+    },
+    {
+      "id": "test_storage.WorkerTests.test_queued_job_survives_worker_restart_without_auto_answer",
+      "status": "passed",
+      "elapsed_seconds": 0.008320170000047256
+    },
+    {
+      "id": "test_storage.WorkerTests.test_retry_completed_or_old_question_is_rejected",
+      "status": "passed",
+      "elapsed_seconds": 0.015481375999911506
+    },
+    {
+      "id": "test_storage.WorkerTests.test_retry_preserves_one_user_message_and_separate_attempts",
+      "status": "passed",
+      "elapsed_seconds": 0.011387116000037167
+    },
+    {
+      "id": "test_storage.WorkerTests.test_saved_partial_is_append_only_and_restored_as_interrupted",
+      "status": "passed",
+      "elapsed_seconds": 0.01019548199997189
+    },
+    {
+      "id": "test_storage.WorkerTests.test_uncertain_inference_gate_survives_another_restart",
+      "status": "passed",
+      "elapsed_seconds": 0.012582683999994515
+    },
+    {
+      "id": "test_web_ui.WebUITests.test_pwa_assets_no_store_same_origin_no_worker_or_api_cache",
+      "status": "passed",
+      "elapsed_seconds": 0.1603811060000453
+    },
+    {
+      "id": "test_web_ui.WebUITests.test_reverse_pagination_no_loss_forward_contract_unchanged",
+      "status": "passed",
+      "elapsed_seconds": 0.14530150400003095
+    },
+    {
+      "id": "test_web_ui.WebUITests.test_tail_stable_across_new_messages_and_foreign_cursor",
+      "status": "passed",
+      "elapsed_seconds": 0.11795665099998587
+    },
+    {
+      "id": "test_web_ui.WebUITests.test_ui_exact_allowlist_https_and_private_headers",
+      "status": "passed",
+      "elapsed_seconds": 0.11315307699999266
+    }
+  ],
+  "evidence": "Real SQLite/threads/processes, ASGI security and verified loopback TLS sockets; synthetic inference only, NO real Ollama/Qwen",
+  "not_run": [
+    "Ollama/Qwen inference",
+    "actual Qwen token counting",
+    "real HTTP + Qwen 10 sequential / 3 concurrent",
+    "real browser acceptance",
+    "LAN device access",
+    "mobile internet chat",
+    "Ollama network isolation",
+    "server reboot/autostart",
+    "operational production restore",
+    "target MacBook/M1 storage and protocol tests"
+  ]
+}

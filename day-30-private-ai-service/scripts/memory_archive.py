@@ -1,6 +1,6 @@
 """Private, verified history transport. No HTTP, inference or automatic replay.
 
-Format v1 restores schema 2 idle snapshots into NEW database files only.
+Format v1 restores supported schema 2/3 idle snapshots into NEW files only.
 Archive hashes detect damage, not malicious replacement; archives are not encrypted.
 """
 import argparse
@@ -21,7 +21,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from bublik_service import __version__
 from bublik_service.domain import ServiceError
-from bublik_service.storage import ChatRepository
 from bublik_service.storage.database import APPLICATION_ID, Database
 
 FORMAT = "bublik-memory-archive-v1"
@@ -81,11 +80,17 @@ def schema_digest(db):
     return hashlib.sha256(canonical(rows)).hexdigest()
 
 
-@lru_cache(maxsize=1)
-def expected_schema():
+@lru_cache(maxsize=2)
+def expected_schema(version=3):
+    if type(version) is not int or version not in (2, 3):
+        fail("archive_incompatible_schema")
     # The packaged migrations are the only accepted schema, not a self-declared ledger.
     with tempfile.TemporaryDirectory(prefix="bublik-schema-") as folder:
-        reference = Database(Path(folder) / "reference.sqlite3")
+        migrations = Path(folder) / "migrations"
+        migrations.mkdir()
+        for item in sorted((ROOT / "bublik_service/storage/migrations").glob("*.sql"))[:version]:
+            shutil.copyfile(item, migrations / item.name)
+        reference = Database(Path(folder) / "reference.sqlite3", migrations=migrations)
         with reference.connect() as db:
             return schema_digest(db), [tuple(r) for r in db.execute(
                 "SELECT version,name,sha256 FROM schema_migrations ORDER BY version")]
@@ -96,8 +101,8 @@ def inspect_snapshot(path):
     private(path)
     if any(Path(str(path) + suffix).exists() for suffix in SIDECARS):
         fail("archive_snapshot_has_sidecars")
-    expected, ledger = expected_schema()
     with closing(sqlite3.connect(path.as_uri() + "?mode=ro&immutable=1", uri=True)) as db:
+        expected, ledger = expected_schema(db.execute("PRAGMA user_version").fetchone()[0])
         db.execute("PRAGMA trusted_schema=OFF")
         if (db.execute("PRAGMA application_id").fetchone()[0] != APPLICATION_ID
                 or db.execute("PRAGMA user_version").fetchone()[0] != len(ledger)
@@ -136,9 +141,9 @@ def create_archive(database, destination):
     source = safe_path(database)
     private(source)
     # Refuse old/future/foreign schemas BEFORE constructing a repository (which migrates).
-    expected, ledger = expected_schema()
     with closing(sqlite3.connect(source.as_uri() + "?mode=ro", uri=True)) as db:
         db.execute("BEGIN")
+        expected, ledger = expected_schema(db.execute("PRAGMA user_version").fetchone()[0])
         if (db.execute("PRAGMA application_id").fetchone()[0] != APPLICATION_ID
                 or db.execute("PRAGMA user_version").fetchone()[0] != len(ledger)
                 or schema_digest(db) != expected
@@ -153,7 +158,14 @@ def create_archive(database, destination):
         fail("archive_destination_exists")
     try:
         snapshot = output / DATABASE
-        ChatRepository(source).backup(snapshot)
+        # Do not construct a current repository: that would migrate a legacy source.
+        fd = os.open(snapshot, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        os.close(fd)
+        with closing(sqlite3.connect(source.as_uri() + "?mode=ro", uri=True)) as origin:
+            with closing(sqlite3.connect(snapshot)) as target:
+                origin.backup(target)
+        with snapshot.open("rb") as stream:
+            os.fsync(stream.fileno())
         # Snapshot is a self-contained read-only transport file, not a live WAL DB.
         state = inspect_snapshot(snapshot)
         manifest = {"format": FORMAT, "created_at": datetime.now(timezone.utc).isoformat(),

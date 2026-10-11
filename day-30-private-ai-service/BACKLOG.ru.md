@@ -70,3 +70,12 @@ API/UI, queue/quotas и versioned prompt реализованы. Ниже — о
 - Отдельный benchmark identity diff: model weights/template/profile и engine
   version показывать раздельно, требовать явного анализа изменений. Не переписывать
   strict stage7 reports после изменения Ollama 0.34.4 → 0.40.2.
+
+## Языки после0.10.0
+
+- RU/EN UI и язык ответа реализованы отдельно; настройки входят в schema3/archive.
+- Отдельно принять новую Qwen-версию на Mac, физические Android/iPhone, Safari/PWA
+  и поведение при конфликтующих настройках двух активных устройств.
+- Multilingual semantic retrieval и проверки русского вопроса об английском
+  воспоминании (и наоборот). Текущий FTS5 lexical поиск этого не гарантирует.
+- Дополнительные языки сейчас не добавляются.

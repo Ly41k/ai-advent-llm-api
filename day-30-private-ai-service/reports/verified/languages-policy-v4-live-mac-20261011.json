@@ -1,0 +1,315 @@
+{
+  "format": "bublik-languages-live-v1",
+  "scope": "HTTPS-Qwen-RU-EN-root-and-explicit-user-hint-plain-and-followup-RAG",
+  "created_at": "2026-10-11T20:39:33.111191+00:00",
+  "status": "passed",
+  "tests": [
+    {
+      "id": "runtime_ready_and_matches_local",
+      "status": "passed"
+    },
+    {
+      "id": "two_language_preferences",
+      "status": "passed"
+    },
+    {
+      "id": "completed-ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_language-ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_model_input-ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "no_cjk_ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "selected_language_ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "control_result_present_ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "saved_language_and_original_input-ru-plain",
+      "status": "passed"
+    },
+    {
+      "id": "completed-ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_language-ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_model_input-ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "memory_enabled-ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "no_cjk_ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "selected_language_ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "control_result_present_ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "saved_language_and_original_input-ru-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "completed-en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_language-en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_model_input-en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "no_cjk_en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "selected_language_en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "control_result_present_en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "saved_language_and_original_input-en-plain",
+      "status": "passed"
+    },
+    {
+      "id": "completed-en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_language-en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "frozen_model_input-en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "memory_enabled-en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "no_cjk_en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "selected_language_en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "control_result_present_en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "saved_language_and_original_input-en-followup-rag",
+      "status": "passed"
+    },
+    {
+      "id": "unsupported_language_rejected",
+      "status": "passed"
+    }
+  ],
+  "observations": [
+    {
+      "case": "ru-plain",
+      "chat_id": "974de0f062ac4b6a9a9c3447c69c3159",
+      "generation_id": "08b6d42f27854094b790a71e4700645c",
+      "reply_language": "ru",
+      "answer_sha256": "84f221695373f2dbd0c5909e45aa9368d2b7774534443393f9df7e860716ccdc",
+      "metrics": {
+        "first_token_seconds": 3.7824802920004004,
+        "inference_seconds": 3.927612,
+        "input_tokens": 218,
+        "load_seconds": 1.809585333,
+        "output_tokens": 49,
+        "queue_seconds": 0.067978,
+        "tokens_per_second": 12.475774083590743,
+        "total_seconds": 7.710016083001392
+      }
+    },
+    {
+      "case": "ru-followup-rag",
+      "chat_id": "974de0f062ac4b6a9a9c3447c69c3159",
+      "generation_id": "a78657acd1d84464997ab334dcfb4a91",
+      "reply_language": "ru",
+      "answer_sha256": "1cb68f7f2a78e25d5a37be22d11f3805f22b4b1e7f05b1a2616b1617fb3ae793",
+      "metrics": {
+        "first_token_seconds": 9.808429415999854,
+        "inference_seconds": 3.361863,
+        "input_tokens": 1172,
+        "load_seconds": 0.007429417,
+        "output_tokens": 42,
+        "queue_seconds": 0.039817,
+        "tokens_per_second": 12.493073037182063,
+        "total_seconds": 13.170339874999627
+      }
+    },
+    {
+      "case": "en-plain",
+      "chat_id": "bf05d3baf3ce4ece9ee9bd0fde0f7e75",
+      "generation_id": "f41fc25ae5724025aacd99facf1da340",
+      "reply_language": "en",
+      "answer_sha256": "2eaf31f922f188e4efcd2e7a50886381482b48563da8c1601596f23a281f291d",
+      "metrics": {
+        "first_token_seconds": 2.0263035829993896,
+        "inference_seconds": 3.907193,
+        "input_tokens": 226,
+        "load_seconds": 0.00770475,
+        "output_tokens": 49,
+        "queue_seconds": 0.045605,
+        "tokens_per_second": 12.54097250890857,
+        "total_seconds": 5.935420415997214
+      }
+    },
+    {
+      "case": "en-followup-rag",
+      "chat_id": "bf05d3baf3ce4ece9ee9bd0fde0f7e75",
+      "generation_id": "89c243586f244281a819be260ec86019",
+      "reply_language": "en",
+      "answer_sha256": "6082c98a71225bcdececcfb8d27432239f5c6368a6f697cb0e4cd8294f891a1b",
+      "metrics": {
+        "first_token_seconds": 8.009646124999563,
+        "inference_seconds": 1.600025,
+        "input_tokens": 972,
+        "load_seconds": 0.011880834,
+        "output_tokens": 20,
+        "queue_seconds": 0.023233,
+        "tokens_per_second": 12.49980469055171,
+        "total_seconds": 9.611072584000794
+      }
+    }
+  ],
+  "not_run": [
+    "physical phones",
+    "arbitrary language quality",
+    "semantic cross-language retrieval",
+    "browser localization",
+    "physical hardware transfer"
+  ],
+  "source": {
+    "unchanged_during_run": true,
+    "source_sha256": {
+      "bublik_service/__init__.py": "89f2b4977f0cc222b859107f88ca474fa571b9c09a824fd3ba662413548332a7",
+      "bublik_service/__main__.py": "b53f5e8d5266df3b174ae3d5bbfaf45746f516181fe745a0a3ae1726388813c9",
+      "bublik_service/admin_cli.py": "4754130f54735c77f86adc3042893da77d0b13ead6564394bd31bd830311e78d",
+      "bublik_service/domain.py": "5c790512c01b4b1648cb62cce58798bd9555e5561875619c95cf630b3c9063b3",
+      "bublik_service/http_api.py": "2f9ed3719b2933687562bc7168ac3c81206f2cb8b8ea47c8c7e6251f43a7e044",
+      "bublik_service/inference/__init__.py": "1d032dd738b97b782bf236ad8774e28b0b5e41519611c2c7b7ff1e8da1b9692c",
+      "bublik_service/inference/context.py": "8081bd36454722cd20b7bd8b692f6608204402ef5dca899e9ed44ad15b8b362b",
+      "bublik_service/inference/coordinator.py": "079954411ba91e503c6242ba7b18d6c6c91e63bedca0d2b2cecae4d9d7bc016d",
+      "bublik_service/inference/engine.py": "f8931566c0b0a79a1cd1e15192a5ec11942309c900286cee6972f8d30b5cd2c8",
+      "bublik_service/inference/ollama.py": "7ba545db32ce2f493cc822108469f4b6edca3a76acb9ad7ce51ce127e943ac0f",
+      "bublik_service/languages.py": "ab38fe26ddad6a0c06c0088e5ca4b9c60e4c0b173673077fa6b9771c610d42ce",
+      "bublik_service/local_cli.py": "5c82e0b52d4cfa61435c195f4077faec1d27637d4d6fb2c718d294fc73d34e04",
+      "bublik_service/memory.py": "096d04e3c2ca81afea8d3fab1b374610e0ac933bbdfc9d4643c27c4742ec2480",
+      "bublik_service/security.py": "5138f990c78cd93bdb6470b3a767116638d196e33dc4b9eac2e030a2227059bd",
+      "bublik_service/service.py": "221f515168dc6fd60054613e40bf56ae487e58bbdffe303d3dc1767d573163a6",
+      "bublik_service/settings.py": "adae1b9264139675bf5a571ef084d1c2c590de8895ce4a9f5d57ec7f1b0697d3",
+      "bublik_service/storage/__init__.py": "124eb9e8a8b91aab94b5c5cd0d71ad4eb925a63be0c81156428a56b41068012e",
+      "bublik_service/storage/database.py": "4c359bd1704df8b6d8f65fd87e565dc40829e29ce410d205ec209b2cc7942f94",
+      "bublik_service/storage/migrations/001_initial.sql": "df70b5f82e79f792aba78a19655a1d65f5d984c4d05a21cc3db02bd3753c7d70",
+      "bublik_service/storage/migrations/002_auth.sql": "f8e70cc1953bb0a0e200ed77ad711e0377a1246907f7e5a9f1100494e0ea76dd",
+      "bublik_service/storage/migrations/003_languages.sql": "f18e5472d46fd6fdb802032b34a76d63ce4e98ae438384b964ffb5509def260d",
+      "bublik_service/storage/repository.py": "53a6efaeee39a39fba2207f3314309fc321354f2fa367d0ca662c881a88e1dc3",
+      "bublik_service/storage/worker.py": "13df5daf631fccd9bba71d98b770ffb700c66f4c123a6a8796aef009730d3a79",
+      "bublik_service/web_ui/app.css": "8eb9acaf64ad480c4f0b307c1aa13c5833e6d1386dfbd20fe290639a48be7235",
+      "bublik_service/web_ui/app.js": "13a6f3e545baf491fc13f0cfdd033b6190a4ebf6ee9817d99012e287d15e3d0a",
+      "bublik_service/web_ui/i18n.js": "6c8611b868b2df962952841a1ec8eaf7cbf738145fe61b46b60db296a06cd6db",
+      "bublik_service/web_ui/icon-180.png": "deca0015cbba7f5539a83a26bb7b099549e7a04c3a1519e139de70933257a59b",
+      "bublik_service/web_ui/icon-192.png": "563f74c4fcf660ff685650ccade4e70387e2b4fa39f8370699945e2248023c99",
+      "bublik_service/web_ui/icon-512.png": "9ef2adc236de8ce9b647247e2b01ee7f76ace890e95b684aa7bfa67c532f09d3",
+      "bublik_service/web_ui/index.html": "2469d986005ddcbd1c71c92c73f71999c6010424bbb91c7e7129b939a93ab2fb",
+      "bublik_service/web_ui/manifest.webmanifest": "7d8b95b21b7b1660c66dc061d6292e824d17b949e8d439d916489e6267e547c1",
+      "deploy/Caddyfile.lan.template": "0adedcfe1a557cc5f8b9012acba22c547f6fc0437dfa6707f814a35aec482883",
+      "deploy/tailnet-policy.example.jsonc": "b5c165be972f91b04af01cc3c4d1b03760d2e3fe8b1655adfdbfe96f15eb6f8b",
+      "pyproject.toml": "25f4f9838105fa6372029fa2c21286df1e31ba05cef2ebd9ae422881e6de42c2",
+      "requirements.browser.lock": "5339e9421bdd9d112f155eea25f397167febdc3ce6b297fa21aa8650eef9a34d",
+      "requirements.lock": "b75817dc36eb6819b3eb945a2b21cb2dbb2f1565a07d927b2086fb2652d64da2",
+      "scripts/acceptance_support.py": "8c4ad61570b9b69c1c09acb07b5f40f7ab64ac4fd5c608244a5ed7a24099f3a1",
+      "scripts/check_acceptance_live.py": "9768a569cc5225a4e421750347091bcbddc8a032142d619bf242e32a3434989b",
+      "scripts/check_browser_https.py": "ef5e6a3ce2f1679a7af900e5bda173d8bc3a5882da6c0a7c4e1b1fbf97ebe12b",
+      "scripts/check_device_handoff.py": "9f1e44e4b89e6a42c34787d40bb39967c56373afddb937d33a450bf26784ae62",
+      "scripts/check_http_live.py": "0b9b7a19208372e03016c4f37db5abb4377157908605eaa125685eb2f33657e6",
+      "scripts/check_inference_live.py": "4de6843eb23ee61d48c2a5ac41504554606db1a2cdae06cfdf80c42036fa8d02",
+      "scripts/check_language_context_variants.py": "8278cfedbdcdb51ef99729dea2937cb424c4fa74a74b13d26babd3a9137e9ff2",
+      "scripts/check_language_prompt_ablation.py": "9254971f05f6a6ed974842f210ae1cf969d79f475b03119e3b7aeb21ac90230a",
+      "scripts/check_language_prompt_candidate.py": "8e542c7e2744384f5913b310be2a1621d4d903f40ebdb083b61dd6fa880a1abb",
+      "scripts/check_languages_live.py": "9a7ffd22500debc2f2d4720ec2489f1962fb29f1818d6add36f3771e98eb505c",
+      "scripts/check_languages_ui.py": "ab7d42071f5d4e0bc7420a9185dce84a39d73aa894cfd0a437c7581893bbbfdb",
+      "scripts/check_launchd_live.py": "aeb523a51f02260852939a4b3157f38e62971fcd461da32361e9b1f523c6e50c",
+      "scripts/check_memory_archive.py": "bd7195d62892540359c1df176b7905a00706cbcb467faf99e439a7f88f8871be",
+      "scripts/check_network_live.py": "bb36ac14dde5b30a039012dd3b07fee79954aa9a01f09026bb945439e88606c4",
+      "scripts/check_network_ui_live.py": "d75fe0036a6dd95e3a1237338ce1f6354985f5d12e74a872666fc9dd343f6e7d",
+      "scripts/check_prompt_compare.py": "40579000a85e5436734697ce175936f2acc173b7076292ada4380b68e8408934",
+      "scripts/check_prompt_upgrade.py": "25667d1e3ed1095984f27c4226b791701c35673730eaebbf437f0bf878c15e9e",
+      "scripts/check_pwa.py": "45b4a3bb7f2cfe8138b8a7e9fac4ae53a65182d309317a2e1cfc2aa32dce6cf5",
+      "scripts/check_rag_live.py": "e1de029ced064c86ca3d246c1076aaea9cb256838183fb29c0b24c42f424d186",
+      "scripts/check_rag_ui.py": "2471d83bb26b82bd8a5c5b649c6e40e43b9cdb23f4d807d14f62b7b93bbf2784",
+      "scripts/check_recovery_live.py": "f43aab0a1d8620b60d7879964d2f5aafbdc08e510ff5a09e3ed38e0674b5c5b0",
+      "scripts/check_storage.py": "4af12271ecd5b4e2b29819ef2736beb2e5f585bea5247d0e3171e63c56cbfe7a",
+      "scripts/check_web_ui.py": "426e99ea5f9e58a0cd5e6a015d8ccd00b051b4a7a17972c6f0df9aab91d0102b",
+      "scripts/check_web_ui_live.py": "0f2a876d3fc500d6de87eebe77733fdb291e361f132f8289654049697a46de74",
+      "scripts/configure_launchd.py": "ab650425b4ee0a505a1604b2d986cdbe36dd07510e35cd888b5ac9803f60f56d",
+      "scripts/configure_network.py": "f237a80f98b7a1011b6de40fdc8109cc4da4cde93484a03bed299bc22771c060",
+      "scripts/install_launchd.py": "2fd5be68cfb72490a1490f3f2e2d88806dc469854cd26c787d1b80ccabd920fd",
+      "scripts/memory_archive.py": "d41af268111a8aaf0e97c39a8b99ed2f6ce33c71ab652fe6098a2291bc59d868",
+      "scripts/network_common.py": "ce7d07fc6cd5e9b74426fe7e95d37c362e9dc8726b4f2aa5b0ce82b8f1bf9bfa",
+      "scripts/resource_observer.py": "fb2c338a63605af9398c8b54724b7d77cbe4e0ca35be744d3d444916b4c02bf5",
+      "scripts/verify_report.py": "7161f0a344ad58a31dbd3121bc243a9859714e1130c1acc6579411549fe2834f",
+      "tests/browser_fixture.py": "b15288a9bb512e01f09b2b5ca198a88a003b0a030af116e3d788bd59653dc3c8",
+      "tests/check_proxy_integration.py": "866dd2bf40cae8217b2e53215ea37083499e03a84a7c06041d5225c5d636b5e7",
+      "tests/check_ui_live_harness.py": "533a048d972f63e60f8a25fa3812f6efa3cd661865623f404d6334708c4128c9",
+      "tests/test_acceptance.py": "d9c31f832dd70b00409d8ea6af790884ea35c2044de6a718bf566079f6138f03",
+      "tests/test_http.py": "cd4600a3bdcb7623345f26ba7df4afbdbd462358cffadd8c45052279c45a00fc",
+      "tests/test_http_live_quota.py": "65f6f9d5cb09c9b84b1d99386d2d442b1a17dac66f4a47d687fa9896f562be03",
+      "tests/test_http_network.py": "f24d17abe3f5aed8d07906f685b406ce3080020799e60150fe7faa20e3069258",
+      "tests/test_inference.py": "bf1921ec4840b8cef6f496c770d9bf6e2c929a551d49e5b7e8e17222cc59e150",
+      "tests/test_language_hint.py": "372c4f7e0aa7c1ac5c5c7905c76adc91265e5e5793fb679f19dff302d62b573c",
+      "tests/test_language_hint_v4.py": "6c5b54fe42888796d3fded841cd205cfce3718020ebac335f4269b4babcf9dff",
+      "tests/test_language_policy.py": "9cfff99d489f702319d7eb15be367bfd656fc36dc1e6afe70209aa661d2eeb43",
+      "tests/test_languages.py": "bcca056304dbf31764f96ad97c2e60a5375b4fb234c06787c184a71a3d7318d6",
+      "tests/test_memory_archive.py": "f9192a10b360622beba9f8bf7e1e8d0c74dcd6fc18e154b596ae6d000e6afbec",
+      "tests/test_networking.py": "2e9c7dfa85fa359ecd368ff34e63e67855c7a49d47f1f874ad3f32bed1d89403",
+      "tests/test_operations.py": "240b0d629b90fbbdf4a34f59c3826fdf679672aa805b90ad0bd47f854fb13f99",
+      "tests/test_prompt_compare.py": "0f58b9f48646a5e0fc5340e44da846b493565fafbb72096f8cd15f6a957e8630",
+      "tests/test_rag_memory.py": "f98cebefc9d94bedf2b4da20ffc68c76bbb5842b41695a17df01b94ffc925b09",
+      "tests/test_storage.py": "fa351b38b281b1edce3b166917ced9e2695e544bf34ffd0b7bfa774c2825121c",
+      "tests/test_web_ui.py": "b6e166287a8b64abcaed5b099f6b5e59e1b21291247f6d25f44605362dfd50f5"
+    }
+  },
+  "summary": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 50.63565570799983
+  }
+}

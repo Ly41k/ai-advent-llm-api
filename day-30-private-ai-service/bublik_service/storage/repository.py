@@ -195,6 +195,8 @@ class ChatRepository:
         # Expose only the citations, never full inference prompts/engine provenance.
         if context.get("memory", {}).get("enabled"):
             result["memory"] = context["memory"]
+        if context.get("reply_language"):
+            result["reply_language"] = context["reply_language"]
         return result
 
     @staticmethod
@@ -228,6 +230,31 @@ class ChatRepository:
             if row is None:
                 raise NotFound()
             return dict(row)
+
+    def preferences(self, owner):
+        with self.database.connect() as db:
+            self._user(db, owner)
+            row = db.execute("SELECT ui_language,reply_language,revision FROM user_preferences WHERE owner_id=?", (owner,)).fetchone()
+            if row is None:
+                raise StorageUnavailable("preferences_missing")
+            return dict(row)
+
+    def set_preferences(self, owner, *, ui_language, reply_language, expected_revision):
+        from bublik_service.languages import validate_language
+        validate_language(ui_language); validate_language(reply_language)
+        if not integer(expected_revision):
+            raise InvalidInput("invalid_revision")
+        with self.database.connect(write=True) as db:
+            self._user(db, owner)
+            row = db.execute("SELECT * FROM user_preferences WHERE owner_id=?", (owner,)).fetchone()
+            if row is None:
+                raise StorageUnavailable("preferences_missing")
+            if row["revision"] != expected_revision:
+                raise Conflict("preferences_changed")
+            if (row["ui_language"], row["reply_language"]) != (ui_language, reply_language):
+                db.execute("UPDATE user_preferences SET ui_language=?,reply_language=?,revision=revision+1 WHERE owner_id=?",
+                           (ui_language, reply_language, owner))
+            return dict(db.execute("SELECT ui_language,reply_language,revision FROM user_preferences WHERE owner_id=?", (owner,)).fetchone())
 
     @staticmethod
     def _memory_row(db, owner, message):
@@ -281,6 +308,15 @@ class ChatRepository:
                 "messages": [{"role": "system", "content": profile.system_prompt},
                              *[{"role": x["role"], "content": x["content"]} for x in selected],
                              {"role": "user", "content": content}]}
+        from bublik_service.languages import system_prompt_for_reply, user_content_for_reply, language_hint_metadata, POLICY as LANGUAGE_POLICY
+        language = plan.reply_language is not None
+        if language:
+            snapshot["messages"][0]["content"] = system_prompt_for_reply(profile, plan.reply_language)
+            snapshot["reply_language"] = plan.reply_language
+            snapshot["language_policy"] = LANGUAGE_POLICY
+            snapshot["original_user_content"] = content
+            snapshot["language_hint"] = language_hint_metadata(content, plan.reply_language)
+            snapshot["messages"][-1]["content"] = user_content_for_reply(content, plan.reply_language)
         if plan.memory_enabled:
             from bublik_service.memory import memory_messages
             owner = db.execute("SELECT owner_id FROM chats WHERE id=?", (chat,)).fetchone()[0]
@@ -300,24 +336,36 @@ class ChatRepository:
             from bublik_service.inference.context import upper_bound
             if upper_bound(snapshot["messages"]) != plan.input_token_upper_bound:
                 raise InvalidInput("invalid_context_plan")
+        elif language:
+            from bublik_service.inference.context import upper_bound
+            if upper_bound(snapshot["messages"]) != plan.input_token_upper_bound:
+                raise InvalidInput("invalid_context_plan")
         return snapshot
 
     @staticmethod
-    def _message_payload(content, expected_revision, use_memory):
+    def _message_payload(content, expected_revision, use_memory, reply_language=None):
+        from bublik_service.languages import validate_language
+        validate_language(reply_language, optional=True)
         if type(use_memory) is not bool:
             raise InvalidInput("invalid_memory_mode")
         result = {"content": content, "expected_revision": expected_revision}
         if use_memory:
             result["use_memory"] = True
+        if reply_language is not None:
+            result["reply_language"] = reply_language
         return result
 
     @staticmethod
-    def _retry_payload(expected_revision, use_memory):
+    def _retry_payload(expected_revision, use_memory, reply_language=None):
+        from bublik_service.languages import validate_language
+        validate_language(reply_language, optional=True)
         if type(use_memory) is not bool:
             raise InvalidInput("invalid_memory_mode")
         result = {"expected_revision": expected_revision}
         if use_memory:
             result["use_memory"] = True
+        if reply_language is not None:
+            result["reply_language"] = reply_language
         return result
 
     def _admission(self, db, owner, chat, expected_revision):
@@ -340,7 +388,7 @@ class ChatRepository:
             self.admission_policy(db, owner)
         return current
 
-    def replay_message(self, owner, chat, content, *, expected_revision, key, use_memory=False):
+    def replay_message(self, owner, chat, content, *, expected_revision, key, use_memory=False, reply_language=None):
         text(content, MAX_MESSAGE_BYTES, "invalid_message")
         request_key(key)
         if not integer(expected_revision):
@@ -348,7 +396,7 @@ class ChatRepository:
         with self.database.connect() as db:
             self._chat(db, owner, chat)
             return self._replay(db, owner, "message.create:" + chat, key,
-                                self._message_payload(content, expected_revision, use_memory))[0]
+                                self._message_payload(content, expected_revision, use_memory, reply_language))[0]
 
     def retry_candidate(self, owner, message):
         with self.database.connect() as db:
@@ -358,7 +406,7 @@ class ChatRepository:
                 raise NotFound()
             return dict(row)
 
-    def replay_retry(self, owner, message, *, expected_revision, key, use_memory=False):
+    def replay_retry(self, owner, message, *, expected_revision, key, use_memory=False, reply_language=None):
         request_key(key)
         if not integer(expected_revision):
             raise InvalidInput("invalid_revision")
@@ -368,7 +416,7 @@ class ChatRepository:
             if row is None:
                 raise NotFound()
             return self._replay(db, owner, "message.retry:" + message, key,
-                                self._retry_payload(expected_revision, use_memory))[0]
+                                self._retry_payload(expected_revision, use_memory, reply_language))[0]
 
     def recovery_context(self):
         """Trusted coordinator only: last transition that could have set the inference gate."""
@@ -390,7 +438,7 @@ class ChatRepository:
             self._chat(db, owner, chat)
             operation = "message.create:" + chat
             replay, fingerprint = self._replay(db, owner, operation, key,
-                                              self._message_payload(content, expected_revision, context.memory_enabled))
+                                              self._message_payload(content, expected_revision, context.memory_enabled, context.reply_language))
             if replay:
                 return replay
             self._admission(db, owner, chat, expected_revision)
@@ -434,7 +482,7 @@ class ChatRepository:
             if row is None:
                 raise NotFound()
             operation = "message.retry:" + message
-            replay, fingerprint = self._replay(db, owner, operation, key, self._retry_payload(expected_revision, context.memory_enabled))
+            replay, fingerprint = self._replay(db, owner, operation, key, self._retry_payload(expected_revision, context.memory_enabled, context.reply_language))
             if replay:
                 return replay
             chat = row["chat_id"]

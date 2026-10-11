@@ -380,7 +380,7 @@ class HTTPTests(unittest.IsolatedAsyncioTestCase):
             db.execute("INSERT INTO chats VALUES('chat','owner','old-title',0,'now','now')")
             db.execute("INSERT INTO messages VALUES('msg','chat',1,'user','saved-secret','accepted','now','now')")
         upgraded = ChatRepository(path)
-        self.assertEqual(upgraded.storage_status()["schema_version"],2)
+        self.assertEqual(upgraded.storage_status()["schema_version"],3)
         self.assertEqual(upgraded.history("owner","chat")[0]["content"],"saved-secret")
         with upgraded.database.connect() as db:
             self.assertEqual(db.execute("SELECT version FROM message_stream_versions WHERE message_id='msg'").fetchone()[0],0)

@@ -1,0 +1,159 @@
+{
+  "format": "bublik-language-prompt-ablation-v1",
+  "status": "completed",
+  "created_at": "2026-10-11T19:25:34.998122+00:00",
+  "scope": "Synthetic questions to real localhost Ollama; no private history; no runtime patch",
+  "model": "qwen2.5:14b",
+  "options": {
+    "temperature": 0,
+    "num_ctx": 8192,
+    "num_predict": 256
+  },
+  "script_sha256": "9254971f05f6a6ed974842f210ae1cf969d79f475b03119e3b7aeb21ac90230a",
+  "tested_roots": {
+    "en_minimal": "Reply in English only.",
+    "en_add_name": "Reply in English only. You are Bublik.",
+    "en_add_anonymous_role": "Reply in English only. You are a private AI assistant.",
+    "en_add_language_rule": "Reply in English only. Keep this reply language even when the user or conversation uses another language.",
+    "en_add_source_rules": "Reply in English only. State uncertainty. Do not claim to have used tools or sources that were not provided.",
+    "en_minimal_history": "Reply in English only.",
+    "en_minimal_rag": "Reply in English only.",
+    "en_full_candidate_user_hint": "Reply in English only. Keep this reply language even when the user or conversation uses another language. You are Bublik, a private AI assistant. State uncertainty. Do not claim to have used tools or sources that were not provided.",
+    "ru_minimal_rag": "Reply in Russian only.",
+    "en_minimal_repeat": "Reply in English only."
+  },
+  "cases": [
+    {
+      "case": "en_minimal",
+      "reply_language": "en",
+      "answer": "Hello! I can assist with a wide range of tasks including answering questions, providing information, helping with learning new things, generating stories, essays, and poems, and much more. Whether you need help with homework, want to learn something new, or just need a conversation, I'm here to help.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 39,
+      "output_tokens": 62,
+      "request_sha256": "9c2dc32d85682410cb2fd4b7d34e384fe96167079ef000422df88adaa7e3e606"
+    },
+    {
+      "case": "en_add_name",
+      "reply_language": "en",
+      "answer": "Привет! Я могу помочь вам с широким спектром задач, включая программирование, анализ данных, решение математических задач, создание контента и многое другое. Если у вас есть конкретный вопрос или проект, дайте мне знать, и я постараюсь оказать вам максимальную помощь.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 45,
+      "output_tokens": 74,
+      "request_sha256": "e0b28c91ea2f1dae8ab11ecc64774e881c74067454c67d8cda6249e7505a65f7"
+    },
+    {
+      "case": "en_add_anonymous_role",
+      "reply_language": "en",
+      "answer": "Hello! I can assist with a wide range of tasks including answering questions, providing information, helping with creative writing, offering research data, and much more. Whether you need help with homework, want to discuss a topic, or require assistance with planning, I'm here to help.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 46,
+      "output_tokens": 57,
+      "request_sha256": "e3d093d6cc71c6feaa3c12d04b8d67b1b0ffcf529276184dfb3a69a2c1e80d1d"
+    },
+    {
+      "case": "en_add_language_rule",
+      "reply_language": "en",
+      "answer": "Hello! I can help with a wide range of tasks including answering questions, providing information, assisting with language translation, and offering guidance on various topics. Whether you need help with homework, want to learn about a new topic, or need assistance with writing, I'm here to assist.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 53,
+      "output_tokens": 58,
+      "request_sha256": "ff7571a13bac4c0c0992804c2a11c7b1443bd9af91b199adc38626840d1bde9d"
+    },
+    {
+      "case": "en_add_source_rules",
+      "reply_language": "en",
+      "answer": "Я могу помочь вам сформулировать вопросы или найти информацию, которая уже доступна, но я не могу использовать дополнительные инструменты или источники для получения новых данных.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 56,
+      "output_tokens": 44,
+      "request_sha256": "e4756fea40d70b3f4c6d6ab97cc48eb74242f0f0b62dc304f48f59eb52957fc6"
+    },
+    {
+      "case": "en_minimal_history",
+      "reply_language": "en",
+      "answer": "Привет! Я могу помочь ответить на вопросы, предоставить информацию, помочь с написанием текстов, анализом данных и многим другим.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 83,
+      "output_tokens": 39,
+      "request_sha256": "81270df9175af9e0ed68974288f674ff158f0ba734f8db73e3c401711e70cc55"
+    },
+    {
+      "case": "en_minimal_rag",
+      "reply_language": "en",
+      "answer": "Вы сохранили контрольное число для теста как 37.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 442,
+      "output_tokens": 16,
+      "request_sha256": "1121c3995c06491dc4f546a285264821bd1b2daf62bb1d913ad39fa264f73d8a"
+    },
+    {
+      "case": "en_full_candidate_user_hint",
+      "reply_language": "en",
+      "answer": "Hello! I can assist with a variety of tasks such as answering questions, providing information, helping with planning, and offering support in managing your schedule and reminders. I aim to make your daily activities more efficient and organized.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 86,
+      "output_tokens": 45,
+      "request_sha256": "3979f8988fbde63f0bc82b07c334022ae1c5b74bc80ad1d7a1c8341e91fdba14"
+    },
+    {
+      "case": "ru_minimal_rag",
+      "reply_language": "ru",
+      "answer": "Вы сохранили контрольный номер 37.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 430,
+      "output_tokens": 12,
+      "request_sha256": "42e0f94bd1fc50ac6cd3179374f28003c7cfb8f41d744c2ba1f78bc2cc082fcc"
+    },
+    {
+      "case": "en_minimal_repeat",
+      "reply_language": "en",
+      "answer": "Hello! I can assist with a wide range of tasks including answering questions, providing information, helping with learning new things, generating content, and offering support in various topics. Whether you need help with homework, want to learn about a new subject, or need assistance with creative writing, I'm here to help.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 39,
+      "output_tokens": 63,
+      "request_sha256": "9c2dc32d85682410cb2fd4b7d34e384fe96167079ef000422df88adaa7e3e606"
+    }
+  ],
+  "all_generations_finished": true,
+  "ollama_version": "0.40.3",
+  "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "model_metadata": {
+    "family": "qwen2",
+    "quantization": "Q4_K_M",
+    "default_system_characters": 68,
+    "default_system_sha256": "66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+    "has_default_messages": false,
+    "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175",
+    "parameters_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_language_checks_passed": false,
+  "successful_cases": [
+    "en_minimal",
+    "en_add_anonymous_role",
+    "en_add_language_rule",
+    "en_full_candidate_user_hint",
+    "ru_minimal_rag",
+    "en_minimal_repeat"
+  ],
+  "limitation": "Script-based language screening is not semantic review or a guarantee for arbitrary chats."
+}

@@ -1,27 +1,7 @@
+import {t, errorMessage, statusLabel, setLanguage, locale, languageForBrowser, translateStatic} from "./i18n.js";
 // Private browser client. No credentials, drafts or history in browser storage.
 const API = "/api/v1";
 const TERMINAL = new Set(["completed", "truncated", "failed", "interrupted"]);
-const LABELS = {accepted:"Сохранено", queued:"В очереди", running:"Бублик отвечает…",
-  completed:"Ответ сохранён", truncated:"Ответ достиг ограничения длины",
-  failed:"Генерация завершилась ошибкой", interrupted:"Генерация прервана"};
-const ERRORS = {
-  authentication_required:"Сессия завершилась. Войдите снова.",
-  csrf_failed:"Сессия изменилась. Обновите подключение и повторите действие.",
-  rate_limit_exceeded:"Достигнут лимит запросов.",
-  user_queue_full:"Слишком много ваших запросов в очереди.",
-  global_queue_full:"Очередь сервера заполнена.",
-  stale_revision:"Диалог изменился на другом устройстве. История обновлена; проверьте её перед отправкой.",
-  chat_has_outstanding_generation:"В этом диалоге уже готовится ответ. История обновлена.",
-  context_budget_exceeded:"Сообщение не помещается в контекст модели. Сократите его.",
-  invalid_message:"Сообщение должно содержать текст и занимать не больше 16 384 байт.",
-  model_unavailable:"Модель недоступна. Сохранённую историю можно читать.",
-  inference_recovery_required:"Генерация приостановлена до восстановления сервера владельцем.",
-  storage_unavailable:"Хранилище временно недоступно.",
-  service_unavailable:"Сервис временно недоступен.",
-  retry_not_allowed:"Этот ответ нельзя повторить. Обновите историю.",
-  idempotency_conflict:"Ключ запроса уже использован с другим содержимым. Обновите историю.",
-  not_found:"Диалог недоступен этой учётной записи.",
-};
 
 export function messageBytes(value) { return new TextEncoder().encode(value).length; }
 export function mergeMessages(existing, incoming) {
@@ -34,7 +14,7 @@ export function newerSnapshot(previous, incoming) {
 }
 export class APIError extends Error {
   constructor(status, code, retryAfter=0) {
-    super(ERRORS[code] || "Не удалось выполнить запрос.");
+    super(errorMessage(code));
     this.status=status; this.code=code; this.retryAfter=retryAfter;
   }
 }
@@ -66,15 +46,15 @@ if (typeof document !== "undefined") {
         const code = data.error?.code || "unknown_error";
         const delay = Math.min(3600,Math.max(0,Number(response.headers.get("Retry-After")) || 0));
         if (response.status === 429) state.cooldown=Date.now()+Math.max(5,delay)*1000;
-        if (response.status === 401 && !quiet && state.session) clearPrivate(ERRORS.authentication_required);
+        if (response.status === 401 && !quiet && state.session) clearPrivate(errorMessage("authentication_required"));
         throw new APIError(response.status,code,delay);
       }
       return data;
     } finally { clearTimeout(deadline); }
   }
   function errorText(error) {
-    if (error instanceof APIError) return error.message+(error.retryAfter?` Повторите через ${error.retryAfter} с.`:"");
-    return "Нет подтверждения от сервера. Проверьте соединение.";
+    if (error instanceof APIError) return errorMessage(error.code)+(error.retryAfter?" "+t("error.retry_after",{seconds:error.retryAfter}):"");
+    return t("error.connection");
   }
   function stopWatch() {
     if (state.watcher) {
@@ -87,29 +67,75 @@ if (typeof document !== "undefined") {
   function clearPrivate(message="") {
     stopWatch(); state.view++;
     Object.assign(state,{session:null,csrf:"",chat:null,messages:[],chats:[],cursor:null,
-      before:null,pending:null,ready:false,loading:false});
+      before:null,pending:null,ready:false,loading:false,preferences:null,sourceContext:null});
     $("messages").replaceChildren(); $("chat-list").replaceChildren(); $("source-preview").replaceChildren(); $("source-preview").hidden=true;
     $("message-input").value=""; $("password").value=""; $("use-memory").checked=true; $("account-name").textContent="";
-    $("chat-title").textContent="Ваш приватный чат"; $("generation-info").textContent="";
-    $("model-status").textContent="Проверяем модель…"; $("new-title").value="Новый диалог";
+    $("chat-title").textContent=t("chat.title"); $("generation-info").textContent="";
+    $("model-status").textContent=t("model.checking"); $("new-title").value=t("dialog.default");
     $("create-dialog").close(); $("workspace").hidden=true; $("login-screen").hidden=false;
     $("login-status").textContent=message; $("connect-button").hidden=false;
     $("login-button").disabled=true; status(""); drawer(false); controls();
   }
+  function applyUILanguage(language,force=false) {
+    const changed=document.documentElement.lang!==language;
+    setLanguage(language); document.documentElement.lang=language;
+    $("login-language").value=language; $("ui-language").value=language;
+    if (!changed && !force) return;
+    translateStatic(document);
+    document.querySelector('meta[name="apple-mobile-web-app-title"]').content=t("brand.name");
+    document.querySelector('link[rel="manifest"]').href=`/manifest.webmanifest?lang=${language}`;
+    $("chat-title").textContent=state.chat?.title || t("chat.title");
+    if (state.ready) $("model-status").textContent=t("model.ready",{model:state.model || "qwen2.5:14b"});
+    if (!state.session && state.csrf) $("login-status").textContent=t("login.required");
+    renderChats(); renderHistory();
+    if (state.sourceContext) renderSourceContext(state.sourceContext,state.sourceMessage);
+  }
+  function applyPreferences(value) {
+    state.preferences=value; applyUILanguage(value.ui_language);
+    $("reply-language").value=value.reply_language;
+  }
+  async function loadPreferences() {
+    const owner=state.session?.id;
+    if (!owner || state.prefSaving) return;
+    const value=await api("/preferences");
+    if (state.session?.id===owner && !state.prefSaving) applyPreferences(value);
+  }
+  async function savePreferences() {
+    if (!state.session || !state.preferences || state.prefSaving) return;
+    const owner=state.session.id;
+    const body={ui_language:$("ui-language").value,reply_language:$("reply-language").value,expected_revision:state.preferences.revision};
+    state.prefSaving=true; controls();
+    try {
+      const value=await api("/preferences",{method:"PATCH",body});
+      if (state.session?.id===owner) {applyPreferences(value);status(t("settings.saved"));}
+    } catch (e) {
+      if (state.session?.id===owner) {
+        // A lost PATCH response is uncertain: reload, do not replay stale settings.
+        try {
+          const value=await api("/preferences");
+          if (state.session?.id===owner) applyPreferences(value);
+        } catch {
+          if (state.session?.id===owner && state.preferences) applyPreferences(state.preferences);
+        }
+        if (state.session?.id===owner) status(e instanceof APIError?errorText(e):t("settings.failed"));
+      }
+    } finally {state.prefSaving=false; controls();}
+  }
   function controls() {
     const bytes=messageBytes($("message-input").value);
-    $("message-size").textContent=`${bytes.toLocaleString("ru-RU")} / 16 384 байт`;
+    $("message-size").textContent=t("chat.bytes",{count:bytes.toLocaleString(locale())});
     const busy = state.messages.some(m=>m.role==="assistant" && !TERMINAL.has(m.status));
     $("use-memory").disabled=state.mutating || Boolean(state.pending);
+    for (const id of ["ui-language","reply-language"]) $(id).disabled=state.prefSaving || state.mutating || Boolean(state.pending) || !state.preferences;
     $("message-input").disabled=!state.chat || state.loading || state.mutating || Boolean(state.pending);
-    $("send-button").disabled=!state.chat || !state.ready || busy || state.loading || state.mutating || Boolean(state.pending)
+    $("send-button").disabled=!state.chat || !state.ready || busy || state.loading || state.mutating || state.prefSaving || !state.preferences || Boolean(state.pending)
       || !$("message-input").value.trim() || bytes>16384 || Date.now()<state.cooldown;
     $("new-chat").disabled=state.mutating || Boolean(state.pending);
     $("delivery-notice").hidden=!state.pending || state.mutating;
     $("replay-request").disabled=state.mutating || Date.now()<state.cooldown;
     const last=state.messages.at(-1);
     $("retry-generation").hidden=!(last?.role==="assistant" && ["truncated","failed","interrupted"].includes(last.status));
-    $("retry-generation").disabled=!state.ready || state.mutating || Boolean(state.pending) || state.loading || Date.now()<state.cooldown;
+    $("retry-generation").disabled=!state.ready || state.mutating || state.prefSaving || !state.preferences || Boolean(state.pending) || state.loading || Date.now()<state.cooldown;
     $("older-messages").hidden=state.before===null;
     $("older-messages").disabled=state.loading;
   }
@@ -124,7 +150,7 @@ if (typeof document !== "undefined") {
       const button=document.createElement("button"); button.type="button"; button.className="chat-item";
       if (chat.id===state.chat?.id) button.setAttribute("aria-current","page");
       const title=document.createElement("span"); title.textContent=chat.title;
-      const date=document.createElement("small"); date.textContent=new Date(chat.created_at).toLocaleDateString("ru-RU");
+      const date=document.createElement("small"); date.textContent=new Date(chat.created_at).toLocaleDateString(locale());
       button.append(title,date); button.addEventListener("click",()=>openChat(chat.id).catch(e=>status(errorText(e))));
       $("chat-list").append(button);
     }
@@ -142,24 +168,24 @@ if (typeof document !== "undefined") {
     const node=document.createElement("article"); node.className="message "+message.role;
     node.dataset.messageId=message.id; node.dataset.state=message.status;
     const label=document.createElement("span"); label.className="message-label";
-    label.textContent=message.role==="user"?"Вы":"Бублик";
+    label.textContent=message.role==="user"?t("chat.you"):t("brand.name");
     const text=document.createElement("pre"); text.className="message-text"; text.textContent=message.content;
     const info=document.createElement("div"); info.className="message-state";
-    info.textContent=message.role==="assistant"?(LABELS[message.status] || "Неизвестный статус"):"";
+    info.textContent=message.role==="assistant"?statusLabel(message.status):"";
     node.append(label,text,info);
     if (message.memory?.enabled) {
       const details=document.createElement("details"); details.className="memory-sources";
       const summary=document.createElement("summary");
-      summary.textContent=`Поиск в истории: ${message.memory.sources.length} источников для контекста`;
+      summary.textContent=t("memory.sources",{count:message.memory.sources.length});
       details.append(summary);
       if (!message.memory.sources.length) {
-        const note=document.createElement("p"); note.textContent="Подходящие фрагменты в контекст не вошли. Это не означает, что такого сообщения нет в полной истории.";
+        const note=document.createElement("p"); note.textContent=t("memory.empty");
         details.append(note);
       }
       message.memory.sources.forEach((source,i)=>{
-        const author=source.role==="assistant"?"Бублик":"Вы";
-        const partial=source.role==="assistant" && source.status!=="completed"?` · ${LABELS[source.status] || source.status}`:"";
-        const link=document.createElement("a"); link.textContent=`[M${i+1}] ${author} · Сообщение №${source.sequence}${partial}`;
+        const author=source.role==="assistant"?t("brand.name"):t("chat.you");
+        const partial=source.role==="assistant" && source.status!=="completed"?` · ${statusLabel(source.status)}`:"";
+        const link=document.createElement("a"); link.textContent=`[M${i+1}] ${author} · ${t("memory.message",{sequence:source.sequence})}${partial}`;
         link.href=`#chat=${source.chat_id}&message=${source.message_id}`;
         const quote=document.createElement("blockquote"); quote.textContent=source.quote;
         details.append(link,quote);
@@ -173,10 +199,21 @@ if (typeof document !== "undefined") {
     $("empty-state").hidden=state.messages.length>0;
     controls();
   }
+  function renderSourceContext(context,sourceMessage) {
+    const panel=$("source-preview"); panel.replaceChildren();
+    const heading=document.createElement("strong"); heading.textContent=t("memory.conversation");panel.append(heading);
+    for (const source of context.items) {
+      const item=document.createElement("section"),label=document.createElement("p");
+      label.textContent=`${source.id===sourceMessage?t("memory.anchor")+" · ":""}${source.role==="user"?t("chat.you"):t("brand.name")} · ${t("memory.message",{sequence:source.sequence})} · ${new Date(source.created_at).toLocaleString(locale())} · ${statusLabel(source.status)}`;
+      const quote=document.createElement("pre");quote.className="message-text";quote.textContent=source.content;
+      item.append(label,quote);panel.append(item);
+    }
+    const note=document.createElement("p");note.textContent=t("memory.window");panel.append(note);panel.hidden=false;
+  }
   async function openChat(id, sourceMessage=null) {
     if (!safeId(id) || !state.session) return;
     stopWatch(); const view=++state.view; state.loading=true; state.chat=null;
-    state.messages=[]; state.before=null; $("source-preview").replaceChildren(); $("source-preview").hidden=true; renderHistory(); controls(); drawer(false);
+    state.messages=[]; state.before=null; state.sourceContext=null; $("source-preview").replaceChildren(); $("source-preview").hidden=true; renderHistory(); controls(); drawer(false);
     try {
       const page=await api(`/chats/${id}/messages?latest=true&limit=50`);
       const chat=await api("/chats/"+id);
@@ -189,18 +226,9 @@ if (typeof document !== "undefined") {
         const context=await api(`/chats/${id}/messages/${sourceMessage}/context`);
         if (view!==state.view || !state.session) return;
         // Keep the paginated timeline complete; show an older source separately.
-        const panel=$("source-preview"); panel.replaceChildren();
-        const heading=document.createElement("strong"); heading.textContent="Исходный разговор";
-        panel.append(heading);
-        for (const source of context.items) {
-          const item=document.createElement("section");
-          const label=document.createElement("p");
-          label.textContent=`${source.id===sourceMessage?"Источник · ":""}${source.role==="user"?"Вы":"Бублик"} · №${source.sequence} · ${new Date(source.created_at).toLocaleString("ru-RU")} · ${LABELS[source.status] || source.status}`;
-          const quote=document.createElement("pre"); quote.className="message-text"; quote.textContent=source.content;
-          item.append(label,quote); panel.append(item);
-        }
-        const note=document.createElement("p"); note.textContent="Показан фрагмент разговора вокруг источника. Полная переписка доступна в истории этого диалога.";
-        panel.append(note); panel.hidden=false;
+        state.sourceContext=context;state.sourceMessage=sourceMessage;
+        renderSourceContext(context,sourceMessage);
+        const panel=$("source-preview");
         panel.scrollIntoView({block:"nearest"});
         history.replaceState(null,"",`#chat=${id}&message=${sourceMessage}`);
       }
@@ -244,8 +272,8 @@ if (typeof document !== "undefined") {
     if (node) node.replaceWith(messageNode(row)); else $("messages").append(messageNode(row));
     $("empty-state").hidden=true;
     const omitted=data.context?.omitted_turns || 0;
-    $("generation-info").textContent=(LABELS[data.status] || "")+(omitted?` · В контекст модели не вошло ранних завершённых ходов: ${omitted}. Они сохранены в истории.`:"");
-    if (data.error_code) status(ERRORS[data.error_code] || "Ответ не завершён. Сохранённая часть остаётся в истории.");
+    $("generation-info").textContent=statusLabel(data.status)+(omitted?" · "+t("chat.omitted",{count:omitted}):"");
+    if (data.error_code) status(errorMessage(data.error_code));
     if (bottom) scrollBottom(); controls();
     if (TERMINAL.has(data.status)) {
       stopWatch(); state.loading=true; controls();
@@ -267,7 +295,7 @@ if (typeof document !== "undefined") {
     const fallback=() => {
       if (watcher.stopped || !watcher.source) return;
       watcher.source.close(); watcher.source=null;
-      $("generation-info").textContent="Восстанавливаем ответ периодическими запросами…";
+      $("generation-info").textContent=t("chat.polling");
       watcher.timer=setTimeout(poll,Math.max(1000,state.cooldown-Date.now()));
     };
     if (typeof EventSource === "undefined") {poll(); return;}
@@ -278,7 +306,7 @@ if (typeof document !== "undefined") {
     watcher.source.addEventListener("reconnect",fallback);
     watcher.source.addEventListener("error",event=>{
       let code=null; try {code=JSON.parse(event.data).error?.code;} catch { /* Network error has no body. */ }
-      if (code==="authentication_required") clearPrivate(ERRORS.authentication_required); else fallback();
+      if (code==="authentication_required") clearPrivate(errorMessage("authentication_required")); else fallback();
     });
   }
   async function ready() {
@@ -287,11 +315,12 @@ if (typeof document !== "undefined") {
       const data=await api("/health/ready");
       if (state.session?.id!==owner) return;
       state.ready=data.status==="ready";
-      $("model-status").textContent=`${data.profile.model} · локальная модель · готова`;
+      state.model=data.profile.model;
+      $("model-status").textContent=t("model.ready",{model:data.profile.model});
     } catch (e) {
       if (state.session?.id!==owner) return;
       state.ready=false; $("model-status").textContent=e instanceof APIError && e.status===503
-        ?"Модель временно недоступна · история доступна":"Не удалось проверить модель";
+        ?t("model.unavailable"):t("model.check_failed");
     }
     controls();
   }
@@ -300,17 +329,17 @@ if (typeof document !== "undefined") {
     state.authBusy=true; $("login-button").disabled=true;
     try {
       const data=await api("/auth/session",{quiet:true});
-      if (state.session && data.user?.id!==state.session.id) clearPrivate("Сессия изменилась. Войдите снова.");
+      if (state.session && data.user?.id!==state.session.id) clearPrivate(t("login.changed"));
       state.csrf=data.csrf_token;
       if (data.user) await signedIn(data.user);
-      else {state.session=null; $("login-status").textContent="Войдите в свою учётную запись."; $("connect-button").hidden=true;}
+      else {state.session=null; $("login-status").textContent=t("login.required"); $("connect-button").hidden=true;}
     } catch (e) { $("login-status").textContent=errorText(e); $("connect-button").hidden=false; }
     finally {state.authBusy=false; $("login-button").disabled=!state.csrf;}
   }
   async function signedIn(user) {
     state.session=user; $("account-name").textContent=user.username;
     $("login-screen").hidden=true; $("workspace").hidden=false; $("password").value="";
-    await loadChats();
+    await loadPreferences(); await loadChats();
     const route=location.hash.match(/^#chat=([a-f0-9]{32})(?:&message=([a-f0-9]{32}))?$/);
     const requested=route?.[1];
     if (!state.chat && requested) {
@@ -324,12 +353,12 @@ if (typeof document !== "undefined") {
     try {
       const data=await api("/auth/login",{method:"POST",body:{username:$("username").value,password:$("password").value},quiet:true});
       state.csrf=data.csrf_token; await signedIn(data.user);
-    } catch (e) { $("login-status").textContent=e instanceof APIError && e.status===401?"Неверное имя пользователя или пароль.":errorText(e); }
+    } catch (e) { $("login-status").textContent=e instanceof APIError && e.status===401?t("login.invalid"):errorText(e); }
     finally {$("password").value=""; state.authBusy=false; $("login-button").disabled=!state.csrf;}
   }
   async function deliver() {
     const operation=state.pending; if (!operation || state.mutating || !state.session) return;
-    state.mutating=true; controls(); status("Отправляем запрос…");
+    state.mutating=true; controls(); status(t("chat.sending"));
     try {
       const receipt=await api(operation.path,{method:"POST",body:operation.body,key:operation.key});
       if (state.pending!==operation || !state.session) return;
@@ -356,11 +385,11 @@ if (typeof document !== "undefined") {
   $("logout").addEventListener("click",async()=>{
     if (state.authBusy) return;
     state.authBusy=true;
-    try { await api("/auth/logout",{method:"POST",body:{}}); clearPrivate("Вы вышли из учётной записи."); }
+    try { await api("/auth/logout",{method:"POST",body:{}}); clearPrivate(t("login.logged_out")); }
     catch (e) {status(errorText(e));}
     finally {state.authBusy=false; if (!state.session) bootstrap();}
   });
-  $("new-chat").addEventListener("click",()=>{ $("new-title").value="Новый диалог"; $("create-dialog").showModal(); });
+  $("new-chat").addEventListener("click",()=>{ $("new-title").value=t("dialog.default"); $("create-dialog").showModal(); });
   $("cancel-create").addEventListener("click",()=>$("create-dialog").close());
   $("create-form").addEventListener("submit",event=>{
     event.preventDefault(); const title=$("new-title").value.trim(); if (!title) return;
@@ -368,7 +397,7 @@ if (typeof document !== "undefined") {
   });
   $("composer").addEventListener("submit",event=>{
     event.preventDefault(); if ($("send-button").disabled) return;
-    startOperation(`/chats/${state.chat.id}/messages`,{content:$("message-input").value,expected_revision:state.chat.revision,use_memory:$("use-memory").checked},"send");
+    startOperation(`/chats/${state.chat.id}/messages`,{content:$("message-input").value,expected_revision:state.chat.revision,use_memory:$("use-memory").checked,reply_language:state.preferences.reply_language},"send");
   });
   $("message-input").addEventListener("input",controls);
   $("message-input").addEventListener("keydown",event=>{
@@ -378,19 +407,22 @@ if (typeof document !== "undefined") {
   });
   $("retry-generation").addEventListener("click",()=>{
     const user=[...state.messages].reverse().find(m=>m.role==="user"); if (!user) return;
-    startOperation(`/messages/${user.id}/retry`,{expected_revision:state.chat.revision,use_memory:$("use-memory").checked},"retry");
+    startOperation(`/messages/${user.id}/retry`,{expected_revision:state.chat.revision,use_memory:$("use-memory").checked,reply_language:state.preferences.reply_language},"retry");
   });
   $("replay-request").addEventListener("click",deliver);
   $("discard-request").addEventListener("click",async()=>{
-    if (!confirm("Запрос мог быть сохранён на сервере. Проверим историю. Отменить дальнейшие повторы доставки?")) return;
+    if (!confirm(t("delivery.confirm"))) return;
     try {
       if (state.chat) await refreshChat(true); await loadChats();
-      state.pending=null; $("message-input").value=""; status("Проверьте историю перед отправкой нового сообщения."); controls();
+      state.pending=null; $("message-input").value=""; status(t("delivery.check_history")); controls();
     } catch(e) {status(errorText(e));}
   });
   $("refresh-chats").addEventListener("click",()=>loadChats().catch(e=>status(errorText(e))));
   $("more-chats").addEventListener("click",()=>loadChats(true).catch(e=>status(errorText(e))));
-  $("refresh-chat").addEventListener("click",()=>Promise.all([refreshChat(true),ready()]).catch(e=>status(errorText(e))));
+  $("refresh-chat").addEventListener("click",()=>Promise.all([refreshChat(true),ready(),loadPreferences()]).catch(e=>status(errorText(e))));
+  $("login-language").addEventListener("change",()=>applyUILanguage($("login-language").value));
+  $("ui-language").addEventListener("change",savePreferences);
+  $("reply-language").addEventListener("change",savePreferences);
   $("older-messages").addEventListener("click",()=>older().catch(e=>status(errorText(e))));
   $("menu-button").addEventListener("click",()=>drawer(!$("workspace").classList.contains("drawer-open")));
   $("drawer-backdrop").addEventListener("click",()=>{drawer(false); $("menu-button").focus();});
@@ -403,7 +435,7 @@ if (typeof document !== "undefined") {
     if (document.hidden) stopWatch(); else if (state.session) bootstrap().then(()=>refreshChat(true)).catch(e=>status(errorText(e)));
   });
   addEventListener("online",()=>{if (state.session) refreshChat(true).then(ready).catch(e=>status(errorText(e))); else bootstrap();});
-  addEventListener("offline",()=>status("Соединение потеряно. Отправленные генерации могут продолжаться на сервере."));
+  addEventListener("offline",()=>status(t("chat.offline")));
   addEventListener("beforeunload",event=>{
     if (state.pending || $("message-input").value.trim()) {event.preventDefault(); event.returnValue="";}
   });
@@ -426,5 +458,6 @@ if (typeof document !== "undefined") {
   },15000);
   setInterval(()=>{if (!document.hidden && state.session && Date.now()>=state.cooldown) ready();},30000);
   setInterval(()=>{if (!document.hidden && state.session && !state.authBusy && Date.now()>=state.cooldown) bootstrap();},60000);
+  applyUILanguage(languageForBrowser(navigator.languages),true);
   bootstrap();
 }

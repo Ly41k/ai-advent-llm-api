@@ -93,3 +93,6 @@ dialog::backdrop { background:#172b2466; }
 .memory-toggle{display:flex;align-items:center;gap:.5rem;font-size:.85rem;margin:.5rem 0}.memory-toggle input{width:auto}.memory-sources{font-size:.85rem;margin-top:.65rem}.memory-sources a{display:block;color:var(--accent,#88b5ff);margin-top:.5rem}.memory-sources blockquote{white-space:pre-wrap;overflow-wrap:anywhere;margin:.4rem 0;padding:.5rem;border-left:2px solid currentColor}
 
 .source-preview{border:1px solid currentColor;border-radius:.75rem;padding:1rem;margin:.5rem 0}
+.language-settings {display:grid; gap:.4rem; margin:1rem 0;}
+.language-settings label {font-size:.85rem; color:var(--muted);}
+.language-settings select {width:100%; min-height:44px; padding:.5rem; border:1px solid #bdc9bf; border-radius:.6rem; background:#fff; color:#173f35;}

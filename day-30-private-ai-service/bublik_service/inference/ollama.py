@@ -188,9 +188,14 @@ class OllamaAdapter:
         profile.validate()
         context = job["context"]
         messages = context["messages"]
+        from bublik_service.languages import snapshot_system_prompt
+        try:
+            system = snapshot_system_prompt(profile, context)
+        except InvalidInput:
+            raise InferenceError("invalid_model_response", uncertain=False) from None
         # Defense in depth against tampered/legacy persisted jobs.
         if (profile != self.profile or not context.get("model_identity")
-                or not messages or messages[0] != {"role": "system", "content": profile.system_prompt}
+                or not messages or messages[0] != {"role": "system", "content": system}
                 or upper_bound(messages) != context["input_token_upper_bound"]
                 or upper_bound(messages) + profile.max_output + profile.margin > profile.num_ctx):
             raise InferenceError("invalid_model_response", uncertain=False)

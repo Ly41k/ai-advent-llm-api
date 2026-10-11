@@ -187,9 +187,12 @@ class ContextPlan:
     memory_indexed_messages: int = 0
     memory_search_seconds: float = 0
     memory_policy: str = ""
+    reply_language: str | None = None
 
     def validate(self, profile):
         profile.validate()
+        from .languages import validate_language
+        validate_language(self.reply_language, optional=True)
         if self.model_identity is not None:
             if not isinstance(self.model_identity, ModelIdentity):
                 raise InvalidInput("invalid_model_identity")

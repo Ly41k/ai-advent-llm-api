@@ -1,0 +1,88 @@
+{
+  "format": "bublik-language-prompt-experiment-v1",
+  "status": "failed",
+  "created_at": "2026-10-11T19:20:14.886897+00:00",
+  "scope": "Synthetic questions to real localhost Ollama; no private history; no runtime patch",
+  "model": "qwen2.5:14b",
+  "options": {
+    "temperature": 0,
+    "num_ctx": 8192,
+    "num_predict": 256
+  },
+  "script_sha256": "8e542c7e2744384f5913b310be2a1621d4d903f40ebdb083b61dd6fa880a1abb",
+  "candidate_roots": {
+    "ru": "Reply in Russian only. Keep this reply language even when the user or conversation uses another language. You are Bublik, a private AI assistant. State uncertainty. Do not claim to have used tools or sources that were not provided.",
+    "en": "Reply in English only. Keep this reply language even when the user or conversation uses another language. You are Bublik, a private AI assistant. State uncertainty. Do not claim to have used tools or sources that were not provided."
+  },
+  "cases": [
+    {
+      "case": "en_fresh",
+      "reply_language": "en",
+      "answer": "Привет! Я могу помочь вам найти информацию, организовать ваш день, напомнить о важных событиях и предложить идеи для решения различных задач.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 81,
+      "output_tokens": 37,
+      "request_sha256": "f4eb2d018747936dfcd4e13cb9a83036d5a76dcf0faaced6c650ced3d42e0b1c"
+    },
+    {
+      "case": "en_history",
+      "reply_language": "en",
+      "answer": "Привет! Я могу помочь вам найти информацию, ответить на вопросы, организовать ваш день или просто поболтать.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 125,
+      "output_tokens": 30,
+      "request_sha256": "41246a2fd2511dda25e5e767bc95e33936c70f62118af71be32124f82434e42f"
+    },
+    {
+      "case": "en_rag",
+      "reply_language": "en",
+      "answer": "Вы сохранили контрольное число для теста как 37.",
+      "done_reason": "stop",
+      "language_screen_passed": false,
+      "control_number_passed": true,
+      "input_tokens": 484,
+      "output_tokens": 16,
+      "request_sha256": "6e57765c6f61f55c44e173c4c20f1802ee2852a374ec9191aa235a4b146df2aa"
+    },
+    {
+      "case": "ru_fresh",
+      "reply_language": "ru",
+      "answer": "Я могу помочь вам найти информацию, ответить на вопросы или помочь организовать ваш день.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 72,
+      "output_tokens": 23,
+      "request_sha256": "546526adf7a828b642997b32cc9c2e2109278c43d3544521fd3c27e12bf22989"
+    },
+    {
+      "case": "ru_history",
+      "reply_language": "ru",
+      "answer": "Я могу помочь вам с информацией и ответами на вопросы.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 102,
+      "output_tokens": 17,
+      "request_sha256": "38c166c36ab34448d3d579f644c847d8e17f477aba498dca4f8579f79b9356e4"
+    },
+    {
+      "case": "ru_rag",
+      "reply_language": "ru",
+      "answer": "Вы сохранили контрольный номер 37 для этого теста.",
+      "done_reason": "stop",
+      "language_screen_passed": true,
+      "control_number_passed": true,
+      "input_tokens": 472,
+      "output_tokens": 16,
+      "request_sha256": "595bcaeb7d8abcb5b571479f11aa44447eeb4ef8267359ff0650389e76376ab6"
+    }
+  ],
+  "all_generations_finished": true,
+  "ollama_version": "0.40.3",
+  "limitation": "Script-based language screening is not semantic review or a guarantee for arbitrary chats."
+}
