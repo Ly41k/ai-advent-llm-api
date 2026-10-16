@@ -1,12 +1,18 @@
 # Day 32 — Minimal AI Pull Request Review
 
-**Delivery status: local implementation and offline checks only. Bootstrap and live acceptance have not run.**
+**Final status, 2026-10-16: Day 32 accepted as PARTIAL. Local technical integration PASS; local AI review quality PARTIAL; GitHub Actions preflight PASS; GitHub Actions live E2E FAIL (two HTTP 403 failures).**
+
+The separately authorized Mac full review used Groq `openai/gpt-oss-120b`, one POST, HTTP 200, 649 input / 284 completion tokens. It correctly found `percentage.py:2` and suggested `/ 100`; document evidence ID was absent and the extra zero-input guard suggestion was unsupported. Three base-revision FTS5 documents were selected. SQLite ResourceWarning remains recorded.
+
+See [FINAL_REPORT.md](FINAL_REPORT.md) ([RU](FINAL_REPORT.ru.md)) for immutable SHAs, request IDs, all failed-run and artifact links, the separate 74/19-token smoke-test, evidence provenance and unverified actual billing. Raw request/response and model artifacts remain outside the public repository. `DAY32_LIVE_ENABLED=false`; PR #2 remains open Draft, unmerged and unclosed. No new generation is authorized.
+
+The setup/bootstrap/live procedures below are retained for historical context and separately authorized reproduction; they are not pending actions or permission to run again. The original Actions-only CLI is unchanged; local acceptance used an external curl helper without pretending to be GitHub Actions.
 
 Public course repository only: `Ly41k/ai-advent-llm-api`.
 
 PR metadata/files/patch → bounded context → base-revision README FTS5 → one Groq POST → deterministic JSON/evidence/line validation → JSON/Markdown artifacts → optional ordinary bot comment.
 
-Python 3.12+ with SQLite FTS5; standard library only. No package installation, PR code execution, or dependencies on Days 1–31. Delivery checked on Python 3.12; the user's Python 3.13 Mac environment is still unverified.
+Python 3.12+ with SQLite FTS5; standard library only. No package installation, PR code execution, or dependencies on Days 1–31. Original offline delivery passed 53/53 tests on Mac Python 3.13.3; the external local acceptance helper passed 9/9 there. Historical offline evidence is retained.
 
 ## Offline reproduction
 
@@ -47,7 +53,7 @@ No checkout/build/test/install/eval/subprocess of PR content. No tools, remote b
 | Active runner timeouts | 3 + 4 + 2 minutes; approval waiting separate |
 | Artifact retention | 7 days |
 
-To keep dependencies minimal, no tokenizer is downloaded. The fixed GPT-OSS byte-BPE input bound uses the entire serialized request's UTF-8 byte count plus 1024 reserved template/service tokens. This is a conservative **upper estimate**, not measured server usage; it includes schema/JSON overhead and admits less text than exact tokenization. The service-overhead assumption must be checked during the first authorized live run. Actual usage is read from the response and excess usage invalidates the run without retry.
+To keep dependencies minimal, no tokenizer is downloaded. The fixed GPT-OSS byte-BPE input bound uses the entire serialized request's UTF-8 byte count plus 1024 reserved template/service tokens. This is a conservative **upper estimate**, not measured server usage; it includes schema/JSON overhead and admits less text than exact tokenization. The authorized local sample measured 649 input tokens against bound 3757; this single sample does not prove all future service-overhead assumptions. Actual usage is read from the response and excess usage invalidates the run without retry.
 
 Unavailable/binary/unsupported/oversized/truncated patches, mismatched hunk/stat counts and context-budget omissions are explicit unreviewed regions. LEFT anchors refer to base lines; RIGHT anchors to head. Rename LEFT links use the original path. Document citations alone cannot anchor code findings. `findings=[]` is valid after analysis; all rejected findings yield `invalid_findings`, not a clean review. Invalid JSON, wrong model, refusal/tool calls, missing usage or incomplete generation stop the run without repair calls.
 
@@ -97,6 +103,6 @@ Groq is primary. The Groq-hosted model name does not spend OpenAI API credit. Op
 
 Publication is a separate write-permission job; generation has read-only GitHub permissions. Only the bot's own marker comment can be updated. More than 300 comments or duplicate bot markers stop publication without another generation. Report SHA256 detects corruption, not authenticity. There is no atomic transaction between the final SHA read and the comment POST; all links and the displayed review head remain revision-bound.
 
-Other limits: small byte budget, patch-only context, lexical README RAG, heuristic secrets filtering, no semantic proof, no actual Actions/Environment/provider test yet. Python 3.13 Mac compatibility and Action SHA availability still need verification before live. Remaining work: about **45–90 active minutes** after bootstrap/configuration, plus approval/merge waiting.
+Other limits: small byte budget, patch-only context, lexical README RAG and heuristic secrets filtering. Mac compatibility, Action pins and real preflight were checked; Actions live failed twice with 403. Local generation success does not establish Actions E2E or complete semantic grounding. No further live work is required for the owner's accepted PARTIAL verdict.
 
-Adapted narrowly from Days 17 (HTTP), 24 (strict JSON/evidence), 27 (advisory reports/usage) and 31 (paths/secrets/source spans/FTS literals); no old-day runtime imports or source edits. Course Minimum remains **pending live acceptance**. Improvements: [BACKLOG_AFTER_COURSE.ru.md](BACKLOG_AFTER_COURSE.ru.md).
+Adapted narrowly from Days 17 (HTTP), 24 (strict JSON/evidence), 27 (advisory reports/usage) and 31 (paths/secrets/source spans/FTS literals); no old-day runtime imports or source edits. Course Minimum is **accepted as PARTIAL**, with the separate outcomes in the final report. Improvements: [BACKLOG_AFTER_COURSE.ru.md](BACKLOG_AFTER_COURSE.ru.md).
