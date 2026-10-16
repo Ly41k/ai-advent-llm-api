@@ -46,7 +46,6 @@ jobs:
       contents: read
       pull-requests: read
     env:
-      REPORT_DIR: ${{ runner.temp }}/day32-preflight
       SOURCE_REVISION: ${{ github.event.pull_request.base.sha || github.sha }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2; revalidate upstream before live
@@ -58,7 +57,7 @@ jobs:
       - name: Preflight using trusted application (no provider secret)
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python3 day-32-pr-review/main.py preflight --root "$GITHUB_WORKSPACE" --output "$REPORT_DIR"
+        run: python3 day-32-pr-review/main.py preflight --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/day32-preflight"
       - name: Upload sanitized preflight reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -84,7 +83,6 @@ jobs:
       contents: read
       pull-requests: read
     env:
-      REPORT_DIR: ${{ runner.temp }}/day32-review
       SOURCE_REVISION: ${{ github.sha }}
       DAY32_LIVE_ENABLED: ${{ vars.DAY32_LIVE_ENABLED }}
       DAY32_ENVIRONMENT_CONFIRMED: ${{ vars.DAY32_ENVIRONMENT_CONFIRMED }}
@@ -101,7 +99,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: python3 day-32-pr-review/main.py live --root "$GITHUB_WORKSPACE" --output "$REPORT_DIR"
+        run: python3 day-32-pr-review/main.py live --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/day32-review"
       - name: Upload sanitized review reports even on API failure
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
