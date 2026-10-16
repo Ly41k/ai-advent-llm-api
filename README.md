@@ -477,6 +477,14 @@ python day-31-course-minimum/verify_delivery.py --root "$PWD"
 
 Historical work/state remains external; this is not a clean installer. A new commit changes the pinned Git HEAD, while editing these root READMEs makes the previous Day 21 and Day 31 Project RAG indices stale against the current corpus. This revision rebuilds no indices. Old frozen indices, pins and results are not rewritten; future live retrieval over updated documentation needs separately prepared current index state. Retained evidence and human review remain unchanged.
 
+## Day 32 — AI Pull Request Review: PARTIAL
+
+[Day 32 module](day-32-pr-review/README.md) is accepted as **PARTIAL**. Real GitHub [preflight](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38940777931) passed with no generation. Two Actions live runs ([38945811433](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38945811433), [38952494436](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38952494436)) failed with HTTP 403; GitHub Actions live E2E remains **FAIL**.
+
+A separately authorized full Groq review on Mac (`execution_environment=local_mac`) returned HTTP 200 in one POST, using `openai/gpt-oss-120b`: 649 input / 284 completion tokens. It detected division by zero in Draft [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2), `percentage.py:2`, and suggested `/ 100`. Local technical integration is **PASS**, review quality **PARTIAL**: document evidence ID is missing and the extra zero-input guard suggestion is unsupported. Mac offline checks: original suite 53/53, external local helper 9/9; SQLite ResourceWarning remains recorded.
+
+The [final report](day-32-pr-review/FINAL_REPORT.md) retains SHA bindings, request IDs, run/artifact links, separate 74/19-token Mac smoke-test and cost/billing distinctions. Live remains disabled (`DAY32_LIVE_ENABLED=false`); demo PR stays Draft and unmerged. Raw payload/response and private evidence are excluded from public delivery. No additional generation is authorized by this documentation.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.

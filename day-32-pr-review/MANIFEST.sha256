@@ -1,9 +1,11 @@
 f84142d85f21f07098a7ef06e9f529a1cb9952b249724fd9faddbdad89c612f0  .github/workflows/day32-pr-review.yml
 3d3da1c4d0c88bc8a6f860a093c2c664bf751145ae22e4b7bb42a94f1ca24234  day-32-pr-review/.gitignore
-08a64a133e87b338145e89c127c27babef34934ce201139e297a23cc4dfb7673  day-32-pr-review/BACKLOG_AFTER_COURSE.ru.md
+a8824687e16f0fee2fc0bdbd73d916d51622d2dc9440de4c8d3e57bb1bd091e4  day-32-pr-review/BACKLOG_AFTER_COURSE.ru.md
+21ec891ada1b698b7135892ece744757221ec6168415600d2aa7d5f619a390df  day-32-pr-review/FINAL_REPORT.md
+c2b530a1ce2edca38ee8862b23f2fbe53eb1a170fbe9d061e2be5f4f0894f717  day-32-pr-review/FINAL_REPORT.ru.md
 2a3932f2a6bb4ee0b49770e5ce4f419ffd518ecee32df6e62087370b2d9ebf8d  day-32-pr-review/OFFLINE_RESULTS.ru.md
-1c9fb1f09aa85b31bc362614ca8873b2e20d30c0154c0e4ff2eebd578a98d40c  day-32-pr-review/README.md
-13f39ff93242b8c869cf2723ca3dcf84fc60a43e8ba6752f480787bb947f229b  day-32-pr-review/README.ru.md
+795ed249a8d2f2b1b9be4d4a9d51125cd8ec8925a9c8777c1e31b9affbe097cc  day-32-pr-review/README.md
+f46d0c9ef5303a95764c02fa120a0f69db156ca8d3fd205692f9a4856a710d81  day-32-pr-review/README.ru.md
 43a9c77108676bbcb07cc1a7a11993909ac12a0a4a6e4396ab0e06c2173c8941  day-32-pr-review/common.py
 8f0179fbb13ee77016b2fe3e50093586614a99914026500d724ecfcf516d743a  day-32-pr-review/demo/README.md
 00f8e170d660b3396e42eaa5e23b224813bd8f7fb8f9f2544323cffbe84809ad  day-32-pr-review/diff_context.py

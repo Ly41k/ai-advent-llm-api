@@ -479,6 +479,14 @@ python day-31-course-minimum/verify_delivery.py --root "$PWD"
 
 Исторические work/state остаются внешними; это не clean installer. Новый commit меняет закреплённый Git HEAD, а изменение этих корневых README делает прежние индексы Day 21 и Project RAG дня 31 stale относительно текущего корпуса. В этой ревизии индексы не перестраиваются. Старые frozen индексы, pins и результаты не переписываются; будущий live-поиск по обновлённой документации требует отдельной подготовки актуального индекса. Сохранённые evidence и human review от этого не меняются.
 
+## День 32 — AI-ревью Pull Request: PARTIAL
+
+[Модуль Дня 32](day-32-pr-review/README.ru.md) принят как **PARTIAL**. Настоящий GitHub [preflight](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38940777931) прошёл без генерации. Два Actions live-run ([38945811433](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38945811433), [38952494436](https://github.com/Ly41k/ai-advent-llm-api/actions/runs/38952494436)) завершились HTTP 403; GitHub Actions live E2E остаётся **FAIL**.
+
+Отдельно разрешённое полное Groq review на Mac (`execution_environment=local_mac`) получило HTTP 200 за один POST: `openai/gpt-oss-120b`, 649 input / 284 completion tokens. Найдено деление на ноль в Draft [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2), `percentage.py:2`, предложено `/ 100`. Локальная техническая интеграция — **PASS**, качество review — **PARTIAL**: нет document evidence ID и необоснован дополнительный совет проверять нулевой input. Mac offline: исходная suite 53/53, внешний локальный helper 9/9; SQLite ResourceWarning сохранён.
+
+[Итоговый отчёт](day-32-pr-review/FINAL_REPORT.ru.md) сохраняет SHA, request IDs, ссылки на runs/artifacts, отдельный Mac smoke-test 74/19 tokens и различие оценки стоимости и billing. Live выключен (`DAY32_LIVE_ENABLED=false`); demo PR остаётся Draft без merge. Сырые payload/response и приватные evidence не включаются в публичную поставку. Документация не разрешает новые генерации.
+
 ## Тесты
 
 Локальные тесты используют fake/scripted HTTP, SQLite, локальные MCP-серверы или fixtures. Они не вызывают платные облачные API, если команда явно не запускает живую модель/API.
