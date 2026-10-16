@@ -1,0 +1,151 @@
+name: Day 32 PR Review
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Approved public PR number from owner-controlled day32-demo'
+        required: true
+        type: string
+      head_sha:
+        description: 'Approved exact 40-character head SHA'
+        required: true
+        type: string
+      confirm_one_call:
+        description: 'Request ONE Groq generation after Environment approval (no retry)'
+        required: true
+        default: false
+        type: boolean
+      publish_comment:
+        description: 'Also publish/update one ordinary PR comment'
+        required: true
+        default: false
+        type: boolean
+
+permissions: {}
+concurrency:
+  group: day32-${{ github.event.pull_request.number || inputs.pr_number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    if: >-
+      github.repository == 'Ly41k/ai-advent-llm-api' &&
+      github.actor == 'Ly41k' && github.triggering_actor == 'Ly41k' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event_name == 'pull_request' &&
+        github.event.pull_request.head.repo.full_name == github.repository &&
+        github.event.pull_request.user.login == 'Ly41k' &&
+        github.event.pull_request.head.ref == 'day32-demo'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: read
+      pull-requests: read
+    env:
+      SOURCE_REVISION: ${{ github.event.pull_request.base.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2; revalidate upstream before live
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          persist-credentials: false
+          submodules: false
+          fetch-depth: 1
+      - name: Preflight using trusted application (no provider secret)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 day-32-pr-review/main.py preflight --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/day32-preflight"
+      - name: Upload sanitized preflight reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: day32-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/day32-preflight/
+          if-no-files-found: error
+          retention-days: 7
+
+  review:
+    needs: preflight
+    if: >-
+      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' &&
+      inputs.confirm_one_call && github.run_attempt == 1 &&
+      vars.DAY32_LIVE_ENABLED == 'true' && vars.DAY32_ENVIRONMENT_CONFIRMED == 'true' &&
+      vars.DAY32_BRANCH_TRUST_CONFIRMED == 'true' && vars.DAY32_FREE_PLAN_CONFIRMED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    # Configure REQUIRED REVIEWERS and deployment branch main before setting confirmation vars.
+    # The key MUST be an Environment secret, NOT a repository-level secret.
+    environment: day32-live
+    permissions:
+      contents: read
+      pull-requests: read
+    env:
+      SOURCE_REVISION: ${{ github.sha }}
+      DAY32_LIVE_ENABLED: ${{ vars.DAY32_LIVE_ENABLED }}
+      DAY32_ENVIRONMENT_CONFIRMED: ${{ vars.DAY32_ENVIRONMENT_CONFIRMED }}
+      DAY32_BRANCH_TRUST_CONFIRMED: ${{ vars.DAY32_BRANCH_TRUST_CONFIRMED }}
+      DAY32_FREE_PLAN_CONFIRMED: ${{ vars.DAY32_FREE_PLAN_CONFIRMED }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          submodules: false
+          fetch-depth: 1
+      - name: One approved generation; re-fetch PR and verify SHA after approval
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python3 day-32-pr-review/main.py live --root "$GITHUB_WORKSPACE" --output "$RUNNER_TEMP/day32-review"
+      - name: Upload sanitized review reports even on API failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: day32-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/day32-review/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: review
+    if: >-
+      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 && inputs.publish_comment
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      SOURCE_REVISION: ${{ github.sha }}
+      DAY32_LIVE_ENABLED: ${{ vars.DAY32_LIVE_ENABLED }}
+      DAY32_ENVIRONMENT_CONFIRMED: ${{ vars.DAY32_ENVIRONMENT_CONFIRMED }}
+      DAY32_BRANCH_TRUST_CONFIRMED: ${{ vars.DAY32_BRANCH_TRUST_CONFIRMED }}
+      DAY32_FREE_PLAN_CONFIRMED: ${{ vars.DAY32_FREE_PLAN_CONFIRMED }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          submodules: false
+          fetch-depth: 1
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: day32-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/day32-input
+      - name: Revalidate current PR and update one bot comment (no model key)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          python3 day-32-pr-review/main.py publish --root "$GITHUB_WORKSPACE"
+          --report "$RUNNER_TEMP/day32-input/review.json" --output "$RUNNER_TEMP/day32-publication"
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: day32-publication-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/day32-publication/
+          if-no-files-found: error
+          retention-days: 7

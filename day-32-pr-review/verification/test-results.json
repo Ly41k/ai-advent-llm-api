@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "offline_contracts_and_synthetic_integration_only",
+  "python": "3.12.14",
+  "platform": "Linux",
+  "tests_run": 53,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "real_network_calls": 0,
+  "real_github_writes": 0,
+  "real_generation_calls": 0,
+  "real_api_keys_used": false,
+  "yaml_parsed": true,
+  "python_ast_parsed": true,
+  "mac_python313_verified": false,
+  "github_actions_executed": false,
+  "environment_policy_verified_remotely": false,
+  "live_acceptance": false,
+  "note": "HTTP/provider responses are synthetic injected transports; actual local FTS5, parsing, validation and rendering execute."
+}

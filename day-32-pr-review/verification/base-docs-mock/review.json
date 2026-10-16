@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "repository": "Ly41k/ai-advent-llm-api",
+  "status": "completed",
+  "mode": "offline_mock",
+  "model": "openai/gpt-oss-120b",
+  "findings": [
+    {
+      "end_line": 2,
+      "evidence": [
+        {
+          "kind": "diff",
+          "path": "day-32-pr-review/demo/percentage.py",
+          "hunk": "F1H1",
+          "id": "F1H1R2",
+          "side": "RIGHT",
+          "line": 2,
+          "text": "    return value / 0",
+          "changed": true
+        },
+        {
+          "kind": "document",
+          "id": "D1",
+          "path": "day-32-pr-review/demo/README.md",
+          "base_sha": "1111111111111111111111111111111111111111",
+          "section": "Percentage helper contract",
+          "start_line": 1,
+          "end_line": 6,
+          "text": "# Percentage helper contract\n\nThe percentage(value) helper accepts a number and returns that number divided by 100.\nThe percentage helper must never divide by zero.\n\nThis is a synthetic Day 32 demonstration contract. No Python demo is executed by the review workflow.",
+          "digest": "6ed7d102e0e8c242c4a855f786c7af8d7cc94e4d582fc9fcdc645d5d8a4be5c4"
+        }
+      ],
+      "path": "day-32-pr-review/demo/percentage.py",
+      "reason": "The percentage helper divides by zero, so a numeric input raises ZeroDivisionError.",
+      "severity": "high",
+      "side": "RIGHT",
+      "start_line": 2,
+      "suggestion": "Divide the value by 100 as required by the percentage helper contract.",
+      "title": "Division by zero"
+    }
+  ],
+  "rejected_findings": [],
+  "omissions": [],
+  "run_id": "offline",
+  "run_attempt": "0",
+  "pr_number": 123,
+  "head_sha": "2222222222222222222222222222222222222222",
+  "base_sha": "1111111111111111111111111111111111111111",
+  "source_revision": "1111111111111111111111111111111111111111",
+  "retrieval": {
+    "method": "sqlite_fts5_bm25",
+    "terms": [
+      "percentage"
+    ],
+    "indexed_chunks": 64,
+    "oversized_document_chunks_omitted": 5,
+    "documents_omitted": [],
+    "matched_chunks": 3,
+    "selected_chunks": 3,
+    "status": "retrieved"
+  },
+  "catalog": {
+    "F1H1R1": {
+      "kind": "diff",
+      "path": "day-32-pr-review/demo/percentage.py",
+      "hunk": "F1H1",
+      "id": "F1H1R1",
+      "side": "RIGHT",
+      "line": 1,
+      "text": "def percentage(value):",
+      "changed": true
+    },
+    "F1H1R2": {
+      "kind": "diff",
+      "path": "day-32-pr-review/demo/percentage.py",
+      "hunk": "F1H1",
+      "id": "F1H1R2",
+      "side": "RIGHT",
+      "line": 2,
+      "text": "    return value / 0",
+      "changed": true
+    },
+    "D1": {
+      "kind": "document",
+      "id": "D1",
+      "path": "day-32-pr-review/demo/README.md",
+      "base_sha": "1111111111111111111111111111111111111111",
+      "section": "Percentage helper contract",
+      "start_line": 1,
+      "end_line": 6,
+      "text": "# Percentage helper contract\n\nThe percentage(value) helper accepts a number and returns that number divided by 100.\nThe percentage helper must never divide by zero.\n\nThis is a synthetic Day 32 demonstration contract. No Python demo is executed by the review workflow.",
+      "digest": "6ed7d102e0e8c242c4a855f786c7af8d7cc94e4d582fc9fcdc645d5d8a4be5c4"
+    },
+    "D2": {
+      "kind": "document",
+      "id": "D2",
+      "path": "day-32-pr-review/README.md",
+      "base_sha": "1111111111111111111111111111111111111111",
+      "section": "Demonstration percentage helper contract",
+      "start_line": 90,
+      "end_line": 93,
+      "text": "### Demonstration percentage helper contract\n\nThe percentage helper accepts a number and returns that number divided by 100. The percentage helper must never divide by zero. This contract exists solely for the small Day 32 demonstration PR; it is not a global project coding rule.",
+      "digest": "11cdaeff6e2648e83473fbe1306a204a4e98d64baab132d246285e18ab11d85a"
+    },
+    "D3": {
+      "kind": "document",
+      "id": "D3",
+      "path": "day-32-pr-review/README.ru.md",
+      "base_sha": "1111111111111111111111111111111111111111",
+      "section": "Контракт демонстрационного percentage helper",
+      "start_line": 101,
+      "end_line": 104,
+      "text": "### Контракт демонстрационного percentage helper\n\nThe percentage helper accepts a number and returns that number divided by 100. The percentage helper must never divide by zero. This contract exists solely for the small Day 32 demonstration PR; it is not a global project coding rule.",
+      "digest": "c6595f73c07daaed0591c09854c2a3158275f245d5795708f0aeb63125cfe971"
+    }
+  },
+  "previous_paths": {},
+  "selected_changed_lines": 2,
+  "selected_files": 1,
+  "generation_calls": 0,
+  "integrity_sha256": "b32bf8aa3bccd61949d6c07376bd11a7f97d654aa5f97654a4a4970e654ccdfa"
+}
