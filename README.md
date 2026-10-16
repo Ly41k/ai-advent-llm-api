@@ -2,11 +2,11 @@
 
 # AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, and a developer assistant with Project RAG, MCP Git and delegated tasks.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, a developer assistant with Project RAG, MCP Git and delegated tasks, and a bounded AI pull request reviewer.
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–31**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–32**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -43,6 +43,7 @@ The repository currently contains **Days 1–31**. Each `day-XX-...` directory i
 | [29](day-29-local-llm-optimization/README.md) | Local LLM optimization | Task-specific prompts and limits, Q4/Q5 measurements, resource sampling and frozen V7 evidence selections |
 | [30](day-30-private-ai-service/README.md) | Private AI service | FastAPI, local Qwen, SQLite history, Web UI/PWA, LAN/Tailscale HTTPS, queue and limits |
 | [31](day-31-developer-assistant/README.md) | Developer assistant | Project RAG, read-only MCP Git, Main/Documentation/Git/Verification delegation, local Qwen and human-reviewed publication; Course Minimum Accepted |
+| [32](day-32-pr-review/README.md) | AI pull request review | GitHub PR diff, base-README FTS5, Groq and validated review artifacts; local integration PASS, quality PARTIAL, Actions live E2E FAIL |
 
 ## How the architecture evolves
 
@@ -61,6 +62,7 @@ The repository currently contains **Days 1–31**. Each `day-XX-...` directory i
 - **Day 29:** optimize local Qwen parameters and task contracts, compare Q4/Q5 and resource measurements, and validate V7 evidence selections on frozen RU/EN procedure questions.
 - **Day 30:** local Qwen becomes a private HTTP service. The Mac stores full history, Android/iPhone continue the same chats, and Tailscale Serve provides mobile access. Cookie/CSRF, ownership, idempotency, a durable queue, quotas and launchd are separate from inference; the course baseline used no RAG; later history RAG is optional, with no cloud fallback.
 - **Day 31:** combine Project RAG and real MCP Git with Main/Documentation/Git/Verification delegation. One local RU-1 / Multi answer was accepted through exact claim–anchor bindings and explicit human review; extended Research Stage 7 remains incomplete.
+- **Day 32:** introduce an AI PR reviewer: read a real GitHub diff, retrieve trusted base-revision README passages with SQLite FTS5, call Groq and validate JSON/line/evidence findings. Local full review found the seeded defect (technical PASS; quality PARTIAL), while GitHub Actions live E2E failed with HTTP 403.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -75,6 +77,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 - Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
 - Day 30 has its own `requirements.lock` (FastAPI/httpx/Uvicorn/Argon2); its main Mac/phone path uses Tailscale, direct LAN uses Caddy and a trusted local CA. No knowledge index or embedding model is required.
 - Day 31 uses its own `requirements.lock`, Git and a real stdio MCP server. The accepted Documentation scenario uses FTS54 and Qwen2.5:14b without new embeddings; working state and indices remain outside the repository. Retained-delivery verification needs no Ollama.
+- Day 32 uses Python 3.12+, the standard library and SQLite FTS5; offline tests need no API key or Ollama. Live GitHub/Groq requests require network access and separately approved credentials; live generation remains disabled.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -165,6 +168,7 @@ Later lessons use specialized entry points:
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
 | 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Verify the current 229/229 offline regression, languages and RAG memory checks; see Day 30 README for server setup |
 | 31 | `python day-31-course-minimum/verify_delivery.py --root "$PWD"` | Verify the retained delivery, 60 Python files and 79 Mac reports without Qwen; not fresh runtime acceptance |
+| 32 | `python -m unittest discover -s day-32-pr-review/tests -v` | Run the offline PR-review tests with no cloud generation; see Day 32 README for saved live evidence and PARTIAL verdict |
 
 ## Day 21 shared knowledge index
 
@@ -483,7 +487,7 @@ Historical work/state remains external; this is not a clean installer. A new com
 
 A separately authorized full Groq review on Mac (`execution_environment=local_mac`) returned HTTP 200 in one POST, using `openai/gpt-oss-120b`: 649 input / 284 completion tokens. It detected division by zero in Draft [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2), `percentage.py:2`, and suggested `/ 100`. Local technical integration is **PASS**, review quality **PARTIAL**: document evidence ID is missing and the extra zero-input guard suggestion is unsupported. Mac offline checks: original suite 53/53, external local helper 9/9; SQLite ResourceWarning remains recorded.
 
-The [final report](day-32-pr-review/FINAL_REPORT.md) retains SHA bindings, request IDs, run/artifact links, separate 74/19-token Mac smoke-test and cost/billing distinctions. Live remains disabled (`DAY32_LIVE_ENABLED=false`); demo PR stays Draft and unmerged. Raw payload/response and private evidence are excluded from public delivery. No additional generation is authorized by this documentation.
+The [final report](day-32-pr-review/FINAL_REPORT.md) retains SHA bindings, request IDs, run/artifact links, separate 74/19-token Mac smoke-test and cost/billing distinctions. Live remains disabled (`DAY32_LIVE_ENABLED=false`); demo [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2) is closed without merge, and documentation [PR #3](https://github.com/Ly41k/ai-advent-llm-api/pull/3) has been merged. Raw payload/response and private evidence are excluded from public delivery. No additional generation is authorized by this documentation.
 
 ## Tests
 
@@ -512,6 +516,7 @@ python -m unittest discover -s day-28-local-rag -p 'test*28.py'
 python day-29-local-llm-optimization/test_day29.py -v
 python -m unittest discover -s day-29-local-llm-optimization/experiments/quality_v7 -p test_quality_v7.py -v
 python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage.py
+python -m unittest discover -s day-32-pr-review/tests -v
 ```
 
 ## Data and limitations

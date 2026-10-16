@@ -4,7 +4,7 @@
 
 The separately authorized Mac full review used Groq `openai/gpt-oss-120b`, one POST, HTTP 200, 649 input / 284 completion tokens. It correctly found `percentage.py:2` and suggested `/ 100`; document evidence ID was absent and the extra zero-input guard suggestion was unsupported. Three base-revision FTS5 documents were selected. SQLite ResourceWarning remains recorded.
 
-See [FINAL_REPORT.md](FINAL_REPORT.md) ([RU](FINAL_REPORT.ru.md)) for immutable SHAs, request IDs, all failed-run and artifact links, the separate 74/19-token smoke-test, evidence provenance and unverified actual billing. Raw request/response and model artifacts remain outside the public repository. `DAY32_LIVE_ENABLED=false`; PR #2 remains open Draft, unmerged and unclosed. No new generation is authorized.
+See [FINAL_REPORT.md](FINAL_REPORT.md) ([RU](FINAL_REPORT.ru.md)) for immutable SHAs, request IDs, all failed-run and artifact links, the separate 74/19-token smoke-test, evidence provenance and unverified actual billing. Raw request/response and model artifacts remain outside the public repository. `DAY32_LIVE_ENABLED=false`; demo [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2) was closed without merge, and documentation [PR #3](https://github.com/Ly41k/ai-advent-llm-api/pull/3) was merged. No new generation is authorized.
 
 The setup/bootstrap/live procedures below are retained for historical context and separately authorized reproduction; they are not pending actions or permission to run again. The original Actions-only CLI is unchanged; local acceptance used an external curl helper without pretending to be GitHub Actions.
 

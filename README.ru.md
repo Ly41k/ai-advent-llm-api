@@ -2,11 +2,11 @@
 
 # AI Advent — от первого LLM-запроса до MCP, подтверждённого RAG и локальных приложений
 
-Практический проект на Python, который начинается с прямых запросов к LLM API и постепенно приходит к агентам, сохраняемому состоянию, MCP-инструментам, индексации документов, RAG, подтверждённым цитатам, постоянному RAG-чату с памятью задачи, локальному приложению проверки Kotlin перед коммитом, приватному AI-чату с доступом с компьютера и телефонов и ассистенту разработчика с Project RAG, MCP Git и делегацией задач.
+Практический проект на Python, который начинается с прямых запросов к LLM API и постепенно приходит к агентам, сохраняемому состоянию, MCP-инструментам, индексации документов, RAG, подтверждённым цитатам, постоянному RAG-чату с памятью задачи, локальному приложению проверки Kotlin перед коммитом, приватному AI-чату с доступом с компьютера и телефонов, ассистенту разработчика с Project RAG, MCP Git и делегацией задач, а также AI-ревью Pull Request.
 
 **Чебуратор** — капитан исследовательского корабля, **Бублик** — помощник, который развивается по ходу курса. **Ревик**, добавленный на Дне 27, — отдельный локальный помощник проверки Kotlin-кода.
 
-Сейчас репозиторий содержит **дни 1–31**. Каждая папка `day-XX-...` — самостоятельный учебный этап с английской и русской документацией. Поздние этапы переиспользуют нужные компоненты предыдущих дней, но не объединяют автоматически все исторические версии агента в одно приложение.
+Сейчас репозиторий содержит **дни 1–32**. Каждая папка `day-XX-...` — самостоятельный учебный этап с английской и русской документацией. Поздние этапы переиспользуют нужные компоненты предыдущих дней, но не объединяют автоматически все исторические версии агента в одно приложение.
 
 ## Путь проекта
 
@@ -43,6 +43,7 @@
 | [29](day-29-local-llm-optimization/README.ru.md) | Оптимизация локальной LLM | Prompt и лимиты под задачу, замеры Q4/Q5 и ресурсов, frozen-проверка выбора доказательств V7 |
 | [30](day-30-private-ai-service/README.ru.md) | Приватный AI-сервис | FastAPI, локальная Qwen, SQLite-история, Web UI/PWA, LAN/Tailscale HTTPS, очередь и лимиты |
 | [31](day-31-developer-assistant/README.ru.md) | Ассистент разработчика | Project RAG, read-only MCP Git, делегация Main/Documentation/Git/Verification, локальная Qwen и публикация после human review; Course Minimum Accepted |
+| [32](day-32-pr-review/README.ru.md) | AI-ревью Pull Request | Настоящий GitHub PR diff, FTS5 по доверенным README, Groq и проверенные отчёты; локальная интеграция PASS, качество PARTIAL, Actions live E2E FAIL |
 
 ## Как развивается архитектура
 
@@ -61,6 +62,7 @@
 - **День 29:** оптимизация параметров и контрактов локальной Qwen, сравнение Q4/Q5 и ресурсов, проверка выбора доказательств V7 на зафиксированных новых RU/EN вопросах о процедуре.
 - **День 30:** локальная Qwen становится приватным HTTP-сервисом. История хранится на Mac, чат продолжается на Android/iPhone, мобильный доступ идёт через Tailscale Serve. Cookie/CSRF, owners, idempotency, очередь, persistent quotas и launchd отделены от модели; курс использовал версию без RAG; последующий history RAG отключаемый, cloud fallback нет.
 - **День 31:** Project RAG и настоящий MCP Git объединяются с делегацией Main/Documentation/Git/Verification. Один локальный RU-1 / Multi ответ принят через exact claim–anchor bindings и явное human review; расширенный Research Stage 7 остаётся незавершённым.
+- **День 32:** появляется AI-ревью Pull Request: реальный diff из GitHub, доверенные README из base через SQLite FTS5, Groq и проверка JSON/строк/evidence. Локальная проверка обнаружила дефект (технически PASS, качество PARTIAL), а GitHub Actions live E2E завершился HTTP 403.
 
 MCP-серверы дней 16–20 общаются с локальными клиентами через **stdio**. Дни 17–20 могут получать живые данные через публичный GitHub REST API. Для постоянного выполнения расписания непрерывный процесс требуется только worker Дня 18.
 
@@ -75,6 +77,7 @@ MCP-серверы дней 16–20 общаются с локальными к�
 - Дню 27 также нужны Git, совместимый JDK и Detekt CLI; дополнительных pip-зависимостей у его Python-модуля нет. Документированный hook-флоу рассчитан на macOS/Linux.
 - День 30 устанавливает собственный `requirements.lock` (FastAPI/httpx/Uvicorn/Argon2); основной Mac/phone путь требует Tailscale, прямой LAN — Caddy и trust собственного CA. Индекс/embedding model не нужны.
 - День 31 использует собственный `requirements.lock`, Git и настоящий stdio MCP server. Принятый Documentation-сценарий использует FTS54 и Qwen2.5:14b без новых embeddings; его состояние и индексы хранятся вне repo. Проверка сохранённой поставки не требует Ollama.
+- День 32 использует Python 3.12+, стандартную библиотеку и SQLite FTS5; offline-тестам не нужны Ollama или API-ключ. Реальные GitHub/Groq-запросы требуют сети и отдельно согласованных credentials; live-генерация остаётся выключенной.
 - `GITHUB_TOKEN` необязателен для публичных GitHub-репозиториев, но помогает с rate limits.
 
 ### Локальные модели
@@ -165,6 +168,7 @@ python day-15-controlled-transitions/main.py
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline-проверка согласованности сохранённых доказательств V7 |
 | 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Сверить текущие 229/229 offline regression, RU/EN и RAG memory проверки; запуск сервера — README дня 30 |
 | 31 | `python day-31-course-minimum/verify_delivery.py --root "$PWD"` | Проверить целостность сохранённой поставки, 60 Python-файлов и 79 Mac-отчётов без Qwen; это не новая runtime-приёмка |
+| 32 | `python -m unittest discover -s day-32-pr-review/tests -v` | Запустить offline-тесты AI-ревью без облачной генерации; реальные доказательства и статус PARTIAL — в README Дня 32 |
 
 ## Общий индекс Дня 21
 
@@ -485,7 +489,7 @@ python day-31-course-minimum/verify_delivery.py --root "$PWD"
 
 Отдельно разрешённое полное Groq review на Mac (`execution_environment=local_mac`) получило HTTP 200 за один POST: `openai/gpt-oss-120b`, 649 input / 284 completion tokens. Найдено деление на ноль в Draft [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2), `percentage.py:2`, предложено `/ 100`. Локальная техническая интеграция — **PASS**, качество review — **PARTIAL**: нет document evidence ID и необоснован дополнительный совет проверять нулевой input. Mac offline: исходная suite 53/53, внешний локальный helper 9/9; SQLite ResourceWarning сохранён.
 
-[Итоговый отчёт](day-32-pr-review/FINAL_REPORT.ru.md) сохраняет SHA, request IDs, ссылки на runs/artifacts, отдельный Mac smoke-test 74/19 tokens и различие оценки стоимости и billing. Live выключен (`DAY32_LIVE_ENABLED=false`); demo PR остаётся Draft без merge. Сырые payload/response и приватные evidence не включаются в публичную поставку. Документация не разрешает новые генерации.
+[Итоговый отчёт](day-32-pr-review/FINAL_REPORT.ru.md) сохраняет SHA, request IDs, ссылки на runs/artifacts, отдельный Mac smoke-test 74/19 tokens и различие оценки стоимости и billing. Live выключен (`DAY32_LIVE_ENABLED=false`); демонстрационный [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2) закрыт без merge, документационный [PR #3](https://github.com/Ly41k/ai-advent-llm-api/pull/3) объединён с `main`. Сырые payload/response и приватные evidence не включаются в публичную поставку. Документация не разрешает новые генерации.
 
 ## Тесты
 
@@ -514,6 +518,7 @@ python -m unittest discover -s day-28-local-rag -p 'test*28.py'
 python day-29-local-llm-optimization/test_day29.py -v
 python -m unittest discover -s day-29-local-llm-optimization/experiments/quality_v7 -p test_quality_v7.py -v
 python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage.py
+python -m unittest discover -s day-32-pr-review/tests -v
 ```
 
 ## Данные и ограничения
