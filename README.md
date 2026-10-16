@@ -2,11 +2,11 @@
 
 # AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, and a private AI chat accessible from computers and phones.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, and a developer assistant with Project RAG, MCP Git and delegated tasks.
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–30**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–31**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -42,6 +42,7 @@ The repository currently contains **Days 1–30**. Each `day-XX-...` directory i
 | [28](day-28-local-rag/README.md) | Local LLM + RAG | Week 6 index, local embedding/search/generation, paired cloud comparison and repeated evaluation |
 | [29](day-29-local-llm-optimization/README.md) | Local LLM optimization | Task-specific prompts and limits, Q4/Q5 measurements, resource sampling and frozen V7 evidence selections |
 | [30](day-30-private-ai-service/README.md) | Private AI service | FastAPI, local Qwen, SQLite history, Web UI/PWA, LAN/Tailscale HTTPS, queue and limits |
+| [31](day-31-developer-assistant/README.md) | Developer assistant | Project RAG, read-only MCP Git, Main/Documentation/Git/Verification delegation, local Qwen and human-reviewed publication; Course Minimum Accepted |
 
 ## How the architecture evolves
 
@@ -59,6 +60,7 @@ The repository currently contains **Days 1–30**. Each `day-XX-...` directory i
 - **Day 28:** reuse the Week 6 index for fully local RAG, retain an initial paired Groq comparison and evaluate selective local/OpenAI fixes. Live reports record quality, speed, exact stability and manual citation support.
 - **Day 29:** optimize local Qwen parameters and task contracts, compare Q4/Q5 and resource measurements, and validate V7 evidence selections on frozen RU/EN procedure questions.
 - **Day 30:** local Qwen becomes a private HTTP service. The Mac stores full history, Android/iPhone continue the same chats, and Tailscale Serve provides mobile access. Cookie/CSRF, ownership, idempotency, a durable queue, quotas and launchd are separate from inference; the course baseline used no RAG; later history RAG is optional, with no cloud fallback.
+- **Day 31:** combine Project RAG and real MCP Git with Main/Documentation/Git/Verification delegation. One local RU-1 / Multi answer was accepted through exact claim–anchor bindings and explicit human review; extended Research Stage 7 remains incomplete.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -69,9 +71,10 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 - Python **3.13** is the project target.
 - A Groq key is required only by lessons that explicitly call Groq. Day 28 optionally supports OpenAI with `OPENAI_API_KEY`; local operation needs neither key.
 - Internet access is required for Groq, OpenAI and live GitHub API calls.
-- Local retrieval/RAG lessons and Days 26–30 use **Ollama**.
+- Local retrieval/RAG lessons and Days 26–31 use **Ollama**.
 - Day 27 additionally needs Git, a compatible JDK and Detekt CLI; its Python module has no extra pip dependencies. Its documented hook workflow targets macOS/Linux.
 - Day 30 has its own `requirements.lock` (FastAPI/httpx/Uvicorn/Argon2); its main Mac/phone path uses Tailscale, direct LAN uses Caddy and a trusted local CA. No knowledge index or embedding model is required.
+- Day 31 uses its own `requirements.lock`, Git and a real stdio MCP server. The accepted Documentation scenario uses FTS54 and Qwen2.5:14b without new embeddings; working state and indices remain outside the repository. Retained-delivery verification needs no Ollama.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -86,6 +89,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 | 28 | `bge-m3` | `qwen2.5:14b` default; optional Groq/OpenAI comparison |
 | 29 | `bge-m3` | `qwen2.5:14b` Q4_K_M selected; Q5_K_M compared on one factual case |
 | 30 | Not required | `qwen2.5:14b` Q4_K_M; private-chat-v2, context 8192 / output 1024 |
+| 31 | Not required for the accepted FTS scenario | `qwen2.5:14b` Q4_K_M; one accepted RU-1 / Multi call, without cloud fallback |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -122,7 +126,7 @@ ollama pull qwen2.5:7b
 ollama pull qwen2.5:14b
 ```
 
-You do not need all answer models at once; the commands above simply cover the documented profiles through Day 30.
+You do not need all answer models at once; the commands above simply cover the documented profiles through Day 31.
 
 If the Ollama desktop application is already serving the local API, a separate `ollama serve` process is not required.
 
@@ -160,6 +164,7 @@ Later lessons use specialized entry points:
 | 28 | `python day-28-local-rag/main.py ask "Какой процесс выполняет фоновые задания на Day 18?"` | One local RAG answer with source quotations |
 | 29 | `python day-29-local-llm-optimization/experiments/quality_v7/main.py verify day-29-local-llm-optimization/reports/check/quality-transfer-v7.json` | Offline consistency check of saved V7 evidence |
 | 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Verify the current 229/229 offline regression, languages and RAG memory checks; see Day 30 README for server setup |
+| 31 | `python day-31-course-minimum/verify_delivery.py --root "$PWD"` | Verify the retained delivery, 60 Python files and 79 Mac reports without Qwen; not fresh runtime acceptance |
 
 ## Day 21 shared knowledge index
 
@@ -447,6 +452,31 @@ change API runtime. The subsequent0.9.1 lexical RAG extension is described above
 semantic retrieval and versioned facts remain future work. The historical69/69
 report covers storage only; the original 143/143 model/API fixture report retains its historical scope.
 
+## Day 31 — Bublik Developer Assistant
+
+**Course Minimum — Accepted.** The [developer assistant](day-31-developer-assistant/README.md) searches repository documentation through a separate Project RAG, obtains branch/status/files/diff through a real read-only MCP Git server, and delegates tasks to Main, Documentation, Git and Verification. Its index is separate from the Day 21 knowledge base and Day 30 personal history.
+
+Base App 0.7.29 remains in `day-31-developer-assistant/`. The verified producer, anchor persistence and launcher live separately in [`day-31-course-minimum/`](day-31-course-minimum/README.ru.md). Publication Gate v104-r2 runs in an isolated application copy; it is not installed into the original `main.py`. The accepted scenario uses FTS54 — 54 documents / 510 chunks; production44 — 44 documents / 405 chunks is retained independently.
+
+| Verified result | Scope |
+|---|---|
+| Mac r3 preflight: 32/32 PASS | Real MCP Git, delegation, worker cleanup and an empty-evidence `unknown`; zero Qwen calls |
+| RU-1 / Multi: one real Qwen2.5:14b Q4_K_M call | 1109 input / 396 output tokens, 47.67 s chat; no retries or cloud fallback; one observation, not a benchmark |
+| Human review + Publication Gate | c1/c2 supported; selected exact anchors and fingerprints retained; `answer_accepted=true` |
+| Mac verification of the placed delivery | Three original packages, 60 Python files and 79 reports with SHA digests; no required inputs hidden by Git ignore rules |
+
+Verify retained delivery from the repository root without a model or network:
+
+```bash
+python day-31-course-minimum/verify_delivery.py --root "$PWD"
+```
+
+`status=passed` establishes integrity of retained data and human review, not a fresh generation or semantic acceptance of the current revision. See the Day 31 README for real MCP commands, publication of the saved answer and working-environment dependencies. The terminal video has been recorded; its [scenario](day-31-developer-assistant/CONSOLE_VIDEO.ru.md) documents the prepared environment.
+
+**Extended Research Stage 7 remains incomplete.** Full multi-task Chain, EN-3 claim decomposition, a general human-review workflow, held-out evaluation, expanded regression and resource studies remain in [BACKLOG_AFTER_COURSE.ru.md](day-31-developer-assistant/BACKLOG_AFTER_COURSE.ru.md). One Documentation worker is not presented as multiple independent LLM contexts. Synthetic transport fixtures remain separate from the real Qwen run; technical quote validation does not replace human semantic review.
+
+Historical work/state remains external; this is not a clean installer. A new commit changes the pinned Git HEAD, while editing these root READMEs makes the previous Day 21 and Day 31 Project RAG indices stale against the current corpus. This revision rebuilds no indices. Old frozen indices, pins and results are not rewritten; future live retrieval over updated documentation needs separately prepared current index state. Retained evidence and human review remain unchanged.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.
@@ -477,6 +507,8 @@ python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage
 ```
 
 ## Data and limitations
+
+- Day 31 is accepted within Course Minimum. Publication Gate requires explicit human review of current bindings; arbitrary new answers, full Chain and extended Research Stage 7 are not accepted by this evidence.
 
 - Day 27 is a local, bypassable pre-commit check. It analyzes entire changed files without type resolution and does not replace KMP compilation, Android Lint or CI. Reviewer style affects explanations only.
 - Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent. Day 28 keeps selected original JSON in `reports/accepted/` and audits in `reports/verified/`; working `reports/check/` and recording `reports/video/` are ignored.

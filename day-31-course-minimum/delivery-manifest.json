@@ -145,10 +145,11 @@
     "day-31-developer-assistant/BACKLOG_AFTER_COURSE.ru.md": "84ead250cc930ac42bcdb2e2bc605ac4d7329a1ba9c2d8285c0e964f491bf77a",
     "day-31-developer-assistant/CONSOLE_VIDEO.ru.md": "ebcc287f4087a1451031fdbdf8d139c6c9f79a4be1d47a12b0a8c9c87e5f03dc",
     "day-31-developer-assistant/MAC_PUBLICATION.ru.md": "fdce9967e82bff61dfeba19f84d75d863a939cac5dced032b1f9de8a80bdc9d9",
-    "day-31-developer-assistant/README.md": "50907c5c0c1dae05cad82cf0593dbbafc76514e7b4c5106181d1d98c424dfdd1",
-    "day-31-developer-assistant/README.ru.md": "de67e9e64ebb723eef7882e225a20ee57285562b5ad94864e57bdd66a88eaec4"
+    "day-31-developer-assistant/README.md": "f0b94aa9e4579f97d9997b10446048436fb1290549d93ba88ed7872f91d751c7",
+    "day-31-developer-assistant/README.ru.md": "1609781bf7ce6552897e8f5582082255f06b4f21fe71ad3e8e515611dc84d419"
   },
   "historical_mac_bundle_sha256": "a1f57b7d071fbb326992b7720f0e6f1210273dbbb5bb8f58eb13fba46475d028",
   "base_application": "0.7.29",
-  "qwen_calls_during_packaging": 0
+  "qwen_calls_during_packaging": 0,
+  "documentation_revision": "day31-readme-update-r1"
 }
