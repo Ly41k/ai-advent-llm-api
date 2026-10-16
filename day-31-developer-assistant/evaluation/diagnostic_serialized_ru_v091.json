@@ -1,0 +1,29 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "Exact routed Documentation question from known serialized-model-branch-ru without current branch request. One production Doc call, not a complete pair or heldout. Original known catalog/rubric unchanged.",
+  "batch_core": [
+    "serialized-doc-ru"
+  ],
+  "cases": [
+    {
+      "id": "serialized-doc-ru",
+      "language": "ru",
+      "question": "Согласно документации архитектуры, параллельные задачи Documentation? Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/architecture.ru.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "required_points": [
+        "Используется одна модель Qwen, не копия на каждого агента.",
+        "Модельные вызовы сериализованы shared lease; Git и retrieval могут выполняться параллельно."
+      ]
+    }
+  ]
+}

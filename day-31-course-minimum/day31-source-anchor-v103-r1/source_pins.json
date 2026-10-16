@@ -1,0 +1,91 @@
+{
+  "schema": "day31-source-pins-v1",
+  "repository": "Ly41k/ai-advent-llm-api",
+  "git_commit": "f5cce79933a8535eda5b8d218e79a04aee88d029",
+  "sources": [
+    {
+      "path": "day-07-context-persistence/README.md",
+      "kind": "markdown",
+      "sha256": "4bb0b868094260e3e815b876a425b9f420713361d10fa38b5811f92e54efb980",
+      "git_blob_sha1": "295450d742f652b8b78e05c5c9ce6b8fd0f19ca4",
+      "bytes": 4930
+    },
+    {
+      "path": "day-07-context-persistence/README.ru.md",
+      "kind": "markdown",
+      "sha256": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+      "git_blob_sha1": "32a1493b1fd65e9d7217dd8ba3c4229b28930490",
+      "bytes": 8092
+    },
+    {
+      "path": "day-09-context-compression/README.md",
+      "kind": "markdown",
+      "sha256": "9d4f31c5fe17c9fb6ad12a1a74980b636c091f8f64fb1820f1dcb8db89c6a180",
+      "git_blob_sha1": "30486c9bac0aed5ac7af579d6f70b1c9bbe1c0d8",
+      "bytes": 4495
+    },
+    {
+      "path": "day-09-context-compression/README.ru.md",
+      "kind": "markdown",
+      "sha256": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+      "git_blob_sha1": "6ab2e6193c32bceb45b211ab23fa18ae29a0f113",
+      "bytes": 7492
+    },
+    {
+      "path": "day-12-personalization/README.md",
+      "kind": "markdown",
+      "sha256": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+      "git_blob_sha1": "fa26a0fb08cc548c2f956a56a32f6fc265e1dead",
+      "bytes": 3504
+    },
+    {
+      "path": "day-12-personalization/README.ru.md",
+      "kind": "markdown",
+      "sha256": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+      "git_blob_sha1": "83aa79963a85e7a7e24d3f34ad181848741bed65",
+      "bytes": 7212
+    },
+    {
+      "path": "day-14-invariants/README.md",
+      "kind": "markdown",
+      "sha256": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+      "git_blob_sha1": "7b81309f71e30de4ea5331674034e662691196c9",
+      "bytes": 6349
+    },
+    {
+      "path": "day-14-invariants/README.ru.md",
+      "kind": "markdown",
+      "sha256": "31ea46b79660dc2ccadbfb67040fe03443add3004a541c69b630ae3ea739e0b9",
+      "git_blob_sha1": "bfe94d138d8be813c0813a4e50e7c8c0d1ad45bd",
+      "bytes": 9854
+    },
+    {
+      "path": "day-15-controlled-transitions/README.md",
+      "kind": "markdown",
+      "sha256": "18be55ccf9828b0280aadfdab2b39e04cdb178a82f2b09096feed810727ee7bf",
+      "git_blob_sha1": "94d0933a3323fb4af0433c415b572601cdff0669",
+      "bytes": 2311
+    },
+    {
+      "path": "day-15-controlled-transitions/README.ru.md",
+      "kind": "markdown",
+      "sha256": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+      "git_blob_sha1": "e694b9f637ad6a0a692a91fb7d6e5304b614618b",
+      "bytes": 3389
+    },
+    {
+      "path": "day-20-mcp-orchestration/README.md",
+      "kind": "markdown",
+      "sha256": "6f2474b78325d5066d9a546db6aa02cf769a091983655bf54829ad840f2ce979",
+      "git_blob_sha1": "11ab6fe6b78f2a9da696ca745159623046ee1de2",
+      "bytes": 3380
+    },
+    {
+      "path": "day-20-mcp-orchestration/README.ru.md",
+      "kind": "markdown",
+      "sha256": "7c49e3e00e9f813eeb53d62b43ddadef9235f4d18f8032cee4c40a7cccc45d9b",
+      "git_blob_sha1": "cd94f677fbb92918c17dbd9918f9b0884652182f",
+      "bytes": 8952
+    }
+  ]
+}

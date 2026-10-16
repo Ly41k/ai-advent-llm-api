@@ -1,0 +1,69 @@
+{
+  "format": "day31-independent-human-review-v1",
+  "status": "pending_answers",
+  "reviewer": null,
+  "reviewer_independence": null,
+  "report_sha256": null,
+  "reviews": [
+    {
+      "case_id": "RU-1",
+      "mode": "single",
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "scores": {
+        "factual_correctness": null,
+        "completeness": null,
+        "documentation_fidelity": null,
+        "absence_of_invented_mechanisms": null,
+        "citation_correctness": null
+      },
+      "comment": "",
+      "verified_evidence_ids": [],
+      "status": "pending"
+    },
+    {
+      "case_id": "RU-1",
+      "mode": "multi",
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "scores": {
+        "factual_correctness": null,
+        "completeness": null,
+        "documentation_fidelity": null,
+        "absence_of_invented_mechanisms": null,
+        "citation_correctness": null
+      },
+      "comment": "",
+      "verified_evidence_ids": [],
+      "status": "pending"
+    },
+    {
+      "case_id": "EN-3",
+      "mode": "single",
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "scores": {
+        "factual_correctness": null,
+        "completeness": null,
+        "documentation_fidelity": null,
+        "absence_of_invented_mechanisms": null,
+        "citation_correctness": null
+      },
+      "comment": "",
+      "verified_evidence_ids": [],
+      "status": "pending"
+    },
+    {
+      "case_id": "EN-3",
+      "mode": "multi",
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "scores": {
+        "factual_correctness": null,
+        "completeness": null,
+        "documentation_fidelity": null,
+        "absence_of_invented_mechanisms": null,
+        "citation_correctness": null
+      },
+      "comment": "",
+      "verified_evidence_ids": [],
+      "status": "pending"
+    }
+  ]
+}

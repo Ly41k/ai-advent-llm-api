@@ -1,0 +1,23 @@
+{
+  "format": "day31-source-anchor-profile-v1",
+  "doc_version": "project-answers-v25-source-anchor",
+  "single_version": "snapshot-single-v26-source-anchor",
+  "schema_version": "status-source-quote-text-v2-linked-blocks",
+  "render_version": "source-anchor-text-identity-v1",
+  "rules_ru": "Вопрос не источник; общие факты не доказывают имена/параметры. Нет поддержки: unknown, claims=[]; без неподтверждённых имён/описаний пробелов.\nclaim: source_quote — точная цитата из schema; text — ответ только по ней; один evidence_id. Цитату не меняй.\nРусская проза; переведи EN, сохрани ASCII имена/API. Без дублей.\nОтветь на всё, включая причины. Сохрани субъект/этап/время, отрицания, условия/исходы. Разные случаи разделяй. Запрет не условное разрешение.\nКаждая часть text следует из source_quote. Нужен другой фрагмент: отдельный claim. Молчание не доказательство.\nВсё поддержано: answered; пробел: partial. Git/язык/отрицание не пробел.\n",
+  "rules_en": "The question is not evidence; generic facts do not establish names/parameters. No support: unknown, claims=[]; no unsupported names or gap descriptions.\nEach claim: source_quote first, copied exactly from evidence using schema choices; then text answering only from that quote; one evidence_id. Never alter the quote.\nEnglish text; translate RU, preserve names/API; no duplicate meanings/languages.\nAnswer every part/cause. Preserve subject, stage, time, negations and exact trigger/outcome. Separate different cases. Never make a prohibition conditional.\nEvery text clause must follow source_quote. Other support: another claim. Silence is not proof.\nAll supported: answered; a support gap: partial. Git/language/negation is not a gap.\n",
+  "quote_max_chars": 600,
+  "text_max_chars": 600,
+  "max_claims": 5,
+  "max_evidence_ids_per_claim": 1,
+  "model_options_unchanged": true,
+  "context_messages_evidence_unchanged": true,
+  "selected_anchor_must_be_inside_provided_quote": true,
+  "only_structure_comes_from_full_pinned_document": true,
+  "full_document_not_added_to_model_context": true,
+  "text_preserved_exactly": true,
+  "exact_span_is_not_semantic_entailment": true,
+  "generation_calls_before_freeze": 0,
+  "anchor_policy_version": "markdown-linked-leadin-blocks-v2",
+  "prompt_rules_identical_to_v102": true
+}

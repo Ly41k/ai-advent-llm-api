@@ -1,0 +1,27 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "One existing scoped EN uncertain-state Documentation question; not paired or held-out.",
+  "batch_core": [
+    "uncertain-doc-en"
+  ],
+  "cases": [
+    {
+      "id": "uncertain-doc-en",
+      "language": "en",
+      "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "required_points": [
+        "Uncertain inference state is retained and verifiable recovery is required.",
+        "No automatic replay, cloud fallback or model restart."
+      ]
+    }
+  ]
+}

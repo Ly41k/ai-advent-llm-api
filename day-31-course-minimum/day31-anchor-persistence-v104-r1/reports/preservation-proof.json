@@ -1,0 +1,15 @@
+{
+  "original_bundle_sha256": "99869874bc1e94e356c1b6d7deb0d9012a58ee91667856808d25b8a70ddd1af1",
+  "original_bundle_copy_identical": true,
+  "original_reports_preserved": 24,
+  "new_reports_added": 2,
+  "helper_files_byte_verified": 93,
+  "installed_app_python_files_byte_verified": 60,
+  "native_results_modified": 0,
+  "evidence_modified": 0,
+  "prompt_modified": false,
+  "retrieval_modified": false,
+  "qwen_calls": 0,
+  "stage7": "open",
+  "stage8": "not_started"
+}

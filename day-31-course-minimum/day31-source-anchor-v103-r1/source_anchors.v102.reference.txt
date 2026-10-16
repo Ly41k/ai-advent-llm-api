@@ -1,0 +1,108 @@
+"""Exact bounded Markdown units; never adds text outside a provided quotation."""
+from functools import lru_cache
+from hashlib import sha256
+from pathlib import Path
+import re
+from runner import Stop,read_json
+HERE=Path(__file__).resolve().parent
+MAX_QUOTE_CHARS=600
+
+def sentence_spans(text,start,end):
+    """Conservative punctuation segmentation, excluding inline code punctuation."""
+    masked=set()
+    for m in re.finditer(r'(`+)(.*?)\1',text[start:end],re.S):
+        masked.update(range(start+m.start(),start+m.end()))
+    spans=[];left=start
+    for i in range(start,end):
+        if i in masked or text[i] not in '.!?':continue
+        if i+1<end and not text[i+1].isspace():continue
+        prefix=text[max(start,i-5):i+1].lower()
+        if re.search(r'(?:e\.g\.|i\.e\.|etc\.|т\.д\.|т\.п\.)$',prefix):continue
+        a,b=left,i+1
+        while a<b and text[a].isspace():a+=1
+        if a<b:spans.append((a,b))
+        left=i+1
+    # Only the document's actual block boundary can authorize an unpunctuated
+    # final sentence. A retrieval window ending mid-sentence cannot do so.
+    while left<end and text[left].isspace():left+=1
+    if left<end:spans.append((left,end))
+    return spans
+
+def document_units(text):
+    rows=[];headings=[];block=[];fence=None
+    def emit():
+        if not block:return
+        start=block[0][0];end=block[-1][0]+len(block[-1][1])
+        while start<end and text[start].isspace():start+=1
+        while end>start and text[end-1].isspace():end-=1
+        if start==end:return
+        body=text[start:end];first=block[0][1].lstrip()
+        structured=first.startswith(('```','~~~','|')) or bool(re.match(r'(?:[-+*]|\d+[.)])\s',first))
+        candidates=[(start,end)]
+        if not structured:
+            sentences=sentence_spans(text,start,end)
+            for i in range(len(sentences)):
+                for size in range(1,4):
+                    if i+size<=len(sentences):candidates.append((sentences[i][0],sentences[i+size-1][1]))
+        for a,b in sorted(set(candidates)):
+            if 1<=b-a<=MAX_QUOTE_CHARS:
+                rows.append({'start':a,'end':b,'quote':text[a:b],'section':list(headings)})
+    offset=0
+    for line in text.splitlines(keepends=True):
+        clean=line.rstrip('\n');marker=re.match(r'^\s*(`{3,}|~{3,})',clean)
+        if fence:
+            block.append((offset,line))
+            if marker and marker[1][0]==fence[0] and len(marker[1])>=len(fence):
+                fence=None;emit();block=[]
+        elif marker:
+            emit();block=[];fence=marker[1];block.append((offset,line))
+        else:
+            heading=re.match(r'^(#{1,6})\s+(.+?)\s*#*\s*$',clean)
+            if heading:
+                emit();block=[];level=len(heading[1]);headings=headings[:level-1]+[heading[2]]
+            elif not clean.strip():emit();block=[]
+            else:block.append((offset,line))
+        offset+=len(line)
+    if not fence:emit()
+    return sorted(rows,key=lambda r:(r['start'],r['end']))
+
+@lru_cache(maxsize=1)
+def documents():
+    values=[];pins={r['source']:r['raw_digest'] for r in read_json(HERE/'source-freeze.json')['source_manifest']}
+    for path in sorted((HERE/'public-corpus54').rglob('*')):
+        if path.is_file():
+            name=path.relative_to(HERE/'public-corpus54').as_posix();raw=path.read_bytes()
+            if name not in pins or sha256(raw).hexdigest()!=pins[name]:raise Stop('Pinned source bytes changed before anchor construction.')
+            text=raw.decode('utf-8').replace('\r\n','\n').replace('\r','\n')
+            values.append({'source':name,
+                'raw_digest':sha256(raw).hexdigest(),'text_digest':sha256(text.encode()).hexdigest(),
+                'text':text,'units':document_units(text)})
+    if len(values)!=54 or {v['source'] for v in values}!=set(pins):raise Stop('Exact pinned public54 source copy required for boundary metadata.')
+    return values
+
+def evidence_units(quote):
+    matches=[]
+    for doc in documents():
+        position=doc['text'].find(quote)
+        if position>=0:
+            if doc['text'].find(quote,position+1)>=0:raise Stop('Ambiguous source quotation offset.')
+            matches.append((doc,position))
+    if len(matches)!=1:raise Stop('Quotation must identify one pinned full source for exact boundaries.')
+    doc,position=matches[0];rows=[]
+    for unit in doc['units']:
+        if position<=unit['start'] and unit['end']<=position+len(quote):
+            rows.append({**unit,'source':doc['source'],'raw_digest':doc['raw_digest'],
+                'text_digest':doc['text_digest'],'relative_start':unit['start']-position,
+                'relative_end':unit['end']-position,'start_line':doc['text'].count('\n',0,unit['start'])+1,
+                'end_line':doc['text'].count('\n',0,unit['end'])+1})
+    return rows
+
+def catalogs(context):return {e['id']:evidence_units(e['quote']) for e in context['evidence']}
+
+def select(catalog,evidence_ids,quote):
+    if (not isinstance(evidence_ids,list) or len(evidence_ids)!=1
+            or not isinstance(evidence_ids[0],str) or evidence_ids[0] not in catalog
+            or not isinstance(quote,str)):
+        return None
+    matches=[r for r in catalog[evidence_ids[0]] if r['quote']==quote]
+    return matches[0] if len(matches)==1 else None

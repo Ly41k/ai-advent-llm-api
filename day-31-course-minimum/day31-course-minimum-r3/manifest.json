@@ -1,0 +1,29 @@
+{
+  "files_sha256": {
+    "BACKLOG_AFTER_COURSE.ru.md": "84ead250cc930ac42bcdb2e2bc605ac4d7329a1ba9c2d8285c0e964f491bf77a",
+    "README.ru.md": "5b7d181a529a225c49bb0a6299e8b7c048924d0be9c554d548837cf6e32f0f4b",
+    "REPORT.ru.md": "20f892491053b7ff2574139927b98bf480852a1549dac60f0b00b33a3fb74d40",
+    "bootstrap_course.py": "3242fafa73e1e969e61cae779c0a732459c423dc04e1ba815ce666beda5d13d1",
+    "check_local.py": "825672fe2a2558a930084fc45688c14fdfb6dc201599b5f525beaace8a03bd8b",
+    "course_runtime.py": "6af240bb67f576498c22b3c6f5be0342108c47bf3a02f5d0bfd07a81e189567a",
+    "dependency-pins.json": "db4cdcfc7a8be18ba5f45a84058a523bce005101cafae7d224d3dfd17d82e278",
+    "entry.py": "c73e24825f54bae767e83b78cc4bdcba687e781faea8dbe4877590ace367ee3e",
+    "fixture_retrieval_worker.py": "b82f37a7965e1b0a8ce463d63171b323c8c98a37cdad456dcd80ca7c590017ce",
+    "inputs/r2-mac-preflight-stopped.json": "eb1eed17118ef1ced938e168388d9b15e3a3064f34600eee4609f7b58828492b",
+    "inputs/reviewed-mac83.json": "d91fcf36f487cfa6a2ddf1b8e63765b771b558d2696a2b70eacd9ce80b0d4b84",
+    "publication_v104r2/overlay/bublik_developer/pipeline.py": "db7516b1f62bd3d406efd8136aff2f5d1a96c702207e5b65fbe3f45ad58b5115",
+    "publication_v104r2/overlay/bublik_developer/publication.py": "18b1af65ec2dcc1878a83a9d44b555370fab873bd4f2b0c166c877f6fbee45e1",
+    "publication_v104r2/prepare_overlay.py": "9e480e47aa35469cfdf4699652dacbe31b78270fb01da732af55f78eb6b14a31",
+    "publication_v104r2/publication_adapter.py": "0db68fee8b9c3649940671b5ceab974f187844db9f293d5385bfddc7ff69b8ca",
+    "reports/local-01-fixture-failed.json": "dc8ae856bd1c9d79f47c4ee64c82cb134c22817ac86b3a84b115b7997e7b944c",
+    "reports/local-bundle.json": "375fa1db55b97a0b78a053cc2e2a1e5747a1a3ee4db35b70d8978e7c55aee00e",
+    "reports/local-checks.json": "8f5fbf7eb5322791f56c03f637c9e889bbcc11703ad35b0474387dce8941309b",
+    "reports/preservation.json": "59b20630acdf0fe5529fc5a149a9f2fd022b235c5fb404f53b2ad74c4829b694",
+    "reports/r2-local-bundle.json": "fd10164827ac57665e0a588650123d928aa052e8acd0ddb340acb995486705e3",
+    "reports/r2-local-checks-21-earlier.json": "d7f731a1a325189e908bacf70528fd596989f04c0f8d72e128ec2fed231f90f7",
+    "reports/r2-local-checks.json": "ec3b73dea33741345bd8abd1842ef6757419911811ace28fa2ad1713301888f1",
+    "reports/r2-preservation.json": "a6bbb4cd783ad735d69da2d58ecac8a10c98c871c19d01ba80bfdb900431c40e",
+    "synthetic_owned_worker.py": "07bf7912869f32d5a2c1c1d8519ecb1d6f558bc9d06e350957580fc7e6993349",
+    "test_course.py": "5902310095949e4ecc6fccd62240e2bb12e1086b2736b87900b19a8c1170cec7"
+  }
+}

@@ -1,0 +1,555 @@
+{
+  "RU-1": {
+    "case": {
+      "id": "RU-1",
+      "language": "ru",
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-07-context-persistence/README.md",
+        "day-07-context-persistence/README.ru.md"
+      ],
+      "required_points": [
+        "Различает pending, completed и failed по документации Day7.",
+        "Объясняет явное добавление текущего pending и восстановление только completed; прерванный запрос не входит в будущий контекст."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "60a96b7a75620811231900fbe33cc6f5e60ad1f1e9236a9b7559969377043c0a",
+        "source": "day-07-context-persistence/README.ru.md",
+        "section": "Как это работает",
+        "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite.",
+        "start_line": 33,
+        "end_line": 58,
+        "start": 1139,
+        "end": 2157,
+        "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "578b721fbd3b9811945ea8bd5e06e52278a48ccd6c270903f86f9fcc0b86a770",
+        "source": "day-07-context-persistence/README.ru.md",
+        "section": "Важная деталь",
+        "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM.",
+        "start_line": 104,
+        "end_line": 108,
+        "start": 3290,
+        "end": 3707,
+        "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "7b810ebdce6fac35104c9ada8e45bd1137524aa00458db0e392368c3e3cb9f3d",
+        "source": "day-12-personalization/README.ru.md",
+        "section": "Связь профиля с памятью",
+        "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти.",
+        "start_line": 28,
+        "end_line": 39,
+        "start": 1061,
+        "end": 1758,
+        "raw_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+        "text_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "чем",
+      "отличаются",
+      "статусы",
+      "сообщений",
+      "pending",
+      "completed",
+      "failed",
+      "памяти",
+      "бублика",
+      "почему",
+      "сообщение",
+      "со",
+      "статусом",
+      "добавляется",
+      "текущий",
+      "запрос",
+      "явно",
+      "но",
+      "не",
+      "восстанавливается",
+      "автоматически",
+      "часть",
+      "истории",
+      "после"
+    ]
+  },
+  "RU-2": {
+    "case": {
+      "id": "RU-2",
+      "language": "ru",
+      "question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-09-context-compression/README.md",
+        "day-09-context-compression/README.ru.md"
+      ],
+      "required_points": [
+        "Объясняет защищённое окно последних 10 сообщений и партии старых сообщений по 10; неполная партия пока остаётся исходной.",
+        "Объясняет накопительный summary и сохранение полной messages history в SQLite.",
+        "Объясняет отдельный учёт summary prompt/completion/total tokens и стоимости и их включение в /stats."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "e51d36002d4a5c55a7d2f924e93a61315d05d82017be3b0608d2780c92cd57a6",
+        "source": "day-09-context-compression/README.ru.md",
+        "section": "Результат",
+        "quote": "## Результат\n\nПолная успешная история по-прежнему остаётся в SQLite и не удаляется. В модель отправляется:\n\n```text\nsystem prompt + накопительный summary + несжатые сообщения + текущий запрос\n```\n\nПоследние 10 сообщений всегда защищены. Пока формируется следующая полная партия, до 9 дополнительных старых сообщений временно остаются в исходном виде. Когда перед защищённым окном накапливается партия из 10 сообщений, `HistoryCompressor` отправляет её вместе с предыдущим summary модели GPT-OSS 20B. Новый накопительный summary заменяет предыдущий в таблице `conversation_summaries`, а `summarized_through_message_id` перемещается вперёд.",
+        "start_line": 18,
+        "end_line": 26,
+        "start": 901,
+        "end": 1539,
+        "raw_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "text_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "6dbf2b5fb1b782dc12e7faf69b2c50f47fa59386fdad752c88dfcbdf10d19d72",
+        "source": "day-09-context-compression/README.ru.md",
+        "section": "Хранение",
+        "quote": "## Хранение\n\nТаблица `conversation_summaries` содержит один накопительный summary для каждого `conversation_id`:\n\n- текст summary;\n- ID последнего сжатого сообщения;\n- количество исходных сообщений и обновлений;\n- накопленные prompt, completion и total tokens, а также стоимость summary.\n\nПолная таблица `messages` сохраняется для диагностики, команды `/history` и честного сравнения со сжатым контекстом.",
+        "start_line": 48,
+        "end_line": 57,
+        "start": 2050,
+        "end": 2455,
+        "raw_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "text_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "3b7b23d872f03160b661b32d5a6151a5ded0d68a5ee6e9a4216f9aa218e74134",
+        "source": "day-09-context-compression/README.ru.md",
+        "section": "Запуск",
+        "quote": "## Запуск\n\n```bash\npip install -r requirements.txt\npython day-09-context-compression/main.py\n```\n\nКоманды:\n\n- `/history` — последние записи полной истории;\n- `/summary` — сохранённый summary и стоимость его создания;\n- `/compare` — один вопрос с полной и сжатой историей;\n- `/stats` — стоимость основных запросов вместе с расходами на summary;\n- `/dialogs` — переключение диалога;\n- `/exit` или `выход` — завершение.\n\nЛокальное сравнение токенов:\n\n```bash\npython day-09-context-compression/experiment.py\n```\n\nЭксперимент сравнивает короткую, среднюю и длинную синтетические истории без обращения к Groq.",
+        "start_line": 59,
+        "end_line": 81,
+        "start": 2457,
+        "end": 3060,
+        "raw_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "text_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "historycompressor",
+      "определяет",
+      "сообщения",
+      "можно",
+      "сжать",
+      "необходимо",
+      "оставить",
+      "без",
+      "изменений",
+      "происходит",
+      "полной",
+      "историей",
+      "sqlite",
+      "учитываются",
+      "дополнительные",
+      "затраты",
+      "генерацию",
+      "summary",
+      "стоимость",
+      "cost",
+      "tokens",
+      "prompt",
+      "completion",
+      "total"
+    ]
+  },
+  "RU-3": {
+    "case": {
+      "id": "RU-3",
+      "language": "ru",
+      "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-15-controlled-transitions/README.md",
+        "day-15-controlled-transitions/README.ru.md"
+      ],
+      "required_points": [
+        "Для planning → execution нужен непустой явно утверждённый план.",
+        "Для validation → done требуется PASS.",
+        "Во время pause прогресс и переходы запрещены; нужно явное resume."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "407b548109e3ede89b58a2f5435cce681ddb2d42f18976014fd7f64b994c4b50",
+        "source": "day-15-controlled-transitions/README.ru.md",
+        "section": "Контракт жизненного цикла",
+        "quote": "## Контракт жизненного цикла\n\nСостояния: `planning`, `execution`, `validation`, `done`.\n\n| Текущее | Разрешённые переходы | Условие |\n|---|---|---|\n| planning | execution | Нужен непустой и явно утверждённый план |\n| execution | validation, planning | Для validation нужно завершить все шаги; planning — контролируемое перепланирование |\n| validation | done, execution | `done` только после PASS; ошибка проверки возвращает в execution |\n| done | нет | Терминальное состояние |\n\nПауза не является пятым этапом. Пока задача на паузе, переходы и изменение прогресса запрещены; разрешено только явное возобновление. Состояние хранится в SQLite.",
+        "start_line": 5,
+        "end_line": 16,
+        "start": 176,
+        "end": 817,
+        "raw_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "text_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "5ea8453bf318e1300d69fbbe5996cba7fd9edd2d3a7e783e8983f7c3271a3901",
+        "source": "day-15-controlled-transitions/README.ru.md",
+        "section": "Что добавлено",
+        "quote": "## Что добавлено\n\n- `TaskState` задаёт допустимые состояния.\n- `ALLOWED_TRANSITIONS` — единый граф переходов.\n- `allowed_targets()` применяет guards и показывает только реально доступные сейчас переходы.\n- Guards запрещают пропуски этапов и объясняют отказ.\n- План утверждается отдельной командой `/task approve`; изменение плана сбрасывает утверждение.\n- В prompt передаётся та же политика с запретом перескакивать этапы.\n- Семантический postflight проверяет готовый ответ модели относительно текущего этапа и `expected_action`.\n- Ответ с реализацией во время `planning` удаляется и заменяется детерминированным отказом.\n- `/task status` показывает разрешённые переходы.\n- Проверки инвариантов Дня 14 сохранены.",
+        "start_line": 18,
+        "end_line": 29,
+        "start": 819,
+        "end": 1531,
+        "raw_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "text_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "463e004b52159cbf4de3395c89ecc505514752196fa4a0ea0eeed6aa7da16d51",
+        "source": "day-15-controlled-transitions/README.ru.md",
+        "section": "Запуск и тесты",
+        "quote": "## Запуск и тесты\n\n```bash\ncd day-15-controlled-transitions\ncp .env.example .env\npython3 -m pip install -r requirements.txt\npython3 main.py\npython3 -m unittest discover -s . -p 'test_*.py' -q\n```\n\nОсновной сценарий: `/task create`, `/task plan`, `/task approve`, `/task transition execution`, `/task complete`, `/task transition validation`, `/task check pass`, `/task transition done`.\n\n35 тестов проверяют недопустимые прыжки, фактически доступные переходы в `/task status`, явное утверждение плана, блокировку преждевременной реализации, pause/resume, восстановление после перезапуска, prompt и совместимость с Днём 14. Используются Python 3.13, SQLite и Groq; Node.js и PostgreSQL не требуются.",
+        "start_line": 31,
+        "end_line": 43,
+        "start": 1533,
+        "end": 2231,
+        "raw_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "text_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "условия",
+      "должны",
+      "быть",
+      "выполнены",
+      "для",
+      "переходов",
+      "planning",
+      "execution",
+      "validation",
+      "done",
+      "произойдёт",
+      "если",
+      "попытаться",
+      "изменить",
+      "прогресс",
+      "задачи",
+      "или",
+      "выполнить",
+      "переход",
+      "во",
+      "время",
+      "паузы"
+    ]
+  },
+  "EN-1": {
+    "case": {
+      "id": "EN-1",
+      "language": "en",
+      "question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-12-personalization/README.md",
+        "day-12-personalization/README.ru.md"
+      ],
+      "required_points": [
+        "Profile changes require both an empty dialogue and empty working memory.",
+        "The conversation stores profile_id; long-term memory is scoped by profile_id across that profile conversations, preventing cross-profile leakage."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "676782e660758d4fd32d84c0cb0b85b65045d25a1ba547fb7554b0f45f3a36bb",
+        "source": "day-12-personalization/README.md",
+        "section": "Profiles and memory",
+        "quote": "## Profiles and memory\n\nA profile is selected when a dialogue is created, and its `profile_id` is stored in `conversations`. Both conversation history and personalization are therefore restored after a restart.\n\n| Data | Scope |\n|---|---|\n| Short-term messages | Current dialogue |\n| Working memory | Current dialogue and task |\n| Long-term decisions and knowledge | All dialogues of one profile |\n| Preferences | Selected user profile |\n\nLong-term records are scoped by `profile_id`, preventing one user's decisions from entering another user's context. A profile can be changed with `/profile PROFILE_ID` only while the dialogue and its working memory are empty.",
+        "start_line": 28,
+        "end_line": 39,
+        "start": 1065,
+        "end": 1729,
+        "raw_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+        "text_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "53cb5a4fe77cc2ca5d7c5d34b702eb66f88896db5a5a738f7c76321313502863",
+        "source": "day-12-personalization/README.md",
+        "section": "Run",
+        "quote": "## Run\n\n```bash\npip install -r requirements.txt\npython day-12-personalization/main.py\n```\n\nDay 11 commands remain available. Day 12 adds:\n\n- `/profile` — show the active profile;\n- `/profile PROFILE_ID` — change the profile of an empty dialogue;\n- `/context` — verify that personalization is included;\n- `/dialogs` — create another dialogue with another profile.",
+        "start_line": 56,
+        "end_line": 68,
+        "start": 2223,
+        "end": 2585,
+        "raw_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+        "text_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "8c1c8dc616e3b7a555ab6951761b216c0f689527a346038694b5bf6fc6daa82b",
+        "source": "day-07-context-persistence/README.md",
+        "section": "What I Learned",
+        "quote": "## What I Learned\n\n- persistent memory differs from an in-memory `messages` list;\n- a conversation identifier connects messages from different process runs;\n- one agent implementation can serve multiple isolated contexts;\n- previous dialogues can be sorted by their last activity time;\n- startup restoration and prompt construction are separate operations;\n- transactional writes keep a user request and assistant answer consistent;\n- failed requests should be stored for diagnostics without contaminating context;\n- context can be bounded while the complete history remains available.",
+        "start_line": 117,
+        "end_line": 126,
+        "start": 3939,
+        "end": 4524,
+        "raw_digest": "4bb0b868094260e3e815b876a425b9f420713361d10fa38b5811f92e54efb980",
+        "text_digest": "4bb0b868094260e3e815b876a425b9f420713361d10fa38b5811f92e54efb980",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "under",
+      "conditions",
+      "can",
+      "active",
+      "profile",
+      "existing",
+      "conversation",
+      "be",
+      "changed",
+      "using",
+      "profile_id",
+      "memory",
+      "architecture",
+      "prevent",
+      "long",
+      "term",
+      "decisions",
+      "from",
+      "one",
+      "leaking",
+      "into",
+      "another",
+      "context",
+      "память"
+    ]
+  },
+  "EN-2": {
+    "case": {
+      "id": "EN-2",
+      "language": "en",
+      "question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-14-invariants/README.md",
+        "day-14-invariants/README.ru.md"
+      ],
+      "required_points": [
+        "Malformed guard JSON or unknown invariant IDs block the answer fail-closed because compliance is unconfirmed.",
+        "Postflight checks generated output before persistence; violating draft is discarded, never persisted as the answer.",
+        "A deterministic explained refusal replaces it; the user request and refusal are persisted as a normal exchange."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "42930bf9cef6fabb90429ade39dc09978e0853eec6521e1e269a52754e324cff",
+        "source": "day-14-invariants/README.md",
+        "section": "Postflight",
+        "quote": "### Postflight\n\nThe generated response is checked before persistence by both local rules and an independent semantic guard covering every invariant. A violating response is discarded and never stored. Instead of AgentError, the user receives a deterministic refusal with the invariant ID, rationale, and compatible alternative.\n\nMalformed guard JSON or unknown IDs cause fail-closed behavior: the answer is blocked because compliance could not be confirmed.\n\nThe guard uses a strict JSON Schema containing the allowed invariant IDs. A compatible request requires three API calls: semantic preflight, answer generation, and semantic postflight. An explicit regex conflict is still blocked locally without an API call.",
+        "start_line": 73,
+        "end_line": 79,
+        "start": 2842,
+        "end": 3558,
+        "raw_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "text_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "1d47bbad2d4065354d9e56ce4c829cc79729740b77b22f446cbf2b4752cad044",
+        "source": "day-14-invariants/README.md",
+        "section": "Day 14 — Invariants and State Constraints",
+        "quote": "# Day 14 — Invariants and State Constraints\n\nDay 13 gave Bublik a persistent task state. Day 14 adds a separate invariant policy: rules that cannot be overridden by dialogue messages.\n\nPreviously, invariants.json was injected into the system prompt and a postflight validator searched generated answers for API keys and claims about nonexistent memory. The new version combines fast local rules with independent semantic checks of both the request and generated response, so paraphrased conflicts are also refused.",
+        "start_line": 3,
+        "end_line": 7,
+        "start": 39,
+        "end": 553,
+        "raw_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "text_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "4ac62d319aca83af399ce7602df8f1671fa67e480bb16912afc984de84cb89b2",
+        "source": "day-14-invariants/README.md",
+        "section": "Preflight",
+        "quote": "### Preflight\n\nInvariantValidator first catches explicit conflicts locally. SemanticInvariantGuard then checks the meaning of the request against every invariant using a separate structured call. The text is treated as untrusted data and the guard returns only JSON containing violated IDs.\n\nWhen a conflict is found:\n\n- explicit regex conflicts do not call Groq;\n- paraphrased conflicts make only the guard call and do not start answer generation;\n- Bublik does not propose the forbidden solution;\n- the response names every violated invariant ID;\n- it explains why the rule exists;\n- it offers a compatible alternative;\n- the request and refusal are stored as a normal conversation exchange.",
+        "start_line": 49,
+        "end_line": 61,
+        "start": 1761,
+        "end": 2454,
+        "raw_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "text_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "happens",
+      "when",
+      "semantic",
+      "invariant",
+      "guard",
+      "returns",
+      "malformed",
+      "json",
+      "or",
+      "unknown",
+      "id",
+      "system",
+      "handle",
+      "generated",
+      "response",
+      "that",
+      "violates",
+      "during",
+      "postflight",
+      "validation",
+      "including",
+      "gets",
+      "persisted",
+      "in"
+    ]
+  },
+  "EN-3": {
+    "case": {
+      "id": "EN-3",
+      "language": "en",
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-20-mcp-orchestration/README.md",
+        "day-20-mcp-orchestration/README.ru.md"
+      ],
+      "required_points": [
+        "Premature model choices are labelled agent correction; HTTP400 tool_use_failed uses a labelled guarded agent fallback; neither counts as model-selected.",
+        "The saved report must be read back and verified against the original summary; success requires verified=true.",
+        "Malformed JSON and MCP failures stop the flow, rather than being silently counted as model success."
+      ]
+    },
+    "sources": [
+      {
+        "chunk_id": "6bea5a13828db07c67e2ff16e119b704917113fe208cef3b42387fa878676ee7",
+        "source": "day-20-mcp-orchestration/README.md",
+        "section": "Day 20 — Orchestrating multiple MCP servers",
+        "quote": "# Day 20 — Orchestrating multiple MCP servers\n\nBublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```\n\nThe final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.\n\nThe user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces",
+        "start_line": 1,
+        "end_line": 12,
+        "start": 0,
+        "end": 1734,
+        "raw_digest": "6f2474b78325d5066d9a546db6aa02cf769a091983655bf54829ad840f2ce979",
+        "text_digest": "6f2474b78325d5066d9a546db6aa02cf769a091983655bf54829ad840f2ce979",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "6afb702954b8076326309aeb4ee2fdd348e837ef019fbda6236cbd45c584004d",
+        "source": "day-20-mcp-orchestration/README.ru.md",
+        "section": "День 20 — Оркестрация нескольких MCP-серверов",
+        "quote": "выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.\n\nАгент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач.",
+        "start_line": 18,
+        "end_line": 20,
+        "start": 1739,
+        "end": 2462,
+        "raw_digest": "7c49e3e00e9f813eeb53d62b43ddadef9235f4d18f8032cee4c40a7cccc45d9b",
+        "text_digest": "7c49e3e00e9f813eeb53d62b43ddadef9235f4d18f8032cee4c40a7cccc45d9b",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      },
+      {
+        "chunk_id": "1539c58aadf9a4db8fe5811f6ec7bc834ea9a0cfc904badfc93f911f145ef485",
+        "source": "day-29-local-llm-optimization/README.md",
+        "section": "Speed, quantization, and resources",
+        "quote": "9.56 GiB | 10.89 GiB |\n\nQuality was equivalent on that question; Q5 took about 25.8% longer and reported 1.33 GiB more allocation. Q4 was measured first; order was not randomized. This does not establish superiority on other tasks.\n\nThe full control report records maximum `size_vram` of 11.19 GiB for baseline and 9.67 GiB for the selected profile. Reports also retain sampled process RSS/CPU, available system memory, and swap. **RSS and `size_vram` are not full physical unified-memory usage and must not be added together.** Full physical peak and GPU utilization were not measured.\n\nSee [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md) for detailed comparisons and limitations.",
+        "start_line": 79,
+        "end_line": 85,
+        "start": 5713,
+        "end": 6387,
+        "raw_digest": "bd432abefe8d3793da078e49340009243925baff4fa1c8c470a4bee51e4fe2b1",
+        "text_digest": "bd432abefe8d3793da078e49340009243925baff4fa1c8c470a4bee51e4fe2b1",
+        "project_id": "ai-advent-llm-api",
+        "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+        "index_version": "a8144ee97f624572b5ce957891019e60"
+      }
+    ],
+    "terms": [
+      "orchestration",
+      "agent",
+      "distinguish",
+      "genuinely",
+      "model",
+      "selected",
+      "operation",
+      "from",
+      "correction",
+      "or",
+      "fallback",
+      "verification",
+      "must",
+      "succeed",
+      "before",
+      "can",
+      "report",
+      "that",
+      "generated",
+      "repository",
+      "was",
+      "saved",
+      "successfully"
+    ]
+  }
+}

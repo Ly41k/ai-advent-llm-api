@@ -1,0 +1,480 @@
+{
+  "format": "day31-native-prompt-input-regression-v1",
+  "scope": "17 exact native inputs from v096 control and three paired packets. Context/budget regression only; not golden answers. EN uncertain Multi has a known policy-scope ambiguity.",
+  "inputs": [
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Память задачи\n\nTask state хранится отдельно от обычной истории:\n\n```text\ngoal\nconstraints\nclarifications\nterms\n```\n\nПамять обновляется как явными командами, так и обычными сообщениями. Поддерживаются размеченные строки `Цель:`, `Ограничение:`, `Уточнение:` и `Термин:`.\n\nКаждое принятое значение памяти должно иметь буквальное evidence в текущем сообщении пользователя. Для записи сохраняются value, evidence, turn и origin.\n\nОсновные guards:\n\n- случайный следующий вопрос не заменяет существующую цель;\n- stale planner update не может затереть параллельное изменение памяти;\n- фрагмент вопроса и сразу же отменённое отрицанием утверждение не становятся memory facts;\n- `/forget` — явный путь удаления;\n- переполнение task-state budget отклоняет новое обновление видимо, а не удаляет старую информацию.\n\nLiteral provenance показывает происхождение текста, но не гарантирует правильность его модельной интерпретации. Для контроля используйте `/state`."
+          }
+        ]
+      },
+      "v096_context_digest": "39bf19af7872061fe9a4ece609d7da0f521b1e50249c056f0826e14a13f073b3",
+      "v096_message_digest": "e6031a9060abf7cf222b6273d3c2b1dc99711716c692c1323ec5201dc0d65e75",
+      "v096_schema_digest": "c0c62e76e212dbfbe266135f287a8e78ca3e0dd4dbd74bd69f932ee5f34e3e6e",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "single",
+      "context": {
+        "question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "documentation_question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Память задачи\n\nTask state хранится отдельно от обычной истории:\n\n```text\ngoal\nconstraints\nclarifications\nterms\n```\n\nПамять обновляется как явными командами, так и обычными сообщениями. Поддерживаются размеченные строки `Цель:`, `Ограничение:`, `Уточнение:` и `Термин:`.\n\nКаждое принятое значение памяти должно иметь буквальное evidence в текущем сообщении пользователя. Для записи сохраняются value, evidence, turn и origin.\n\nОсновные guards:\n\n- случайный следующий вопрос не заменяет существующую цель;\n- stale planner update не может затереть параллельное изменение памяти;\n- фрагмент вопроса и сразу же отменённое отрицанием утверждение не становятся memory facts;\n- `/forget` — явный путь удаления;\n- переполнение task-state budget отклоняет новое обновление видимо, а не удаляет старую информацию.\n\nLiteral provenance показывает происхождение текста, но не гарантирует правильность его модельной интерпретации. Для контроля используйте `/state`."
+          }
+        ],
+        "git_facts": []
+      },
+      "v096_context_digest": "32792d76baf673c76e5e94136d20a4c177c72473c269d798db2f611006503af7",
+      "v096_message_digest": "c0e6946a102fc553d1ad684e170a91a4af9c347fcd547c29a1bdcf3efb3a40c0",
+      "v096_schema_digest": "752ae260d91787dce543a6ac0de3c315ee8d8c3305b5bb8fc3b5da8cdec0cf27",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "single",
+      "context": {
+        "question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "documentation_question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ],
+        "git_facts": []
+      },
+      "v096_context_digest": "f4de71e028542e9af5c6a67b10fb23173c6330fd009e408f3de018396ddfa35f",
+      "v096_message_digest": "6e2ea8a1561c7b0f60b1d76828371202b6eb77b486a042602bcbd1d8d513577a",
+      "v096_schema_digest": "4c4e47f088766dc8ca5315bdd6821bd4a2ed91c3df6114287149d74857fceacc",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ]
+      },
+      "v096_context_digest": "007bf493ec808358a6765bee338e31e768b2fad25d448350fc6558d5b94b9315",
+      "v096_message_digest": "7d849886d580e46efbd50d881fcea86d1948a96b0af4f65d7c01f6f94676bdc6",
+      "v096_schema_digest": "b29ed70c0c619a9f5fe3cca20155508bf1715bf9d2bd95d3d21eabf3e0d6866c",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          }
+        ]
+      },
+      "v096_context_digest": "08f5933e93f67abd8bebf7183564c005c81584364560870157b54ab2c72bf5bf",
+      "v096_message_digest": "3dafee95f12145af98290b8f724e6cccb84593799d8094bea71459f7e17b8960",
+      "v096_schema_digest": "854008ee339bf4bc9bd786e20dd7dc24c05864632ee3d4658bfd701e01584279",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Documentation и Git могут выполняться параллельно; Verification проверяет их результаты."
+          },
+          {
+            "id": "c2",
+            "text": "Модельные вызовы последовательны через общую lease."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T10:06:48.376591+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "d91c982d78f8ef9833e874de6291ecb5e5434f9c5296cc587bbbc6c88df0c00d",
+      "v096_message_digest": "0124b1eb7c2abe029a5f620e1516981024a875b45c85cddb50b6ed81cdc67acb",
+      "v096_schema_digest": "aba0513c3bd71bf3327c2728c38ff51da01e32bec46da94d4c55fa066e3bcf03",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease? Покажи текущую ветку.",
+        "documentation_question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T10:06:48.376591+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "d87d7add42d5a8c7265d53b56bb0474d3dff70da665f650030e7e4ff734a88e0",
+      "v096_message_digest": "f177320e27f0f472f22a6d62d8d8eec0938f9400c6d66133511ec6ced43702fe",
+      "v096_schema_digest": "afb0ea29d6452699e98f6729c1d9217c00376c4069a2d4423a816530d05279e3",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease? Also show the current branch.",
+        "documentation_question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T10:07:58.547177+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "a0194c3caddc5f63f2c91f585c07fecaded9f2d5961faa000e1d8370f1fc2104",
+      "v096_message_digest": "4db356cda7436d97180a8b9bbab185d0ac5488d024789620bb1965988368dfa0",
+      "v096_schema_digest": "b648ca105a0cf93297613c69bd593fcf3ab0b69d63b42956b907f1846a779ef0",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          }
+        ]
+      },
+      "v096_context_digest": "acfb503a66416659ec997e1d6f7af2e3957506de361d9b58c7c0a62e74ba9ccd",
+      "v096_message_digest": "dfae52d057128a430c6252a1c6de9b23bc04efb52285096aba320c6f43567101",
+      "v096_schema_digest": "b29ed70c0c619a9f5fe3cca20155508bf1715bf9d2bd95d3d21eabf3e0d6866c",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "concurrent Documentation and Git tasks imply serialized model calls through one lease"
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T10:07:58.547177+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "60321d2ccbc494af24b89af9c9dd1456e400cc6a95c73f7b44d1f76347e263a2",
+      "v096_message_digest": "cae323a04c2af6b6c0623a2347728cf0b6a62e86052fb81b42ced86bd1d2cde7",
+      "v096_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback? Покажи текущую ветку.",
+        "documentation_question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T10:18:37.132856+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "3e7f4b882ee5010aa05ac0c03f96b6baead1a8c3d1c08669c05e81f217ada50e",
+      "v096_message_digest": "04fa73ef34edbcfd0cb9b4dff347557e0b6c2b4f37c98ffc7aa120760d34f4dd",
+      "v096_schema_digest": "94819593c527254004e6c7f17eec35158f8a1a144e1b52297554d35aaf8fdbbc",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          }
+        ]
+      },
+      "v096_context_digest": "1ad773f57ba253f3e32d185af07ad1468d6363bab01892d46c5e646c3a0e1527",
+      "v096_message_digest": "29654c9271c234b2573a50b9d5692f6a4ef93c7c40dff7a570bc4e2cbe03ccc0",
+      "v096_schema_digest": "7a3366ce0a9002fc02dc9c2fa6d5df30618a99c5906692fe6fc6499842e0c91a",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "При потере HTTP-ответа сохраняется uncertain inference state. Автоматические повтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery."
+          },
+          {
+            "id": "c2",
+            "text": "Автоматического cloud fallback нет."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T10:18:37.132856+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "db05e8d8176559af470592e0fa99eee432c1608760cb4cb84fd03709d89acf5c",
+      "v096_message_digest": "35c56fe6239dda404365815792a5826d8cc92e819d1ac3ddcce4394eae30d7fa",
+      "v096_schema_digest": "aba0513c3bd71bf3327c2728c38ff51da01e32bec46da94d4c55fa066e3bcf03",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Ollama /api/ps: loaded models and request state\n\n`GET /api/ps` reports models currently loaded into memory. The returned model\nlist describes model residency; it is not a completion record for inference\nrequests. A loaded model does not establish whether a generation has finished\nor whether Ollama is idle. Do not use `/api/ps` as an idle witness after a lost\nHTTP response or interrupted request.\n\n`/api/ps` показывает загруженные модели, а не подтверждение завершения запроса.\nСписок моделей не доказывает, что генерация закончилась и Ollama свободна.\n\nEndpoint documentation: https://docs.ollama.com/api/ps . The model-residency\ndescription comes from the API contract; the idle-witness restriction is the\nDay 31 policy implemented in model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          }
+        ]
+      },
+      "v096_context_digest": "75cb24c3bc3b4bbc0f78c3ded215966d2e74ecafd26d6e014154b433704b600c",
+      "v096_message_digest": "d7de3c7bf918bba55db59c5eb102868d1bc66a7e85b969141b2cdc5daec70f49",
+      "v096_schema_digest": "b29ed70c0c619a9f5fe3cca20155508bf1715bf9d2bd95d3d21eabf3e0d6866c",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "After a local generation HTTP response is lost, the uncertain inference state is retained; automatic replay, cloud fallback, and model restart are not automatic and require a verified recovery."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T10:19:53.417585+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "bb111972e3f9a5c28b054f515d9ec61f0e5393e287ddf563ea266294b3c55cda",
+      "v096_message_digest": "bf6033e01f4ed33b822d770049e684d4440ae46ed6c855329e15410eb1bf346a",
+      "v096_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed? Also show the current branch.",
+        "documentation_question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Ollama /api/ps: loaded models and request state\n\n`GET /api/ps` reports models currently loaded into memory. The returned model\nlist describes model residency; it is not a completion record for inference\nrequests. A loaded model does not establish whether a generation has finished\nor whether Ollama is idle. Do not use `/api/ps` as an idle witness after a lost\nHTTP response or interrupted request.\n\n`/api/ps` показывает загруженные модели, а не подтверждение завершения запроса.\nСписок моделей не доказывает, что генерация закончилась и Ollama свободна.\n\nEndpoint documentation: https://docs.ollama.com/api/ps . The model-residency\ndescription comes from the API contract; the idle-witness restriction is the\nDay 31 policy implemented in model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T10:19:53.417585+00:00"
+          }
+        ]
+      },
+      "v096_context_digest": "9389c75fd4c4d9ac42ca2b4668b75261f789497b961977e346855880edc787e5",
+      "v096_message_digest": "58954a65f4cac852945cb4c7220b1038e6dfeb9c9e52d93379c43fdd658f2688",
+      "v096_schema_digest": "b648ca105a0cf93297613c69bd593fcf3ab0b69d63b42956b907f1846a779ef0",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-doc-ru-production-control",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          }
+        ]
+      },
+      "v096_context_digest": "08f5933e93f67abd8bebf7183564c005c81584364560870157b54ab2c72bf5bf",
+      "v096_message_digest": "3dafee95f12145af98290b8f724e6cccb84593799d8094bea71459f7e17b8960",
+      "v096_schema_digest": "854008ee339bf4bc9bd786e20dd7dc24c05864632ee3d4658bfd701e01584279",
+      "scope": "Separate known positive control, not extra paired repeat or heldout."
+    }
+  ]
+}

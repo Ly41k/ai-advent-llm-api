@@ -1,0 +1,429 @@
+{
+  "format": "day31-v103-offline-clause-review-v1",
+  "input_bundle_sha256": "99869874bc1e94e356c1b6d7deb0d9012a58ee91667856808d25b8a70ddd1af1",
+  "native_reports_verified": 24,
+  "scope": "Every text is partitioned losslessly; explicit trigger pairs may span adjacent parts and are interpreted jointly. Reviewer judgments are not automated entailment.",
+  "qwen_calls": 0,
+  "records": [
+    {
+      "case_id": "RU-1",
+      "mode": "single",
+      "frame_sha256": "3bc03e6748e2ef09976eab31866ea72bc492baf6f540033e80b896f2ba347bec",
+      "reviewer_type": "assistant_development_review_not_independent",
+      "claims": [
+        {
+          "id": "c1",
+          "claim_sha256": "c829db29d156c4b8b36043c9342ef8c912b2c08ea69a2c58fbea88e466097592",
+          "source_quote": "Каждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 80,
+              "text": "Сообщения в памяти Бублика имеют три статуса: `pending`, `completed` и `failed`.",
+              "verdict": "supported",
+              "support_spans": [
+                "Каждое сообщение имеет один из трёх статусов:",
+                "`pending`",
+                "`completed`",
+                "`failed`"
+              ],
+              "reason": "Три статуса перечислены в точной цитате."
+            },
+            {
+              "start": 80,
+              "end": 174,
+              "text": " Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API.",
+              "verdict": "supported",
+              "support_spans": [
+                "`pending` — запрос пользователя сохранён перед вызовом API;"
+              ],
+              "reason": "Прямое определение pending, не обещание успешного завершения."
+            },
+            {
+              "start": 174,
+              "end": 242,
+              "text": " Сообщение со статусом `completed` можно включать в будущий контекст",
+              "verdict": "supported",
+              "support_spans": [
+                "`completed` — запрос или ответ можно включать в будущий контекст;"
+              ],
+              "reason": "Разрешение включать completed, а не обязательное включение всей истории."
+            },
+            {
+              "start": 242,
+              "end": 301,
+              "text": ", а сообщение со статусом `failed` исключается из контекста",
+              "verdict": "supported",
+              "support_spans": [
+                "`failed` — запрос остаётся для диагностики, но исключается из контекста."
+              ],
+              "reason": "Прямой запрет использования failed, согласованный с цитатой."
+            },
+            {
+              "start": 301,
+              "end": 331,
+              "text": ", но остаётся для диагностики.",
+              "verdict": "supported",
+              "support_spans": [
+                "запрос остаётся для диагностики"
+              ],
+              "reason": "Диагностическое хранение failed прямо указано."
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "claim_sha256": "d37a2f86401f33113ad9e7f309bc96ca7f00ec7ab6c6a5fcbe5cf2b69deabbd0",
+          "source_quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+          "evidence_ids": [
+            "e2"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 66,
+              "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно,",
+              "verdict": "supported",
+              "support_spans": [
+                "В API-запрос он добавляется явно"
+              ],
+              "reason": "Субъект — текущий pending; не все pending из истории."
+            },
+            {
+              "start": 66,
+              "end": 142,
+              "text": " так как из базы восстанавливаются только сообщения со статусом `completed`.",
+              "verdict": "supported",
+              "support_spans": [
+                "из базы восстанавливаются только сообщения со статусом `completed`"
+              ],
+              "reason": "Прямая причинная связь: обычное восстановление не добавляет текущий pending."
+            },
+            {
+              "start": 142,
+              "end": 213,
+              "text": " После ответа модели пользовательское сообщение помечается завершённым,",
+              "verdict": "supported",
+              "support_spans": [
+                "После ответа модели пользовательское сообщение помечается завершённым"
+              ],
+              "reason": "Условие после ответа модели сохранено; нет утверждения об успехе при сбое."
+            },
+            {
+              "start": 213,
+              "end": 271,
+              "text": " а ответ ассистента добавляется в рамках одной транзакции.",
+              "verdict": "supported",
+              "support_spans": [
+                "а ответ ассистента добавляется в рамках одной транзакции."
+              ],
+              "reason": "Описана транзакционная запись ответа вместе с завершением сообщения."
+            },
+            {
+              "start": 271,
+              "end": 393,
+              "text": " Это означает, что сообщение со статусом `pending` не восстанавливается автоматически как часть истории после перезапуска.",
+              "verdict": "scoped_inference",
+              "support_spans": [
+                "из базы восстанавливаются только сообщения со статусом `completed`"
+              ],
+              "reason": "Если сообщение всё ещё pending, completed-only восстановление исключает его и после рестарта. Это следствие ограничения по статусу, а не утверждение, что никогда не восстановится впоследствии completed. Сам restart не описан этой цитатой как отдельная процедура."
+            }
+          ]
+        }
+      ],
+      "coverage_note": "Прямой вопрос: определения, явная вставка и completed-only восстановление объяснены. Расширенная замороженная рубрика: явная защитная причина для прерванного/неуспешного обмена не сформулирована. Это отдельный пропуск полноты, не ошибка grounding.",
+      "admission": {
+        "disposition": "incomplete_reviewed_answer",
+        "semantic_acceptance": "not_accepted",
+        "independent_review": "pending",
+        "reviewer_type": "assistant_development_review_not_independent",
+        "scope": "Offline reviewer ledger; no automatic entailment proof or production answer repair."
+      },
+      "direct_question_coverage_complete": true,
+      "frozen_rubric_coverage_complete": false
+    },
+    {
+      "case_id": "RU-1",
+      "mode": "multi",
+      "frame_sha256": "b006c93a8dae3b10d8eb00223924b9b78d075616f832c8fbf6523390379a04cf",
+      "reviewer_type": "assistant_development_review_not_independent",
+      "claims": [
+        {
+          "id": "c1",
+          "claim_sha256": "6f9825a7ef52c4ebe4d81d6ca5038b1d46f67559f7446a9c7f483758e78b4738",
+          "source_quote": "Каждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 93,
+              "text": "Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API.",
+              "verdict": "supported",
+              "support_spans": [
+                "`pending` — запрос пользователя сохранён перед вызовом API;"
+              ],
+              "reason": "Прямое определение pending, не обещание успешного завершения."
+            },
+            {
+              "start": 93,
+              "end": 161,
+              "text": " Сообщение со статусом `completed` можно включать в будущий контекст",
+              "verdict": "supported",
+              "support_spans": [
+                "`completed` — запрос или ответ можно включать в будущий контекст;"
+              ],
+              "reason": "Разрешение включать completed, а не обязательное включение всей истории."
+            },
+            {
+              "start": 161,
+              "end": 233,
+              "text": ", в то время как сообщение со статусом `failed` исключается из контекста",
+              "verdict": "supported",
+              "support_spans": [
+                "`failed` — запрос остаётся для диагностики, но исключается из контекста."
+              ],
+              "reason": "Прямой запрет использования failed, согласованный с цитатой."
+            },
+            {
+              "start": 233,
+              "end": 263,
+              "text": ", но остаётся для диагностики.",
+              "verdict": "supported",
+              "support_spans": [
+                "запрос остаётся для диагностики"
+              ],
+              "reason": "Диагностическое хранение failed прямо указано."
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "claim_sha256": "5139572398dc7250233c2a013233438b767012bc60c92c754824c3a8117a5e94",
+          "source_quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+          "evidence_ids": [
+            "e2"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 66,
+              "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно,",
+              "verdict": "supported",
+              "support_spans": [
+                "В API-запрос он добавляется явно"
+              ],
+              "reason": "Субъект — текущий pending; не все pending из истории."
+            },
+            {
+              "start": 66,
+              "end": 145,
+              "text": " потому что из базы восстанавливаются только сообщения со статусом `completed`.",
+              "verdict": "supported",
+              "support_spans": [
+                "из базы восстанавливаются только сообщения со статусом `completed`"
+              ],
+              "reason": "Прямая причинная связь: обычное восстановление не добавляет текущий pending."
+            },
+            {
+              "start": 145,
+              "end": 267,
+              "text": " Это означает, что сообщение со статусом `pending` не восстанавливается автоматически как часть истории после перезапуска.",
+              "verdict": "scoped_inference",
+              "support_spans": [
+                "из базы восстанавливаются только сообщения со статусом `completed`"
+              ],
+              "reason": "Если сообщение всё ещё pending, completed-only восстановление исключает его и после рестарта. Это следствие ограничения по статусу, а не утверждение, что никогда не восстановится впоследствии completed. Сам restart не описан этой цитатой как отдельная процедура."
+            }
+          ]
+        }
+      ],
+      "coverage_note": "Прямой вопрос: определения, явная вставка и completed-only восстановление объяснены. Расширенная замороженная рубрика: явная защитная причина для прерванного/неуспешного обмена не сформулирована. Это отдельный пропуск полноты, не ошибка grounding.",
+      "admission": {
+        "disposition": "incomplete_reviewed_answer",
+        "semantic_acceptance": "not_accepted",
+        "independent_review": "pending",
+        "reviewer_type": "assistant_development_review_not_independent",
+        "scope": "Offline reviewer ledger; no automatic entailment proof or production answer repair."
+      },
+      "direct_question_coverage_complete": true,
+      "frozen_rubric_coverage_complete": false
+    },
+    {
+      "case_id": "EN-3",
+      "mode": "multi",
+      "frame_sha256": "3db8b379f360086abd33691f8bb4116b7aa5c2e7dd502ed22d4fcd45d8e38a2a",
+      "reviewer_type": "assistant_development_review_not_independent",
+      "claims": [
+        {
+          "id": "c1",
+          "claim_sha256": "d783bee5a256a3baf3e1809d57fe4a2870e6837f4ac942e9386fcc43f16d0b17",
+          "source_quote": "The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 188,
+              "text": "The orchestration agent distinguishes a genuinely model-selected operation from an `agent correction` or `agent fallback` by ensuring that the operation is part of the verified MCP results",
+              "verdict": "incorrect",
+              "support_spans": [],
+              "reason": "Проверка результата исполнения не устанавливает, кто выбрал операцию. Цитата говорит о формировании финального ответа, а не о происхождении выбора. Смешаны selection и result verification."
+            },
+            {
+              "start": 188,
+              "end": 247,
+              "text": " and not labeled as `agent fallback` or `agent correction`.",
+              "verdict": "unsupported",
+              "support_spans": [],
+              "reason": "Отсутствие меток не является достаточным доказательством выбора моделью; метки вообще отсутствуют в выбранной цитате. Проверка unsupported_identifier срабатывает именно на них."
+            },
+            {
+              "start": 247,
+              "end": 301,
+              "text": " The agent only reports success after `verified=true`.",
+              "verdict": "supported",
+              "support_spans": [
+                "the agent only reports success after `verified=true`."
+              ],
+              "reason": "Условие отчёта об успехе прямо подтверждено, но не спасает ошибочную первую часть."
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "claim_sha256": "81ed0296b14f04eb7d4bd005a595055131b0ede7938ffc2b91c616e67b31dcac",
+          "source_quote": "The final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 176,
+              "text": "Before the agent can report that the generated repository report was saved successfully, the final verification must compare the report read from disk with the original summary",
+              "verdict": "supported",
+              "support_spans": [
+                "The final verification compares the report read from disk with the original summary."
+              ],
+              "reason": "Disk read-back и сравнение с оригиналом подтверждены; случай успешного отчёта следует читать в пределах этой проверки."
+            },
+            {
+              "start": 176,
+              "end": 216,
+              "text": " and confirm that it is `verified=true`.",
+              "verdict": "unsupported",
+              "support_spans": [],
+              "reason": "verified=true отсутствует именно в выбранной source_quote, хотя находится в другом доступном фрагменте e1. Подмена точной опоры всем e1 запрещена."
+            }
+          ]
+        }
+      ],
+      "coverage_note": "EN-3: failure-stop для invalid JSON/MCP не изложен; это отдельный пункт зафиксированной расширенной рубрики, а не новое требование прямого вопроса. Single покрывает прямой вопрос по смыслу, но содержит ошибку привязки c2. Multi не описывает точные триггеры и смешивает уровни.",
+      "admission": {
+        "disposition": "runtime_rejected_original_retained",
+        "semantic_acceptance": "not_accepted",
+        "independent_review": "pending",
+        "reviewer_type": "assistant_development_review_not_independent",
+        "scope": "Offline reviewer ledger; no automatic entailment proof or production answer repair."
+      },
+      "direct_question_coverage_complete": false,
+      "frozen_rubric_coverage_complete": false
+    },
+    {
+      "case_id": "EN-3",
+      "mode": "single",
+      "frame_sha256": "8cf20981dd9a2f852afb943d6f6f2cdb3ae7671654457f8673dd784efd5728b5",
+      "reviewer_type": "assistant_development_review_not_independent",
+      "claims": [
+        {
+          "id": "c1",
+          "claim_sha256": "a335db4be270e49f8b3d024dd2e0ce5c7e469d6f22c52d35a5ab1cb6c4208755",
+          "source_quote": "If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 212,
+              "text": "The agent distinguishes a genuinely model-selected operation from an `agent correction` or `agent fallback` by labeling steps as `agent fallback` or `agent correction` when Groq returns HTTP 400 `tool_use_failed`",
+              "verdict": "supported",
+              "support_spans": [
+                "If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`."
+              ],
+              "reason": "Первая пара respectively: fallback соответствует HTTP400 tool_use_failed; это не любой сбой."
+            },
+            {
+              "start": 212,
+              "end": 265,
+              "text": " or the model selects a premature step, respectively.",
+              "verdict": "supported",
+              "support_spans": [
+                "If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`."
+              ],
+              "reason": "Вторая пара respectively: correction соответствует преждевременному выбору модели. Порядок пар прочитан целиком; это не перестановка условий."
+            },
+            {
+              "start": 265,
+              "end": 312,
+              "text": " These steps are not counted as model selected.",
+              "verdict": "supported",
+              "support_spans": [
+                "Neither step can be counted as model selected."
+              ],
+              "reason": "Ни correction, ни fallback не засчитываются как выбранные моделью."
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "claim_sha256": "a20d0a3e36a35aadd3b9f7a465e41b9b5ffa23ed6827ccedac0b3af04260e231",
+          "source_quote": "The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.",
+          "evidence_ids": [
+            "e1"
+          ],
+          "clauses": [
+            {
+              "start": 0,
+              "end": 149,
+              "text": "Before the agent can report that the generated repository report was saved successfully, the verification must succeed, indicated by `verified=true`.",
+              "verdict": "supported",
+              "support_spans": [
+                "the agent only reports success after `verified=true`."
+              ],
+              "reason": "Сообщать об успешном сохранении можно только после verified=true."
+            },
+            {
+              "start": 149,
+              "end": 223,
+              "text": " This ensures that the report read from disk matches the original summary.",
+              "verdict": "unsupported",
+              "support_spans": [],
+              "reason": "Выбранная цитата не определяет, что verified проверяет равенство прочитанного отчёта исходному summary. Верность этой фразы в другом точном фрагменте не является опорой данного claim."
+            }
+          ]
+        }
+      ],
+      "coverage_note": "EN-3: failure-stop для invalid JSON/MCP не изложен; это отдельный пункт зафиксированной расширенной рубрики, а не новое требование прямого вопроса. Single покрывает прямой вопрос по смыслу, но содержит ошибку привязки c2. Multi не описывает точные триггеры и смешивает уровни.",
+      "admission": {
+        "disposition": "blocked_by_clause_review",
+        "semantic_acceptance": "not_accepted",
+        "independent_review": "pending",
+        "reviewer_type": "assistant_development_review_not_independent",
+        "scope": "Offline reviewer ledger; no automatic entailment proof or production answer repair."
+      },
+      "direct_question_coverage_complete": true,
+      "frozen_rubric_coverage_complete": false
+    }
+  ],
+  "semantic_acceptance": "not_accepted",
+  "stage7": "open",
+  "stage8": "not_started"
+}

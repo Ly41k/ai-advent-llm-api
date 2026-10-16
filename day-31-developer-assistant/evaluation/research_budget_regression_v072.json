@@ -1,0 +1,399 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_regression",
+  "scope": "20 fixed questions first introduced in v071; partial outcomes already viewed. New admission-policy regression phase v072; no independent held-out or end-to-end acceptance. Questions and rubrics unchanged.",
+  "created_at": "2026-10-13T17:49:51.468924+00:00",
+  "batch_core": [
+    "receipt-ru",
+    "receipt-en",
+    "main-authority-branch-ru",
+    "main-authority-branch-en"
+  ],
+  "batches": [
+    {
+      "id": "a",
+      "case_ids": [
+        "receipt-ru",
+        "receipt-en",
+        "main-authority-branch-ru",
+        "main-authority-branch-en"
+      ],
+      "generation_upper_bound": 10,
+      "request_observations": 8
+    },
+    {
+      "id": "b",
+      "case_ids": [
+        "assistant-facts-ru",
+        "assistant-facts-en",
+        "dense-private-branch-ru",
+        "dense-private-branch-en"
+      ],
+      "generation_upper_bound": 10,
+      "request_observations": 8
+    },
+    {
+      "id": "c",
+      "case_ids": [
+        "quote-language-ru",
+        "quote-language-en",
+        "path-limit-branch-ru",
+        "path-limit-branch-en"
+      ],
+      "generation_upper_bound": 10,
+      "request_observations": 8
+    },
+    {
+      "id": "d",
+      "case_ids": [
+        "paraphrase-ru",
+        "paraphrase-en",
+        "serialized-model-branch-ru",
+        "serialized-model-branch-en"
+      ],
+      "generation_upper_bound": 10,
+      "request_observations": 8
+    },
+    {
+      "id": "e",
+      "case_ids": [
+        "uncertain-branch-ru",
+        "uncertain-branch-en",
+        "unsupported-knobs-ru",
+        "unsupported-knobs-en"
+      ],
+      "generation_upper_bound": 10,
+      "request_observations": 8
+    }
+  ],
+  "cases": [
+    {
+      "id": "receipt-ru",
+      "language": "ru",
+      "question": "После POST сообщения API вернул HTTP 202. Это готовый ответ или квитанция генерации? Какой API ресурс позволяет узнать состояние этой генерации?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/api.md"
+      ],
+      "required_points": [
+        "HTTP 202 возвращает квитанцию генерации, а не сам готовый ответ.",
+        "Состояние читается через GET /api/v1/generations/{generation}."
+      ]
+    },
+    {
+      "id": "receipt-en",
+      "language": "en",
+      "question": "After posting a message, the API returned HTTP 202. Is this a completed answer or a generation receipt? Which API resource lets me read that generation state?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/api.md"
+      ],
+      "required_points": [
+        "HTTP 202 returns a generation receipt, not the completed answer itself.",
+        "Generation state is read with GET /api/v1/generations/{generation}."
+      ]
+    },
+    {
+      "id": "assistant-facts-ru",
+      "language": "ru",
+      "question": "В документации памяти: сохранённый текст ассистента автоматически становится проверенным фактом о пользователе или только записью того, что было сказано?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Сообщения ассистента фиксируют сказанное им.",
+        "Они не являются автоматически проверенными фактами о пользователе."
+      ]
+    },
+    {
+      "id": "assistant-facts-en",
+      "language": "en",
+      "question": "In the memory documentation, does saved assistant text automatically become a verified fact about the user, or merely a record of what was said?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Assistant messages record what the assistant said.",
+        "They are not automatically verified user facts."
+      ]
+    },
+    {
+      "id": "dense-private-branch-ru",
+      "language": "ru",
+      "question": "Согласно документации, добавление dense Project RAG дня 31 делает поиск личной памяти дня 30 векторным? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Нет: векторный индекс Project RAG не является новой личной памятью.",
+        "Project dense retrieval не обновляет поиск памяти приватного чата дня 30.",
+        "Ветка совпадает с повторно проверенным Git."
+      ]
+    },
+    {
+      "id": "dense-private-branch-en",
+      "language": "en",
+      "question": "According to the documentation, does adding dense Project RAG in Day 31 make Day 30 personal-memory search vector-based? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "No: the project vector index is not a new personal-memory layer.",
+        "Project dense retrieval does not upgrade private Day 30 memory search.",
+        "Branch matches reobserved Git."
+      ]
+    },
+    {
+      "id": "quote-language-ru",
+      "language": "ru",
+      "question": "Что говорит документация памяти: после смены reply_language оригинал сообщения и цитата источника переводятся или сохраняют исходный текст?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Оригинальное сообщение и цитата сохраняют исходный текст.",
+        "Настройка языка ответа не заменяет исходные тексты переводом."
+      ]
+    },
+    {
+      "id": "quote-language-en",
+      "language": "en",
+      "question": "What does the memory documentation say: after changing reply_language, are the original message and source quotation translated or kept in their original text?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "The original message and source quotation retain their original text.",
+        "The reply-language setting does not replace those originals with translations."
+      ]
+    },
+    {
+      "id": "path-limit-branch-ru",
+      "language": "ru",
+      "question": "Согласно документации, сколько изменённых путей максимум проверяет цепочка на связь с документацией? Подтверждает ли найденная связь всю функциональность файла? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Не более четырёх изменённых путей.",
+        "Связь по точному относительному пути не доказывает описание всей функциональности.",
+        "Ветка совпадает с повторно проверенным Git."
+      ]
+    },
+    {
+      "id": "path-limit-branch-en",
+      "language": "en",
+      "question": "According to the documentation, how many changed paths can the chain check for documentation associations? Does finding an association prove all file functionality? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "At most four changed paths.",
+        "An exact relative-path association does not prove coverage of all file functionality.",
+        "Branch matches reobserved Git."
+      ]
+    },
+    {
+      "id": "main-authority-branch-ru",
+      "language": "ru",
+      "question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md"
+      ],
+      "required_points": [
+        "Main видит полный вопрос, проверенные утверждения и произведённые приложением Git-факты.",
+        "Main может упорядочивать существующие claim/fact IDs, но не добавлять новый текст или факты.",
+        "Ветка совпадает с повторно проверенным Git."
+      ]
+    },
+    {
+      "id": "main-authority-branch-en",
+      "language": "en",
+      "question": "In the architecture documentation, does Main receive original excerpts or already checked claims? Can Main add new factual prose? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md"
+      ],
+      "required_points": [
+        "Main sees the full question, checked claims and application-produced Git facts.",
+        "Main can order existing claim/fact IDs but cannot add new text or facts.",
+        "Branch matches reobserved Git."
+      ]
+    },
+    {
+      "id": "paraphrase-ru",
+      "language": "ru",
+      "question": "Гарантирует ли лексический поиск памяти дня 30 нахождение русско-английских перефразировок? Загружает ли он дополнительную embedding-модель?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Нет гарантии поиска перефразировок между RU и EN.",
+        "Поиск использует FTS5 без дополнительной embedding-модели."
+      ]
+    },
+    {
+      "id": "paraphrase-en",
+      "language": "en",
+      "question": "Does Day 30 lexical memory search guarantee finding Russian-English paraphrases? Does it load an additional embedding model?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md"
+      ],
+      "required_points": [
+        "Finding paraphrases across RU and EN is not guaranteed.",
+        "The search uses FTS5 without an additional embedding model."
+      ]
+    },
+    {
+      "id": "serialized-model-branch-ru",
+      "language": "ru",
+      "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Используется одна модель Qwen, не копия на каждого агента.",
+        "Модельные вызовы сериализованы shared lease; Git и retrieval могут выполняться параллельно.",
+        "Ветка совпадает с повторно проверенным Git."
+      ]
+    },
+    {
+      "id": "serialized-model-branch-en",
+      "language": "en",
+      "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "There is one Qwen model, not a copy per agent.",
+        "Model calls are serialized by the shared lease; Git and retrieval may run concurrently.",
+        "Branch matches reobserved Git."
+      ]
+    },
+    {
+      "id": "uncertain-branch-ru",
+      "language": "ru",
+      "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Сохраняется uncertain inference state и требуется проверяемое восстановление.",
+        "Нет автоматического повтора, cloud fallback или model restart.",
+        "Ветка совпадает с повторно проверенным Git."
+      ]
+    },
+    {
+      "id": "uncertain-branch-en",
+      "language": "en",
+      "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Uncertain inference state is retained and verifiable recovery is required.",
+        "No automatic replay, cloud fallback or model restart.",
+        "Branch matches reobserved Git."
+      ]
+    },
+    {
+      "id": "unsupported-knobs-ru",
+      "language": "ru",
+      "question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Для указанного механизма и параметров нет подтверждения в корпусе.",
+        "Корректный unknown без выдуманных значений или описания неподтверждённого механизма."
+      ]
+    },
+    {
+      "id": "unsupported-knobs-en",
+      "language": "en",
+      "question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "The corpus does not support this named mechanism or its parameters.",
+        "Return unknown without inventing values or describing the unsupported mechanism."
+      ]
+    }
+  ]
+}

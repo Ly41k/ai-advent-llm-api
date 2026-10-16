@@ -1,0 +1,22 @@
+{
+  "format": "bublik-budget-regression-input-v1",
+  "scope": "Exact public documentation input from stopped v071 request; no model output or semantic labels",
+  "context": {
+    "question": "В документации памяти: сохранённый текст ассистента автоматически становится проверенным фактом о пользователе или только записью того, что было сказано?",
+    "language": "ru",
+    "evidence": [
+      {
+        "id": "e1",
+        "quote": "## Доступ к памяти\n\nВеб-чат включён в режим поиска по умолчанию. Поиск охватывает все accepted user\nmessages и непустые terminal assistant messages независимо от возраста диалога\nили успешности ответа. Queued/running assistant checkpoints доступны в обычной\nистории, но ещё меняются и поэтому не становятся frozen источниками RAG.\nПосле завершения/прерывания их сохранённый текст попадает в индекс.\n\nКаждая цитата содержит роль, статус, дату, IDs, диапазон символов и SHA-256\nполного текста. Assistant response — свидетельство о том, что ответил ассистент,\nа не подтверждённый факт о пользователе. Partial response явно помечается.\nИсточник проверяется по основной базе при поиске и повторно при admission.\n\nПоиск рассматривает весь корпус, но возвращает до трёх сообщений. Ограничение\nрезультатов/контекста не ограничивает сохранённую память. Original-message API,\nbounded conversation-window API и существующая pagination истории позволяют\nчитать исходный разговор независимо от inference budget. Модель пока получает\nвыбранные цитаты автоматически; самостоятельные дополнительные поиски и чтение\nразговора моделью ещё не реализованы. Это будущий навык использования памяти.\n\nСервис принимает сменный `HistorySearch` backend. Контракт результата включает\npolicy_version, sources, indexed_messages, search_seconds и reason. ContextBuilder\nи storage не доверяют backend авторизацию или содержание original quotations.\nBackend policy сохраняется в snapshot. Семантический backend можно добавить\nотдельно, не меняя IDs и публичный контракт источников; его ресурсный профиль и\nкачество потребуют замеров.\n\nAPI v1 сохраняет историческое `use_memory=false` при отсутствии поля, включая\nстарые idempotency fingerprints. Веб-клиент всегда передаёт явное значение:\nобычно true; false — при ручном отключении. Повтор исходного запроса сохраняет\nего режим и snapshot. Reload/logout возвращает checkbox к true без web storage."
+      },
+      {
+        "id": "e2",
+        "quote": "## Ограничения\n\n- Локальный single-user CLI, без web-auth и multi-user server.\n- Чат не выполняет произвольный пользовательский код.\n- Чат не вызывает внешние MCP tools.\n- Полная история хранится без потерь, но model context намеренно ограничен.\n- Старые детали вне task state и recent completed history могут потребовать уточнения.\n- Planner может ошибочно интерпретировать намерение даже при корректном literal provenance.\n- Точная цитата доказывает provenance, но не автоматически полноту смысла.\n- Live-model quality относится к проверенным prompts/models/settings.\n- POSIX ownership рассчитан и проверен для macOS/Linux на локальной файловой системе."
+      }
+    ]
+  },
+  "legacy_wire_message_bytes": 6442,
+  "content_message_bytes": 6315,
+  "legacy_estimated_total": 8234,
+  "corrected_estimated_total": 8107
+}

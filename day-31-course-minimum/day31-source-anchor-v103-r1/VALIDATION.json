@@ -1,0 +1,42 @@
+{
+  "format": "day31-linked-source-blocks-v103-validation-v1",
+  "environment": "Linux Python 3.12.14",
+  "tests": {
+    "status": "passed",
+    "count": 79,
+    "seconds": 13.326,
+    "resource_warning_policy": "error",
+    "log_sha256": "9569ac6a5e247c0322f4590b2fcadfb56192ca92951b53a00b423d88a6d31198"
+  },
+  "native_v102_review": {
+    "hashes_verified": 14,
+    "matching_offline_report": true,
+    "native_test_count": 69,
+    "native_test_seconds": 11.159,
+    "raw_validation_reproduced": "unsupported_identifier",
+    "known_llm_calls_retained": 1,
+    "original_result": "stopped"
+  },
+  "changed": "Generic Markdown colon lead-in + following structured block linkage only; prompt text/guards unchanged",
+  "case_ids": [
+    "RU-1",
+    "EN-3"
+  ],
+  "pairs": 2,
+  "generation_upper_bound": 4,
+  "embedding_calls": 0,
+  "new_real_model_calls_in_preparation": 0,
+  "model_test_responses": "synthetic",
+  "real_owned_acquisition_worker_questions_tested": 6,
+  "test_index_identity": "synthetic",
+  "known_contexts_checked": 55,
+  "known_context_budget_max": 8154,
+  "research_preview_context_budget_max": 7791,
+  "max_schema_bytes": 27128,
+  "model_options_unchanged": true,
+  "semantic_acceptance": "pending_native_answers_and_review",
+  "native_mac79": "pending",
+  "installed_app": "0.7.29 unchanged",
+  "stage7": "open",
+  "stage8": "not_started"
+}

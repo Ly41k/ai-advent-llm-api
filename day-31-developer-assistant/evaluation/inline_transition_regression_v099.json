@@ -1,0 +1,59 @@
+{
+  "format": "day31-captured-transition-regression-v1",
+  "source_bundle_sha256": "6fe5861f3ccd370ef7fefdaf17a222a6d7c5b27b47b9c2b9a5eb5ca71b4fad2a",
+  "scope": "Two real controlled v098 diagnostic responses; regression fixture, not initial held-out results or new model calls.",
+  "rows": [
+    {
+      "mode": "multi",
+      "context": {
+        "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Контракт жизненного цикла\n\nСостояния: `planning`, `execution`, `validation`, `done`.\n\n| Текущее | Разрешённые переходы | Условие |\n|---|---|---|\n| planning | execution | Нужен непустой и явно утверждённый план |\n| execution | validation, planning | Для validation нужно завершить все шаги; planning — контролируемое перепланирование |\n| validation | done, execution | `done` только после PASS; ошибка проверки возвращает в execution |\n| done | нет | Терминальное состояние |\n\nПауза не является пятым этапом. Пока задача на паузе, переходы и изменение прогресса запрещены; разрешено только явное возобновление. Состояние хранится в SQLite."
+          },
+          {
+            "id": "e2",
+            "quote": "## Lifecycle contract\n\nStates: `planning`, `execution`, `validation`, `done`.\n\n| Current | Allowed transitions | Guard |\n|---|---|---|\n| planning | execution | A non-empty, explicitly approved plan is required |\n| execution | validation, planning | Validation requires every step; planning is controlled re-planning |\n| validation | done, execution | `done` requires PASS; failed validation returns to execution |\n| done | none | Terminal state |\n\nPause is orthogonal to the stage. While paused, no transition or progress mutation is accepted; only explicit resume is allowed. State is persisted in SQLite."
+          },
+          {
+            "id": "e3",
+            "quote": "## Что добавлено\n\n- `TaskState` задаёт допустимые состояния.\n- `ALLOWED_TRANSITIONS` — единый граф переходов.\n- `allowed_targets()` применяет guards и показывает только реально доступные сейчас переходы.\n- Guards запрещают пропуски этапов и объясняют отказ.\n- План утверждается отдельной командой `/task approve`; изменение плана сбрасывает утверждение.\n- В prompt передаётся та же политика с запретом перескакивать этапы.\n- Семантический postflight проверяет готовый ответ модели относительно текущего этапа и `expected_action`.\n- Ответ с реализацией во время `planning` удаляется и заменяется детерминированным отказом.\n- `/task status` показывает разрешённые переходы.\n- Проверки инвариантов Дня 14 сохранены."
+          }
+        ]
+      },
+      "raw_content": "{\n  \"status\": \"answered\",\n  \"language\": \"ru\",\n  \"claims\": [\n    {\n      \"text\": \"Для перехода `planning → execution` требуется непустой и явно утверждённый план.\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    },\n    {\n      \"text\": \"Для перехода `validation → done` требуется PASS; если проверка не прошла, задача возвращается в состояние `execution`.\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    },\n    {\n      \"text\": \"При паузе задачи запрещены любые переходы и изменение прогресса; разрешено только явное возобновление.\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    }\n  ]\n}",
+      "content_sha256": "d56d8c398459171b5f1a3ec78a352ad04b3d6bcf4063c9e37531ae18d7b47c06",
+      "request_body_sha256": "8015a6b86ef8735305a99253ee5f0a8b1030a9af4c699f90f349a8ffce96c4d4",
+      "original_validation_reason": "unsupported_identifier"
+    },
+    {
+      "mode": "single",
+      "context": {
+        "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Контракт жизненного цикла\n\nСостояния: `planning`, `execution`, `validation`, `done`.\n\n| Текущее | Разрешённые переходы | Условие |\n|---|---|---|\n| planning | execution | Нужен непустой и явно утверждённый план |\n| execution | validation, planning | Для validation нужно завершить все шаги; planning — контролируемое перепланирование |\n| validation | done, execution | `done` только после PASS; ошибка проверки возвращает в execution |\n| done | нет | Терминальное состояние |\n\nПауза не является пятым этапом. Пока задача на паузе, переходы и изменение прогресса запрещены; разрешено только явное возобновление. Состояние хранится в SQLite."
+          },
+          {
+            "id": "e2",
+            "quote": "## Lifecycle contract\n\nStates: `planning`, `execution`, `validation`, `done`.\n\n| Current | Allowed transitions | Guard |\n|---|---|---|\n| planning | execution | A non-empty, explicitly approved plan is required |\n| execution | validation, planning | Validation requires every step; planning is controlled re-planning |\n| validation | done, execution | `done` requires PASS; failed validation returns to execution |\n| done | none | Terminal state |\n\nPause is orthogonal to the stage. While paused, no transition or progress mutation is accepted; only explicit resume is allowed. State is persisted in SQLite."
+          },
+          {
+            "id": "e3",
+            "quote": "## Что добавлено\n\n- `TaskState` задаёт допустимые состояния.\n- `ALLOWED_TRANSITIONS` — единый граф переходов.\n- `allowed_targets()` применяет guards и показывает только реально доступные сейчас переходы.\n- Guards запрещают пропуски этапов и объясняют отказ.\n- План утверждается отдельной командой `/task approve`; изменение плана сбрасывает утверждение.\n- В prompt передаётся та же политика с запретом перескакивать этапы.\n- Семантический postflight проверяет готовый ответ модели относительно текущего этапа и `expected_action`.\n- Ответ с реализацией во время `planning` удаляется и заменяется детерминированным отказом.\n- `/task status` показывает разрешённые переходы.\n- Проверки инвариантов Дня 14 сохранены."
+          }
+        ],
+        "documentation_question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+        "git_facts": []
+      },
+      "raw_content": "{\n  \"status\": \"answered\",\n  \"language\": \"ru\",\n  \"claims\": [\n    {\n      \"text\": \"Для перехода `planning → execution` требуется непустой и явно утверждённый план.\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    },\n    {\n      \"text\": \"Для перехода `validation → done` требуется успешное завершение проверки (PASS).\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    },\n    {\n      \"text\": \"При попытке изменить прогресс задачи или выполнить переход во время паузы такие действия запрещены.\",\n      \"evidence_ids\": [\"e1\", \"e2\"]\n    }\n  ],\n  \"git_fact_ids\": []\n}",
+      "content_sha256": "ea91effa6ba8734ac0575934f81e50e56687a5c2f6d00e6cbc0d19a1171966fa",
+      "request_body_sha256": "0412b29cd8b6a8d1b5298b64258b8a22e14c760fda3c0d8a3359e7854eb9944f",
+      "original_validation_reason": "unsupported_identifier"
+    }
+  ]
+}

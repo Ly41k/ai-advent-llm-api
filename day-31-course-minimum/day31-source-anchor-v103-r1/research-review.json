@@ -1,0 +1,1667 @@
+{
+  "format": "day31-v102-stopped-anchor-review-v1",
+  "created_at": "2026-10-16T06:17:49.369142+00:00",
+  "status": "reviewed_original_rejection_retained",
+  "source_bundle_library_id": "libfile_266de53b82a08191a2aed80bffe3c408",
+  "source_bundle_sha256": "7f61f1723a5ac1b5cc5f730f205430f43c190ce2b5c12fada09102fd02377eb9",
+  "native_hashes_verified": 14,
+  "native_report_hash_manifest": {
+    "day31-source-anchor-mac-v102-analysis-c1a7a0b364d84e23a5c120f1a7750ddc.json": "ff8fb38fcf3b9eed2288baf00bd587e92e328f622dd3e978099f347a399f9723",
+    "day31-source-anchor-mac-v102-dispatch-c1a7a0b364d84e23a5c120f1a7750ddc.json": "b06a3de34ceea1111240b225be5c70043bde17d7d85287f275574e5f4f07847d",
+    "day31-source-anchor-mac-v102-freeze.json": "276c008b9dc488df20119d86b66adabfb6b829630275bfab50af471ec2b670e2",
+    "day31-source-anchor-mac-v102-human-review-template.json": "cde35234dd1546a3af3f7411a1b0d233017a8e610115ffe4b70e9d66e7c18c73",
+    "day31-source-anchor-mac-v102-index-verify.json": "cbea55621c124de6616d8d38f7d80337d3fe8e5f648d7f68d0018151a84dd75e",
+    "day31-source-anchor-mac-v102-offline-tests.json": "9870eb004d58ab70187062a7e87d2a2c91741807a32c6520d020f464bdc64167",
+    "day31-source-anchor-mac-v102-plan.json": "b98d8a0f04fd4e1b4c64396f97f1bf4d2bf74786c6de507ee7285fe648125c27",
+    "day31-source-anchor-mac-v102-prompt-profile.json": "03a8579358d4ea77818cd6fa31b9205bb09129aa68cf176552414fbf7a674894",
+    "day31-source-anchor-mac-v102-raw-c1a7a0b364d84e23a5c120f1a7750ddc.json": "b9b78c5583a2cd3540ba804b00335785468434d30b108dfda43202bf3421e4b3",
+    "day31-source-anchor-mac-v102-research-review.json": "4754da5e084dbb30fa4576abb1dd71b2909f67885f8f0dd1874af38e567803f4",
+    "day31-source-anchor-mac-v102-result.json": "f43aeaa7823f271e6e394513cba074d5493df02a194a972922ddbd19b3b1d537",
+    "day31-source-anchor-mac-v102-runner.json": "862ce15aeb508aedfa3ef889fcfcb740878b7ef1694ecebcd155ee6278879a93",
+    "day31-source-anchor-mac-v102-selection-policy.json": "2f3e551cf6b266046f53d4556e5c74c43341a2e4de15579de5df152476dde1aa",
+    "day31-source-anchor-mac-v102-task-selection.json": "d88af2cb083527d425d14212afc318f114966e53406cf07655f187e3b259b717"
+  },
+  "provenance_audit": {
+    "matching_separate_offline_report": true,
+    "native_tests_passed": 69,
+    "native_test_seconds": 11.159,
+    "exact_source_spans_verified": 3,
+    "original_request_body_reconstructed": true,
+    "exact_raw_validation_reproduced": true,
+    "source_quotes_are_valid_v102_choices": true,
+    "raw_frame_satisfies_output_json_schema": true,
+    "runtime_source_verification_passed": true,
+    "runtime_final_verification_passed": true,
+    "known_generation_calls": 1,
+    "uncertain_calls": 0,
+    "journal_limit": "Full journal not exported; only reported sequence/tip."
+  },
+  "summary": {
+    "actual_common_capability_calls": 2,
+    "common_preparation_seconds": 0.5105462500068825,
+    "embedding_calls": 0,
+    "failed_requests": 0,
+    "generation_slots_reserved": 1,
+    "input_tokens": 1200,
+    "known_llm_calls": 1,
+    "llm_calls": 1,
+    "output_tokens": 389,
+    "pairs_completed": 0,
+    "requests_completed": 1,
+    "semantic_acceptance": "not_evaluated",
+    "single_multi_comparison": "source_anchor_targeted_development_snapshot_regression",
+    "technical_failure_requests": 1,
+    "unknown_inference_attempts": 0
+  },
+  "rejection": {
+    "reason": "unsupported_identifier",
+    "claim_id": "c1",
+    "missing_tokens": [
+      "pending",
+      "completed",
+      "failed"
+    ],
+    "exact_selected_quote": "Каждое сообщение имеет один из трёх статусов:",
+    "root_cause": "The model selected a colon-ended introduction without its following Markdown list, then described statuses outside that chosen anchor. The schema permitted the detached introduction. Original narrow-anchor validator correctly rejected the mismatched claim.",
+    "not_a_transport_failure": true,
+    "no_truncation_observed": true,
+    "no_replay_or_repair_of_native_result": true
+  },
+  "claim_anchor_checks": [
+    {
+      "claim_id": "c1",
+      "anchor": {
+        "start": 1788,
+        "end": 1833,
+        "quote": "Каждое сообщение имеет один из трёх статусов:",
+        "section": [
+          "День 7 — сохранение контекста",
+          "Как это работает"
+        ],
+        "source": "day-07-context-persistence/README.ru.md",
+        "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "relative_start": 649,
+        "relative_end": 694,
+        "start_line": 52,
+        "end_line": 52
+      },
+      "text": "Сообщения в памяти Бублика имеют три статуса: `pending`, `completed` и `failed`. Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` означает, что запрос или ответ можно включать в будущий контекст. Сообщение со статусом `failed` означает, что запрос остаётся для диагностики, но исключается из контекста.",
+      "tokens_missing_in_anchor": [
+        "pending",
+        "completed",
+        "failed"
+      ]
+    },
+    {
+      "claim_id": "c2",
+      "anchor": {
+        "start": 3308,
+        "end": 3624,
+        "quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+        "section": [
+          "День 7 — сохранение контекста",
+          "Важная деталь"
+        ],
+        "source": "day-07-context-persistence/README.ru.md",
+        "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+        "relative_start": 18,
+        "relative_end": 334,
+        "start_line": 106,
+        "end_line": 106
+      },
+      "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это позволяет избежать включения неуспешных или прерванных запросов в будущий контекст LLM.",
+      "tokens_missing_in_anchor": []
+    }
+  ],
+  "raw_frame": {
+    "status": "answered",
+    "language": "ru",
+    "claims": [
+      {
+        "source_quote": "Каждое сообщение имеет один из трёх статусов:",
+        "text": "Сообщения в памяти Бублика имеют три статуса: `pending`, `completed` и `failed`. Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` означает, что запрос или ответ можно включать в будущий контекст. Сообщение со статусом `failed` означает, что запрос остаётся для диагностики, но исключается из контекста.",
+        "evidence_ids": [
+          "e1"
+        ]
+      },
+      {
+        "source_quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+        "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это позволяет избежать включения неуспешных или прерванных запросов в будущий контекст LLM.",
+        "evidence_ids": [
+          "e2"
+        ]
+      }
+    ],
+    "git_fact_ids": []
+  },
+  "reviewer": {
+    "type": "assistant",
+    "identity": "Codex development assistant",
+    "independent_human": false
+  },
+  "next_fix_scope": "Generic Markdown unit construction: attach a colon-ended lead-in to the next adjacent list/table/fence in the same section. Remove the detached lead-in choice. Keep exact-source and narrow text validators unchanged. No case names, expected tokens or answers in the algorithm.",
+  "semantic_acceptance": "not_accepted",
+  "stage7": "open",
+  "stage8": "not_started",
+  "raw_native_reports_subset": {
+    "day31-source-anchor-mac-v102-analysis-c1a7a0b364d84e23a5c120f1a7750ddc.json": {
+      "data": {
+        "content_sha256": "170cc02154532119b69bd33ed9483c458e5baf572a0b2de7ae01c0f1c160311c",
+        "format": "day31-selection-regression-exact-validation-analysis-v1",
+        "mode": "single",
+        "normalized_output": null,
+        "render_version": "source-anchor-text-identity-v1",
+        "request_id": "a36433f47e0a4a0883003fb98413d9cb",
+        "scope": "Exact source-span validation and original v099 guards on unchanged text against the selected anchor and original evidence; no factual repair or semantic acceptance.",
+        "source_anchors": [],
+        "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc",
+        "unmatched_identifiers": [
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "pending",
+            "token_kind": "inline_code"
+          },
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "completed",
+            "token_kind": "inline_code"
+          },
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "failed",
+            "token_kind": "inline_code"
+          },
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "pending",
+            "token_kind": "inline_code"
+          },
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "completed",
+            "token_kind": "inline_code"
+          },
+          {
+            "claim_index": 0,
+            "evidence_ids": [
+              "e1"
+            ],
+            "token": "failed",
+            "token_kind": "inline_code"
+          }
+        ],
+        "validation_passed": false,
+        "validation_reason": "unsupported_identifier"
+      },
+      "sha256": "ff8fb38fcf3b9eed2288baf00bd587e92e328f622dd3e978099f347a399f9723"
+    },
+    "day31-source-anchor-mac-v102-dispatch-c1a7a0b364d84e23a5c120f1a7750ddc.json": {
+      "data": {
+        "context_digest": "8528ad1489bd7e094816bb4fcdc426a349e88c9dae879a88f21782eb7bf2c079",
+        "created_at": "2026-10-15T18:58:04.359201+00:00",
+        "format": "day31-selection-regression-dispatch-capture-v1",
+        "message_digest": "833f191bcb22f8a4a47643699aad0ab041a79a6dfc0f40302eff096df128c751",
+        "mode": "single",
+        "output_schema_digest": "2d5dfa9c332a73d32d1f732410837b23aa8dff271b6e982a7ec68f1645521ecf",
+        "request_body_sha256": "a2fe86e46f48c55b6cbcadac2f2537fff129afa05c1ba70e9eec768fd5244bba",
+        "request_id": "a36433f47e0a4a0883003fb98413d9cb",
+        "scope": "Instrumentation witness; original model session checkpoint remains authoritative.",
+        "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc"
+      },
+      "sha256": "b06a3de34ceea1111240b225be5c70043bde17d7d85287f275574e5f4f07847d"
+    },
+    "day31-source-anchor-mac-v102-freeze.json": {
+      "data": {
+        "catalog_design": {
+          "case_count": 6,
+          "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+          "human_review": "pending",
+          "independent_semantic_acceptance": false,
+          "kind": "known_regression",
+          "scope": "Post-change development regression of six previously observed questions; not independent held-out, not production44 acceptance, not E2E."
+        },
+        "comparison_spec": {
+          "baseline": "snapshot-single-v26-source-anchor",
+          "cold_warm_control": "not_controlled_in_runner_smoke",
+          "modes": [
+            "single",
+            "multi"
+          ],
+          "order": "catalog-gray-parity-repeat-flip-v1",
+          "per_call_output_limit": 1024,
+          "request_capability_limit": 8,
+          "request_deadline_seconds": 300,
+          "resource_measurement": "not_run",
+          "retrieval": "fts",
+          "scope": "Known-question exact-source-anchor schema experiment; identical evidence/model/options; original guards validate text against exact selected anchor and then original evidence; not held-out or E2E.",
+          "token_probes": 0,
+          "version": "paired-snapshot-source-anchor-v102",
+          "warmups": 0
+        },
+        "conditions": {
+          "capability_limit": 8,
+          "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+          "dense_policy": "vocabulary",
+          "documentation_schema_version": "status-claims-text-first-v7",
+          "fts_endpoint_policy": "literal-endpoint-heading-v1",
+          "generation_budget_policy": "message-content-utf8-plus256-v1",
+          "git_branch": "main",
+          "git_head": "f5cce79933a8535eda5b8d218e79a04aee88d029",
+          "hybrid_policy": "raw",
+          "index": {
+            "built_at": "2026-10-15T14:43:18.373298+00:00",
+            "chunk_version": "project-structural-spans-v1",
+            "chunks": 510,
+            "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+            "documents": 54,
+            "embedding": null,
+            "index_version": "a8144ee97f624572b5ce957891019e60",
+            "limit_words": 250,
+            "overlap_words": 40,
+            "project_id": "ai-advent-llm-api",
+            "schema_version": 1,
+            "selection_digest": "74656e24c55ae4a48f5fbbd005f1e6b1a58729bff17741450ae222d851251d62"
+          },
+          "model_options": {
+            "num_ctx": 8192,
+            "num_predict": 1024,
+            "seed": 31,
+            "temperature": 0
+          },
+          "pipeline_mode": "fts",
+          "project_id": "ai-advent-llm-api",
+          "prompt_version": "project-answers-v25-source-anchor",
+          "query_defaults_version": "mode-query-defaults-v1",
+          "request_deadline": 300,
+          "source_sha256": {
+            "bublik_developer/__init__.py": "c69e0aba21e0baf6959fdec7290b18820965e88aa25c8a3ddf6cc81dd8842e5e",
+            "bublik_developer/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+            "bublik_developer/agent_process.py": "33a367fdbddd9acafdae3faa1d1f91c52d98f027f00e1c88e18a737294abaee6",
+            "bublik_developer/agent_runtime.py": "13f0134e8159b01160869e460a8e9bf78f18d92881d22f61691af7639ac70dd6",
+            "bublik_developer/agent_worker.py": "afb957581ff72a4eecc61b986b907bb060499cc85bfe06ef66282854d11e607f",
+            "bublik_developer/baseline.py": "5b218e1b34a3c2f738f75355a21d01df32969d5266cfc3d860364f9ba3fe2f9f",
+            "bublik_developer/baseline_worker.py": "7a0e92a0f70e2faaa582cca778ddf08641de3d56cecbe5f80cfc6a7d46aa60b9",
+            "bublik_developer/cli.py": "864e32a7f7423591620e8ffffc09e292ad83ab97cc8ccd46437ea401e8158620",
+            "bublik_developer/contracts.py": "f43c7f2a05ab574f0f30919fa0ab2c65170fac611d34de55c97baab28855b294",
+            "bublik_developer/errors.py": "6c4e9eb0215b9b75bef475ee7fd98f8ce1113523e0d19426074804230b0b39d3",
+            "bublik_developer/generation.py": "d6496f034de9d54c20b299ebb4d65034d832dadb64cc423bda247fdb58c0399a",
+            "bublik_developer/git_tools.py": "80d40371ee77951febe85a603488cbf28c17e22a88f838afed49770e9d5f4fb9",
+            "bublik_developer/inference_tasks.py": "7fab2c144b29067e35a82232d1d40c8615a57cddb0b64e19af458eacfa4d0ceb",
+            "bublik_developer/mcp_client.py": "1faee7b24c63b200c3589e7c9fcb61449f7850d487276f4f5251f069ab91b690",
+            "bublik_developer/mcp_schema.py": "ad7f97bb5d0704cb55fc0d1f4d6179ca5fb6b1541dd6247c95dade126636225a",
+            "bublik_developer/mcp_server.py": "e96ea226a8ee583132fccb245ecb30522d003b8ff024886a0985d4d159ef4985",
+            "bublik_developer/model_session.py": "9e795c3705b3c095c30508e6146df5fdaefc9bc2c4973ee37349f61ef9b3fb91",
+            "bublik_developer/model_worker.py": "b856e925cd04b755119fc9331a40012b99fb60da2937a50f008d1e14731ca83a",
+            "bublik_developer/paired_research.py": "10bf39db33c32f7aecbabb9bc41b9f69b977731680252d8780aeac5ceaf1a29b",
+            "bublik_developer/pipeline.py": "62b4074d6cd742d1d8465f54315203120c919ea89b9b0908dbeb4ed841eb1566",
+            "bublik_developer/policy.py": "514c0b7c32ca7b499733acd4a138e48e9d892f5aacdcf576ea2985d599964ec6",
+            "bublik_developer/preflight.py": "3bea9d54c052c5440a2231c622d5482900a3ab995579fe99a97cc697000045eb",
+            "bublik_developer/process.py": "98f304c96a1c9908d1f79983f9bbad12ae7492ecc47da8dabef64ae98c162116",
+            "bublik_developer/rag/__init__.py": "b9b45591ce856d1f2d45b935e1cde5c6cb32715fe3f2bcd32511322c9fac2e00",
+            "bublik_developer/rag/chunking.py": "3504a00691e312a3d4f95efdfaefd0cba6849c0409cb7abee949866213ac22e9",
+            "bublik_developer/rag/corpus.py": "1974ba1d4c1e6106122dd414581ccf03402ae858c5a7e59628eb8d892062ddba",
+            "bublik_developer/rag/embeddings.py": "3d79e9718829900932b24aca5498a229e53cf82812e5f4f92ddbfe5bcafd9278",
+            "bublik_developer/rag/index.py": "5bff723d566c30083956404637eb2d9b0f3515d2272f7ef3ad378232168e940c",
+            "bublik_developer/rag/retrieval.py": "381847f9bbccdc15a091fbd085578b0a53a6680330608f36c8d6775aedef6e84",
+            "bublik_developer/rag/state.py": "5d18a3e7db23befbfd00a79ae6a14d354384f123dc13455ebfba312bb565bf9f",
+            "bublik_developer/reliability.py": "ebba9d7e3dd39aa0f91e3df0740a936c13a0d54e677e48d8a83da768f2e1ae9b",
+            "bublik_developer/research.py": "8b33552a00a2fa966008d7ab970b20536642f52c5e5db4ba84cfccf93897668c",
+            "bublik_developer/routing.py": "8465f3f58bd85ae6fedd38272d45fe916ac4104a05be6c7085907f36cc998579",
+            "bublik_developer/workspace.py": "17ca3295574f7427ce18691bacfb2629de12c1f647b52622f8133ebfab6908ce",
+            "main.py": "5a95fa5c7ff91bd7eaac9894e99a979d6a993d72c81629962ccb3cdd9d13fd5d",
+            "scripts/check_bilingual_retrieval.py": "ae8720491bf0d4789de54d9ab61fb438788fd8e5a3af48edf4edc86a574b40d9",
+            "scripts/check_stage12.py": "a9dff1e7b4ad8645e6719037cee47d0e970b8bedf23927275f355f28367955cc",
+            "scripts/check_stage3.py": "e399b9db306a964355843932c537d91371798076cde0f7b280ae4eff64030552",
+            "scripts/check_stage4.py": "316e6522458cadd1dddd0c49e857538e825fe760838a0ddf50bf9c0ab717ab29",
+            "scripts/check_stage5.py": "c72ca43e6e0de3610e22e071a68b94711acabb3d18b18206de348b34c495a396",
+            "scripts/check_stage6.py": "5aae7583729646821b1c4183b2ed2bc4e1337913c64839dd8bee3dac815ce783",
+            "scripts/check_stage7.py": "7a2540b20034004dc88c7e9803c9ecb13d725a16c2eb507ff72fdee9850f67ba",
+            "scripts/compare_project_retrieval.py": "158379432f7accd1aa95f348315673507965ee39fe719fa07ac209c0b42de9a5",
+            "scripts/compare_single_multi.py": "49397452f63b241b166534677a0f4cf417f027464e73a5cf460c2f6d0bea2920",
+            "scripts/research_project.py": "05a54966df0914e4e0ccfeecf7839c479c8774ea743ed5e92deae3f0f3731e3e",
+            "tests/test_agent_runtime.py": "66478ddcfc9cc3811d59ba86ef9e080c0731a7c489f420bcb7230b556c397c60",
+            "tests/test_bilingual_corpus.py": "797cde72a30599ec47780a22165d15e76c2adb0f269990d2e1681b066f4a26c7",
+            "tests/test_claim_string_boundaries.py": "537296a86566e56db36ecc6de8e7a446c2d73e627ebe66d07b39fa9d3fb1e667",
+            "tests/test_context_budget.py": "6c49271fff66ad15fe462ddcaec9ff3b7c1e3c9f8f69ebd3518624eadeb9dfe6",
+            "tests/test_foundation.py": "b23123ee849a1e073efa7dcb92b56ed4286dc756e713e6518e52ad53ee6deaf7",
+            "tests/test_language_schema.py": "c5397c84a23be8f6235791d133052b0b8e091ff2cfa3e49b7f8cf9ccc8705026",
+            "tests/test_mcp_git.py": "cfda0f466d773bae2c2c882e759a4c485e133675381b6187418aa75b1d3a9739",
+            "tests/test_paired_research.py": "1b06440f510b3340b213705460b2804a7ed0ec6487ff526b90d97c6b98061ab6",
+            "tests/test_pipeline.py": "ee79b098d85c736e47ef0e34f32b10db210438c25f85b6f2f802fd4dcf68f565",
+            "tests/test_project_rag.py": "bffb755d5b88ac0cc68d51587bc2964c7f90873a682c18071e951f4808a87e3c",
+            "tests/test_quality_prompt.py": "7525acd1acfa6364eb1d95bbb4cbe202e878b44736e1a8588273b36816a5bcf1",
+            "tests/test_rejection_diagnostics.py": "82cb5d545b40e544a4f6296f78c9c7fa87adc4505d6c6706858093ae715959d6",
+            "tests/test_reliability.py": "e6a5d06cf3f96917b96569d444fb57023628aa63dafcae3c17d94c6b93b49f5d",
+            "tests/test_research.py": "87ce91839d2196a214572e2b367f731eb99ea13aada7f93092c2ef98ef1d9dc3",
+            "tests/test_transition_tokens.py": "73210aab9cc3bf2acc6f58d8b92a38f14e4d4cacb51e41add4f74c98e8186192"
+          },
+          "token_probes": 0,
+          "version": "0.7.29",
+          "warmups": 0
+        },
+        "created_at": "2026-10-15T18:58:01.208079+00:00",
+        "embedding_calls": 0,
+        "format": "bublik-research-freeze-v1",
+        "generation_calls": 0,
+        "independent_preparation_binding": {
+          "acquisition": "Fresh owned FTS/Verification workers using one explicitly frozen external research selector; same snapshot shared per Single/Multi pair",
+          "criteria_sha256": "359e4256757d611bd9fd0d3474e986cb1521b85d0f86a49f8771d26bc231aa4b",
+          "expected_contexts_sha256": "a5dd1141906a9b18bf12828ebbb4ee8d392b2c3e448587537e1ee296f2d3359e",
+          "expected_selection_sha256": "dd562be7abc56a7ebaa47876f7cec06eaef10086f8c763a722a2b3473db3130f",
+          "new_regression_not_original_replacement": true,
+          "preparation_bundle_sha256": "b4a02ac0a9b746c37fa64e898e4d217cd4e8f68d82f653b5a49d3ca2b71de738",
+          "preparation_freeze_digest": "4cc211c3d213197d7b25d3a477a1d8ad82a745e82285e41766eaf77732dc44da",
+          "prompt_profile_sha256": "0a9c3e221e49f70cb0895248f46e02944642fdd1869ab54674ebe80a1ddf214c",
+          "question_sha256": "5afdcd5eeccd63cea649b4373baae96d72326f40d9552a0bee4d59eaff55b6ad",
+          "reviewed_prior_receipt_sha256": "77045d252ce68ae8a6f5f214cdadcda3ac76fe1fa7457ab140045c56b300719a",
+          "selection_policy_sha256": "8dc386f57b9916804dc47cff7109da2890c97ce5164da95ae737e1e67c7f0c65",
+          "selection_sha256": "317997cf9b1da68cbcf83e4dd61e18853eda7bf3c037dfcd92565caffd0dff08",
+          "source_anchor_representation_trial": true,
+          "source_scope": "explicit expanded54; existing production44 is not replaced",
+          "task_selection_sha256": "313d55432dbd892679086925c458227b24cb105f400161385c659ad10e9b9b13"
+        },
+        "metadata_http_events": [
+          {
+            "endpoint": "/api/tags",
+            "seconds": 0.012253166001755744,
+            "status": "success"
+          },
+          {
+            "endpoint": "/api/show",
+            "seconds": 0.0017328750109300017,
+            "status": "success"
+          },
+          {
+            "endpoint": "/api/ps",
+            "seconds": 0.0007377080037258565,
+            "status": "success"
+          }
+        ],
+        "model": {
+          "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+          "name": "qwen2.5:14b",
+          "quantization": "Q4_K_M"
+        },
+        "scope": "Controlled exact-source-anchor representation trial; same research54 evidence/selector/model/options; original validators retained; anchor exactness/source boundaries additionally enforced; not held-out or E2E"
+      },
+      "sha256": "276c008b9dc488df20119d86b66adabfb6b829630275bfab50af471ec2b670e2"
+    },
+    "day31-source-anchor-mac-v102-human-review-template.json": {
+      "data": {
+        "format": "day31-independent-human-review-v1",
+        "report_sha256": "b6cdee5f9e27fd859230f74ae796e411787c84e418f9afe9ec67c28257024257",
+        "reviewer": null,
+        "reviewer_independence": null,
+        "reviews": [
+          {
+            "answer": "Ответ модели не получен; доступны проверенные выдержки источников.",
+            "answer_status": "partial",
+            "case_id": "RU-1",
+            "citations": [],
+            "claims": [],
+            "comment": "",
+            "execution_status": "partial",
+            "mode": "single",
+            "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+            "scores": {
+              "absence_of_invented_mechanisms": null,
+              "citation_correctness": null,
+              "completeness": null,
+              "documentation_fidelity": null,
+              "factual_correctness": null
+            },
+            "status": "pending_human_review",
+            "verified_evidence_ids": []
+          },
+          {
+            "case_id": "RU-1",
+            "comment": "",
+            "mode": "multi",
+            "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+            "scores": {
+              "absence_of_invented_mechanisms": null,
+              "citation_correctness": null,
+              "completeness": null,
+              "documentation_fidelity": null,
+              "factual_correctness": null
+            },
+            "status": "pending",
+            "verified_evidence_ids": []
+          },
+          {
+            "case_id": "EN-3",
+            "comment": "",
+            "mode": "single",
+            "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+            "scores": {
+              "absence_of_invented_mechanisms": null,
+              "citation_correctness": null,
+              "completeness": null,
+              "documentation_fidelity": null,
+              "factual_correctness": null
+            },
+            "status": "pending",
+            "verified_evidence_ids": []
+          },
+          {
+            "case_id": "EN-3",
+            "comment": "",
+            "mode": "multi",
+            "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+            "scores": {
+              "absence_of_invented_mechanisms": null,
+              "citation_correctness": null,
+              "completeness": null,
+              "documentation_fidelity": null,
+              "factual_correctness": null
+            },
+            "status": "pending",
+            "verified_evidence_ids": []
+          }
+        ],
+        "status": "pending_human_review"
+      },
+      "sha256": "cde35234dd1546a3af3f7411a1b0d233017a8e610115ffe4b70e9d66e7c18c73"
+    },
+    "day31-source-anchor-mac-v102-index-verify.json": {
+      "data": {
+        "checks": [
+          "current_corpus",
+          "source_digests",
+          "exact_spans",
+          "fts_rows",
+          "vectors"
+        ],
+        "index": {
+          "built_at": "2026-10-15T14:43:18.373298+00:00",
+          "chunk_version": "project-structural-spans-v1",
+          "chunks": 510,
+          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+          "documents": 54,
+          "embedding": null,
+          "index_version": "a8144ee97f624572b5ce957891019e60",
+          "limit_words": 250,
+          "overlap_words": 40,
+          "project_id": "ai-advent-llm-api",
+          "schema_version": 1,
+          "selection_digest": "74656e24c55ae4a48f5fbbd005f1e6b1a58729bff17741450ae222d851251d62"
+        },
+        "read_only": true,
+        "status": "verified"
+      },
+      "sha256": "cbea55621c124de6616d8d38f7d80337d3fe8e5f648d7f68d0018151a84dd75e"
+    },
+    "day31-source-anchor-mac-v102-offline-tests.json": {
+      "data": {
+        "exit_code": 0,
+        "generation_calls": 0,
+        "scope": "Offline coordinator fault/signal checks plus selector/capture/native scoped worker smoke; synthetic model replies.",
+        "status": "passed",
+        "stderr": "test_bundle_hashes_native_schema_and_immutable_exports (test_runner.CoordinatorTests.test_bundle_hashes_native_schema_and_immutable_exports) ... ok\ntest_catalog_position_order_does_not_reset_per_subset (test_runner.CoordinatorTests.test_catalog_position_order_does_not_reset_per_subset) ... ok\ntest_changed_cap_on_resume_blocks (test_runner.CoordinatorTests.test_changed_cap_on_resume_blocks) ... ok\ntest_changed_model_after_pause_blocks_before_new_call (test_runner.CoordinatorTests.test_changed_model_after_pause_blocks_before_new_call) ... ok\ntest_changed_run_identity_blocks (test_runner.CoordinatorTests.test_changed_run_identity_blocks) ... ok\ntest_changed_source_after_pause_blocks_before_new_call (test_runner.CoordinatorTests.test_changed_source_after_pause_blocks_before_new_call) ... ok\ntest_completed_flag_cannot_hide_missing_question (test_runner.CoordinatorTests.test_completed_flag_cannot_hide_missing_question) ... ok\ntest_completed_run_is_idempotent_no_calls_no_journal_writes (test_runner.CoordinatorTests.test_completed_run_is_idempotent_no_calls_no_journal_writes) ... ok\ntest_duplicate_or_reordered_rows_refused (test_runner.CoordinatorTests.test_duplicate_or_reordered_rows_refused) ... ok\ntest_error_export_retains_results_without_editing_journal (test_runner.CoordinatorTests.test_error_export_retains_results_without_editing_journal) ... ok\ntest_graceful_pause_during_request_finishes_saves_and_resumes (test_runner.CoordinatorTests.test_graceful_pause_during_request_finishes_saves_and_resumes) ... ok\ntest_incomplete_pair_cannot_be_marked_complete (test_runner.CoordinatorTests.test_incomplete_pair_cannot_be_marked_complete) ... ok\ntest_insufficient_cap_refused_before_freeze (test_runner.CoordinatorTests.test_insufficient_cap_refused_before_freeze) ... ok\ntest_interrupt_after_reservation_never_replays (test_runner.CoordinatorTests.test_interrupt_after_reservation_never_replays) ... ok\ntest_interrupt_before_dispatch_is_conservatively_blocked (test_runner.CoordinatorTests.test_interrupt_before_dispatch_is_conservatively_blocked) ... ok\ntest_lost_response_blocks_replay_and_keeps_consumed_budget (test_runner.CoordinatorTests.test_lost_response_blocks_replay_and_keeps_consumed_budget) ... ok\ntest_more_than_six_or_duplicate_questions_refused (test_runner.CoordinatorTests.test_more_than_six_or_duplicate_questions_refused) ... ok\ntest_resume_after_durable_terminal_before_validation_no_replay (test_runner.CoordinatorTests.test_resume_after_durable_terminal_before_validation_no_replay) ... ok\ntest_resume_after_question_does_not_recapture_or_regenerate (test_runner.CoordinatorTests.test_resume_after_question_does_not_recapture_or_regenerate) ... ok\ntest_resume_after_snapshot_makes_no_duplicate_acquisition (test_runner.CoordinatorTests.test_resume_after_snapshot_makes_no_duplicate_acquisition) ... ok\ntest_resume_between_modes_preserves_first_mode_and_snapshot (test_runner.CoordinatorTests.test_resume_between_modes_preserves_first_mode_and_snapshot) ... ok\ntest_reviewed_model_digest_change_blocks_fresh_dispatch (test_runner.CoordinatorTests.test_reviewed_model_digest_change_blocks_fresh_dispatch) ... ok\ntest_six_questions_twelve_outputs_fourteen_sequential_calls (test_runner.CoordinatorTests.test_six_questions_twelve_outputs_fourteen_sequential_calls) ... ok\ntest_snapshot_change_refused (test_runner.CoordinatorTests.test_snapshot_change_refused) ... ok\ntest_technical_failure_retained_not_repaired (test_runner.CoordinatorTests.test_technical_failure_retained_not_repaired) ... ok\ntest_original_compare_and_new_coordinator_use_same_contexts_and_calls (test_runner.NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls) ... Executing <Task pending name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() running at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:414> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:181] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.347 seconds\nExecuting <Task pending name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() running at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:432> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:181] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.418 seconds\nExecuting <Task pending name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() running at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:432> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:181] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.266 seconds\nExecuting <Task pending name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() running at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:437> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:181] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.520 seconds\nExecuting <Task pending name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() running at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:437> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py:181] created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.270 seconds\nExecuting <Task finished name='Task-110' coro=<NativeIntegrationTests.test_original_compare_and_new_coordinator_use_same_contexts_and_calls() done, defined at /private/tmp/day31-source-anchor-v102-r1/test_runner.py:399> result=None created at /opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py:100> took 0.138 seconds\nok\ntest_real_sigint_finishes_request_then_same_cli_resumes_without_duplicate (test_runner.SignalTests.test_real_sigint_finishes_request_then_same_cli_resumes_without_duplicate) ... ok\ntest_second_sigint_forces_stop_then_resume_refuses_inflight (test_runner.SignalTests.test_second_sigint_forces_stop_then_resume_refuses_inflight) ... ok\ntest_corrupt_published_file_is_not_ignored (test_runner.StorageTests.test_corrupt_published_file_is_not_ignored) ... ok\ntest_exclusive_publication_refuses_overwrite (test_runner.StorageTests.test_exclusive_publication_refuses_overwrite) ... ok\ntest_hash_chain_tamper_refused (test_runner.StorageTests.test_hash_chain_tamper_refused) ... ok\ntest_last_event_checksum_tamper_refused (test_runner.StorageTests.test_last_event_checksum_tamper_refused) ... ok\ntest_macos_standard_tmp_var_aliases_are_normalized (test_runner.StorageTests.test_macos_standard_tmp_var_aliases_are_normalized) ... ok\ntest_missing_journal_event_refused (test_runner.StorageTests.test_missing_journal_event_refused) ... ok\ntest_process_lock_excludes_second_coordinator (test_runner.StorageTests.test_process_lock_excludes_second_coordinator) ... ok\ntest_symlink_file_and_parent_refused (test_runner.StorageTests.test_symlink_file_and_parent_refused) ... ok\ntest_unpublished_temporary_file_is_not_an_event (test_runner.StorageTests.test_unpublished_temporary_file_is_not_an_event) ... ok\ntest_world_readable_run_directory_refused (test_runner.StorageTests.test_world_readable_run_directory_refused) ... ok\ntest_accepted_v099_transition_format_stays_accepted (test_regression.RegressionTests.test_accepted_v099_transition_format_stays_accepted) ... ok\ntest_all_twelve_contexts_and_current_validators_capture_exact_body_and_reply (test_regression.RegressionTests.test_all_twelve_contexts_and_current_validators_capture_exact_body_and_reply) ... ok\ntest_captured_generate_and_bundle_replay_agree_without_changing_raw_anchor (test_regression.RegressionTests.test_captured_generate_and_bundle_replay_agree_without_changing_raw_anchor) ... ok\ntest_export_keeps_raw_rejection_and_never_overwrites_previous_bundle (test_regression.RegressionTests.test_export_keeps_raw_rejection_and_never_overwrites_previous_bundle) ... ok\ntest_fingerprint_is_diversity_heuristic_without_invented_translation_table (test_regression.RegressionTests.test_fingerprint_is_diversity_heuristic_without_invented_translation_table) ... ok\ntest_fresh_six_owned_documentation_and_verification_workers_on_pinned_corpus (test_regression.RegressionTests.test_fresh_six_owned_documentation_and_verification_workers_on_pinned_corpus) ... ok\ntest_invalid_identifier_is_recorded_without_repair_or_extra_dispatch (test_regression.RegressionTests.test_invalid_identifier_is_recorded_without_repair_or_extra_dispatch) ... ok\ntest_missing_source_quote_schema_keeps_raw_rejection_and_known_call_without_retry (test_regression.RegressionTests.test_missing_source_quote_schema_keeps_raw_rejection_and_known_call_without_retry) ... ok\ntest_model_worker_redirection_preserves_exact_payload_and_owned_cleanup (test_regression.RegressionTests.test_model_worker_redirection_preserves_exact_payload_and_owned_cleanup) ... ok\ntest_mutated_context_and_role_block_before_HTTP (test_regression.RegressionTests.test_mutated_context_and_role_block_before_HTTP) ... ok\ntest_mutated_messages_or_schema_block_before_HTTP (test_regression.RegressionTests.test_mutated_messages_or_schema_block_before_HTTP) ... ok\ntest_new_catalog_preserves_exact_six_wordings_and_frozen_rubric (test_regression.RegressionTests.test_new_catalog_preserves_exact_six_wordings_and_frozen_rubric) ... ok\ntest_oversize_reply_retains_dispatch_but_never_retries (test_regression.RegressionTests.test_oversize_reply_retains_dispatch_but_never_retries) ... ok\ntest_raw_collision_prevents_second_dispatch_and_tamper_is_detected (test_regression.RegressionTests.test_raw_collision_prevents_second_dispatch_and_tamper_is_detected) ... ok\ntest_real_capture_worker_imports_in_original_minimal_environment (test_regression.RegressionTests.test_real_capture_worker_imports_in_original_minimal_environment) ... ok\ntest_source_and_preflight_pins_match_current_app_without_model_access (test_regression.RegressionTests.test_source_and_preflight_pins_match_current_app_without_model_access) ... ok\ntest_unreviewed_question_cannot_enter_research_worker (test_regression.RegressionTests.test_unreviewed_question_cannot_enter_research_worker) ... ok\ntest_all_known_budgets_fit_main_schema_and_prompt_remain_identical (test_prompt_profile.SourceAnchorTests.test_all_known_budgets_fit_main_schema_and_prompt_remain_identical) ... ok\ntest_all_units_have_exact_offsets_digests_line_ranges_and_no_scope_expansion (test_prompt_profile.SourceAnchorTests.test_all_units_have_exact_offsets_digests_line_ranges_and_no_scope_expansion) ... ok\ntest_ambiguous_or_unpinned_source_does_not_create_fake_boundaries (test_prompt_profile.SourceAnchorTests.test_ambiguous_or_unpinned_source_does_not_create_fake_boundaries) ... ok\ntest_exact_quote_is_not_a_semantic_proof_of_paraphrased_outcome (test_prompt_profile.SourceAnchorTests.test_exact_quote_is_not_a_semantic_proof_of_paraphrased_outcome) ... ok\ntest_full_document_boundaries_exclude_clipped_first_and_last_sentences (test_prompt_profile.SourceAnchorTests.test_full_document_boundaries_exclude_clipped_first_and_last_sentences) ... ok\ntest_invented_reworded_empty_partial_or_wrong_id_quote_is_rejected (test_prompt_profile.SourceAnchorTests.test_invented_reworded_empty_partial_or_wrong_id_quote_is_rejected) ... ok\ntest_literal_quote_and_text_preserved_with_provenance_in_both_modes (test_prompt_profile.SourceAnchorTests.test_literal_quote_and_text_preserved_with_provenance_in_both_modes) ... ok\ntest_missing_quote_extra_fields_multiple_ids_and_claim_count_fail_closed (test_prompt_profile.SourceAnchorTests.test_missing_quote_extra_fields_multiple_ids_and_claim_count_fail_closed) ... ok\ntest_negation_cannot_be_removed_from_the_source_anchor (test_prompt_profile.SourceAnchorTests.test_negation_cannot_be_removed_from_the_source_anchor) ... ok\ntest_original_language_encoding_paths_ids_status_and_bounds_remain_enforced (test_prompt_profile.SourceAnchorTests.test_original_language_encoding_paths_ids_status_and_bounds_remain_enforced) ... ok\ntest_same_frozen_questions_criteria_contexts_and_target_four_only (test_prompt_profile.SourceAnchorTests.test_same_frozen_questions_criteria_contexts_and_target_four_only) ... ok\ntest_schema_binds_quote_enum_to_one_source_and_preserves_existing_text_guards (test_prompt_profile.SourceAnchorTests.test_schema_binds_quote_enum_to_one_source_and_preserves_existing_text_guards) ... ok\ntest_selected_span_not_elsewhere_in_chunk_must_support_identifiers (test_prompt_profile.SourceAnchorTests.test_selected_span_not_elsewhere_in_chunk_must_support_identifiers) ... ok\ntest_structured_blocks_stay_whole_and_inline_code_punctuation_is_protected (test_prompt_profile.SourceAnchorTests.test_structured_blocks_stay_whole_and_inline_code_punctuation_is_protected) ... ok\n\n----------------------------------------------------------------------\nRan 69 tests in 11.159s\n\nOK\n",
+        "stdout": ""
+      },
+      "sha256": "9870eb004d58ab70187062a7e87d2a2c91741807a32c6520d020f464bdc64167"
+    },
+    "day31-source-anchor-mac-v102-plan.json": {
+      "data": {
+        "case_ids": [
+          "RU-1",
+          "EN-3"
+        ],
+        "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+        "catalog_design": {
+          "case_count": 6,
+          "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+          "human_review": "pending",
+          "independent_semantic_acceptance": false,
+          "kind": "known_regression",
+          "scope": "Post-change development regression of six previously observed questions; not independent held-out, not production44 acceptance, not E2E."
+        },
+        "embedding_calls": 0,
+        "generation_upper_bound": 4,
+        "inference_performed": false,
+        "max_generation_calls": 4,
+        "pairs": 2,
+        "planned_orders": [
+          {
+            "case_id": "RU-1",
+            "catalog_position": 0,
+            "order": [
+              "single",
+              "multi"
+            ],
+            "repeat": 1
+          },
+          {
+            "case_id": "EN-3",
+            "catalog_position": 5,
+            "order": [
+              "multi",
+              "single"
+            ],
+            "repeat": 1
+          }
+        ],
+        "preparation_binding": {
+          "acquisition": "Fresh owned FTS/Verification workers using one explicitly frozen external research selector; same snapshot shared per Single/Multi pair",
+          "criteria_sha256": "359e4256757d611bd9fd0d3474e986cb1521b85d0f86a49f8771d26bc231aa4b",
+          "expected_contexts_sha256": "a5dd1141906a9b18bf12828ebbb4ee8d392b2c3e448587537e1ee296f2d3359e",
+          "expected_selection_sha256": "dd562be7abc56a7ebaa47876f7cec06eaef10086f8c763a722a2b3473db3130f",
+          "new_regression_not_original_replacement": true,
+          "preparation_bundle_sha256": "b4a02ac0a9b746c37fa64e898e4d217cd4e8f68d82f653b5a49d3ca2b71de738",
+          "preparation_freeze_digest": "4cc211c3d213197d7b25d3a477a1d8ad82a745e82285e41766eaf77732dc44da",
+          "prompt_profile_sha256": "0a9c3e221e49f70cb0895248f46e02944642fdd1869ab54674ebe80a1ddf214c",
+          "question_sha256": "5afdcd5eeccd63cea649b4373baae96d72326f40d9552a0bee4d59eaff55b6ad",
+          "reviewed_prior_receipt_sha256": "77045d252ce68ae8a6f5f214cdadcda3ac76fe1fa7457ab140045c56b300719a",
+          "selection_policy_sha256": "8dc386f57b9916804dc47cff7109da2890c97ce5164da95ae737e1e67c7f0c65",
+          "selection_sha256": "317997cf9b1da68cbcf83e4dd61e18853eda7bf3c037dfcd92565caffd0dff08",
+          "source_anchor_representation_trial": true,
+          "source_scope": "explicit expanded54; existing production44 is not replaced",
+          "task_selection_sha256": "313d55432dbd892679086925c458227b24cb105f400161385c659ad10e9b9b13"
+        },
+        "request_observations": 4,
+        "scope": "Known-question exact-source-anchor schema experiment; identical evidence/model/options; original guards validate text against exact selected anchor and then original evidence; not held-out or E2E."
+      },
+      "sha256": "b98d8a0f04fd4e1b4c64396f97f1bf4d2bf74786c6de507ee7285fe648125c27"
+    },
+    "day31-source-anchor-mac-v102-prompt-profile.json": {
+      "data": {
+        "context_messages_evidence_unchanged": true,
+        "doc_version": "project-answers-v25-source-anchor",
+        "exact_span_is_not_semantic_entailment": true,
+        "format": "day31-source-anchor-profile-v1",
+        "full_document_not_added_to_model_context": true,
+        "generation_calls_before_freeze": 0,
+        "max_claims": 5,
+        "max_evidence_ids_per_claim": 1,
+        "model_options_unchanged": true,
+        "only_structure_comes_from_full_pinned_document": true,
+        "quote_max_chars": 600,
+        "render_version": "source-anchor-text-identity-v1",
+        "rules_en": "The question is not evidence; generic facts do not establish names/parameters. No support: unknown, claims=[]; no unsupported names or gap descriptions.\nEach claim: source_quote first, copied exactly from evidence using schema choices; then text answering only from that quote; one evidence_id. Never alter the quote.\nEnglish text; translate RU, preserve names/API; no duplicate meanings/languages.\nAnswer every part/cause. Preserve subject, stage, time, negations and exact trigger/outcome. Separate different cases. Never make a prohibition conditional.\nEvery text clause must follow source_quote. Other support: another claim. Silence is not proof.\nAll supported: answered; a support gap: partial. Git/language/negation is not a gap.\n",
+        "rules_ru": "Вопрос не источник; общие факты не доказывают имена/параметры. Нет поддержки: unknown, claims=[]; без неподтверждённых имён/описаний пробелов.\nclaim: source_quote — точная цитата из schema; text — ответ только по ней; один evidence_id. Цитату не меняй.\nРусская проза; переведи EN, сохрани ASCII имена/API. Без дублей.\nОтветь на всё, включая причины. Сохрани субъект/этап/время, отрицания, условия/исходы. Разные случаи разделяй. Запрет не условное разрешение.\nКаждая часть text следует из source_quote. Нужен другой фрагмент: отдельный claim. Молчание не доказательство.\nВсё поддержано: answered; пробел: partial. Git/язык/отрицание не пробел.\n",
+        "schema_version": "status-source-quote-text-v1",
+        "selected_anchor_must_be_inside_provided_quote": true,
+        "single_version": "snapshot-single-v26-source-anchor",
+        "text_max_chars": 600,
+        "text_preserved_exactly": true
+      },
+      "sha256": "03a8579358d4ea77818cd6fa31b9205bb09129aa68cf176552414fbf7a674894"
+    },
+    "day31-source-anchor-mac-v102-raw-c1a7a0b364d84e23a5c120f1a7750ddc.json": {
+      "data": {
+        "captured_at": "2026-10-15T18:58:52.176228+00:00",
+        "content_bytes": 2094,
+        "content_sha256": "170cc02154532119b69bd33ed9483c458e5baf572a0b2de7ae01c0f1c160311c",
+        "context_digest": "8528ad1489bd7e094816bb4fcdc426a349e88c9dae879a88f21782eb7bf2c079",
+        "format": "day31-selection-regression-raw-response-v1",
+        "message_digest": "833f191bcb22f8a4a47643699aad0ab041a79a6dfc0f40302eff096df128c751",
+        "mode": "single",
+        "output_schema_digest": "2d5dfa9c332a73d32d1f732410837b23aa8dff271b6e982a7ec68f1645521ecf",
+        "request_body_sha256": "a2fe86e46f48c55b6cbcadac2f2537fff129afa05c1ba70e9eec768fd5244bba",
+        "request_id": "a36433f47e0a4a0883003fb98413d9cb",
+        "response": {
+          "done": true,
+          "done_reason": "stop",
+          "eval_count": 389,
+          "message": {
+            "content": "{\n  \"status\": \"answered\",\n  \"language\": \"ru\",\n  \"claims\": [\n    {\n      \"source_quote\": \"Каждое сообщение имеет один из трёх статусов:\",\"text\": \"Сообщения в памяти Бублика имеют три статуса: `pending`, `completed` и `failed`. Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` означает, что запрос или ответ можно включать в будущий контекст. Сообщение со статусом `failed` означает, что запрос остаётся для диагностики, но исключается из контекста.\",\n      \"evidence_ids\": [\"e1\"]\n    },\n    {\n      \"source_quote\": \"Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\",\"text\": \"Сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это позволяет избежать включения неуспешных или прерванных запросов в будущий контекст LLM.\",\n      \"evidence_ids\": [\"e2\"]\n    }\n  ],\n  \"git_fact_ids\": []\n}",
+            "role": "assistant"
+          },
+          "model": "qwen2.5:14b",
+          "prompt_eval_count": 1200
+        },
+        "scope": "New post-change development regression; none of the original twelve observations are replaced.",
+        "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc"
+      },
+      "sha256": "b9b78c5583a2cd3540ba804b00335785468434d30b108dfda43202bf3421e4b3"
+    },
+    "day31-source-anchor-mac-v102-result.json": {
+      "data": {
+        "catalog_design": {
+          "case_count": 6,
+          "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+          "human_review": "pending",
+          "independent_semantic_acceptance": false,
+          "kind": "known_regression",
+          "scope": "Post-change development regression of six previously observed questions; not independent held-out, not production44 acceptance, not E2E."
+        },
+        "comparison_spec": {
+          "baseline": "snapshot-single-v26-source-anchor",
+          "cold_warm_control": "not_controlled_in_runner_smoke",
+          "modes": [
+            "single",
+            "multi"
+          ],
+          "order": "catalog-gray-parity-repeat-flip-v1",
+          "per_call_output_limit": 1024,
+          "request_capability_limit": 8,
+          "request_deadline_seconds": 300,
+          "resource_measurement": "not_run",
+          "retrieval": "fts",
+          "scope": "Known-question exact-source-anchor schema experiment; identical evidence/model/options; original guards validate text against exact selected anchor and then original evidence; not held-out or E2E.",
+          "token_probes": 0,
+          "version": "paired-snapshot-source-anchor-v102",
+          "warmups": 0
+        },
+        "created_at": "2026-10-15T18:58:01.317289+00:00",
+        "error": "technical_request_failure",
+        "format": "bublik-paired-snapshot-v1",
+        "freeze_sha256": "94dfeace5c4cb5e16cd668d8c1cf78683419c7f67f010a92869c447409f2c9c9",
+        "frozen_conditions": {
+          "catalog_design": {
+            "case_count": 6,
+            "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+            "human_review": "pending",
+            "independent_semantic_acceptance": false,
+            "kind": "known_regression",
+            "scope": "Post-change development regression of six previously observed questions; not independent held-out, not production44 acceptance, not E2E."
+          },
+          "comparison_spec": {
+            "baseline": "snapshot-single-v26-source-anchor",
+            "cold_warm_control": "not_controlled_in_runner_smoke",
+            "modes": [
+              "single",
+              "multi"
+            ],
+            "order": "catalog-gray-parity-repeat-flip-v1",
+            "per_call_output_limit": 1024,
+            "request_capability_limit": 8,
+            "request_deadline_seconds": 300,
+            "resource_measurement": "not_run",
+            "retrieval": "fts",
+            "scope": "Known-question exact-source-anchor schema experiment; identical evidence/model/options; original guards validate text against exact selected anchor and then original evidence; not held-out or E2E.",
+            "token_probes": 0,
+            "version": "paired-snapshot-source-anchor-v102",
+            "warmups": 0
+          },
+          "conditions": {
+            "capability_limit": 8,
+            "cases_sha256": "f2329a206bb5e904aa0398fcea648e75691c00e18494fe1a3d0d927ce0f70348",
+            "dense_policy": "vocabulary",
+            "documentation_schema_version": "status-claims-text-first-v7",
+            "fts_endpoint_policy": "literal-endpoint-heading-v1",
+            "generation_budget_policy": "message-content-utf8-plus256-v1",
+            "git_branch": "main",
+            "git_head": "f5cce79933a8535eda5b8d218e79a04aee88d029",
+            "hybrid_policy": "raw",
+            "index": {
+              "built_at": "2026-10-15T14:43:18.373298+00:00",
+              "chunk_version": "project-structural-spans-v1",
+              "chunks": 510,
+              "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+              "documents": 54,
+              "embedding": null,
+              "index_version": "a8144ee97f624572b5ce957891019e60",
+              "limit_words": 250,
+              "overlap_words": 40,
+              "project_id": "ai-advent-llm-api",
+              "schema_version": 1,
+              "selection_digest": "74656e24c55ae4a48f5fbbd005f1e6b1a58729bff17741450ae222d851251d62"
+            },
+            "model_options": {
+              "num_ctx": 8192,
+              "num_predict": 1024,
+              "seed": 31,
+              "temperature": 0
+            },
+            "pipeline_mode": "fts",
+            "project_id": "ai-advent-llm-api",
+            "prompt_version": "project-answers-v25-source-anchor",
+            "query_defaults_version": "mode-query-defaults-v1",
+            "request_deadline": 300,
+            "source_sha256": {
+              "bublik_developer/__init__.py": "c69e0aba21e0baf6959fdec7290b18820965e88aa25c8a3ddf6cc81dd8842e5e",
+              "bublik_developer/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+              "bublik_developer/agent_process.py": "33a367fdbddd9acafdae3faa1d1f91c52d98f027f00e1c88e18a737294abaee6",
+              "bublik_developer/agent_runtime.py": "13f0134e8159b01160869e460a8e9bf78f18d92881d22f61691af7639ac70dd6",
+              "bublik_developer/agent_worker.py": "afb957581ff72a4eecc61b986b907bb060499cc85bfe06ef66282854d11e607f",
+              "bublik_developer/baseline.py": "5b218e1b34a3c2f738f75355a21d01df32969d5266cfc3d860364f9ba3fe2f9f",
+              "bublik_developer/baseline_worker.py": "7a0e92a0f70e2faaa582cca778ddf08641de3d56cecbe5f80cfc6a7d46aa60b9",
+              "bublik_developer/cli.py": "864e32a7f7423591620e8ffffc09e292ad83ab97cc8ccd46437ea401e8158620",
+              "bublik_developer/contracts.py": "f43c7f2a05ab574f0f30919fa0ab2c65170fac611d34de55c97baab28855b294",
+              "bublik_developer/errors.py": "6c4e9eb0215b9b75bef475ee7fd98f8ce1113523e0d19426074804230b0b39d3",
+              "bublik_developer/generation.py": "d6496f034de9d54c20b299ebb4d65034d832dadb64cc423bda247fdb58c0399a",
+              "bublik_developer/git_tools.py": "80d40371ee77951febe85a603488cbf28c17e22a88f838afed49770e9d5f4fb9",
+              "bublik_developer/inference_tasks.py": "7fab2c144b29067e35a82232d1d40c8615a57cddb0b64e19af458eacfa4d0ceb",
+              "bublik_developer/mcp_client.py": "1faee7b24c63b200c3589e7c9fcb61449f7850d487276f4f5251f069ab91b690",
+              "bublik_developer/mcp_schema.py": "ad7f97bb5d0704cb55fc0d1f4d6179ca5fb6b1541dd6247c95dade126636225a",
+              "bublik_developer/mcp_server.py": "e96ea226a8ee583132fccb245ecb30522d003b8ff024886a0985d4d159ef4985",
+              "bublik_developer/model_session.py": "9e795c3705b3c095c30508e6146df5fdaefc9bc2c4973ee37349f61ef9b3fb91",
+              "bublik_developer/model_worker.py": "b856e925cd04b755119fc9331a40012b99fb60da2937a50f008d1e14731ca83a",
+              "bublik_developer/paired_research.py": "10bf39db33c32f7aecbabb9bc41b9f69b977731680252d8780aeac5ceaf1a29b",
+              "bublik_developer/pipeline.py": "62b4074d6cd742d1d8465f54315203120c919ea89b9b0908dbeb4ed841eb1566",
+              "bublik_developer/policy.py": "514c0b7c32ca7b499733acd4a138e48e9d892f5aacdcf576ea2985d599964ec6",
+              "bublik_developer/preflight.py": "3bea9d54c052c5440a2231c622d5482900a3ab995579fe99a97cc697000045eb",
+              "bublik_developer/process.py": "98f304c96a1c9908d1f79983f9bbad12ae7492ecc47da8dabef64ae98c162116",
+              "bublik_developer/rag/__init__.py": "b9b45591ce856d1f2d45b935e1cde5c6cb32715fe3f2bcd32511322c9fac2e00",
+              "bublik_developer/rag/chunking.py": "3504a00691e312a3d4f95efdfaefd0cba6849c0409cb7abee949866213ac22e9",
+              "bublik_developer/rag/corpus.py": "1974ba1d4c1e6106122dd414581ccf03402ae858c5a7e59628eb8d892062ddba",
+              "bublik_developer/rag/embeddings.py": "3d79e9718829900932b24aca5498a229e53cf82812e5f4f92ddbfe5bcafd9278",
+              "bublik_developer/rag/index.py": "5bff723d566c30083956404637eb2d9b0f3515d2272f7ef3ad378232168e940c",
+              "bublik_developer/rag/retrieval.py": "381847f9bbccdc15a091fbd085578b0a53a6680330608f36c8d6775aedef6e84",
+              "bublik_developer/rag/state.py": "5d18a3e7db23befbfd00a79ae6a14d354384f123dc13455ebfba312bb565bf9f",
+              "bublik_developer/reliability.py": "ebba9d7e3dd39aa0f91e3df0740a936c13a0d54e677e48d8a83da768f2e1ae9b",
+              "bublik_developer/research.py": "8b33552a00a2fa966008d7ab970b20536642f52c5e5db4ba84cfccf93897668c",
+              "bublik_developer/routing.py": "8465f3f58bd85ae6fedd38272d45fe916ac4104a05be6c7085907f36cc998579",
+              "bublik_developer/workspace.py": "17ca3295574f7427ce18691bacfb2629de12c1f647b52622f8133ebfab6908ce",
+              "main.py": "5a95fa5c7ff91bd7eaac9894e99a979d6a993d72c81629962ccb3cdd9d13fd5d",
+              "scripts/check_bilingual_retrieval.py": "ae8720491bf0d4789de54d9ab61fb438788fd8e5a3af48edf4edc86a574b40d9",
+              "scripts/check_stage12.py": "a9dff1e7b4ad8645e6719037cee47d0e970b8bedf23927275f355f28367955cc",
+              "scripts/check_stage3.py": "e399b9db306a964355843932c537d91371798076cde0f7b280ae4eff64030552",
+              "scripts/check_stage4.py": "316e6522458cadd1dddd0c49e857538e825fe760838a0ddf50bf9c0ab717ab29",
+              "scripts/check_stage5.py": "c72ca43e6e0de3610e22e071a68b94711acabb3d18b18206de348b34c495a396",
+              "scripts/check_stage6.py": "5aae7583729646821b1c4183b2ed2bc4e1337913c64839dd8bee3dac815ce783",
+              "scripts/check_stage7.py": "7a2540b20034004dc88c7e9803c9ecb13d725a16c2eb507ff72fdee9850f67ba",
+              "scripts/compare_project_retrieval.py": "158379432f7accd1aa95f348315673507965ee39fe719fa07ac209c0b42de9a5",
+              "scripts/compare_single_multi.py": "49397452f63b241b166534677a0f4cf417f027464e73a5cf460c2f6d0bea2920",
+              "scripts/research_project.py": "05a54966df0914e4e0ccfeecf7839c479c8774ea743ed5e92deae3f0f3731e3e",
+              "tests/test_agent_runtime.py": "66478ddcfc9cc3811d59ba86ef9e080c0731a7c489f420bcb7230b556c397c60",
+              "tests/test_bilingual_corpus.py": "797cde72a30599ec47780a22165d15e76c2adb0f269990d2e1681b066f4a26c7",
+              "tests/test_claim_string_boundaries.py": "537296a86566e56db36ecc6de8e7a446c2d73e627ebe66d07b39fa9d3fb1e667",
+              "tests/test_context_budget.py": "6c49271fff66ad15fe462ddcaec9ff3b7c1e3c9f8f69ebd3518624eadeb9dfe6",
+              "tests/test_foundation.py": "b23123ee849a1e073efa7dcb92b56ed4286dc756e713e6518e52ad53ee6deaf7",
+              "tests/test_language_schema.py": "c5397c84a23be8f6235791d133052b0b8e091ff2cfa3e49b7f8cf9ccc8705026",
+              "tests/test_mcp_git.py": "cfda0f466d773bae2c2c882e759a4c485e133675381b6187418aa75b1d3a9739",
+              "tests/test_paired_research.py": "1b06440f510b3340b213705460b2804a7ed0ec6487ff526b90d97c6b98061ab6",
+              "tests/test_pipeline.py": "ee79b098d85c736e47ef0e34f32b10db210438c25f85b6f2f802fd4dcf68f565",
+              "tests/test_project_rag.py": "bffb755d5b88ac0cc68d51587bc2964c7f90873a682c18071e951f4808a87e3c",
+              "tests/test_quality_prompt.py": "7525acd1acfa6364eb1d95bbb4cbe202e878b44736e1a8588273b36816a5bcf1",
+              "tests/test_rejection_diagnostics.py": "82cb5d545b40e544a4f6296f78c9c7fa87adc4505d6c6706858093ae715959d6",
+              "tests/test_reliability.py": "e6a5d06cf3f96917b96569d444fb57023628aa63dafcae3c17d94c6b93b49f5d",
+              "tests/test_research.py": "87ce91839d2196a214572e2b367f731eb99ea13aada7f93092c2ef98ef1d9dc3",
+              "tests/test_transition_tokens.py": "73210aab9cc3bf2acc6f58d8b92a38f14e4d4cacb51e41add4f74c98e8186192"
+            },
+            "token_probes": 0,
+            "version": "0.7.29",
+            "warmups": 0
+          },
+          "created_at": "2026-10-15T18:58:01.208079+00:00",
+          "embedding_calls": 0,
+          "format": "bublik-research-freeze-v1",
+          "generation_calls": 0,
+          "independent_preparation_binding": {
+            "acquisition": "Fresh owned FTS/Verification workers using one explicitly frozen external research selector; same snapshot shared per Single/Multi pair",
+            "criteria_sha256": "359e4256757d611bd9fd0d3474e986cb1521b85d0f86a49f8771d26bc231aa4b",
+            "expected_contexts_sha256": "a5dd1141906a9b18bf12828ebbb4ee8d392b2c3e448587537e1ee296f2d3359e",
+            "expected_selection_sha256": "dd562be7abc56a7ebaa47876f7cec06eaef10086f8c763a722a2b3473db3130f",
+            "new_regression_not_original_replacement": true,
+            "preparation_bundle_sha256": "b4a02ac0a9b746c37fa64e898e4d217cd4e8f68d82f653b5a49d3ca2b71de738",
+            "preparation_freeze_digest": "4cc211c3d213197d7b25d3a477a1d8ad82a745e82285e41766eaf77732dc44da",
+            "prompt_profile_sha256": "0a9c3e221e49f70cb0895248f46e02944642fdd1869ab54674ebe80a1ddf214c",
+            "question_sha256": "5afdcd5eeccd63cea649b4373baae96d72326f40d9552a0bee4d59eaff55b6ad",
+            "reviewed_prior_receipt_sha256": "77045d252ce68ae8a6f5f214cdadcda3ac76fe1fa7457ab140045c56b300719a",
+            "selection_policy_sha256": "8dc386f57b9916804dc47cff7109da2890c97ce5164da95ae737e1e67c7f0c65",
+            "selection_sha256": "317997cf9b1da68cbcf83e4dd61e18853eda7bf3c037dfcd92565caffd0dff08",
+            "source_anchor_representation_trial": true,
+            "source_scope": "explicit expanded54; existing production44 is not replaced",
+            "task_selection_sha256": "313d55432dbd892679086925c458227b24cb105f400161385c659ad10e9b9b13"
+          },
+          "metadata_http_events": [
+            {
+              "endpoint": "/api/tags",
+              "seconds": 0.012253166001755744,
+              "status": "success"
+            },
+            {
+              "endpoint": "/api/show",
+              "seconds": 0.0017328750109300017,
+              "status": "success"
+            },
+            {
+              "endpoint": "/api/ps",
+              "seconds": 0.0007377080037258565,
+              "status": "success"
+            }
+          ],
+          "model": {
+            "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+            "name": "qwen2.5:14b",
+            "quantization": "Q4_K_M"
+          },
+          "scope": "Controlled exact-source-anchor representation trial; same research54 evidence/selector/model/options; original validators retained; anchor exactness/source boundaries additionally enforced; not held-out or E2E"
+        },
+        "generation_cap": 4,
+        "generation_slots_reserved": 1,
+        "metadata_checks": [
+          {
+            "case_id": "RU-1",
+            "generation_calls": 0,
+            "metadata_http_events": [
+              {
+                "endpoint": "/api/tags",
+                "seconds": 0.010089042014442384,
+                "status": "success"
+              },
+              {
+                "endpoint": "/api/show",
+                "seconds": 0.0017385840183123946,
+                "status": "success"
+              },
+              {
+                "endpoint": "/api/ps",
+                "seconds": 0.0008331250282935798,
+                "status": "success"
+              }
+            ],
+            "model": {
+              "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+              "name": "qwen2.5:14b",
+              "quantization": "Q4_K_M"
+            },
+            "repeat": 1
+          }
+        ],
+        "pairs": [
+          {
+            "case_id": "RU-1",
+            "catalog_position": 0,
+            "conditions_valid_after": false,
+            "order": [
+              "single",
+              "multi"
+            ],
+            "pair_id": 1,
+            "repeat": 1,
+            "snapshot": {
+              "common_preparation_seconds": 0.5105462500068825,
+              "language": "ru",
+              "observation": {
+                "context_audit": [
+                  {
+                    "context_bytes": 1076,
+                    "context_digest": "ff0ea7d98b9a3f05c8397828deb7df29e8a23042ae5b1c89c39516815ddf439c",
+                    "context_keys": [
+                      "mode",
+                      "question"
+                    ],
+                    "role": "documentation",
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                  },
+                  {
+                    "context_bytes": 12217,
+                    "context_digest": "4d2abd09bf44ae56fbed81a7b9892f58f16385a6fb9ee0674a1c76538cf9fa4a",
+                    "context_keys": [
+                      "results"
+                    ],
+                    "role": "verification",
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d"
+                  }
+                ],
+                "independent_llm_contexts_verified": false,
+                "merged": [
+                  {
+                    "data": {
+                      "content_filter": {
+                        "excluded_heading_only": 11,
+                        "policy": "markdown-body-v1",
+                        "scope": "selected_source_namespace"
+                      },
+                      "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                      "embedding_events": [],
+                      "index_version": "a8144ee97f624572b5ce957891019e60",
+                      "kind": "documentation_evidence",
+                      "project_id": "ai-advent-llm-api",
+                      "retrieval_metrics": {
+                        "answer_model_calls": 0,
+                        "context_bytes": 3554,
+                        "embedding_seconds": 0,
+                        "total_seconds": 0.10158579098060727
+                      },
+                      "semantic_support_verified": false,
+                      "settings": {
+                        "bm25_weights": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "candidate_k": 20,
+                        "context_bytes": 4096,
+                        "dense_query_policy": null,
+                        "explicit_endpoints": [],
+                        "final_k": 3,
+                        "fts_endpoint_policy": "literal-endpoint-heading-v1",
+                        "min_cosine": 0.5,
+                        "query_defaults_version": "mode-query-defaults-v1",
+                        "requested_dense_query": null,
+                        "research_selection_policy": "body-code-cost-facets-code-diversity-v3",
+                        "retrieval_policy": "markdown-body-v1",
+                        "rrf_k": null,
+                        "topical_redundancy_is_semantic_equivalence": false
+                      },
+                      "sources": [
+                        {
+                          "chunk_id": "60a96b7a75620811231900fbe33cc6f5e60ad1f1e9236a9b7559969377043c0a",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 2157,
+                          "end_line": 58,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite.",
+                          "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                          "section": "Как это работает",
+                          "source": "day-07-context-persistence/README.ru.md",
+                          "start": 1139,
+                          "start_line": 33,
+                          "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                        },
+                        {
+                          "chunk_id": "578b721fbd3b9811945ea8bd5e06e52278a48ccd6c270903f86f9fcc0b86a770",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 3707,
+                          "end_line": 108,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM.",
+                          "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                          "section": "Важная деталь",
+                          "source": "day-07-context-persistence/README.ru.md",
+                          "start": 3290,
+                          "start_line": 104,
+                          "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                        },
+                        {
+                          "chunk_id": "7b810ebdce6fac35104c9ada8e45bd1137524aa00458db0e392368c3e3cb9f3d",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 1758,
+                          "end_line": 39,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти.",
+                          "raw_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+                          "section": "Связь профиля с памятью",
+                          "source": "day-12-personalization/README.ru.md",
+                          "start": 1061,
+                          "start_line": 28,
+                          "text_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a"
+                        }
+                      ]
+                    },
+                    "error_code": null,
+                    "outcome": "answered",
+                    "role": "documentation",
+                    "status": "success",
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                  }
+                ],
+                "metrics": {
+                  "capability_calls": 2,
+                  "llm_calls": 0,
+                  "total_seconds": 0.5017827080155257
+                },
+                "request_id": "b82dc70b47fb4fad9ab8cca978b9a88d",
+                "results": [
+                  {
+                    "data": {
+                      "content_filter": {
+                        "excluded_heading_only": 11,
+                        "policy": "markdown-body-v1",
+                        "scope": "selected_source_namespace"
+                      },
+                      "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                      "embedding_events": [],
+                      "index_version": "a8144ee97f624572b5ce957891019e60",
+                      "kind": "documentation_evidence",
+                      "project_id": "ai-advent-llm-api",
+                      "retrieval_metrics": {
+                        "answer_model_calls": 0,
+                        "context_bytes": 3554,
+                        "embedding_seconds": 0,
+                        "total_seconds": 0.10158579098060727
+                      },
+                      "semantic_support_verified": false,
+                      "settings": {
+                        "bm25_weights": [
+                          0,
+                          0,
+                          0,
+                          1
+                        ],
+                        "candidate_k": 20,
+                        "context_bytes": 4096,
+                        "dense_query_policy": null,
+                        "explicit_endpoints": [],
+                        "final_k": 3,
+                        "fts_endpoint_policy": "literal-endpoint-heading-v1",
+                        "min_cosine": 0.5,
+                        "query_defaults_version": "mode-query-defaults-v1",
+                        "requested_dense_query": null,
+                        "research_selection_policy": "body-code-cost-facets-code-diversity-v3",
+                        "retrieval_policy": "markdown-body-v1",
+                        "rrf_k": null,
+                        "topical_redundancy_is_semantic_equivalence": false
+                      },
+                      "sources": [
+                        {
+                          "chunk_id": "60a96b7a75620811231900fbe33cc6f5e60ad1f1e9236a9b7559969377043c0a",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 2157,
+                          "end_line": 58,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite.",
+                          "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                          "section": "Как это работает",
+                          "source": "day-07-context-persistence/README.ru.md",
+                          "start": 1139,
+                          "start_line": 33,
+                          "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                        },
+                        {
+                          "chunk_id": "578b721fbd3b9811945ea8bd5e06e52278a48ccd6c270903f86f9fcc0b86a770",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 3707,
+                          "end_line": 108,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM.",
+                          "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                          "section": "Важная деталь",
+                          "source": "day-07-context-persistence/README.ru.md",
+                          "start": 3290,
+                          "start_line": 104,
+                          "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                        },
+                        {
+                          "chunk_id": "7b810ebdce6fac35104c9ada8e45bd1137524aa00458db0e392368c3e3cb9f3d",
+                          "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                          "end": 1758,
+                          "end_line": 39,
+                          "index_version": "a8144ee97f624572b5ce957891019e60",
+                          "project_id": "ai-advent-llm-api",
+                          "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти.",
+                          "raw_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+                          "section": "Связь профиля с памятью",
+                          "source": "day-12-personalization/README.ru.md",
+                          "start": 1061,
+                          "start_line": 28,
+                          "text_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a"
+                        }
+                      ]
+                    },
+                    "error_code": null,
+                    "outcome": "answered",
+                    "role": "documentation",
+                    "status": "success",
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                  },
+                  {
+                    "data": {
+                      "checks": [
+                        {
+                          "check": "fresh_exact_source_provenance",
+                          "status": "passed",
+                          "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                        }
+                      ],
+                      "kind": "verification_report",
+                      "scope": "source_provenance_and_git_schema",
+                      "semantic_support_verified": false,
+                      "verified_task_ids": [
+                        "1b6c450bc90a4080a20b3a4ac6436b35"
+                      ]
+                    },
+                    "error_code": null,
+                    "outcome": "answered",
+                    "role": "verification",
+                    "status": "success",
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d"
+                  }
+                ],
+                "scope": "agent_runtime_fts_mcp_and_provenance",
+                "status": "completed",
+                "tool_events": [],
+                "trace": [
+                  {
+                    "context_digest": "ff0ea7d98b9a3f05c8397828deb7df29e8a23042ae5b1c89c39516815ddf439c",
+                    "dependencies": [],
+                    "event": "SPAWN",
+                    "role": "documentation",
+                    "seconds": 2e-06,
+                    "sequence": 1,
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                  },
+                  {
+                    "context_digest": "7ce4a32728ce8ec62abf2d70b9424cd8565779aa00a99a63e82f7bd756fbe9f9",
+                    "dependencies": [
+                      "1b6c450bc90a4080a20b3a4ac6436b35"
+                    ],
+                    "event": "SPAWN",
+                    "role": "verification",
+                    "seconds": 2.9e-05,
+                    "sequence": 2,
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d"
+                  },
+                  {
+                    "effective_context_digest": "ff0ea7d98b9a3f05c8397828deb7df29e8a23042ae5b1c89c39516815ddf439c",
+                    "event": "EXECUTE",
+                    "role": "documentation",
+                    "seconds": 0.000171,
+                    "sequence": 3,
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35"
+                  },
+                  {
+                    "event": "WORKER_REAPED",
+                    "role": "documentation",
+                    "seconds": 0.318119,
+                    "sequence": 4,
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35",
+                    "worker_pid": 59154
+                  },
+                  {
+                    "error_code": null,
+                    "event": "REPORT",
+                    "outcome": "answered",
+                    "role": "documentation",
+                    "seconds": 0.318189,
+                    "sequence": 5,
+                    "status": "success",
+                    "task_id": "1b6c450bc90a4080a20b3a4ac6436b35",
+                    "task_seconds": 0.3180850839999039
+                  },
+                  {
+                    "effective_context_digest": "4d2abd09bf44ae56fbed81a7b9892f58f16385a6fb9ee0674a1c76538cf9fa4a",
+                    "event": "EXECUTE",
+                    "role": "verification",
+                    "seconds": 0.318527,
+                    "sequence": 6,
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d"
+                  },
+                  {
+                    "event": "WORKER_REAPED",
+                    "role": "verification",
+                    "seconds": 0.501505,
+                    "sequence": 7,
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d",
+                    "worker_pid": 59156
+                  },
+                  {
+                    "error_code": null,
+                    "event": "REPORT",
+                    "outcome": "answered",
+                    "role": "verification",
+                    "seconds": 0.501576,
+                    "sequence": 8,
+                    "status": "success",
+                    "task_id": "212249a6bf4c4a0293d2225cd641736d",
+                    "task_seconds": 0.5012527910002973
+                  },
+                  {
+                    "event": "MERGE",
+                    "interruption": null,
+                    "seconds": 0.501654,
+                    "sequence": 9,
+                    "verified_task_ids": [
+                      "1b6c450bc90a4080a20b3a4ac6436b35"
+                    ]
+                  }
+                ]
+              },
+              "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+              "signature": [
+                {
+                  "context": {
+                    "mode": "fts",
+                    "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?"
+                  },
+                  "dependencies": [],
+                  "role": "documentation"
+                },
+                {
+                  "context": {
+                    "task_roles": [
+                      "documentation"
+                    ]
+                  },
+                  "dependencies": [
+                    "documentation"
+                  ],
+                  "role": "verification"
+                }
+              ]
+            },
+            "snapshot_digest": "375fd5e7a27f194fc64482104afaff962233c9e40a17c4ba2ef4bc776482bd8b",
+            "status": "running"
+          }
+        ],
+        "planned_case_ids": [
+          "RU-1",
+          "EN-3"
+        ],
+        "planned_generation_upper_bound": 4,
+        "repeats": 1,
+        "requests": [
+          {
+            "case_id": "RU-1",
+            "conditions_valid_after": false,
+            "generation_slots_before": 0,
+            "mode": "single",
+            "pair_id": 1,
+            "repeat": 1,
+            "result": {
+              "answer": "Ответ модели не получен; доступны проверенные выдержки источников.",
+              "answer_status": "partial",
+              "citations": [],
+              "claims": [],
+              "diagnostics": [
+                "invalid_model_output",
+                "documentation_not_answered"
+              ],
+              "excerpts": [
+                {
+                  "chunk_id": "60a96b7a75620811231900fbe33cc6f5e60ad1f1e9236a9b7559969377043c0a",
+                  "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                  "end": 2157,
+                  "end_line": 58,
+                  "evidence_id": "e1",
+                  "index_version": "a8144ee97f624572b5ce957891019e60",
+                  "project_id": "ai-advent-llm-api",
+                  "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite.",
+                  "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                  "section": "Как это работает",
+                  "source": "day-07-context-persistence/README.ru.md",
+                  "start": 1139,
+                  "start_line": 33,
+                  "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                },
+                {
+                  "chunk_id": "578b721fbd3b9811945ea8bd5e06e52278a48ccd6c270903f86f9fcc0b86a770",
+                  "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                  "end": 3707,
+                  "end_line": 108,
+                  "evidence_id": "e2",
+                  "index_version": "a8144ee97f624572b5ce957891019e60",
+                  "project_id": "ai-advent-llm-api",
+                  "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM.",
+                  "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+                  "section": "Важная деталь",
+                  "source": "day-07-context-persistence/README.ru.md",
+                  "start": 3290,
+                  "start_line": 104,
+                  "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+                },
+                {
+                  "chunk_id": "7b810ebdce6fac35104c9ada8e45bd1137524aa00458db0e392368c3e3cb9f3d",
+                  "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+                  "end": 1758,
+                  "end_line": 39,
+                  "evidence_id": "e3",
+                  "index_version": "a8144ee97f624572b5ce957891019e60",
+                  "project_id": "ai-advent-llm-api",
+                  "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти.",
+                  "raw_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+                  "section": "Связь профиля с памятью",
+                  "source": "day-12-personalization/README.ru.md",
+                  "start": 1061,
+                  "start_line": 28,
+                  "text_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a"
+                }
+              ],
+              "execution_status": "partial",
+              "git_facts": [],
+              "independent_llm_contexts_verified": false,
+              "inference_tasks": [
+                {
+                  "context_budget": {
+                    "content_bytes": 5999,
+                    "context_window": 8192,
+                    "estimated_total": 7791,
+                    "input_token_upper_bound_estimate": 6255,
+                    "output_reserve": 1024,
+                    "policy": "message-content-utf8-plus256-v1",
+                    "safety_reserve": 512,
+                    "template_allowance": 256
+                  },
+                  "context_digest": "8528ad1489bd7e094816bb4fcdc426a349e88c9dae879a88f21782eb7bf2c079",
+                  "context_keys": [
+                    "documentation_question",
+                    "evidence",
+                    "git_facts",
+                    "language",
+                    "question"
+                  ],
+                  "dispatch_attempts": 1,
+                  "error_code": "invalid_model_output",
+                  "http_events": [
+                    {
+                      "endpoint": "/api/tags",
+                      "seconds": 0.00938670799951069,
+                      "status": "success"
+                    },
+                    {
+                      "endpoint": "/api/show",
+                      "seconds": 0.0033532920060679317,
+                      "status": "success"
+                    },
+                    {
+                      "endpoint": "/api/ps",
+                      "seconds": 0.0010472920257598162,
+                      "status": "success"
+                    },
+                    {
+                      "endpoint": "/api/chat",
+                      "seconds": 47.79037720800261,
+                      "status": "success"
+                    }
+                  ],
+                  "input_bytes": 6146,
+                  "input_content_bytes": 5999,
+                  "input_token_upper_bound_estimate": 6255,
+                  "input_tokens": 1200,
+                  "llm_calls": 1,
+                  "load_duration_ns": 5326089000,
+                  "message_digest": "833f191bcb22f8a4a47643699aad0ab041a79a6dfc0f40302eff096df128c751",
+                  "metadata_retries": 0,
+                  "model": {
+                    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+                    "name": "qwen2.5:14b",
+                    "quantization": "Q4_K_M"
+                  },
+                  "output_schema_digest": "2d5dfa9c332a73d32d1f732410837b23aa8dff271b6e982a7ec68f1645521ecf",
+                  "output_schema_version": "status-source-quote-text-v1-single",
+                  "output_tokens": 389,
+                  "output_validation": "rejected",
+                  "output_validation_reason": "unsupported_identifier",
+                  "prompt_version": "snapshot-single-v26-source-anchor",
+                  "request_id": "a36433f47e0a4a0883003fb98413d9cb",
+                  "role": "main",
+                  "seconds": 48.28442720801104,
+                  "status": "completed",
+                  "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc",
+                  "task_seconds": 48.72722024997347,
+                  "total_duration_ns": 47768315166,
+                  "transport": "ollama_loopback_http"
+                }
+              ],
+              "language": "ru",
+              "metrics": {
+                "cancel_count": 0,
+                "capability_accounting": "common acquisition logically charged to each mode; actual acquisition counted once per pair",
+                "capability_calls": 4,
+                "cloud_fallbacks": 0,
+                "common_preparation_seconds": 0.5105462500068825,
+                "embedding_calls_completed": 0,
+                "equal_budget_total_seconds": 49.43611845900887,
+                "input_tokens": 1200,
+                "known_llm_calls": 1,
+                "llm_calls": 1,
+                "metadata_retries": 0,
+                "model_http_attempts": 4,
+                "model_retries": 0,
+                "output_tokens": 389,
+                "timeout_count": 0,
+                "total_seconds": 48.925572209001984,
+                "unknown_inference_attempts": 0
+              },
+              "project_id": "ai-advent-llm-api",
+              "recovery": [
+                {
+                  "action": "inspect_validation_reason",
+                  "automatic_replay": false,
+                  "code": "invalid_model_output",
+                  "message": "Ответ модели отклонён. Проверьте output_validation_reason; автоматического повтора нет."
+                }
+              ],
+              "request_id": "a36433f47e0a4a0883003fb98413d9cb",
+              "route": "documentation",
+              "schema_version": 1,
+              "semantic_support_verified": false,
+              "snapshot_digest": "375fd5e7a27f194fc64482104afaff962233c9e40a17c4ba2ef4bc776482bd8b",
+              "stage_metrics": [
+                {
+                  "metrics": {
+                    "capability_calls": 2,
+                    "llm_calls": 0,
+                    "total_seconds": 0.5017827080155257
+                  },
+                  "stage_index": 1,
+                  "status": "completed",
+                  "tasks": [
+                    {
+                      "error_code": null,
+                      "role": "documentation",
+                      "status": "success",
+                      "task_id": "604f2e81a340443185cad51076fa82c6",
+                      "task_seconds": 0.3180850839999039
+                    },
+                    {
+                      "error_code": null,
+                      "role": "verification",
+                      "status": "success",
+                      "task_id": "2d891646018640258b0b0c174741c005",
+                      "task_seconds": 0.5012527910002973
+                    }
+                  ],
+                  "tool_events": []
+                }
+              ],
+              "trace": [
+                {
+                  "event": "ROUTE",
+                  "git_operation": null,
+                  "kind": "documentation",
+                  "seconds": 0.000163,
+                  "sequence": 1
+                },
+                {
+                  "event": "SNAPSHOT_REPLAY",
+                  "logical_capability_calls": 2,
+                  "seconds": 0.000455,
+                  "sequence": 2,
+                  "snapshot_digest": "375fd5e7a27f194fc64482104afaff962233c9e40a17c4ba2ef4bc776482bd8b"
+                },
+                {
+                  "capability": "local_inference_only",
+                  "context_digest": "8528ad1489bd7e094816bb4fcdc426a349e88c9dae879a88f21782eb7bf2c079",
+                  "context_keys": [
+                    "documentation_question",
+                    "evidence",
+                    "git_facts",
+                    "language",
+                    "question"
+                  ],
+                  "event": "SPAWN",
+                  "max_generation_calls": 1,
+                  "role": "main",
+                  "seconds": 0.089508,
+                  "sequence": 3,
+                  "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc",
+                  "timeout_seconds": 180
+                },
+                {
+                  "event": "EXECUTE",
+                  "role": "main",
+                  "seconds": 0.089512,
+                  "sequence": 4,
+                  "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc"
+                },
+                {
+                  "event": "WORKER_REAPED",
+                  "role": "main",
+                  "seconds": 48.816638,
+                  "sequence": 5,
+                  "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc",
+                  "worker_pid": 59162
+                },
+                {
+                  "error_code": "invalid_model_output",
+                  "event": "REPORT",
+                  "role": "main",
+                  "seconds": 48.816729,
+                  "sequence": 6,
+                  "status": "failed",
+                  "task_id": "c1a7a0b364d84e23a5c120f1a7750ddc"
+                },
+                {
+                  "event": "FINAL_VERIFY",
+                  "scope": "fresh_provenance_closed_claim_ids_and_git_reobservation",
+                  "seconds": 48.925378,
+                  "sequence": 7,
+                  "status": "passed"
+                },
+                {
+                  "answer_status": "partial",
+                  "event": "OUTPUT",
+                  "execution_status": "partial",
+                  "seconds": 48.925489,
+                  "sequence": 8
+                }
+              ],
+              "trace_file": "/private/tmp/day31-independent-v098-r1-work/isolated-fts-state/traces/a36433f47e0a4a0883003fb98413d9cb.json",
+              "trace_persistence": "saved"
+            },
+            "status": "completed",
+            "structural_checks": {
+              "answer_status_expected": false,
+              "execution_status_expected": true,
+              "expected_source_present": false,
+              "route_matches": true,
+              "semantic_review": "pending",
+              "semantic_support_verified": false
+            }
+          }
+        ],
+        "status": "stopped",
+        "summary": {
+          "actual_common_capability_calls": 2,
+          "common_preparation_seconds": 0.5105462500068825,
+          "embedding_calls": 0,
+          "failed_requests": 0,
+          "generation_slots_reserved": 1,
+          "input_tokens": 1200,
+          "known_llm_calls": 1,
+          "llm_calls": 1,
+          "output_tokens": 389,
+          "pairs_completed": 0,
+          "requests_completed": 1,
+          "semantic_acceptance": "not_evaluated",
+          "single_multi_comparison": "source_anchor_targeted_development_snapshot_regression",
+          "technical_failure_requests": 1,
+          "unknown_inference_attempts": 0
+        },
+        "version": "0.7.29"
+      },
+      "sha256": "f43aeaa7823f271e6e394513cba074d5493df02a194a972922ddbd19b3b1d537"
+    },
+    "day31-source-anchor-mac-v102-runner.json": {
+      "data": {
+        "config": {
+          "package_sha256": "0bdaf120ff79ebe34ba05eebd112952c551fe900320af2d478eff23ab244cfa7",
+          "packet": "source-anchor-targeted-development-regression",
+          "preparation_binding": {
+            "acquisition": "Fresh owned FTS/Verification workers using one explicitly frozen external research selector; same snapshot shared per Single/Multi pair",
+            "criteria_sha256": "359e4256757d611bd9fd0d3474e986cb1521b85d0f86a49f8771d26bc231aa4b",
+            "expected_contexts_sha256": "a5dd1141906a9b18bf12828ebbb4ee8d392b2c3e448587537e1ee296f2d3359e",
+            "expected_selection_sha256": "dd562be7abc56a7ebaa47876f7cec06eaef10086f8c763a722a2b3473db3130f",
+            "new_regression_not_original_replacement": true,
+            "preparation_bundle_sha256": "b4a02ac0a9b746c37fa64e898e4d217cd4e8f68d82f653b5a49d3ca2b71de738",
+            "preparation_freeze_digest": "4cc211c3d213197d7b25d3a477a1d8ad82a745e82285e41766eaf77732dc44da",
+            "prompt_profile_sha256": "0a9c3e221e49f70cb0895248f46e02944642fdd1869ab54674ebe80a1ddf214c",
+            "question_sha256": "5afdcd5eeccd63cea649b4373baae96d72326f40d9552a0bee4d59eaff55b6ad",
+            "reviewed_prior_receipt_sha256": "77045d252ce68ae8a6f5f214cdadcda3ac76fe1fa7457ab140045c56b300719a",
+            "selection_policy_sha256": "8dc386f57b9916804dc47cff7109da2890c97ce5164da95ae737e1e67c7f0c65",
+            "selection_sha256": "317997cf9b1da68cbcf83e4dd61e18853eda7bf3c037dfcd92565caffd0dff08",
+            "source_anchor_representation_trial": true,
+            "source_scope": "explicit expanded54; existing production44 is not replaced",
+            "task_selection_sha256": "313d55432dbd892679086925c458227b24cb105f400161385c659ad10e9b9b13"
+          },
+          "root": "/Users/litdi/AI/ai-advent-llm-api",
+          "runner_version": "source-anchor-v102-r1",
+          "state_dir": "/private/tmp/day31-independent-v098-r1-work/isolated-fts-state"
+        },
+        "exported_at": "2026-10-15T18:58:52.674868+00:00",
+        "journal_events": 8,
+        "journal_tip_sha256": "2bf7e2dc4f4a9776d767be1c42e58a1ca7b1e41458c44d62175b42a13329db09",
+        "scope": "Application v099 unchanged; external v102 exact source anchor plus unchanged claim text; same prior research selection; not acceptance or E2E.",
+        "version": "source-anchor-v102-r1"
+      },
+      "sha256": "862ce15aeb508aedfa3ef889fcfcb740878b7ef1694ecebcd155ee6278879a93"
+    },
+    "day31-source-anchor-mac-v102-selection-policy.json": {
+      "data": {
+        "context_bytes": 4096,
+        "contexts": "both existing Single+Multi numeric estimates<=8192",
+        "cost_pattern": "стоимост|затрат|cost|overhead|расход",
+        "expansion": [
+          "стоимость",
+          "cost",
+          "tokens",
+          "prompt",
+          "completion",
+          "total"
+        ],
+        "extra_diversity": "Deprioritize same document family with an equal set of at least two inline-code tokens; topical redundancy heuristic, not proof of translation equivalence.",
+        "facet_groups": [
+          [
+            "стоимость",
+            "cost"
+          ],
+          [
+            "tokens",
+            "токены"
+          ],
+          [
+            "prompt"
+          ],
+          [
+            "completion"
+          ],
+          [
+            "total"
+          ]
+        ],
+        "generation_calls": 0,
+        "max_candidates": 20,
+        "max_evidence": 3,
+        "name": "body-code-cost-facets-code-diversity-v3",
+        "no_semantic_acceptance_inferred": true,
+        "research_only": true,
+        "scope": "generic cost accounting vocabulary; no expected sources or answer strings in selector; developer calibration after initial results",
+        "sorting": [
+          "new literal inline-code identifiers descending",
+          "new uncovered bilingual cost/metric groups descending",
+          "repeated same family/exact section or same family/equal >=2 inline-code-token fingerprint ascending",
+          "body BM25 ascending",
+          "chunk_id ascending"
+        ],
+        "source_scope": "existing isolated54; production44 not modified"
+      },
+      "sha256": "2f3e551cf6b266046f53d4556e5c74c43341a2e4de15579de5df152476dde1aa"
+    },
+    "day31-source-anchor-mac-v102-task-selection.json": {
+      "data": {
+        "case_ids": [
+          "RU-1",
+          "EN-3"
+        ],
+        "format": "day31-source-anchor-trial-task-selection-v1",
+        "kind": "new_known_question_development_experiment",
+        "max_generation_calls": 4,
+        "modes": [
+          "single",
+          "multi"
+        ],
+        "scope": "Same RU-1/EN-3 questions, evidence, model/options; source_quote first, literal text unchanged. No held-out, recovery or replacement of prior results; other four cases not dispatched."
+      },
+      "sha256": "d88af2cb083527d425d14212afc318f114966e53406cf07655f187e3b259b717"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "artifact": "day31-v082-continuation",
+  "application_version_required": "0.7.12",
+  "created_at": "2026-10-14T09:20:20.660668+00:00",
+  "application_python_files_modified": 0,
+  "prompt_schema_validator_retrieval_model_options_modified": false,
+  "native_preflight_already_passed": 252,
+  "python_source_digests": 59,
+  "raw_native_v082_reports_byte_preserved": 7,
+  "v082_result": "completed; target policy correct; duplicate/awkward second claim remains open",
+  "default_packet": "unknown",
+  "default_questions": 2,
+  "default_paired_observations": 4,
+  "default_generation_upper_bound": 4,
+  "helper_supported_packets": {
+    "unknown": 4,
+    "serialized": 6,
+    "untracked": 4
+  },
+  "other_packets_automatic": false,
+  "new_embedding_calls": 0,
+  "rebuild": false,
+  "full_native_suite_replay": false,
+  "independent_human_review": "pending",
+  "stage7": "open",
+  "stage8_start": "After stage7 complete, notify Yuriy and agree timing before starting."
+}

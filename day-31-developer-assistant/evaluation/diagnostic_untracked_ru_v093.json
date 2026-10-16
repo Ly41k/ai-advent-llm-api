@@ -1,0 +1,26 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "One existing RU untracked documentation question; not paired or held-out.",
+  "batch_core": [
+    "untracked-doc-ru"
+  ],
+  "cases": [
+    {
+      "id": "untracked-doc-ru",
+      "language": "ru",
+      "question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "required_points": [
+        "Нет: содержимое untracked файлов никогда не читается, в том числе при явных allowed paths."
+      ]
+    }
+  ]
+}

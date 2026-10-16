@@ -1,0 +1,458 @@
+[
+  {
+    "case_id": "RU-1",
+    "mode": "multi",
+    "context": {
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite."
+        },
+        {
+          "id": "e2",
+          "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM."
+        },
+        {
+          "id": "e3",
+          "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти."
+        }
+      ]
+    },
+    "context_digest": "0fc5b44d7862cda42c5f10f6312473024a9fe93904b97ef5257e82f30b54bf5c",
+    "message_digest": "cab0919d8a102fee83cdfef6b371184acb9a98a66f809df1ad53332ede4b6d83",
+    "output_schema_digest": "bd9877e9f28857764018434931082a95f6d4cd844bfc79534b279074af1d4828",
+    "output_schema_bytes": 21326,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 5479,
+      "input_token_upper_bound_estimate": 5735,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 7271
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "RU-1",
+    "mode": "single",
+    "context": {
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Как это работает\n\n```mermaid\nflowchart TD\n    A[Запуск приложения] --> B[Открытие базы SQLite]\n    B --> C[Выбор или создание темы]\n    C --> D[Загрузка её завершённых сообщений]\n    D --> E[Отправка изолированного контекста в LLM]\n    E --> F[Сохранение обмена в выбранной теме]\n    F --> C\n```\n\nВ базе находятся две таблицы:\n\n- `conversations` хранит независимые темы и время последней активности;\n- `messages` хранит сообщения с ролями `user` и `assistant`.\n\nКаждая новая тема получает UUID. Поэтому один класс `BublikAgent` переиспользуется для любого диалога, а в каждый запрос к LLM попадают сообщения только выбранного `conversation_id`.\n\nКаждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.\n\nМодели передаются только последние 20 завершённых сообщений. Полная локальная история продолжает храниться в SQLite."
+        },
+        {
+          "id": "e2",
+          "quote": "## Важная деталь\n\nТекущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.\n\nТак прерванный или неуспешный запрос не становится частью будущего контекста LLM."
+        },
+        {
+          "id": "e3",
+          "quote": "## Связь профиля с памятью\n\nПрофиль выбирается при создании диалога, а его `profile_id` сохраняется в таблице `conversations`. Поэтому после перезапуска программа автоматически восстановит не только историю, но и нужную персонализацию.\n\n| Данные | Область видимости |\n|---|---|\n| Short-term сообщения | Текущий диалог |\n| Working memory | Текущий диалог и задача |\n| Long-term решения и знания | Все диалоги одного профиля |\n| Предпочтения | Выбранный пользовательский профиль |\n\nLong-term memory теперь содержит `profile_id`. Это не позволяет решениям одного пользователя попасть в контекст другого. Профиль можно сменить командой `/profile PROFILE_ID` только в пустом диалоге без рабочей памяти."
+        }
+      ],
+      "documentation_question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "git_facts": []
+    },
+    "context_digest": "8528ad1489bd7e094816bb4fcdc426a349e88c9dae879a88f21782eb7bf2c079",
+    "message_digest": "833f191bcb22f8a4a47643699aad0ab041a79a6dfc0f40302eff096df128c751",
+    "output_schema_digest": "ca705f44d927328e7a733fdbe5363f4028916d321db4d24d2c8d9994f9af0149",
+    "output_schema_bytes": 21562,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 5999,
+      "input_token_upper_bound_estimate": 6255,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 7791
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "RU-2",
+    "mode": "multi",
+    "context": {
+      "question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Результат\n\nПолная успешная история по-прежнему остаётся в SQLite и не удаляется. В модель отправляется:\n\n```text\nsystem prompt + накопительный summary + несжатые сообщения + текущий запрос\n```\n\nПоследние 10 сообщений всегда защищены. Пока формируется следующая полная партия, до 9 дополнительных старых сообщений временно остаются в исходном виде. Когда перед защищённым окном накапливается партия из 10 сообщений, `HistoryCompressor` отправляет её вместе с предыдущим summary модели GPT-OSS 20B. Новый накопительный summary заменяет предыдущий в таблице `conversation_summaries`, а `summarized_through_message_id` перемещается вперёд."
+        },
+        {
+          "id": "e2",
+          "quote": "## Хранение\n\nТаблица `conversation_summaries` содержит один накопительный summary для каждого `conversation_id`:\n\n- текст summary;\n- ID последнего сжатого сообщения;\n- количество исходных сообщений и обновлений;\n- накопленные prompt, completion и total tokens, а также стоимость summary.\n\nПолная таблица `messages` сохраняется для диагностики, команды `/history` и честного сравнения со сжатым контекстом."
+        },
+        {
+          "id": "e3",
+          "quote": "## Запуск\n\n```bash\npip install -r requirements.txt\npython day-09-context-compression/main.py\n```\n\nКоманды:\n\n- `/history` — последние записи полной истории;\n- `/summary` — сохранённый summary и стоимость его создания;\n- `/compare` — один вопрос с полной и сжатой историей;\n- `/stats` — стоимость основных запросов вместе с расходами на summary;\n- `/dialogs` — переключение диалога;\n- `/exit` или `выход` — завершение.\n\nЛокальное сравнение токенов:\n\n```bash\npython day-09-context-compression/experiment.py\n```\n\nЭксперимент сравнивает короткую, среднюю и длинную синтетические истории без обращения к Groq."
+        }
+      ]
+    },
+    "context_digest": "6b9dc1f1f0e7b1f941660e96756ba4bb67b3c7c3d34506f1fbf29e6b2beda4a0",
+    "message_digest": "7e3a36ee9ee013a9e52a774666873afad8c69127784ca055f437e64b61a7d9f3",
+    "output_schema_digest": "13946a0d70d0533998f3cfdfb17658bc44ecb95a30311b3347535c0675c415bd",
+    "output_schema_bytes": 17900,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 4465,
+      "input_token_upper_bound_estimate": 4721,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 6257
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "RU-2",
+    "mode": "single",
+    "context": {
+      "question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Результат\n\nПолная успешная история по-прежнему остаётся в SQLite и не удаляется. В модель отправляется:\n\n```text\nsystem prompt + накопительный summary + несжатые сообщения + текущий запрос\n```\n\nПоследние 10 сообщений всегда защищены. Пока формируется следующая полная партия, до 9 дополнительных старых сообщений временно остаются в исходном виде. Когда перед защищённым окном накапливается партия из 10 сообщений, `HistoryCompressor` отправляет её вместе с предыдущим summary модели GPT-OSS 20B. Новый накопительный summary заменяет предыдущий в таблице `conversation_summaries`, а `summarized_through_message_id` перемещается вперёд."
+        },
+        {
+          "id": "e2",
+          "quote": "## Хранение\n\nТаблица `conversation_summaries` содержит один накопительный summary для каждого `conversation_id`:\n\n- текст summary;\n- ID последнего сжатого сообщения;\n- количество исходных сообщений и обновлений;\n- накопленные prompt, completion и total tokens, а также стоимость summary.\n\nПолная таблица `messages` сохраняется для диагностики, команды `/history` и честного сравнения со сжатым контекстом."
+        },
+        {
+          "id": "e3",
+          "quote": "## Запуск\n\n```bash\npip install -r requirements.txt\npython day-09-context-compression/main.py\n```\n\nКоманды:\n\n- `/history` — последние записи полной истории;\n- `/summary` — сохранённый summary и стоимость его создания;\n- `/compare` — один вопрос с полной и сжатой историей;\n- `/stats` — стоимость основных запросов вместе с расходами на summary;\n- `/dialogs` — переключение диалога;\n- `/exit` или `выход` — завершение.\n\nЛокальное сравнение токенов:\n\n```bash\npython day-09-context-compression/experiment.py\n```\n\nЭксперимент сравнивает короткую, среднюю и длинную синтетические истории без обращения к Groq."
+        }
+      ],
+      "documentation_question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?",
+      "git_facts": []
+    },
+    "context_digest": "4d837236282edf7faa6968c39144adde6afbaed7a269beed9211aeaf4f76cb55",
+    "message_digest": "39a4151a8b0582deabf0e8b3a1affba815a38257f25f2f0726f4d686fdb2bc6e",
+    "output_schema_digest": "db057727f36f8e6441dcb298430121d14c354b3f9bbbd1960a34d0e3f816a16d",
+    "output_schema_bytes": 18136,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 4950,
+      "input_token_upper_bound_estimate": 5206,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 6742
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "RU-3",
+    "mode": "multi",
+    "context": {
+      "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Контракт жизненного цикла\n\nСостояния: `planning`, `execution`, `validation`, `done`.\n\n| Текущее | Разрешённые переходы | Условие |\n|---|---|---|\n| planning | execution | Нужен непустой и явно утверждённый план |\n| execution | validation, planning | Для validation нужно завершить все шаги; planning — контролируемое перепланирование |\n| validation | done, execution | `done` только после PASS; ошибка проверки возвращает в execution |\n| done | нет | Терминальное состояние |\n\nПауза не является пятым этапом. Пока задача на паузе, переходы и изменение прогресса запрещены; разрешено только явное возобновление. Состояние хранится в SQLite."
+        },
+        {
+          "id": "e2",
+          "quote": "## Что добавлено\n\n- `TaskState` задаёт допустимые состояния.\n- `ALLOWED_TRANSITIONS` — единый граф переходов.\n- `allowed_targets()` применяет guards и показывает только реально доступные сейчас переходы.\n- Guards запрещают пропуски этапов и объясняют отказ.\n- План утверждается отдельной командой `/task approve`; изменение плана сбрасывает утверждение.\n- В prompt передаётся та же политика с запретом перескакивать этапы.\n- Семантический postflight проверяет готовый ответ модели относительно текущего этапа и `expected_action`.\n- Ответ с реализацией во время `planning` удаляется и заменяется детерминированным отказом.\n- `/task status` показывает разрешённые переходы.\n- Проверки инвариантов Дня 14 сохранены."
+        },
+        {
+          "id": "e3",
+          "quote": "## Запуск и тесты\n\n```bash\ncd day-15-controlled-transitions\ncp .env.example .env\npython3 -m pip install -r requirements.txt\npython3 main.py\npython3 -m unittest discover -s . -p 'test_*.py' -q\n```\n\nОсновной сценарий: `/task create`, `/task plan`, `/task approve`, `/task transition execution`, `/task complete`, `/task transition validation`, `/task check pass`, `/task transition done`.\n\n35 тестов проверяют недопустимые прыжки, фактически доступные переходы в `/task status`, явное утверждение плана, блокировку преждевременной реализации, pause/resume, восстановление после перезапуска, prompt и совместимость с Днём 14. Используются Python 3.13, SQLite и Groq; Node.js и PostgreSQL не требуются."
+        }
+      ]
+    },
+    "context_digest": "2031d2b623e9289f5849b41ec010ebcb1604c7716dbb7bf7a9095e7971e715c6",
+    "message_digest": "b5c1930a1cb39f1e0e1f0f12bd96244c0baaa66c55fa8c0483a505bce83006f0",
+    "output_schema_digest": "865730f111f542c5f14f1a5ea99091bfecaf5088fde8621efd4418a2c4388ed9",
+    "output_schema_bytes": 11680,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 4920,
+      "input_token_upper_bound_estimate": 5176,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 6712
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "RU-3",
+    "mode": "single",
+    "context": {
+      "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+      "language": "ru",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Контракт жизненного цикла\n\nСостояния: `planning`, `execution`, `validation`, `done`.\n\n| Текущее | Разрешённые переходы | Условие |\n|---|---|---|\n| planning | execution | Нужен непустой и явно утверждённый план |\n| execution | validation, planning | Для validation нужно завершить все шаги; planning — контролируемое перепланирование |\n| validation | done, execution | `done` только после PASS; ошибка проверки возвращает в execution |\n| done | нет | Терминальное состояние |\n\nПауза не является пятым этапом. Пока задача на паузе, переходы и изменение прогресса запрещены; разрешено только явное возобновление. Состояние хранится в SQLite."
+        },
+        {
+          "id": "e2",
+          "quote": "## Что добавлено\n\n- `TaskState` задаёт допустимые состояния.\n- `ALLOWED_TRANSITIONS` — единый граф переходов.\n- `allowed_targets()` применяет guards и показывает только реально доступные сейчас переходы.\n- Guards запрещают пропуски этапов и объясняют отказ.\n- План утверждается отдельной командой `/task approve`; изменение плана сбрасывает утверждение.\n- В prompt передаётся та же политика с запретом перескакивать этапы.\n- Семантический postflight проверяет готовый ответ модели относительно текущего этапа и `expected_action`.\n- Ответ с реализацией во время `planning` удаляется и заменяется детерминированным отказом.\n- `/task status` показывает разрешённые переходы.\n- Проверки инвариантов Дня 14 сохранены."
+        },
+        {
+          "id": "e3",
+          "quote": "## Запуск и тесты\n\n```bash\ncd day-15-controlled-transitions\ncp .env.example .env\npython3 -m pip install -r requirements.txt\npython3 main.py\npython3 -m unittest discover -s . -p 'test_*.py' -q\n```\n\nОсновной сценарий: `/task create`, `/task plan`, `/task approve`, `/task transition execution`, `/task complete`, `/task transition validation`, `/task check pass`, `/task transition done`.\n\n35 тестов проверяют недопустимые прыжки, фактически доступные переходы в `/task status`, явное утверждение плана, блокировку преждевременной реализации, pause/resume, восстановление после перезапуска, prompt и совместимость с Днём 14. Используются Python 3.13, SQLite и Groq; Node.js и PostgreSQL не требуются."
+        }
+      ],
+      "documentation_question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+      "git_facts": []
+    },
+    "context_digest": "ba4400f58b729f4e628dafa85d2ae42a2e5a7058e1afb933d4ebdd080b121afc",
+    "message_digest": "8d17dfe1e99174dea390cf4ce2d5243be6fd98744ec0462f4802f9885fabd947",
+    "output_schema_digest": "aa8d32a71837fa4775404b640c1f4e9e5168e79994a5fc696f73a0195713ecbd",
+    "output_schema_bytes": 11916,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 5362,
+      "input_token_upper_bound_estimate": 5618,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 7154
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-1",
+    "mode": "multi",
+    "context": {
+      "question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Profiles and memory\n\nA profile is selected when a dialogue is created, and its `profile_id` is stored in `conversations`. Both conversation history and personalization are therefore restored after a restart.\n\n| Data | Scope |\n|---|---|\n| Short-term messages | Current dialogue |\n| Working memory | Current dialogue and task |\n| Long-term decisions and knowledge | All dialogues of one profile |\n| Preferences | Selected user profile |\n\nLong-term records are scoped by `profile_id`, preventing one user's decisions from entering another user's context. A profile can be changed with `/profile PROFILE_ID` only while the dialogue and its working memory are empty."
+        },
+        {
+          "id": "e2",
+          "quote": "## Run\n\n```bash\npip install -r requirements.txt\npython day-12-personalization/main.py\n```\n\nDay 11 commands remain available. Day 12 adds:\n\n- `/profile` — show the active profile;\n- `/profile PROFILE_ID` — change the profile of an empty dialogue;\n- `/context` — verify that personalization is included;\n- `/dialogs` — create another dialogue with another profile."
+        },
+        {
+          "id": "e3",
+          "quote": "## What I Learned\n\n- persistent memory differs from an in-memory `messages` list;\n- a conversation identifier connects messages from different process runs;\n- one agent implementation can serve multiple isolated contexts;\n- previous dialogues can be sorted by their last activity time;\n- startup restoration and prompt construction are separate operations;\n- transactional writes keep a user request and assistant answer consistent;\n- failed requests should be stored for diagnostics without contaminating context;\n- context can be bounded while the complete history remains available."
+        }
+      ]
+    },
+    "context_digest": "77defa845aeb246ce1de03636a706334244dea548d0982447190792b526c58fa",
+    "message_digest": "bbc8b0ad6313c5ff6b03733478ce4fd70d50969108be8aa077c1a38035de474d",
+    "output_schema_digest": "2912b9f1a013395fe884662085506fda51b8f1394ed6f25ca02cdf9df7ab0b65",
+    "output_schema_bytes": 7690,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 2991,
+      "input_token_upper_bound_estimate": 3247,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 4783
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-1",
+    "mode": "single",
+    "context": {
+      "question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "## Profiles and memory\n\nA profile is selected when a dialogue is created, and its `profile_id` is stored in `conversations`. Both conversation history and personalization are therefore restored after a restart.\n\n| Data | Scope |\n|---|---|\n| Short-term messages | Current dialogue |\n| Working memory | Current dialogue and task |\n| Long-term decisions and knowledge | All dialogues of one profile |\n| Preferences | Selected user profile |\n\nLong-term records are scoped by `profile_id`, preventing one user's decisions from entering another user's context. A profile can be changed with `/profile PROFILE_ID` only while the dialogue and its working memory are empty."
+        },
+        {
+          "id": "e2",
+          "quote": "## Run\n\n```bash\npip install -r requirements.txt\npython day-12-personalization/main.py\n```\n\nDay 11 commands remain available. Day 12 adds:\n\n- `/profile` — show the active profile;\n- `/profile PROFILE_ID` — change the profile of an empty dialogue;\n- `/context` — verify that personalization is included;\n- `/dialogs` — create another dialogue with another profile."
+        },
+        {
+          "id": "e3",
+          "quote": "## What I Learned\n\n- persistent memory differs from an in-memory `messages` list;\n- a conversation identifier connects messages from different process runs;\n- one agent implementation can serve multiple isolated contexts;\n- previous dialogues can be sorted by their last activity time;\n- startup restoration and prompt construction are separate operations;\n- transactional writes keep a user request and assistant answer consistent;\n- failed requests should be stored for diagnostics without contaminating context;\n- context can be bounded while the complete history remains available."
+        }
+      ],
+      "documentation_question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?",
+      "git_facts": []
+    },
+    "context_digest": "9041c6974682dea093f279c46f43dc53cf4913b66ad95d0232f16824220bc649",
+    "message_digest": "7eb4c7af7eae4607ec167aeb0fbfc50ca2d024f742bcd7e33f55081a76b895cc",
+    "output_schema_digest": "a21abe6c095c3a4a8aa82b77a8fc7127ed76ac7a9b9af603f132476453c3c417",
+    "output_schema_bytes": 7926,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 3463,
+      "input_token_upper_bound_estimate": 3719,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 5255
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-2",
+    "mode": "multi",
+    "context": {
+      "question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "### Postflight\n\nThe generated response is checked before persistence by both local rules and an independent semantic guard covering every invariant. A violating response is discarded and never stored. Instead of AgentError, the user receives a deterministic refusal with the invariant ID, rationale, and compatible alternative.\n\nMalformed guard JSON or unknown IDs cause fail-closed behavior: the answer is blocked because compliance could not be confirmed.\n\nThe guard uses a strict JSON Schema containing the allowed invariant IDs. A compatible request requires three API calls: semantic preflight, answer generation, and semantic postflight. An explicit regex conflict is still blocked locally without an API call."
+        },
+        {
+          "id": "e2",
+          "quote": "# Day 14 — Invariants and State Constraints\n\nDay 13 gave Bublik a persistent task state. Day 14 adds a separate invariant policy: rules that cannot be overridden by dialogue messages.\n\nPreviously, invariants.json was injected into the system prompt and a postflight validator searched generated answers for API keys and claims about nonexistent memory. The new version combines fast local rules with independent semantic checks of both the request and generated response, so paraphrased conflicts are also refused."
+        },
+        {
+          "id": "e3",
+          "quote": "### Preflight\n\nInvariantValidator first catches explicit conflicts locally. SemanticInvariantGuard then checks the meaning of the request against every invariant using a separate structured call. The text is treated as untrusted data and the guard returns only JSON containing violated IDs.\n\nWhen a conflict is found:\n\n- explicit regex conflicts do not call Groq;\n- paraphrased conflicts make only the guard call and do not start answer generation;\n- Bublik does not propose the forbidden solution;\n- the response names every violated invariant ID;\n- it explains why the rule exists;\n- it offers a compatible alternative;\n- the request and refusal are stored as a normal conversation exchange."
+        }
+      ]
+    },
+    "context_digest": "f5762d7ce50b2c39081d69be4f6c89834b247aad31ac4b48a4f500f7b9fe5fad",
+    "message_digest": "d4feaf83270f88b7af0ea0d552033d37fd3c107bb0263ac1ec569f312cb90fb5",
+    "output_schema_digest": "ab422f6694db962f2c4ea1c58c600751185520d83f742623b36af0f8a0b8d6dc",
+    "output_schema_bytes": 12276,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 3295,
+      "input_token_upper_bound_estimate": 3551,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 5087
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-2",
+    "mode": "single",
+    "context": {
+      "question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "### Postflight\n\nThe generated response is checked before persistence by both local rules and an independent semantic guard covering every invariant. A violating response is discarded and never stored. Instead of AgentError, the user receives a deterministic refusal with the invariant ID, rationale, and compatible alternative.\n\nMalformed guard JSON or unknown IDs cause fail-closed behavior: the answer is blocked because compliance could not be confirmed.\n\nThe guard uses a strict JSON Schema containing the allowed invariant IDs. A compatible request requires three API calls: semantic preflight, answer generation, and semantic postflight. An explicit regex conflict is still blocked locally without an API call."
+        },
+        {
+          "id": "e2",
+          "quote": "# Day 14 — Invariants and State Constraints\n\nDay 13 gave Bublik a persistent task state. Day 14 adds a separate invariant policy: rules that cannot be overridden by dialogue messages.\n\nPreviously, invariants.json was injected into the system prompt and a postflight validator searched generated answers for API keys and claims about nonexistent memory. The new version combines fast local rules with independent semantic checks of both the request and generated response, so paraphrased conflicts are also refused."
+        },
+        {
+          "id": "e3",
+          "quote": "### Preflight\n\nInvariantValidator first catches explicit conflicts locally. SemanticInvariantGuard then checks the meaning of the request against every invariant using a separate structured call. The text is treated as untrusted data and the guard returns only JSON containing violated IDs.\n\nWhen a conflict is found:\n\n- explicit regex conflicts do not call Groq;\n- paraphrased conflicts make only the guard call and do not start answer generation;\n- Bublik does not propose the forbidden solution;\n- the response names every violated invariant ID;\n- it explains why the rule exists;\n- it offers a compatible alternative;\n- the request and refusal are stored as a normal conversation exchange."
+        }
+      ],
+      "documentation_question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?",
+      "git_facts": []
+    },
+    "context_digest": "a779a23a966e510da5f32a76beeaeb8d665fcff569b8e49d256f46c23c7eddbd",
+    "message_digest": "c94e7b4f8d495f43b1789de02c4f0e3f33e97e91441b95fec9ee88e4b4797b72",
+    "output_schema_digest": "929e88405aef1d16c2d0fc54fcf4cc922337600d1901ca8a5daf04aaa37c7e27",
+    "output_schema_bytes": 12512,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 3775,
+      "input_token_upper_bound_estimate": 4031,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 5567
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-3",
+    "mode": "multi",
+    "context": {
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "# Day 20 — Orchestrating multiple MCP servers\n\nBublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```\n\nThe final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.\n\nThe user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces"
+        },
+        {
+          "id": "e2",
+          "quote": "выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.\n\nАгент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач."
+        },
+        {
+          "id": "e3",
+          "quote": "9.56 GiB | 10.89 GiB |\n\nQuality was equivalent on that question; Q5 took about 25.8% longer and reported 1.33 GiB more allocation. Q4 was measured first; order was not randomized. This does not establish superiority on other tasks.\n\nThe full control report records maximum `size_vram` of 11.19 GiB for baseline and 9.67 GiB for the selected profile. Reports also retain sampled process RSS/CPU, available system memory, and swap. **RSS and `size_vram` are not full physical unified-memory usage and must not be added together.** Full physical peak and GPU utilization were not measured.\n\nSee [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md) for detailed comparisons and limitations."
+        }
+      ]
+    },
+    "context_digest": "6b6f7e4afb9ceb3993f37e3368643e9487265d5b78111c4374e493c4b260107e",
+    "message_digest": "29e67713d63915ba50b1d8ddcf75d9cd993e0fe4cecf2de2a08d0b2af999fb6f",
+    "output_schema_digest": "3ad9ecd0f830e8179378b02c1065a8e81bc3e9c4b7d9dfc6833138b535ae16f5",
+    "output_schema_bytes": 26892,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 5007,
+      "input_token_upper_bound_estimate": 5263,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 6799
+    },
+    "status": "fits"
+  },
+  {
+    "case_id": "EN-3",
+    "mode": "single",
+    "context": {
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "language": "en",
+      "evidence": [
+        {
+          "id": "e1",
+          "quote": "# Day 20 — Orchestrating multiple MCP servers\n\nBublik launches three independent stdio MCP servers: `github` (`get_repository_info`), `analysis` (`summarize_repository`, `verify_report`), and `storage` (`save_report`, `read_report`). The registry discovers tools and routes each selected call to the correct server session. The model sees short operation codes such as `FETCH` and `READ` and selects one via strict JSON, for example `{\"operation\":\"READ\"}`. The agent maps it to the discovered MCP route and supplies exact validated inputs from prior results. Native Groq `tool_calls` and model-generated report arguments are not required. Real input schemas remain available in the registry and are enforced by the servers.\n\n```text\ngithub.get_repository_info → analysis.summarize_repository\n→ storage.save_report → storage.read_report → analysis.verify_report → answer\n```\n\nThe final verification compares the report read from disk with the original summary. Each pending selection uses strict JSON Schema with an enum of operation codes. If Groq returns HTTP 400 `tool_use_failed`, the agent picks the next guarded step and labels it `agent fallback`. If the model selects a premature step, the agent executes the valid next step and labels it `agent correction`. Neither step can be counted as model selected. The agent forms the final answer from verified MCP results without a sixth model request. Invalid JSON and MCP failures stop the flow; the agent only reports success after `verified=true`.\n\nThe user task selects the required subset: `--task info` uses GitHub only, `--task summary` uses GitHub and analysis, and the default `--task report` completes all five calls. The model selects each tool call and the agent enforces"
+        },
+        {
+          "id": "e2",
+          "quote": "выбирает следующий шаг по проверенному порядку и пишет `selected by agent fallback`; при преждевременном выборе модели пишет `selected by agent correction`. Эти шаги нельзя выдавать за выбор модели. После проверки агент формирует ответ из MCP-результатов без шестого запроса к модели. День 19 использовал один MCP-сервер и фиксированные три вызова; здесь серверы и сессии отдельные, а задача выбирает один из трёх маршрутов.\n\nАгент также понимает два коротких запроса: `--task info` вызывает только GitHub, `--task summary` вызывает GitHub и analysis без сохранения файла. По умолчанию `--task report` запускает полный сценарий. Это позволяет проверить выбор *нужного набора* инструментов для разных пользовательских задач."
+        },
+        {
+          "id": "e3",
+          "quote": "9.56 GiB | 10.89 GiB |\n\nQuality was equivalent on that question; Q5 took about 25.8% longer and reported 1.33 GiB more allocation. Q4 was measured first; order was not randomized. This does not establish superiority on other tasks.\n\nThe full control report records maximum `size_vram` of 11.19 GiB for baseline and 9.67 GiB for the selected profile. Reports also retain sampled process RSS/CPU, available system memory, and swap. **RSS and `size_vram` are not full physical unified-memory usage and must not be added together.** Full physical peak and GPU utilization were not measured.\n\nSee [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md) for detailed comparisons and limitations."
+        }
+      ],
+      "documentation_question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "git_facts": []
+    },
+    "context_digest": "1dfccef9ec44943138369a5baed5ee566c806bd6669a482a3be552b4833c50bc",
+    "message_digest": "fda2dfac797b56d3463db565b65635801f3b6ba11a60c70c33e92e44ffdae7af",
+    "output_schema_digest": "a41484742b0d5b561afb698e1b77280367dbf6a88b5d3975bb51236887b2153f",
+    "output_schema_bytes": 27128,
+    "context_budget": {
+      "policy": "message-content-utf8-plus256-v1",
+      "content_bytes": 5493,
+      "input_token_upper_bound_estimate": 5749,
+      "template_allowance": 256,
+      "safety_reserve": 512,
+      "output_reserve": 1024,
+      "context_window": 8192,
+      "estimated_total": 7285
+    },
+    "status": "fits"
+  }
+]

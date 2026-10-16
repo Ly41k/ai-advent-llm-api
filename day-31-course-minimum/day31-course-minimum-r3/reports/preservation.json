@@ -1,0 +1,45 @@
+{
+  "version": "course-minimum-r3",
+  "source_python_files": 60,
+  "original_source_before_equals_after": true,
+  "r2_failure_bundle_sha256": "eb1eed17118ef1ced938e168388d9b15e3a3064f34600eee4609f7b58828492b",
+  "r2_failure_reports": 64,
+  "r2_failure_counts": {
+    "course_minimum": "not_accepted",
+    "current_operation_qwen_calls": 0,
+    "dispatch_records": 0,
+    "extended_stage7": "paused_incomplete",
+    "generation_cap": 1,
+    "generation_slots_reserved": 0,
+    "known_terminal_calls": 0,
+    "old_61_reports_retained": true,
+    "old_qwen_calls_excluded": true,
+    "preflight_status": "not_passed",
+    "stage8": "not_started",
+    "unknown_dispatch_outcomes": [],
+    "version": "course-minimum-r2"
+  },
+  "publication_files_unchanged": {
+    "publication_adapter.py": true,
+    "prepare_overlay.py": true,
+    "overlay/bublik_developer/pipeline.py": true,
+    "overlay/bublik_developer/publication.py": true
+  },
+  "pinned_dependencies_unchanged": {
+    "day31-source-anchor-v103-r1": true,
+    "day31-anchor-persistence-v104-r1": true
+  },
+  "indices": {
+    "production44-state": {
+      "sqlite_sha256": "afbff43f692377e5c606c1883114e014710bfbc158426ef76be0a90ea17169ee",
+      "matches_existing_current": true
+    },
+    "expanded54-state": {
+      "sqlite_sha256": "fcee3dc3bd4bb658a88849e01276ad98efb7421f96a6734cba0e95a645a93f8f",
+      "matches_existing_current": true
+    }
+  },
+  "qwen_calls": 0,
+  "embedding_calls": 0,
+  "index_builds": 0
+}

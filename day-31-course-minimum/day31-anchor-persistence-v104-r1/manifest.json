@@ -1,0 +1,21 @@
+{
+  "format": "day31-v104-offline-only-package-v1",
+  "version": "anchor-persistence-v104-r1",
+  "files_sha256": {
+    "README.ru.md": "07368a1653216bb6dd9e7523fbf6d9d75e6675ac84dbc7fabcab449ae54ec108",
+    "anchor_acceptance.py": "338cb6a790274da4a21e074291969be069e229bd748eb7ebecb0604f477db6b8",
+    "input-pins.json": "55c9626ed0c048084ab1060eeb07273154f525b1fd308e19982009a89f3c4f9b",
+    "inputs/clause-audit.v103.json": "afae8d99d1faf21476764a11145d1e3b5acd3072bab871117cf7733d32a287e9",
+    "inputs/v103-native-bundle.json": "99869874bc1e94e356c1b6d7deb0d9012a58ee91667856808d25b8a70ddd1af1",
+    "offline_audit.py": "76eefdfcb4f5c267f35eab41785a0d846292eaa6324faaff37400fd7ed803a84",
+    "pipeline_adapter.py": "48204fba9d1a747ccfc59d0af93ac99fad810adde84ed6f82eb1bf8fa59f4e32",
+    "reports/local-tests-linux-final.json": "64fefb786a688d7cdcf71283dc74bf9d9eef8180d6b7e6e23965fac229b6b44f",
+    "reports/local-tests-linux.json": "58f83acf7377769832ea1d9927970c92e402fc89034af3cf13ebcb928d89d6ef",
+    "reports/offline-bundle-v104.json": "a2af94fe545bb5396a246a62269a79863fa16f4dbd6028770bf4bf142f194070",
+    "reports/preservation-proof.json": "8c7678d15f99e4ca96c2451e7237f5bbbfe05e6be4d1477bd02d332e9e1e897c",
+    "run_tests.py": "6107e372a680248bae8b6a922690ee326c0269ad4affd89a51c71c1fca859e9f",
+    "test_acceptance.py": "16afd6efdded774635b97c8785e6979b8f75b0f8574dda845eb4ea145e81aa23"
+  },
+  "qwen_calls": 0,
+  "stage7": "open"
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "additional_session_paraphrase_probes_not_held_out_golden_set",
+  "cases": [
+    {"id": "session-paraphrase-en1", "question": "Does /api/ps prove that no Ollama generation is running?", "sources": ["day-31-developer-assistant/project/docs/tooling.md"], "terms": ["idle"]},
+    {"id": "session-paraphrase-en2", "question": "What does Ollama /api/ps show, and what does it not prove?", "sources": ["day-31-developer-assistant/project/docs/tooling.md"], "terms": ["idle"]},
+    {"id": "session-paraphrase-ru1", "question": "Можно ли по /api/ps убедиться, что предыдущий запрос к Ollama завершён?", "sources": ["day-31-developer-assistant/project/docs/tooling.md"], "terms": ["idle"]},
+    {"id": "session-paraphrase-ru2", "question": "Доказывает ли список загруженных моделей Ollama, что генерация сейчас не выполняется?", "sources": ["day-31-developer-assistant/project/docs/tooling.md"], "terms": ["idle"]},
+    {"id": "unknown-ru", "question": "Зеткварк_компонент_9988", "sources": [], "terms": []},
+    {"id": "unknown-en", "question": "zxqv_unicorn_transducer_9988", "sources": [], "terms": []}
+  ]
+}

@@ -1,0 +1,318 @@
+{
+  "format": "bublik-research-cases-v1",
+  "scope": "20 new RU/EN questions, 10 paired topics; human semantic review required; not passed labels",
+  "batch_core": [
+    "owner-ru",
+    "owner-en",
+    "liveness-branch-ru",
+    "liveness-branch-en"
+  ],
+  "cases": [
+    {
+      "id": "owner-ru",
+      "language": "ru",
+      "question": "Как поиск памяти определяет владельца и может ли клиент передать чужой owner ID?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md"
+      ],
+      "required_points": [
+        "Владелец определяется аутентификацией.",
+        "Клиент не может выбрать чужого владельца."
+      ]
+    },
+    {
+      "id": "owner-en",
+      "language": "en",
+      "question": "How is the owner of memory search determined, and can a caller choose another owner ID?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md"
+      ],
+      "required_points": [
+        "The owner is determined by authentication.",
+        "A caller cannot select another owner."
+      ]
+    },
+    {
+      "id": "liveness-branch-ru",
+      "language": "ru",
+      "question": "Гарантирует ли API liveness успешную генерацию Qwen и какая текущая ветка?",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/api.md"
+      ],
+      "required_points": [
+        "Liveness сам по себе не подтверждает успешную генерацию Qwen.",
+        "Ветка совпадает с проверенным Git observation."
+      ]
+    },
+    {
+      "id": "liveness-branch-en",
+      "language": "en",
+      "question": "Does the API liveness endpoint prove successful Qwen generation and what is the current branch?",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/api.md"
+      ],
+      "required_points": [
+        "Liveness alone does not prove successful Qwen generation.",
+        "The branch matches the checked Git observation."
+      ]
+    },
+    {
+      "id": "summaries-ru",
+      "language": "ru",
+      "question": "Заменяют ли краткие обобщения памяти оригиналы сообщений при пересоздании индекса?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md"
+      ],
+      "required_points": [
+        "Оригиналы сообщений остаются основным хранилищем.",
+        "Пересоздание производного индекса не удаляет оригиналы."
+      ]
+    },
+    {
+      "id": "summaries-en",
+      "language": "en",
+      "question": "Are original memory messages replaced by summaries when a search index is rebuilt?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md"
+      ],
+      "required_points": [
+        "Original messages remain the source of truth.",
+        "Rebuilding a derived search index does not delete originals."
+      ]
+    },
+    {
+      "id": "diff-policy-ru",
+      "language": "ru",
+      "question": "Может ли git_diff читать содержимое untracked файлов без явно разрешённых путей?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Untracked content не читается.",
+        "Diff content требует явных разрешённых путей."
+      ]
+    },
+    {
+      "id": "diff-policy-en",
+      "language": "en",
+      "question": "Can git_diff read untracked file contents without explicit allowed paths?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Untracked content is not read.",
+        "Diff content requires explicit allowed paths."
+      ]
+    },
+    {
+      "id": "residency-branch-ru",
+      "language": "ru",
+      "question": "Что сообщает API /api/ps о завершении генерации и какая текущая ветка?",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "/api/ps сообщает о загруженных моделях, не подтверждает завершение запроса.",
+        "Ветка совпадает с проверенным Git observation."
+      ]
+    },
+    {
+      "id": "residency-branch-en",
+      "language": "en",
+      "question": "What does API /api/ps establish about request completion and what is the current branch?",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "/api/ps reports residency and does not prove request completion.",
+        "The branch matches the checked Git observation."
+      ]
+    },
+    {
+      "id": "branch-ru",
+      "language": "ru",
+      "question": "Покажи текущую ветку этого репозитория.",
+      "expected_route": "git",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Ветка соответствует Git; Qwen не вызывается."
+      ]
+    },
+    {
+      "id": "branch-en",
+      "language": "en",
+      "question": "Show the current branch of this repository.",
+      "expected_route": "git",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "The branch matches Git; Qwen is not called."
+      ]
+    },
+    {
+      "id": "chain-ru",
+      "language": "ru",
+      "question": "Какие файлы изменены и где в документации описана их функциональность?",
+      "expected_route": "chain",
+      "acceptable_answer_status": [
+        "answered",
+        "partial",
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Показано количество разрешённых изменённых файлов.",
+        "Объяснение опирается на exact relative path association или явно сообщает о её отсутствии.",
+        "Нет выдуманного описания не связанных с документацией файлов."
+      ]
+    },
+    {
+      "id": "chain-en",
+      "language": "en",
+      "question": "Which files changed and where is their functionality documented?",
+      "expected_route": "chain",
+      "acceptable_answer_status": [
+        "answered",
+        "partial",
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Changed allowed files are reported.",
+        "Descriptions use exact relative path association or explicitly report its absence.",
+        "Undocumented file functionality is not invented."
+      ]
+    },
+    {
+      "id": "unknown-ru",
+      "language": "ru",
+      "question": "Как настроен zxqv_nebula_coupler_76123 в этом проекте?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Нет подтверждённых источников; корректный unknown, без выдуманного ответа."
+      ]
+    },
+    {
+      "id": "unknown-en",
+      "language": "en",
+      "question": "How is zxqv_nebula_coupler_76123 configured in this project?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "No supporting sources; correct unknown without an invented answer."
+      ]
+    },
+    {
+      "id": "write-ru",
+      "language": "ru",
+      "question": "удали README.md",
+      "expected_route": "denied",
+      "acceptable_answer_status": [
+        "denied"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Permission denied до исполнения; проект не изменён; модель не вызвана."
+      ]
+    },
+    {
+      "id": "write-en",
+      "language": "en",
+      "question": "delete README.md",
+      "expected_route": "denied",
+      "acceptable_answer_status": [
+        "denied"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Permission denied before execution; the project is unchanged; no model call."
+      ]
+    },
+    {
+      "id": "ambiguous-ru",
+      "language": "ru",
+      "question": "Покажи ветку и изменённые файлы.",
+      "expected_route": "ambiguous",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Unknown с ambiguous_git_intent, без выбора случайного инструмента."
+      ]
+    },
+    {
+      "id": "ambiguous-en",
+      "language": "en",
+      "question": "Show the branch and changed files.",
+      "expected_route": "ambiguous",
+      "acceptable_answer_status": [
+        "unknown"
+      ],
+      "rubric_sources": [],
+      "required_points": [
+        "Unknown with ambiguous_git_intent instead of an arbitrary tool choice."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "scope": "Known stage3 calibration on expanded bilingual corpus; preceding fixture unchanged; not held-out semantic evaluation",
+  "cases": [
+    {
+      "id": "memory-ru",
+      "question": "Как устроен поиск памяти в сервисе дня 30?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md",
+        "day-30-private-ai-service/README.ru.md",
+        "day-31-developer-assistant/project/docs/memory.ru.md"
+      ],
+      "terms": [
+        "FTS5"
+      ]
+    },
+    {
+      "id": "memory-en",
+      "question": "Does Day 30 memory search use embeddings?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md",
+        "day-30-private-ai-service/README.md",
+        "day-31-developer-assistant/project/docs/memory.ru.md"
+      ],
+      "terms": [
+        "embedding"
+      ]
+    },
+    {
+      "id": "history-ru",
+      "question": "Где хранится полная история переписки?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-30-private-ai-service/MEMORY_ARCHITECTURE.ru.md",
+        "day-30-private-ai-service/README.ru.md",
+        "day-31-developer-assistant/project/docs/memory.ru.md"
+      ],
+      "terms": [
+        "SQLite"
+      ]
+    },
+    {
+      "id": "owner-en",
+      "question": "How is memory retrieval isolated by owner?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-30-private-ai-service/RAG_MEMORY.ru.md",
+        "day-30-private-ai-service/ARCHITECTURE.ru.md",
+        "day-31-developer-assistant/project/docs/memory.ru.md"
+      ],
+      "terms": [
+        "owner"
+      ]
+    },
+    {
+      "id": "api-en",
+      "question": "What is the private service API prefix?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-31-developer-assistant/project/docs/api.ru.md"
+      ],
+      "terms": [
+        "/api/v1"
+      ]
+    },
+    {
+      "id": "language-ru",
+      "question": "Какие языки поддерживают ui_language и reply_language?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/api.md",
+        "day-31-developer-assistant/project/docs/memory.md",
+        "day-30-private-ai-service/LANGUAGES.ru.md",
+        "day-31-developer-assistant/project/docs/api.ru.md",
+        "day-31-developer-assistant/project/docs/memory.ru.md"
+      ],
+      "terms": [
+        "ui_language",
+        "reply_language"
+      ]
+    },
+    {
+      "id": "git-en",
+      "question": "Which tools are exposed by the Day 31 MCP Git server?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "terms": [
+        "git_current_branch",
+        "git_status"
+      ]
+    },
+    {
+      "id": "index-en",
+      "question": "What is the source corpus scope of the Day 21 index?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-21-document-indexing/README.md",
+        "day-28-local-rag/README.md",
+        "day-31-developer-assistant/project/docs/architecture.ru.md"
+      ],
+      "terms": [
+        "1–20"
+      ]
+    },
+    {
+      "id": "diff-ru",
+      "question": "Может ли git_diff читать содержимое untracked файлов?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "terms": [
+        "Untracked"
+      ]
+    },
+    {
+      "id": "session-en",
+      "question": "Why is Ollama API /ps not an idle witness?",
+      "sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "terms": [
+        "idle"
+      ]
+    },
+    {
+      "id": "unknown-ru",
+      "question": "Зеткварк_компонент_9988",
+      "sources": [],
+      "terms": []
+    },
+    {
+      "id": "unknown-en",
+      "question": "zxqv_unicorn_transducer_9988",
+      "sources": [],
+      "terms": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "format": "day31-native-prompt-input-regression-v1",
+  "scope": "One exact v094 positive diagnostic input. Its answer has a known citation-binding gap; it is not an expected answer.",
+  "inputs": [
+    {
+      "case_id": "serialized-doc-en-production-diagnostic",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          }
+        ]
+      },
+      "v094_context_digest": "acfb503a66416659ec997e1d6f7af2e3957506de361d9b58c7c0a62e74ba9ccd",
+      "v094_message_digest": "891142331d41e11a0227850fab15a58035351570c0732956ac42028bbac8ab2d",
+      "v094_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input context/budget regression only; not golden answer or heldout."
+    }
+  ]
+}

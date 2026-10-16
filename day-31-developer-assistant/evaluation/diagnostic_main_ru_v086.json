@@ -1,0 +1,27 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "Exact routed Documentation question from known main-authority-branch-ru, excluding Git branch request. One production Doc call, not a complete paired Main case or held-out question. Original v077 catalog/rubric unchanged.",
+  "batch_core": [
+    "main-doc-ru"
+  ],
+  "cases": [
+    {
+      "id": "main-doc-ru",
+      "language": "ru",
+      "question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-31-developer-assistant/project/docs/architecture.ru.md"
+      ],
+      "required_points": [
+        "Main видит полный вопрос, проверенные утверждения и произведённые приложением Git-факты.",
+        "Main может упорядочивать существующие claim/fact IDs, но не добавлять новый текст или факты."
+      ]
+    }
+  ]
+}

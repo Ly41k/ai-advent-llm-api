@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "source": "User-supplied Mac bundle-0003.json",
+  "source_bundle_sha256": "a1f57b7d071fbb326992b7720f0e6f1210273dbbb5bb8f58eb13fba46475d028",
+  "reports_verified": 79,
+  "all79_reports_identical_to_previously_verified_publication": true,
+  "all_previous76_live_reports_unchanged": true,
+  "result_binding_sha256": "37d5205e0708b21247834cd8b6a285c31c07703c0609dc7a9801ffad58d28a4e",
+  "review_sha256": "7ed6948e516e35d077888b5e8ee34b4c3e24590a6d1011ffc4cf41ecb6674174",
+  "reviewer": {
+    "id": "yuriy",
+    "kind": "human"
+  },
+  "claim_statuses": {
+    "c1": "supported",
+    "c2": "supported"
+  },
+  "answer_accepted": true,
+  "runtime_validation": "passed",
+  "original_claims_anchors_fingerprints_unchanged": true,
+  "known_qwen_calls_current_course_run": 1,
+  "new_qwen_calls_during_review_or_stage8": 0,
+  "new_embeddings_or_index_builds": 0,
+  "native_preflight": {
+    "status": "passed",
+    "tests_run": 32,
+    "platform": "Darwin",
+    "python": "3.13.3"
+  },
+  "course_minimum": "Accepted",
+  "research_stage7": "paused_incomplete",
+  "stage8": "documentation_prepared",
+  "stage9": "not_started"
+}

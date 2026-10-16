@@ -1,0 +1,121 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_regression",
+  "scope": "Post-change development regression of six previously observed questions; not independent held-out, not production44 acceptance, not E2E.",
+  "batch_core": [
+    "RU-1",
+    "RU-2",
+    "RU-3",
+    "EN-1",
+    "EN-2",
+    "EN-3"
+  ],
+  "cases": [
+    {
+      "id": "RU-1",
+      "language": "ru",
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-07-context-persistence/README.md",
+        "day-07-context-persistence/README.ru.md"
+      ],
+      "required_points": [
+        "Различает pending, completed и failed по документации Day7.",
+        "Объясняет явное добавление текущего pending и восстановление только completed; прерванный запрос не входит в будущий контекст."
+      ]
+    },
+    {
+      "id": "RU-2",
+      "language": "ru",
+      "question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-09-context-compression/README.md",
+        "day-09-context-compression/README.ru.md"
+      ],
+      "required_points": [
+        "Объясняет защищённое окно последних 10 сообщений и партии старых сообщений по 10; неполная партия пока остаётся исходной.",
+        "Объясняет накопительный summary и сохранение полной messages history в SQLite.",
+        "Объясняет отдельный учёт summary prompt/completion/total tokens и стоимости и их включение в /stats."
+      ]
+    },
+    {
+      "id": "RU-3",
+      "language": "ru",
+      "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-15-controlled-transitions/README.md",
+        "day-15-controlled-transitions/README.ru.md"
+      ],
+      "required_points": [
+        "Для planning → execution нужен непустой явно утверждённый план.",
+        "Для validation → done требуется PASS.",
+        "Во время pause прогресс и переходы запрещены; нужно явное resume."
+      ]
+    },
+    {
+      "id": "EN-1",
+      "language": "en",
+      "question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-12-personalization/README.md",
+        "day-12-personalization/README.ru.md"
+      ],
+      "required_points": [
+        "Profile changes require both an empty dialogue and empty working memory.",
+        "The conversation stores profile_id; long-term memory is scoped by profile_id across that profile conversations, preventing cross-profile leakage."
+      ]
+    },
+    {
+      "id": "EN-2",
+      "language": "en",
+      "question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-14-invariants/README.md",
+        "day-14-invariants/README.ru.md"
+      ],
+      "required_points": [
+        "Malformed guard JSON or unknown invariant IDs block the answer fail-closed because compliance is unconfirmed.",
+        "Postflight checks generated output before persistence; violating draft is discarded, never persisted as the answer.",
+        "A deterministic explained refusal replaces it; the user request and refusal are persisted as a normal exchange."
+      ]
+    },
+    {
+      "id": "EN-3",
+      "language": "en",
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-20-mcp-orchestration/README.md",
+        "day-20-mcp-orchestration/README.ru.md"
+      ],
+      "required_points": [
+        "Premature model choices are labelled agent correction; HTTP400 tool_use_failed uses a labelled guarded agent fallback; neither counts as model-selected.",
+        "The saved report must be read back and verified against the original summary; success requires verified=true.",
+        "Malformed JSON and MCP failures stop the flow, rather than being silently counted as model success."
+      ]
+    }
+  ]
+}

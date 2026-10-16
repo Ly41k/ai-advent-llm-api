@@ -1,0 +1,452 @@
+{
+  "app_source_sha256": {
+    "bublik_developer/__init__.py": "104abf8e2de8388dd961591a90f5c23f9a20990f1b2252d13fd61c02f5715eaf",
+    "bublik_developer/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "bublik_developer/agent_process.py": "33a367fdbddd9acafdae3faa1d1f91c52d98f027f00e1c88e18a737294abaee6",
+    "bublik_developer/agent_runtime.py": "13f0134e8159b01160869e460a8e9bf78f18d92881d22f61691af7639ac70dd6",
+    "bublik_developer/agent_worker.py": "afb957581ff72a4eecc61b986b907bb060499cc85bfe06ef66282854d11e607f",
+    "bublik_developer/baseline.py": "5b218e1b34a3c2f738f75355a21d01df32969d5266cfc3d860364f9ba3fe2f9f",
+    "bublik_developer/baseline_worker.py": "7a0e92a0f70e2faaa582cca778ddf08641de3d56cecbe5f80cfc6a7d46aa60b9",
+    "bublik_developer/cli.py": "864e32a7f7423591620e8ffffc09e292ad83ab97cc8ccd46437ea401e8158620",
+    "bublik_developer/contracts.py": "f43c7f2a05ab574f0f30919fa0ab2c65170fac611d34de55c97baab28855b294",
+    "bublik_developer/errors.py": "6c4e9eb0215b9b75bef475ee7fd98f8ce1113523e0d19426074804230b0b39d3",
+    "bublik_developer/generation.py": "38ad0bdfb3fcac11f33ea6e7c700b4eaa7327ccc57902a76f137c0d7f3b2c7df",
+    "bublik_developer/git_tools.py": "80d40371ee77951febe85a603488cbf28c17e22a88f838afed49770e9d5f4fb9",
+    "bublik_developer/inference_tasks.py": "7fab2c144b29067e35a82232d1d40c8615a57cddb0b64e19af458eacfa4d0ceb",
+    "bublik_developer/mcp_client.py": "1faee7b24c63b200c3589e7c9fcb61449f7850d487276f4f5251f069ab91b690",
+    "bublik_developer/mcp_schema.py": "ad7f97bb5d0704cb55fc0d1f4d6179ca5fb6b1541dd6247c95dade126636225a",
+    "bublik_developer/mcp_server.py": "e96ea226a8ee583132fccb245ecb30522d003b8ff024886a0985d4d159ef4985",
+    "bublik_developer/model_session.py": "9e795c3705b3c095c30508e6146df5fdaefc9bc2c4973ee37349f61ef9b3fb91",
+    "bublik_developer/model_worker.py": "b856e925cd04b755119fc9331a40012b99fb60da2937a50f008d1e14731ca83a",
+    "bublik_developer/paired_research.py": "10bf39db33c32f7aecbabb9bc41b9f69b977731680252d8780aeac5ceaf1a29b",
+    "bublik_developer/pipeline.py": "62b4074d6cd742d1d8465f54315203120c919ea89b9b0908dbeb4ed841eb1566",
+    "bublik_developer/policy.py": "514c0b7c32ca7b499733acd4a138e48e9d892f5aacdcf576ea2985d599964ec6",
+    "bublik_developer/preflight.py": "3bea9d54c052c5440a2231c622d5482900a3ab995579fe99a97cc697000045eb",
+    "bublik_developer/process.py": "98f304c96a1c9908d1f79983f9bbad12ae7492ecc47da8dabef64ae98c162116",
+    "bublik_developer/rag/__init__.py": "b9b45591ce856d1f2d45b935e1cde5c6cb32715fe3f2bcd32511322c9fac2e00",
+    "bublik_developer/rag/chunking.py": "3504a00691e312a3d4f95efdfaefd0cba6849c0409cb7abee949866213ac22e9",
+    "bublik_developer/rag/corpus.py": "1974ba1d4c1e6106122dd414581ccf03402ae858c5a7e59628eb8d892062ddba",
+    "bublik_developer/rag/embeddings.py": "3d79e9718829900932b24aca5498a229e53cf82812e5f4f92ddbfe5bcafd9278",
+    "bublik_developer/rag/index.py": "5bff723d566c30083956404637eb2d9b0f3515d2272f7ef3ad378232168e940c",
+    "bublik_developer/rag/retrieval.py": "381847f9bbccdc15a091fbd085578b0a53a6680330608f36c8d6775aedef6e84",
+    "bublik_developer/rag/state.py": "5d18a3e7db23befbfd00a79ae6a14d354384f123dc13455ebfba312bb565bf9f",
+    "bublik_developer/reliability.py": "ebba9d7e3dd39aa0f91e3df0740a936c13a0d54e677e48d8a83da768f2e1ae9b",
+    "bublik_developer/research.py": "8b33552a00a2fa966008d7ab970b20536642f52c5e5db4ba84cfccf93897668c",
+    "bublik_developer/routing.py": "8465f3f58bd85ae6fedd38272d45fe916ac4104a05be6c7085907f36cc998579",
+    "bublik_developer/workspace.py": "17ca3295574f7427ce18691bacfb2629de12c1f647b52622f8133ebfab6908ce",
+    "main.py": "5a95fa5c7ff91bd7eaac9894e99a979d6a993d72c81629962ccb3cdd9d13fd5d",
+    "scripts/check_bilingual_retrieval.py": "ae8720491bf0d4789de54d9ab61fb438788fd8e5a3af48edf4edc86a574b40d9",
+    "scripts/check_stage12.py": "a9dff1e7b4ad8645e6719037cee47d0e970b8bedf23927275f355f28367955cc",
+    "scripts/check_stage3.py": "e399b9db306a964355843932c537d91371798076cde0f7b280ae4eff64030552",
+    "scripts/check_stage4.py": "316e6522458cadd1dddd0c49e857538e825fe760838a0ddf50bf9c0ab717ab29",
+    "scripts/check_stage5.py": "c72ca43e6e0de3610e22e071a68b94711acabb3d18b18206de348b34c495a396",
+    "scripts/check_stage6.py": "5aae7583729646821b1c4183b2ed2bc4e1337913c64839dd8bee3dac815ce783",
+    "scripts/check_stage7.py": "7a2540b20034004dc88c7e9803c9ecb13d725a16c2eb507ff72fdee9850f67ba",
+    "scripts/compare_project_retrieval.py": "158379432f7accd1aa95f348315673507965ee39fe719fa07ac209c0b42de9a5",
+    "scripts/compare_single_multi.py": "49397452f63b241b166534677a0f4cf417f027464e73a5cf460c2f6d0bea2920",
+    "scripts/research_project.py": "05a54966df0914e4e0ccfeecf7839c479c8774ea743ed5e92deae3f0f3731e3e",
+    "tests/test_agent_runtime.py": "66478ddcfc9cc3811d59ba86ef9e080c0731a7c489f420bcb7230b556c397c60",
+    "tests/test_bilingual_corpus.py": "797cde72a30599ec47780a22165d15e76c2adb0f269990d2e1681b066f4a26c7",
+    "tests/test_claim_string_boundaries.py": "537296a86566e56db36ecc6de8e7a446c2d73e627ebe66d07b39fa9d3fb1e667",
+    "tests/test_context_budget.py": "6c49271fff66ad15fe462ddcaec9ff3b7c1e3c9f8f69ebd3518624eadeb9dfe6",
+    "tests/test_foundation.py": "b23123ee849a1e073efa7dcb92b56ed4286dc756e713e6518e52ad53ee6deaf7",
+    "tests/test_language_schema.py": "c5397c84a23be8f6235791d133052b0b8e091ff2cfa3e49b7f8cf9ccc8705026",
+    "tests/test_mcp_git.py": "cfda0f466d773bae2c2c882e759a4c485e133675381b6187418aa75b1d3a9739",
+    "tests/test_paired_research.py": "1b06440f510b3340b213705460b2804a7ed0ec6487ff526b90d97c6b98061ab6",
+    "tests/test_pipeline.py": "ee79b098d85c736e47ef0e34f32b10db210438c25f85b6f2f802fd4dcf68f565",
+    "tests/test_project_rag.py": "bffb755d5b88ac0cc68d51587bc2964c7f90873a682c18071e951f4808a87e3c",
+    "tests/test_quality_prompt.py": "7525acd1acfa6364eb1d95bbb4cbe202e878b44736e1a8588273b36816a5bcf1",
+    "tests/test_rejection_diagnostics.py": "82cb5d545b40e544a4f6296f78c9c7fa87adc4505d6c6706858093ae715959d6",
+    "tests/test_reliability.py": "e6a5d06cf3f96917b96569d444fb57023628aa63dafcae3c17d94c6b93b49f5d",
+    "tests/test_research.py": "87ce91839d2196a214572e2b367f731eb99ea13aada7f93092c2ef98ef1d9dc3"
+  },
+  "cases_sha256": "555e5603af80e3c5093f6de73479f7e292d3492b7648510705379fac6d456944",
+  "created_at": "2026-10-15T14:43:25.065754+00:00",
+  "criteria_sha256": "359e4256757d611bd9fd0d3474e986cb1521b85d0f86a49f8771d26bc231aa4b",
+  "embedding_calls": 0,
+  "format": "day31-independent-preparation-freeze-v1",
+  "generation_calls": 0,
+  "git_head": "f5cce79933a8535eda5b8d218e79a04aee88d029",
+  "intended_model": {
+    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+    "name": "qwen2.5:14b",
+    "quantization": "Q4_K_M"
+  },
+  "isolated_index": {
+    "built_at": "2026-10-15T14:43:18.373298+00:00",
+    "chunk_version": "project-structural-spans-v1",
+    "chunks": 510,
+    "corpus_revision": "ab94db744a214aa2250960fa13a488311e64db461df2697ce0af1b1bed49bd21",
+    "documents": 54,
+    "embedding": null,
+    "index_version": "a8144ee97f624572b5ce957891019e60",
+    "limit_words": 250,
+    "overlap_words": 40,
+    "project_id": "ai-advent-llm-api",
+    "schema_version": 1,
+    "selection_digest": "74656e24c55ae4a48f5fbbd005f1e6b1a58729bff17741450ae222d851251d62"
+  },
+  "isolated_state_dir": "/private/tmp/day31-independent-v098-r1-work/isolated-fts-state",
+  "model_options": {
+    "num_ctx": 8192,
+    "num_predict": 1024,
+    "seed": 31,
+    "temperature": 0
+  },
+  "production_CURRENT_sha256_after": "2efcaf3cca66dfb2a1921025e1e7ad9633320ba675b4249c329e735e9162d53d",
+  "production_CURRENT_sha256_before": "2efcaf3cca66dfb2a1921025e1e7ad9633320ba675b4249c329e735e9162d53d",
+  "production_index": {
+    "built_at": "2026-10-13T19:41:55.978630+00:00",
+    "chunk_version": "project-structural-spans-v1",
+    "chunks": 405,
+    "corpus_revision": "f6a4fb45413e2e9cb493ca421a102d75b560d7137c551363705cda8a9e0376f5",
+    "documents": 44,
+    "embedding": {
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimension": 1024,
+      "name": "bge-m3"
+    },
+    "index_version": "27519cd6caa346ac87a18639932506b5",
+    "limit_words": 250,
+    "overlap_words": 40,
+    "project_id": "ai-advent-llm-api",
+    "schema_version": 1,
+    "selection_digest": "4a25a85ae37bc97cff346b0cf606d0ec40e202c685d4ddc86e1da543f1415ab5"
+  },
+  "prompt_versions": {
+    "multi": "project-answers-v22",
+    "single": "snapshot-single-v23"
+  },
+  "quality_acceptance": "not_evaluated",
+  "questions_sha256": "5afdcd5eeccd63cea649b4373baae96d72326f40d9552a0bee4d59eaff55b6ad",
+  "selection_provenance": "User-supplied; user declares independent from Qwen tuning. External authorship and independent human scoring not verified.",
+  "selection_sha256": "317997cf9b1da68cbcf83e4dd61e18853eda7bf3c037dfcd92565caffd0dff08",
+  "source_manifest": [
+    {
+      "kind": "markdown",
+      "raw_digest": "96b9944db7b5c52afa62766d17813542256ebfc73dfceeaf527fd3546106d167",
+      "source": "README.md",
+      "text_digest": "96b9944db7b5c52afa62766d17813542256ebfc73dfceeaf527fd3546106d167"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "8c5a6727fc64db19bf13e7c1408714547afe9db23c4aa893b952756c3f62bae1",
+      "source": "README.ru.md",
+      "text_digest": "8c5a6727fc64db19bf13e7c1408714547afe9db23c4aa893b952756c3f62bae1"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "4bb0b868094260e3e815b876a425b9f420713361d10fa38b5811f92e54efb980",
+      "source": "day-07-context-persistence/README.md",
+      "text_digest": "4bb0b868094260e3e815b876a425b9f420713361d10fa38b5811f92e54efb980"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+      "source": "day-07-context-persistence/README.ru.md",
+      "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "9d4f31c5fe17c9fb6ad12a1a74980b636c091f8f64fb1820f1dcb8db89c6a180",
+      "source": "day-09-context-compression/README.md",
+      "text_digest": "9d4f31c5fe17c9fb6ad12a1a74980b636c091f8f64fb1820f1dcb8db89c6a180"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895",
+      "source": "day-09-context-compression/README.ru.md",
+      "text_digest": "f00b79ba2c6a6fc4e96820b8b658f8f29e3a7f2ad104389cb91a933a61155895"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e",
+      "source": "day-12-personalization/README.md",
+      "text_digest": "ee4980003c7c0aa90a3e23eefdfcd0f0a78f16e873abea646fe516cb5cc2193e"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a",
+      "source": "day-12-personalization/README.ru.md",
+      "text_digest": "83a47cbcf3f6ac75b25aee3c1d69caa402df2712478d8f964afa571bc432e46a"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24",
+      "source": "day-14-invariants/README.md",
+      "text_digest": "998f44b329f17bbcc7d10626741dc049dfceb7fdb443ec5cfc665786f55c8a24"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "31ea46b79660dc2ccadbfb67040fe03443add3004a541c69b630ae3ea739e0b9",
+      "source": "day-14-invariants/README.ru.md",
+      "text_digest": "31ea46b79660dc2ccadbfb67040fe03443add3004a541c69b630ae3ea739e0b9"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "18be55ccf9828b0280aadfdab2b39e04cdb178a82f2b09096feed810727ee7bf",
+      "source": "day-15-controlled-transitions/README.md",
+      "text_digest": "18be55ccf9828b0280aadfdab2b39e04cdb178a82f2b09096feed810727ee7bf"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7",
+      "source": "day-15-controlled-transitions/README.ru.md",
+      "text_digest": "a131a3f218a4d771fe1217212a4f8880b271d75951136c32037cc1b58ceea7a7"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "babd2125b9b79f841dd0ad4c308ea9a2bc46a6c527f793b852de603d36eef8e2",
+      "source": "day-16-mcp-connection/README.md",
+      "text_digest": "babd2125b9b79f841dd0ad4c308ea9a2bc46a6c527f793b852de603d36eef8e2"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "7116eaac4c156d8d6a5af44c2d08cf28d2f4661e6d013631cf8bda492924e679",
+      "source": "day-16-mcp-connection/README.ru.md",
+      "text_digest": "7116eaac4c156d8d6a5af44c2d08cf28d2f4661e6d013631cf8bda492924e679"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "99481e24c7dddb3b894f92f571a47ec8870f8cc6332e8793585fda76c6d659b9",
+      "source": "day-17-first-mcp-tool/README.md",
+      "text_digest": "99481e24c7dddb3b894f92f571a47ec8870f8cc6332e8793585fda76c6d659b9"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "0ac510b506870bb7ebc39173a6cdf8334e929dc5ff462ebc6da94f63a0d216f7",
+      "source": "day-17-first-mcp-tool/README.ru.md",
+      "text_digest": "0ac510b506870bb7ebc39173a6cdf8334e929dc5ff462ebc6da94f63a0d216f7"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ba10ffd55bebcbfb8dae93be9639defd1e7b18748a7a89b48e09594bdfe891a8",
+      "source": "day-18-scheduled-mcp/README.md",
+      "text_digest": "ba10ffd55bebcbfb8dae93be9639defd1e7b18748a7a89b48e09594bdfe891a8"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "4253be8c9a755a51e7d71f5aab5abd322bf26c444aa5a5f30ec426dcf89ffe06",
+      "source": "day-18-scheduled-mcp/README.ru.md",
+      "text_digest": "4253be8c9a755a51e7d71f5aab5abd322bf26c444aa5a5f30ec426dcf89ffe06"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "26207d373db5115ee2f6949f1ad22f95cba39163c9bd05b9b917dd483969265e",
+      "source": "day-19-mcp-composition/README.md",
+      "text_digest": "26207d373db5115ee2f6949f1ad22f95cba39163c9bd05b9b917dd483969265e"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "40d5bf73a9716f202f8c15169cc993e68cb60034a817cb4961f4db2023471fda",
+      "source": "day-19-mcp-composition/README.ru.md",
+      "text_digest": "40d5bf73a9716f202f8c15169cc993e68cb60034a817cb4961f4db2023471fda"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "6f2474b78325d5066d9a546db6aa02cf769a091983655bf54829ad840f2ce979",
+      "source": "day-20-mcp-orchestration/README.md",
+      "text_digest": "6f2474b78325d5066d9a546db6aa02cf769a091983655bf54829ad840f2ce979"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "7c49e3e00e9f813eeb53d62b43ddadef9235f4d18f8032cee4c40a7cccc45d9b",
+      "source": "day-20-mcp-orchestration/README.ru.md",
+      "text_digest": "7c49e3e00e9f813eeb53d62b43ddadef9235f4d18f8032cee4c40a7cccc45d9b"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "393579771c3f5d3fec1634452beda896e4bb582deeea351514f75371ee5c936e",
+      "source": "day-21-document-indexing/README.md",
+      "text_digest": "393579771c3f5d3fec1634452beda896e4bb582deeea351514f75371ee5c936e"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "1b05cc326320373f42f10e6a1d31bbba9a8ef84e1fafa112d179ce645ca61e8a",
+      "source": "day-21-document-indexing/README.ru.md",
+      "text_digest": "1b05cc326320373f42f10e6a1d31bbba9a8ef84e1fafa112d179ce645ca61e8a"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "498d4785d5da5c533e749d541183cdae159049d72f325ab86d71ceaa33eec3f6",
+      "source": "day-22-first-rag/README.md",
+      "text_digest": "498d4785d5da5c533e749d541183cdae159049d72f325ab86d71ceaa33eec3f6"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "e2d335cf6eaabc49296d0721263f1ea8d7deef3529e6c876ec8af0f83467cf34",
+      "source": "day-22-first-rag/README.ru.md",
+      "text_digest": "e2d335cf6eaabc49296d0721263f1ea8d7deef3529e6c876ec8af0f83467cf34"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "09e4a7954aed9c84afb5d68f18291a305e1cdaa72b666a68339538cc3e3bc465",
+      "source": "day-23-reranking-filtering/README.md",
+      "text_digest": "09e4a7954aed9c84afb5d68f18291a305e1cdaa72b666a68339538cc3e3bc465"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "efd3cbb443716f186737a41590903ed8f6c25e22112b01883352077fd4cc8c48",
+      "source": "day-23-reranking-filtering/README.ru.md",
+      "text_digest": "efd3cbb443716f186737a41590903ed8f6c25e22112b01883352077fd4cc8c48"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "bc76a7f0b81a8ccffa110ea7299cad5dcc5bbc99362927aad43ed0ee56eaa7e6",
+      "source": "day-24-citations-grounding/README.md",
+      "text_digest": "bc76a7f0b81a8ccffa110ea7299cad5dcc5bbc99362927aad43ed0ee56eaa7e6"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "6eff77c750e56f64bf52509ca71c8a48723e5ed0920683fb6fd0a137b63e7533",
+      "source": "day-24-citations-grounding/README.ru.md",
+      "text_digest": "6eff77c750e56f64bf52509ca71c8a48723e5ed0920683fb6fd0a137b63e7533"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "feab511b49671bc1a9b5f5174bced5cbd507b8bdd0f779c3a0e8190ec8a91b8c",
+      "source": "day-25-rag-chat/README.md",
+      "text_digest": "feab511b49671bc1a9b5f5174bced5cbd507b8bdd0f779c3a0e8190ec8a91b8c"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "4bdcb3f5a772460a5d4cde3068cc2598ae6d6e6964d5523af778cf3186d387d5",
+      "source": "day-25-rag-chat/README.ru.md",
+      "text_digest": "4bdcb3f5a772460a5d4cde3068cc2598ae6d6e6964d5523af778cf3186d387d5"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "d0c484dae72de0a87c4a7d1542a5ee2f6da742e9862d4ad69dd924263d125f5c",
+      "source": "day-26-local-llm/README.md",
+      "text_digest": "d0c484dae72de0a87c4a7d1542a5ee2f6da742e9862d4ad69dd924263d125f5c"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "cd621f1786dcec4cecf70a5241214feb8c82c97fbb59bd99e09f6628d5488b10",
+      "source": "day-26-local-llm/README.ru.md",
+      "text_digest": "cd621f1786dcec4cecf70a5241214feb8c82c97fbb59bd99e09f6628d5488b10"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "8dbe20e4ae1ac6af4b282b6c0bb1db3521fb042e2e5df462a43094888ceb843a",
+      "source": "day-27-local-llm-integration/README.md",
+      "text_digest": "8dbe20e4ae1ac6af4b282b6c0bb1db3521fb042e2e5df462a43094888ceb843a"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "e6dbec93f525c61c52a40ba3e63c3e055c39c5bd53dfc653d67d74a73d0bdaf5",
+      "source": "day-27-local-llm-integration/README.ru.md",
+      "text_digest": "e6dbec93f525c61c52a40ba3e63c3e055c39c5bd53dfc653d67d74a73d0bdaf5"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ba73fdd68d8f8da9bda4f2b9ae3add5470ceb35d294bb095cb4cc7edfa8a1458",
+      "source": "day-28-local-rag/README.md",
+      "text_digest": "ba73fdd68d8f8da9bda4f2b9ae3add5470ceb35d294bb095cb4cc7edfa8a1458"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "8680c395be33e27e11bf26d245c15146e40eab94fe37f2f027075b192c6288b1",
+      "source": "day-28-local-rag/README.ru.md",
+      "text_digest": "8680c395be33e27e11bf26d245c15146e40eab94fe37f2f027075b192c6288b1"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "bd432abefe8d3793da078e49340009243925baff4fa1c8c470a4bee51e4fe2b1",
+      "source": "day-29-local-llm-optimization/README.md",
+      "text_digest": "bd432abefe8d3793da078e49340009243925baff4fa1c8c470a4bee51e4fe2b1"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "b535a9962b229598c4a31e09c4c36bd6da43a82a04a3f419e34d8a72f41de7f7",
+      "source": "day-29-local-llm-optimization/README.ru.md",
+      "text_digest": "b535a9962b229598c4a31e09c4c36bd6da43a82a04a3f419e34d8a72f41de7f7"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "60a142c80dc5ede6fb874be55419f6c9c580b27b54e7bcadf2d7bac37b130cb8",
+      "source": "day-30-private-ai-service/ARCHITECTURE.ru.md",
+      "text_digest": "60a142c80dc5ede6fb874be55419f6c9c580b27b54e7bcadf2d7bac37b130cb8"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "84399dc5f6cace63f942103c62b1a2250780c8e50823b4ec51734a7f2bebb55e",
+      "source": "day-30-private-ai-service/LANGUAGES.ru.md",
+      "text_digest": "84399dc5f6cace63f942103c62b1a2250780c8e50823b4ec51734a7f2bebb55e"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "d141e058da34a7dc8e5ef79b2c80ba075496bc345c77bcc0e9f2a6fce51945ee",
+      "source": "day-30-private-ai-service/MEMORY_ARCHITECTURE.ru.md",
+      "text_digest": "d141e058da34a7dc8e5ef79b2c80ba075496bc345c77bcc0e9f2a6fce51945ee"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "055ca7f18d3abdb800a436186393a743cb67bec85e8bd143fc53def49108ec6a",
+      "source": "day-30-private-ai-service/RAG_MEMORY.ru.md",
+      "text_digest": "055ca7f18d3abdb800a436186393a743cb67bec85e8bd143fc53def49108ec6a"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5",
+      "source": "day-30-private-ai-service/README.md",
+      "text_digest": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "a03deeea1b7e60bc4ae68dfa83302091a3180d9dd46a7dc1a2e9c322c1a4eba5",
+      "source": "day-30-private-ai-service/README.ru.md",
+      "text_digest": "a03deeea1b7e60bc4ae68dfa83302091a3180d9dd46a7dc1a2e9c322c1a4eba5"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "87f0a0750c3b1e3204a7c8656aaff8239ab59d2303dbbfbebb2954f9a03d339b",
+      "source": "day-31-developer-assistant/project/docs/api.md",
+      "text_digest": "87f0a0750c3b1e3204a7c8656aaff8239ab59d2303dbbfbebb2954f9a03d339b"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "41642c2c97600124faee0aa00f6f946489812ec386901df05319971d3661d4e7",
+      "source": "day-31-developer-assistant/project/docs/api.ru.md",
+      "text_digest": "41642c2c97600124faee0aa00f6f946489812ec386901df05319971d3661d4e7"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "b13b03da5caaa8002946b38c354ffc6ac3123ee3d7b9e508ae261a3843ef6375",
+      "source": "day-31-developer-assistant/project/docs/architecture.md",
+      "text_digest": "b13b03da5caaa8002946b38c354ffc6ac3123ee3d7b9e508ae261a3843ef6375"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "ff027b96d7d7ad90df8ebaf4e5b2ac2093f4d5eb64e82b9b6be2737ffbdce725",
+      "source": "day-31-developer-assistant/project/docs/architecture.ru.md",
+      "text_digest": "ff027b96d7d7ad90df8ebaf4e5b2ac2093f4d5eb64e82b9b6be2737ffbdce725"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "86a909eee8214b27d625f19b4be2d24b6448f7b8a97d071a1d35b718385317d1",
+      "source": "day-31-developer-assistant/project/docs/memory.md",
+      "text_digest": "86a909eee8214b27d625f19b4be2d24b6448f7b8a97d071a1d35b718385317d1"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "e85d974b0fe4fbc12e558ef24d7a347517e87c0df4e17481741fe4000081f6a1",
+      "source": "day-31-developer-assistant/project/docs/memory.ru.md",
+      "text_digest": "e85d974b0fe4fbc12e558ef24d7a347517e87c0df4e17481741fe4000081f6a1"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "f9f8a8c463c59bb94b181058a29d4fa8fe4cbbac21d93b3d97d110cd285e16e2",
+      "source": "day-31-developer-assistant/project/docs/tooling.md",
+      "text_digest": "f9f8a8c463c59bb94b181058a29d4fa8fe4cbbac21d93b3d97d110cd285e16e2"
+    },
+    {
+      "kind": "markdown",
+      "raw_digest": "aedeff095b405fd068322f518ea0bfea8a5ed2a0e90745243e643d2cbab059a5",
+      "source": "day-31-developer-assistant/project/docs/tooling.ru.md",
+      "text_digest": "aedeff095b405fd068322f518ea0bfea8a5ed2a0e90745243e643d2cbab059a5"
+    }
+  ],
+  "source_pins_sha256": "d65b1277a4a172e366c2279fbfef121dbb1ac0653f9d9655b05903c60bb4214c",
+  "source_scope_change": "Explicit original44 plus target README of days7,9,12,14,15. Separate research corpus54, not production44 acceptance."
+}

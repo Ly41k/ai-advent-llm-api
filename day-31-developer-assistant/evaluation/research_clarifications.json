@@ -1,0 +1,76 @@
+{
+  "format": "bublik-research-cases-v1",
+  "scope": "Targeted clarification of known wording/completeness issues; regression follow-ups, not independent held-out or passed labels. Production prompt unchanged.",
+  "batch_core": [
+    "allowed-untracked-ru",
+    "allowed-untracked-en",
+    "residency-explicit-ru",
+    "residency-explicit-en"
+  ],
+  "cases": [
+    {
+      "id": "allowed-untracked-ru",
+      "language": "ru",
+      "question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Нет: содержимое untracked файлов никогда не читается, в том числе при явных allowed paths."
+      ]
+    },
+    {
+      "id": "allowed-untracked-en",
+      "language": "en",
+      "question": "If an untracked file is explicitly included in allowed paths, can git_diff read its contents?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "No: untracked content is never read, including with explicit allowed paths."
+      ]
+    },
+    {
+      "id": "residency-explicit-ru",
+      "language": "ru",
+      "question": "Какие сведения возвращает API /api/ps: загруженные модели или завершение конкретного запроса? Покажи текущую ветку.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Сообщает о загруженных моделях.",
+        "Не является подтверждением завершения отдельного запроса или idle.",
+        "Ветка совпадает с reobserved Git."
+      ]
+    },
+    {
+      "id": "residency-explicit-en",
+      "language": "en",
+      "question": "What information does API /api/ps return: loaded models or completion of an individual request? Also show the current branch.",
+      "expected_route": "fan_out",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md"
+      ],
+      "required_points": [
+        "Reports loaded models.",
+        "Does not certify individual request completion or idle.",
+        "Branch matches reobserved Git."
+      ]
+    }
+  ]
+}

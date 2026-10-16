@@ -1,0 +1,154 @@
+{
+  "answer": "Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` можно включать в будущий контекст, в то время как сообщение со статусом `failed` исключается из контекста, но остаётся для диагностики.\n\nСообщение со статусом `pending` добавляется в текущий запрос явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это означает, что сообщение со статусом `pending` не восстанавливается автоматически как часть истории после перезапуска.",
+  "answer_accepted": true,
+  "answer_status": "supported",
+  "citations": [
+    {
+      "binding_sha256": "2e127ae12ca05a18ba9ec5f3ea9703e6873ec1e3db0390ad82942e5e7e43c8b6",
+      "claim_id": "c1",
+      "end_line": 56,
+      "quote": "Каждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.",
+      "source": "day-07-context-persistence/README.ru.md",
+      "start_line": 52
+    },
+    {
+      "binding_sha256": "7da1cdfcb32db5a998cf9ed4875c0234c75dbbe2a781287347d99d97ae861873",
+      "claim_id": "c2",
+      "end_line": 106,
+      "quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+      "source": "day-07-context-persistence/README.ru.md",
+      "start_line": 106
+    }
+  ],
+  "claims": [
+    {
+      "evidence_ids": [
+        "e1"
+      ],
+      "id": "c1",
+      "text": "Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` можно включать в будущий контекст, в то время как сообщение со статусом `failed` исключается из контекста, но остаётся для диагностики."
+    },
+    {
+      "evidence_ids": [
+        "e2"
+      ],
+      "id": "c2",
+      "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это означает, что сообщение со статусом `pending` не восстанавливается автоматически как часть истории после перезапуска."
+    }
+  ],
+  "execution_status": "completed",
+  "language": "ru",
+  "metrics": {
+    "cancel_count": 0,
+    "capability_calls": 4,
+    "cloud_fallbacks": 0,
+    "embedding_calls_completed": 0,
+    "input_tokens": 1109,
+    "known_llm_calls": 1,
+    "llm_calls": 1,
+    "metadata_retries": 0,
+    "model_http_attempts": 7,
+    "model_retries": 0,
+    "output_tokens": 396,
+    "timeout_count": 0,
+    "total_seconds": 48.86697324999841,
+    "unknown_inference_attempts": 0
+  },
+  "project_id": "ai-advent-llm-api",
+  "publication": {
+    "partial_answer_published": false,
+    "policy": "claim-anchor-publication-v1",
+    "result_binding_sha256": "37d5205e0708b21247834cd8b6a285c31c07703c0609dc7a9801ffad58d28a4e",
+    "runtime_refusal_preserved": false
+  },
+  "request_id": "629bcdc705604d68a43968d5469ac9ba",
+  "result_format": "publication-gated-answer-v1",
+  "schema_version": 1,
+  "semantic_acceptance": {
+    "answer_accepted": true,
+    "automatic_semantic_entailment": false,
+    "claims": [
+      {
+        "binding_sha256": "2e127ae12ca05a18ba9ec5f3ea9703e6873ec1e3db0390ad82942e5e7e43c8b6",
+        "claim_id": "c1",
+        "reason": "explicit_bound_human_review",
+        "review_finding": "supported",
+        "status": "supported"
+      },
+      {
+        "binding_sha256": "7da1cdfcb32db5a998cf9ed4875c0234c75dbbe2a781287347d99d97ae861873",
+        "claim_id": "c2",
+        "reason": "explicit_bound_human_review",
+        "review_finding": "supported",
+        "status": "supported"
+      }
+    ],
+    "completeness": "evaluated_separately",
+    "review_error": null,
+    "review_sha256": "7ed6948e516e35d077888b5e8ee34b4c3e24590a6d1011ffc4cf41ecb6674174",
+    "reviewer": {
+      "id": "yuriy",
+      "kind": "human"
+    },
+    "runtime_validation": "passed",
+    "stage7_acceptance": "not_evaluated",
+    "status": "supported",
+    "version": "source-anchor-persistence-semantic-review-v1"
+  },
+  "source_anchors": [
+    {
+      "binding_sha256": "2e127ae12ca05a18ba9ec5f3ea9703e6873ec1e3db0390ad82942e5e7e43c8b6",
+      "claim_id": "c1",
+      "claim_sha256": "6f9825a7ef52c4ebe4d81d6ca5038b1d46f67559f7446a9c7f483758e78b4738",
+      "end": 2039,
+      "end_line": 56,
+      "evidence_id": "e1",
+      "exact_anchor_check": "passed",
+      "in_answer": true,
+      "quote": "Каждое сообщение имеет один из трёх статусов:\n\n- `pending` — запрос пользователя сохранён перед вызовом API;\n- `completed` — запрос или ответ можно включать в будущий контекст;\n- `failed` — запрос остаётся для диагностики, но исключается из контекста.",
+      "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+      "relative_end": 900,
+      "relative_start": 649,
+      "runtime_validation": {
+        "reason": null,
+        "status": "passed"
+      },
+      "section": [
+        "День 7 — сохранение контекста",
+        "Как это работает"
+      ],
+      "source": "day-07-context-persistence/README.ru.md",
+      "start": 1788,
+      "start_line": 52,
+      "text": "Сообщение со статусом `pending` означает, что запрос пользователя сохранён перед вызовом API. Сообщение со статусом `completed` можно включать в будущий контекст, в то время как сообщение со статусом `failed` исключается из контекста, но остаётся для диагностики.",
+      "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+    },
+    {
+      "binding_sha256": "7da1cdfcb32db5a998cf9ed4875c0234c75dbbe2a781287347d99d97ae861873",
+      "claim_id": "c2",
+      "claim_sha256": "5139572398dc7250233c2a013233438b767012bc60c92c754824c3a8117a5e94",
+      "end": 3624,
+      "end_line": 106,
+      "evidence_id": "e2",
+      "exact_anchor_check": "passed",
+      "in_answer": true,
+      "quote": "Текущий пользовательский запрос сначала сохраняется со статусом `pending`. В API-запрос он добавляется явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. После ответа модели пользовательское сообщение помечается завершённым, а ответ ассистента добавляется в рамках одной транзакции.",
+      "raw_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5",
+      "relative_end": 334,
+      "relative_start": 18,
+      "runtime_validation": {
+        "reason": null,
+        "status": "passed"
+      },
+      "section": [
+        "День 7 — сохранение контекста",
+        "Важная деталь"
+      ],
+      "source": "day-07-context-persistence/README.ru.md",
+      "start": 3308,
+      "start_line": 106,
+      "text": "Сообщение со статусом `pending` добавляется в текущий запрос явно, потому что из базы восстанавливаются только сообщения со статусом `completed`. Это означает, что сообщение со статусом `pending` не восстанавливается автоматически как часть истории после перезапуска.",
+      "text_digest": "ad4b422009fa7df5e8064158fbe0191e79b97f19824fa6b2a1efb98dd3652cb5"
+    }
+  ]
+}

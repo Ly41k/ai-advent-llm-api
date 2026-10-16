@@ -1,0 +1,29 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "One existing scoped EN serialized-model Documentation question; not paired or held-out.",
+  "batch_core": [
+    "serialized-doc-en"
+  ],
+  "cases": [
+    {
+      "id": "serialized-doc-en",
+      "language": "en",
+      "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/architecture.md",
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/architecture.ru.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "required_points": [
+        "There is one Qwen model, not a copy per agent.",
+        "Model calls are serialized by the shared lease; Git and retrieval may run concurrently."
+      ]
+    }
+  ]
+}

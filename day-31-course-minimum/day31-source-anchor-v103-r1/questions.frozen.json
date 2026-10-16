@@ -1,0 +1,58 @@
+{
+  "schema": "day31-user-questions-v1",
+  "received_at": "2026-10-15T14:29:14Z",
+  "selection_provenance": "user-supplied; user declares independence from Qwen tuning; external authorship not independently verified",
+  "questions": [
+    {
+      "id": "RU-1",
+      "language": "ru",
+      "day": 7,
+      "title": "Context Persistence",
+      "question": "Чем отличаются статусы сообщений `pending`, `completed` и `failed` в памяти Бублика? Почему сообщение со статусом `pending` добавляется в текущий запрос явно, но не восстанавливается автоматически как часть истории после перезапуска?"
+    },
+    {
+      "id": "RU-2",
+      "language": "ru",
+      "day": 9,
+      "title": "Context Compression",
+      "question": "Как `HistoryCompressor` определяет, какие сообщения можно сжать, а какие необходимо оставить без изменений? Что происходит с полной историей в SQLite и как учитываются дополнительные затраты на генерацию summary?"
+    },
+    {
+      "id": "RU-3",
+      "language": "ru",
+      "day": 15,
+      "title": "Controlled Transitions",
+      "question": "Какие условия должны быть выполнены для переходов `planning → execution` и `validation → done`? Что произойдёт, если попытаться изменить прогресс задачи или выполнить переход во время паузы?"
+    },
+    {
+      "id": "EN-1",
+      "language": "en",
+      "day": 12,
+      "title": "Personalization",
+      "question": "Under what conditions can the active profile of an existing conversation be changed using `/profile PROFILE_ID`? How does the memory architecture prevent long-term decisions from one profile from leaking into another profile's context?"
+    },
+    {
+      "id": "EN-2",
+      "language": "en",
+      "day": 14,
+      "title": "Invariant Enforcement",
+      "question": "What happens when the semantic invariant guard returns malformed JSON or an unknown invariant ID? How does the system handle a generated response that violates an invariant during postflight validation, including what gets persisted in SQLite?"
+    },
+    {
+      "id": "EN-3",
+      "language": "en",
+      "day": 20,
+      "title": "MCP Orchestration",
+      "question": "How does the orchestration agent distinguish a genuinely model-selected operation from an `agent correction` or `agent fallback`? What verification must succeed before the agent can report that the generated repository report was saved successfully?"
+    }
+  ],
+  "criteria": [
+    "Корректность фактов.",
+    "Полноту ответа.",
+    "Соответствие документации.",
+    "Отсутствие выдуманных механизмов.",
+    "Корректность ссылок на источники."
+  ],
+  "generation_calls_before_freeze": 0,
+  "policy": "Do not rewrite questions or tune prompts on this set before preserving original results. Human semantic acceptance remains pending."
+}

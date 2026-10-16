@@ -1,0 +1,9 @@
+{
+  "path": "/tmp/day31-source-anchor-v102-r1-work/exports/bundle-0001.json",
+  "sha256": "7f61f1723a5ac1b5cc5f730f205430f43c190ce2b5c12fada09102fd02377eb9",
+  "library_id": "libfile_266de53b82a08191a2aed80bffe3c408",
+  "status": "stopped_reviewed_not_repaired",
+  "requests": 1,
+  "known_llm_calls": 1,
+  "technical_failure_requests": 1
+}

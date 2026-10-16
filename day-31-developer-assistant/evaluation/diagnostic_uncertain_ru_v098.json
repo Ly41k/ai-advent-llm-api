@@ -1,0 +1,27 @@
+{
+  "format": "bublik-research-cases-v1",
+  "evaluation_kind": "known_role_input_diagnostic",
+  "scope": "One existing scoped RU uncertain-state Documentation question; not paired or held-out.",
+  "batch_core": [
+    "uncertain-doc-ru"
+  ],
+  "cases": [
+    {
+      "id": "uncertain-doc-ru",
+      "language": "ru",
+      "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback?",
+      "expected_route": "documentation",
+      "acceptable_answer_status": [
+        "answered"
+      ],
+      "rubric_sources": [
+        "day-31-developer-assistant/project/docs/tooling.md",
+        "day-31-developer-assistant/project/docs/tooling.ru.md"
+      ],
+      "required_points": [
+        "Сохраняется uncertain inference state и требуется проверяемое восстановление.",
+        "Нет автоматического повтора, cloud fallback или model restart."
+      ]
+    }
+  ]
+}

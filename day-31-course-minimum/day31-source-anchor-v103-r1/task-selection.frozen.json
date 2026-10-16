@@ -1,0 +1,14 @@
+{
+  "format": "day31-source-anchor-trial-task-selection-v1",
+  "case_ids": [
+    "RU-1",
+    "EN-3"
+  ],
+  "modes": [
+    "single",
+    "multi"
+  ],
+  "max_generation_calls": 4,
+  "kind": "new_known_question_development_experiment",
+  "scope": "Same RU-1/EN-3 questions, evidence, model/options; source_quote first, literal text unchanged. No held-out, recovery or replacement of prior results; other four cases not dispatched."
+}

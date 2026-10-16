@@ -1,0 +1,48 @@
+{
+  "day31-source-anchor-v103-r1": {
+    "files_checked": 93,
+    "all_manifest_files_unchanged": true,
+    "manifest_sha256": "9792e1ef5cc04e8a2f5826968a73bd8accb1565276d14cc13ee36f8866b233c2",
+    "manifest_pin_matches": true
+  },
+  "day31-anchor-persistence-v104-r1": {
+    "files_checked": 13,
+    "all_manifest_files_unchanged": true,
+    "manifest_sha256": "b3a56352285a4b4df8a11d41b997e038bdb38762e2d29892cf30589424ca7216",
+    "manifest_pin_matches": true
+  },
+  "production44-state": {
+    "files_sha256": {
+      "CURRENT.json": "c099afd34b6d9e3037c9eb7fbb1acbe33f61428b91d3a00fd36543e9db47e150",
+      "index-6375ae293aa147d7856c7c0f1144edbb.sqlite3": "afbff43f692377e5c606c1883114e014710bfbc158426ef76be0a90ea17169ee"
+    },
+    "index_build_performed": false
+  },
+  "expanded54-state": {
+    "files_sha256": {
+      "CURRENT.json": "e82f34cc01988e16288792253387101d53db69e4bd4d2ed3ae4b103a9eab57d5",
+      "index-e060786ddc904bddb3f5abc9db9d1d48.sqlite3": "fcee3dc3bd4bb658a88849e01276ad98efb7421f96a6734cba0e95a645a93f8f"
+    },
+    "index_build_performed": false
+  },
+  "prior_evidence": {
+    "reports": 61,
+    "raw_bundle_sha256": "d91fcf36f487cfa6a2ddf1b8e63765b771b558d2696a2b70eacd9ce80b0d4b84",
+    "raw_bundle_pin_matches": true
+  },
+  "scope": {
+    "qwen_calls": 0,
+    "embedding_calls": 0,
+    "index_builds": 0,
+    "user_mac_preflight": "not_run_here",
+    "extended_stage7": "paused_incomplete",
+    "course_minimum": "not_accepted",
+    "stage8": "not_started"
+  },
+  "publication_v104r2_files_byte_identical": {
+    "prepare_overlay.py": true,
+    "publication_adapter.py": true,
+    "overlay/bublik_developer/pipeline.py": true,
+    "overlay/bublik_developer/publication.py": true
+  }
+}

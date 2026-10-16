@@ -1,0 +1,832 @@
+{
+  "format": "day31-linked-block-budget-check-v1",
+  "known_contexts": 55,
+  "inputs": [
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5794,
+        "input_token_upper_bound_estimate": 6050,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7586
+      },
+      "schema_bytes": 43701
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5254,
+        "input_token_upper_bound_estimate": 5510,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7046
+      },
+      "schema_bytes": 43407
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 1076,
+        "input_token_upper_bound_estimate": 1332,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2868
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4913,
+        "input_token_upper_bound_estimate": 5169,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6705
+      },
+      "schema_bytes": 32785
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 858,
+        "input_token_upper_bound_estimate": 1114,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2650
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5426,
+        "input_token_upper_bound_estimate": 5682,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7218
+      },
+      "schema_bytes": 33079
+    },
+    {
+      "case_id": "allowed-untracked-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5227,
+        "input_token_upper_bound_estimate": 5483,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7019
+      },
+      "schema_bytes": 42815
+    },
+    {
+      "case_id": "allowed-untracked-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4963,
+        "input_token_upper_bound_estimate": 5219,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6755
+      },
+      "schema_bytes": 42553
+    },
+    {
+      "case_id": "allowed-untracked-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4561,
+        "input_token_upper_bound_estimate": 4817,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6353
+      },
+      "schema_bytes": 32757
+    },
+    {
+      "case_id": "allowed-untracked-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4891,
+        "input_token_upper_bound_estimate": 5147,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6683
+      },
+      "schema_bytes": 33019
+    },
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4687,
+        "input_token_upper_bound_estimate": 4943,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6479
+      },
+      "schema_bytes": 26963
+    },
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4995,
+        "input_token_upper_bound_estimate": 5251,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6787
+      },
+      "schema_bytes": 27225
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 3670,
+        "input_token_upper_bound_estimate": 3926,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 5462
+      },
+      "schema_bytes": 23129
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 3312,
+        "input_token_upper_bound_estimate": 3568,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 5104
+      },
+      "schema_bytes": 22867
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5827,
+        "input_token_upper_bound_estimate": 6083,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7619
+      },
+      "schema_bytes": 56633
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 1086,
+        "input_token_upper_bound_estimate": 1342,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2878
+      },
+      "schema_bytes": 373
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 6362,
+        "input_token_upper_bound_estimate": 6618,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 8154
+      },
+      "schema_bytes": 56927
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5711,
+        "input_token_upper_bound_estimate": 5967,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7503
+      },
+      "schema_bytes": 41677
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5206,
+        "input_token_upper_bound_estimate": 5462,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6998
+      },
+      "schema_bytes": 41383
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 775,
+        "input_token_upper_bound_estimate": 1031,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2567
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5822,
+        "input_token_upper_bound_estimate": 6078,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7614
+      },
+      "schema_bytes": 45893
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 1374,
+        "input_token_upper_bound_estimate": 1630,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 3166
+      },
+      "schema_bytes": 373
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 6322,
+        "input_token_upper_bound_estimate": 6578,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 8114
+      },
+      "schema_bytes": 46187
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5588,
+        "input_token_upper_bound_estimate": 5844,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7380
+      },
+      "schema_bytes": 30491
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5112,
+        "input_token_upper_bound_estimate": 5368,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6904
+      },
+      "schema_bytes": 30197
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 831,
+        "input_token_upper_bound_estimate": 1087,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2623
+      },
+      "schema_bytes": 373
+    },
+    {
+      "case_id": "receipt-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5742,
+        "input_token_upper_bound_estimate": 5998,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7534
+      },
+      "schema_bytes": 41743
+    },
+    {
+      "case_id": "receipt-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5370,
+        "input_token_upper_bound_estimate": 5626,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7162
+      },
+      "schema_bytes": 41481
+    },
+    {
+      "case_id": "receipt-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5261,
+        "input_token_upper_bound_estimate": 5517,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7053
+      },
+      "schema_bytes": 33449
+    },
+    {
+      "case_id": "receipt-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5656,
+        "input_token_upper_bound_estimate": 5912,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7448
+      },
+      "schema_bytes": 33711
+    },
+    {
+      "case_id": "assistant-facts-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5760,
+        "input_token_upper_bound_estimate": 6016,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7552
+      },
+      "schema_bytes": 49553
+    },
+    {
+      "case_id": "assistant-facts-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 6169,
+        "input_token_upper_bound_estimate": 6425,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7961
+      },
+      "schema_bytes": 49815
+    },
+    {
+      "case_id": "assistant-facts-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5090,
+        "input_token_upper_bound_estimate": 5346,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6882
+      },
+      "schema_bytes": 27673
+    },
+    {
+      "case_id": "assistant-facts-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4709,
+        "input_token_upper_bound_estimate": 4965,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6501
+      },
+      "schema_bytes": 27411
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5419,
+        "input_token_upper_bound_estimate": 5675,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7211
+      },
+      "schema_bytes": 43663
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4988,
+        "input_token_upper_bound_estimate": 5244,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6780
+      },
+      "schema_bytes": 43369
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 929,
+        "input_token_upper_bound_estimate": 1185,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2721
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 3504,
+        "input_token_upper_bound_estimate": 3760,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 5296
+      },
+      "schema_bytes": 22673
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 743,
+        "input_token_upper_bound_estimate": 999,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2535
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 3971,
+        "input_token_upper_bound_estimate": 4227,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 5763
+      },
+      "schema_bytes": 22967
+    },
+    {
+      "case_id": "quote-language-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5612,
+        "input_token_upper_bound_estimate": 5868,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7404
+      },
+      "schema_bytes": 18557
+    },
+    {
+      "case_id": "quote-language-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5982,
+        "input_token_upper_bound_estimate": 6238,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7774
+      },
+      "schema_bytes": 18819
+    },
+    {
+      "case_id": "quote-language-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 3088,
+        "input_token_upper_bound_estimate": 3344,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 4880
+      },
+      "schema_bytes": 16233
+    },
+    {
+      "case_id": "quote-language-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 2692,
+        "input_token_upper_bound_estimate": 2948,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 4484
+      },
+      "schema_bytes": 15971
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5978,
+        "input_token_upper_bound_estimate": 6234,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7770
+      },
+      "schema_bytes": 36455
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5419,
+        "input_token_upper_bound_estimate": 5675,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7211
+      },
+      "schema_bytes": 36161
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 1180,
+        "input_token_upper_bound_estimate": 1436,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2972
+      },
+      "schema_bytes": 367
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4625,
+        "input_token_upper_bound_estimate": 4881,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6417
+      },
+      "schema_bytes": 21629
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "multi_main",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 929,
+        "input_token_upper_bound_estimate": 1185,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 2721
+      },
+      "schema_bytes": 373
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5136,
+        "input_token_upper_bound_estimate": 5392,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6928
+      },
+      "schema_bytes": 21923
+    },
+    {
+      "case_id": "paraphrase-ru",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5235,
+        "input_token_upper_bound_estimate": 5491,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7027
+      },
+      "schema_bytes": 42233
+    },
+    {
+      "case_id": "paraphrase-ru",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 4860,
+        "input_token_upper_bound_estimate": 5116,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6652
+      },
+      "schema_bytes": 41971
+    },
+    {
+      "case_id": "paraphrase-en",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5165,
+        "input_token_upper_bound_estimate": 5421,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 6957
+      },
+      "schema_bytes": 35317
+    },
+    {
+      "case_id": "paraphrase-en",
+      "mode": "single",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5526,
+        "input_token_upper_bound_estimate": 5782,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7318
+      },
+      "schema_bytes": 35579
+    },
+    {
+      "case_id": "uncertain-doc-ru-production-diagnostic",
+      "mode": "multi_documentation",
+      "context_budget": {
+        "policy": "message-content-utf8-plus256-v1",
+        "content_bytes": 5254,
+        "input_token_upper_bound_estimate": 5510,
+        "template_allowance": 256,
+        "safety_reserve": 512,
+        "output_reserve": 1024,
+        "context_window": 8192,
+        "estimated_total": 7046
+      },
+      "schema_bytes": 43407
+    }
+  ],
+  "generation_calls": 0
+}

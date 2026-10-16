@@ -1,0 +1,1494 @@
+{
+  "format": "day31-native-prompt-input-regression-v1",
+  "scope": "Input context/budget regression only, never golden answers or heldout acceptance.",
+  "inputs": [
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Память задачи\n\nTask state хранится отдельно от обычной истории:\n\n```text\ngoal\nconstraints\nclarifications\nterms\n```\n\nПамять обновляется как явными командами, так и обычными сообщениями. Поддерживаются размеченные строки `Цель:`, `Ограничение:`, `Уточнение:` и `Термин:`.\n\nКаждое принятое значение памяти должно иметь буквальное evidence в текущем сообщении пользователя. Для записи сохраняются value, evidence, turn и origin.\n\nОсновные guards:\n\n- случайный следующий вопрос не заменяет существующую цель;\n- stale planner update не может затереть параллельное изменение памяти;\n- фрагмент вопроса и сразу же отменённое отрицанием утверждение не становятся memory facts;\n- `/forget` — явный путь удаления;\n- переполнение task-state budget отклоняет новое обновление видимо, а не удаляет старую информацию.\n\nLiteral provenance показывает происхождение текста, но не гарантирует правильность его модельной интерпретации. Для контроля используйте `/state`."
+          }
+        ]
+      },
+      "v093_context_digest": "39bf19af7872061fe9a4ece609d7da0f521b1e50249c056f0826e14a13f073b3",
+      "v093_message_digest": "5e76bfeefad99af5cff7a1eb7694a371fd78ceeea2aa86cac8672c996a1badf5",
+      "v093_schema_digest": "97cd2baae603ca798795e7cf594b4dc2936ec7342493d6cb85494e128b5e2a90",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-ru",
+      "mode": "single",
+      "context": {
+        "question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "documentation_question": "Какие точные значения ttl_minutes и compression_codec используются у механизма памяти quartz_retention_54827 в этом проекте?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Память задачи\n\nTask state хранится отдельно от обычной истории:\n\n```text\ngoal\nconstraints\nclarifications\nterms\n```\n\nПамять обновляется как явными командами, так и обычными сообщениями. Поддерживаются размеченные строки `Цель:`, `Ограничение:`, `Уточнение:` и `Термин:`.\n\nКаждое принятое значение памяти должно иметь буквальное evidence в текущем сообщении пользователя. Для записи сохраняются value, evidence, turn и origin.\n\nОсновные guards:\n\n- случайный следующий вопрос не заменяет существующую цель;\n- stale planner update не может затереть параллельное изменение памяти;\n- фрагмент вопроса и сразу же отменённое отрицанием утверждение не становятся memory facts;\n- `/forget` — явный путь удаления;\n- переполнение task-state budget отклоняет новое обновление видимо, а не удаляет старую информацию.\n\nLiteral provenance показывает происхождение текста, но не гарантирует правильность его модельной интерпретации. Для контроля используйте `/state`."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "32792d76baf673c76e5e94136d20a4c177c72473c269d798db2f611006503af7",
+      "v093_message_digest": "0c5e8d8c54a8b1b15ee7e1e26e1ba4dc61ccd73aea9425fd2be678dc9f551b4c",
+      "v093_schema_digest": "2b02176b05a1efa08ad0e03440008072dc1b2a3ad78c28a6c1e54c3ab7a959b6",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "single",
+      "context": {
+        "question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "documentation_question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "f4de71e028542e9af5c6a67b10fb23173c6330fd009e408f3de018396ddfa35f",
+      "v093_message_digest": "d27b9d16807e78dbd1384c516aa99063924716d664270767e8606cd5b18c3186",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "unsupported-knobs-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "What exact ttl_minutes and compression_codec values does the quartz_retention_54827 memory mechanism use in this project?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ]
+      },
+      "v093_context_digest": "007bf493ec808358a6765bee338e31e768b2fad25d448350fc6558d5b94b9315",
+      "v093_message_digest": "e2abc126decce1e33776a2c63f51304ec21427d2dd8527e9f627d911e4d00c69",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          }
+        ]
+      },
+      "v093_context_digest": "08f5933e93f67abd8bebf7183564c005c81584364560870157b54ab2c72bf5bf",
+      "v093_message_digest": "a35a348deef8980921b0558766ea98e2b1c41e6991489f8b34cc5a65ac1532e9",
+      "v093_schema_digest": "5ad9e97092f2307111783512dd7c642cc8c9b8425a8092deda8eb164ad577974",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Documentation и Git могут выполняться параллельно; модельные вызовы последовательны через общую lease."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T07:45:51.796888+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "f7cc8ba109daa784ea80b6d7ce8e55f3c8686f3e4ca7281c0bb1da31c17dfc33",
+      "v093_message_digest": "783b33ee71a71be9fcff3f3f1ca302612b65d199af4c6fd7fab3249b9f1ece25",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease? Покажи текущую ветку.",
+        "documentation_question": "Согласно документации архитектуры, параллельные задачи Documentation и Git означают несколько копий Qwen или последовательные модельные вызовы через одну lease?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T07:45:51.796888+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "b73da2bdf60a6b42c698c2720f8a06cf77d4caa2e9d0dd376af038541a98fd90",
+      "v093_message_digest": "9b9b13bc4113f5be4207c08faca47fb8210bb7517e9048ccefd0e4aacd2d8243",
+      "v093_schema_digest": "5a68d6197c0d2fd3d182bb0625574b9a5019ae2245e5e9d3bd8eacdfbb3f9ccc",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease? Also show the current branch.",
+        "documentation_question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T07:46:50.600884+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "972c8dc549baf06891bffdbe6134725c9bd07cb95aafef63b886c39aaabe4d10",
+      "v093_message_digest": "d5efc7cd7e23ed44cea25719091c62404e0d91bc9603ab91d892381073ee54d8",
+      "v093_schema_digest": "5a8e52fa5892048683bdfce7dd56b2f12dd37cad0c4751bcfbdb6fd0bd313edd",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          }
+        ]
+      },
+      "v093_context_digest": "acfb503a66416659ec997e1d6f7af2e3957506de361d9b58c7c0a62e74ba9ccd",
+      "v093_message_digest": "f3faa42761689aa93164b0d6f12c2787a00d94ad595d3548729ce9a7a2b385e2",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "serialized-model-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "According to the architecture documentation, do concurrent Documentation and Git tasks imply several Qwen copies, or serialized model calls through one lease? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Documentation and Main assembly are separate inference tasks in owned workers; Git and retrieval jobs may run concurrently, while model calls remain serialized through the shared model lease."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T07:46:50.600884+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "fb5b12d0e472f9a51d58f64310fcba5534752fd76fe766ee52129a9c41e25136",
+      "v093_message_digest": "0b05360213bbd305472479e79889da34598f3a33fb530223d336355401bb88ce",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Локальные инструменты разработчика: день 31\n\nДень 31 — отдельный пакет bublik_developer в day-31-developer-assistant.\nТочка входа main.py импортирует bublik_developer.cli. ProjectWorkspace закрепляет\nкорень локального Git-репозитория и логический project ID. Read-only данные Git\nпоступают через настоящий FastMCP stdio server с discovery и call_tool.\n\nИндекс документации проекта отделён от Week 6 knowledge.db и личной базы\nпереписки дня 30. Project RAG использует SQLite FTS5, локальные bge-m3 embeddings\nи hybrid RRF. Он возвращает точные выдержки с относительными путями, строками,\nraw digests и версиями корпуса/индекса. Индекс хранится вне репозитория.\nЛичная история дня 30 не входит в корпус. Изменение документа делает старые\nдоказательства устаревшими; такие выдержки не публикуются."
+          },
+          {
+            "id": "e3",
+            "quote": "## Ответы и источники\n\nДень 25 сохраняет extractive-протокол Дня 24.\n\nМодель выбирает quote IDs из найденных данных; приложение копирует точный текст источника и само назначает:\n\n- номер source;\n- путь файла;\n- section;\n- chunk ID;\n- диапазон строк;\n- связь claim/quote.\n\nКаждый успешный ответ печатает явный блок `Источники / Sources`.\n\nЕсли ссылка неоднозначна, retrieval недостаточен, модель вернула unknown или strict validation не прошла, пользователь получает явный отказ/уточнение и **без выдуманного подтверждённого источника**.\n\nСтарые ответы и task memory могут помогать понять текущий запрос, но не становятся proof для repository facts."
+          }
+        ]
+      },
+      "v093_context_digest": "cd9feb44dfde04f13b44858bd1c2b47104ea1cab4c4f66087baa4946b1caf6e9",
+      "v093_message_digest": "0966331f9250e3ee338681df09138897e3499c33f0324f165db0375f77622eee",
+      "v093_schema_digest": "9a659a70297cd114c8dc73a6e548f147cc6ca8680db93de9b4e5e4cd0683e6bc",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Main получает полный вопрос, уже проверенные утверждения (checked claims) и Git-факты, сформированные приложением. Исходные выдержки не входят в контекст сборки Main."
+          },
+          {
+            "id": "c2",
+            "text": "Main не может добавить новый текст, новые факты или переписать утверждения Documentation."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T07:52:55.575304+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "46944f80a0d861098b2f64d419d933708595d07eac77fd1d746d36fd16fe852c",
+      "v093_message_digest": "c5bd1d3db5b0507ea00cafa4524e9f7a15d81702d46cef0dbe49302844c0ea78",
+      "v093_schema_digest": "aba0513c3bd71bf3327c2728c38ff51da01e32bec46da94d4c55fa066e3bcf03",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта? Покажи текущую ветку.",
+        "documentation_question": "В документации архитектуры: Main получает исходные выдержки или уже проверенные утверждения? Может ли Main добавить новый текст факта?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация Documentation и сборка Main дня 31\n\nDocumentation получает отдельный вопрос и исходные выдержки источников.\nMain получает полный вопрос, уже проверенные утверждения (checked claims)\nи Git-факты, сформированные приложением. Исходные выдержки не входят в контекст\nсборки Main. Git и Verification не имеют capability генерации.\n\nMain может выбирать и упорядочивать существующие claim/fact IDs. Он не может\nдобавить новый текст, новые факты или переписать утверждения Documentation.\nМодельные вызовы Qwen сериализованы через общую model lease. Перед публикацией\nисточники проверяются снова, а Git независимо наблюдается после генерации.\nПроверка точного происхождения цитат не доказывает правильность смысла каждого\nутверждения; формулировки требуют отдельного semantic human review.\n\nBare /help и Git-only запросы не требуют модели или индекса. Search возвращает\nвыдержки. Console помнит один предыдущий вопрос о документации в рамках project\nidentity и corpus revision; это не личная история. Реальные контексты Qwen\nпроверяются отдельными отчётами Mac."
+          },
+          {
+            "id": "e2",
+            "quote": "## Локальные инструменты разработчика: день 31\n\nДень 31 — отдельный пакет bublik_developer в day-31-developer-assistant.\nТочка входа main.py импортирует bublik_developer.cli. ProjectWorkspace закрепляет\nкорень локального Git-репозитория и логический project ID. Read-only данные Git\nпоступают через настоящий FastMCP stdio server с discovery и call_tool.\n\nИндекс документации проекта отделён от Week 6 knowledge.db и личной базы\nпереписки дня 30. Project RAG использует SQLite FTS5, локальные bge-m3 embeddings\nи hybrid RRF. Он возвращает точные выдержки с относительными путями, строками,\nraw digests и версиями корпуса/индекса. Индекс хранится вне репозитория.\nЛичная история дня 30 не входит в корпус. Изменение документа делает старые\nдоказательства устаревшими; такие выдержки не публикуются."
+          },
+          {
+            "id": "e3",
+            "quote": "## Ответы и источники\n\nДень 25 сохраняет extractive-протокол Дня 24.\n\nМодель выбирает quote IDs из найденных данных; приложение копирует точный текст источника и само назначает:\n\n- номер source;\n- путь файла;\n- section;\n- chunk ID;\n- диапазон строк;\n- связь claim/quote.\n\nКаждый успешный ответ печатает явный блок `Источники / Sources`.\n\nЕсли ссылка неоднозначна, retrieval недостаточен, модель вернула unknown или strict validation не прошла, пользователь получает явный отказ/уточнение и **без выдуманного подтверждённого источника**.\n\nСтарые ответы и task memory могут помогать понять текущий запрос, но не становятся proof для repository facts."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T07:52:55.575304+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "716de3fd28b26dff2376e2b582f439c0f1e93a03b6be7bf260424f131f766a3b",
+      "v093_message_digest": "8dc944a2ad78dbe690f01306c0dd62cca724974ea6a9c4a21984cff3cbd879d0",
+      "v093_schema_digest": "045fb4ca77e9cfd1453c0b67d16b01ad013f93c17ba72303133f73e4e65714f2",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "In the architecture documentation, does Main receive original excerpts or already checked claims? Can Main add new factual prose? Also show the current branch.",
+        "documentation_question": "In the architecture documentation, does Main receive original excerpts or already checked claims? Can Main add new factual prose?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Quality before and after\n\n| Stage | Observed behavior / reviewed result |\n|---|---|\n| Baseline worker answer | Names `worker.py`, but adds unnecessary VPS setup instructions and an unsupported citation binding |\n| V3 factual / negative controls | Four questions × three trials: **12/12 pass** |\n| V6 periodic procedure | More precise source bindings, but wrong language, setup commands, and incomplete recurrence verification: **3/3 fail** |\n| V7 original Russian procedure | **3/3 pass**; status, logs, execution, and repeated stored results are separated |\n| Frozen V7 transfer, new English formulation | **3/3 pass** |\n| Frozen V7 transfer, new Russian formulation | **3/3 pass** |\n\nThe final scope includes four factual/abstention questions and three formulations of one periodic-procedure case. All three observations per case are retained. Within each new transfer question, all three rendered responses are identical. Code and transfer questions were frozen before the transfer run.\n\nSemantic reviews were performed by an assistant against the supplied JSON and source documentation, and are stored separately in `review/`. Automated checks and exact quotations alone do not establish semantic completeness. The original reports, failures, and automated verdicts remain unchanged."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T07:53:58.428989+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "9cd046fd88c93a7b3b2762e8f7aaabf5897a9f992180b4a7ca5ffbb656b3db6b",
+      "v093_message_digest": "3992ae7016fc1a943bff41a6b5e6ffbdc704374f999e9e2425fe8642d7abc351",
+      "v093_schema_digest": "5a8e52fa5892048683bdfce7dd56b2f12dd37cad0c4751bcfbdb6fd0bd313edd",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "In the architecture documentation, does Main receive original excerpts or already checked claims? Can Main add new factual prose?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Quality before and after\n\n| Stage | Observed behavior / reviewed result |\n|---|---|\n| Baseline worker answer | Names `worker.py`, but adds unnecessary VPS setup instructions and an unsupported citation binding |\n| V3 factual / negative controls | Four questions × three trials: **12/12 pass** |\n| V6 periodic procedure | More precise source bindings, but wrong language, setup commands, and incomplete recurrence verification: **3/3 fail** |\n| V7 original Russian procedure | **3/3 pass**; status, logs, execution, and repeated stored results are separated |\n| Frozen V7 transfer, new English formulation | **3/3 pass** |\n| Frozen V7 transfer, new Russian formulation | **3/3 pass** |\n\nThe final scope includes four factual/abstention questions and three formulations of one periodic-procedure case. All three observations per case are retained. Within each new transfer question, all three rendered responses are identical. Code and transfer questions were frozen before the transfer run.\n\nSemantic reviews were performed by an assistant against the supplied JSON and source documentation, and are stored separately in `review/`. Automated checks and exact quotations alone do not establish semantic completeness. The original reports, failures, and automated verdicts remain unchanged."
+          }
+        ]
+      },
+      "v093_context_digest": "24c251c0af8843e585bb432e6d90b2fb0ba51b6bf2027ba0f7c934a04c69a312",
+      "v093_message_digest": "594948ff9b0080652e15780a46c30f34bb855fbb547858e7495ca3d01cf93137",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "main-authority-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "In the architecture documentation, does Main receive original excerpts or already checked claims? Can Main add new factual prose? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Main sees the full question, checked claims and application-produced Git facts; Documentation sees the scoped question and source excerpts. Main can order existing claim/fact IDs, not add new text or facts."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T07:53:58.428989+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "fc4ef2dd789ce3f4676225d8e3a91d1ca64d7cfe3cd4d79b68f071639672882e",
+      "v093_message_digest": "f26315e86a06ad8caac56e700a045e4ad2a171956fcd1a81bb6573e194053006",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "paraphrase-ru",
+      "mode": "single",
+      "context": {
+        "question": "Гарантирует ли лексический поиск памяти дня 30 нахождение русско-английских перефразировок? Загружает ли он дополнительную embedding-модель?",
+        "documentation_question": "Гарантирует ли лексический поиск памяти дня 30 нахождение русско-английских перефразировок? Загружает ли он дополнительную embedding-модель?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Лексический поиск личной памяти дня 30\n\nbublik_service/memory.py определяет MemoryRetriever и протокол HistorySearch.\nТекущая реализация использует SQLite FTS5, BM25 и unicode61. Она ищет принятые\nuser messages и непустой terminal assistant text только authenticated owner.\nИсточники сохраняют message/chat IDs, role, status, date и source SHA-256.\nВ generation snapshot входят до трёх фрагментов. Owner задаётся authentication;\ncaller не может выбрать owner ID другого пользователя.\n\nЛексический поиск не использует дополнительную embedding-модель и не гарантирует\nнахождение русско-английских перефразировок. Источники сверяются с оригинальными\nсообщениями перед admission. Ошибка поиска не заменяется скрытым обычным ответом\nбез памяти."
+          },
+          {
+            "id": "e2",
+            "quote": "## Lexical memory retrieval in Day 30\n\nbublik_service/memory.py defines MemoryRetriever and a HistorySearch protocol.\nThe current implementation uses SQLite FTS5 and BM25 with unicode61 tokenization.\nIt searches accepted user messages and nonempty terminal assistant text for the\nauthenticated owner. Source snippets retain message/chat IDs, role, status,\ndate and source SHA-256. Up to three source fragments enter a generation snapshot.\nThe owner comes from authentication; callers do not select another user's owner ID.\n\nПоиск памяти дня 30 — лексический FTS5. Он не использует дополнительную embedding\nмодель и не гарантирует поиск перефразировок между русским и английским языками.\nИсточники сверяются с оригинальными сообщениями перед admission. Ошибка поиска\nне заменяется скрытым обычным ответом без памяти."
+          },
+          {
+            "id": "e3",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "66d2492153793e947fba85a4b27f18e29777cf8010267462b818cda22138733f",
+      "v093_message_digest": "23c55a14eca205851683f43dbc1bd1326bdbf6aa807108b82d688912002097c6",
+      "v093_schema_digest": "a171784a43f6912b292ada9aedc532e920ed86238b4f88abbad8234b3411c8ff",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "paraphrase-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Гарантирует ли лексический поиск памяти дня 30 нахождение русско-английских перефразировок? Загружает ли он дополнительную embedding-модель?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Лексический поиск личной памяти дня 30\n\nbublik_service/memory.py определяет MemoryRetriever и протокол HistorySearch.\nТекущая реализация использует SQLite FTS5, BM25 и unicode61. Она ищет принятые\nuser messages и непустой terminal assistant text только authenticated owner.\nИсточники сохраняют message/chat IDs, role, status, date и source SHA-256.\nВ generation snapshot входят до трёх фрагментов. Owner задаётся authentication;\ncaller не может выбрать owner ID другого пользователя.\n\nЛексический поиск не использует дополнительную embedding-модель и не гарантирует\nнахождение русско-английских перефразировок. Источники сверяются с оригинальными\nсообщениями перед admission. Ошибка поиска не заменяется скрытым обычным ответом\nбез памяти."
+          },
+          {
+            "id": "e2",
+            "quote": "## Lexical memory retrieval in Day 30\n\nbublik_service/memory.py defines MemoryRetriever and a HistorySearch protocol.\nThe current implementation uses SQLite FTS5 and BM25 with unicode61 tokenization.\nIt searches accepted user messages and nonempty terminal assistant text for the\nauthenticated owner. Source snippets retain message/chat IDs, role, status,\ndate and source SHA-256. Up to three source fragments enter a generation snapshot.\nThe owner comes from authentication; callers do not select another user's owner ID.\n\nПоиск памяти дня 30 — лексический FTS5. Он не использует дополнительную embedding\nмодель и не гарантирует поиск перефразировок между русским и английским языками.\nИсточники сверяются с оригинальными сообщениями перед admission. Ошибка поиска\nне заменяется скрытым обычным ответом без памяти."
+          },
+          {
+            "id": "e3",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          }
+        ]
+      },
+      "v093_context_digest": "a755b4a90cc0daa21033196d56e52d7b8703cf935b0c8f2c2e50fa14ed6aab00",
+      "v093_message_digest": "b312dfd430f40ffd5dcaeacfda53e8c5b09e5a2206d56929803523b2488d4dae",
+      "v093_schema_digest": "3ed528be01854c79ab1b112e17f80840681bd1ba90de264e7ec9ee00e1569b6a",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "paraphrase-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Does Day 30 lexical memory search guarantee finding Russian-English paraphrases? Does it load an additional embedding model?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Post-course history RAG — 0.9.1\n\nThe **«Искать в прошлых разговорах»** switch enables local FTS5 retrieval over\nall saved user text and nonempty terminal assistant text owned by the signed-in user. Up to three\nexact fragments, timestamps, IDs and SHA-256 hashes are frozen in each generation\nsnapshot and displayed below the reply, with author and completion status. Sources\nand the surrounding original conversation can be reopened.\n\nThe private `memory-index/` cache is rebuilt from the primary history. At its introduction, core schema\nstayed **2**; archives preserve history and RAG snapshots, without transporting the\ncache. No embeddings or second model are loaded. Lexical search cannot guarantee\nrecall of paraphrases. The Web UI enables retrieval by default; users can disable\nit for a request. API v1 omission still means false for compatibility. Index failures reject RAG\nadmission with 503; there is no silent fallback.\n\nSee [installation and Mac checks](RAG_MEMORY.ru.md). The Day 30 live results above\nbelong to 0.8.0; 0.9.1 Qwen/phone checks are separate. Displayed sources are context\nsupplied to the model, not automatic verification of every generated claim.\n\nSee [memory continuity and future layers](MEMORY_ARCHITECTURE.ru.md). Summaries and\nstructured facts remain future work; originals are not replaced or aged out."
+          },
+          {
+            "id": "e2",
+            "quote": "## Day 30 — Bublik Private AI Service\n\n**Current extension: 0.10.3.** Russian/English interface and reply languages\nare separate, saved per user and shared across devices. SQLite schema 3 adds\npreferences; archive/restore accepts schemas 2/3 without replacing originals.\nSee [upgrade and language checks](day-30-private-ai-service/LANGUAGES.ru.md).\nCurrent validation: [229/229 offline checks](day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json)\nand [33/33 live HTTPS/Qwen checks on the Mac](day-30-private-ai-service/reports/verified/languages-policy-v4-live-mac-20261011.json).\nFour live generations covered Russian/English replies with plain input and a RAG follow-up,\nincluding user instructions asking for the opposite language. The operator also confirmed\nlanguage switching through the UI and phone use. This manual check is separate from the\nJSON report; these examples do not guarantee the language of every possible answer.\n\nAfter the course, **0.9.1** adds lexical RAG enabled by default in the Web UI over both sides of saved conversations,\nowner-specific SQLite FTS5 caches, role/status-aware source links, original conversation windows and immutable RAG snapshots.\nRAG was introduced with schema 2; schema 3 is documented above. No embedding model or\ncloud LLM is used. See [history RAG setup and checks](day-30-private-ai-service/RAG_MEMORY.ru.md).\nThe 0.8.0 live evidence below is historical and does not prove 0.9.1 model quality.\n\n[Day 30](day-30-private-ai-service/README.md) turns local Qwen into a private HTTP\nservice with multiple conversations, durable SQLite history and a responsive\nWeb UI. Mac, Android and iPhone can open the same conversation and continue it.\nThe PWA can be added to the phone's home screen.\n\nThe tested host is a **MacBook Pro M1 with 32 GB unified memory**. Ollama runs\nQwen2.5:14b Q4_K_M on localhost; FastAPI handles authentication, API v1, context\nbudgets,"
+          },
+          {
+            "id": "e3",
+            "quote": "## Project RAG in Day 31\n\nProject RAG searches explicitly selected README files, architecture documents\nand permitted schema descriptions. It never reads the Day 30 chats.sqlite3,\nmemory-index or exported private conversation archives. Project index identity\ncontains project ID, corpus fingerprint, chunker version and embedding digest.\n\nDay 31 can compare FTS5, bge-m3 dense retrieval and hybrid RRF on the same chunks.\nIts vector index is not a new personal-memory layer. Implementing project dense\nretrieval does not upgrade the Day 30 private chat's memory search."
+          }
+        ]
+      },
+      "v093_context_digest": "50790a12cbc06af31b40f052c412429fbdca3c5aaaf33e386785df2e2c3bc8e7",
+      "v093_message_digest": "b10b67d6d6b26bcdb0ca741a92e4abfa667f2c97c7e6a27b8aa6ef7b0a592ce1",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "paraphrase-en",
+      "mode": "single",
+      "context": {
+        "question": "Does Day 30 lexical memory search guarantee finding Russian-English paraphrases? Does it load an additional embedding model?",
+        "documentation_question": "Does Day 30 lexical memory search guarantee finding Russian-English paraphrases? Does it load an additional embedding model?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Post-course history RAG — 0.9.1\n\nThe **«Искать в прошлых разговорах»** switch enables local FTS5 retrieval over\nall saved user text and nonempty terminal assistant text owned by the signed-in user. Up to three\nexact fragments, timestamps, IDs and SHA-256 hashes are frozen in each generation\nsnapshot and displayed below the reply, with author and completion status. Sources\nand the surrounding original conversation can be reopened.\n\nThe private `memory-index/` cache is rebuilt from the primary history. At its introduction, core schema\nstayed **2**; archives preserve history and RAG snapshots, without transporting the\ncache. No embeddings or second model are loaded. Lexical search cannot guarantee\nrecall of paraphrases. The Web UI enables retrieval by default; users can disable\nit for a request. API v1 omission still means false for compatibility. Index failures reject RAG\nadmission with 503; there is no silent fallback.\n\nSee [installation and Mac checks](RAG_MEMORY.ru.md). The Day 30 live results above\nbelong to 0.8.0; 0.9.1 Qwen/phone checks are separate. Displayed sources are context\nsupplied to the model, not automatic verification of every generated claim.\n\nSee [memory continuity and future layers](MEMORY_ARCHITECTURE.ru.md). Summaries and\nstructured facts remain future work; originals are not replaced or aged out."
+          },
+          {
+            "id": "e2",
+            "quote": "## Day 30 — Bublik Private AI Service\n\n**Current extension: 0.10.3.** Russian/English interface and reply languages\nare separate, saved per user and shared across devices. SQLite schema 3 adds\npreferences; archive/restore accepts schemas 2/3 without replacing originals.\nSee [upgrade and language checks](day-30-private-ai-service/LANGUAGES.ru.md).\nCurrent validation: [229/229 offline checks](day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json)\nand [33/33 live HTTPS/Qwen checks on the Mac](day-30-private-ai-service/reports/verified/languages-policy-v4-live-mac-20261011.json).\nFour live generations covered Russian/English replies with plain input and a RAG follow-up,\nincluding user instructions asking for the opposite language. The operator also confirmed\nlanguage switching through the UI and phone use. This manual check is separate from the\nJSON report; these examples do not guarantee the language of every possible answer.\n\nAfter the course, **0.9.1** adds lexical RAG enabled by default in the Web UI over both sides of saved conversations,\nowner-specific SQLite FTS5 caches, role/status-aware source links, original conversation windows and immutable RAG snapshots.\nRAG was introduced with schema 2; schema 3 is documented above. No embedding model or\ncloud LLM is used. See [history RAG setup and checks](day-30-private-ai-service/RAG_MEMORY.ru.md).\nThe 0.8.0 live evidence below is historical and does not prove 0.9.1 model quality.\n\n[Day 30](day-30-private-ai-service/README.md) turns local Qwen into a private HTTP\nservice with multiple conversations, durable SQLite history and a responsive\nWeb UI. Mac, Android and iPhone can open the same conversation and continue it.\nThe PWA can be added to the phone's home screen.\n\nThe tested host is a **MacBook Pro M1 with 32 GB unified memory**. Ollama runs\nQwen2.5:14b Q4_K_M on localhost; FastAPI handles authentication, API v1, context\nbudgets,"
+          },
+          {
+            "id": "e3",
+            "quote": "## Project RAG in Day 31\n\nProject RAG searches explicitly selected README files, architecture documents\nand permitted schema descriptions. It never reads the Day 30 chats.sqlite3,\nmemory-index or exported private conversation archives. Project index identity\ncontains project ID, corpus fingerprint, chunker version and embedding digest.\n\nDay 31 can compare FTS5, bge-m3 dense retrieval and hybrid RRF on the same chunks.\nIts vector index is not a new personal-memory layer. Implementing project dense\nretrieval does not upgrade the Day 30 private chat's memory search."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "617f0525399a8d83f07053845f3e0dc49be025d6df26416ca72f7c770ae1b46d",
+      "v093_message_digest": "93ebdfd21dc47a24c4a9d6f2dea6a835a46c17e9c6a3f1f8827613aa19d790df",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback? Покажи текущую ветку.",
+        "documentation_question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:02:51.549780+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "fa63a4afb7fa71a7797f9f3568edf27795c65baa29599f2bdd4164168ca458fd",
+      "v093_message_digest": "f638e2fbcd607d5308d01a481fca370f1522bb952c13a940c84156d9a928e327",
+      "v093_schema_digest": "0105f08bd6d54b9627c9835b329241c8fde275326d67416040cb640267aa5a82",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Новые process epochs и выделенная модельная сессия\n\nДень 31 использует prepare/confirm. Оператор перезапускает Ollama; приложение\nподтверждает новый OS process epoch и отсутствие отдельного старого runner.\nМежпроцессный cooperative lease разрешает одну model operation. Перед dispatch\nсохраняется uncertain state; потеря ответа или crash требуют проверяемого recovery.\nДругие приложения не должны использовать эту выделенную сессию.\n\nИспользуется одна модель Qwen, а не отдельная копия для каждого агента.\nGit и retrieval могут выполняться параллельно; модельные вызовы последовательны\nчерез общую lease. Финальный embedding batch/query выгружает bge-m3 с keep_alive=0s.\nАвтоматического cloud fallback нет."
+          },
+          {
+            "id": "e3",
+            "quote": "## Fresh process epochs and exclusive model session\n\nДень 31 использует prepare/confirm модельной сессии. Оператор перезапускает\nOllama; приложение подтверждает новый OS process epoch и отсутствие старого\nотдельного runner. Межпроцессный cooperative lease разрешает одну model operation.\nПеред dispatch сохраняется uncertain state; потеря ответа или crash требуют\nпроверяемого восстановления. Другие приложения не должны использовать эту сессию.\n\nThere is one Qwen model, not one copy per agent. Git and retrieval jobs may run\nconcurrently, while model calls remain serialized. bge-m3 is unloaded after a\nfinal embedding batch/query using keep_alive=0s. No cloud fallback is performed."
+          }
+        ]
+      },
+      "v093_context_digest": "1ad773f57ba253f3e32d185af07ad1468d6363bab01892d46c5e646c3a0e1527",
+      "v093_message_digest": "e87cef7cd6181c5c30ca63871b437f4428645f3de77d1aa235d23d011aab4799",
+      "v093_schema_digest": "f4294aae6c55bc797e566c53a3233cc05eb42115cab0f370daec205a9cec3f27",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Что требует документация, если HTTP-ответ локальной генерации потерян: автоматический повтор или сохранение uncertain state? Разрешён ли автоматический cloud fallback? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "При потере HTTP-ответа сохраняется uncertain inference state. Автоматические повтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery."
+          },
+          {
+            "id": "c2",
+            "text": "Перед dispatch сохраняется uncertain state; потеря ответа или crash требуют проверяемого восстановления. Автоматического cloud fallback нет."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:02:51.549780+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "af275e1e0d7044ff45a2771d1dbc476ea562a4c1def88e45965a18c7bb7cece5",
+      "v093_message_digest": "00f20a0977f43552e738dc63b3ffbe254acb8b7a8ed90f2f57bf11e50713c01f",
+      "v093_schema_digest": "aba0513c3bd71bf3327c2728c38ff51da01e32bec46da94d4c55fa066e3bcf03",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Ollama /api/ps: loaded models and request state\n\n`GET /api/ps` reports models currently loaded into memory. The returned model\nlist describes model residency; it is not a completion record for inference\nrequests. A loaded model does not establish whether a generation has finished\nor whether Ollama is idle. Do not use `/api/ps` as an idle witness after a lost\nHTTP response or interrupted request.\n\n`/api/ps` показывает загруженные модели, а не подтверждение завершения запроса.\nСписок моделей не доказывает, что генерация закончилась и Ollama свободна.\n\nEndpoint documentation: https://docs.ollama.com/api/ps . The model-residency\ndescription comes from the API contract; the idle-witness restriction is the\nDay 31 policy implemented in model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          }
+        ]
+      },
+      "v093_context_digest": "75cb24c3bc3b4bbc0f78c3ded215966d2e74ecafd26d6e014154b433704b600c",
+      "v093_message_digest": "1a49a5cfa623e98939389e73eeff04d2d7cd5ef9fe89ef53b264165ae90c8f73",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "After a local generation HTTP response is lost, the uncertain inference state is retained. Automatic replay, cloud fallback, and model restart are not allowed; a verified recovery is required."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:03:54.621501+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "e18bd0ed36edab5660522151c7a7232e1b83db00c3a13498438896f8feb8066c",
+      "v093_message_digest": "d49d8d08af2cbf8df4d1cbed20efc9cc1beadf964aba473afa68c77eb5f28042",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "uncertain-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed? Also show the current branch.",
+        "documentation_question": "What does the documentation require after a local generation HTTP response is lost: automatic replay or retained uncertain state? Is automatic cloud fallback allowed?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Ollama /api/ps: loaded models and request state\n\n`GET /api/ps` reports models currently loaded into memory. The returned model\nlist describes model residency; it is not a completion record for inference\nrequests. A loaded model does not establish whether a generation has finished\nor whether Ollama is idle. Do not use `/api/ps` as an idle witness after a lost\nHTTP response or interrupted request.\n\n`/api/ps` показывает загруженные модели, а не подтверждение завершения запроса.\nСписок моделей не доказывает, что генерация закончилась и Ollama свободна.\n\nEndpoint documentation: https://docs.ollama.com/api/ps . The model-residency\ndescription comes from the API contract; the idle-witness restriction is the\nDay 31 policy implemented in model_session.py."
+          },
+          {
+            "id": "e3",
+            "quote": "## Генерация и финальная проверка ответа дня 31\n\nQwen2.5:14b Q4_K_M формирует claims по scoped excerpts через /api/chat с закрытой\nJSON schema. Documentation не видит Git-факты caller и private history.\nMain имеет отдельный контекст и выбирает только проверенные claim/fact IDs.\nНа запрос разрешены восемь capability calls и deadline 300 секунд;\nкаждый model worker имеет timeout 180 секунд.\n\nПри потере HTTP-ответа сохраняется uncertain inference state. Автоматические\nповтор, cloud fallback и model restart не разрешены; требуется проверяемое recovery.\nФинальный verifier проверяет свежие source digests/spans и повторно наблюдает Git\nпосле генерации. Точные цитаты и identifier checks отделены от semantic correctness.\nЗаписи и произвольные shell-команды остаются недоступны.\n\nИсточники: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py;\nday-31-developer-assistant/bublik_developer/pipeline.py."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:03:54.621501+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "cd8962b1b76cb572b414f65f0808a2f55c908e5f6ad788d89ab139d58d387b30",
+      "v093_message_digest": "2553a83e5a821140a470fc3f2bb706fe2be257580fc1a2d85096925c26f3d247",
+      "v093_schema_digest": "5a8e52fa5892048683bdfce7dd56b2f12dd37cad0c4751bcfbdb6fd0bd313edd",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Согласно документации, сколько изменённых путей максимум проверяет цепочка на связь с документацией? Подтверждает ли найденная связь всю функциональность файла? Покажи текущую ветку.",
+        "documentation_question": "Согласно документации, сколько изменённых путей максимум проверяет цепочка на связь с документацией? Подтверждает ли найденная связь всю функциональность файла?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Цепочка ответов и связь изменённых путей с документацией\n\n/help question и ask выбирают Git, документацию, независимый fan-out или\nцепочку changed-files documentation. Цепочка проверяет максимум четыре\nизменённых пути на связь с документацией. Association использует точное\nупоминание относительного пути, а не basename. Найденная связь не подтверждает\nвсю функциональность файла: документ может описывать только часть.\nОтсутствие association сообщается явно."
+          },
+          {
+            "id": "e2",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          },
+          {
+            "id": "e3",
+            "quote": "## Проверка требований\n\n| Требование | Реализация | Тест |\n|---|---|---|\n| Несколько MCP-инструментов | Три `@mcp.tool()` в `server.py` | `list_tools()` возвращает три имени и схемы |\n| Первый получает данные | `search_repository` → GitHub REST API | Локальный fake API, проверка `stars = 12` |\n| Второй обрабатывает | `summarize_repository` → Markdown | Сверка `Stars: 12` |\n| Третий сохраняет | `save_report` → `.md` | Сверка содержимого файла и числа байт |\n| Автоматическая цепочка | `BublikPipelineAgent.run()` выполняет вызовы подряд | Тест запускает `main.py` одной командой, проверяет порядок трёх вызовов и файл |\n| Передача данных | Следующий аргумент равен полному результату предыдущего MCP-вызова | Проверка точного равенства словарей на обеих границах |\n| Ошибка в середине | Остановка цепочки без отчёта | HTTP 503 не создаёт файл |\n\nСводка фиксирует текущий снимок репозитория, поэтому числа могут измениться со временем. День 18 запускал отдельный worker по расписанию; здесь цепочка выполняется сразу по команде пользователя."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:13:00.576155+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "728eeb4ee445b0ab7fbe1e7ea5882b64e07d03087bfd99f84930bd446b9a20e5",
+      "v093_message_digest": "1d83ca100b521ca34f73bfa78f4be582dac1b3d77f473101db3eeb586b13970c",
+      "v093_schema_digest": "87381395a2be8343e8ba20c4662e35ed1a9429dc21fb844752c2788c6d522869",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Согласно документации, сколько изменённых путей максимум проверяет цепочка на связь с документацией? Подтверждает ли найденная связь всю функциональность файла?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Цепочка ответов и связь изменённых путей с документацией\n\n/help question и ask выбирают Git, документацию, независимый fan-out или\nцепочку changed-files documentation. Цепочка проверяет максимум четыре\nизменённых пути на связь с документацией. Association использует точное\nупоминание относительного пути, а не basename. Найденная связь не подтверждает\nвсю функциональность файла: документ может описывать только часть.\nОтсутствие association сообщается явно."
+          },
+          {
+            "id": "e2",
+            "quote": "## Задачи и независимые контексты дня 31\n\nRuntime делегирует Documentation, Git и Verification отдельные TaskEnvelope\nс запечатанными контекстами. Documentation и Verification используют owned\nworker processes; Git использует настоящий MCP. Dispatcher проверяет зависимости,\ncapabilities ролей и общий budget вызовов. Documentation и Git могут выполняться\nпараллельно; Verification проверяет их результаты. Lifecycle содержит\nSPAWN / EXECUTE / REPORT / MERGE.\n\nДемонстрация agents demo не вызывает LLM. Команды /help question и ask используют\nограниченный RU/EN Router. Независимые вопросы о документации и Git идут через\nfan-out. Поиск документации изменённых файлов зависит от результата Git status.\nНесколько неоднозначных Git-намерений требуют уточнения."
+          },
+          {
+            "id": "e3",
+            "quote": "## Проверка требований\n\n| Требование | Реализация | Тест |\n|---|---|---|\n| Несколько MCP-инструментов | Три `@mcp.tool()` в `server.py` | `list_tools()` возвращает три имени и схемы |\n| Первый получает данные | `search_repository` → GitHub REST API | Локальный fake API, проверка `stars = 12` |\n| Второй обрабатывает | `summarize_repository` → Markdown | Сверка `Stars: 12` |\n| Третий сохраняет | `save_report` → `.md` | Сверка содержимого файла и числа байт |\n| Автоматическая цепочка | `BublikPipelineAgent.run()` выполняет вызовы подряд | Тест запускает `main.py` одной командой, проверяет порядок трёх вызовов и файл |\n| Передача данных | Следующий аргумент равен полному результату предыдущего MCP-вызова | Проверка точного равенства словарей на обеих границах |\n| Ошибка в середине | Остановка цепочки без отчёта | HTTP 503 не создаёт файл |\n\nСводка фиксирует текущий снимок репозитория, поэтому числа могут измениться со временем. День 18 запускал отдельный worker по расписанию; здесь цепочка выполняется сразу по команде пользователя."
+          }
+        ]
+      },
+      "v093_context_digest": "df2ab8c249587090a166cd5fc594ff2f67360c09032d9b3f41fe3f0db2c87ed0",
+      "v093_message_digest": "77995f76a705a990d0fc4d41315a3d26d0a065752998b22180465b917150de6f",
+      "v093_schema_digest": "b916d5d1ff3555a2e33ea54a0ad02e273f1e2ff9d7ddbc74365a1a82db0925d8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Согласно документации, сколько изменённых путей максимум проверяет цепочка на связь с документацией? Подтверждает ли найденная связь всю функциональность файла? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Цепочка проверяет максимум четыре изменённых пути на связь с документацией. Найденная связь не подтверждает всю функциональность файла: документ может описывать только часть."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:13:00.576155+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "1a9787263a480c8ac8388487bdc21353dd3121e888eb85996c217b5a80726eaf",
+      "v093_message_digest": "2cccdb006faff1bda9c6bc92911072dbb18aa2ac93819913c2d670d38858664b",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "According to the documentation, how many changed paths can the chain check for documentation associations? Does finding an association prove all file functionality?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Цепочка ответов и связь изменённых путей с документацией\n\n/help question и ask выбирают Git, документацию, независимый fan-out или\nцепочку changed-files documentation. Цепочка проверяет максимум четыре\nизменённых пути на связь с документацией. Association использует точное\nупоминание относительного пути, а не basename. Найденная связь не подтверждает\nвсю функциональность файла: документ может описывать только часть.\nОтсутствие association сообщается явно."
+          },
+          {
+            "id": "e3",
+            "quote": "## Data and limitations\n\n- Day 27 is a local, bypassable pre-commit check. It analyzes entire changed files without type resolution and does not replace KMP compilation, Android Lint or CI. Reviewer style affects explanations only.\n- Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent. Day 28 keeps selected original JSON in `reports/accepted/` and audits in `reports/verified/`; working `reports/check/` and recording `reports/video/` are ignored.\n- Day 18 worker output goes to stdout or a service journal; it does not automatically push a message back into a chat.\n- Days 21–25 are local RAG experiments, not a hosted multi-user service.\n- Day 25 is a local single-user CLI. It does not execute arbitrary user code or call external MCP tools from the chat.\n- Stored memory is evidence-bound to user text, but literal provenance alone does not prove that a model interpreted the text correctly.\n- Exact quotations prove source provenance, not semantic completeness. Live reports therefore retain an explicit manual-review requirement.\n- Model names, provider limits, and pricing can change; check the relevant provider documentation when reproducing older lessons."
+          }
+        ]
+      },
+      "v093_context_digest": "27a6f07b6e263937d71101d3f43c75d5856cbe3041a14cc4c701f8c510be787b",
+      "v093_message_digest": "99d2012cfb23098907384d328ed79333a540014ee7f7b7261e904faa4b95a04e",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "According to the documentation, how many changed paths can the chain check for documentation associations? Does finding an association prove all file functionality? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "The chain checks at most four changed paths for documentation associations. Finding an association does not prove that the document explains all functionality of the file."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:13:53.236503+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "65d3f4abcfdb1c37d8372efc78b4f08003af98c61c7dedd443a1f438a59eca95",
+      "v093_message_digest": "1db495e3c6b968aef01ccfe5decea433af4cd5b91931b5ba88142025725d2ff4",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "path-limit-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "According to the documentation, how many changed paths can the chain check for documentation associations? Does finding an association prove all file functionality? Also show the current branch.",
+        "documentation_question": "According to the documentation, how many changed paths can the chain check for documentation associations? Does finding an association prove all file functionality?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          },
+          {
+            "id": "e2",
+            "quote": "## Цепочка ответов и связь изменённых путей с документацией\n\n/help question и ask выбирают Git, документацию, независимый fan-out или\nцепочку changed-files documentation. Цепочка проверяет максимум четыре\nизменённых пути на связь с документацией. Association использует точное\nупоминание относительного пути, а не basename. Найденная связь не подтверждает\nвсю функциональность файла: документ может описывать только часть.\nОтсутствие association сообщается явно."
+          },
+          {
+            "id": "e3",
+            "quote": "## Data and limitations\n\n- Day 27 is a local, bypassable pre-commit check. It analyzes entire changed files without type resolution and does not replace KMP compilation, Android Lint or CI. Reviewer style affects explanations only.\n- Generated SQLite databases, temporary reports, model outputs, and provider availability are environment-dependent. Day 28 keeps selected original JSON in `reports/accepted/` and audits in `reports/verified/`; working `reports/check/` and recording `reports/video/` are ignored.\n- Day 18 worker output goes to stdout or a service journal; it does not automatically push a message back into a chat.\n- Days 21–25 are local RAG experiments, not a hosted multi-user service.\n- Day 25 is a local single-user CLI. It does not execute arbitrary user code or call external MCP tools from the chat.\n- Stored memory is evidence-bound to user text, but literal provenance alone does not prove that a model interpreted the text correctly.\n- Exact quotations prove source provenance, not semantic completeness. Live reports therefore retain an explicit manual-review requirement.\n- Model names, provider limits, and pricing can change; check the relevant provider documentation when reproducing older lessons."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:13:53.236503+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "7c23da9f72a08cf4172dc00aef4068e0a9dfcdfb020e76bd313f70a00eb2ec5a",
+      "v093_message_digest": "8c910c7be0abe4f09aa1ec5b9eee12918e4edcc76f7db6c4155dc8da1eff4eee",
+      "v093_schema_digest": "5a8e52fa5892048683bdfce7dd56b2f12dd37cad0c4751bcfbdb6fd0bd313edd",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "receipt-ru",
+      "mode": "single",
+      "context": {
+        "question": "После POST сообщения API вернул HTTP 202. Это готовый ответ или квитанция генерации? Какой API ресурс позволяет узнать состояние этой генерации?",
+        "documentation_question": "После POST сообщения API вернул HTTP 202. Это готовый ответ или квитанция генерации? Какой API ресурс позволяет узнать состояние этой генерации?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Диалоги, сообщения и генерации\n\nPOST /api/v1/chats создаёт диалог. GET /api/v1/chats возвращает доступные\nавторизованному пользователю диалоги. GET /api/v1/chats/{chat}/messages читает\nисторию сообщений. POST /api/v1/chats/{chat}/messages принимает сообщение\nи возвращает квитанцию генерации с HTTP 202, а не готовый ответ.\nЗапрос содержит content, expected_revision, use_memory и необязательный\nreply_language. Idempotency-Key передаётся в request header.\nGET /api/v1/generations/{generation} позволяет узнать состояние генерации;\nGET /api/v1/generations/{generation}/events предоставляет event stream.\n\nPOST /api/v1/messages/{message}/retry создаёт явный повтор по правилам сервиса.\nRetry не заменяет молча уже завершённый ответ модели."
+          },
+          {
+            "id": "e2",
+            "quote": "## API, история и ограничения\n\n[API.md](API.md) описывает `/api/v1`: live/ready, login/session/logout,\nchats/history, send, generation status/SSE, retry, export и authenticated OpenAPI.\nПрочим приложениям выдаются локальным CLI scoped, expiring, revocable Bearer tokens.\nБраузер использует Secure/HttpOnly/SameSite=Strict cookie и exact Origin/CSRF.\nЧужие chat/generation IDs возвращают 404; owner задаётся авторизацией.\n\n| Ограничение | Значение |\n|---|---:|\n| Model context / max output / temperature | 8192 / 1024 / 0 |\n| Запас контекста | 512; input upper bound ≤6656 |\n| Одновременный inference / очередь | 1 / 8 ожидающих |\n| Outstanding на owner | 3 |\n| Принятые генерации / HTTP запросы на owner | 10 / 120 за скользящие 60 s |\n| JSON body / текст пользователя | 32 KiB / 16 KiB UTF-8 |\n| Срок queued задания | 600 s |\n\nПолная история не обрезается при сокращении inference context. В модель передаётся\nсуффикс завершённых пар; исключённые ходы видны в metadata/UI. System prompt и новый\nвопрос не обрезаются; oversize отклоняется до вставки сообщений. Счётчик — проверенная\nконсервативная byte-BPE верхняя граница, не точный tokenizer.\n\nIdempotency сохраняет IDs при повторной доставке без дублирования сообщений или\nновой inference quota. `202` означает сохранённое задание, а не готовый ответ.\nPartial text и terminal status сохраняются; при недоступной модели история доступна.\nНеизвестное состояние inference блокирует новые задания до явного проверенного\nrecovery. Старые v1 snapshots сохраняются при новых v2 ходах того же диалога.\n\nUI не сохраняет API tokens, пароли, историю или черновики в localStorage/sessionStorage.\nОтветы отображаются plain text; нет CDN/analytics. Access logs отключены, ошибки\nне сериализуют личный"
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "bc0979a88c3000ad7982d6801b56569548b4f9001adf126a18824861c83e8c22",
+      "v093_message_digest": "053cce574664dd6c69170d51bac58cf08507e5d9e2412b118a4f07f07fc770b7",
+      "v093_schema_digest": "03ee49334f076f5726095b88fadcf35ce81edd67530740f4abe83c5deefd7497",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "receipt-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "После POST сообщения API вернул HTTP 202. Это готовый ответ или квитанция генерации? Какой API ресурс позволяет узнать состояние этой генерации?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Диалоги, сообщения и генерации\n\nPOST /api/v1/chats создаёт диалог. GET /api/v1/chats возвращает доступные\nавторизованному пользователю диалоги. GET /api/v1/chats/{chat}/messages читает\nисторию сообщений. POST /api/v1/chats/{chat}/messages принимает сообщение\nи возвращает квитанцию генерации с HTTP 202, а не готовый ответ.\nЗапрос содержит content, expected_revision, use_memory и необязательный\nreply_language. Idempotency-Key передаётся в request header.\nGET /api/v1/generations/{generation} позволяет узнать состояние генерации;\nGET /api/v1/generations/{generation}/events предоставляет event stream.\n\nPOST /api/v1/messages/{message}/retry создаёт явный повтор по правилам сервиса.\nRetry не заменяет молча уже завершённый ответ модели."
+          },
+          {
+            "id": "e2",
+            "quote": "## API, история и ограничения\n\n[API.md](API.md) описывает `/api/v1`: live/ready, login/session/logout,\nchats/history, send, generation status/SSE, retry, export и authenticated OpenAPI.\nПрочим приложениям выдаются локальным CLI scoped, expiring, revocable Bearer tokens.\nБраузер использует Secure/HttpOnly/SameSite=Strict cookie и exact Origin/CSRF.\nЧужие chat/generation IDs возвращают 404; owner задаётся авторизацией.\n\n| Ограничение | Значение |\n|---|---:|\n| Model context / max output / temperature | 8192 / 1024 / 0 |\n| Запас контекста | 512; input upper bound ≤6656 |\n| Одновременный inference / очередь | 1 / 8 ожидающих |\n| Outstanding на owner | 3 |\n| Принятые генерации / HTTP запросы на owner | 10 / 120 за скользящие 60 s |\n| JSON body / текст пользователя | 32 KiB / 16 KiB UTF-8 |\n| Срок queued задания | 600 s |\n\nПолная история не обрезается при сокращении inference context. В модель передаётся\nсуффикс завершённых пар; исключённые ходы видны в metadata/UI. System prompt и новый\nвопрос не обрезаются; oversize отклоняется до вставки сообщений. Счётчик — проверенная\nконсервативная byte-BPE верхняя граница, не точный tokenizer.\n\nIdempotency сохраняет IDs при повторной доставке без дублирования сообщений или\nновой inference quota. `202` означает сохранённое задание, а не готовый ответ.\nPartial text и terminal status сохраняются; при недоступной модели история доступна.\nНеизвестное состояние inference блокирует новые задания до явного проверенного\nrecovery. Старые v1 snapshots сохраняются при новых v2 ходах того же диалога.\n\nUI не сохраняет API tokens, пароли, историю или черновики в localStorage/sessionStorage.\nОтветы отображаются plain text; нет CDN/analytics. Access logs отключены, ошибки\nне сериализуют личный"
+          }
+        ]
+      },
+      "v093_context_digest": "2059bb999550bf5a3fe1b4aeec25e173ef2ad1b6e7f9f73fc3fd57edf8234afa",
+      "v093_message_digest": "8feb867b7fc0f4f263ff9a4558d2cd27a32dcbced86716516557b53831e6346e",
+      "v093_schema_digest": "9922541cb8d120560fc4cc370e6475edf1c63eb79d79ced1c926b094bea92676",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "receipt-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "After posting a message, the API returned HTTP 202. Is this a completed answer or a generation receipt? Which API resource lets me read that generation state?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Chats, messages and generations\n\nPOST /api/v1/chats creates a conversation. GET /api/v1/chats lists authorized\nconversations. GET /api/v1/chats/{chat}/messages reads message history.\nPOST /api/v1/chats/{chat}/messages accepts a new message and returns a generation\nreceipt with HTTP 202. The request includes content, expected_revision, use_memory\nand optional reply_language. Idempotency-Key is passed as a request header.\nGET /api/v1/generations/{generation} reads generation state.\nGET /api/v1/generations/{generation}/events provides the generation event stream.\n\nPOST /api/v1/messages/{message}/retry creates an explicit retry under the service\nrules. A retry is not a silent replacement of an already completed model answer."
+          },
+          {
+            "id": "e2",
+            "quote": "## Поток сообщения и повторы\n\n1. HTTPS/auth определяет owner; request не задаёт owner/model/URL/system roles.\n2. Проверяются body, JSON fields, CSRF/Origin, quotas, readiness и context budget.\n3. `BEGIN IMMEDIATE`: проверка idempotency/revision/capacity/current context и\n   atomic insertion user message, assistant placeholder, job snapshots и receipt.\n4. После commit —202 с durable IDs. Это admission, не completed answer.\n5. Worker claim записывает running, inference выполняется вне SQLite transaction.\n6. Saved partial checkpoints/terminal result читаются через GET/SSE/polling.\n   Disconnect subscriber не отменяет вычисление. UI заменяет snapshot, не append\n   повторно полученный prefix. Unsaved tokens не объявляются persisted history.\n\nSame key+original payload возвращает прежниеIDs/receipt; changed payload409.\nReplay идёт до новой revision/capacity/context проверки, но после owner/security;\nне расходует новую inference quota, general HTTP quota действует. Receipts durable,\nне автоматически expire. Model default update не меняет принятый job.\n`chat.revision` меняется на admission/terminal transition, не каждый partial chunk.\nSQLite trigger поддерживает отдельную durable SSE message revision.\n\nGeneration: queued→running→completed|truncated|failed|interrupted. Queue expiry600s\nсохраняет вопрос и failed/queue_expired. Retry только последнего retryable question,\nс new generation/assistant attempt, без вставки user message заново. Completed/older\nregeneration, editing/delete/branching не входят в APIv1."
+          },
+          {
+            "id": "e3",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          }
+        ]
+      },
+      "v093_context_digest": "b2a46ca2fa9d70399197f70ea829d31c5060f37bf2a5c839e203a0e4530365de",
+      "v093_message_digest": "631c58fe458b373104b43bb8bc458e75035d9b73f2d418eb96017716b79d4286",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "receipt-en",
+      "mode": "single",
+      "context": {
+        "question": "After posting a message, the API returned HTTP 202. Is this a completed answer or a generation receipt? Which API resource lets me read that generation state?",
+        "documentation_question": "After posting a message, the API returned HTTP 202. Is this a completed answer or a generation receipt? Which API resource lets me read that generation state?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Chats, messages and generations\n\nPOST /api/v1/chats creates a conversation. GET /api/v1/chats lists authorized\nconversations. GET /api/v1/chats/{chat}/messages reads message history.\nPOST /api/v1/chats/{chat}/messages accepts a new message and returns a generation\nreceipt with HTTP 202. The request includes content, expected_revision, use_memory\nand optional reply_language. Idempotency-Key is passed as a request header.\nGET /api/v1/generations/{generation} reads generation state.\nGET /api/v1/generations/{generation}/events provides the generation event stream.\n\nPOST /api/v1/messages/{message}/retry creates an explicit retry under the service\nrules. A retry is not a silent replacement of an already completed model answer."
+          },
+          {
+            "id": "e2",
+            "quote": "## Поток сообщения и повторы\n\n1. HTTPS/auth определяет owner; request не задаёт owner/model/URL/system roles.\n2. Проверяются body, JSON fields, CSRF/Origin, quotas, readiness и context budget.\n3. `BEGIN IMMEDIATE`: проверка idempotency/revision/capacity/current context и\n   atomic insertion user message, assistant placeholder, job snapshots и receipt.\n4. После commit —202 с durable IDs. Это admission, не completed answer.\n5. Worker claim записывает running, inference выполняется вне SQLite transaction.\n6. Saved partial checkpoints/terminal result читаются через GET/SSE/polling.\n   Disconnect subscriber не отменяет вычисление. UI заменяет snapshot, не append\n   повторно полученный prefix. Unsaved tokens не объявляются persisted history.\n\nSame key+original payload возвращает прежниеIDs/receipt; changed payload409.\nReplay идёт до новой revision/capacity/context проверки, но после owner/security;\nне расходует новую inference quota, general HTTP quota действует. Receipts durable,\nне автоматически expire. Model default update не меняет принятый job.\n`chat.revision` меняется на admission/terminal transition, не каждый partial chunk.\nSQLite trigger поддерживает отдельную durable SSE message revision.\n\nGeneration: queued→running→completed|truncated|failed|interrupted. Queue expiry600s\nсохраняет вопрос и failed/queue_expired. Retry только последнего retryable question,\nс new generation/assistant attempt, без вставки user message заново. Completed/older\nregeneration, editing/delete/branching не входят в APIv1."
+          },
+          {
+            "id": "e3",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "c332549cf79a595ae4b107fb4ff312ab2fa138ee6f258c866ea6d64a7d2243c9",
+      "v093_message_digest": "7b342889b1c6d16ef27238098a0bf756d8474ae3e4904af39cbc2040ac91c702",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "assistant-facts-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "В документации памяти: сохранённый текст ассистента автоматически становится проверенным фактом о пользователе или только записью того, что было сказано?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Оригинальная история переписки дня 30\n\nПриватный сервис дня 30 хранит оригинальные сообщения в SQLite. Полная история\nпереписки — основное хранилище. Поисковые индексы являются производными caches;\nих можно пересоздать без удаления сообщений. Сохранённый текст ассистента —\nзапись того, что ассистент сказал. Он автоматически не становится проверенным\nфактом о пользователе. Оригиналы не заменяются краткими обобщениями.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Доступ к памяти\n\nВеб-чат включён в режим поиска по умолчанию. Поиск охватывает все accepted user\nmessages и непустые terminal assistant messages независимо от возраста диалога\nили успешности ответа. Queued/running assistant checkpoints доступны в обычной\nистории, но ещё меняются и поэтому не становятся frozen источниками RAG.\nПосле завершения/прерывания их сохранённый текст попадает в индекс.\n\nКаждая цитата содержит роль, статус, дату, IDs, диапазон символов и SHA-256\nполного текста. Assistant response — свидетельство о том, что ответил ассистент,\nа не подтверждённый факт о пользователе. Partial response явно помечается.\nИсточник проверяется по основной базе при поиске и повторно при admission.\n\nПоиск рассматривает весь корпус, но возвращает до трёх сообщений. Ограничение\nрезультатов/контекста не ограничивает сохранённую память. Original-message API,\nbounded conversation-window API и существующая pagination истории позволяют\nчитать исходный разговор независимо от inference budget. Модель пока получает\nвыбранные цитаты автоматически; самостоятельные дополнительные поиски и чтение\nразговора моделью ещё не реализованы. Это будущий навык использования памяти.\n\nСервис принимает сменный `HistorySearch` backend. Контракт результата включает\npolicy_version, sources, indexed_messages, search_seconds и reason. ContextBuilder\nи storage не доверяют backend авторизацию или содержание original quotations.\nBackend policy сохраняется в snapshot. Семантический backend можно добавить\nотдельно, не меняя IDs и публичный контракт источников; его ресурсный профиль и\nкачество потребуют замеров.\n\nAPI v1 сохраняет историческое `use_memory=false` при отсутствии поля, включая\nстарые idempotency fingerprints. Веб-клиент всегда передаёт явное значение:\nобычно true; false — при ручном отключении. Повтор исходного запроса сохраняет\nего режим и snapshot. Reload/logout возвращает checkbox к true без web storage."
+          }
+        ]
+      },
+      "v093_context_digest": "236f6e553c05f1f6f784adc5a0319fb5a26cf72c8d23bdc6170015d2a57d78fd",
+      "v093_message_digest": "acf53a28606c5827c11bf0e98000457955a3bb780f990ccec340e086f8e4da93",
+      "v093_schema_digest": "25babcaa229a4f97b3c2231b0040c8c1ee31cea445c823fe6b495944ddca8077",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "assistant-facts-ru",
+      "mode": "single",
+      "context": {
+        "question": "В документации памяти: сохранённый текст ассистента автоматически становится проверенным фактом о пользователе или только записью того, что было сказано?",
+        "documentation_question": "В документации памяти: сохранённый текст ассистента автоматически становится проверенным фактом о пользователе или только записью того, что было сказано?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Оригинальная история переписки дня 30\n\nПриватный сервис дня 30 хранит оригинальные сообщения в SQLite. Полная история\nпереписки — основное хранилище. Поисковые индексы являются производными caches;\nих можно пересоздать без удаления сообщений. Сохранённый текст ассистента —\nзапись того, что ассистент сказал. Он автоматически не становится проверенным\nфактом о пользователе. Оригиналы не заменяются краткими обобщениями.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "## Доступ к памяти\n\nВеб-чат включён в режим поиска по умолчанию. Поиск охватывает все accepted user\nmessages и непустые terminal assistant messages независимо от возраста диалога\nили успешности ответа. Queued/running assistant checkpoints доступны в обычной\nистории, но ещё меняются и поэтому не становятся frozen источниками RAG.\nПосле завершения/прерывания их сохранённый текст попадает в индекс.\n\nКаждая цитата содержит роль, статус, дату, IDs, диапазон символов и SHA-256\nполного текста. Assistant response — свидетельство о том, что ответил ассистент,\nа не подтверждённый факт о пользователе. Partial response явно помечается.\nИсточник проверяется по основной базе при поиске и повторно при admission.\n\nПоиск рассматривает весь корпус, но возвращает до трёх сообщений. Ограничение\nрезультатов/контекста не ограничивает сохранённую память. Original-message API,\nbounded conversation-window API и существующая pagination истории позволяют\nчитать исходный разговор независимо от inference budget. Модель пока получает\nвыбранные цитаты автоматически; самостоятельные дополнительные поиски и чтение\nразговора моделью ещё не реализованы. Это будущий навык использования памяти.\n\nСервис принимает сменный `HistorySearch` backend. Контракт результата включает\npolicy_version, sources, indexed_messages, search_seconds и reason. ContextBuilder\nи storage не доверяют backend авторизацию или содержание original quotations.\nBackend policy сохраняется в snapshot. Семантический backend можно добавить\nотдельно, не меняя IDs и публичный контракт источников; его ресурсный профиль и\nкачество потребуют замеров.\n\nAPI v1 сохраняет историческое `use_memory=false` при отсутствии поля, включая\nстарые idempotency fingerprints. Веб-клиент всегда передаёт явное значение:\nобычно true; false — при ручном отключении. Повтор исходного запроса сохраняет\nего режим и snapshot. Reload/logout возвращает checkbox к true без web storage."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "e24758002d0949ceb4a8e393effb38b2880460e1f595cfc2ab30f03525b2768c",
+      "v093_message_digest": "567292bccd03dd8a8a6aa9ca641bc716a51fe38d4c78ad8f5d2448b6add54421",
+      "v093_schema_digest": "45f9f3f1b56993d2770683c1a21fc2f80402ffa43bc221fd97fd437f352fe239",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "assistant-facts-en",
+      "mode": "single",
+      "context": {
+        "question": "In the memory documentation, does saved assistant text automatically become a verified fact about the user, or merely a record of what was said?",
+        "documentation_question": "In the memory documentation, does saved assistant text automatically become a verified fact about the user, or merely a record of what was said?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e3",
+            "quote": "## Speed, quantization, and resources\n\n| Case / variant | Median generation time |\n|---|---:|\n| Worker fact, baseline | 26.281 s |\n| Worker fact, Q4 / V3 | 6.091 s |\n| Worker fact, Q5 / V3 | 7.665 s |\n| Periodic VPS procedure, V6 | 16.572 s |\n| Periodic VPS procedure, V7 | 6.077 s |\n| New English V7 formulation | 6.067 s |\n| New Russian V7 formulation | 6.105 s |\n\nV6→V7 reduces this procedure's median by about **63.3%**, while changing both the input and the output contract. V7's 75 output tokens are evidence selections; the full displayed procedure is rendered by the application. This is not a measurement of generating the same free-text answer faster.\n\nThe first transfer trial takes 13.496 s in English and 12.637 s in Russian; subsequent trials are around 6 s. Prefill and prompt/KV-cache affect timing. No new baseline or Q5 transfer run was performed.\n\nQ4/Q5 were compared on **one factual worker question**, with three observations per variant and matching settings, messages, and evidence:\n\n| Metric | Q4_K_M | Q5_K_M |\n|---|---:|---:|\n| Median generation | 6.09 s | 7.66 s |\n| Median decode | 11.47 tokens/s | 9.27 tokens/s |\n| Maximum Ollama `size_vram` | 9.56 GiB | 10.89 GiB |\n\nQuality was equivalent on that question; Q5 took about 25.8% longer and reported 1.33 GiB more allocation. Q4 was measured first; order was not randomized. This does not establish superiority on other tasks.\n\nThe"
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "8fc552fd654ecfca9e1adf86f2954b6724d6d05c2b89eb6012fe5d411bf277ce",
+      "v093_message_digest": "62f4f4fe4c30e88fad95f39fe355ee16de78bca2046dc521b74dd50a2092dce9",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "assistant-facts-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "In the memory documentation, does saved assistant text automatically become a verified fact about the user, or merely a record of what was said?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          },
+          {
+            "id": "e2",
+            "quote": "commands use a project pipeline with bounded RU/EN routing. An independent\ndocumentation question and Git observation use fan-out; documentation about\nchanged files depends on a prior Git status result. Ambiguous multiple Git\nintentions request clarification rather than choosing an operation silently.\n\nDocumentation generation and Main assembly are separate inference tasks in\nowned workers. Documentation sees the scoped question and source excerpts;\nMain sees the full question, checked claims and application-produced Git facts.\nGit and Verification do not receive a generation capability. Qwen is serialized\nthrough the shared model lease. Main can order existing claim/fact IDs, not add\nnew text or facts. Publication checks sources again and reobserves Git after\ngeneration. Claim wording still needs semantic human review; source provenance\nis not proof that every natural-language claim is correct.\n\nBare /help and Git-only requests need no model or project index. Project search\ncontinues returning excerpts. The console remembers one prior documentation\nquestion scoped to project identity and corpus revision, not personal history.\nReal Qwen contexts for this new pipeline require a separate Mac smoke report."
+          },
+          {
+            "id": "e3",
+            "quote": "## Speed, quantization, and resources\n\n| Case / variant | Median generation time |\n|---|---:|\n| Worker fact, baseline | 26.281 s |\n| Worker fact, Q4 / V3 | 6.091 s |\n| Worker fact, Q5 / V3 | 7.665 s |\n| Periodic VPS procedure, V6 | 16.572 s |\n| Periodic VPS procedure, V7 | 6.077 s |\n| New English V7 formulation | 6.067 s |\n| New Russian V7 formulation | 6.105 s |\n\nV6→V7 reduces this procedure's median by about **63.3%**, while changing both the input and the output contract. V7's 75 output tokens are evidence selections; the full displayed procedure is rendered by the application. This is not a measurement of generating the same free-text answer faster.\n\nThe first transfer trial takes 13.496 s in English and 12.637 s in Russian; subsequent trials are around 6 s. Prefill and prompt/KV-cache affect timing. No new baseline or Q5 transfer run was performed.\n\nQ4/Q5 were compared on **one factual worker question**, with three observations per variant and matching settings, messages, and evidence:\n\n| Metric | Q4_K_M | Q5_K_M |\n|---|---:|---:|\n| Median generation | 6.09 s | 7.66 s |\n| Median decode | 11.47 tokens/s | 9.27 tokens/s |\n| Maximum Ollama `size_vram` | 9.56 GiB | 10.89 GiB |\n\nQuality was equivalent on that question; Q5 took about 25.8% longer and reported 1.33 GiB more allocation. Q4 was measured first; order was not randomized. This does not establish superiority on other tasks.\n\nThe"
+          }
+        ]
+      },
+      "v093_context_digest": "df4857c117e3394b1b814a7e53e3834c9500c0cc322c5ed0795fb9e2e0d87eb6",
+      "v093_message_digest": "378ada12fee35ec77288b2695fa8219c3e726447edbb266d2fb0038b8a7bee31",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "single",
+      "context": {
+        "question": "Согласно документации, добавление dense Project RAG дня 31 делает поиск личной памяти дня 30 векторным? Покажи текущую ветку.",
+        "documentation_question": "Согласно документации, добавление dense Project RAG дня 31 делает поиск личной памяти дня 30 векторным?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Лексический поиск личной памяти дня 30\n\nbublik_service/memory.py определяет MemoryRetriever и протокол HistorySearch.\nТекущая реализация использует SQLite FTS5, BM25 и unicode61. Она ищет принятые\nuser messages и непустой terminal assistant text только authenticated owner.\nИсточники сохраняют message/chat IDs, role, status, date и source SHA-256.\nВ generation snapshot входят до трёх фрагментов. Owner задаётся authentication;\ncaller не может выбрать owner ID другого пользователя.\n\nЛексический поиск не использует дополнительную embedding-модель и не гарантирует\nнахождение русско-английских перефразировок. Источники сверяются с оригинальными\nсообщениями перед admission. Ошибка поиска не заменяется скрытым обычным ответом\nбез памяти."
+          },
+          {
+            "id": "e3",
+            "quote": "## Локальные инструменты разработчика: день 31\n\nДень 31 — отдельный пакет bublik_developer в day-31-developer-assistant.\nТочка входа main.py импортирует bublik_developer.cli. ProjectWorkspace закрепляет\nкорень локального Git-репозитория и логический project ID. Read-only данные Git\nпоступают через настоящий FastMCP stdio server с discovery и call_tool.\n\nИндекс документации проекта отделён от Week 6 knowledge.db и личной базы\nпереписки дня 30. Project RAG использует SQLite FTS5, локальные bge-m3 embeddings\nи hybrid RRF. Он возвращает точные выдержки с относительными путями, строками,\nraw digests и версиями корпуса/индекса. Индекс хранится вне репозитория.\nЛичная история дня 30 не входит в корпус. Изменение документа делает старые\nдоказательства устаревшими; такие выдержки не публикуются."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:35:10.319672+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "eeaf1b010adc0296d9b5a76212c860623fd128f2a094ea5fbe039137060cbc2a",
+      "v093_message_digest": "bd94a9dbdc2c124bb10469f041ab996f0550f49c564bb7bfaf261a9ae4c343f1",
+      "v093_schema_digest": "7e48f4e79a1e9bac42638b74e9d52d2c831afc3e9588c4a7de1b05ee46a7f38f",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Согласно документации, добавление dense Project RAG дня 31 делает поиск личной памяти дня 30 векторным?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e2",
+            "quote": "## Лексический поиск личной памяти дня 30\n\nbublik_service/memory.py определяет MemoryRetriever и протокол HistorySearch.\nТекущая реализация использует SQLite FTS5, BM25 и unicode61. Она ищет принятые\nuser messages и непустой terminal assistant text только authenticated owner.\nИсточники сохраняют message/chat IDs, role, status, date и source SHA-256.\nВ generation snapshot входят до трёх фрагментов. Owner задаётся authentication;\ncaller не может выбрать owner ID другого пользователя.\n\nЛексический поиск не использует дополнительную embedding-модель и не гарантирует\nнахождение русско-английских перефразировок. Источники сверяются с оригинальными\nсообщениями перед admission. Ошибка поиска не заменяется скрытым обычным ответом\nбез памяти."
+          },
+          {
+            "id": "e3",
+            "quote": "## Локальные инструменты разработчика: день 31\n\nДень 31 — отдельный пакет bublik_developer в day-31-developer-assistant.\nТочка входа main.py импортирует bublik_developer.cli. ProjectWorkspace закрепляет\nкорень локального Git-репозитория и логический project ID. Read-only данные Git\nпоступают через настоящий FastMCP stdio server с discovery и call_tool.\n\nИндекс документации проекта отделён от Week 6 knowledge.db и личной базы\nпереписки дня 30. Project RAG использует SQLite FTS5, локальные bge-m3 embeddings\nи hybrid RRF. Он возвращает точные выдержки с относительными путями, строками,\nraw digests и версиями корпуса/индекса. Индекс хранится вне репозитория.\nЛичная история дня 30 не входит в корпус. Изменение документа делает старые\nдоказательства устаревшими; такие выдержки не публикуются."
+          }
+        ]
+      },
+      "v093_context_digest": "c2d6afed3345200d1a543e3ba3184f07bde8a58779f238c35cb2a5b90280e664",
+      "v093_message_digest": "17a0c0d11cedaa6c785ecc65dfc3a51933e4056fa3e7a224d9e88e3b08f7c681",
+      "v093_schema_digest": "efc2d0df434a18d690178f246aafd4abd87fc0820ab3886d24ad175dc0c70b94",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-ru",
+      "mode": "multi_main",
+      "context": {
+        "question": "Согласно документации, добавление dense Project RAG дня 31 делает поиск личной памяти дня 30 векторным? Покажи текущую ветку.",
+        "language": "ru",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Добавление dense Project RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет поиск приватного чата. Эти подсистемы отделены."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Ветка: main. Наблюдение: 2026-10-15T08:35:10.319672+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "ca9b937c80736f7357aef56093dab1ff77fcb3b31a24171d0c35dfa321964e12",
+      "v093_message_digest": "50415c8a79d74dae03d167f359bc88ec56c48f0c9124eed14cea8d3a649cb5bb",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "According to the documentation, does adding dense Project RAG in Day 31 make Day 30 personal-memory search vector-based?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG in Day 31\n\nProject RAG searches explicitly selected README files, architecture documents\nand permitted schema descriptions. It never reads the Day 30 chats.sqlite3,\nmemory-index or exported private conversation archives. Project index identity\ncontains project ID, corpus fingerprint, chunker version and embedding digest.\n\nDay 31 can compare FTS5, bge-m3 dense retrieval and hybrid RRF on the same chunks.\nIts vector index is not a new personal-memory layer. Implementing project dense\nretrieval does not upgrade the Day 30 private chat's memory search."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          }
+        ]
+      },
+      "v093_context_digest": "57f16d41aef9204a4824b087ad7777f4a9ace60a5ad9849963fe8b5b0d98d6c8",
+      "v093_message_digest": "984fd53e0022bd5265802e4f4d485d49b910ec11e829b98a70bfc2d3013a1c0d",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "multi_main",
+      "context": {
+        "question": "According to the documentation, does adding dense Project RAG in Day 31 make Day 30 personal-memory search vector-based? Also show the current branch.",
+        "language": "en",
+        "claims": [
+          {
+            "id": "c1",
+            "text": "Implementing project dense retrieval does not upgrade the Day 30 private chat's memory search. Adding dense Project RAG day 31 does not make search of personal memory day 30 vector-based and does not update search of private chat. These subsystems are separated."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:36:16.017982+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "06601285ad74696216bddb767ef286a56606ab43f20e095ffbd15f6123bf2629",
+      "v093_message_digest": "571fb4ccf007df5180e5e4ac1744b6c8fa0d910da2f5ec28406f377978c10506",
+      "v093_schema_digest": "e204a32391998dd767e3203a8f67467df9fca5617b008e58f51ecd13eeb4dfc8",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "dense-private-branch-en",
+      "mode": "single",
+      "context": {
+        "question": "According to the documentation, does adding dense Project RAG in Day 31 make Day 30 personal-memory search vector-based? Also show the current branch.",
+        "documentation_question": "According to the documentation, does adding dense Project RAG in Day 31 make Day 30 personal-memory search vector-based?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Project RAG in Day 31\n\nProject RAG searches explicitly selected README files, architecture documents\nand permitted schema descriptions. It never reads the Day 30 chats.sqlite3,\nmemory-index or exported private conversation archives. Project index identity\ncontains project ID, corpus fingerprint, chunker version and embedding digest.\n\nDay 31 can compare FTS5, bge-m3 dense retrieval and hybrid RRF on the same chunks.\nIts vector index is not a new personal-memory layer. Implementing project dense\nretrieval does not upgrade the Day 30 private chat's memory search."
+          },
+          {
+            "id": "e2",
+            "quote": "## Project RAG дня 31 и личная память\n\nProject RAG ищет по явно выбранным README, архитектурным документам и разрешённым\nописаниям schemas. Он не читает Day 30 chats.sqlite3, memory-index и экспорты\nличных архивов. Identity индекса содержит project ID, corpus fingerprint,\nchunker version и embedding digest.\n\nДень 31 сравнивает FTS5, bge-m3 dense retrieval и hybrid RRF на одних чанках.\nВекторный индекс проекта не является новым слоем личной памяти. Добавление dense\nProject RAG дня 31 не делает поиск личной памяти дня 30 векторным и не обновляет\nпоиск приватного чата. Эти подсистемы отделены."
+          },
+          {
+            "id": "e3",
+            "quote": "## Original conversation history\n\nThe Day 30 private service stores original conversation messages in SQLite.\nConversation history is the primary source of truth. Search indexes are derived\ncaches and can be rebuilt without deleting original messages. Assistant messages\nrecord what the assistant said; they are not automatically verified user facts.\n\nПолная история переписки хранится в SQLite сервиса дня 30. Оригиналы сообщений не\nзаменяются краткими обобщениями. Индекс поиска можно пересоздать из оригиналов.\nЛичные диалоги и проектная документация остаются разными хранилищами."
+          }
+        ],
+        "git_facts": [
+          {
+            "id": "g1",
+            "text": "Branch: main. Observed: 2026-10-15T08:36:16.017982+00:00"
+          }
+        ]
+      },
+      "v093_context_digest": "b6cd7e67c881566c1372c22cb0133f1aa2f950c066d95840b7a575f33d9fbf03",
+      "v093_message_digest": "f57bfa967e8b2c0013a01325eb88f08d8da8feeca3958b2c46a91c7888869268",
+      "v093_schema_digest": "5a8e52fa5892048683bdfce7dd56b2f12dd37cad0c4751bcfbdb6fd0bd313edd",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "quote-language-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Что говорит документация памяти: после смены reply_language оригинал сообщения и цитата источника переводятся или сохраняют исходный текст?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Языковые настройки и исходный текст\n\nДень 30 хранит отдельные owner preferences ui_language и reply_language;\nдопустимые значения — ru и en. После смены языка оригинал сообщения и цитата\nисточника сохраняют исходный текст: они не переводятся и не заменяются переводом.\nLanguage guidance сохраняется в generation snapshot. Schema 3 добавляет\nязыковые preferences; history archive/restore поддерживает предыдущие\nподдержанные schemas.\n\nИсточники: day-30-private-ai-service/bublik_service/memory.py;\nday-30-private-ai-service/bublik_service/languages.py;\nday-30-private-ai-service/bublik_service/storage/migrations/003_languages.sql."
+          },
+          {
+            "id": "e2",
+            "quote": "## Что меняется и что сохраняется\n\n- Переведены экран входа, кнопки, настройки, статусы доставки/модели, ошибки,\n  сведения об источниках памяти и подписи исходного разговора. Даты используют\n  locale выбранного интерфейса. Manifest PWA имеет RU/EN варианты.\n- Web UI явно отправляет `reply_language`. Языковая инструкция входит в бюджет\n  контекста и сохраняется в snapshot генерации; поздняя смена настройки не меняет\n  начатый ответ или повтор с тем же idempotency key.\n- Исторический profile `private-chat-v2` и параметры Qwen остаются прежними;\n  0.10.3 сохраняет эффективную первую инструкцию по выбранному языку и добавляет\n  явную подсказку с приоритетом языка настройки над пожеланиями в вопросе к последнему\n  вопросу только в inference snapshot. Исходный вопрос в истории не изменяется:\n  temperature 0, output 1024, num_ctx 8192, margin 512. Добавленная инструкция\n  уменьшает место для недавних сообщений; полная история остаётся в SQLite.\n- Исходные сообщения, названия диалогов, цитаты памяти и прежние snapshots\n  не переводятся и не переписываются. Новый язык действует на следующие ответы.\n- API v1 без `reply_language` сохраняет прежний выбор языка по сообщению и\n  прежние fingerprints повторов. Настройка аккаунта сама по себе не меняет\n  старых внешних клиентов: новый клиент должен передать выбранный код явно.\n- Секреты, настройки и история не записываются в localStorage/sessionStorage.\n  Доступ к настройкам использует ту же авторизацию и browser CSRF/Origin защиту.\n\nИнструкция направляет модель, но не гарантирует язык каждого произвольного\nответа. Имена, код, буквальные цитаты и явно запрошенные переводы могут содержать\nдругой язык. Нет автоматической перегенерации или облачного fallback.\nПроверка реальной Qwen выполняется отдельно от synthetic tests."
+          }
+        ]
+      },
+      "v093_context_digest": "c3b7880f712905e44b5201da15d35724ecde0642c514d567a453604ba417d71b",
+      "v093_message_digest": "c4080ea7137b010215fe1481672d9dd5f00e2d26415a7ab5995784602f3b165d",
+      "v093_schema_digest": "55b45d1970467f739d315ee6a054519aa0f2623ba66e094ddd59330845aadb13",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "quote-language-ru",
+      "mode": "single",
+      "context": {
+        "question": "Что говорит документация памяти: после смены reply_language оригинал сообщения и цитата источника переводятся или сохраняют исходный текст?",
+        "documentation_question": "Что говорит документация памяти: после смены reply_language оригинал сообщения и цитата источника переводятся или сохраняют исходный текст?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Языковые настройки и исходный текст\n\nДень 30 хранит отдельные owner preferences ui_language и reply_language;\nдопустимые значения — ru и en. После смены языка оригинал сообщения и цитата\nисточника сохраняют исходный текст: они не переводятся и не заменяются переводом.\nLanguage guidance сохраняется в generation snapshot. Schema 3 добавляет\nязыковые preferences; history archive/restore поддерживает предыдущие\nподдержанные schemas.\n\nИсточники: day-30-private-ai-service/bublik_service/memory.py;\nday-30-private-ai-service/bublik_service/languages.py;\nday-30-private-ai-service/bublik_service/storage/migrations/003_languages.sql."
+          },
+          {
+            "id": "e2",
+            "quote": "## Что меняется и что сохраняется\n\n- Переведены экран входа, кнопки, настройки, статусы доставки/модели, ошибки,\n  сведения об источниках памяти и подписи исходного разговора. Даты используют\n  locale выбранного интерфейса. Manifest PWA имеет RU/EN варианты.\n- Web UI явно отправляет `reply_language`. Языковая инструкция входит в бюджет\n  контекста и сохраняется в snapshot генерации; поздняя смена настройки не меняет\n  начатый ответ или повтор с тем же idempotency key.\n- Исторический profile `private-chat-v2` и параметры Qwen остаются прежними;\n  0.10.3 сохраняет эффективную первую инструкцию по выбранному языку и добавляет\n  явную подсказку с приоритетом языка настройки над пожеланиями в вопросе к последнему\n  вопросу только в inference snapshot. Исходный вопрос в истории не изменяется:\n  temperature 0, output 1024, num_ctx 8192, margin 512. Добавленная инструкция\n  уменьшает место для недавних сообщений; полная история остаётся в SQLite.\n- Исходные сообщения, названия диалогов, цитаты памяти и прежние snapshots\n  не переводятся и не переписываются. Новый язык действует на следующие ответы.\n- API v1 без `reply_language` сохраняет прежний выбор языка по сообщению и\n  прежние fingerprints повторов. Настройка аккаунта сама по себе не меняет\n  старых внешних клиентов: новый клиент должен передать выбранный код явно.\n- Секреты, настройки и история не записываются в localStorage/sessionStorage.\n  Доступ к настройкам использует ту же авторизацию и browser CSRF/Origin защиту.\n\nИнструкция направляет модель, но не гарантирует язык каждого произвольного\nответа. Имена, код, буквальные цитаты и явно запрошенные переводы могут содержать\nдругой язык. Нет автоматической перегенерации или облачного fallback.\nПроверка реальной Qwen выполняется отдельно от synthetic tests."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "35f830f53829a5d74075759c715a02fd4e16cf48f64fd6f7732af1084270b4c2",
+      "v093_message_digest": "1242327cc782f83b1e38ebdd8c91e6a82cf1ec031f9336060330d89f4523a81b",
+      "v093_schema_digest": "b0b949b5d537e499fa9f4f1df83385db8ef3708e4d3c451734c10fb4dc6c9034",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "quote-language-en",
+      "mode": "single",
+      "context": {
+        "question": "What does the memory documentation say: after changing reply_language, are the original message and source quotation translated or kept in their original text?",
+        "documentation_question": "What does the memory documentation say: after changing reply_language, are the original message and source quotation translated or kept in their original text?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Language settings\n\nDay 30 has separate owner preferences ui_language and reply_language, accepting\nru or en. The original message and source quotation keep their original text.\nLanguage guidance is stored in the generation snapshot. Schema 3 adds language\npreferences; history archive/restore supports the preceding supported schemas.\n\nSources: day-30-private-ai-service/bublik_service/memory.py;\nday-30-private-ai-service/bublik_service/languages.py;\nday-30-private-ai-service/bublik_service/storage/migrations/003_languages.sql."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "dade4e67f5824711cd1900cd1a96aba4efa9974912eb68611adafca16fde7a75",
+      "v093_message_digest": "e471279de4b98898ba3de6c3c917de7396e0f6830bb99facc346f110f82d1775",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "quote-language-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "What does the memory documentation say: after changing reply_language, are the original message and source quotation translated or kept in their original text?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Language settings\n\nDay 30 has separate owner preferences ui_language and reply_language, accepting\nru or en. The original message and source quotation keep their original text.\nLanguage guidance is stored in the generation snapshot. Schema 3 adds language\npreferences; history archive/restore supports the preceding supported schemas.\n\nSources: day-30-private-ai-service/bublik_service/memory.py;\nday-30-private-ai-service/bublik_service/languages.py;\nday-30-private-ai-service/bublik_service/storage/migrations/003_languages.sql."
+          },
+          {
+            "id": "e2",
+            "quote": "## Настройки владельца и память\n\nGET /api/v1/preferences читает настройки текущего owner.\nPATCH /api/v1/preferences обновляет ui_language и reply_language с\nexpected_revision. Допустимы только ru и en.\nPOST /api/v1/memory/search выполняет лексический поиск памяти в рамках owner.\nGET /api/v1/chats/{chat}/messages/{message}/context читает авторизованный context."
+          },
+          {
+            "id": "e3",
+            "quote": "## Preferences and memory\n\nGET /api/v1/preferences reads the current owner's preferences.\nPATCH /api/v1/preferences updates ui_language and reply_language with an\nexpected_revision. Only ru and en are valid language values.\nPOST /api/v1/memory/search performs owner-scoped lexical memory retrieval.\nGET /api/v1/chats/{chat}/messages/{message}/context reads an authorized context."
+          }
+        ]
+      },
+      "v093_context_digest": "a34c0264e9f056516eabe6533c062a349826152ef3e5771c4d2c50117f49ad92",
+      "v093_message_digest": "260b8c295c2bd66ed89e2148ece4fa702dd87f4adf8ec6eb80272f881df796c9",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "allowed-untracked-ru",
+      "mode": "single",
+      "context": {
+        "question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+        "documentation_question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only инструменты Git дня 31\n\nДень 31 предоставляет git_current_branch, git_status, git_diff и\nproject_list_files через локальный FastMCP stdio server. Входы и выходы\nпроверяются. Только scoped client роли Git может вызывать эти инструменты.\nПути относительны корню репозитория; traversal и symlinks отклоняются.\n\ngit_diff по умолчанию возвращает metadata. Содержимое требует от одного до\nчетырёх явных allowed paths. Содержимое untracked файлов не читается, даже если\nпуть явно разрешён. Sensitive names и private databases исключены;\npatches с признаками secret блокируются.\n\nКонтролируемый runner отключает hooks, external diff, textconv, fsmonitor и\nнастроенные clean/smudge/process filters. Произвольный Bash не выполняется.\nApplication capabilities не являются OS sandbox для враждебного Python-кода."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only Git tools\n\nDay 31 exposes git_current_branch, git_status, git_diff and project_list_files\nthrough a local FastMCP stdio server. Tool inputs and outputs are validated.\nOnly the Git role's scoped client can call the Git tools. Project paths are\nrelative to the configured repository root. Traversal and symlinks are rejected.\n\ngit_diff returns metadata by default. Text content requires one to four explicit\nallowed paths. Untracked file content is not read. Sensitive names and private\ndatabases are excluded; detected secret-like patches are blocked.\n\nThe controlled command runner disables hooks, external diff, textconv, fsmonitor\nand configured clean/smudge/process filters. It does not execute arbitrary Bash.\nApplication capabilities do not constitute an OS sandbox for hostile Python code."
+          },
+          {
+            "id": "e3",
+            "quote": "## VPS (systemd)\n\nНа VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nСоздайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "91966e0b931ac789969a6189d69b77c0830c06ae0968e8906704566172415378",
+      "v093_message_digest": "0cd0c119cfa75de75ae3775d5c65f03cbf0db1e83e19e7cefc0ffd0de0d758c7",
+      "v093_schema_digest": "2e24f56e4a1a8b8f99fcbdd2fd34ef14c6ed8bd9beae9ff0bbc33b3102ed2dd7",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "allowed-untracked-ru",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only инструменты Git дня 31\n\nДень 31 предоставляет git_current_branch, git_status, git_diff и\nproject_list_files через локальный FastMCP stdio server. Входы и выходы\nпроверяются. Только scoped client роли Git может вызывать эти инструменты.\nПути относительны корню репозитория; traversal и symlinks отклоняются.\n\ngit_diff по умолчанию возвращает metadata. Содержимое требует от одного до\nчетырёх явных allowed paths. Содержимое untracked файлов не читается, даже если\nпуть явно разрешён. Sensitive names и private databases исключены;\npatches с признаками secret блокируются.\n\nКонтролируемый runner отключает hooks, external diff, textconv, fsmonitor и\nнастроенные clean/smudge/process filters. Произвольный Bash не выполняется.\nApplication capabilities не являются OS sandbox для враждебного Python-кода."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only Git tools\n\nDay 31 exposes git_current_branch, git_status, git_diff and project_list_files\nthrough a local FastMCP stdio server. Tool inputs and outputs are validated.\nOnly the Git role's scoped client can call the Git tools. Project paths are\nrelative to the configured repository root. Traversal and symlinks are rejected.\n\ngit_diff returns metadata by default. Text content requires one to four explicit\nallowed paths. Untracked file content is not read. Sensitive names and private\ndatabases are excluded; detected secret-like patches are blocked.\n\nThe controlled command runner disables hooks, external diff, textconv, fsmonitor\nand configured clean/smudge/process filters. It does not execute arbitrary Bash.\nApplication capabilities do not constitute an OS sandbox for hostile Python code."
+          },
+          {
+            "id": "e3",
+            "quote": "## VPS (systemd)\n\nНа VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nСоздайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему."
+          }
+        ]
+      },
+      "v093_context_digest": "8d872b5b9aabe94e90a4b05213022a447a57ad433847e6068b1dd8470a48ab29",
+      "v093_message_digest": "3d9074ca0946af916fccb025c0f52bca377ef69a9e11635c8d9bf0395fb6f301",
+      "v093_schema_digest": "26835b1114223e77b16da2dd6b23f352041eb24fc58fe3c41740bf27209330f5",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "allowed-untracked-en",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "If an untracked file is explicitly included in allowed paths, can git_diff read its contents?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only Git tools\n\nDay 31 exposes git_current_branch, git_status, git_diff and project_list_files\nthrough a local FastMCP stdio server. Tool inputs and outputs are validated.\nOnly the Git role's scoped client can call the Git tools. Project paths are\nrelative to the configured repository root. Traversal and symlinks are rejected.\n\ngit_diff returns metadata by default. Text content requires one to four explicit\nallowed paths. Untracked file content is not read. Sensitive names and private\ndatabases are excluded; detected secret-like patches are blocked.\n\nThe controlled command runner disables hooks, external diff, textconv, fsmonitor\nand configured clean/smudge/process filters. It does not execute arbitrary Bash.\nApplication capabilities do not constitute an OS sandbox for hostile Python code."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only инструменты Git дня 31\n\nДень 31 предоставляет git_current_branch, git_status, git_diff и\nproject_list_files через локальный FastMCP stdio server. Входы и выходы\nпроверяются. Только scoped client роли Git может вызывать эти инструменты.\nПути относительны корню репозитория; traversal и symlinks отклоняются.\n\ngit_diff по умолчанию возвращает metadata. Содержимое требует от одного до\nчетырёх явных allowed paths. Содержимое untracked файлов не читается, даже если\nпуть явно разрешён. Sensitive names и private databases исключены;\npatches с признаками secret блокируются.\n\nКонтролируемый runner отключает hooks, external diff, textconv, fsmonitor и\nнастроенные clean/smudge/process filters. Произвольный Bash не выполняется.\nApplication capabilities не являются OS sandbox для враждебного Python-кода."
+          },
+          {
+            "id": "e3",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          }
+        ]
+      },
+      "v093_context_digest": "5d6a1a1eafdb7c03ec9b344ad45ee2a44f85c2a16044030c8ff749133dc98c7d",
+      "v093_message_digest": "5d497352135688f484b120457120f3b1fd26191d85ab369aa5b20ace1fef84a8",
+      "v093_schema_digest": "a52e1a85f7b54872174454c052651e4e877796952ea361171c697ab1e3f0d6ab",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "allowed-untracked-en",
+      "mode": "single",
+      "context": {
+        "question": "If an untracked file is explicitly included in allowed paths, can git_diff read its contents?",
+        "documentation_question": "If an untracked file is explicitly included in allowed paths, can git_diff read its contents?",
+        "language": "en",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only Git tools\n\nDay 31 exposes git_current_branch, git_status, git_diff and project_list_files\nthrough a local FastMCP stdio server. Tool inputs and outputs are validated.\nOnly the Git role's scoped client can call the Git tools. Project paths are\nrelative to the configured repository root. Traversal and symlinks are rejected.\n\ngit_diff returns metadata by default. Text content requires one to four explicit\nallowed paths. Untracked file content is not read. Sensitive names and private\ndatabases are excluded; detected secret-like patches are blocked.\n\nThe controlled command runner disables hooks, external diff, textconv, fsmonitor\nand configured clean/smudge/process filters. It does not execute arbitrary Bash.\nApplication capabilities do not constitute an OS sandbox for hostile Python code."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only инструменты Git дня 31\n\nДень 31 предоставляет git_current_branch, git_status, git_diff и\nproject_list_files через локальный FastMCP stdio server. Входы и выходы\nпроверяются. Только scoped client роли Git может вызывать эти инструменты.\nПути относительны корню репозитория; traversal и symlinks отклоняются.\n\ngit_diff по умолчанию возвращает metadata. Содержимое требует от одного до\nчетырёх явных allowed paths. Содержимое untracked файлов не читается, даже если\nпуть явно разрешён. Sensitive names и private databases исключены;\npatches с признаками secret блокируются.\n\nКонтролируемый runner отключает hooks, external diff, textconv, fsmonitor и\nнастроенные clean/smudge/process filters. Произвольный Bash не выполняется.\nApplication capabilities не являются OS sandbox для враждебного Python-кода."
+          },
+          {
+            "id": "e3",
+            "quote": "## Read-only project answer pipeline\n\nThe /help question and ask commands choose Git, documentation, independent\nfan-out or a changed-files documentation chain. Chain source association uses\nexact relative path mentions, never basename alone, and examines at most four\nchanged paths. This association does not prove that a document explains all\nfunctionality of a changed file. Missing associations are reported explicitly.\n\nQwen2.5:14b Q4_K_M generates claims from scoped excerpts through /api/chat with\na closed JSON schema. A Documentation task cannot see the caller's Git facts\nor private history. Main has a separate context and can select only checked\nclaim/fact IDs. The same request permits eight capability calls and a 300-second\ndeadline. Each model worker has a 180-second timeout. Lost responses retain\nuncertain inference state; no retry, cloud fallback or model restart is automatic.\n\nThe final verifier checks fresh source digests/spans and reobserves Git after\ngeneration. Exact citations and identifier checks are distinct from semantic\nanswer correctness. Writes and arbitrary shell commands remain unavailable.\n\nSources: day-31-developer-assistant/bublik_developer/policy.py;\nday-31-developer-assistant/bublik_developer/preflight.py;\nday-31-developer-assistant/bublik_developer/model_session.py."
+          }
+        ],
+        "git_facts": []
+      },
+      "v093_context_digest": "562234b780f09117ebf947bd1ad51e2cd3e16c9c95a5c8ad1be7ee19ab87ab45",
+      "v093_message_digest": "474584bcb6c78f6258b9a4d2968a5bf8bbcd004a40bc1c6b811e2322aaecff49",
+      "v093_schema_digest": "b5199a0196ee95bf03affa5cee38c1da8d1c27f6bb95972dcdb761fdf4365464",
+      "scope": "Known native input budget/context regression only; never golden facts, production instructions or held-out acceptance."
+    },
+    {
+      "case_id": "untracked-doc-ru-production-diagnostic",
+      "mode": "multi_documentation",
+      "context": {
+        "question": "Если untracked-файл явно указан в allowed paths, может ли git_diff прочитать его содержимое?",
+        "language": "ru",
+        "evidence": [
+          {
+            "id": "e1",
+            "quote": "## Read-only инструменты Git дня 31\n\nДень 31 предоставляет git_current_branch, git_status, git_diff и\nproject_list_files через локальный FastMCP stdio server. Входы и выходы\nпроверяются. Только scoped client роли Git может вызывать эти инструменты.\nПути относительны корню репозитория; traversal и symlinks отклоняются.\n\ngit_diff по умолчанию возвращает metadata. Содержимое требует от одного до\nчетырёх явных allowed paths. Содержимое untracked файлов не читается, даже если\nпуть явно разрешён. Sensitive names и private databases исключены;\npatches с признаками secret блокируются.\n\nКонтролируемый runner отключает hooks, external diff, textconv, fsmonitor и\nнастроенные clean/smudge/process filters. Произвольный Bash не выполняется.\nApplication capabilities не являются OS sandbox для враждебного Python-кода."
+          },
+          {
+            "id": "e2",
+            "quote": "## Read-only Git tools\n\nDay 31 exposes git_current_branch, git_status, git_diff and project_list_files\nthrough a local FastMCP stdio server. Tool inputs and outputs are validated.\nOnly the Git role's scoped client can call the Git tools. Project paths are\nrelative to the configured repository root. Traversal and symlinks are rejected.\n\ngit_diff returns metadata by default. Text content requires one to four explicit\nallowed paths. Untracked file content is not read. Sensitive names and private\ndatabases are excluded; detected secret-like patches are blocked.\n\nThe controlled command runner disables hooks, external diff, textconv, fsmonitor\nand configured clean/smudge/process filters. It does not execute arbitrary Bash.\nApplication capabilities do not constitute an OS sandbox for hostile Python code."
+          },
+          {
+            "id": "e3",
+            "quote": "## VPS (systemd)\n\nНа VPS после клонирования проекта и установки зависимостей адаптируйте `bublik-day18.service.example`: замените `YOUR_LINUX_USER` и пути на фактические, скопируйте файл в `/etc/systemd/system/bublik-day18.service`. Затем:\n\n```bash\nsudo systemctl daemon-reload\nsudo systemctl enable --now bublik-day18\nsudo systemctl status bublik-day18\njournalctl -u bublik-day18 -f\n```\n\nСоздайте расписание через `main.py` на том же VPS (или вызвав его MCP-сервер с тем же `BUBLIK_DB_PATH`). Для worker не требуется Groq key: нужен доступ к `api.github.com`; `GITHUB_TOKEN` для публичных репозиториев необязателен, но помогает с лимитами. Установите переменную окружения для обоих процессов, если база находится в другом месте. Проверяйте `journalctl` и запрашивайте свежую сводку через агента. Установить сервис на конкретном VPS можно только при наличии доступа к нему."
+          }
+        ]
+      },
+      "v093_context_digest": "8d872b5b9aabe94e90a4b05213022a447a57ad433847e6068b1dd8470a48ab29",
+      "v093_message_digest": "3d9074ca0946af916fccb025c0f52bca377ef69a9e11635c8d9bf0395fb6f301",
+      "v093_schema_digest": "26835b1114223e77b16da2dd6b23f352041eb24fc58fe3c41740bf27209330f5",
+      "scope": "Separate production control, not an additional paired repeat or held-out observation."
+    }
+  ]
+}

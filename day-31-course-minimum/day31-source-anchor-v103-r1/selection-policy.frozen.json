@@ -1,0 +1,48 @@
+{
+  "name": "body-code-cost-facets-code-diversity-v3",
+  "cost_pattern": "стоимост|затрат|cost|overhead|расход",
+  "expansion": [
+    "стоимость",
+    "cost",
+    "tokens",
+    "prompt",
+    "completion",
+    "total"
+  ],
+  "sorting": [
+    "new literal inline-code identifiers descending",
+    "new uncovered bilingual cost/metric groups descending",
+    "repeated same family/exact section or same family/equal >=2 inline-code-token fingerprint ascending",
+    "body BM25 ascending",
+    "chunk_id ascending"
+  ],
+  "extra_diversity": "Deprioritize same document family with an equal set of at least two inline-code tokens; topical redundancy heuristic, not proof of translation equivalence.",
+  "facet_groups": [
+    [
+      "стоимость",
+      "cost"
+    ],
+    [
+      "tokens",
+      "токены"
+    ],
+    [
+      "prompt"
+    ],
+    [
+      "completion"
+    ],
+    [
+      "total"
+    ]
+  ],
+  "scope": "generic cost accounting vocabulary; no expected sources or answer strings in selector; developer calibration after initial results",
+  "max_candidates": 20,
+  "max_evidence": 3,
+  "context_bytes": 4096,
+  "contexts": "both existing Single+Multi numeric estimates<=8192",
+  "generation_calls": 0,
+  "research_only": true,
+  "source_scope": "existing isolated54; production44 not modified",
+  "no_semantic_acceptance_inferred": true
+}

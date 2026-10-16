@@ -1,0 +1,170 @@
+{
+  "schema": "day31-reviewed-coverage-v1",
+  "application_version": "0.7.28",
+  "reviewer": "Codex; independent human review pending",
+  "completed_case_ids": [
+    "uncertain-branch-ru",
+    "uncertain-branch-en",
+    "allowed-untracked-ru",
+    "allowed-untracked-en",
+    "unsupported-knobs-ru",
+    "unsupported-knobs-en",
+    "serialized-model-branch-ru",
+    "serialized-model-branch-en",
+    "main-authority-branch-ru",
+    "main-authority-branch-en"
+  ],
+  "conditions": {
+    "capability_limit": 8,
+    "cases_sha256": "3cd0381ef7ef624b3fa81689ddd20277151389bb5820e12ba32d1a034b7f4010",
+    "dense_policy": "vocabulary",
+    "documentation_schema_version": "status-claims-text-first-v7",
+    "fts_endpoint_policy": "literal-endpoint-heading-v1",
+    "generation_budget_policy": "message-content-utf8-plus256-v1",
+    "git_branch": "main",
+    "git_head": "f5cce79933a8535eda5b8d218e79a04aee88d029",
+    "hybrid_policy": "raw",
+    "index": {
+      "built_at": "2026-10-13T19:41:55.978630+00:00",
+      "chunk_version": "project-structural-spans-v1",
+      "chunks": 405,
+      "corpus_revision": "f6a4fb45413e2e9cb493ca421a102d75b560d7137c551363705cda8a9e0376f5",
+      "documents": 44,
+      "embedding": {
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "name": "bge-m3"
+      },
+      "index_version": "27519cd6caa346ac87a18639932506b5",
+      "limit_words": 250,
+      "overlap_words": 40,
+      "project_id": "ai-advent-llm-api",
+      "schema_version": 1,
+      "selection_digest": "4a25a85ae37bc97cff346b0cf606d0ec40e202c685d4ddc86e1da543f1415ab5"
+    },
+    "model_options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 31,
+      "temperature": 0
+    },
+    "pipeline_mode": "fts",
+    "project_id": "ai-advent-llm-api",
+    "prompt_version": "project-answers-v22",
+    "query_defaults_version": "mode-query-defaults-v1",
+    "request_deadline": 300,
+    "source_sha256": {
+      "bublik_developer/__init__.py": "c69e0aba21e0baf6959fdec7290b18820965e88aa25c8a3ddf6cc81dd8842e5e",
+      "bublik_developer/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "bublik_developer/agent_process.py": "33a367fdbddd9acafdae3faa1d1f91c52d98f027f00e1c88e18a737294abaee6",
+      "bublik_developer/agent_runtime.py": "13f0134e8159b01160869e460a8e9bf78f18d92881d22f61691af7639ac70dd6",
+      "bublik_developer/agent_worker.py": "afb957581ff72a4eecc61b986b907bb060499cc85bfe06ef66282854d11e607f",
+      "bublik_developer/baseline.py": "5b218e1b34a3c2f738f75355a21d01df32969d5266cfc3d860364f9ba3fe2f9f",
+      "bublik_developer/baseline_worker.py": "7a0e92a0f70e2faaa582cca778ddf08641de3d56cecbe5f80cfc6a7d46aa60b9",
+      "bublik_developer/cli.py": "864e32a7f7423591620e8ffffc09e292ad83ab97cc8ccd46437ea401e8158620",
+      "bublik_developer/contracts.py": "f43c7f2a05ab574f0f30919fa0ab2c65170fac611d34de55c97baab28855b294",
+      "bublik_developer/errors.py": "6c4e9eb0215b9b75bef475ee7fd98f8ce1113523e0d19426074804230b0b39d3",
+      "bublik_developer/generation.py": "d6496f034de9d54c20b299ebb4d65034d832dadb64cc423bda247fdb58c0399a",
+      "bublik_developer/git_tools.py": "80d40371ee77951febe85a603488cbf28c17e22a88f838afed49770e9d5f4fb9",
+      "bublik_developer/inference_tasks.py": "7fab2c144b29067e35a82232d1d40c8615a57cddb0b64e19af458eacfa4d0ceb",
+      "bublik_developer/mcp_client.py": "1faee7b24c63b200c3589e7c9fcb61449f7850d487276f4f5251f069ab91b690",
+      "bublik_developer/mcp_schema.py": "ad7f97bb5d0704cb55fc0d1f4d6179ca5fb6b1541dd6247c95dade126636225a",
+      "bublik_developer/mcp_server.py": "e96ea226a8ee583132fccb245ecb30522d003b8ff024886a0985d4d159ef4985",
+      "bublik_developer/model_session.py": "9e795c3705b3c095c30508e6146df5fdaefc9bc2c4973ee37349f61ef9b3fb91",
+      "bublik_developer/model_worker.py": "b856e925cd04b755119fc9331a40012b99fb60da2937a50f008d1e14731ca83a",
+      "bublik_developer/paired_research.py": "10bf39db33c32f7aecbabb9bc41b9f69b977731680252d8780aeac5ceaf1a29b",
+      "bublik_developer/pipeline.py": "62b4074d6cd742d1d8465f54315203120c919ea89b9b0908dbeb4ed841eb1566",
+      "bublik_developer/policy.py": "514c0b7c32ca7b499733acd4a138e48e9d892f5aacdcf576ea2985d599964ec6",
+      "bublik_developer/preflight.py": "3bea9d54c052c5440a2231c622d5482900a3ab995579fe99a97cc697000045eb",
+      "bublik_developer/process.py": "98f304c96a1c9908d1f79983f9bbad12ae7492ecc47da8dabef64ae98c162116",
+      "bublik_developer/rag/__init__.py": "b9b45591ce856d1f2d45b935e1cde5c6cb32715fe3f2bcd32511322c9fac2e00",
+      "bublik_developer/rag/chunking.py": "3504a00691e312a3d4f95efdfaefd0cba6849c0409cb7abee949866213ac22e9",
+      "bublik_developer/rag/corpus.py": "1974ba1d4c1e6106122dd414581ccf03402ae858c5a7e59628eb8d892062ddba",
+      "bublik_developer/rag/embeddings.py": "3d79e9718829900932b24aca5498a229e53cf82812e5f4f92ddbfe5bcafd9278",
+      "bublik_developer/rag/index.py": "5bff723d566c30083956404637eb2d9b0f3515d2272f7ef3ad378232168e940c",
+      "bublik_developer/rag/retrieval.py": "381847f9bbccdc15a091fbd085578b0a53a6680330608f36c8d6775aedef6e84",
+      "bublik_developer/rag/state.py": "5d18a3e7db23befbfd00a79ae6a14d354384f123dc13455ebfba312bb565bf9f",
+      "bublik_developer/reliability.py": "ebba9d7e3dd39aa0f91e3df0740a936c13a0d54e677e48d8a83da768f2e1ae9b",
+      "bublik_developer/research.py": "8b33552a00a2fa966008d7ab970b20536642f52c5e5db4ba84cfccf93897668c",
+      "bublik_developer/routing.py": "8465f3f58bd85ae6fedd38272d45fe916ac4104a05be6c7085907f36cc998579",
+      "bublik_developer/workspace.py": "17ca3295574f7427ce18691bacfb2629de12c1f647b52622f8133ebfab6908ce",
+      "main.py": "5a95fa5c7ff91bd7eaac9894e99a979d6a993d72c81629962ccb3cdd9d13fd5d",
+      "scripts/check_bilingual_retrieval.py": "ae8720491bf0d4789de54d9ab61fb438788fd8e5a3af48edf4edc86a574b40d9",
+      "scripts/check_stage12.py": "a9dff1e7b4ad8645e6719037cee47d0e970b8bedf23927275f355f28367955cc",
+      "scripts/check_stage3.py": "e399b9db306a964355843932c537d91371798076cde0f7b280ae4eff64030552",
+      "scripts/check_stage4.py": "316e6522458cadd1dddd0c49e857538e825fe760838a0ddf50bf9c0ab717ab29",
+      "scripts/check_stage5.py": "c72ca43e6e0de3610e22e071a68b94711acabb3d18b18206de348b34c495a396",
+      "scripts/check_stage6.py": "5aae7583729646821b1c4183b2ed2bc4e1337913c64839dd8bee3dac815ce783",
+      "scripts/check_stage7.py": "7a2540b20034004dc88c7e9803c9ecb13d725a16c2eb507ff72fdee9850f67ba",
+      "scripts/compare_project_retrieval.py": "158379432f7accd1aa95f348315673507965ee39fe719fa07ac209c0b42de9a5",
+      "scripts/compare_single_multi.py": "49397452f63b241b166534677a0f4cf417f027464e73a5cf460c2f6d0bea2920",
+      "scripts/research_project.py": "05a54966df0914e4e0ccfeecf7839c479c8774ea743ed5e92deae3f0f3731e3e",
+      "tests/test_agent_runtime.py": "66478ddcfc9cc3811d59ba86ef9e080c0731a7c489f420bcb7230b556c397c60",
+      "tests/test_bilingual_corpus.py": "797cde72a30599ec47780a22165d15e76c2adb0f269990d2e1681b066f4a26c7",
+      "tests/test_claim_string_boundaries.py": "537296a86566e56db36ecc6de8e7a446c2d73e627ebe66d07b39fa9d3fb1e667",
+      "tests/test_context_budget.py": "6c49271fff66ad15fe462ddcaec9ff3b7c1e3c9f8f69ebd3518624eadeb9dfe6",
+      "tests/test_foundation.py": "b23123ee849a1e073efa7dcb92b56ed4286dc756e713e6518e52ad53ee6deaf7",
+      "tests/test_language_schema.py": "c5397c84a23be8f6235791d133052b0b8e091ff2cfa3e49b7f8cf9ccc8705026",
+      "tests/test_mcp_git.py": "cfda0f466d773bae2c2c882e759a4c485e133675381b6187418aa75b1d3a9739",
+      "tests/test_paired_research.py": "1b06440f510b3340b213705460b2804a7ed0ec6487ff526b90d97c6b98061ab6",
+      "tests/test_pipeline.py": "ee79b098d85c736e47ef0e34f32b10db210438c25f85b6f2f802fd4dcf68f565",
+      "tests/test_project_rag.py": "bffb755d5b88ac0cc68d51587bc2964c7f90873a682c18071e951f4808a87e3c",
+      "tests/test_quality_prompt.py": "7525acd1acfa6364eb1d95bbb4cbe202e878b44736e1a8588273b36816a5bcf1",
+      "tests/test_rejection_diagnostics.py": "82cb5d545b40e544a4f6296f78c9c7fa87adc4505d6c6706858093ae715959d6",
+      "tests/test_reliability.py": "e6a5d06cf3f96917b96569d444fb57023628aa63dafcae3c17d94c6b93b49f5d",
+      "tests/test_research.py": "87ce91839d2196a214572e2b367f731eb99ea13aada7f93092c2ef98ef1d9dc3",
+      "tests/test_transition_tokens.py": "73210aab9cc3bf2acc6f58d8b92a38f14e4d4cacb51e41add4f74c98e8186192"
+    },
+    "token_probes": 0,
+    "version": "0.7.29",
+    "warmups": 0
+  },
+  "completed_reports": [
+    {
+      "file": "day31-paired-uncertain-mac-v098-result.json",
+      "sha256": "39f78b505eec6eb5819e070165aef63606bd10a98046565319c4dd5f36ac7b86",
+      "case_ids": [
+        "uncertain-branch-ru",
+        "uncertain-branch-en"
+      ]
+    },
+    {
+      "file": "day31-paired-untracked-mac-v098-result.json",
+      "sha256": "6d7bb67aec5aeb5bbd87ce1d8f96117543c18b9fac429105f235a6898587b043",
+      "case_ids": [
+        "allowed-untracked-ru",
+        "allowed-untracked-en"
+      ]
+    },
+    {
+      "file": "day31-paired-unknown-mac-v098-result.json",
+      "sha256": "9da5a869088b8510b0a956cc6feebe17a7c8cdc71dbd272bdc703d33b9d9477b",
+      "case_ids": [
+        "unsupported-knobs-ru",
+        "unsupported-knobs-en"
+      ]
+    },
+    {
+      "file": "day31-paired-serialized-mac-v098-result.json",
+      "sha256": "1d42a9b317bdd30546b2693065208129dba219768c460b3d9b02f47f7dc70dd2",
+      "case_ids": [
+        "serialized-model-branch-ru",
+        "serialized-model-branch-en"
+      ]
+    },
+    {
+      "file": "day31-paired-main-mac-v098-result.json",
+      "sha256": "458491aa1ae87f5a2f2573366b9c8a5094075cd017de35860a4eeed6126e6dd0",
+      "case_ids": [
+        "main-authority-branch-ru",
+        "main-authority-branch-en"
+      ]
+    }
+  ],
+  "scope": "Known paired execution and assistant semantic review; broader omissions retained. Not heldout acceptance.",
+  "model": {
+    "digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+    "name": "qwen2.5:14b",
+    "quantization": "Q4_K_M"
+  }
+}
