@@ -4,7 +4,7 @@
 
 Отдельно разрешённое полное review с Mac: Groq `openai/gpt-oss-120b`, один POST, HTTP 200, 649 input / 284 completion tokens. Верно найден дефект `percentage.py:2` и предложено `/ 100`; отсутствует document evidence ID и необоснован дополнительный совет проверять нулевой input. Выбраны три документа FTS5 из base. SQLite ResourceWarning сохранён.
 
-В [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md) ([EN](FINAL_REPORT.md)) сохранены SHA, request IDs, все failed runs/artifacts, отдельный smoke-test 74/19 tokens, происхождение evidence и неподтверждённый billing. Сырые request/response и модельные artifacts остаются вне публичного репозитория. `DAY32_LIVE_ENABLED=false`; PR #2 открыт Draft, без merge и закрытия. Новые генерации не разрешены.
+В [FINAL_REPORT.ru.md](FINAL_REPORT.ru.md) ([EN](FINAL_REPORT.md)) сохранены SHA, request IDs, все failed runs/artifacts, отдельный smoke-test 74/19 tokens, происхождение evidence и неподтверждённый billing. Сырые request/response и модельные artifacts остаются вне публичного репозитория. `DAY32_LIVE_ENABLED=false`; демонстрационный [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2) закрыт без merge, документационный [PR #3](https://github.com/Ly41k/ai-advent-llm-api/pull/3) объединён с `main`. Новые генерации не разрешены.
 
 Инструкции bootstrap/live ниже сохранены как история и описание отдельно согласуемого воспроизведения; это не незавершённые действия и не разрешение на новый запуск. Исходный Actions-only CLI не изменён; локальная приёмка использовала внешний curl helper без имитации GitHub Actions.
 
