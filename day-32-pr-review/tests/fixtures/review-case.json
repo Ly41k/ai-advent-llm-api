@@ -1,0 +1,39 @@
+{
+  "synthetic": true,
+  "pr": {
+    "number": 123,
+    "state": "open",
+    "changed_files": 1,
+    "user": {"login": "Ly41k"},
+    "base": {
+      "ref": "main",
+      "sha": "1111111111111111111111111111111111111111",
+      "repo": {"full_name": "Ly41k/ai-advent-llm-api", "private": false}
+    },
+    "head": {
+      "ref": "day32-demo",
+      "sha": "2222222222222222222222222222222222222222",
+      "repo": {"full_name": "Ly41k/ai-advent-llm-api", "private": false}
+    }
+  },
+  "files": [{
+    "filename": "day-32-pr-review/demo/percentage.py",
+    "status": "added",
+    "additions": 2,
+    "deletions": 0,
+    "patch": "@@ -0,0 +1,2 @@\n+def percentage(value):\n+    return value / 0"
+  }],
+  "mock_review": {
+    "findings": [{
+      "severity": "high",
+      "path": "day-32-pr-review/demo/percentage.py",
+      "side": "RIGHT",
+      "start_line": 2,
+      "end_line": 2,
+      "title": "Division by zero",
+      "reason": "The percentage helper divides by zero, so a numeric input raises ZeroDivisionError.",
+      "suggestion": "Divide the value by 100 as required by the percentage helper contract.",
+      "evidence": ["F1H1R2", "D1"]
+    }]
+  }
+}

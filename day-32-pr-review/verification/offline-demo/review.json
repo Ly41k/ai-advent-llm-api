@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "repository": "Ly41k/ai-advent-llm-api",
+  "status": "completed",
+  "mode": "offline_mock",
+  "model": "openai/gpt-oss-120b",
+  "findings": [
+    {
+      "end_line": 2,
+      "evidence": [
+        {
+          "kind": "diff",
+          "path": "day-32-pr-review/demo/percentage.py",
+          "hunk": "F1H1",
+          "id": "F1H1R2",
+          "side": "RIGHT",
+          "line": 2,
+          "text": "    return value / 0",
+          "changed": true
+        },
+        {
+          "kind": "document",
+          "id": "D1",
+          "path": "README.md",
+          "base_sha": "1111111111111111111111111111111111111111",
+          "section": "Synthetic percentage helper contract",
+          "start_line": 1,
+          "end_line": 4,
+          "text": "# Synthetic percentage helper contract\n\nThe percentage helper accepts a number and returns that number divided by 100.\nThe percentage helper must never divide by zero. This is a synthetic course example.",
+          "digest": "b2c17d3bc6a0e22e1bfdbe1f0967046ffba39bc2efe42b367e671fa677894d4e"
+        }
+      ],
+      "path": "day-32-pr-review/demo/percentage.py",
+      "reason": "The percentage helper divides by zero, so a numeric input raises ZeroDivisionError.",
+      "severity": "high",
+      "side": "RIGHT",
+      "start_line": 2,
+      "suggestion": "Divide the value by 100 as required by the percentage helper contract.",
+      "title": "Division by zero"
+    }
+  ],
+  "rejected_findings": [],
+  "omissions": [],
+  "run_id": "offline",
+  "run_attempt": "0",
+  "pr_number": 123,
+  "head_sha": "2222222222222222222222222222222222222222",
+  "base_sha": "1111111111111111111111111111111111111111",
+  "source_revision": "1111111111111111111111111111111111111111",
+  "retrieval": {
+    "method": "sqlite_fts5_bm25",
+    "terms": [
+      "percentage"
+    ],
+    "indexed_chunks": 1,
+    "oversized_document_chunks_omitted": 0,
+    "documents_omitted": [],
+    "matched_chunks": 1,
+    "selected_chunks": 1,
+    "status": "retrieved"
+  },
+  "catalog": {
+    "F1H1R1": {
+      "kind": "diff",
+      "path": "day-32-pr-review/demo/percentage.py",
+      "hunk": "F1H1",
+      "id": "F1H1R1",
+      "side": "RIGHT",
+      "line": 1,
+      "text": "def percentage(value):",
+      "changed": true
+    },
+    "F1H1R2": {
+      "kind": "diff",
+      "path": "day-32-pr-review/demo/percentage.py",
+      "hunk": "F1H1",
+      "id": "F1H1R2",
+      "side": "RIGHT",
+      "line": 2,
+      "text": "    return value / 0",
+      "changed": true
+    },
+    "D1": {
+      "kind": "document",
+      "id": "D1",
+      "path": "README.md",
+      "base_sha": "1111111111111111111111111111111111111111",
+      "section": "Synthetic percentage helper contract",
+      "start_line": 1,
+      "end_line": 4,
+      "text": "# Synthetic percentage helper contract\n\nThe percentage helper accepts a number and returns that number divided by 100.\nThe percentage helper must never divide by zero. This is a synthetic course example.",
+      "digest": "b2c17d3bc6a0e22e1bfdbe1f0967046ffba39bc2efe42b367e671fa677894d4e"
+    }
+  },
+  "previous_paths": {},
+  "selected_changed_lines": 2,
+  "selected_files": 1,
+  "generation_calls": 0,
+  "integrity_sha256": "fbba3b4c7a657964c6fb6e1148570952bd92956fb44983a10f9ab6676a97105f"
+}
