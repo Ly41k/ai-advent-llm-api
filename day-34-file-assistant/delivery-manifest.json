@@ -3,8 +3,8 @@
   "base_main": "25ba00685d0748ebe533570711b75e0d187ab20b",
   "scope": "Only Day 34 and root README RU/EN; manifest excludes its own hash. Integrity check, not a signed attestation.",
   "files_sha256": {
-    "README.md": "aaf76230b2cecf32495d6a86d4f6c82d042346fc64af93726c9bc91ae9d2823a",
-    "README.ru.md": "d5d5d2dbacf8622140bd579540ce2d179f16e2aab6521c12b23a0ae133d5ac89",
+    "README.md": "2b38ec2b67bec8a82686aa6a124f7ac80ff37ca6534430988236bc14c7071c71",
+    "README.ru.md": "691d6cad13eba0f1d540c13e8e743299dbc01bcade8e65da7999bc9c5bf8bb8b",
     "day-34-file-assistant/.gitattributes": "0b5eb4cec54d0add517e63a150515d8727ce704165902a2662b8128a409f1703",
     "day-34-file-assistant/.gitignore": "783e7f3b0457fed22c4423b7519ff3f65b2151d4f3cbf17b773fa96213c7d40c",
     "day-34-file-assistant/CONSOLE_VIDEO.ru.md": "a686ba757459421c39a9aecec4eae81499bb4cf3f0f56aa6067a3478cc640d53",

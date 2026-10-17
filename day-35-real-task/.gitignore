@@ -1,0 +1,9 @@
+results/
+private/
+__pycache__/
+*.pyc
+ollama-*.json
+development-journal*.md
+evidence.json
+acceptance.json
+generation.json
