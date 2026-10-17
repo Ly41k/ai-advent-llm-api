@@ -19,6 +19,9 @@ Seven Russian FAQ items plus seven exact English excerpts form 14 chunks.
 Day 30 README.md and API.md are read-only sources checked against file SHA-256
 and exact quotations; README.ru.md was also reviewed when preparing the FAQ.
 Links point to original sections at base `c654e24610bdabed15747088f9e1691ed36d0b17`.
+One retained FAQ-HISTORY URL has a noncanonical fragment (`#api,-persistence-and-limits`);
+use the correct [Day 30 section](https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/README.md#api-persistence-and-limits).
+The source text is valid; the frozen FAQ JSON and acceptance hashes are not changed.
 A changed source fails closed. No embeddings, reranker or shared knowledge.db.
 
 The model selects an assessment, exact document/context facts and action IDs.
@@ -111,5 +114,7 @@ catalogue and explicit semantic review are also needed for acceptance.
 Post-course backlog: unified curl adapter/live HTTP, RU/EN replies, broader FAQ,
 semantic retrieval, general claim verification, real CRM/operator auth, persistent
 MCP sessions. No Web UI, chat history or public deployment. Lexical search can
-miss paraphrases. GitHub publication and video recording are separate steps;
-PR/merge require owner authorization. OpenAI API was not used.
+miss paraphrases. The video was recorded by the owner using the retained real
+response; its [script](CONSOLE_VIDEO.ru.md) remains available. Implementation
+[PR #5](https://github.com/Ly41k/ai-advent-llm-api/pull/5) was merged into
+`main` on 2026-10-17. OpenAI API was not used.

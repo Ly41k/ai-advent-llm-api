@@ -18,7 +18,11 @@ MCP SDK запускает настоящий stdio subprocess с initialize/dis
 Корпус: семь FAQ RU и семь дословных EN-выдержек, всего 14 фрагментов.
 README.md и API.md Day 30 читаются read-only с проверкой SHA-256 и точных цитат;
 README.ru.md также изучен при подготовке FAQ. Ссылки закреплены на исходных разделах
-base `c654e24610bdabed15747088f9e1691ed36d0b17`. Изменённый источник блокирует ответ.
+base `c654e24610bdabed15747088f9e1691ed36d0b17`. У сохранённой ссылки
+FAQ-HISTORY некорректный якорь (`#api,-persistence-and-limits`); правильная
+[ссылка на раздел Day 30](https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/README.md#api-persistence-and-limits).
+Текст источника корректен; зафиксированные FAQ JSON и SHA приёмки не меняются.
+Изменённый источник блокирует ответ.
 Нет embeddings, reranker, новой векторной базы или зависимости от knowledge.db.
 
 Модель выбирает диагноз, дословные факты документов/контекста и action IDs.
@@ -110,5 +114,6 @@ HTTP body 8192 bytes. Очевидные secret patterns блокируются;
 Backlog: общий curl adapter/live HTTP, RU/EN, расширение FAQ, semantic retrieval,
 общая проверка claims, настоящая CRM/авторизация оператора, постоянный MCP-процесс.
 Нет Web UI, истории чата и публичного deployment. FTS5 может пропускать парафразы.
-Видео и публикация GitHub отделены от технической приёмки; PR/merge требуют
-разрешения владельца. OpenAI API не использовался.
+Видео уже записано владельцем с сохранённым настоящим ответом;
+его [сценарий](CONSOLE_VIDEO.ru.md) доступен в репозитории. [PR #5](https://github.com/Ly41k/ai-advent-llm-api/pull/5)
+объединён с `main` 17.10.2026. OpenAI API не использовался.
