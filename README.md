@@ -2,11 +2,11 @@
 
 # AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, a developer assistant with Project RAG, MCP Git and delegated tasks, a bounded AI pull request reviewer, and a support assistant for the private AI service.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, a developer assistant with Project RAG, MCP Git and delegated tasks, a bounded AI pull request reviewer, a support assistant for the private AI service, a file assistant, and a local AI development journal for a private game project.
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–34**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–35**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -46,6 +46,7 @@ The repository currently contains **Days 1–34**. Each `day-XX-...` directory i
 | [32](day-32-pr-review/README.md) | AI pull request review | GitHub PR diff, base-README FTS5, Groq and validated review artifacts; local integration PASS, quality PARTIAL, Actions live E2E FAIL |
 | [33](day-33-support-assistant/README.md) | AI support assistant | Synthetic CRM over real MCP stdio, FAQ/FTS5, Groq and separate evidence; Mac 25/25, fresh live E2E PASS |
 | [34](day-34-file-assistant/README.md) | AI File Assistant | Real LLM-selected list/search/read/write, Usage and ADR, saved Markdown/diffs and replay; Mac 65/65, Course Minimum PASS with editorial review; original ADR PARTIAL |
+| [35](day-35-real-task/README.md) | Local AI Development Journal | Local Git + GET-only PR metadata, Qwen/Ollama and Russian Markdown; four merged PRs, Technical/AI/Course Minimum PASS with owner review; private outputs stay local |
 
 ## How the architecture evolves
 
@@ -68,6 +69,7 @@ The repository currently contains **Days 1–34**. Each `day-XX-...` directory i
 - **Day 33:** add a separate support assistant for Bublik Day 30: JSON users/tickets over real MCP, FTS5/BM25 top-3, a bounded Groq plan and validated answer. Model/application evidence is separate; Mac offline 25/25 and fresh curl attempt-03 passed.
 
 - **Day 34:** add a bounded file assistant over pinned Day 33 sources. Real cloud model decisions select local list/search/read/write operations for Usage and ADR; Markdown, source evidence, diffs and zero-POST replay are retained. Technical/Usage PASS, original ADR PARTIAL, reviewed ADR PASS; Course Minimum accepted with documented editorial review.
+- **Day 35:** generate a private Russian development journal from real merged PR changes using local Git and Qwen2.5:14b. GitHub GET verifies merged_at and merge/squash SHA; owner semantic review completes Course Minimum PASS.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -84,6 +86,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 - Day 31 uses its own `requirements.lock`, Git and a real stdio MCP server. The accepted Documentation scenario uses FTS54 and Qwen2.5:14b without new embeddings; working state and indices remain outside the repository. Retained-delivery verification needs no Ollama.
 - Day 32 uses Python 3.12+, the standard library and SQLite FTS5; offline tests need no API key or Ollama. Live GitHub/Groq requests require network access and separately approved credentials; live generation remains disabled.
 - Day 33 uses Python 3.12+, its own MCP SDK requirements.txt and SQLite FTS5; retained verification needs no API key or Ollama. HTTP is always mock; real Groq acceptance used a separate curl CLI.
+- Day 35 uses Python 3.13, Git, authenticated GitHub CLI `gh` for GET-only PR metadata, and local Ollama/Qwen2.5:14b Q4_K_M. No pip dependencies, embeddings, or cloud LLM; accepted private artifacts are verified offline.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -99,6 +102,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 | 29 | `bge-m3` | `qwen2.5:14b` Q4_K_M selected; Q5_K_M compared on one factual case |
 | 30 | Not required | `qwen2.5:14b` Q4_K_M; private-chat-v2, context 8192 / output 1024 |
 | 31 | Not required for the accepted FTS scenario | `qwen2.5:14b` Q4_K_M; one accepted RU-1 / Multi call, without cloud fallback |
+| 35 | Not required | Local `qwen2.5:14b` Q4_K_M; Course Minimum PASS with owner semantic review |
 
 Pull only the models needed for the lesson you want to run.
 
@@ -176,6 +180,7 @@ Later lessons use specialized entry points:
 | 31 | `python day-31-course-minimum/verify_delivery.py --root "$PWD"` | Verify the retained delivery, 60 Python files and 79 Mac reports without Qwen; not fresh runtime acceptance |
 | 32 | `python -m unittest discover -s day-32-pr-review/tests -v` | Run the offline PR-review tests with no cloud generation; see Day 32 README for saved live evidence and PARTIAL verdict |
 | 33 | `python day-33-support-assistant/verify_delivery.py` | Verify retained real Groq PASS and runtime hashes without generation; see Day 33 README for CLI/HTTP |
+| 35 | `python3.13 day-35-real-task/main.py summary "$HOME/day35-private/results/day35-imperz-20261014-07"` | Verify and show the accepted private local result without new generation or private text; see Day 35 README for a fresh run |
 
 ## Day 21 shared knowledge index
 
@@ -506,7 +511,13 @@ Session expiry is explicit synthetic ticket evidence, not inferred solely from 4
 
 [Day 34](day-34-file-assistant/README.md) uses real model-selected local file tools for two goals: find `fetch_context` usage and document MCP ticket context. Both create Markdown with verified source lines, diffs and saved-decision replay. Mac offline: 65/65. Technical acceptance and Usage quality pass; the original model ADR remains PARTIAL. The separate reviewed ADR passes, with explicit reviewer provenance and editorial diff. Course Minimum is accepted on that combined evidence; historical automatic NOT_ACCEPTED reports are preserved.
 
-The [final report](day-34-file-assistant/FINAL_REPORT.md) records four Groq POST, ten OpenAI POST, 89,297 OpenAI tokens and a conservative $0.08822025 estimate; billing is unknown. Verify offline with `python3.13 day-34-file-assistant/verify_delivery.py`; no keys, network, Ollama or new generation are needed. See the [terminal video script](day-34-file-assistant/CONSOLE_VIDEO.ru.md). Earlier lessons are unchanged. Root README edits may require old RAG indices to be rebuilt when reused; no index is rebuilt here.
+The [final report](day-34-file-assistant/FINAL_REPORT.md) records four Groq POST, ten OpenAI POST, 89,297 OpenAI tokens and a conservative $0.08822025 estimate; billing is unknown. Day 34 was merged into `main` via [PR #7](https://github.com/Ly41k/ai-advent-llm-api/pull/7) on 2026-10-17 (merge commit `2d20ebf`). Verify offline with `python3.13 day-34-file-assistant/verify_delivery.py`; no keys, network, Ollama or new generation are needed. The [terminal video script](day-34-file-assistant/CONSOLE_VIDEO.ru.md) is available; recording has not been independently confirmed. Earlier lessons are unchanged. Root README edits may require old RAG indices to be rebuilt when reused; no index is rebuilt here.
+
+## Day 35 — Local AI Development Journal: Course Minimum PASS
+
+[Day 35](day-35-real-task/README.md) generates a Russian development-journal draft from real Imperz merged PRs for 2026-10-14 in Europe/Kyiv. GitHub GET metadata confirms merged_at and merge/squash SHA; local Git supplies bounded source changes to local Qwen2.5:14b Q4_K_M through Ollama. Four confirmed PRs, all reference checks and owner semantic review pass; Imperz is unchanged. This is a journal of confirmed merged PRs, not an exhaustive list of direct commits.
+
+The accepted Mac run returned HTTP 200: **201.941 seconds generation / 204.529 seconds total**, 11,357 prompt / 698 output tokens. Two real local generation calls were made: the first omitted URLs, the second passed after a format instruction fix. [Final report](day-35-real-task/FINAL_REPORT.md). Private Markdown, diffs, evidence, prompts and raw responses remain on the owner's Mac; public files contain code, synthetic tests and a safe acceptance summary. The [video guide](day-35-real-task/VIDEO.ru.md) is ready; recording is not yet confirmed. No new generation or index rebuild accompanies this documentation update.
 
 ## Tests
 
@@ -538,6 +549,7 @@ python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage
 python -m unittest discover -s day-32-pr-review/tests -v
 python -W error::ResourceWarning -m unittest discover -s day-33-support-assistant/tests -v
 python day-33-support-assistant/verify_delivery.py
+python3.13 -m unittest discover -s day-35-real-task/tests -v
 ```
 
 ## Data and limitations

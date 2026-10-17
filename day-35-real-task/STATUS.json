@@ -1,0 +1,76 @@
+{
+  "schema": 2,
+  "day": 35,
+  "package_version": "final-v5",
+  "runtime_code_version": "accepted-v4-unchanged",
+  "status": "COURSE_MINIMUM_PASS",
+  "course_minimum": "PASS",
+  "technical_real_imperz": "PASS",
+  "ai_generation_evidence": "PASS",
+  "ai_real_ollama": "PASS",
+  "human_semantic_review": "PASS",
+  "imperz_unchanged_during_run": true,
+  "acceptance_provenance": "Owner supplied local review/summary output; private artifacts remain on owner Mac.",
+  "human_review": {
+    "status": "PASS",
+    "reviewer": "Ly41k",
+    "recorded_at": "2026-10-17T15:08:04.464431+00:00"
+  },
+  "accepted_scenario": {
+    "date": "2026-10-14",
+    "timezone": "Europe/Kyiv",
+    "events_count": 4,
+    "context_chars": 27075,
+    "unattributed_committer_date_candidates_count": 15,
+    "scope": "confirmed merged PRs only"
+  },
+  "accepted_run": {
+    "model": "qwen2.5:14b",
+    "quantization": "Q4_K_M",
+    "http_status": 200,
+    "generation_calls": 1,
+    "generation_seconds": 201.941,
+    "elapsed_seconds": 204.529,
+    "prompt_eval_count": 11357,
+    "eval_count": 698,
+    "done": true,
+    "done_reason": "stop"
+  },
+  "generation_calls_total": 2,
+  "first_live_run": {
+    "http_status": 200,
+    "generation_seconds": 177.123,
+    "elapsed_seconds": 180.574,
+    "technical": "FAIL",
+    "reason": "Model omitted all source URLs; original output preserved."
+  },
+  "offline_synthetic_tests": {
+    "passed": 30,
+    "failed": 0,
+    "python": "3.12.14",
+    "real_llm_calls": 0,
+    "environment": "preparation Linux environment"
+  },
+  "mac_verification": "Live Python 3.13 scenario and human review PASS; complete Mac suite output was not separately supplied.",
+  "github_writes": 0,
+  "github_publication": "NOT_PERFORMED",
+  "video_instruction": "READY",
+  "video_recording": "NOT_CONFIRMED",
+  "root_readmes_modified": true,
+  "day34_manifest_modified": true,
+  "day34_manifest_changed_entries": [
+    "README.md",
+    "README.ru.md"
+  ],
+  "course_repository_base_main": "1a7a668c3812ada49977a350c92fa05cae3067e0",
+  "private_journal_evidence_prompts_responses_in_public_package": false,
+  "day34_delivery_verification": {
+    "status": "PASS",
+    "offline_tests": "65/65 PASS",
+    "manifest_file_hashes_verified": 43,
+    "source_inputs_unchanged": 17,
+    "new_provider_posts": 0,
+    "environment": "isolated local copy without .git",
+    "git_index_checked": false
+  }
+}
