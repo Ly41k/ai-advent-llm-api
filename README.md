@@ -2,11 +2,11 @@
 
 # AI Advent — from an LLM API request to MCP, grounded RAG and local applications
 
-A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, a developer assistant with Project RAG, MCP Git and delegated tasks, and a bounded AI pull request reviewer.
+A day-by-day Python learning project that starts with direct LLM API calls and grows into agents, persistent state, MCP tools, document indexing, retrieval-augmented generation, grounded citations, a persistent RAG chat with task memory, a local Kotlin pre-commit review application, a private AI chat accessible from computers and phones, a developer assistant with Project RAG, MCP Git and delegated tasks, a bounded AI pull request reviewer, and a support assistant for the private AI service.
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–32**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–33**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -44,6 +44,7 @@ The repository currently contains **Days 1–32**. Each `day-XX-...` directory i
 | [30](day-30-private-ai-service/README.md) | Private AI service | FastAPI, local Qwen, SQLite history, Web UI/PWA, LAN/Tailscale HTTPS, queue and limits |
 | [31](day-31-developer-assistant/README.md) | Developer assistant | Project RAG, read-only MCP Git, Main/Documentation/Git/Verification delegation, local Qwen and human-reviewed publication; Course Minimum Accepted |
 | [32](day-32-pr-review/README.md) | AI pull request review | GitHub PR diff, base-README FTS5, Groq and validated review artifacts; local integration PASS, quality PARTIAL, Actions live E2E FAIL |
+| [33](day-33-support-assistant/README.md) | AI support assistant | Synthetic CRM over real MCP stdio, FAQ/FTS5, Groq and separate evidence; Mac 25/25, fresh live E2E PASS |
 
 ## How the architecture evolves
 
@@ -63,6 +64,7 @@ The repository currently contains **Days 1–32**. Each `day-XX-...` directory i
 - **Day 30:** local Qwen becomes a private HTTP service. The Mac stores full history, Android/iPhone continue the same chats, and Tailscale Serve provides mobile access. Cookie/CSRF, ownership, idempotency, a durable queue, quotas and launchd are separate from inference; the course baseline used no RAG; later history RAG is optional, with no cloud fallback.
 - **Day 31:** combine Project RAG and real MCP Git with Main/Documentation/Git/Verification delegation. One local RU-1 / Multi answer was accepted through exact claim–anchor bindings and explicit human review; extended Research Stage 7 remains incomplete.
 - **Day 32:** introduce an AI PR reviewer: read a real GitHub diff, retrieve trusted base-revision README passages with SQLite FTS5, call Groq and validate JSON/line/evidence findings. Local full review found the seeded defect (technical PASS; quality PARTIAL), while GitHub Actions live E2E failed with HTTP 403.
+- **Day 33:** add a separate support assistant for Bublik Day 30: JSON users/tickets over real MCP, FTS5/BM25 top-3, a bounded Groq plan and validated answer. Model/application evidence is separate; Mac offline 25/25 and fresh curl attempt-03 passed.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -78,6 +80,7 @@ Days 21–25 and 28–29 use the shared Day 21 knowledge index. Day 25 does not 
 - Day 30 has its own `requirements.lock` (FastAPI/httpx/Uvicorn/Argon2); its main Mac/phone path uses Tailscale, direct LAN uses Caddy and a trusted local CA. No knowledge index or embedding model is required.
 - Day 31 uses its own `requirements.lock`, Git and a real stdio MCP server. The accepted Documentation scenario uses FTS54 and Qwen2.5:14b without new embeddings; working state and indices remain outside the repository. Retained-delivery verification needs no Ollama.
 - Day 32 uses Python 3.12+, the standard library and SQLite FTS5; offline tests need no API key or Ollama. Live GitHub/Groq requests require network access and separately approved credentials; live generation remains disabled.
+- Day 33 uses Python 3.12+, its own MCP SDK requirements.txt and SQLite FTS5; retained verification needs no API key or Ollama. HTTP is always mock; real Groq acceptance used a separate curl CLI.
 - `GITHUB_TOKEN` is optional for public GitHub repositories and can help with rate limits.
 
 ### Local models
@@ -169,6 +172,7 @@ Later lessons use specialized entry points:
 | 30 | `python day-30-private-ai-service/scripts/verify_report.py day-30-private-ai-service/reports/verified/languages-policy-v4-offline-20261011.json` | Verify the current 229/229 offline regression, languages and RAG memory checks; see Day 30 README for server setup |
 | 31 | `python day-31-course-minimum/verify_delivery.py --root "$PWD"` | Verify the retained delivery, 60 Python files and 79 Mac reports without Qwen; not fresh runtime acceptance |
 | 32 | `python -m unittest discover -s day-32-pr-review/tests -v` | Run the offline PR-review tests with no cloud generation; see Day 32 README for saved live evidence and PARTIAL verdict |
+| 33 | `python day-33-support-assistant/verify_delivery.py` | Verify retained real Groq PASS and runtime hashes without generation; see Day 33 README for CLI/HTTP |
 
 ## Day 21 shared knowledge index
 
@@ -489,6 +493,12 @@ A separately authorized full Groq review on Mac (`execution_environment=local_ma
 
 The [final report](day-32-pr-review/FINAL_REPORT.md) retains SHA bindings, request IDs, run/artifact links, separate 74/19-token Mac smoke-test and cost/billing distinctions. Live remains disabled (`DAY32_LIVE_ENABLED=false`); demo [PR #2](https://github.com/Ly41k/ai-advent-llm-api/pull/2) is closed without merge, and documentation [PR #3](https://github.com/Ly41k/ai-advent-llm-api/pull/3) has been merged. Raw payload/response and private evidence are excluded from public delivery. No additional generation is authorized by this documentation.
 
+## Day 33 — AI Support Assistant: PASS
+
+[Day 33](day-33-support-assistant/README.md) is accepted as **PASS** within Course Minimum. Mac offline 25/25; fresh attempt-03 executed real MCP `get_ticket(T-101)` → `get_user(U-001)`, FTS5/BM25 top-3 and one Groq curl POST: HTTP 200, `openai/gpt-oss-120b`, **1370 input / 233 completion tokens**. The corrected validator and saved-answer semantic review passed.
+
+Session expiry is explicit synthetic ticket evidence, not inferred solely from 401. Model citations remain separate from `assigned_by: application`. Previous HTTP 403 and evidence rejection are preserved; replay is not presented as fresh live acceptance. The [final report](day-33-support-assistant/FINAL_REPORT.md) retains SHAs, request IDs, a $0.0003453 estimate and unknown billing. Real-model coverage is T-101; other mandatory cases passed offline. HTTP is mock, real Groq used CLI; the Day 30 database is untouched. The [video scenario](day-33-support-assistant/CONSOLE_VIDEO.ru.md) reuses the saved answer without new generation.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.
@@ -517,6 +527,8 @@ python day-29-local-llm-optimization/test_day29.py -v
 python -m unittest discover -s day-29-local-llm-optimization/experiments/quality_v7 -p test_quality_v7.py -v
 python -W error::ResourceWarning day-30-private-ai-service/scripts/check_storage.py
 python -m unittest discover -s day-32-pr-review/tests -v
+python -W error::ResourceWarning -m unittest discover -s day-33-support-assistant/tests -v
+python day-33-support-assistant/verify_delivery.py
 ```
 
 ## Data and limitations

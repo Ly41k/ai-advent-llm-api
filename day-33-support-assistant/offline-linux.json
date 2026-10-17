@@ -1,0 +1,440 @@
+{
+  "status": "passed",
+  "scope": "offline_only_real_MCP_stdio_and_mock_LLM",
+  "tests_run": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "real_generation_calls": 0,
+  "real_provider_http_posts": 0,
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14",
+    "sqlite": "3.53.1",
+    "mcp": "1.30.0"
+  },
+  "base_sha": "c654e24610bdabed15747088f9e1691ed36d0b17",
+  "source_sha256": {
+    "README.md": "cde39224cdd15fac2fce31b00de568cd4e1d5922b2e6851bc339ad2a4cb48ca9",
+    "README.ru.md": "50510776345adfd3b1015604233ad114e6b69569592f1bb515df08eefcfd0f66",
+    "acceptance.py": "a9bd09ecfd7396058ba65a222208d0593e0d171881bad927ab1095c76b18a07f",
+    "common.py": "7705eb63edf3987d05737e9650095dd4b457899ac486e6059f936a01c4a4ee89",
+    "data/tickets.json": "cd0ed4b95aa356b62df983ce8e12476d49d35861c57b36d7641bc1ce6e5313f7",
+    "data/users.json": "a491a2620cd153b5c81db9bc62ee38939f1dd3a68d34a93d8f433cdc4b5f39b1",
+    "faq/bublik.json": "033a2df728a3e1beadfd35d8cb604475f018e84f8828c23ebea3aa50fa55fba0",
+    "llm_adapter.py": "c0e30fdc4c76135be1df7f69278330e9ed53034dd3bb0477b7ea2f22ed9a28d7",
+    "main.py": "0eb2f3e29400aaedb0cd51d0c3cad932f41b7b47a87d845e6bca78cdd603f02f",
+    "mcp_client.py": "fb25df80344f55ab2ee33b0171a6aeff1b5e1cad92fede1f50fc7c80585b8c41",
+    "mcp_server.py": "43705499a53ffc1bd2ae76de3a8aa774e9d323bd26cf974551ed6ccbe5ec4664",
+    "requirements.txt": "4fe75062c5d424bbc86a8cd58c63ab19aeffe4f0a0e100022252c8032e12ee5b",
+    "retrieval.py": "733135c19b3975168134a5ada99a986e785061925872b799d0d1e1d6112e5950",
+    "support_agent.py": "bde82665e0545675a014993a92700ca6e7d00a875fff090883c6e8ba98d22b12",
+    "tests/test_support.py": "74b3c2a0d8485ec338f89454e3fe942088e395c3b3e0df4408a98e637fd6eb07"
+  },
+  "examples": {
+    "A_auth": {
+      "ticket_id": "T-101",
+      "answer": "Факты FAQ/документации:\n[DOC-ERRORS] | 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |\n[FAQ-AUTH] Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.\n[DOC-AUTH] Browser: opaque server-side session in `__Host-bublik_session`; Secure, HttpOnly,\nSameSite, Path=/, no Domain. State-changing requests require a session-bound\n`X-CSRF-Token` and an allowed Origin, including login/logout. Login rotates the\nsession. `GET auth/session` supplies bootstrap/session state and the CSRF token\nto in-memory client state. GET does not log in or mutate chat data.\n\nФакты MCP-тикета и пользователя:\nticket.observed_error: HTTP 401 authentication_required\nuser.device: Android Chrome\nticket.session_state: expired\n\nВывод по доступным данным:\nПо данным синтетического тикета браузерная сессия истекла. Это подтверждает тикет, а не один HTTP 401.\n\nРекомендации модели (следующие проверки, результат не гарантирован):\n- Откройте исходный HTTPS-адрес чата и повторно войдите через интерфейс Bublik.\n- Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.",
+      "assessment": "session_expired",
+      "document_facts": [
+        {
+          "source_id": "DOC-ERRORS",
+          "quote": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |"
+        },
+        {
+          "source_id": "FAQ-AUTH",
+          "quote": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF."
+        },
+        {
+          "source_id": "DOC-AUTH",
+          "quote": "Browser: opaque server-side session in `__Host-bublik_session`; Secure, HttpOnly,\nSameSite, Path=/, no Domain. State-changing requests require a session-bound\n`X-CSRF-Token` and an allowed Origin, including login/logout. Login rotates the\nsession. `GET auth/session` supplies bootstrap/session state and the CSRF token\nto in-memory client state. GET does not log in or mutate chat data."
+        }
+      ],
+      "context_facts": [
+        {
+          "key": "ticket.observed_error",
+          "quote": "HTTP 401 authentication_required"
+        },
+        {
+          "key": "user.device",
+          "quote": "Android Chrome"
+        },
+        {
+          "key": "ticket.session_state",
+          "quote": "expired"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "sign_in",
+          "text": "Откройте исходный HTTPS-адрес чата и повторно войдите через интерфейс Bublik.",
+          "source_ids": [
+            "FAQ-AUTH",
+            "DOC-AUTH"
+          ]
+        },
+        {
+          "id": "check_auth",
+          "text": "Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.",
+          "source_ids": [
+            "DOC-ERRORS",
+            "FAQ-AUTH",
+            "DOC-AUTH"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "DOC-ERRORS",
+          "kind": "documentation",
+          "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+          "text": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#errors",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        },
+        {
+          "id": "FAQ-AUTH",
+          "kind": "faq",
+          "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+          "text": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        },
+        {
+          "id": "DOC-AUTH",
+          "kind": "documentation",
+          "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+          "text": "Browser: opaque server-side session in `__Host-bublik_session`; Secure, HttpOnly,\nSameSite, Path=/, no Domain. State-changing requests require a session-bound\n`X-CSRF-Token` and an allowed Origin, including login/logout. Login rotates the\nsession. `GET auth/session` supplies bootstrap/session state and the CSRF token\nto in-memory client state. GET does not log in or mutate chat data.",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        }
+      ],
+      "context_used": true,
+      "context_user_id": "U-001",
+      "evidence_gaps": [],
+      "retrieval": {
+        "method": "sqlite_fts5_bm25",
+        "indexed_chunks": 14,
+        "terms": [
+          "авторизация",
+          "чате",
+          "authentication",
+          "session",
+          "problem",
+          "http",
+          "401",
+          "required"
+        ],
+        "selected_chunks": 3
+      },
+      "llm": {
+        "mode": "offline_mock",
+        "model": null,
+        "generation_calls": 0,
+        "http_posts": 0
+      },
+      "validation": {
+        "source_ids": true,
+        "exact_quotes": true,
+        "context_binding": true,
+        "bounded_claims": true
+      }
+    },
+    "B_phone": {
+      "ticket_id": "T-102",
+      "answer": "Факты FAQ/документации:\n[FAQ-PHONE] Подключите Tailscale на телефоне к той же tailnet и войдите по HTTPS-адресу Mac. Для ts.net Tailscale нужен и дома.\n[DOC-PHONE] On Android/iPhone, connect Tailscale to the same tailnet, open the Mac HTTPS\nhostname and sign in as the same Bublik user. No API token or custom CA is needed\nfor the `.ts.net` URL. Tailscale remains necessary for that URL on home Wi-Fi.\nThe Mac must stay awake and online with API/Ollama available.\n[FAQ-ACCESS] Спящий или отключённый от сети Mac не обслуживает чат. Не запускайте второй экземпляр уже работающего сервиса.\n\nФакты MCP-тикета и пользователя:\nticket.observed_error: Mac HTTPS hostname unreachable\nuser.device: iPhone Safari\nticket.tailscale_state: disconnected_on_phone\n\nВывод по доступным данным:\nВ тикете явно зафиксирован отключённый Tailscale на телефоне; это препятствует указанному доступу через Tailscale HTTPS.\n\nРекомендации модели (следующие проверки, результат не гарантирован):\n- Подключите Tailscale на телефоне к той же tailnet, затем откройте HTTPS-адрес Mac и войдите в Bublik.\n- Проверьте, что Mac не спит, подключён к сети и API доступен; не запускайте второй экземпляр сервиса.",
+      "assessment": "tailscale_disconnected",
+      "document_facts": [
+        {
+          "source_id": "FAQ-PHONE",
+          "quote": "Подключите Tailscale на телефоне к той же tailnet и войдите по HTTPS-адресу Mac. Для ts.net Tailscale нужен и дома."
+        },
+        {
+          "source_id": "DOC-PHONE",
+          "quote": "On Android/iPhone, connect Tailscale to the same tailnet, open the Mac HTTPS\nhostname and sign in as the same Bublik user. No API token or custom CA is needed\nfor the `.ts.net` URL. Tailscale remains necessary for that URL on home Wi-Fi.\nThe Mac must stay awake and online with API/Ollama available."
+        },
+        {
+          "source_id": "FAQ-ACCESS",
+          "quote": "Спящий или отключённый от сети Mac не обслуживает чат. Не запускайте второй экземпляр уже работающего сервиса."
+        }
+      ],
+      "context_facts": [
+        {
+          "key": "ticket.observed_error",
+          "quote": "Mac HTTPS hostname unreachable"
+        },
+        {
+          "key": "user.device",
+          "quote": "iPhone Safari"
+        },
+        {
+          "key": "ticket.tailscale_state",
+          "quote": "disconnected_on_phone"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "connect_tailscale",
+          "text": "Подключите Tailscale на телефоне к той же tailnet, затем откройте HTTPS-адрес Mac и войдите в Bublik.",
+          "source_ids": [
+            "FAQ-PHONE",
+            "DOC-PHONE"
+          ]
+        },
+        {
+          "id": "check_host",
+          "text": "Проверьте, что Mac не спит, подключён к сети и API доступен; не запускайте второй экземпляр сервиса.",
+          "source_ids": [
+            "FAQ-PHONE",
+            "DOC-PHONE",
+            "FAQ-ACCESS"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "FAQ-PHONE",
+          "kind": "faq",
+          "title": "Телефон Tailscale доступ подключение / phone connection tailscale disconnected iPhone Android",
+          "text": "Подключите Tailscale на телефоне к той же tailnet и войдите по HTTPS-адресу Mac. Для ts.net Tailscale нужен и дома.",
+          "topic": "phone",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/README.md#phones-and-lan",
+          "origin_path": "day-30-private-ai-service/README.md",
+          "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+        },
+        {
+          "id": "DOC-PHONE",
+          "kind": "documentation",
+          "title": "Телефон Tailscale доступ подключение / phone connection tailscale disconnected iPhone Android",
+          "text": "On Android/iPhone, connect Tailscale to the same tailnet, open the Mac HTTPS\nhostname and sign in as the same Bublik user. No API token or custom CA is needed\nfor the `.ts.net` URL. Tailscale remains necessary for that URL on home Wi-Fi.\nThe Mac must stay awake and online with API/Ollama available.",
+          "topic": "phone",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/README.md#phones-and-lan",
+          "origin_path": "day-30-private-ai-service/README.md",
+          "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+        },
+        {
+          "id": "FAQ-ACCESS",
+          "kind": "faq",
+          "title": "Mac спит нет доступа / Mac asleep offline phone network",
+          "text": "Спящий или отключённый от сети Mac не обслуживает чат. Не запускайте второй экземпляр уже работающего сервиса.",
+          "topic": "phone",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/README.md#daily-use-and-mac-sleep",
+          "origin_path": "day-30-private-ai-service/README.md",
+          "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+        }
+      ],
+      "context_used": true,
+      "context_user_id": "U-002",
+      "evidence_gaps": [],
+      "retrieval": {
+        "method": "sqlite_fts5_bm25",
+        "indexed_chunks": 14,
+        "terms": [
+          "телефона",
+          "открывается",
+          "чат",
+          "tailscale",
+          "phone",
+          "connection",
+          "unavailable",
+          "mac",
+          "https",
+          "hostname",
+          "unreachable"
+        ],
+        "selected_chunks": 3
+      },
+      "llm": {
+        "mode": "offline_mock",
+        "model": null,
+        "generation_calls": 0,
+        "http_posts": 0
+      },
+      "validation": {
+        "source_ids": true,
+        "exact_quotes": true,
+        "context_binding": true,
+        "bounded_claims": true
+      }
+    },
+    "C_401_unknown": {
+      "ticket_id": "T-103",
+      "answer": "Факты FAQ/документации:\n[DOC-ERRORS] | 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |\n[FAQ-ERRORS] 401 соответствует отсутствию авторизации или истёкшим credentials; один код не устанавливает точную причину.\n[FAQ-AUTH] Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.\n\nФакты MCP-тикета и пользователя:\nticket.observed_error: HTTP 401 authentication_required\nuser.device: Mac browser\n\nВывод по доступным данным:\nТочная причина неизвестна: имеющихся данных недостаточно для подтверждённого диагноза.\n\nРекомендации модели (следующие проверки, результат не гарантирован):\n- Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.\n- Передайте оператору время сбоя, устройство, адрес доступа и точный код ошибки. Не передавайте пароль, cookie или токены.",
+      "assessment": "undetermined",
+      "document_facts": [
+        {
+          "source_id": "DOC-ERRORS",
+          "quote": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |"
+        },
+        {
+          "source_id": "FAQ-ERRORS",
+          "quote": "401 соответствует отсутствию авторизации или истёкшим credentials; один код не устанавливает точную причину."
+        },
+        {
+          "source_id": "FAQ-AUTH",
+          "quote": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF."
+        }
+      ],
+      "context_facts": [
+        {
+          "key": "ticket.observed_error",
+          "quote": "HTTP 401 authentication_required"
+        },
+        {
+          "key": "user.device",
+          "quote": "Mac browser"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "check_auth",
+          "text": "Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.",
+          "source_ids": [
+            "DOC-ERRORS",
+            "FAQ-ERRORS",
+            "FAQ-AUTH"
+          ]
+        },
+        {
+          "id": "collect_details",
+          "text": "Передайте оператору время сбоя, устройство, адрес доступа и точный код ошибки. Не передавайте пароль, cookie или токены.",
+          "source_ids": []
+        }
+      ],
+      "sources": [
+        {
+          "id": "DOC-ERRORS",
+          "kind": "documentation",
+          "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+          "text": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#errors",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        },
+        {
+          "id": "FAQ-ERRORS",
+          "kind": "faq",
+          "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+          "text": "401 соответствует отсутствию авторизации или истёкшим credentials; один код не устанавливает точную причину.",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#errors",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        },
+        {
+          "id": "FAQ-AUTH",
+          "kind": "faq",
+          "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+          "text": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+          "topic": "auth",
+          "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+          "origin_path": "day-30-private-ai-service/API.md",
+          "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+        }
+      ],
+      "context_used": true,
+      "context_user_id": "U-003",
+      "evidence_gaps": [
+        "Точная причина не установлена."
+      ],
+      "retrieval": {
+        "method": "sqlite_fts5_bm25",
+        "indexed_chunks": 14,
+        "terms": [
+          "авторизация",
+          "authentication",
+          "failure",
+          "http",
+          "401",
+          "required"
+        ],
+        "selected_chunks": 3
+      },
+      "llm": {
+        "mode": "offline_mock",
+        "model": null,
+        "generation_calls": 0,
+        "http_posts": 0
+      },
+      "validation": {
+        "source_ids": true,
+        "exact_quotes": true,
+        "context_binding": true,
+        "bounded_claims": true
+      }
+    },
+    "C_no_documentation": {
+      "ticket_id": "T-104",
+      "answer": "Факты FAQ/документации:\nРелевантные источники не найдены.\n\nФакты MCP-тикета и пользователя:\nticket.observed_error: Refund policy not found\nuser.device: Mac browser\n\nВывод по доступным данным:\nТочная причина неизвестна: имеющихся данных недостаточно для подтверждённого диагноза.\n\nРекомендации модели (следующие проверки, результат не гарантирован):\n- Передайте оператору время сбоя, устройство, адрес доступа и точный код ошибки. Не передавайте пароль, cookie или токены.",
+      "assessment": "undetermined",
+      "document_facts": [],
+      "context_facts": [
+        {
+          "key": "ticket.observed_error",
+          "quote": "Refund policy not found"
+        },
+        {
+          "key": "user.device",
+          "quote": "Mac browser"
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "collect_details",
+          "text": "Передайте оператору время сбоя, устройство, адрес доступа и точный код ошибки. Не передавайте пароль, cookie или токены.",
+          "source_ids": []
+        }
+      ],
+      "sources": [],
+      "context_used": true,
+      "context_user_id": "U-003",
+      "evidence_gaps": [
+        "Точная причина не установлена.",
+        "В ограниченном FAQ и корпусе Day 30 нет релевантного подтверждения."
+      ],
+      "retrieval": {
+        "method": "sqlite_fts5_bm25",
+        "indexed_chunks": 14,
+        "terms": [
+          "получить",
+          "возврат",
+          "оплаты",
+          "за",
+          "подписку",
+          "refund",
+          "billing",
+          "subscription",
+          "policy",
+          "found"
+        ],
+        "selected_chunks": 0
+      },
+      "llm": {
+        "mode": "offline_mock",
+        "model": null,
+        "generation_calls": 0,
+        "http_posts": 0
+      },
+      "validation": {
+        "source_ids": true,
+        "exact_quotes": true,
+        "context_binding": true,
+        "bounded_claims": true
+      }
+    }
+  },
+  "failures_detail": [],
+  "acceptance_pending": [
+    "Mac offline results",
+    "one separately approved real LLM E2E",
+    "human review of real answer",
+    "publication and video"
+  ]
+}

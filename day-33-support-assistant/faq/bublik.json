@@ -1,0 +1,72 @@
+[
+  {
+    "id": "FAQ-AUTH",
+    "topic": "auth",
+    "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+    "text": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+    "origin_path": "day-30-private-ai-service/API.md",
+    "anchor": "authentication",
+    "quote": "Browser: opaque server-side session in `__Host-bublik_session`; Secure, HttpOnly,\nSameSite, Path=/, no Domain. State-changing requests require a session-bound\n`X-CSRF-Token` and an allowed Origin, including login/logout. Login rotates the\nsession. `GET auth/session` supplies bootstrap/session state and the CSRF token\nto in-memory client state. GET does not log in or mutate chat data.",
+    "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+  },
+  {
+    "id": "FAQ-EXPIRY",
+    "topic": "auth",
+    "title": "Истечение сессии / expired session 401 авторизация сессия вход",
+    "text": "У авторизованной сессии абсолютный срок 12 часов. Сброс пароля отзывает сессии и токены.",
+    "origin_path": "day-30-private-ai-service/API.md",
+    "anchor": "operational-limits",
+    "quote": "Sessions: anonymous bootstrap 15 min; authenticated 12 h absolute expiry.\nCookie uses SameSite=Strict. Login rotates session/CSRF; password reset revokes\nall sessions and tokens. Tokens default to 30 days, CLI selectable 1–365 days.",
+    "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+  },
+  {
+    "id": "FAQ-ERRORS",
+    "topic": "auth",
+    "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+    "text": "401 соответствует отсутствию авторизации или истёкшим credentials; один код не устанавливает точную причину.",
+    "origin_path": "day-30-private-ai-service/API.md",
+    "anchor": "errors",
+    "quote": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+    "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+  },
+  {
+    "id": "FAQ-PHONE",
+    "topic": "phone",
+    "title": "Телефон Tailscale доступ подключение / phone connection tailscale disconnected iPhone Android",
+    "text": "Подключите Tailscale на телефоне к той же tailnet и войдите по HTTPS-адресу Mac. Для ts.net Tailscale нужен и дома.",
+    "origin_path": "day-30-private-ai-service/README.md",
+    "anchor": "phones-and-lan",
+    "quote": "On Android/iPhone, connect Tailscale to the same tailnet, open the Mac HTTPS\nhostname and sign in as the same Bublik user. No API token or custom CA is needed\nfor the `.ts.net` URL. Tailscale remains necessary for that URL on home Wi-Fi.\nThe Mac must stay awake and online with API/Ollama available.",
+    "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+  },
+  {
+    "id": "FAQ-HISTORY",
+    "topic": "history",
+    "title": "История диалогов чаты синхронизация / history conversations saved",
+    "text": "Полная история хранится отдельно от короткого контекста модели. Неудачные и прерванные ходы сохраняются.",
+    "origin_path": "day-30-private-ai-service/README.md",
+    "anchor": "api,-persistence-and-limits",
+    "quote": "Full history is independent of the inference suffix. Only recent completed pairs\nenter ordinary context; omissions are visible. The system prompt and new question\nare not silently truncated. Counting uses a verified conservative byte-BPE upper\nbound, not an exact tokenizer. Failed/truncated/interrupted turns remain stored.",
+    "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+  },
+  {
+    "id": "FAQ-OUTAGE",
+    "topic": "outage",
+    "title": "Модель Ollama недоступна / model offline history readiness",
+    "text": "При недоступной Ollama сохранённая история доступна после авторизации, если хранилище исправно.",
+    "origin_path": "day-30-private-ai-service/API.md",
+    "anchor": "errors",
+    "quote": "Readiness failure gates new inference; authenticated stored history remains\navailable when Ollama is offline, assuming storage itself is healthy.",
+    "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+  },
+  {
+    "id": "FAQ-ACCESS",
+    "topic": "phone",
+    "title": "Mac спит нет доступа / Mac asleep offline phone network",
+    "text": "Спящий или отключённый от сети Mac не обслуживает чат. Не запускайте второй экземпляр уже работающего сервиса.",
+    "origin_path": "day-30-private-ai-service/README.md",
+    "anchor": "daily-use-and-mac-sleep",
+    "quote": "If you did not stop the API before sleep, check `launchctl print` and reopen the\nchat first; do not bootstrap a service that is already running. Keep the same\ndatabase. The chat is unavailable while its Mac host sleeps or is offline.\nDetails and interruption recovery: [RUNBOOK.ru.md](RUNBOOK.ru.md).",
+    "file_sha256": "ec65efe5112e2a851ddd51ec059621322846d968eff5f16b20b8011c79c4bec5"
+  }
+]

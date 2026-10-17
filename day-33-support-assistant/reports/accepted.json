@@ -1,0 +1,345 @@
+{
+  "overall_status": "PASS",
+  "scope": "Day 33 Course Minimum: synthetic local support assistant",
+  "acceptance_date": "2026-10-17",
+  "timezone": "Europe/Kiev",
+  "base_sha": "c654e24610bdabed15747088f9e1691ed36d0b17",
+  "attempt_id": "attempt-03",
+  "fresh_live_acceptance": true,
+  "original_receipt_sha256": "dc03e5e22a9ca1d72885df97ae548a88ada8666c9ce60c2005ab9fb8ef694acb",
+  "mac_offline": {
+    "status": "passed",
+    "tests_run": 25,
+    "provenance": "verified by the pinned final runner before the real call",
+    "original_report_sha256": "106b3d7544210c5b7a9d2b77113cc0dace0b84e734aaaa0d43b298c9feac3acd"
+  },
+  "technical_checks": {
+    "real_MCP_execution": true,
+    "RAG_three_expected_sources": true,
+    "real_Groq_response": true,
+    "measured_usage": true,
+    "no_retry_or_fallback": true,
+    "validated_answer": true,
+    "evidence_provenance": true,
+    "previous_attempts_unchanged": true
+  },
+  "full_live_E2E": "PASS",
+  "semantic_review": {
+    "status": "PASS",
+    "reviewer": "assistant",
+    "method": "manual assessment of saved real answer plus independent offline reconstruction",
+    "findings": [
+      "Expired session is explicit in ticket.session_state; the diagnosis is not inferred solely from HTTP 401.",
+      "Sign-in is a reasonable next action, grounded by FAQ-AUTH.",
+      "The additional credential-mode clarification is safe but not essential to this browser ticket.",
+      "Application-assigned evidence is explicitly labelled and separate from model document_facts.",
+      "No guaranteed repair, invented cause, wrong-password claim or other-user data appears in the final answer."
+    ]
+  },
+  "http": {
+    "status": 200,
+    "post_attempts": 1,
+    "usage": {
+      "prompt_tokens": 1370,
+      "completion_tokens": 233,
+      "total_tokens": 1603
+    },
+    "request_id": "req_01m53etxjwewhbfqzfk12b4veg",
+    "response_id": "chatcmpl-05789f69-9e29-48ee-ab8f-7adb8977cfb5",
+    "finish_reason": "stop",
+    "transport": "curl",
+    "curl_exit": 0,
+    "request_body_sha256": "8010cd4309636300702e335b3b738fd86227dcab51ed573e099fa0e22bd2d4c8",
+    "request_body_bytes": 7552,
+    "completion_token_cap": 1800,
+    "error_code": null,
+    "error_type": null
+  },
+  "automatic_retries": 0,
+  "fallback_calls": 0,
+  "model_input": {
+    "question": "Почему не работает авторизация?",
+    "ticket_id": "T-101",
+    "context": {
+      "ticket.ticket_id": "T-101",
+      "ticket.user_id": "U-001",
+      "ticket.product": "Bublik Private AI Service",
+      "ticket.description": "Не работает авторизация в чате. Authentication session problem.",
+      "ticket.status": "open",
+      "ticket.device": "Android Chrome",
+      "ticket.observed_error": "HTTP 401 authentication_required",
+      "ticket.session_state": "expired",
+      "ticket.diagnostic": "Synthetic operator fixture explicitly records an expired authenticated browser session; this is not inferred from HTTP 401.",
+      "user.user_id": "U-001",
+      "user.display_name": "Demo One",
+      "user.product": "Bublik Private AI Service",
+      "user.device": "Android Chrome",
+      "user.access_route": "Tailscale HTTPS"
+    },
+    "sources": [
+      {
+        "id": "DOC-ERRORS",
+        "kind": "documentation",
+        "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+        "text": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+        "topic": "auth",
+        "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#errors",
+        "origin_path": "day-30-private-ai-service/API.md",
+        "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+      },
+      {
+        "id": "FAQ-AUTH",
+        "kind": "faq",
+        "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+        "text": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+        "topic": "auth",
+        "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+        "origin_path": "day-30-private-ai-service/API.md",
+        "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+      },
+      {
+        "id": "DOC-AUTH",
+        "kind": "documentation",
+        "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+        "text": "Browser: opaque server-side session in `__Host-bublik_session`; Secure, HttpOnly,\nSameSite, Path=/, no Domain. State-changing requests require a session-bound\n`X-CSRF-Token` and an allowed Origin, including login/logout. Login rotates the\nsession. `GET auth/session` supplies bootstrap/session state and the CSRF token\nto in-memory client state. GET does not log in or mutate chat data.",
+        "topic": "auth",
+        "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+        "origin_path": "day-30-private-ai-service/API.md",
+        "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+      }
+    ],
+    "max_completion_tokens": 1800
+  },
+  "model_plan": {
+    "assessment": "session_expired",
+    "document_facts": [
+      {
+        "source_id": "DOC-ERRORS",
+        "quote": "| 401 | authentication_required / expired credential |"
+      }
+    ],
+    "context_facts": [
+      {
+        "key": "ticket.observed_error",
+        "quote": "HTTP 401 authentication_required"
+      },
+      {
+        "key": "ticket.session_state",
+        "quote": "expired"
+      },
+      {
+        "key": "user.device",
+        "quote": "Android Chrome"
+      },
+      {
+        "key": "ticket.device",
+        "quote": "Android Chrome"
+      }
+    ],
+    "action_ids": [
+      "sign_in",
+      "check_auth"
+    ]
+  },
+  "result": {
+    "ticket_id": "T-101",
+    "answer": "Факты FAQ/документации:\n[DOC-ERRORS] | 401 | authentication_required / expired credential |\n\nФакты MCP-тикета и пользователя:\nticket.observed_error: HTTP 401 authentication_required\nticket.session_state: expired\nuser.device: Android Chrome\nticket.device: Android Chrome\n\nВывод по доступным данным:\nПо данным синтетического тикета браузерная сессия истекла. Это подтверждает тикет, а не один HTTP 401.\n\nПодтверждение рекомендаций (добавлено приложением):\n[FAQ-AUTH] Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.\n[DOC-ERRORS] | 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |\n\nРекомендации модели (следующие проверки, результат не гарантирован):\n- Откройте исходный HTTPS-адрес чата и повторно войдите через интерфейс Bublik.\n- Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.",
+    "assessment": "session_expired",
+    "document_facts": [
+      {
+        "source_id": "DOC-ERRORS",
+        "quote": "| 401 | authentication_required / expired credential |"
+      }
+    ],
+    "context_facts": [
+      {
+        "key": "ticket.observed_error",
+        "quote": "HTTP 401 authentication_required"
+      },
+      {
+        "key": "ticket.session_state",
+        "quote": "expired"
+      },
+      {
+        "key": "user.device",
+        "quote": "Android Chrome"
+      },
+      {
+        "key": "ticket.device",
+        "quote": "Android Chrome"
+      }
+    ],
+    "application_evidence": [
+      {
+        "action_id": "sign_in",
+        "source_id": "FAQ-AUTH",
+        "quote": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+        "assigned_by": "application"
+      },
+      {
+        "action_id": "check_auth",
+        "source_id": "DOC-ERRORS",
+        "quote": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+        "assigned_by": "application"
+      }
+    ],
+    "recommendations": [
+      {
+        "id": "sign_in",
+        "text": "Откройте исходный HTTPS-адрес чата и повторно войдите через интерфейс Bublik.",
+        "source_ids": [
+          "FAQ-AUTH"
+        ]
+      },
+      {
+        "id": "check_auth",
+        "text": "Уточните, используется браузерная сессия или Bearer-доступ; сообщите точный код ошибки без credentials.",
+        "source_ids": [
+          "DOC-ERRORS"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "DOC-ERRORS",
+        "kind": "documentation",
+        "title": "Коды ошибок / authentication 401 авторизация неизвестная причина csrf 403",
+        "text": "| 401 | authentication_required / expired credential |\n| 403 | csrf_failed / insufficient_scope |",
+        "topic": "auth",
+        "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#errors",
+        "origin_path": "day-30-private-ai-service/API.md",
+        "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+      },
+      {
+        "id": "FAQ-AUTH",
+        "kind": "faq",
+        "title": "Авторизация и сессия / Authentication session login 401 вход авторизация пароль сессия",
+        "text": "Браузер использует серверную сессию; вход обновляет сессию. Изменения требуют Origin и CSRF.",
+        "topic": "auth",
+        "origin_url": "https://github.com/Ly41k/ai-advent-llm-api/blob/c654e24610bdabed15747088f9e1691ed36d0b17/day-30-private-ai-service/API.md#authentication",
+        "origin_path": "day-30-private-ai-service/API.md",
+        "file_sha256": "aa2777165d29fc2994c1a03a30c36e330b7ce862768da530e57b452698e01c6c"
+      }
+    ],
+    "context_used": true,
+    "context_user_id": "U-001",
+    "evidence_gaps": [],
+    "retrieval": {
+      "method": "sqlite_fts5_bm25",
+      "indexed_chunks": 14,
+      "terms": [
+        "авторизация",
+        "чате",
+        "authentication",
+        "session",
+        "problem",
+        "http",
+        "401",
+        "required"
+      ],
+      "selected_chunks": 3
+    },
+    "llm": {
+      "mode": "live_groq",
+      "model": "openai/gpt-oss-120b",
+      "generation_calls": 1,
+      "http_posts": 1,
+      "response_id": "chatcmpl-05789f69-9e29-48ee-ab8f-7adb8977cfb5",
+      "usage": {
+        "queue_time": 0.218073739,
+        "prompt_tokens": 1370,
+        "prompt_time": 0.061381024,
+        "completion_tokens": 233,
+        "completion_time": 0.485750632,
+        "total_tokens": 1603,
+        "total_time": 0.547131656,
+        "completion_tokens_details": {
+          "reasoning_tokens": 129
+        }
+      }
+    },
+    "validation": {
+      "source_ids": true,
+      "exact_quotes": true,
+      "context_binding": true,
+      "bounded_claims": true
+    }
+  },
+  "runtime_source_sha256": {
+    "acceptance.py": "a9bd09ecfd7396058ba65a222208d0593e0d171881bad927ab1095c76b18a07f",
+    "common.py": "7705eb63edf3987d05737e9650095dd4b457899ac486e6059f936a01c4a4ee89",
+    "data/tickets.json": "cd0ed4b95aa356b62df983ce8e12476d49d35861c57b36d7641bc1ce6e5313f7",
+    "data/users.json": "a491a2620cd153b5c81db9bc62ee38939f1dd3a68d34a93d8f433cdc4b5f39b1",
+    "faq/bublik.json": "033a2df728a3e1beadfd35d8cb604475f018e84f8828c23ebea3aa50fa55fba0",
+    "llm_adapter.py": "c0e30fdc4c76135be1df7f69278330e9ed53034dd3bb0477b7ea2f22ed9a28d7",
+    "main.py": "0eb2f3e29400aaedb0cd51d0c3cad932f41b7b47a87d845e6bca78cdd603f02f",
+    "mcp_client.py": "fb25df80344f55ab2ee33b0171a6aeff1b5e1cad92fede1f50fc7c80585b8c41",
+    "mcp_server.py": "43705499a53ffc1bd2ae76de3a8aa774e9d323bd26cf974551ed6ccbe5ec4664",
+    "requirements.txt": "4fe75062c5d424bbc86a8cd58c63ab19aeffe4f0a0e100022252c8032e12ee5b",
+    "retrieval.py": "733135c19b3975168134a5ada99a986e785061925872b799d0d1e1d6112e5950",
+    "support_agent.py": "1342a3b1a88c4942526370c5f08c4c158e0a690d4b9ba3698fbc5e333460f0e3",
+    "tests/test_support.py": "74b3c2a0d8485ec338f89454e3fe942088e395c3b3e0df4408a98e637fd6eb07",
+    "live_acceptance.py": "a36f19bb940edbe9210c28696b2cc7ef9c4e4f34b362af59ae82fee2cc2d10be",
+    "retry_acceptance.py": "50302fae006f2a1cc954e2c1ff37bc2aa62954a63ef64aa24d12e28357777733",
+    "replay_acceptance.py": "f6888cd1bcb4164c0849c5a59352f692828fb28040ce184241346fb1ab7ab158",
+    "tests/test_action_evidence.py": "191a0353e91fcf891a2494c99ec8edcdc5cbaa0436a79fa17ed1931471e5cb0a",
+    "final_acceptance.py": "7cbbaec6ee7825e69fec2c04d9b16d5217657807ebd73778211c425827caa1be",
+    "final_acceptance_sources.json": "682482ef14e73a8ea2425cc9b3bfe48cf77532edc3a5a8063e1bed1f24fb69f2"
+  },
+  "acceptance_time_readme_sha256": {
+    "README.md": "cde39224cdd15fac2fce31b00de568cd4e1d5922b2e6851bc339ad2a4cb48ca9",
+    "README.ru.md": "50510776345adfd3b1015604233ad114e6b69569592f1bb515df08eefcfd0f66"
+  },
+  "prior_attempts": [
+    {
+      "attempt_id": "attempt-01",
+      "original_receipt_sha256": "0030fa6c427986ee766704ee5542fb5356fe02e10749b7b4c7304ea439a99545",
+      "http_status": 403,
+      "full_E2E": "FAIL",
+      "usage": null,
+      "error": "HTTP 403"
+    },
+    {
+      "attempt_id": "attempt-02",
+      "original_receipt_sha256": "0e1184ad6904ca8804f81bc803d760dc4966d835bfdfe26adb6edfde4a6f7bb3",
+      "http_status": 200,
+      "full_E2E": "FAIL",
+      "usage": {
+        "prompt_tokens": 1370,
+        "completion_tokens": 230
+      },
+      "error": "missing_action_evidence"
+    }
+  ],
+  "previous_receipts_unchanged": true,
+  "estimated_list_cost_usd": 0.0003453,
+  "actual_billed_usd": null,
+  "pricing_basis": "planning snapshot: USD 0.15 input / 0.60 output per 1M tokens",
+  "limitations": [
+    "One real accepted T-101 scenario; other mandatory cases tested offline.",
+    "Bounded model plan and application-owned action catalogue; not general free-text diagnosis.",
+    "HTTP demo always uses mock; accepted real Groq path is the explicit CLI acceptance runner.",
+    "Exact cause of attempt-01 HTTP 403 is unknown.",
+    "Final READMEs were updated after acceptance; frozen runner manifests retain their historical README hashes.",
+    "Original raw receipts remain private and unchanged; this report is a derived publication."
+  ],
+  "mcp_calls": [
+    {
+      "tool": "get_ticket",
+      "arguments": {
+        "ticket_id": "T-101"
+      },
+      "completed": true,
+      "user_id": "U-001",
+      "ticket_id": "T-101"
+    },
+    {
+      "tool": "get_user",
+      "arguments": {
+        "user_id": "U-001"
+      },
+      "completed": true,
+      "user_id": "U-001"
+    }
+  ]
+}
