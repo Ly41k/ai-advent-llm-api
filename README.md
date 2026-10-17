@@ -519,6 +519,8 @@ The [final report](day-34-file-assistant/FINAL_REPORT.md) records four Groq POST
 
 The accepted Mac run returned HTTP 200: **201.941 seconds generation / 204.529 seconds total**, 11,357 prompt / 698 output tokens. Two real local generation calls were made: the first omitted URLs, the second passed after a format instruction fix. [Final report](day-35-real-task/FINAL_REPORT.md). Private Markdown, diffs, evidence, prompts and raw responses remain on the owner's Mac; public files contain code, synthetic tests and a safe acceptance summary. The [video guide](day-35-real-task/VIDEO.ru.md) is ready; recording is not yet confirmed. No new generation or index rebuild accompanies this documentation update.
 
+The public delivery is in open [PR #9](https://github.com/Ly41k/ai-advent-llm-api/pull/9), not yet merged. The accepted private result is `day35-imperz-20261014-07`; the `summary` command in the launch table verifies it offline without generating text or displaying private content. Day 35 has 30/30 passing synthetic tests in the preparation environment (Linux, Python 3.12.14); complete Mac suite output has not been separately supplied. The real Python 3.13 Mac run and owner's semantic review are confirmed independently of those tests.
+
 ## Tests
 
 The local test suites use fakes, scripted HTTP fixtures, local SQLite, or local MCP servers. They do not call paid cloud APIs unless a command explicitly performs a live model/API run.
