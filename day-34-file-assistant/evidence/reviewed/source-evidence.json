@@ -1,0 +1,143 @@
+{
+  "provenance": "reviewer-created editorial proposal, not a model-selected write_file",
+  "original_model_document_sha256": "69b8d740ef46256ef9a5c40b563ffe5c0538f0f3bcd0193235f23e14eea89010",
+  "editorial_document_sha256": "7e1c49169bce21255d3600c7e5a0ed7634d5458cfd5a6bfa54faee9ade180d1d",
+  "new_provider_posts": 0,
+  "evidence": [
+    {
+      "path": "day-33-support-assistant/data/tickets.json",
+      "line": 2,
+      "quote": "  {\"ticket_id\":\"T-101\",\"user_id\":\"U-001\",\"product\":\"Bublik Private AI Service\",\"description\":\"Не работает авторизация в чате. Authentication session problem.\",\"status\":\"open\",\"device\":\"Android Chrome\",\"observed_error\":\"HTTP 401 authentication_required\",\"session_state\":\"expired\",\"diagnostic\":\"Synthetic operator fixture explicitly records an expired authenticated browser session; this is not inferred from HTTP 401.\",\"synthetic\":true},"
+    },
+    {
+      "path": "day-33-support-assistant/data/users.json",
+      "line": 2,
+      "quote": "  {\"user_id\":\"U-001\",\"display_name\":\"Demo One\",\"product\":\"Bublik Private AI Service\",\"device\":\"Android Chrome\",\"access_route\":\"Tailscale HTTPS\",\"synthetic\":true},"
+    },
+    {
+      "path": "day-33-support-assistant/main.py",
+      "line": 11,
+      "quote": "from mcp_client import fetch_context"
+    },
+    {
+      "path": "day-33-support-assistant/main.py",
+      "line": 59,
+      "quote": "            self.send_json(200,answer(request,OfflineAdapter()))"
+    },
+    {
+      "path": "day-33-support-assistant/main.py",
+      "line": 107,
+      "quote": "            adapter=OfflineAdapter()"
+    },
+    {
+      "path": "day-33-support-assistant/main.py",
+      "line": 115,
+      "quote": "                ticket,user=asyncio.run(fetch_context(args.ticket))"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 31,
+      "quote": "                async with stdio_client(StdioServerParameters(command=cmd[0], args=cmd[1:], env=env), errlog=errors) as (read, write):"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 33,
+      "quote": "                        await session.initialize()"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 35,
+      "quote": "                        require(names == {'get_ticket', 'get_user'}, 'mcp_invalid_catalog', 502)"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 57,
+      "quote": "async def fetch_context(ticket_id, command=None):"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 59,
+      "quote": "        ticket = (await call(session, 'get_ticket', {'ticket_id': ticket_id})).get('ticket')"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 65,
+      "quote": "        # This ID comes only from the MCP ticket. The question is never parsed for IDs."
+    },
+    {
+      "path": "day-33-support-assistant/mcp_client.py",
+      "line": 66,
+      "quote": "        user = (await call(session, 'get_user', {'user_id': user_id})).get('user')"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_server.py",
+      "line": 16,
+      "quote": "def get_ticket(ticket_id: str) -> dict:"
+    },
+    {
+      "path": "day-33-support-assistant/mcp_server.py",
+      "line": 22,
+      "quote": "def get_user(user_id: str) -> dict:"
+    },
+    {
+      "path": "day-33-support-assistant/retrieval.py",
+      "line": 39,
+      "quote": "        db.execute(\"CREATE VIRTUAL TABLE search USING fts5(title,text, tokenize='unicode61')\")"
+    },
+    {
+      "path": "day-33-support-assistant/retrieval.py",
+      "line": 45,
+      "quote": "        rows = db.execute('SELECT rowid FROM search WHERE search MATCH ? AND rowid IN (SELECT rowid FROM search WHERE search MATCH ?) ORDER BY bm25(search),rowid LIMIT 3', (query,question_query)).fetchall() if query and question_query else []"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 35,
+      "quote": "def validate_context(ticket, user):"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 42,
+      "quote": "    require(ticket['user_id'] == user['user_id'] and ticket['device'] == user['device'], 'mcp_identity_mismatch', 502)"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 46,
+      "quote": "    sources, retrieval = retrieve(question, ticket)"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 123,
+      "quote": "    if payload['ticket_id'] is None:"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 147,
+      "quote": "    if request.get('ticket_id'):"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 148,
+      "quote": "        ticket,user=await fetch_context(request['ticket_id'],mcp_command)"
+    },
+    {
+      "path": "day-33-support-assistant/support_agent.py",
+      "line": 150,
+      "quote": "    payload=prepare(request['question'],ticket,user)"
+    },
+    {
+      "path": "day-33-support-assistant/tests/test_support.py",
+      "line": 96,
+      "quote": "                self.assertEqual({t.name for t in (await session.list_tools()).tools},{'get_ticket','get_user'})"
+    },
+    {
+      "path": "day-33-support-assistant/tests/test_support.py",
+      "line": 97,
+      "quote": "                self.assertEqual((await call(session,'get_ticket',{'ticket_id':'T-101'}))['ticket']['user_id'],'U-001')"
+    },
+    {
+      "path": "day-33-support-assistant/tests/test_support.py",
+      "line": 98,
+      "quote": "                self.assertEqual((await call(session,'get_user',{'user_id':'U-001'}))['user']['device'],'Android Chrome')"
+    }
+  ]
+}

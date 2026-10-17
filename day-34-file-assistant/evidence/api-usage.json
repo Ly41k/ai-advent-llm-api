@@ -1,0 +1,16 @@
+{
+  "prompt_tokens": 83631,
+  "completion_tokens": 5666,
+  "total_tokens": 89297,
+  "cached_input_tokens": 21248,
+  "conservative_list_cost_usd": 0.08822025,
+  "cache_adjusted_estimate_usd": 0.07387785,
+  "openai_posts": 10,
+  "groq_posts": 4,
+  "total_provider_posts": 14,
+  "new_provider_posts_in_review": 0,
+  "openai_reserved_usd": 0.44085975,
+  "openai_money_cap_usd": 0.5,
+  "groq_usage_total": "UNKNOWN: failed responses lack usage; previously verified successful response has 1140 tokens",
+  "cost_note": "OpenAI estimates from saved usage; not an invoice. Full input tariff is conservative; cached-input estimate uses reported cached tokens."
+}

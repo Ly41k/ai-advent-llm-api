@@ -6,7 +6,7 @@ A day-by-day Python learning project that starts with direct LLM API calls and g
 
 **Cheburator** is the captain of the research spacecraft; **Bublik** is the assistant that evolves through the course. **Revik**, introduced on Day 27, is a separate local code review assistant for Kotlin projects.
 
-The repository currently contains **Days 1–33**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
+The repository currently contains **Days 1–34**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
 ## Learning path
 
@@ -45,6 +45,7 @@ The repository currently contains **Days 1–33**. Each `day-XX-...` directory i
 | [31](day-31-developer-assistant/README.md) | Developer assistant | Project RAG, read-only MCP Git, Main/Documentation/Git/Verification delegation, local Qwen and human-reviewed publication; Course Minimum Accepted |
 | [32](day-32-pr-review/README.md) | AI pull request review | GitHub PR diff, base-README FTS5, Groq and validated review artifacts; local integration PASS, quality PARTIAL, Actions live E2E FAIL |
 | [33](day-33-support-assistant/README.md) | AI support assistant | Synthetic CRM over real MCP stdio, FAQ/FTS5, Groq and separate evidence; Mac 25/25, fresh live E2E PASS |
+| [34](day-34-file-assistant/README.md) | AI File Assistant | Real LLM-selected list/search/read/write, Usage and ADR, saved Markdown/diffs and replay; Mac 65/65, Course Minimum PASS with editorial review; original ADR PARTIAL |
 
 ## How the architecture evolves
 
@@ -65,6 +66,8 @@ The repository currently contains **Days 1–33**. Each `day-XX-...` directory i
 - **Day 31:** combine Project RAG and real MCP Git with Main/Documentation/Git/Verification delegation. One local RU-1 / Multi answer was accepted through exact claim–anchor bindings and explicit human review; extended Research Stage 7 remains incomplete.
 - **Day 32:** introduce an AI PR reviewer: read a real GitHub diff, retrieve trusted base-revision README passages with SQLite FTS5, call Groq and validate JSON/line/evidence findings. Local full review found the seeded defect (technical PASS; quality PARTIAL), while GitHub Actions live E2E failed with HTTP 403.
 - **Day 33:** add a separate support assistant for Bublik Day 30: JSON users/tickets over real MCP, FTS5/BM25 top-3, a bounded Groq plan and validated answer. Model/application evidence is separate; Mac offline 25/25 and fresh curl attempt-03 passed.
+
+- **Day 34:** add a bounded file assistant over pinned Day 33 sources. Real cloud model decisions select local list/search/read/write operations for Usage and ADR; Markdown, source evidence, diffs and zero-POST replay are retained. Technical/Usage PASS, original ADR PARTIAL, reviewed ADR PASS; Course Minimum accepted with documented editorial review.
 
 The MCP servers in Days 16–20 communicate with local clients over **stdio**. Days 17–20 can call the public GitHub REST API. Only the Day 18 worker needs a continuously running process for unattended schedules.
 
@@ -498,6 +501,12 @@ The [final report](day-32-pr-review/FINAL_REPORT.md) retains SHA bindings, reque
 [Day 33](day-33-support-assistant/README.md) is accepted as **PASS** within Course Minimum. Mac offline 25/25; fresh attempt-03 executed real MCP `get_ticket(T-101)` → `get_user(U-001)`, FTS5/BM25 top-3 and one Groq curl POST: HTTP 200, `openai/gpt-oss-120b`, **1370 input / 233 completion tokens**. The corrected validator and saved-answer semantic review passed.
 
 Session expiry is explicit synthetic ticket evidence, not inferred solely from 401. Model citations remain separate from `assigned_by: application`. Previous HTTP 403 and evidence rejection are preserved; replay is not presented as fresh live acceptance. The [final report](day-33-support-assistant/FINAL_REPORT.md) retains SHAs, request IDs, a $0.0003453 estimate and unknown billing. Real-model coverage is T-101; other mandatory cases passed offline. HTTP is mock, real Groq used CLI; the Day 30 database is untouched. The Day 33 video has been recorded by the owner; its [terminal script](day-33-support-assistant/CONSOLE_VIDEO.ru.md) reuses the saved answer without new generation. Implementation [PR #5](https://github.com/Ly41k/ai-advent-llm-api/pull/5) was merged into `main` on 2026-10-17.
+
+## Day 34 — AI File Assistant: Course Minimum PASS with editorial review
+
+[Day 34](day-34-file-assistant/README.md) uses real model-selected local file tools for two goals: find `fetch_context` usage and document MCP ticket context. Both create Markdown with verified source lines, diffs and saved-decision replay. Mac offline: 65/65. Technical acceptance and Usage quality pass; the original model ADR remains PARTIAL. The separate reviewed ADR passes, with explicit reviewer provenance and editorial diff. Course Minimum is accepted on that combined evidence; historical automatic NOT_ACCEPTED reports are preserved.
+
+The [final report](day-34-file-assistant/FINAL_REPORT.md) records four Groq POST, ten OpenAI POST, 89,297 OpenAI tokens and a conservative $0.08822025 estimate; billing is unknown. Verify offline with `python3.13 day-34-file-assistant/verify_delivery.py`; no keys, network, Ollama or new generation are needed. See the [terminal video script](day-34-file-assistant/CONSOLE_VIDEO.ru.md). Earlier lessons are unchanged. Root README edits may require old RAG indices to be rebuilt when reused; no index is rebuilt here.
 
 ## Tests
 

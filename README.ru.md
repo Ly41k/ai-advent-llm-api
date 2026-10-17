@@ -6,7 +6,7 @@
 
 **Чебуратор** — капитан исследовательского корабля, **Бублик** — помощник, который развивается по ходу курса. **Ревик**, добавленный на Дне 27, — отдельный локальный помощник проверки Kotlin-кода.
 
-Сейчас репозиторий содержит **дни 1–33**. Каждая папка `day-XX-...` — самостоятельный учебный этап с английской и русской документацией. Поздние этапы переиспользуют нужные компоненты предыдущих дней, но не объединяют автоматически все исторические версии агента в одно приложение.
+Сейчас репозиторий содержит **дни 1–34**. Каждая папка `day-XX-...` — самостоятельный учебный этап с английской и русской документацией. Поздние этапы переиспользуют нужные компоненты предыдущих дней, но не объединяют автоматически все исторические версии агента в одно приложение.
 
 ## Путь проекта
 
@@ -45,6 +45,7 @@
 | [31](day-31-developer-assistant/README.ru.md) | Ассистент разработчика | Project RAG, read-only MCP Git, делегация Main/Documentation/Git/Verification, локальная Qwen и публикация после human review; Course Minimum Accepted |
 | [32](day-32-pr-review/README.ru.md) | AI-ревью Pull Request | Настоящий GitHub PR diff, FTS5 по доверенным README, Groq и проверенные отчёты; локальная интеграция PASS, качество PARTIAL, Actions live E2E FAIL |
 | [33](day-33-support-assistant/README.ru.md) | AI-ассистент поддержки | Синтетическая CRM через настоящий MCP stdio, FAQ/FTS5, Groq, раздельные evidence; Mac 25/25, новый live E2E PASS |
+| [34](day-34-file-assistant/README.ru.md) | AI File Assistant | Настоящий модельный выбор list/search/read/write, Usage и ADR, Markdown/diff и replay; Mac 65/65, Course Minimum PASS с редакционной проверкой; исходный ADR PARTIAL |
 
 ## Как развивается архитектура
 
@@ -65,6 +66,7 @@
 - **День 31:** Project RAG и настоящий MCP Git объединяются с делегацией Main/Documentation/Git/Verification. Один локальный RU-1 / Multi ответ принят через exact claim–anchor bindings и явное human review; расширенный Research Stage 7 остаётся незавершённым.
 - **День 32:** появляется AI-ревью Pull Request: реальный diff из GitHub, доверенные README из base через SQLite FTS5, Groq и проверка JSON/строк/evidence. Локальная проверка обнаружила дефект (технически PASS, качество PARTIAL), а GitHub Actions live E2E завершился HTTP 403.
 - **День 33:** отдельный ассистент поддержки Bublik Day 30: JSON users/tickets через настоящий MCP, FTS5/BM25 top-3, ограниченный Groq plan и проверенный ответ. Evidence модели и приложения разделены; Mac offline 25/25 и новая curl attempt-03 приняты как PASS.
+- **День 34:** отдельный ограниченный файловый ассистент на закреплённых исходниках Day 33. Настоящая облачная модель выбирает list/search/read/write для Usage и ADR; сохранены Markdown, source evidence, diff и replay без POST. Технически и Usage — PASS, исходный ADR — PARTIAL, редакционный ADR — PASS; Course Minimum принят с документированной редакционной проверкой.
 
 MCP-серверы дней 16–20 общаются с локальными клиентами через **stdio**. Дни 17–20 могут получать живые данные через публичный GitHub REST API. Для постоянного выполнения расписания непрерывный процесс требуется только worker Дня 18.
 
@@ -500,6 +502,12 @@ python day-31-course-minimum/verify_delivery.py --root "$PWD"
 [Модуль Day 33](day-33-support-assistant/README.ru.md) принят как **PASS** в Course Minimum. Mac offline 25/25; новая attempt-03 выполнила настоящий MCP `get_ticket(T-101)` → `get_user(U-001)`, FTS5/BM25 top-3 и один Groq curl POST: HTTP 200, `openai/gpt-oss-120b`, **1370 input / 233 completion tokens**. Исправленный валидатор и смысл сохранённого ответа прошли проверку.
 
 Истечение сессии явно задано синтетическим тикетом, а не выведено только из 401. Модельные цитаты отделены от `assigned_by: application`. Предыдущие 403 и evidence-отказ сохранены; replay не подменяет новый live. [Итоговый отчёт](day-33-support-assistant/FINAL_REPORT.ru.md) содержит SHA, request IDs, расчёт $0.0003453 и неизвестный billing. Реальная модель проверена на T-101; остальные обязательные сценарии — offline. HTTP-демо mock, настоящий Groq принят через CLI. База Day 30 не менялась. Видео Day 33 уже записано владельцем; его [сценарий для терминала](day-33-support-assistant/CONSOLE_VIDEO.ru.md) использует сохранённый ответ без новой генерации. [PR #5](https://github.com/Ly41k/ai-advent-llm-api/pull/5) объединён с `main` 17.10.2026.
+
+## День 34 — AI File Assistant: Course Minimum PASS с редакционной проверкой
+
+[Day 34](day-34-file-assistant/README.ru.md) использует настоящие модельные решения для локального чтения, поиска и записи по двум целям: использование `fetch_context` и архитектура MCP-контекста тикета. Созданы Markdown с проверенными file:line, diff и replay. Mac offline: 65/65. Техническая приёмка и Usage — PASS; исходный модельный ADR остаётся PARTIAL. Отдельный редакционный ADR — PASS, правки рецензента явно обозначены и показаны в diff. На этой совокупности принят Course Minimum; исторические автоматические NOT_ACCEPTED сохранены.
+
+[Итоговый отчёт](day-34-file-assistant/FINAL_REPORT.ru.md): четыре Groq POST, десять OpenAI POST, 89 297 OpenAI токенов, консервативная оценка $0.08822025, billing неизвестен. Offline-проверка: `python3.13 day-34-file-assistant/verify_delivery.py`; без ключей, сети, Ollama и новых генераций. Готов [терминальный сценарий видео](day-34-file-assistant/CONSOLE_VIDEO.ru.md). Предыдущие задания не меняются. Корневые README могут потребовать переиндексации старых RAG при будущем использовании; сейчас индексы не перестраиваются.
 
 ## Тесты
 
