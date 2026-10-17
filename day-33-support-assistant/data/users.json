@@ -1,0 +1,5 @@
+[
+  {"user_id":"U-001","display_name":"Demo One","product":"Bublik Private AI Service","device":"Android Chrome","access_route":"Tailscale HTTPS","synthetic":true},
+  {"user_id":"U-002","display_name":"Demo Two","product":"Bublik Private AI Service","device":"iPhone Safari","access_route":"Tailscale HTTPS","synthetic":true},
+  {"user_id":"U-003","display_name":"Demo Three","product":"Bublik Private AI Service","device":"Mac browser","access_route":"LAN HTTPS","synthetic":true}
+]
