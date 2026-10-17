@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "Final Course Minimum acceptance with documented independent editorial review",
+  "acceptance_basis": "Owner accepted the independent editorial review in the finalization request on 2026-10-17.",
+  "technical_acceptance": "PASS",
+  "offline_mac": "65/65 PASS",
+  "real_llm_tool_selection": "PASS",
+  "file_operations": "PASS",
+  "usage_quality": "PASS",
+  "original_adr_quality": "PARTIAL",
+  "reviewed_adr_quality": "PASS",
+  "course_minimum": "PASS",
+  "fully_automatic_original_documents_e2e": "NOT_ACCEPTED",
+  "historical_acceptance_unchanged": true,
+  "editorial_changes_are_model_output": false,
+  "original_adr_exact_quotes": {
+    "passed": 17,
+    "total": 17
+  },
+  "reviewed_adr_source_quotes": {
+    "passed": 27,
+    "total": 27
+  },
+  "usage_source_references": 10,
+  "source_inputs": 17,
+  "source_inputs_unchanged": true,
+  "replay": {
+    "usage": "PASS",
+    "adr": "PASS",
+    "new_provider_posts": 0
+  },
+  "new_provider_posts_during_finalization": 0,
+  "api": {
+    "openai_posts": 10,
+    "groq_posts": 4,
+    "openai_budget_exhausted": true,
+    "money_cap_usd": 0.5
+  },
+  "quality_review": {
+    "usage": "All ten fetch_context occurrences across five files classified as definition (1), imports (4), calls (5).",
+    "original_adr": "Valid MCP flow and exact citations, but ambiguous CLI/HTTP wording and missing retrieval explanation.",
+    "reviewed_adr": "Separates CLI prepare from HTTP answer; HTTP always uses OfflineAdapter; includes retrieve(question,ticket), SQLite FTS5/BM25 and payload generation flow.",
+    "reviewer_provenance": "Independent editorial changes, explicitly labelled; not an unchanged model answer."
+  },
+  "limits": "Course demonstration on pinned Day 33 sources, not a production agent. Offline replay does not re-establish model quality."
+}

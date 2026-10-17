@@ -1,0 +1,23 @@
+{
+  "base_sha": "25ba00685d0748ebe533570711b75e0d187ab20b",
+  "scope": "All Day 33 Python source files including tests/runners; synthetic CRM JSON. Historical reports and other days excluded.",
+  "files": {
+    "day-33-support-assistant/acceptance.py": "a9bd09ecfd7396058ba65a222208d0593e0d171881bad927ab1095c76b18a07f",
+    "day-33-support-assistant/common.py": "7705eb63edf3987d05737e9650095dd4b457899ac486e6059f936a01c4a4ee89",
+    "day-33-support-assistant/data/tickets.json": "cd0ed4b95aa356b62df983ce8e12476d49d35861c57b36d7641bc1ce6e5313f7",
+    "day-33-support-assistant/data/users.json": "a491a2620cd153b5c81db9bc62ee38939f1dd3a68d34a93d8f433cdc4b5f39b1",
+    "day-33-support-assistant/final_acceptance.py": "7cbbaec6ee7825e69fec2c04d9b16d5217657807ebd73778211c425827caa1be",
+    "day-33-support-assistant/live_acceptance.py": "a36f19bb940edbe9210c28696b2cc7ef9c4e4f34b362af59ae82fee2cc2d10be",
+    "day-33-support-assistant/llm_adapter.py": "c0e30fdc4c76135be1df7f69278330e9ed53034dd3bb0477b7ea2f22ed9a28d7",
+    "day-33-support-assistant/main.py": "0eb2f3e29400aaedb0cd51d0c3cad932f41b7b47a87d845e6bca78cdd603f02f",
+    "day-33-support-assistant/mcp_client.py": "fb25df80344f55ab2ee33b0171a6aeff1b5e1cad92fede1f50fc7c80585b8c41",
+    "day-33-support-assistant/mcp_server.py": "43705499a53ffc1bd2ae76de3a8aa774e9d323bd26cf974551ed6ccbe5ec4664",
+    "day-33-support-assistant/replay_acceptance.py": "f6888cd1bcb4164c0849c5a59352f692828fb28040ce184241346fb1ab7ab158",
+    "day-33-support-assistant/retrieval.py": "733135c19b3975168134a5ada99a986e785061925872b799d0d1e1d6112e5950",
+    "day-33-support-assistant/retry_acceptance.py": "50302fae006f2a1cc954e2c1ff37bc2aa62954a63ef64aa24d12e28357777733",
+    "day-33-support-assistant/support_agent.py": "1342a3b1a88c4942526370c5f08c4c158e0a690d4b9ba3698fbc5e333460f0e3",
+    "day-33-support-assistant/tests/test_action_evidence.py": "191a0353e91fcf891a2494c99ec8edcdc5cbaa0436a79fa17ed1931471e5cb0a",
+    "day-33-support-assistant/tests/test_support.py": "74b3c2a0d8485ec338f89454e3fe942088e395c3b3e0df4408a98e637fd6eb07",
+    "day-33-support-assistant/verify_delivery.py": "a4e5741939cd68b9017b969f9506c3a515d04bfbd0498ed3f4c2def07a9bf4d9"
+  }
+}

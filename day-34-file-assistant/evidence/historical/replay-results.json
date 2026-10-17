@@ -1,0 +1,20 @@
+{
+  "usage-final": {
+    "status": "completed",
+    "file_operation": "PASS",
+    "new_provider_posts": 0,
+    "document_sha256": {
+      "component-usage.md": "c3b10db5cc5d01f28569b8875cc4096ba1c0ff5365357a6617ef1e564e7d1731"
+    },
+    "matched_saved_events": true
+  },
+  "adr-final": {
+    "status": "completed",
+    "file_operation": "PASS",
+    "new_provider_posts": 0,
+    "document_sha256": {
+      "ADR-001-ticket-context.md": "69b8d740ef46256ef9a5c40b563ffe5c0538f0f3bcd0193235f23e14eea89010"
+    },
+    "matched_saved_events": true
+  }
+}

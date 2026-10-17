@@ -1,0 +1,24 @@
+{
+  "mode": "live_openai",
+  "technical_checks": {
+    "completed": true,
+    "inputs_unchanged": true,
+    "searched_at_least_three_files": true,
+    "all_four_tools_observed": true,
+    "read_core_three": true,
+    "documents_created": true,
+    "references_and_quotes_validated": true
+  },
+  "file_operation": "PASS",
+  "real_llm_tool_selection": "PENDING_REVIEW",
+  "result_quality": "PENDING_REVIEW",
+  "full_e2e": "NOT_ACCEPTED",
+  "new_groq_posts": 0,
+  "new_openai_posts": 2,
+  "new_provider_posts": 2,
+  "error": null,
+  "note": "Offline/mock and replay cannot establish fresh real LLM selection or semantic quality.",
+  "reused_model_decisions": 3,
+  "historical_openai_posts": 3,
+  "continuation_trace": "day-34-file-assistant/results/mac-openai-usage-01-resume-01/trace.json"
+}

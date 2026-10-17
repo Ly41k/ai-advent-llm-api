@@ -1,0 +1,322 @@
+{
+  "provenance": "Authored deterministic test decisions. Never a real model response.",
+  "usage": [
+    {
+      "actions": [
+        {
+          "tool": "list_files",
+          "args": {}
+        },
+        {
+          "tool": "search_files",
+          "args": {
+            "query": "fetch_context"
+          }
+        }
+      ],
+      "done": false
+    },
+    {
+      "actions": [
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/main.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/mcp_client.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/support_agent.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/tests/test_support.py",
+            "start": 1,
+            "end": 25
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/tests/test_support.py",
+            "start": 110,
+            "end": 145
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/retry_acceptance.py",
+            "start": 1,
+            "end": 25
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/retry_acceptance.py",
+            "start": 145,
+            "end": 160
+          }
+        }
+      ],
+      "done": false
+    },
+    {
+      "actions": [
+        {
+          "tool": "write_file",
+          "args": {
+            "path": "component-usage.md",
+            "content": "# fetch_context — отчёт использования\n\nИсточник: offline_mock fixture. Это технический пример, не результат реальной LLM.\n\nПоиск выполнен по всем Python-исходникам Day 33, включая tests и acceptance runners.\n\n| Вид | Место | Назначение |\n|---|---|---|\n| Импорт | `day-33-support-assistant/main.py:11` | Подключение функции; само по себе не вызывает MCP. |\n| Вызов | `day-33-support-assistant/main.py:115` | CLI prepare. |\n| Определение | `day-33-support-assistant/mcp_client.py:57` | Получить тикет, затем пользователя через MCP. |\n| Импорт | `day-33-support-assistant/retry_acceptance.py:20` | Подключение функции; само по себе не вызывает MCP. |\n| Вызов | `day-33-support-assistant/retry_acceptance.py:152` | Тестовый/acceptance вызов T-101. |\n| Импорт | `day-33-support-assistant/support_agent.py:5` | Подключение функции; само по себе не вызывает MCP. |\n| Вызов | `day-33-support-assistant/support_agent.py:148` | Получение контекста до prepare и генерации. |\n| Импорт | `day-33-support-assistant/tests/test_support.py:20` | Подключение функции; само по себе не вызывает MCP. |\n| Вызов | `day-33-support-assistant/tests/test_support.py:121` | Тестовый/acceptance вызов T-101. |\n| Вызов | `day-33-support-assistant/tests/test_support.py:138` | Тестовый/acceptance вызов T-101. |\n\nИтого: 1 определение, 4 импорта и 5 вызовов в 5 файлах. HTTP и CLI используют разные входы: один из production-вызовов находится в answer_async.\n",
+            "evidence": [
+              {
+                "path": "day-33-support-assistant/main.py",
+                "line": 11,
+                "quote": "from mcp_client import fetch_context"
+              },
+              {
+                "path": "day-33-support-assistant/main.py",
+                "line": 115,
+                "quote": "                ticket,user=asyncio.run(fetch_context(args.ticket))"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 57,
+                "quote": "async def fetch_context(ticket_id, command=None):"
+              },
+              {
+                "path": "day-33-support-assistant/retry_acceptance.py",
+                "line": 20,
+                "quote": "from mcp_client import fetch_context"
+              },
+              {
+                "path": "day-33-support-assistant/retry_acceptance.py",
+                "line": 152,
+                "quote": "    ticket,user = asyncio.run(fetch_context('T-101'))"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 5,
+                "quote": "from mcp_client import fetch_context"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 148,
+                "quote": "        ticket,user=await fetch_context(request['ticket_id'],mcp_command)"
+              },
+              {
+                "path": "day-33-support-assistant/tests/test_support.py",
+                "line": 20,
+                "quote": "from mcp_client import connect, call, fetch_context"
+              },
+              {
+                "path": "day-33-support-assistant/tests/test_support.py",
+                "line": 121,
+                "quote": "        ticket,user=asyncio.run(fetch_context('T-101'))"
+              },
+              {
+                "path": "day-33-support-assistant/tests/test_support.py",
+                "line": 138,
+                "quote": "        ticket,user=asyncio.run(fetch_context('T-101'))"
+              }
+            ]
+          }
+        }
+      ],
+      "done": true
+    }
+  ],
+  "adr": [
+    {
+      "actions": [
+        {
+          "tool": "list_files",
+          "args": {}
+        },
+        {
+          "tool": "search_files",
+          "args": {
+            "query": "get_ticket"
+          }
+        },
+        {
+          "tool": "search_files",
+          "args": {
+            "query": "T-101"
+          }
+        }
+      ],
+      "done": false
+    },
+    {
+      "actions": [
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/main.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/mcp_client.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/support_agent.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/mcp_server.py"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/data/tickets.json"
+          }
+        },
+        {
+          "tool": "read_file",
+          "args": {
+            "path": "day-33-support-assistant/data/users.json"
+          }
+        }
+      ],
+      "done": false
+    },
+    {
+      "actions": [
+        {
+          "tool": "write_file",
+          "args": {
+            "path": "ADR-001-ticket-context.md",
+            "content": "# ADR-001 — Получение контекста тикета через MCP\n\nСтатус: описание существующей реализации. Источник: offline_mock fixture, не реальная LLM.\n\n## Контекст и решение\n\nDay 33 отделяет синтетическую CRM от обработки поддержки. CLI prepare явно получает и валидирует контекст: `day-33-support-assistant/main.py:115`. HTTP обрабатывает ответ через OfflineAdapter: `day-33-support-assistant/main.py:59`.\n\nВ основном пути answer_async контекст получается перед prepare, а план проверяется перед render: `day-33-support-assistant/support_agent.py:148`; `day-33-support-assistant/support_agent.py:152`.\n\n## Поток T-101 / U-001\n\n1. Клиент запускает stdio MCP subprocess, инициализирует сессию и проверяет каталог get_ticket/get_user: `day-33-support-assistant/mcp_client.py:31`; `day-33-support-assistant/mcp_client.py:33`; `day-33-support-assistant/mcp_client.py:35`.\n2. fetch_context вызывает get_ticket с ticket_id: `day-33-support-assistant/mcp_client.py:59`. Сервер читает tickets.json: `day-33-support-assistant/mcp_server.py:18`. В синтетических данных T-101 связан с U-001 и имеет session_state=expired: `day-33-support-assistant/data/tickets.json:2`.\n3. user_id берётся только из полученного тикета, не из текста вопроса; get_user проверяет совпадение ID: `day-33-support-assistant/mcp_client.py:62`; `day-33-support-assistant/mcp_client.py:66`; `day-33-support-assistant/mcp_client.py:67`. Сервер читает users.json: `day-33-support-assistant/mcp_server.py:24`. U-001 использует Android Chrome и Tailscale HTTPS: `day-33-support-assistant/data/users.json:2`.\n4. validate_context проверяет synthetic/product и связь user_id/device: `day-33-support-assistant/support_agent.py:38`; `day-33-support-assistant/support_agent.py:42`. prepare передаёт вопрос и тикет в retrieval и собирает факты контекста: `day-33-support-assistant/support_agent.py:46`; `day-33-support-assistant/support_agent.py:50`.\n\n## Последствия и границы\n\nКаждый запрос с тикетом создаёт отдельный MCP-процесс; передача ключа Groq в CRM исключена ограниченным env: `day-33-support-assistant/mcp_client.py:26`. Отсутствующий тикет останавливает обработку до генерации: `day-33-support-assistant/mcp_client.py:60`. Это описание кода и fixtures; Day 34 не запускает сам MCP и не меняет Day 33.\n",
+            "evidence": [
+              {
+                "path": "day-33-support-assistant/main.py",
+                "line": 115,
+                "quote": "                ticket,user=asyncio.run(fetch_context(args.ticket))"
+              },
+              {
+                "path": "day-33-support-assistant/main.py",
+                "line": 59,
+                "quote": "            self.send_json(200,answer(request,OfflineAdapter()))"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 148,
+                "quote": "        ticket,user=await fetch_context(request['ticket_id'],mcp_command)"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 152,
+                "quote": "    return render(validate_plan(plan,payload),payload,meta)"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 31,
+                "quote": "                async with stdio_client(StdioServerParameters(command=cmd[0], args=cmd[1:], env=env), errlog=errors) as (read, write):"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 33,
+                "quote": "                        await session.initialize()"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 35,
+                "quote": "                        require(names == {'get_ticket', 'get_user'}, 'mcp_invalid_catalog', 502)"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 59,
+                "quote": "        ticket = (await call(session, 'get_ticket', {'ticket_id': ticket_id})).get('ticket')"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_server.py",
+                "line": 18,
+                "quote": "    return {'ticket': lookup('tickets.json', 'ticket_id', ticket_id, 'T')}"
+              },
+              {
+                "path": "day-33-support-assistant/data/tickets.json",
+                "line": 2,
+                "quote": "  {\"ticket_id\":\"T-101\",\"user_id\":\"U-001\",\"product\":\"Bublik Private AI Service\",\"description\":\"Не работает авторизация в чате. Authentication session problem.\",\"status\":\"open\",\"device\":\"Android Chrome\",\"observed_error\":\"HTTP 401 authentication_required\",\"session_state\":\"expired\",\"diagnostic\":\"Synthetic operator fixture explicitly records an expired authenticated browser session; this is not inferred from HTTP 401.\",\"synthetic\":true},"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 62,
+                "quote": "        user_id = ticket.get('user_id')"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 66,
+                "quote": "        user = (await call(session, 'get_user', {'user_id': user_id})).get('user')"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 67,
+                "quote": "        require(isinstance(user, dict) and user.get('user_id') == user_id, 'mcp_identity_mismatch', 502)"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_server.py",
+                "line": 24,
+                "quote": "    return {'user': lookup('users.json', 'user_id', user_id, 'U')}"
+              },
+              {
+                "path": "day-33-support-assistant/data/users.json",
+                "line": 2,
+                "quote": "  {\"user_id\":\"U-001\",\"display_name\":\"Demo One\",\"product\":\"Bublik Private AI Service\",\"device\":\"Android Chrome\",\"access_route\":\"Tailscale HTTPS\",\"synthetic\":true},"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 38,
+                "quote": "        require(record['synthetic'] is True and record['product'] == PRODUCT, 'non_synthetic_context', 502)"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 42,
+                "quote": "    require(ticket['user_id'] == user['user_id'] and ticket['device'] == user['device'], 'mcp_identity_mismatch', 502)"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 46,
+                "quote": "    sources, retrieval = retrieve(question, ticket)"
+              },
+              {
+                "path": "day-33-support-assistant/support_agent.py",
+                "line": 50,
+                "quote": "            facts.update({prefix+'.'+k:v for k,v in record.items() if isinstance(v,str)})"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 26,
+                "quote": "    env = {k: v for k, v in os.environ.items() if k in {'PATH', 'SYSTEMROOT', 'WINDIR', 'LANG'}}"
+              },
+              {
+                "path": "day-33-support-assistant/mcp_client.py",
+                "line": 60,
+                "quote": "        require(ticket is not None, 'ticket_not_found', 404)"
+              }
+            ]
+          }
+        }
+      ],
+      "done": true
+    }
+  ]
+}
