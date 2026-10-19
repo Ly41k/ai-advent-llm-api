@@ -8,6 +8,10 @@ A day-by-day Python learning project that starts with direct LLM API calls and g
 
 The repository currently contains **Days 1–35**. Each `day-XX-...` directory is a self-contained lesson with English and Russian documentation. Later lessons reuse selected components from earlier days instead of merging every historical implementation into one application.
 
+## Course reflection
+
+After completing all 35 lessons, I wrote a personal [seven-week AI Advent review](COURSE_REVIEW.md) about building local AI tools, working with agents, managing deadlines and costs, and learning when to stop polishing. This is a personal reflection, not a technical acceptance report.
+
 ## Learning path
 
 | Day | Lesson | What it adds |
