@@ -1,3 +1,5 @@
+**English** | [Русский](COURSE_REVIEW.ru.md)
+
 # AI Advent — My Review After Seven Weeks
 
 **This review is ready to publish!** 😁
